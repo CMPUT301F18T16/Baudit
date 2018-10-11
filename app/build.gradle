@@ -27,6 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
+// adding gradle plugin for easy Javadoc generation for android projects
 buildscript {
     repositories {
         mavenCentral()
@@ -37,3 +38,11 @@ buildscript {
 }
 
 apply plugin: "com.vanniktech.android.javadoc"
+
+androidJavadoc {
+    // outputDir return the documentation output dir
+    // Default implementation :
+    outputDir = { Project project ->
+        "${project.rootDir}/docs/javadoc/"
+    }
+}
