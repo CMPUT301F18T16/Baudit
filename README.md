@@ -1,3 +1,3 @@
 # Baudit
 
-[![CircleCI](https://circleci.com/gh/CMPUT301F18T16/Baudit/tree/master.svg?style=svg)](https://circleci.com/gh/CMPUT301F18T16/Baudit/tree/master)
+[![Build Status](https://travis-ci.org/CMPUT301F18T16/Baudit.svg?branch=master)](https://travis-ci.org/CMPUT301F18T16/Baudit)

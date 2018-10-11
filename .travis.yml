@@ -2,6 +2,17 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
+# after every build you need to add the following
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+
 android:
   components:
     # use the latest revision of Android SDK Tools
@@ -50,26 +61,27 @@ stages:
   - test
   - deploy
 
+# run jobs to test the Android App
+# TODO: setup more testing components for android
 jobs:
   include:
     - stage: test
       name: "Dependencies"
-      script: ./gradlew androidDependencies
-    - script: ./gradlew lint test
+      script: ./gradlew clean androidDependencies
+    - script: ./gradlew clean lint
       name: "Lint"
+    - script: ./gradlew clean test
+      name: "Test"
+    - script: ./gradlew clean build
+      name: "Build"
+    - script: ./gradlew clean assembleDebug
+      name: "Debug APK"
+    - stage: deploy
+      script: ./gradlew generateReleaseJavadoc
+      name: "Release Javadoc"
+#    - script: ./gradlew clean build connectedCheck
+#      name: "Connected Check"
 #    - script: ./gradlew connectedAndroidTest
 #      name: "connectedAndroidTest"
-
-
-# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
-# after every build you need to add the following
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
 
 # test

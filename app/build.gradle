@@ -26,3 +26,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.vanniktech:gradle-android-javadoc-plugin:0.3.0"
+    }
+}
+
+apply plugin: "com.vanniktech.android.javadoc"
