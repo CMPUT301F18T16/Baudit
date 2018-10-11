@@ -76,7 +76,10 @@ jobs:
       name: "Build"
     - script: ./gradlew clean assembleDebug
       name: "Debug APK"
+    - script: ./gradlew generateDebugJavadoc
+      name: "Debug Javadoc"
     - stage: deploy
+      # TODO: still need to upload generated JavaDoc to github pages
       script: ./gradlew generateReleaseJavadoc
       name: "Release Javadoc"
 #    - script: ./gradlew clean build connectedCheck
