@@ -56,16 +56,36 @@ before_script:
 
 
 stages:
+  - compile
   - test
+  # only run deploy stage on master branch
+  - name: deploy
+    if: branch = master
 
-# TODO: disabling for testing
+
 ## run jobs to test the Android App
 ## TODO: setup more testing components for android
 jobs:
   include:
     - stage: test
-      script: ./gradlew connectedAndroidTest
+      name: "Dependencies"
+      script: ./gradlew clean androidDependencies
+    - script: ./gradlew clean lint
+      name: "Lint"
+    - script: ./gradlew clean test
+      name: "Test"
+    - script: ./gradlew clean build
+      name: "Build"
+    - script: ./gradlew clean assembleDebug
+      name: "Debug APK"
+    - script:
+        - ./gradlew generateJavadoc
+      name: "Debug Javadoc"
+    - script: ./gradlew clean build connectedCheck
+      name: "Connected Check"
+    - script: ./gradlew clean build connectedAndroidTest
       name: "connectedAndroidTest"
+
 
 env:
   global:
