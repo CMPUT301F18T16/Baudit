@@ -87,6 +87,8 @@ jobs:
       name: "Connected Check"
     - script: ./gradlew clean build connectedAndroidTest
       name: "connectedAndroidTest"
+    - script: ./gradlew jacocoTestReport
+      name: "test reports"
 
 
 env:
