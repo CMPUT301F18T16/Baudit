@@ -5,7 +5,6 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
-
 ## Branch Creation Standards
 
 Branches **with the intention to be pulled into master** should follow a naming convention of `<intention name>/<intention description>`
@@ -13,7 +12,6 @@ Branches **with the intention to be pulled into master** should follow a naming 
 **i.e**: a branch adding a feature of a new button could be named `feature/NewButton`
 
 **i.e**: a branch fixing a bug regarding syntax error could be named `bugfix/SyntaxError`
-
 
 ## Pull Request Process
 
@@ -27,7 +25,6 @@ Branches **with the intention to be pulled into master** should follow a naming 
 5. Avoid pull requests that add a large bundle of features or address a large range of issues. 
    Pull requests should only address one aspect/issue to keep reviews quick and accurate.
 
-
 ## Code of Conduct
 
 ### Our Pledge
@@ -38,7 +35,6 @@ our community a harassment-free experience for everyone, regardless of age, body
 size, disability, ethnicity, gender identity and expression, level of experience,
 nationality, personal appearance, race, religion, or sexual identity and
 orientation.
-
 
 ### Our Standards
 
@@ -51,18 +47,16 @@ include:
 * Focusing on what is best for the community
 * Showing empathy towards other community members
 
-
 Examples of unacceptable behavior by participants include:
 
 * The use of sexualized language or imagery and unwelcome sexual attention or
-advances
+  advances
 * Trolling, insulting/derogatory comments, and personal or political attacks
 * Public or private harassment
 * Publishing others' private information, such as a physical or electronic
   address, without explicit permission  
 * Other conduct which could reasonably be considered inappropriate in a
   professional setting
-
 
 ### Our Responsibilities
 
@@ -76,7 +70,6 @@ that are not aligned to this Code of Conduct, or to ban temporarily or
 permanently any contributor for other behaviors that they deem inappropriate,
 threatening, offensive, or harmful.
 
-
 ### Scope
 
 This Code of Conduct applies both within project spaces and in public spaces
@@ -85,7 +78,6 @@ representing a project or community include using an official project e-mail
 address, posting via an official social media account, or acting as an appointed
 representative at an online or offline event. Representation of a project may be
 further defined and clarified by project maintainers.
-
 
 ### Enforcement
 
@@ -99,7 +91,6 @@ Further details of specific enforcement policies may be posted separately.
 Project maintainers who do not follow or enforce the Code of Conduct in good
 faith may face temporary or permanent repercussions as determined by other
 members of the project's leadership.
-
 
 ### Attribution
 
