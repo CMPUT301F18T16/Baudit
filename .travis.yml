@@ -85,6 +85,8 @@ jobs:
 #      name: "Connected Check"
 #    - script: ./gradlew connectedAndroidTest
 #      name: "connectedAndroidTest"
+    - script: ./gradlew jacocoTestReport
+      name: "TestReports"
     - stage: deploy
       script:
         - ./gradlew generateReleaseJavadoc
