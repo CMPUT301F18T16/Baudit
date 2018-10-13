@@ -14,6 +14,12 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
+env:
+  global:
+    - ANDROID_API_LEVEL=22
+    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+    - ANDROID_ABI=google_apis/armeabi-v7a
+
 
 android:
   components:
@@ -22,9 +28,10 @@ android:
     - tools
 
     # The BuildTools version used by your project
-    - build-tools-27.0.3
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
 
     # The SDK version used to compile your project
+    - android-$ANDROID_API_LEVEL
     - android-28
 
     # Specify at least one system image,
@@ -37,8 +44,20 @@ android:
 
 
     # stuff for testin android emulator
+    - addon-google_apis-google-$ANDROID_API_LEVEL
     - sys-img-armeabi-v7a-android-22
     - android-22
+
+    # Google Play Services
+    - extra-google-google_play_services
+    # Support library
+    - extra-android-support
+    # Latest artifacts in local repository
+    - extra-google-m2repository
+    - extra-android-m2repository
+    # Specify at least one system image
+    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+
   licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
@@ -56,7 +75,7 @@ before_script:
   - android list targets
 
   # Create and start emulator
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
