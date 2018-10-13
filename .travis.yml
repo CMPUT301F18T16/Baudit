@@ -16,47 +16,34 @@ cache:
 
 env:
   global:
-    - ANDROID_API_LEVEL=22
-    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
-    - ANDROID_ABI=google_apis/armeabi-v7a
+  - ANDROID_API_LEVEL=26
+  - ANDROID_BUILD_TOOLS_VERSION=26.0.1
+  - ANDROID_EMU_API_LEVEL=22
+  - ANDROID_ABI=armeabi-v7a
+  - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
+  - QEMU_AUDIO_DRV=none # Remove audio
 
 
 android:
   components:
-    # use the latest revision of Android SDK Tools
+    # The SDK version used to compile your project
+    - android-28
+`
+    - tools
     - platform-tools
     - tools
-
-    # The BuildTools version used by your project
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-
-    # The SDK version used to compile your project
     - android-$ANDROID_API_LEVEL
-    - android-28
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-26
-    - sys-img-armeabi-v7a-android-28
-
-    # Additional components
-    - extra-android-m2repository
-
-
-    # stuff for testin android emulator
-    - addon-google_apis-google-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-android-22
-    - android-22
+    - android-$ANDROID_EMU_API_LEVEL
+    - extra-android-support
+    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
 
     # Google Play Services
     - extra-google-google_play_services
-    # Support library
-    - extra-android-support
+
     # Latest artifacts in local repository
     - extra-google-m2repository
     - extra-android-m2repository
-    # Specify at least one system image
-    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
 
   licenses:
     - android-sdk-preview-license-.+
@@ -70,12 +57,13 @@ before_script:
 
   # Install Android SDK's manually and accept their licences
   - yes | sdkmanager "platforms;android-28"
-
+  # Install Android SDK's manually and accept their licences
+  - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
   # TODO: TESTING
   - android list targets
 
   # Create and start emulator
-  - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL --abi $ANDROID_ABI
+  - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
