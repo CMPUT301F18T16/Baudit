@@ -1,108 +1,21 @@
 language: android
 jdk: oraclejdk8
-sudo: false
-
-
-# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
-# after every build you need to add the following
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-
 env:
   global:
-  - ANDROID_API_LEVEL=26
-  - ANDROID_BUILD_TOOLS_VERSION=26.0.1
-  - ANDROID_EMU_API_LEVEL=22
-  - ANDROID_ABI=armeabi-v7a
-  - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
-  - QEMU_AUDIO_DRV=none # Remove audio
-
-
+    - ANDROID_TARGET=android-15
+    - ANDROID_ABI=armeabi-v7a
 android:
   components:
-    # The SDK version used to compile your project
-    - android-28
-`
-    - tools
-    - platform-tools
-    - tools
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-$ANDROID_API_LEVEL
-    - android-$ANDROID_EMU_API_LEVEL
-    - extra-android-support
-    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
-
-    # Google Play Services
-    - extra-google-google_play_services
-
-    # Latest artifacts in local repository
-    - extra-google-m2repository
-    - extra-android-m2repository
-
-  licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-
-
-before_script:
-  # If permission for Gradlew Dependencies fail, use this.
-  - sudo chmod +x ./gradlew
-
-  # Install Android SDK's manually and accept their licences
-  - yes | sdkmanager "platforms;android-28"
-  # Install Android SDK's manually and accept their licences
-  - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
-  # TODO: TESTING
-  - android list targets
-
-  # Create and start emulator
-  - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
+  - tools
+  - platform-tools
+  - build-tools-23.0.3
+  - android-23
+  - extra-android-m2repository
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-
-stages:
-  - compile
-  - test
-  # only run deploy stage on master branch
-  - name: deploy
-    if: branch = master
-
-
-## run jobs to test the Android App
-## TODO: setup more testing components for android
-jobs:
-  include:
-    - stage: test
-      name: "Dependencies"
-      script: ./gradlew clean androidDependencies
-    - script: ./gradlew clean lint
-      name: "Lint"
-    - script: ./gradlew clean test
-      name: "Test"
-    - script: ./gradlew clean build
-      name: "Build"
-    - script: ./gradlew clean assembleDebug
-      name: "Debug APK"
-    - script:
-        - ./gradlew generateJavadoc
-      name: "Debug Javadoc"
-    - script: ./gradlew clean build connectedCheck
-      name: "Connected Check"
-    - script: ./gradlew clean build connectedAndroidTest
-      name: "connectedAndroidTest"
-    - script: ./gradlew jacocoTestReport
-      name: "test reports"
-
-
-env:
-  global:
-    secure: trXCHpPotQVd7eP/+miReg17lXhJa4fDQ/otxuuslFk9WN7P4XsyKmz0tLyJmJdBbOy1x2rLwYMlF60rx3kRBcvJ/jDHSkLexxLpkIABZqO1XLLugVhOradaWD2XS89lWNXQeoWacNx7E1HScO6mkBziHYAcg8+usP9K9BRQqRi0SUS/C6m+aL+nSe/wCYJ+4lh4xe+cHh9CFumKLM+u74QarKvF7784K+Dd0Xf6hZZa4PQEPBKtPfXU42YM1KJM6wFj2K93idesOou7w6QCvVVIsrHzDyDDTEOFIcQsL/XFkgYAU1+TQB0sGBzAiT07U3KlR9WrVymjruq4mozxnwak57F3YlzM6g3ZpgV3Dhw4SnwwCdVtorIhRniYhmvBrb4ovI6EsJ4xEwD3a1jrnA5/0SlSrb6V/gQYfDOhazFVeuPtRLC/fK2ODIKF/mxhhxPX3SOlk4zPKgYxi+mPKE0wIUpCXBbuQYPUc9MseefDhrG8d95Fb5syYwtIgmaNf0jl9icaxqdzC0zwkChWf+ZqFcLmZuww8eiEunxCQ1VF/Xt12anz2U2A8T6ytGGNnQeGX5vzjOc/EzvBZpVf59lD0C1KtS7So+6uenOx4N7oEG+2Q/IEBGi/G2wesyhPAc8RrGCdx1lylgQDUSiDHIsEDJQQwU/sB9NiQZEB87w=
-
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - ./gradlew connectedCheck
