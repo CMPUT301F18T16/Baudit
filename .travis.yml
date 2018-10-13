@@ -80,10 +80,12 @@ jobs:
 #      name: "Connected Check"
 #    - script: ./gradlew connectedAndroidTest
 #      name: "connectedAndroidTest"
-    - script: ./gradlew jacocoTestReport
+    - script:
+        - ./gradlew jacocoTestReport assembleAndroidTest
+        - ./gradlew clean test
       name: "TestReports"
       after_success:
-      - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
       script:
         - ./gradlew generateReleaseJavadoc
