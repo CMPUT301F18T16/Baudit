@@ -1,7 +1,7 @@
 Baudit contributors (sorted alphabetically)
 ============================================
 
-* **[Nathan Klapstien](https://github.com/nklapste)**
+*   **[Nathan Klapstien](https://github.com/nklapste)**
 
-  * Project Lead
-  * Maintainer
+    * Project Lead
+    * Maintainer
