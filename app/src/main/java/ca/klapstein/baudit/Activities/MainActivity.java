@@ -7,6 +7,8 @@ import ca.klapstein.baudit.R;
 
 /**
  * Starting Activity for Baudit.
+ *
+ * Acts as a start page for Baudit providing access to Account Creation and Login.
  */
 public class MainActivity extends AppCompatActivity {
 
