@@ -1,8 +1,8 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Data;
 
 /**
  * Class that represents a Care Provider.
  */
-class CareProvider extends User {
+public class CareProvider extends User {
     private PatientTreeSet assignedPatientTreeSet;
 }

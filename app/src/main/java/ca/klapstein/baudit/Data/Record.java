@@ -1,9 +1,9 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Data;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
  *
  * @see Problem
  */
-class Record {
+public class Record {
 }

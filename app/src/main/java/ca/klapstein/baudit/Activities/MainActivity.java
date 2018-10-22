@@ -1,7 +1,8 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import ca.klapstein.baudit.R;
 
 
 /**

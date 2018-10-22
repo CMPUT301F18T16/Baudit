@@ -1,10 +1,10 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Data;
 
 /**
  * Data class representing a Medical Problem for a {@code Patient}.
  *
  * @see Patient
  */
-class Problem {
+public class Problem {
     private RecordTreeSet recordTreeSet;
 }

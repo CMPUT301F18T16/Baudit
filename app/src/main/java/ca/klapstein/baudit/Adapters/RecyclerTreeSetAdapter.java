@@ -1,4 +1,4 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 

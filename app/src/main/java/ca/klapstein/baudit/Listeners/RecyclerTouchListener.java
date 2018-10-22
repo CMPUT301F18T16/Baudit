@@ -1,4 +1,4 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Listeners;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import android.view.View;
  * Provides a {@code ClickListener} interface that then provides stubs for a {@code onClick} and
  * {@code onLongClick} methods for RecyclerViews.
  */
-class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
     @Override
     public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
