@@ -1,5 +1,8 @@
 package ca.klapstein.baudit;
 
+/**
+ * Abstract class representing a basic account/user of Baudit.
+ */
 abstract class User {
     private ContactInfo contactInfo;
     private String username;
