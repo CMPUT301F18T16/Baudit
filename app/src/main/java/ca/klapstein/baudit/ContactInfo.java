@@ -1,6 +1,7 @@
 package ca.klapstein.baudit;
 
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 
 /**
  * Data class representing the contact info of a {@code User}.
@@ -10,7 +11,9 @@ import android.provider.ContactsContract;
  * @see User
  */
 class ContactInfo {
+    @NonNull
     private ContactsContract.CommonDataKinds.Email email;
+    @NonNull
     private ContactsContract.CommonDataKinds.Phone phone;
 
     public ContactsContract.CommonDataKinds.Phone getPhone() {
