@@ -14,6 +14,7 @@ import android.view.View;
  * {@code onLongClick} methods for RecyclerViews.
  */
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+    private static final String TAG = "RecyclerTouchListener";
 
     @Override
     public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
@@ -33,7 +34,6 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
     /**
      * A {@code ClickListener} interface that provides stubs for a {@code onClick} and
      * {@code onLongClick} methods for RecyclerViews.
-     *
      */
     public interface ClickListener {
         void onClick(View view, int position);

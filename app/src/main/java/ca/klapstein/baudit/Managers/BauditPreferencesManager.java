@@ -1,4 +1,5 @@
 package ca.klapstein.baudit.Managers;
 
-class BauditPreferencesManager {
+public class BauditPreferencesManager {
+    private static final String TAG = "BauditPrefManager";
 }

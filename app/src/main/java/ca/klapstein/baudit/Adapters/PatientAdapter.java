@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 public class PatientAdapter extends RecyclerTreeSetAdapter {
+    private static final String TAG = "PatientAdapter";
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

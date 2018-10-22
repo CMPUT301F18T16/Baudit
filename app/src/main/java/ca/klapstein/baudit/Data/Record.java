@@ -6,4 +6,5 @@ package ca.klapstein.baudit.Data;
  * @see Problem
  */
 public class Record {
+    private static final String TAG = "Record";
 }
