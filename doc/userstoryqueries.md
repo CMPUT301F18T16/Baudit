@@ -72,7 +72,7 @@ Same as 01.05.01
 As a patient, records can have a geo-location.
 ```sql
 UPDATE record
-SET geolat = $geolat, geolong = $geolong
+SET record.geolat = $geolat, record.geolong = $geolong
 WHERE record.id = $recordid
 ```
 
@@ -80,7 +80,7 @@ WHERE record.id = $recordid
 As a patient, records can have a body location.
 ```sql
 UPDATE record
-SET bodyphoto = $bodyphoto, bodyx = $bodyx, bodyy = $bodyy
+SET record.bodyphoto = $bodyphoto, record.bodyx = $bodyx, record.bodyy = $bodyy
 WHERE record.id = $recordid
 ```
 
@@ -88,7 +88,7 @@ WHERE record.id = $recordid
 As a patient, records can have a title and comment.
 ```sql
 UPDATE record
-SET title = $title, comment = $comment
+SET record.title = $title, record.comment = $comment
 WHERE record.id = $recordid
 ```
 
@@ -147,7 +147,7 @@ VALUES ($id, $first, $last, $email, $phone)
 As a patient, I want to edit the contact information in my profile.
 ```sql
 UPDATE patient
-SET email = $email, phone = $phone
+SET patient.email = $email, patient.phone = $phone
 WHERE patient.id = $patientid
 ```
 
@@ -234,14 +234,14 @@ NON-SQL
 As a patient, I want to specify a geo location on a map of a record.
 ```sql
 UPDATE record
-SET geolat = $geolat, geolong = $geolong
+SET record.geolat = $geolat, record.geolong = $geolong
 WHERE record.id = $recordid
 ```
 
 #### US 10.02.01
 As a patient or provider, I want to view any geo location for a record, on a map.
 ```sql
-SELECT geolat, geolong
+SELECT record.geolat, record.geolong
 FROM record
 WHERE record.id = $recordid
 ```
@@ -249,7 +249,7 @@ WHERE record.id = $recordid
 #### US 10.03.01
 As a patient or care provider, I want to see a map of all records for a patient (that have locations).
 ```sql
-SELECT geolat, geolong
+SELECT record.geolat, record.geolong
 FROM record, problem
 WHERE record.problem = problem.id
 AND problem.patient = $patientid
