@@ -2,6 +2,7 @@ package ca.klapstein.baudit;
 
 import android.support.test.rule.ActivityTestRule;
 
+import ca.klapstein.baudit.Activities.MainActivity;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class MainActivityTest extends ActivityTestRule<MainActivity> {
     public MainActivityTest() {
-        super(ca.klapstein.baudit.MainActivity.class);
+        super(MainActivity.class);
     }
 
     /**
