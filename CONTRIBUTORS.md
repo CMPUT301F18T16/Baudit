@@ -9,3 +9,8 @@ Baudit contributors (sorted alphabetically)
 
     *   Project Lead
     *   Maintainer
+
+*   **[Thomas Lorincz](https://github.com/thomaslorincz)**
+
+    *   Software Lead
+    *   UI/UX Designer
