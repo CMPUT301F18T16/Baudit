@@ -6,5 +6,6 @@ package ca.klapstein.baudit.Data;
  * @see Patient
  */
 public class Problem {
+    private static final String TAG = "Problem";
     private RecordTreeSet recordTreeSet;
 }

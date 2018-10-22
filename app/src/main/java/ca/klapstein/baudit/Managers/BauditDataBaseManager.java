@@ -1,4 +1,5 @@
 package ca.klapstein.baudit.Managers;
 
-class BauditDataBaseManager {
+public class BauditDataBaseManager {
+    private static final String TAG = "BauditDataBaseManager";
 }
