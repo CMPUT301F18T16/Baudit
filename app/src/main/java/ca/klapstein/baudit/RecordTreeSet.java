@@ -2,7 +2,6 @@ package ca.klapstein.baudit;
 
 import java.util.TreeSet;
 
-
 /**
  * A {@code TreeSet} the models a list of {@code Record}s of a Medical Problem {@code Problem}.
  *
