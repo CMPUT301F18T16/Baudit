@@ -1,4 +1,8 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Data;
+
+import ca.klapstein.baudit.Data.CareProvider;
+import ca.klapstein.baudit.Data.Patient;
+import ca.klapstein.baudit.Data.Problem;
 
 import java.util.TreeSet;
 
@@ -11,5 +15,5 @@ import java.util.TreeSet;
  * @see Patient
  * @see CareProvider
  */
-class ProblemTreeSet extends TreeSet<Problem> {
+public class ProblemTreeSet extends TreeSet<Problem> {
 }

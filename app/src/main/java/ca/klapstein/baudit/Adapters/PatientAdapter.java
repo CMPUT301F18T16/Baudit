@@ -1,10 +1,10 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-public class ProblemAdapter extends RecyclerTreeSetAdapter {
+public class PatientAdapter extends RecyclerTreeSetAdapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

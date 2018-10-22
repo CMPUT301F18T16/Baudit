@@ -1,4 +1,4 @@
-package ca.klapstein.baudit;
+package ca.klapstein.baudit.Data;
 
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
  *
  * @see User
  */
-class ContactInfo {
+public class ContactInfo {
     @NonNull
     private ContactsContract.CommonDataKinds.Email email;
     @NonNull
