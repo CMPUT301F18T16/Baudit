@@ -3,7 +3,7 @@ package ca.klapstein.baudit;
 import java.util.TreeSet;
 
 /**
- * A {@code TreeSet} the models a list of {@code Patient}s.
+ * {@code TreeSet} subclass that models a list of {@code Patient}s.
  *
  * This is viewed only by {@code CareProvider}.
  *
