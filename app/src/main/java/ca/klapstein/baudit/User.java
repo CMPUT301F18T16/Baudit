@@ -1,10 +1,14 @@
 package ca.klapstein.baudit;
 
+import android.support.annotation.NonNull;
+
 /**
  * Abstract class representing a basic account/user of Baudit.
  */
 abstract class User {
+    @NonNull
     private ContactInfo contactInfo;
+    @NonNull
     private String username;
 
     public String getUsername() {
