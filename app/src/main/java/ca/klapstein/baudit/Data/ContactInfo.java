@@ -35,6 +35,14 @@ public class ContactInfo {
     }
 
     @Override
+    public int hashCode() {
+        int result = 21;
+        result = 31 * result + this.getEmail().hashCode();
+        result = 31 * result + this.getPhoneNumber().hashCode();
+        return result;
+    }
+
+    @Override
     public boolean equals(Object obj){
         if (obj == null){
             return false;
