@@ -6,7 +6,8 @@ env:
   global:
     - ANDROID_API_LEVEL=28
     - ANDROID_EMULATOR_LEVEL=18
-    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+#    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
     - ADB_INSTALL_TIMEOUT=20
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
@@ -30,6 +31,11 @@ licenses:
   - android-sdk-license-.+
   - google-gdk-license-.+
 
+# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
+# after every build you need to add the following
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
   - "$HOME/.gradle/caches/"
@@ -49,16 +55,44 @@ before_install:
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   # If permission for Gradlew Dependencies fail, use this.
 
-script:
-  - android list targets
-  - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - emulator -avd test -no-window &
-  - mkdir -p build/reports
-  #  - ./gradlew dependencyCheckAnalyze
-  - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
-  - android-wait-for-emulator
-  #  - adb shell input keyevent 82 &
-  - ./gradlew connectedDebugAndroidTest -PdisablePreDex --continue --stacktrace
+
+
+stages:
+- compile
+- test
+# only run deploy stage on master branch
+- name: deploy
+  if: branch = master
+
+
+# run jobs to test the Android App
+jobs:
+  include:
+    - stage: test
+      name: "Dependencies"
+      script: ./gradlew clean androidDependencies
+    - script: ./gradlew clean lint
+      name: "Lint"
+    - script: ./gradlew clean test
+      name: "Test"
+    - script: ./gradlew clean build
+      name: "Build"
+    - script: ./gradlew clean assembleDebug
+      name: "Debug APK"
+    - script:
+      - ./gradlew generateJavadoc
+      name: "Debug Javadoc"
+    - script:
+      - android list targets
+      - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+      - emulator -avd test -no-window &
+      - mkdir -p build/reports
+      #  - ./gradlew dependencyCheckAnalyze
+      - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
+      - android-wait-for-emulator
+      #  - adb shell input keyevent 82 &
+      - ./gradlew connectedDebugAndroidTest -PdisablePreDex --continue --stacktrace
+      name: "Connected test"
 
 after_failure:
   - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
