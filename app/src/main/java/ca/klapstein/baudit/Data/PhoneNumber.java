@@ -1,9 +1,10 @@
 package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
-import android.telephony.PhoneNumberUtils;
 
 public class PhoneNumber {
+    private static final String TAG = "PhoneNumber";
+
     @NonNull
     private String phoneNumber;
 
