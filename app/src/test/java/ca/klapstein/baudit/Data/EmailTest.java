@@ -18,6 +18,7 @@ public class EmailTest {
         Email email = new Email("foo@example.com");
         assertNotNull(email.getEmail());
         assertEquals(email.getEmail(), "foo@example.com");
+        assertNotNull(null);
     }
 
     @Test
