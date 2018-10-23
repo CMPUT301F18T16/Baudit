@@ -33,4 +33,17 @@ public class ContactInfo {
     public void setEmail(Email email) {
         this.email = email;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        } else if (obj.getClass().equals(ContactInfo.class)){
+            ContactInfo otherContactInfo = (ContactInfo) obj;
+            return this.getEmail().equals(otherContactInfo.getEmail()) &&
+                    this.getPhoneNumber().equals(otherContactInfo.getPhoneNumber());
+        } else {
+            return false;
+        }
+    }
 }
