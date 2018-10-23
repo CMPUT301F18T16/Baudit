@@ -14,23 +14,23 @@ public class ContactInfo {
     private static final String TAG = "ContactInfo";
 
     @NonNull
-    private ContactsContract.CommonDataKinds.Email email;
+    private Email email;
     @NonNull
-    private ContactsContract.CommonDataKinds.Phone phone;
+    private PhoneNumber phone;
 
-    public ContactsContract.CommonDataKinds.Phone getPhone() {
+    public PhoneNumber getPhoneNumber() {
         return phone;
     }
 
-    public void setPhone(ContactsContract.CommonDataKinds.Phone phone) {
+    public void setPhoneNumber(PhoneNumber phone) {
         this.phone = phone;
     }
 
-    public ContactsContract.CommonDataKinds.Email getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public void setEmail(ContactsContract.CommonDataKinds.Email email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 }
