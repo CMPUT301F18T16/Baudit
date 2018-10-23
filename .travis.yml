@@ -68,6 +68,7 @@ jobs:
   include:
     - stage: test
       name: "Unit Tests"
+      script:
         - ./gradlew build jacocoTestReport
         - ./gradlew test
       after_success:
