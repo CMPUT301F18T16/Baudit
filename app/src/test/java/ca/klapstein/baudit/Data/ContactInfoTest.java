@@ -13,11 +13,11 @@ public class ContactInfoTest {
         contactInfo = new ContactInfo();
     }
 
-    public Email ExampleEmail(){
+    private Email ExampleEmail(){
         return new Email("foo@example.com");
     }
 
-    public PhoneNumber ExamplePhoneNumber(){
+    private PhoneNumber ExamplePhoneNumber(){
         return new PhoneNumber("111-111-1111");
     }
 
