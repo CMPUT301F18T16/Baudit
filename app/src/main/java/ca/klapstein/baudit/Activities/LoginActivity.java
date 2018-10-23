@@ -9,8 +9,8 @@ import ca.klapstein.baudit.Data.User;
  *
  * @see ca.klapstein.baudit.Data.Username
  * @see ca.klapstein.baudit.Data.Email
- * @see ca.klapstein.baudit.Data.User
  * @see ca.klapstein.baudit.Data.Password
+ * @see ca.klapstein.baudit.Data.User
  */
 public class LoginActivity {
     private static final String TAG = "LoginActivity";
