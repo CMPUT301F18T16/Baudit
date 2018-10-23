@@ -2,6 +2,11 @@ package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
 
+/**
+ * Data class representing a Baudit's {@code User}'s email.
+ *
+ * @see User
+ */
 public class Email{
     private static final String TAG = "Email";
 
