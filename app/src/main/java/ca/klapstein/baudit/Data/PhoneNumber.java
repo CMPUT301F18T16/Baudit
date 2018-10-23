@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
+import android.telephony.PhoneNumberUtils;
 
 public class PhoneNumber {
     @NonNull
@@ -18,5 +19,17 @@ public class PhoneNumber {
     public void setPhoneNumber(String phoneNumber) {
         // TODO: add validation of phone number string
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        } else if (obj.getClass().equals(PhoneNumber.class)){
+            PhoneNumber otherPhoneNumber = (PhoneNumber) obj;
+            return this.getPhoneNumber().equals(otherPhoneNumber.getPhoneNumber());
+        } else {
+            return false;
+        }
     }
 }
