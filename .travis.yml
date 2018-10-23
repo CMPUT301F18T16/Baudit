@@ -100,8 +100,15 @@ jobs:
       - ./gradlew connectedDebugAndroidTest -PdisablePreDex --continue --stacktrace
       name: "Connected test"
     - script:
-        - ./gradlew jacocoTestReport assembleAndroidTest
-        - ./gradlew clean test
+        - ./gradlew build jacocoTestReport assembleAndroidTest
+        - android list targets
+        - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+        - emulator -avd test -no-window &
+        - mkdir -p build/reports
+        #  - ./gradlew dependencyCheckAnalyze
+        - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
+        - android-wait-for-emulator
+        - ./gradlew connectedCheck
       name: "TestReports"
       after_success:
         - bash <(curl -s https://codecov.io/bash)
