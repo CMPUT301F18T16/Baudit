@@ -56,6 +56,11 @@ before_install:
   # If permission for Gradlew Dependencies fail, use this.
 
 
+before_script:
+# If permission for Gradlew Dependencies fail, use this.
+  - sudo chmod +x ./gradlew
+  - yes | sdkmanager "cmake;3.6.4111459"
+  - yes | sdkmanager "platforms;android-28"
 
 stages:
 - compile
