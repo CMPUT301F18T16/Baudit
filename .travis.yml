@@ -67,8 +67,13 @@ stages:
 jobs:
   include:
     - stage: test
+      name: "Unit Tests"
+        - ./gradlew build jacocoTestReport
+        - ./gradlew test
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF unittests
     - script:
-      - ./gradlew generateJavadoc
+      - ./gradlew build generateJavadoc
       name: "Debug Javadoc"
     - script:
         - ./gradlew build jacocoTestReport assembleDebugAndroidTest
@@ -77,12 +82,11 @@ jobs:
         - emulator -avd test -no-window &
         - mkdir -p build/reports
         #  - ./gradlew dependencyCheckAnalyze
-        - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
         - android-wait-for-emulator
         - ./gradlew connectedCheck
-      name: "test"
+      name: "Instrumentation Tests"
       after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash) -cF Instrumentationtests
     - stage: deploy
       script:
       - ./gradlew generateReleaseJavadoc
@@ -95,6 +99,3 @@ jobs:
         keep-history: true
         on:
           branch: master
-
-after_failure:
-  - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
