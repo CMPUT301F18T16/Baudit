@@ -2,104 +2,60 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
-
-# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
-# after every build you need to add the following
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-
+env:
+  global:
+    - ANDROID_API_LEVEL=28
+    - ANDROID_EMULATOR_LEVEL=18
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ADB_INSTALL_TIMEOUT=20
+    - ANDROID_ABI=armeabi-v7a
+    - ANDROID_TAG=google_apis
+    - QEMU_AUDIO_DRV=none
 
 android:
   components:
-    # use the latest revision of Android SDK Tools
+    - tools
     - platform-tools
     - tools
-
-    # The BuildTools version used by your project
-    - build-tools-27.0.3
-
-    # The SDK version used to compile your project
-    - android-28
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-26
-    - sys-img-armeabi-v7a-android-28
-
-    # Additional components
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    - android-$ANDROID_EMULATOR_LEVEL
+    - extra-android-support
+    - extra-google-m2repository
     - extra-android-m2repository
-  licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
+    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMULATOR_LEVEL
 
+licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 
-before_script:
-  # If permission for Gradlew Dependencies fail, use this.
-  - sudo chmod +x ./gradlew
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/build-cache"
 
-  # Install Android SDK's manually and accept their licences
-  - yes | sdkmanager "platforms;android-28"
+before_install:
+  - yes | sdkmanager "cmake;3.6.4111459"
+  - wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip
+  - unzip android-ndk-r18b-linux-x86_64.zip -d $HOME > /dev/null
+  - export ANDROID_NDK_HOME=$HOME/android-ndk-r18b
+  - export PATH=$PATH:$ANDROID_NDK_HOME
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
+script:
+  - android list targets
+  - echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - emulator -avd test -no-window &
+  - mkdir -p build/reports
+  #  - ./gradlew dependencyCheckAnalyze
+  - ./gradlew assembleDebugAndroidTest -PdisablePreDex --continue --stacktrace
+  - android-wait-for-emulator
+  #  - adb shell input keyevent 82 &
+  - ./gradlew connectedDebugAndroidTest -PdisablePreDex --continue --stacktrace
 
-#  # Create and start emulator
-#  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-#  - emulator -avd test -no-skin -no-audio -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-
-
-stages:
-  - compile
-  - test
-  # only run deploy stage on master branch
-  - name: deploy
-    if: branch = master
-
-
-# run jobs to test the Android App
-# TODO: setup more testing components for android
-jobs:
-  include:
-    - stage: test
-      name: "Dependencies"
-      script: ./gradlew clean androidDependencies
-    - script: ./gradlew clean lint
-      name: "Lint"
-    - script: ./gradlew clean test
-      name: "Test"
-    - script: ./gradlew clean build
-      name: "Build"
-    - script: ./gradlew clean assembleDebug
-      name: "Debug APK"
-    - script:
-        - ./gradlew generateJavadoc
-      name: "Debug Javadoc"
-#    - script: ./gradlew clean build connectedCheck
-#      name: "Connected Check"
-#    - script: ./gradlew connectedAndroidTest
-#      name: "connectedAndroidTest"
-    - stage: deploy
-      script:
-        - ./gradlew generateReleaseJavadoc
-      name: "Release Javadoc"
-      deploy:
-        provider: pages
-        local-dir: docs/javadoc/release
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        on:
-          branch: master
-
-
-env:
-  global:
-    secure: trXCHpPotQVd7eP/+miReg17lXhJa4fDQ/otxuuslFk9WN7P4XsyKmz0tLyJmJdBbOy1x2rLwYMlF60rx3kRBcvJ/jDHSkLexxLpkIABZqO1XLLugVhOradaWD2XS89lWNXQeoWacNx7E1HScO6mkBziHYAcg8+usP9K9BRQqRi0SUS/C6m+aL+nSe/wCYJ+4lh4xe+cHh9CFumKLM+u74QarKvF7784K+Dd0Xf6hZZa4PQEPBKtPfXU42YM1KJM6wFj2K93idesOou7w6QCvVVIsrHzDyDDTEOFIcQsL/XFkgYAU1+TQB0sGBzAiT07U3KlR9WrVymjruq4mozxnwak57F3YlzM6g3ZpgV3Dhw4SnwwCdVtorIhRniYhmvBrb4ovI6EsJ4xEwD3a1jrnA5/0SlSrb6V/gQYfDOhazFVeuPtRLC/fK2ODIKF/mxhhxPX3SOlk4zPKgYxi+mPKE0wIUpCXBbuQYPUc9MseefDhrG8d95Fb5syYwtIgmaNf0jl9icaxqdzC0zwkChWf+ZqFcLmZuww8eiEunxCQ1VF/Xt12anz2U2A8T6ytGGNnQeGX5vzjOc/EzvBZpVf59lD0C1KtS7So+6uenOx4N7oEG+2Q/IEBGi/G2wesyhPAc8RrGCdx1lylgQDUSiDHIsEDJQQwU/sB9NiQZEB87w=
-
+after_failure:
+  - cat $TRAVIS_BUILD_DIR/app/build/reports/lint-results.xml
