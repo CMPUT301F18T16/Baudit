@@ -1,9 +1,10 @@
 package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
-import android.telephony.PhoneNumberUtils;
 
 public class Email{
+    private static final String TAG = "Email";
+
     @NonNull
     private String email;
 
