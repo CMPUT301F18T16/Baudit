@@ -72,7 +72,7 @@ jobs:
         - ./gradlew build jacocoTestReport
         - ./gradlew test
       after_success:
-        - bash <(curl -s https://codecov.io/bash) -cF unittests
+        - bash <(curl -s https://codecov.io/bash) -cF Unit
     - script:
       - ./gradlew build generateJavadoc
       name: "Debug Javadoc"
@@ -87,7 +87,7 @@ jobs:
         - ./gradlew connectedCheck
       name: "Instrumentation Tests"
       after_success:
-        - bash <(curl -s https://codecov.io/bash) -cF Instrumentationtests
+        - bash <(curl -s https://codecov.io/bash) -cF Instrumentation
     - stage: deploy
       script:
       - ./gradlew generateReleaseJavadoc
