@@ -8,7 +8,11 @@ import ca.klapstein.baudit.Data.User;
  *
  * After filling out the required forms create a {@code User} and log them into Baudit.
  *
- * @see User
+ * @see ca.klapstein.baudit.Data.Username
+ * @see ca.klapstein.baudit.Data.Email
+ * @see ca.klapstein.baudit.Data.Password
+ * @see ca.klapstein.baudit.Data.PhoneNumber
+ * @see ca.klapstein.baudit.Data.User
  */
 public class AccountCreateActivity {
     private static final String TAG = "AccountCreateActivity";
