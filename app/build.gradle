@@ -18,6 +18,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
 }
 
@@ -50,6 +53,7 @@ buildscript {
     }
     dependencies {
         classpath "com.vanniktech:gradle-android-javadoc-plugin:0.3.0"
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.3'
     }
 }
 
@@ -61,4 +65,21 @@ androidJavadoc {
     outputDir = { Project project ->
         "${project.rootDir}/docs/javadoc/"
     }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.3'
+    }
+}
+
+apply plugin: 'jacoco-android'
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
