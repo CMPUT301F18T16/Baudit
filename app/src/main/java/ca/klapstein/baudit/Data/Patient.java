@@ -6,4 +6,8 @@ package ca.klapstein.baudit.Data;
 public class Patient extends User {
     private static final String TAG = "Patient";
     private ProblemTreeSet problemTreeSet;
+
+    public ProblemTreeSet getProblemTreeSet() {
+        return problemTreeSet;
+    }
 }
