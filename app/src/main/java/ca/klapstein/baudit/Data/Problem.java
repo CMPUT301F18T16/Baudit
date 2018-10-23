@@ -8,4 +8,8 @@ package ca.klapstein.baudit.Data;
 public class Problem {
     private static final String TAG = "Problem";
     private RecordTreeSet recordTreeSet;
+
+    public RecordTreeSet getRecordTreeSet() {
+        return recordTreeSet;
+    }
 }
