@@ -79,7 +79,7 @@ jobs:
       script: ./gradlew clean androidDependencies
     - script: ./gradlew clean lint
       name: "Lint"
-    - script: ./gradlew clean test
+    - script: ./gradlew clean test --stacktrace --debug
       name: "Test"
     - script: ./gradlew clean build
       name: "Build"
