@@ -1,4 +1,4 @@
 package ca.klapstein.baudit.Activities;
 
-public class DeleteRecordDialog {
+public class DeleteRecordDialog extends DeleteDialog {
 }

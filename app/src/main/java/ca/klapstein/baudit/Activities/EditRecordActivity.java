@@ -1,10 +1,9 @@
 package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 
-public class EditRecordActivity extends AppCompatActivity {
+public class EditRecordActivity extends RecordActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

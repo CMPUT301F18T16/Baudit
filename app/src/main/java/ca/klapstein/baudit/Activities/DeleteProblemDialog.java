@@ -1,4 +1,4 @@
 package ca.klapstein.baudit.Activities;
 
-public class DeleteProblemDialog {
+public class DeleteProblemDialog extends DeleteDialog {
 }

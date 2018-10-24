@@ -1,10 +1,9 @@
 package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 
-public class CreateCareProviderAccountActivity extends AppCompatActivity {
+public class CreateCareProviderAccountActivity extends AccountCreateActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
