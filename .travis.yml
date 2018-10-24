@@ -61,6 +61,7 @@ stages:
   - name: deploy
     if: branch = master
 
+script:
 
 # run jobs to test the Android App
 jobs:
