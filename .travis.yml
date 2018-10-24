@@ -61,16 +61,15 @@ stages:
   - name: deploy
     if: branch = master
 
-script:
 
-# run jobs to test the Android App
 jobs:
   include:
     - stage: test
+      name: "Debug Javadoc"
       script:
         - ./gradlew generateJavadoc
-      name: "Debug Javadoc"
-    - before_script:
+    - name: "Test"
+      before_script:
         - android list targets
         - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
         - emulator -avd test -no-window &
@@ -78,13 +77,12 @@ jobs:
       script:
         - ./gradlew build jacocoTestReport assembleDebugAndroidTest
         - ./gradlew connectedCheck
-      name: "test"
       after_success:
         - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
-      script:
-      - ./gradlew generateReleaseJavadoc
       name: "Release Javadoc"
+      script:
+        - ./gradlew generateReleaseJavadoc
       deploy:
         provider: pages
         local-dir: docs/javadoc/release
