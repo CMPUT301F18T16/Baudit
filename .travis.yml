@@ -67,8 +67,8 @@ script:
 jobs:
   include:
     - stage: test
-    - script:
-      - ./gradlew generateJavadoc
+      script:
+        - ./gradlew generateJavadoc
       name: "Debug Javadoc"
     - before_script:
         - android list targets
