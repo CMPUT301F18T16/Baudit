@@ -77,7 +77,7 @@ jobs:
       script:
         - ./gradlew build jacocoTestReport assembleDebugAndroidTest
         - ./gradlew connectedCheck
-      name: "Test"
+      name: "test"
       after_success:
         - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
