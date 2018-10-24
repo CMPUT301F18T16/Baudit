@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 /**
  * RecyclerView adapter for integrating a {@code RecordTreeSet}.
  *
+ * @see ca.klapstein.baudit.Data.Record
  * @see ca.klapstein.baudit.Data.RecordTreeSet
  */
 public class RecordAdapter extends RecyclerTreeSetAdapter {
