@@ -67,14 +67,8 @@ stages:
 jobs:
   include:
     - stage: test
-      name: "Unit Tests"
-      script:
-        - ./gradlew build jacocoTestReport
-        - ./gradlew test
-      after_success:
-        - bash <(curl -s https://codecov.io/bash) -cF Unit
     - script:
-      - ./gradlew build generateJavadoc
+      - ./gradlew generateJavadoc
       name: "Debug Javadoc"
     - before_script:
         - android list targets
@@ -84,9 +78,9 @@ jobs:
       script:
         - ./gradlew build jacocoTestReport assembleDebugAndroidTest
         - ./gradlew connectedCheck
-      name: "Instrumentation Tests"
+      name: "Test"
       after_success:
-        - bash <(curl -s https://codecov.io/bash) -cF Instrumentation
+        - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
       script:
       - ./gradlew generateReleaseJavadoc
