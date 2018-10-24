@@ -38,9 +38,9 @@ before_cache:
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.android/build-cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
 
 before_install:
   # If permission for Gradlew Dependencies fail, use this.
@@ -65,17 +65,18 @@ stages:
 jobs:
   include:
     - stage: test
-      name: "Debug Javadoc"
-      script:
-        - ./gradlew generateJavadoc
-    - name: "Test"
+      name: "Test"
       before_script:
         - android list targets
         - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
         - emulator -avd test -no-window &
         - android-wait-for-emulator
       script:
+        # ensure javadoc generates correctly
+        - ./gradlew generateJavadoc
+        # assemble code coverage reports
         - ./gradlew build jacocoTestReport assembleDebugAndroidTest
+        # run connected (instrumented) tests
         - ./gradlew connectedCheck
       after_success:
         - bash <(curl -s https://codecov.io/bash)
