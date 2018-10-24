@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 /**
  * RecyclerView adapter for integrating a {@code ProblemTreeSet}.
  *
+ * @see ca.klapstein.baudit.Data.Problem
  * @see ca.klapstein.baudit.Data.ProblemTreeSet
  */
 public class ProblemAdapter extends RecyclerTreeSetAdapter {

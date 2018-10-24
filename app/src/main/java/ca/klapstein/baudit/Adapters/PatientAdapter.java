@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 /**
  * RecyclerView adapter for integrating a {@code PatientTreeSet}.
  *
+ * @see ca.klapstein.baudit.Data.Patient
  * @see ca.klapstein.baudit.Data.PatientTreeSet
  */
 public class PatientAdapter extends RecyclerTreeSetAdapter {
