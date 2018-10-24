@@ -4,6 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+/**
+ * RecyclerView adapter for integrating a {@code RecordTreeSet}.
+ *
+ * @see ca.klapstein.baudit.Data.RecordTreeSet
+ */
 public class RecordAdapter extends RecyclerTreeSetAdapter {
     private static final String TAG = "RecordAdapter";
 
