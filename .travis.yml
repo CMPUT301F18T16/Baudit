@@ -65,9 +65,9 @@ jobs:
         - android-wait-for-emulator
       script:
         # ensure javadoc generates correctly
-        - ./gradlew build generateJavadoc
+        - ./gradlew clean build generateJavadoc
         # assemble code coverage reports
-        - ./gradlew build jacocoTestReport assembleDebugAndroidTest
+        - ./gradlew clean build jacocoTestReport assembleDebugAndroidTest
         # run connected (instrumented) tests
         - ./gradlew connectedCheck
       after_success:
@@ -75,7 +75,7 @@ jobs:
     - stage: deploy
       name: "Deploy Javadoc"
       script:
-        - ./gradlew build generateReleaseJavadoc
+        - ./gradlew clean build generateReleaseJavadoc
       deploy:
         provider: pages
         local-dir: docs/javadoc/release
