@@ -9,7 +9,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         // Testing config
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -26,14 +25,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // misc android view/layout libraries
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    // GSON
-    implementation 'com.google.code.gson:gson:2.8.2'
-
     // Add a recyclerview
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.2'
     // Android instrument tests
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
@@ -41,24 +39,25 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
     // Optional if you need to detect intents.
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
-
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'
 }
 
-// adding gradle plugin for easy Javadoc generation for android projects
 buildscript {
     repositories {
+        google()
+        jcenter()
         mavenCentral()
     }
     dependencies {
+        // easy javadoc generation for android projects
         classpath "com.vanniktech:gradle-android-javadoc-plugin:0.3.0"
+        // easy code coverage for android projects
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.3'
     }
 }
 
 apply plugin: "com.vanniktech.android.javadoc"
-
 androidJavadoc {
     // outputDir return the documentation output dir
     // Default implementation :
@@ -67,17 +66,7 @@ androidJavadoc {
     }
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.3'
-    }
-}
-
 apply plugin: 'jacoco-android'
-
 jacocoAndroidUnitTestReport {
     csv.enabled false
     html.enabled true
