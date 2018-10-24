@@ -8,14 +8,16 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/cmput301f18t16/baudit/badge)](https://www.codefactor.io/repository/github/cmput301f18t16/baudit)
 
 ## Overview 
-Baudit is a health tracking Android application designed to help ease the montioring of an 
-individual's (Patient) Medical Problems. 
+Baudit is a health tracking Android application designed to help ease
+the monitoring of an individual's (Patient) Medical Problems. 
 
-Baudit helps Patients record their Medical Problems and provides options to append Records onto 
-their Medical Problems for enhancing the details of their medical issues.
+Baudit helps Patients record their Medical Problems and provides options
+to append Records onto their Medical Problems for enhancing the details
+of their medical issues.
 
-Additionally, Baudit also allows Care Providers to monitor Patients Medical Problems and 
-Records. And if needed provide assistance in contacting Patients if their Medical Problems 
-appear serious. 
+Additionally, Baudit also allows Care Providers to monitor Patients 
+Medical Problems and Records. And if needed provide assistance in 
+contacting Patients if their Medical Problems appear serious. 
 
-For more information on Baudit please look at its [GitHub Wiki](https://github.com/CMPUT301F18T16/Baudit/wiki).
+For more information on Baudit please look at its 
+[GitHub Wiki](https://github.com/CMPUT301F18T16/Baudit/wiki).
