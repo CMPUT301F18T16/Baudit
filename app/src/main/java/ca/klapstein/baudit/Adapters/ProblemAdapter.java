@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import ca.klapstein.baudit.Data.ProblemTreeSet;
+
 /**
  * RecyclerView adapter for integrating a {@code ProblemTreeSet}.
  *
@@ -12,6 +14,13 @@ import android.view.ViewGroup;
  */
 public class ProblemAdapter extends RecyclerTreeSetAdapter {
     private static final String TAG = "ProblemAdapter";
+
+    @NonNull
+    private ProblemTreeSet problemTreeSet;
+
+    public ProblemAdapter(@NonNull ProblemTreeSet problemTreeSet) {
+        this.problemTreeSet = problemTreeSet;
+    }
 
     @NonNull
     @Override

@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import ca.klapstein.baudit.Data.RecordTreeSet;
+
 /**
  * RecyclerView adapter for integrating a {@code RecordTreeSet}.
  *
@@ -12,6 +14,13 @@ import android.view.ViewGroup;
  */
 public class RecordAdapter extends RecyclerTreeSetAdapter {
     private static final String TAG = "RecordAdapter";
+
+    @NonNull
+    private final RecordTreeSet recordTreeSet;
+
+    public RecordAdapter(@NonNull RecordTreeSet recordTreeSet) {
+        this.recordTreeSet = recordTreeSet;
+    }
 
     @NonNull
     @Override
