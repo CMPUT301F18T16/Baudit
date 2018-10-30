@@ -11,8 +11,11 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class BauditRemoteManagerTest {
 
+    private BauditRemoteManager bauditRemoteManager;
+
     @Before
     public void setUp() {
+        bauditRemoteManager = new BauditRemoteManager();
     }
 
     @After

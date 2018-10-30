@@ -11,8 +11,11 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class BauditDataBaseManagerTest {
 
+    private BauditDataBaseManager bauditDataBaseManager;
+
     @Before
     public void setUp()  {
+        bauditDataBaseManager = new BauditDataBaseManager();
     }
 
     @After

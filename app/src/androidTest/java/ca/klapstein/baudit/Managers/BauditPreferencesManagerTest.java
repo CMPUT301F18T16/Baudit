@@ -11,8 +11,11 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class BauditPreferencesManagerTest {
 
+    private BauditPreferencesManager bauditPreferencesManager;
+
     @Before
     public void setUp() {
+        bauditPreferencesManager = new BauditPreferencesManager();
     }
 
     @After
