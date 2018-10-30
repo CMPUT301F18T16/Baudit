@@ -10,7 +10,7 @@ public class ContactInfoTest {
     private ContactInfo contactInfo;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         contactInfo = new ContactInfo();
     }
 
