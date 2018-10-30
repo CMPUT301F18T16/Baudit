@@ -12,14 +12,12 @@ import ca.klapstein.baudit.Data.PatientTreeSet;
  * @see ca.klapstein.baudit.Data.Patient
  * @see ca.klapstein.baudit.Data.PatientTreeSet
  */
-public class PatientAdapter extends RecyclerTreeSetAdapter {
+public class PatientAdapter extends RecyclerTreeSetAdapter<PatientTreeSet> {
     private static final String TAG = "PatientAdapter";
 
-    @NonNull
-    private PatientTreeSet patientTreeSet;
 
     public PatientAdapter(@NonNull PatientTreeSet patientTreeSet) {
-        this.patientTreeSet = patientTreeSet;
+        this.treeSet = patientTreeSet;
     }
 
     @NonNull
@@ -31,10 +29,5 @@ public class PatientAdapter extends RecyclerTreeSetAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
     }
 }
