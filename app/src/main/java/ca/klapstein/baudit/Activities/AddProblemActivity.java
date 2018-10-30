@@ -2,7 +2,6 @@ package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import ca.klapstein.baudit.Data.Problem;
 import ca.klapstein.baudit.R;
 

@@ -3,7 +3,6 @@ package ca.klapstein.baudit.Activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
 import ca.klapstein.baudit.Data.User;
 import ca.klapstein.baudit.R;
 

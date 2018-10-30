@@ -1,9 +1,14 @@
 package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
-
 import ca.klapstein.baudit.R;
 
+/**
+ * Activity providing the inputs and validations for creating a
+ * valid {@code CareProvider} Account for Baudit.
+ *
+ * @see ca.klapstein.baudit.Data.CareProvider
+ */
 public class CreateCareProviderAccountActivity extends AccountCreateActivity {
     private static final String TAG = "CreateCareProviderAccountActivity";
 
