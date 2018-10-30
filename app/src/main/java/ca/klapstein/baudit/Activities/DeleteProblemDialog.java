@@ -1,5 +1,10 @@
 package ca.klapstein.baudit.Activities;
 
+/**
+ * Dialog providing a confirmation prompt to delete a {@code Problem}.
+ *
+ * @see ca.klapstein.baudit.Data.Problem
+ */
 public class DeleteProblemDialog extends DeleteDialog {
     private static final String TAG = "DeleteProblemDialog";
 

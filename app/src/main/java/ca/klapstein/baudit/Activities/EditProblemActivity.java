@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
-
 import ca.klapstein.baudit.R;
 
 /**

@@ -23,6 +23,12 @@ android {
     }
 }
 
+configurations {
+    all {
+        exclude module: 'httpclient'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // misc android view/layout libraries
@@ -43,6 +49,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     // robotium gui tests
     implementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
+
+    // apache commons!
+    implementation 'commons-validator:commons-validator:1.6'
 }
 
 buildscript {
@@ -73,4 +82,12 @@ jacocoAndroidUnitTestReport {
     csv.enabled false
     html.enabled true
     xml.enabled true
+}
+
+// allowing apache commons frameworks to exist in android project
+configurations {
+    all {
+        exclude module: 'httpclient'
+        exclude module: 'commons-logging'
+    }
 }

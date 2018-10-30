@@ -14,8 +14,22 @@ public class Password {
     private String password;
 
     public Password(@NonNull String password) {
-        // TODO: validate password
-        this.password = password;
+        if (isValid(password)) {
+            this.password = password;
+        } else {
+            throw new IllegalArgumentException("Invalid password String");
+        }
+    }
+
+    /**
+     * Validate whether a string is a valid Password.
+     *
+     * @param password {@code String}
+     * @return {@code boolean}
+     */
+    static public boolean isValid(String password) {
+        // TODO: implement
+        return true;
     }
 
     @NonNull
@@ -24,7 +38,10 @@ public class Password {
     }
 
     public void setPassword(@NonNull String password) {
-        // TODO: validate password
-        this.password = password;
+        if (isValid(password)) {
+            this.password = password;
+        } else {
+            throw new IllegalArgumentException("Invalid password String");
+        }
     }
 }

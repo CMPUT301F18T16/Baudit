@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.Activities;
 
 import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

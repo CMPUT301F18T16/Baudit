@@ -3,7 +3,6 @@ package ca.klapstein.baudit.Adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-
 import ca.klapstein.baudit.Data.ProblemTreeSet;
 
 /**
@@ -12,14 +11,11 @@ import ca.klapstein.baudit.Data.ProblemTreeSet;
  * @see ca.klapstein.baudit.Data.Problem
  * @see ca.klapstein.baudit.Data.ProblemTreeSet
  */
-public class ProblemAdapter extends RecyclerTreeSetAdapter {
+public class ProblemAdapter extends RecyclerTreeSetAdapter<ProblemTreeSet> {
     private static final String TAG = "ProblemAdapter";
 
-    @NonNull
-    private ProblemTreeSet problemTreeSet;
-
     public ProblemAdapter(@NonNull ProblemTreeSet problemTreeSet) {
-        this.problemTreeSet = problemTreeSet;
+        this.treeSet = problemTreeSet;
     }
 
     @NonNull
@@ -31,10 +27,5 @@ public class ProblemAdapter extends RecyclerTreeSetAdapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
     }
 }
