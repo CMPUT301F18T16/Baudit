@@ -21,6 +21,17 @@ public class Password {
         }
     }
 
+    /**
+     * Validate whether a string is a valid Password.
+     *
+     * @param password {@code String}
+     * @return {@code boolean}
+     */
+    static public boolean isValid(String password) {
+        // TODO: implement
+        return true;
+    }
+
     @NonNull
     public String getPassword() {
         return password;
@@ -32,16 +43,5 @@ public class Password {
         } else {
             throw new IllegalArgumentException("Invalid password String");
         }
-    }
-
-    /**
-     * Validate whether a string is a valid Password.
-     *
-     * @param password {@code String}
-     * @return {@code boolean}
-     */
-    static public boolean isValid(String password) {
-        // TODO: implement
-        return true;
     }
 }

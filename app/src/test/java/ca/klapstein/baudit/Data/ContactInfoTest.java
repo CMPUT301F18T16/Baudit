@@ -4,7 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ContactInfoTest {
     private ContactInfo contactInfo;
@@ -18,11 +19,11 @@ public class ContactInfoTest {
     public void tearDown() {
     }
 
-    private Email ExampleEmail(){
+    private Email ExampleEmail() {
         return new Email("foo@example.com");
     }
 
-    private PhoneNumber ExamplePhoneNumber(){
+    private PhoneNumber ExamplePhoneNumber() {
         return new PhoneNumber("111-111-1111");
     }
 

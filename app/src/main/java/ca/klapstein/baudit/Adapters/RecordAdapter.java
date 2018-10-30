@@ -3,7 +3,6 @@ package ca.klapstein.baudit.Adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-
 import ca.klapstein.baudit.Data.RecordTreeSet;
 
 /**

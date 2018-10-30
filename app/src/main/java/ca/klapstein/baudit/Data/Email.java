@@ -10,30 +10,15 @@ import org.apache.commons.validator.routines.EmailValidator;
  */
 public class Email {
     private static final String TAG = "Email";
-
-    @NonNull
-    private String email;
-
     /**
      * Apache commons EmailValidator.
      */
     private static final EmailValidator emailValidator = EmailValidator.getInstance();
+    @NonNull
+    private String email;
 
     public Email(String email) {
-        if (isValid(email)){
-            this.email = email;
-        } else {
-            throw new IllegalArgumentException("Invalid Email String");
-        }
-    }
-
-    @NonNull
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if (isValid(email)){
+        if (isValid(email)) {
             this.email = email;
         } else {
             throw new IllegalArgumentException("Invalid Email String");
@@ -42,16 +27,28 @@ public class Email {
 
     /**
      * Validate whether a string is a valid email.
-     *
+     * <p>
      * Wrapping of the Apache Commons EmailValidator.
      *
      * @param email {@code String}
      * @return {@code boolean}
-     *
      * @see EmailValidator
      */
-    static public boolean isValid(String email){
+    static public boolean isValid(String email) {
         return emailValidator.isValid(email);
+    }
+
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (isValid(email)) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Invalid Email String");
+        }
     }
 
     @Override
