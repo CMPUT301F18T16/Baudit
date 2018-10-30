@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.Data;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +12,10 @@ public class ContactInfoTest {
     @Before
     public void setUp() throws Exception {
         contactInfo = new ContactInfo();
+    }
+
+    @After
+    public void tearDown() {
     }
 
     private Email ExampleEmail(){
