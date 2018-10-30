@@ -18,7 +18,7 @@ public class ProblemListActivityTest extends ActivityTestRule<ProblemListActivit
 
     private Solo solo;
 
-    public ProblemListActivityTest(){
+    public ProblemListActivityTest() {
         super(ca.klapstein.baudit.Activities.ProblemListActivity.class);
     }
 

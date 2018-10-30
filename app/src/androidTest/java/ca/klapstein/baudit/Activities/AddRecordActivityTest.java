@@ -18,7 +18,7 @@ public class AddRecordActivityTest extends ActivityTestRule<AddRecordActivity> {
 
     private Solo solo;
 
-    public AddRecordActivityTest(){
+    public AddRecordActivityTest() {
         super(ca.klapstein.baudit.Activities.AddRecordActivity.class);
     }
 

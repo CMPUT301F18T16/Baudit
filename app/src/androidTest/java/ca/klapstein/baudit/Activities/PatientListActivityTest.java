@@ -18,7 +18,7 @@ public class PatientListActivityTest extends ActivityTestRule<PatientListActivit
 
     private Solo solo;
 
-    public PatientListActivityTest(){
+    public PatientListActivityTest() {
         super(ca.klapstein.baudit.Activities.PatientListActivity.class);
     }
 

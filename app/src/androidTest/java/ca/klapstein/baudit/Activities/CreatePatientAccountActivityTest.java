@@ -18,7 +18,7 @@ public class CreatePatientAccountActivityTest extends ActivityTestRule<CreatePat
 
     private Solo solo;
 
-    public CreatePatientAccountActivityTest(){
+    public CreatePatientAccountActivityTest() {
         super(ca.klapstein.baudit.Activities.CreatePatientAccountActivity.class);
     }
 

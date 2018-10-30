@@ -18,7 +18,7 @@ public class CreateCareProviderActivityTest extends ActivityTestRule<CreateCareP
 
     private Solo solo;
 
-    public CreateCareProviderActivityTest(){
+    public CreateCareProviderActivityTest() {
         super(ca.klapstein.baudit.Activities.CreateCareProviderAccountActivity.class);
     }
 

@@ -18,7 +18,7 @@ public class PhotoActivityTest extends ActivityTestRule<PhotoActivity> {
 
     private Solo solo;
 
-    public PhotoActivityTest(){
+    public PhotoActivityTest() {
         super(ca.klapstein.baudit.Activities.PhotoActivity.class);
     }
 

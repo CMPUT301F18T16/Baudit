@@ -18,7 +18,7 @@ public class RecordListActivityTest extends ActivityTestRule<RecordListActivity>
 
     private Solo solo;
 
-    public RecordListActivityTest(){
+    public RecordListActivityTest() {
         super(ca.klapstein.baudit.Activities.RecordListActivity.class);
     }
 

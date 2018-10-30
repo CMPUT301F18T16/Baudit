@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class AccountCreateActivityTest extends ActivityTestRule<AccountCreateActivity> {
@@ -30,7 +29,7 @@ public class AccountCreateActivityTest extends ActivityTestRule<AccountCreateAct
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test

@@ -18,7 +18,7 @@ public class LoginActivityTest extends ActivityTestRule<LoginActivity> {
 
     private Solo solo;
 
-    public LoginActivityTest(){
+    public LoginActivityTest() {
         super(ca.klapstein.baudit.Activities.LoginActivity.class);
     }
 

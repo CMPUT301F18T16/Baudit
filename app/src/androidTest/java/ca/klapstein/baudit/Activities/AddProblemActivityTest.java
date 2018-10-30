@@ -12,14 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class AddProblemActivityTest extends ActivityTestRule<AddProblemActivity> {
 
     private Solo solo;
 
-    public AddProblemActivityTest(){
+    public AddProblemActivityTest() {
         super(ca.klapstein.baudit.Activities.AddProblemActivity.class);
     }
 

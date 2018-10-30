@@ -18,7 +18,7 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
 
     private Solo solo;
 
-    public MainActivityTest(){
+    public MainActivityTest() {
         super(ca.klapstein.baudit.Activities.MainActivity.class);
     }
 

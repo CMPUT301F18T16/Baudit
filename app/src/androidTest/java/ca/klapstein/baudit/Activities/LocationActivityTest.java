@@ -18,7 +18,7 @@ public class LocationActivityTest extends ActivityTestRule<LocationActivity> {
 
     private Solo solo;
 
-    public LocationActivityTest(){
+    public LocationActivityTest() {
         super(ca.klapstein.baudit.Activities.LocationActivity.class);
     }
 

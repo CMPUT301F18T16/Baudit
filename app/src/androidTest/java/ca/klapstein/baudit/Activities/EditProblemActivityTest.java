@@ -18,7 +18,7 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
 
     private Solo solo;
 
-    public EditProblemActivityTest(){
+    public EditProblemActivityTest() {
         super(ca.klapstein.baudit.Activities.EditProblemActivity.class);
     }
 

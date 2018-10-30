@@ -18,7 +18,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
 
     private Solo solo;
 
-    public EditAccountActivityTest(){
+    public EditAccountActivityTest() {
         super(ca.klapstein.baudit.Activities.EditAccountActivity.class);
     }
 
