@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class SlideShowDialog extends DialogFragment {
     private static final String TAG = "SlideShowDialog";
 
-    ArrayList<RecordPhoto> photos;
+    private ArrayList<RecordPhoto> photos;
 
     @NonNull
     @Override
