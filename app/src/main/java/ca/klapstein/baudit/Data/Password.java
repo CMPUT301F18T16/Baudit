@@ -13,7 +13,7 @@ public class Password {
     @NonNull
     private String password;
 
-    public Password(@NonNull String password){
+    public Password(@NonNull String password) {
         // TODO: validate password
         this.password = password;
     }

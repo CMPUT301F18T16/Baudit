@@ -3,10 +3,10 @@ package ca.klapstein.baudit.Data;
 public class BodyPhotoCoords {
     private static BodyPhotoCoords ourInstance = new BodyPhotoCoords();
 
-    public static BodyPhotoCoords getInstance() {
-        return ourInstance;
+    private BodyPhotoCoords() {
     }
 
-    private BodyPhotoCoords() {
+    public static BodyPhotoCoords getInstance() {
+        return ourInstance;
     }
 }

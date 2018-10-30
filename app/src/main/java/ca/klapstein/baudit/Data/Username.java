@@ -13,7 +13,7 @@ public class Username {
     @NonNull
     private String username;
 
-    public Username(@NonNull String username){
+    public Username(@NonNull String username) {
         // TODO: validate username
         this.username = username;
     }

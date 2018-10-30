@@ -1,6 +1,5 @@
 package ca.klapstein.baudit.Data;
 
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 
 /**
@@ -43,10 +42,10 @@ public class ContactInfo {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if (obj == null){
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
-        } else if (obj.getClass().equals(ContactInfo.class)){
+        } else if (obj.getClass().equals(ContactInfo.class)) {
             ContactInfo otherContactInfo = (ContactInfo) obj;
             return this.getEmail().equals(otherContactInfo.getEmail()) &&
                     this.getPhoneNumber().equals(otherContactInfo.getPhoneNumber());

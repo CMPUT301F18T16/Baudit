@@ -41,6 +41,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'
+    // robotium gui tests
+    implementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
 }
 
 buildscript {

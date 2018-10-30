@@ -8,7 +8,7 @@ public class PhoneNumber {
     @NonNull
     private String phoneNumber;
 
-    public PhoneNumber(@NonNull String phoneNumber){
+    public PhoneNumber(@NonNull String phoneNumber) {
         // TODO: add validation of phone number string
         this.phoneNumber = phoneNumber;
     }
@@ -31,9 +31,9 @@ public class PhoneNumber {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null){
+        if (obj == null) {
             return false;
-        } else if (obj.getClass().equals(PhoneNumber.class)){
+        } else if (obj.getClass().equals(PhoneNumber.class)) {
             PhoneNumber otherPhoneNumber = (PhoneNumber) obj;
             return this.getPhoneNumber().equals(otherPhoneNumber.getPhoneNumber());
         } else {

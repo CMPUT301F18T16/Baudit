@@ -1,9 +1,11 @@
 package ca.klapstein.baudit.Activities;
 
 import android.os.Bundle;
+
 import ca.klapstein.baudit.R;
 
 public class CreateCareProviderAccountActivity extends AccountCreateActivity {
+    private static final String TAG = "CreateCareProviderAccountActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

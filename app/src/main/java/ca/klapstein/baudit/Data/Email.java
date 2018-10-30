@@ -7,13 +7,13 @@ import android.support.annotation.NonNull;
  *
  * @see User
  */
-public class Email{
+public class Email {
     private static final String TAG = "Email";
 
     @NonNull
     private String email;
 
-    public Email(@NonNull String email){
+    public Email(@NonNull String email) {
         // TODO: add validation of email string
         this.email = email;
     }
@@ -37,9 +37,9 @@ public class Email{
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null){
+        if (obj == null) {
             return false;
-        } else if (obj.getClass().equals(Email.class)){
+        } else if (obj.getClass().equals(Email.class)) {
             Email otherEmail = (Email) obj;
             return this.getEmail().equals(otherEmail.getEmail());
         } else {
