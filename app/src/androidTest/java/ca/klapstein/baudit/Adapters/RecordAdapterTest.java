@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class RecordAdapterTest {
@@ -35,5 +36,6 @@ public class RecordAdapterTest {
 
     @Test
     public void getItemCount() {
+        assertEquals(0, recordAdapter.getItemCount());
     }
 }

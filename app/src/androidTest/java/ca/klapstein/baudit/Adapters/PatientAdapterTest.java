@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class PatientAdapterTest {
@@ -34,5 +35,6 @@ public class PatientAdapterTest {
 
     @Test
     public void getItemCount() {
+        assertEquals(0, patientAdapter.getItemCount());
     }
 }
