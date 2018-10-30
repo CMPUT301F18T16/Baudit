@@ -7,13 +7,18 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import ca.klapstein.baudit.Data.RecordPhoto;
 import ca.klapstein.baudit.R;
+
+import java.util.ArrayList;
 
 /**
  * Dialog providing a "slideshow" of photos to be easily viewed.
  */
 public class SlideShowDialog extends DialogFragment {
     private static final String TAG = "SlideShowDialog";
+
+    ArrayList<RecordPhoto> photos;
 
     @NonNull
     @Override
