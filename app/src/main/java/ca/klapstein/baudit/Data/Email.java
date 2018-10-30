@@ -50,7 +50,7 @@ public class Email {
      *
      * @see EmailValidator
      */
-    public boolean isValid(String email){
+    static public boolean isValid(String email){
         return emailValidator.isValid(email);
     }
 
