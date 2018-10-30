@@ -14,6 +14,7 @@ public class PatientAdapterTest {
 
     private PatientTreeSet patientTreeSet;
     private PatientAdapter patientAdapter;
+
     @Before
     public void setUp() {
         patientTreeSet = new PatientTreeSet();

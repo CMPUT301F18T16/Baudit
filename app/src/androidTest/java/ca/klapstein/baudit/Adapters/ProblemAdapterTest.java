@@ -12,8 +12,9 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ProblemAdapterTest {
 
-    ProblemTreeSet problemTreeSet;
-    ProblemAdapter problemAdapter;
+    private ProblemTreeSet problemTreeSet;
+    private ProblemAdapter problemAdapter;
+
     @Before
     public void setUp() {
         problemTreeSet = new ProblemTreeSet();

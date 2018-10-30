@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class RecordAdapterTest {
 
-    RecordTreeSet recordTreeSet;
-    RecordAdapter recordAdapter;
+    private RecordTreeSet recordTreeSet;
+    private RecordAdapter recordAdapter;
 
     @Before
     public void setUp() {
