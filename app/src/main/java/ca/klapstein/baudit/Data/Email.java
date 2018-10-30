@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
+import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * Data class representing a Baudit's {@code User}'s email.
@@ -13,9 +14,17 @@ public class Email {
     @NonNull
     private String email;
 
-    public Email(@NonNull String email) {
-        // TODO: add validation of email string
-        this.email = email;
+    /**
+     * Apache commons EmailValidator.
+     */
+    private static final EmailValidator emailValidator = EmailValidator.getInstance();
+
+    public Email(String email) {
+        if (isValid(email)){
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Invalid Email String");
+        }
     }
 
     @NonNull
@@ -23,9 +32,26 @@ public class Email {
         return email;
     }
 
-    public void setEmail(@NonNull String email) {
-        // TODO: add validation of email string
-        this.email = email;
+    public void setEmail(String email) {
+        if (isValid(email)){
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Invalid Email String");
+        }
+    }
+
+    /**
+     * Validate whether a string is a valid email.
+     *
+     * Wrapping of the Apache Commons EmailValidator.
+     *
+     * @param email {@code String}
+     * @return {@code boolean}
+     *
+     * @see EmailValidator
+     */
+    public boolean isValid(String email){
+        return emailValidator.isValid(email);
     }
 
     @Override
