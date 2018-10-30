@@ -83,3 +83,11 @@ jacocoAndroidUnitTestReport {
     html.enabled true
     xml.enabled true
 }
+
+// allowing apache commons frameworks to exist in android project
+configurations {
+    all {
+        exclude module: 'httpclient'
+        exclude module: 'commons-logging'
+    }
+}
