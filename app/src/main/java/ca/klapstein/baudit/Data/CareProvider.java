@@ -15,8 +15,8 @@ public class CareProvider extends User {
 
     // UC-02.01.01:  list all the records for a related medical problem
     public RecordTreeSet getRecordTreeSet(Patient patient, Problem problem){
-        ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
 
+        ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
         RecordTreeSet recordTreeSet = new RecordTreeSet();
 
         Iterator itr = problemTreeSet.iterator();
@@ -49,9 +49,14 @@ public class CareProvider extends User {
     }
 
     // UC-03.03.01: login into account
-    public void attemptLogin(Username username, Password password){
-        if (this.getUsername().equals(username) && this.getPassword().equals(password));
-        // TODO: successful
+    public boolean attemptLogin(Username username, Password password){
+        if (this.getUsername().equals(username)) {
+            if (this.getPassword().equals(password))
+                return true;
+            else return false;
+        }
+        else
+            return false;
     }
 
     // UC-03.04.01: logout of account TODO

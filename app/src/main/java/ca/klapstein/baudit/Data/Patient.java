@@ -17,7 +17,7 @@ public class Patient extends User {
         return problemTreeSet;
     }
 
-    // UC-01.03.01: edit medical problem TODO: replace edited record
+    // UC-01.03.01: edit medical problem TODO: replace edited record or done in problem class?
     public void editProblem(Problem editedProblem, Problem problem){}
 
     // UC-01.04.1: delete problem
@@ -29,7 +29,7 @@ public class Patient extends User {
     // UC-02.02.01: add record to medical problem
     public void addRecordToProblem(Record record, Problem problem){ problem.getRecordTreeSet().add(record); }
 
-    // UC-02.03.01: edit record of medical problem TODO: get problem from treeset then replace edited record
+    // UC-02.03.01: edit record of medical problem TODO: get problem from treeset then replace edited record or done in record?
     public void editRecord(Problem problem, Record editedRecord, Record record){ }
 
     // UC-03.02.01: edit account contact information
@@ -42,9 +42,14 @@ public class Patient extends User {
     // UC-02.03.03: remind patient to add photo TODO
 
     // UC-03.03.01: login into account
-    public void attemptLogin(Username username, Password password){
-        if (this.getUsername().equals(username) && this.getPassword().equals(password));
-            // TODO: successful
+    public boolean attemptLogin(Username username, Password password){
+        if (this.getUsername().equals(username)) {
+            if (this.getPassword().equals(password))
+                return true;
+            else return false;
+        }
+        else
+            return false;
     }
 
     // UC-03.04.01: logout of account TODO
