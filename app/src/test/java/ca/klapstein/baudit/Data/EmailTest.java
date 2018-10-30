@@ -30,12 +30,12 @@ public class EmailTest {
     }
 
     @Test
-    public void test_setEmailValid(){
-
+    public void test_validEmail(){
+        assertTrue(Email.isValid("foo@example.com"));
     }
 
     @Test
-    public void test_setEmailInvalid(){
-
+    public void test_invalidEmail(){
+        assertFalse(Email.isValid("foobar"));
     }
 }
