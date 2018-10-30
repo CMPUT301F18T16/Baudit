@@ -7,12 +7,17 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RecordTreeSetTest {
+
+    private RecordTreeSet recordTreeSet;
+
     @Before
     public void setUp() {
+        recordTreeSet = new RecordTreeSet();
     }
 
     @After
     public void tearDown() {
+        recordTreeSet = null;
     }
 
     @Test
