@@ -2,24 +2,40 @@ package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
 
+import java.util.regex.Pattern;
+
 public class PhoneNumber {
     private static final String TAG = "PhoneNumber";
+    private static final String VALID_CANADIAN_PHONE_NUMBER
+        = "\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
 
     @NonNull
     private String phoneNumber;
 
-    public PhoneNumber(@NonNull String phoneNumber) {
-        // TODO: add validation of phone number string
-        this.phoneNumber = phoneNumber;
+    public PhoneNumber(@NonNull String phoneNumber) throws InvalidPhoneNumberException {
+        if (isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            throw new InvalidPhoneNumberException();
+        }
     }
 
+    @NonNull
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        // TODO: add validation of phone number string
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+        if (isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            throw new InvalidPhoneNumberException();
+        }
+    }
+
+    private boolean isValidPhoneNumber(String number) {
+        Pattern p = Pattern.compile(VALID_CANADIAN_PHONE_NUMBER);
+        return p.matcher(number).matches();
     }
 
     @Override
@@ -40,4 +56,6 @@ public class PhoneNumber {
             return false;
         }
     }
+
+    private class InvalidPhoneNumberException extends Exception {}
 }
