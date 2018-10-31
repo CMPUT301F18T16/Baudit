@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest extends ActivityTestRule<MainActivity> {
+public class SplashActivityTest extends ActivityTestRule<SplashActivity> {
 
     private Solo solo;
 
-    public MainActivityTest() {
-        super(ca.klapstein.baudit.activities.MainActivity.class);
+    public SplashActivityTest() {
+        super(ca.klapstein.baudit.activities.SplashActivity.class);
     }
 
     @Before
@@ -32,6 +32,6 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
 
     @Test
     public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", SplashActivity.class);
     }
 }
