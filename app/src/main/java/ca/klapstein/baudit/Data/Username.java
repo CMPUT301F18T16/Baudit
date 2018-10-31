@@ -52,4 +52,5 @@ public class Username {
         } else {
             return false;
         }
+    }
 }
