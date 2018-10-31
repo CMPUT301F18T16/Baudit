@@ -15,7 +15,6 @@ public class PatientTest {
     public void tearDown() {
     }
 
-    /*
     @Test
     public void addProblem() {
 
@@ -46,7 +45,7 @@ public class PatientTest {
         // Two Problems
         Problem problem1 = new Problem();
         patient.getProblemTreeSet().add(problem1);
-        assertFalse(patient.getProblemTreeSet().contains(problem0) &&
+        assertTrue(patient.getProblemTreeSet().contains(problem0) &&
                 patient.getProblemTreeSet().contains(problem1));
     }
 
@@ -70,25 +69,6 @@ public class PatientTest {
         patient.deleteProblem(problem0);
         assertFalse(patient.getProblemTreeSet().contains(problem1));
     }
-    */
-
-    /*
-    // UC-03.02.01: edit account contact information
-    public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
-    // UC-03.03.01: view username or account contact information
-    public ContactInfo getContactInfo(){ return this.getContactInfo(); }
-    public Username getUsername(){ return this.getUsername(); }
-    // UC-03.03.01: login into account
-    public boolean attemptLogin(Username username, Password password){
-        if (this.getUsername().equals(username)) {
-            if (this.getPassword().equals(password))
-                return true;
-            else return false;
-        }
-        else
-            return false;
-    }
-    */
 
     @Test
     public void editContactInfo(){
