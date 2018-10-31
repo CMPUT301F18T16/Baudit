@@ -2,22 +2,19 @@ package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneNumber {
     private static final String TAG = "PhoneNumber";
-    private static final String VALID_CANADIAN_PHONE_NUMBER
-        = "\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
+    private static final String VALID_TEN_DIGIT_PHONE_NUMBER
+        = "\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})";
 
     @NonNull
     private String phoneNumber;
 
-    public PhoneNumber(@NonNull String phoneNumber) throws InvalidPhoneNumberException {
-        if (isValidPhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
-        } else {
-            throw new InvalidPhoneNumberException();
-        }
+    public PhoneNumber(@NonNull String phoneNumber) throws IllegalArgumentException {
+        this.setPhoneNumber(phoneNumber);
     }
 
     @NonNull
@@ -25,17 +22,14 @@ public class PhoneNumber {
         return this.phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
-        if (isValidPhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
+        Pattern p = Pattern.compile(VALID_TEN_DIGIT_PHONE_NUMBER);
+        Matcher m = p.matcher(phoneNumber);
+        if (m.matches()) {
+            this.phoneNumber = m.group(1) + m.group(2) + m.group(3);
         } else {
-            throw new InvalidPhoneNumberException();
+            throw new IllegalArgumentException();
         }
-    }
-
-    private boolean isValidPhoneNumber(String number) {
-        Pattern p = Pattern.compile(VALID_CANADIAN_PHONE_NUMBER);
-        return p.matcher(number).matches();
     }
 
     @Override
@@ -56,6 +50,4 @@ public class PhoneNumber {
             return false;
         }
     }
-
-    private class InvalidPhoneNumberException extends Exception {}
 }
