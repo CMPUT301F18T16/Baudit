@@ -17,7 +17,7 @@ import ca.klapstein.baudit.R;
  * @see ca.klapstein.baudit.data.PhoneNumber
  * @see ca.klapstein.baudit.data.User
  */
-abstract class AccountCreateActivity extends AppCompatActivity {
+public class AccountCreateActivity extends AppCompatActivity {
     private static final String TAG = "AccountCreateActivity";
 
     @Nullable
