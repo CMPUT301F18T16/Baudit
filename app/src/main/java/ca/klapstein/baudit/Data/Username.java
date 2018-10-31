@@ -16,7 +16,6 @@ public class Username {
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException{
-        // TODO: validate username
         this.setUsername(username);
     }
 
