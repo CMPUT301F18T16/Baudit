@@ -2,24 +2,34 @@ package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PhoneNumber {
     private static final String TAG = "PhoneNumber";
+    private static final String VALID_TEN_DIGIT_PHONE_NUMBER
+        = "\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})";
 
     @NonNull
     private String phoneNumber;
 
-    public PhoneNumber(@NonNull String phoneNumber) {
-        // TODO: add validation of phone number string
-        this.phoneNumber = phoneNumber;
+    public PhoneNumber(@NonNull String phoneNumber) throws IllegalArgumentException {
+        this.setPhoneNumber(phoneNumber);
     }
 
+    @NonNull
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        // TODO: add validation of phone number string
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
+        Pattern p = Pattern.compile(VALID_TEN_DIGIT_PHONE_NUMBER);
+        Matcher m = p.matcher(phoneNumber);
+        if (m.matches()) {
+            this.phoneNumber = m.group(1) + m.group(2) + m.group(3);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
