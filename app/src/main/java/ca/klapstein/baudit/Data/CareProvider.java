@@ -2,6 +2,9 @@ package ca.klapstein.baudit.Data;
 
 import java.util.Iterator;
 
+import ca.klapstein.baudit.Activities.LogoutDialog;
+import ca.klapstein.baudit.Managers.BauditRemoteManager;
+
 /**
  * Class that represents a Care Provider.
  */
@@ -37,32 +40,12 @@ public class CareProvider extends User {
     public void assignPatient(Patient patient){ assignedPatientTreeSet.add(patient); }
 
     // UC-07.02.01: list all patients TODO: not sure how to
+    // This is implemented in PatientListActivity
 
-    // UC-07.03.01: add comment record to medical problem
-    public void addCommentRecord(Record record, Problem problem){
-        RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
-        recordTreeSet.add(record);
-    }
-
-    // UC-03.03.01: login into account
-    public boolean attemptLogin(Username username, Password password){
-        if (this.getUsername().getUsername().equals(username.getUsername())) {
-            if (this.getPassword().getPassword().equals(password.getPassword()))
-                return true;
-            else
-                return false;
-        }
-        else
-            return false;
-    }
-
-    // UC-03.04.01: logout of account TODO
-    public void logout(){}
 
     // UC-04.01.01: search for problem or record
     public ProblemTreeSet searchProblem(String searchString){
         ProblemTreeSet matchingProblems = new ProblemTreeSet();
-
         Iterator itr = assignedPatientTreeSet.iterator();
         while(itr.hasNext()){
             // TODO: iterate patients the problems, search using regex and add to matching problems
