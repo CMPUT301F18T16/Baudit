@@ -17,7 +17,7 @@ import ca.klapstein.baudit.R;
  * @see ca.klapstein.baudit.data.PhoneNumber
  * @see ca.klapstein.baudit.data.User
  */
-public class AccountCreateActivity extends AppCompatActivity {
+abstract class AccountCreateActivity extends AppCompatActivity {
     private static final String TAG = "AccountCreateActivity";
 
     @Nullable
@@ -27,7 +27,6 @@ public class AccountCreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_create);
-
         // TODO: parse inputs and create the user
     }
 }
