@@ -31,7 +31,6 @@ public class Patient extends User {
     public void editRecord(Problem problem, Record editedRecord, Record record){ }
 
     // UC-03.02.01: edit account contact information
-
     public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
 
     // UC-02.03.03: remind patient to add photo TODO

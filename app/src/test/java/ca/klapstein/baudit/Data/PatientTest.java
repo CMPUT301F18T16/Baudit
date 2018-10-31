@@ -49,7 +49,7 @@ public class PatientTest {
                 patient.getProblemTreeSet().contains(problem1));
     }
 
-    @Test// UC-01.04.1: delete problem
+    @Test
     public void deleteProblem() {
 
         Patient patient = new Patient();
@@ -68,6 +68,25 @@ public class PatientTest {
 
         patient.deleteProblem(problem0);
         assertFalse(patient.getProblemTreeSet().contains(problem1));
+    }
+
+    @Test
+    public void addRecordToProblem(){
+
+        Patient patient = new Patient();
+
+        Problem problem0 = new Problem();
+        patient.addProblem(problem0);
+
+        Record record0 = new Record();
+        Record record1 = new Record();
+        patient.addRecordToProblem(record0, problem0);
+        patient.addRecordToProblem(record1, problem0);
+
+        RecordTreeSet recordTreeSet = patient.getProblemTreeSet().first().getRecordTreeSet();
+
+        assertTrue(recordTreeSet.contains(record0));
+        assertTrue(recordTreeSet.contains(record1));
     }
 
     @Test

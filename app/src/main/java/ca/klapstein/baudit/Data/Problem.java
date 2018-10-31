@@ -13,6 +13,7 @@ public class Problem implements Comparable<Problem> {
 
     public Problem() {
         this.timestamp = System.currentTimeMillis();
+        this.recordTreeSet = new RecordTreeSet();
     }
 
     public long getTimestamp() {
