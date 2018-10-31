@@ -12,22 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AccountCreateActivity"></activity>
-        <activity android:name=".Activities.CreateCareProviderAccountActivity"></activity>
-        <activity android:name=".Activities.EditAccountActivity"></activity>
-        <activity android:name=".Activities.LoginActivity"></activity>
-        <activity android:name=".Activities.CreatePatientAccountActivity"></activity>
-        <activity android:name=".Activities.LocationActivity"></activity>
-        <activity android:name=".Activities.EditProblemActivity"></activity>
-        <activity android:name=".Activities.AddProblemActivity"></activity>
-        <activity android:name=".Activities.AddRecordActivity"></activity>
-        <activity android:name=".Activities.EditRecordActivity"></activity>
-        <activity android:name=".Activities.PatientListActivity"></activity>
-        <activity android:name=".Activities.PhotoActivity"></activity>
-        <activity android:name=".Activities.ProblemListActivity"></activity>
-        <activity android:name=".Activities.RecordListActivity"></activity>
+        <activity android:name=".activities.AccountCreateActivity"></activity>
+        <activity android:name=".activities.CreateCareProviderAccountActivity"></activity>
+        <activity android:name=".activities.EditAccountActivity"></activity>
+        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.CreatePatientAccountActivity"></activity>
+        <activity android:name=".activities.LocationActivity"></activity>
+        <activity android:name=".activities.EditProblemActivity"></activity>
+        <activity android:name=".activities.AddProblemActivity"></activity>
+        <activity android:name=".activities.AddRecordActivity"></activity>
+        <activity android:name=".activities.EditRecordActivity"></activity>
+        <activity android:name=".activities.PatientListActivity"></activity>
+        <activity android:name=".activities.PhotoActivity"></activity>
+        <activity android:name=".activities.ProblemListActivity"></activity>
+        <activity android:name=".activities.RecordListActivity"></activity>
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
