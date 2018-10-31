@@ -13,7 +13,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
 
     private Solo solo;
 
-    LoginCareProviderActivityTest() {
+    public LoginCareProviderActivityTest() {
         super(ca.klapstein.baudit.Activities.LoginCareProviderActivity.class);
     }
 
@@ -29,7 +29,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
 
     @Test
     public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
 
     @Test
