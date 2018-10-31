@@ -1,7 +1,5 @@
 package ca.klapstein.baudit.Data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.fail;
@@ -9,12 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class PhoneNumberTest {
-    @Before
-    public void setUp() {}
-
-    @After
-    public void tearDown() {}
-
     @Test
     public void testPhoneNumberConstructor() {
         PhoneNumber phoneNumber = new PhoneNumber("(780)4444444");
