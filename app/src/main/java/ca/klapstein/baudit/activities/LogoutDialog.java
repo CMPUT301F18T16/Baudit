@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -30,5 +31,13 @@ public class LogoutDialog extends DialogFragment {
 
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    /**
+     * On a proper logout go back to MainActivity.
+     */
+    private void onLogout(){
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
