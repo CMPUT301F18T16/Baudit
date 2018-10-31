@@ -30,10 +30,6 @@ public class CareProvider extends User {
     // UC-03.02.01: edit account contact information
     public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
 
-    // UC-03.03.01: view username or account contact information
-    public ContactInfo getContactInfo(){ return this.getContactInfo(); }
-    public Username getUsername(){ return this.getUsername(); }
-
     // UC-06.01.01: list patients assigned to care providers
     public PatientTreeSet getAssignedPatientTreeSet(){ return assignedPatientTreeSet; }
 
@@ -50,16 +46,18 @@ public class CareProvider extends User {
 
     // UC-03.03.01: login into account
     public boolean attemptLogin(Username username, Password password){
-        if (this.getUsername().equals(username)) {
-            if (this.getPassword().equals(password))
+        if (this.getUsername().getUsername().equals(username.getUsername())) {
+            if (this.getPassword().getPassword().equals(password.getPassword()))
                 return true;
-            else return false;
+            else
+                return false;
         }
         else
             return false;
     }
 
     // UC-03.04.01: logout of account TODO
+    public void logout(){}
 
     // UC-04.01.01: search for problem or record
     public ProblemTreeSet searchProblem(String searchString){

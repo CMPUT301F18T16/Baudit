@@ -13,9 +13,7 @@ public class Patient extends User {
     public void addProblem(Problem problem){ problemTreeSet.add(problem); }
 
     // UC-01.02.01: list problems
-    public ProblemTreeSet getProblemTreeSet() {
-        return problemTreeSet;
-    }
+    public ProblemTreeSet getProblemTreeSet() { return problemTreeSet; }
 
     // UC-01.03.01: edit medical problem TODO: replace edited record or done in problem class?
     public void editProblem(Problem editedProblem, Problem problem){}
@@ -33,26 +31,25 @@ public class Patient extends User {
     public void editRecord(Problem problem, Record editedRecord, Record record){ }
 
     // UC-03.02.01: edit account contact information
-    public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
 
-    // UC-03.03.01: view username or account contact information
-    public ContactInfo getContactInfo(){ return this.getContactInfo(); }
-    public Username getUsername(){ return this.getUsername(); }
+    public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
 
     // UC-02.03.03: remind patient to add photo TODO
 
     // UC-03.03.01: login into account
     public boolean attemptLogin(Username username, Password password){
-        if (this.getUsername().equals(username)) {
-            if (this.getPassword().equals(password))
+        if (this.getUsername().getUsername().equals(username.getUsername())) {
+            if (this.getPassword().getPassword().equals(password.getPassword()))
                 return true;
-            else return false;
+            else
+                return false;
         }
         else
             return false;
     }
 
     // UC-03.04.01: logout of account TODO
+    public void logout(){}
 
     // UC-04.01.01: search for problem or record
     public ProblemTreeSet searchProblem(String searchString){
