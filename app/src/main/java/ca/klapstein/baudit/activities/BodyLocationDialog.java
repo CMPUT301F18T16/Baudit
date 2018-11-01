@@ -7,8 +7,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import ca.klapstein.baudit.Data.BodyPhoto;
-import ca.klapstein.baudit.Data.BodyPhotoCoords;
+import ca.klapstein.baudit.data.BodyPhoto;
+import ca.klapstein.baudit.data.BodyPhotoCoords;
 import ca.klapstein.baudit.R;
 
 
@@ -16,8 +16,8 @@ import ca.klapstein.baudit.R;
  * Dialog providing a prompt to pick a location on a {@code BodyPhoto}
  * thus obtaining a set of {@code BodyPhotoCoords}
  *
- * @see ca.klapstein.baudit.Data.BodyPhoto
- * @see ca.klapstein.baudit.Data.BodyPhotoCoords
+ * @see ca.klapstein.baudit.data.BodyPhoto
+ * @see ca.klapstein.baudit.data.BodyPhotoCoords
  */
 public class BodyLocationDialog extends DialogFragment {
     private static final String TAG = "BodyLocationDialog";

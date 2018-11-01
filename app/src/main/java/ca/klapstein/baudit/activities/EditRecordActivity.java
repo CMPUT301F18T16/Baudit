@@ -8,7 +8,7 @@ import ca.klapstein.baudit.R;
  * <p>
  * Should be only accessed by a {@code Record}.
  *
- * @see ca.klapstein.baudit.Data.Record
+ * @see ca.klapstein.baudit.data.Record
  */
 public class EditRecordActivity extends RecordActivity {
     private static final String TAG = "EditRecordActivity";

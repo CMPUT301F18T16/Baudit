@@ -2,14 +2,14 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import ca.klapstein.baudit.Data.Problem;
+import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.R;
 
 /**
  * Activity for adding a {@code Problem} to a {@code Patient}.
  *
- * @see ca.klapstein.baudit.Data.Problem
- * @see ca.klapstein.baudit.Data.Patient
+ * @see ca.klapstein.baudit.data.Problem
+ * @see ca.klapstein.baudit.data.Patient
  */
 public class AddProblemActivity extends ProblemActivity {
     private static final String TAG = "AddProblemActivity";

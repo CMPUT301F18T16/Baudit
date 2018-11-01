@@ -3,7 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import ca.klapstein.baudit.Data.User;
+import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.R;
 
 /**
@@ -11,8 +11,8 @@ import ca.klapstein.baudit.R;
  * <p>
  * Should be accessed by both a {@code Patient} and {@code CareProvider}.
  *
- * @see ca.klapstein.baudit.Data.Patient
- * @see ca.klapstein.baudit.Data.CareProvider
+ * @see ca.klapstein.baudit.data.Patient
+ * @see ca.klapstein.baudit.data.CareProvider
  */
 public class EditAccountActivity extends AppCompatActivity {
     private static final String TAG = "EditAccountActivity";

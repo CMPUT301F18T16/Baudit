@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import ca.klapstein.baudit.adapters.RecordAdapter;
-import ca.klapstein.baudit.Data.RecordTreeSet;
+import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.R;
 
 /**
  * Activity for listing {@code Record}s.
  *
- * @see ca.klapstein.baudit.Data.Record
+ * @see ca.klapstein.baudit.data.Record
  */
 public class RecordListActivity extends AppCompatActivity {
     private static final String TAG = "RecordListActivity";

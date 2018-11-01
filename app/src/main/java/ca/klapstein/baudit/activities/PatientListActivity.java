@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import ca.klapstein.baudit.adapters.PatientAdapter;
-import ca.klapstein.baudit.Data.PatientTreeSet;
+import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.R;
 
 /**
  * Activity for listing {@code Patient}s.
  *
- * @see ca.klapstein.baudit.Data.Patient
+ * @see ca.klapstein.baudit.data.Patient
  */
 public class PatientListActivity extends AppCompatActivity {
     private static final String TAG = "PatientListActivity";

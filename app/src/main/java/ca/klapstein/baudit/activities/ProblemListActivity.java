@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import ca.klapstein.baudit.adapters.ProblemAdapter;
-import ca.klapstein.baudit.Data.ProblemTreeSet;
+import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.R;
 
 /**
  * Activity for listing {@code Problem}s.
  *
- * @see ca.klapstein.baudit.Data.Problem
+ * @see ca.klapstein.baudit.data.Problem
  */
 public class ProblemListActivity extends AppCompatActivity {
     private static final String TAG = "ProblemListActivity";

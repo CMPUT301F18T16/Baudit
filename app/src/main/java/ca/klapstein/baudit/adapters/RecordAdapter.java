@@ -3,13 +3,13 @@ package ca.klapstein.baudit.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import ca.klapstein.baudit.Data.RecordTreeSet;
+import ca.klapstein.baudit.data.RecordTreeSet;
 
 /**
  * RecyclerView adapter for integrating a {@code RecordTreeSet}.
  *
- * @see ca.klapstein.baudit.Data.Record
- * @see ca.klapstein.baudit.Data.RecordTreeSet
+ * @see ca.klapstein.baudit.data.Record
+ * @see ca.klapstein.baudit.data.RecordTreeSet
  */
 public class RecordAdapter extends RecyclerTreeSetAdapter<RecordTreeSet> {
     private static final String TAG = "RecordAdapter";

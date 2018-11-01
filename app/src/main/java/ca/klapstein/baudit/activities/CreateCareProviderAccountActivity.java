@@ -7,7 +7,7 @@ import ca.klapstein.baudit.R;
  * Activity providing the inputs and validations for creating a
  * valid {@code CareProvider} Account for Baudit.
  *
- * @see ca.klapstein.baudit.Data.CareProvider
+ * @see ca.klapstein.baudit.data.CareProvider
  */
 public class CreateCareProviderAccountActivity extends AccountCreateActivity {
     private static final String TAG = "CreateCareProviderAccountActivity";

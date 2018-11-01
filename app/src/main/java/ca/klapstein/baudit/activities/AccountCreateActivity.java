@@ -3,7 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import ca.klapstein.baudit.Data.User;
+import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.R;
 
 /**
@@ -11,11 +11,11 @@ import ca.klapstein.baudit.R;
  * <p>
  * After filling out the required forms create a {@code User} and log them into Baudit.
  *
- * @see ca.klapstein.baudit.Data.Username
- * @see ca.klapstein.baudit.Data.Email
- * @see ca.klapstein.baudit.Data.Password
- * @see ca.klapstein.baudit.Data.PhoneNumber
- * @see ca.klapstein.baudit.Data.User
+ * @see ca.klapstein.baudit.data.Username
+ * @see ca.klapstein.baudit.data.Email
+ * @see ca.klapstein.baudit.data.Password
+ * @see ca.klapstein.baudit.data.PhoneNumber
+ * @see ca.klapstein.baudit.data.User
  */
 public class AccountCreateActivity extends AppCompatActivity {
     private static final String TAG = "AccountCreateActivity";

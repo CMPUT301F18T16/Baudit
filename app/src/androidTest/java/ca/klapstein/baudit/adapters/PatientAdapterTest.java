@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.adapters;
 
 import android.support.test.runner.AndroidJUnit4;
-import ca.klapstein.baudit.Data.PatientTreeSet;
+import ca.klapstein.baudit.data.PatientTreeSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

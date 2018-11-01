@@ -7,7 +7,7 @@ import ca.klapstein.baudit.R;
  * Activity providing the inputs and validations for creating a
  * valid {@code Patient} Account for Baudit.
  *
- * @see ca.klapstein.baudit.Data.Patient
+ * @see ca.klapstein.baudit.data.Patient
  */
 public class CreatePatientAccountActivity extends AccountCreateActivity {
     private static final String TAG = "CreatePatientAccountActivity";

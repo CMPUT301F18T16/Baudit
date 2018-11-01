@@ -8,7 +8,7 @@ import ca.klapstein.baudit.R;
  * <p>
  * Should be only accessed by a {@code Patient}.
  *
- * @see ca.klapstein.baudit.Data.Patient
+ * @see ca.klapstein.baudit.data.Patient
  */
 public class EditProblemActivity extends ProblemActivity {
     private static final String TAG = "EditProblemActivity";
