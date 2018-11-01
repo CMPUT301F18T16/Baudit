@@ -2,7 +2,6 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Problem;
 
 /**
  * Activity for editing a {@code Problem}.

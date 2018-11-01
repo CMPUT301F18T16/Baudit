@@ -7,8 +7,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.User;
 
 /**
  * Dialog providing a overview of an {@code User}.

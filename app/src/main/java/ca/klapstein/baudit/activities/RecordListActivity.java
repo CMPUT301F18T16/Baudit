@@ -36,7 +36,7 @@ public class RecordListActivity extends AppCompatActivity implements DeleteRecor
     /**
      * Launch a EditRecordActivity with the selected Record noted by its position within the {@code RecordTreeSet}.
      *
-     * @param view {@code View}
+     * @param view     {@code View}
      * @param position {@code int} the position of the selected Record within the {@code RecordTreeSet}.
      */
     private void onRecordListItemClick(View view, final int position) {

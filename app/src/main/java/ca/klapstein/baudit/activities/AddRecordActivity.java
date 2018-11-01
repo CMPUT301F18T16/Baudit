@@ -1,9 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Record;
 
 
 /**

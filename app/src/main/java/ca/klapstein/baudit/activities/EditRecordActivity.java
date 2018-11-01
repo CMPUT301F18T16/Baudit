@@ -1,9 +1,7 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Record;
 
 /**
  * Activity for editing a {@code Record}.

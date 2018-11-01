@@ -36,7 +36,7 @@ public class ProblemListActivity extends AppCompatActivity implements DeleteProb
     /**
      * Launch a EditProblemActivity with the selected Problem noted by its position within the {@code ProblemTreeSet}.
      *
-     * @param view {@code View}
+     * @param view     {@code View}
      * @param position {@code int} the position of the selected Problem within the {@code ProblemTreeSet}.
      */
     private void onProblemListItemClick(View view, final int position) {

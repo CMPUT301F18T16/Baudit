@@ -3,8 +3,8 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.User;
 
 /**
  * Activity for editing a {@code User}.

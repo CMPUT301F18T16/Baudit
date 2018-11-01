@@ -2,8 +2,8 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Problem;
 
 /**
  * Abstract Class for interacting with a instance of a {@code Problem}.

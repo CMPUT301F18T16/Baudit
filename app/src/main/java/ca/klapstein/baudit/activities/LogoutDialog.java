@@ -36,7 +36,7 @@ public class LogoutDialog extends DialogFragment {
     /**
      * On a proper logout go back to SplashActivity.
      */
-    private void onLogout(){
+    private void onLogout() {
         Intent intent = new Intent(getContext(), SplashActivity.class);
         startActivity(intent);
     }
