@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
 
@@ -20,7 +21,23 @@ public class LoginPatientActivity extends LoginActivity {
         setContentView(R.layout.activity_login_patient);
     }
 
-    public void onLogin() {
+    /**
+     * Attempt a login as a {@code Patient}.
+     *
+     * @return {@code true} if the login was successful, otherwise return {@code false}.
+     */
+    public boolean login(){
         // TODO: implement
+        return true;
+    }
+
+    /**
+     * After logging in as a {@code Patient} start the {@code ProblemListActivity}.
+     *
+     * @see ProblemListActivity
+     */
+    public void onLogin() {
+        Intent intent = new Intent(this, ProblemListActivity.class);
+        startActivity(intent);
     }
 }

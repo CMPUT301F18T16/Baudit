@@ -27,5 +27,17 @@ public abstract class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    /**
+     * Attempt to login a {@code User}.
+     *
+     * @return {@code true} if the login was successful, otherwise return {@code false}.
+     */
+    abstract boolean login();
+
+    /**
+     * Functional stub defining what to do after a successful login.
+     *
+     * Should be called after {@code login} returns {@code true}.
+     */
     abstract void onLogin();
 }

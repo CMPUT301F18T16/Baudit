@@ -33,6 +33,14 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     }
 
     @Test
+    public void testLoginSuccess() {
+    }
+
+    @Test
+    public void testLoginFail() {
+    }
+
+    @Test
     public void onLogin() {
     }
 }

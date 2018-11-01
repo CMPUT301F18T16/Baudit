@@ -33,6 +33,14 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     }
 
     @Test
+    public void testLoginSuccess() {
+    }
+
+    @Test
+    public void testLoginFail() {
+    }
+
+    @Test
     public void onLogin() {
     }
 }
