@@ -23,8 +23,4 @@ public class AddRecordActivity extends RecordActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
     }
-
-    public interface onAddRecordListener {
-        void onAddRecord(Record record);
-    }
 }

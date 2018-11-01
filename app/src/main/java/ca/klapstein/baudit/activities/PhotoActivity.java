@@ -15,8 +15,4 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
     }
-
-    public interface onPhotoSetListener {
-        void onPhotoSet(); // TODO: define
-    }
 }

@@ -15,8 +15,4 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
     }
-
-    public interface onLocationSetListener {
-        void onLocationSet(); // TODO: define
-    }
 }

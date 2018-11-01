@@ -22,8 +22,4 @@ public class AddProblemActivity extends ProblemActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
     }
-
-    public interface onAddProblemListener {
-        void onAddProblem(Problem problem);
-    }
 }

@@ -16,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // TODO: choose correct login activity for either User, Patient
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

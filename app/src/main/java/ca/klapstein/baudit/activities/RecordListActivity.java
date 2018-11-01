@@ -15,8 +15,7 @@ import ca.klapstein.baudit.data.RecordTreeSet;
  *
  * @see ca.klapstein.baudit.data.Record
  */
-public class RecordListActivity extends AppCompatActivity implements AddRecordActivity.onAddRecordListener,
-        EditRecordActivity.onEditRecordListener, DeleteRecordDialog.onDeleteRecordListener {
+public class RecordListActivity extends AppCompatActivity implements DeleteRecordDialog.onDeleteRecordListener {
     private static final String TAG = "RecordListActivity";
 
     private RecordTreeSet recordTreeSet;
@@ -55,18 +54,13 @@ public class RecordListActivity extends AppCompatActivity implements AddRecordAc
         startActivity(intent);
     }
 
+    /**
+     * Dialog callback for when a Record is deleted.
+     *
+     * @param record {@code Record}
+     */
     @Override
-    public void onAddRecord(Record record) {
-
-    }
-
-    @Override
-    public void onEditRecord(Record record, int position) {
-
-    }
-
-    @Override
-    public void onDeleteRecord(Record problem) {
-
+    public void onDeleteRecord(Record record) {
+        // TODO: implement
     }
 }

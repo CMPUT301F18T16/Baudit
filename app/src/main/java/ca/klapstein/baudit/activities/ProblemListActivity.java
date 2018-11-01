@@ -15,8 +15,7 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class ProblemListActivity extends AppCompatActivity implements AddProblemActivity.onAddProblemListener,
-        EditProblemActivity.onEditProblemListener, DeleteProblemDialog.onDeleteProblemListener {
+public class ProblemListActivity extends AppCompatActivity implements DeleteProblemDialog.onDeleteProblemListener {
     private static final String TAG = "ProblemListActivity";
 
     private ProblemTreeSet problemTreeSet;
@@ -55,18 +54,13 @@ public class ProblemListActivity extends AppCompatActivity implements AddProblem
         startActivity(intent);
     }
 
-    @Override
-    public void onAddProblem(Problem problem) {
-
-    }
-
-    @Override
-    public void onEditProblem(Problem problem, int position) {
-
-    }
-
+    /**
+     * Dialog callback for when a problem is deleted.
+     *
+     * @param problem {@code Problem}
+     */
     @Override
     public void onDeleteProblem(Problem problem) {
-
+        // TODO: implement
     }
 }

@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
@@ -18,9 +19,5 @@ public class EditRecordActivity extends RecordActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_record);
-    }
-
-    public interface onEditRecordListener {
-        void onEditRecord(Record record, final int position);
     }
 }

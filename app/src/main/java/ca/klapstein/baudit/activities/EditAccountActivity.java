@@ -25,8 +25,4 @@ public class EditAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
     }
-
-    public interface onEditAccountListener {
-        void onEditAccount(User user);
-    }
 }

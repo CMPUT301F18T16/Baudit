@@ -21,6 +21,6 @@ public class LoginCareProviderActivity extends LoginActivity {
     }
 
     public void onLogin() {
-
+        // TODO: implement
     }
 }

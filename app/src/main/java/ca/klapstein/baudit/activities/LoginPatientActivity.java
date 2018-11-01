@@ -21,5 +21,6 @@ public class LoginPatientActivity extends LoginActivity {
     }
 
     public void onLogin() {
+        // TODO: implement
     }
 }

@@ -19,8 +19,4 @@ public class EditProblemActivity extends ProblemActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
     }
-
-    public interface onEditProblemListener {
-        void onEditProblem(Problem problem, final int position);
-    }
 }
