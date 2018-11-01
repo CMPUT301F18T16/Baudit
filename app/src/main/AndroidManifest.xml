@@ -9,40 +9,40 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashActivity">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.AccountCreateActivity">
+        <activity android:name=".activities.AccountCreateActivity">
         </activity>
-        <activity android:name=".Activities.CreateCareProviderAccountActivity">
+        <activity android:name=".activities.CreateCareProviderAccountActivity">
         </activity>
-        <activity android:name=".Activities.EditAccountActivity">
+        <activity android:name=".activities.EditAccountActivity">
         </activity>
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity">
         </activity>
-        <activity android:name=".Activities.CreatePatientAccountActivity">
+        <activity android:name=".activities.CreatePatientAccountActivity">
         </activity>
-        <activity android:name=".Activities.LocationActivity">
+        <activity android:name=".activities.LocationActivity">
         </activity>
-        <activity android:name=".Activities.EditProblemActivity">
+        <activity android:name=".activities.EditProblemActivity">
         </activity>
-        <activity android:name=".Activities.AddProblemActivity">
+        <activity android:name=".activities.AddProblemActivity">
         </activity>
-        <activity android:name=".Activities.AddRecordActivity">
+        <activity android:name=".activities.AddRecordActivity">
         </activity>
-        <activity android:name=".Activities.EditRecordActivity">
+        <activity android:name=".activities.EditRecordActivity">
         </activity>
-        <activity android:name=".Activities.PatientListActivity">
+        <activity android:name=".activities.PatientListActivity">
         </activity>
-        <activity android:name=".Activities.PhotoActivity">
+        <activity android:name=".activities.PhotoActivity">
         </activity>
-        <activity android:name=".Activities.ProblemListActivity">
+        <activity android:name=".activities.ProblemListActivity">
         </activity>
-        <activity android:name=".Activities.RecordListActivity">
+        <activity android:name=".activities.RecordListActivity">
         </activity>
     </application>
 
