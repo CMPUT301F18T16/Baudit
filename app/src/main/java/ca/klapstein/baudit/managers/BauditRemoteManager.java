@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Managers;
+package ca.klapstein.baudit.managers;
 
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.

@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Managers;
+package ca.klapstein.baudit.managers;
 
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.After;
@@ -7,13 +7,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class BauditPreferencesManagerTest {
+public class BauditDataBaseManagerTest {
 
-    private BauditPreferencesManager bauditPreferencesManager;
+    private BauditDataBaseManager bauditDataBaseManager;
 
     @Before
     public void setUp() {
-        bauditPreferencesManager = new BauditPreferencesManager();
+        bauditDataBaseManager = new BauditDataBaseManager();
     }
 
     @After

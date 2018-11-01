@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Managers;
+package ca.klapstein.baudit.managers;
 
 /**
  * Helper class for accessing the Android's SharedPreferences for use in Baudit.
