@@ -23,7 +23,6 @@
         <activity android:name=".activities.AccountCreateActivity" />
         <activity android:name=".activities.CreateCareProviderAccountActivity" />
         <activity android:name=".activities.EditAccountActivity" />
-        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.CreatePatientAccountActivity" />
         <activity android:name=".activities.LocationActivity" />
         <activity android:name=".activities.EditProblemActivity" />
