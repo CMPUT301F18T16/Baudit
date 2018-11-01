@@ -9,6 +9,7 @@ import ca.klapstein.baudit.Managers.BauditRemoteManager;
  *
  * @see User
  */
+
 public class Username {
     private static final String TAG = "Username";
 
