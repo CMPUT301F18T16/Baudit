@@ -7,19 +7,17 @@ import java.util.Iterator;
  */
 public class Patient extends User implements Comparable<Patient> {
     private static final String TAG = "Patient";
-    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
+    private ProblemTreeSet problemTreeSet;
 
-    // UC-01.01.01: add problem
-    public void addProblem(Problem problem){ problemTreeSet.add(problem); }
+    public void Patient(){
+        this.problemTreeSet = new ProblemTreeSet();
+    }
 
     // UC-01.02.01: list problems
     public ProblemTreeSet getProblemTreeSet() { return problemTreeSet; }
 
     /* UC-01.03.01: edit medical problem TODO: replace edited record or done in problem class?
      public void editProblem(Problem editedProblem, Problem problem){} */
-
-    // UC-01.04.1: delete problem
-    public void deleteProblem(Problem deleteProblem){ problemTreeSet.remove(deleteProblem); }
 
     // UC-02.01.01: list medical problem records
     public RecordTreeSet listProblemRecords(Problem problem){ return problem.getRecordTreeSet();}
@@ -34,23 +32,13 @@ public class Patient extends User implements Comparable<Patient> {
 
     // UC-04.01.01: search for problem or record
     public ProblemTreeSet searchProblem(String searchString){
-        ProblemTreeSet matchingProblems = new ProblemTreeSet();
-
-        Iterator itr = problemTreeSet.iterator();
-        while(itr.hasNext()){
-            // TODO: problemTitle.matches(".*" + searchString + ".*");
-            // add to matchingTreeSet
-        }
-
-        return matchingProblems;
+        ProblemTreeSet results = new ProblemTreeSet();
+        return results;
     }
 
     public RecordTreeSet searchRecords(String searchString){
-
-        RecordTreeSet matchingRecords = new RecordTreeSet();
-        // TODO: iterate problems then records and search using regex
-
-        return matchingRecords;
+        RecordTreeSet results = new RecordTreeSet();
+        return results;
     }
 
     @Override

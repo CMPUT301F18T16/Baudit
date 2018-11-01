@@ -1,6 +1,9 @@
 package ca.klapstein.baudit.Data;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -12,6 +15,7 @@ public class Record implements Comparable<Record> {
     public Collection<RecordPhoto> recordPhotos; //not approved yet
     public Collection<BodyPhoto> bodyPhotos; // not approved yet
     private long timestamp;
+    private String dateString;
     public String comment;
 
     public void setComment(String comment){
@@ -23,7 +27,12 @@ public class Record implements Comparable<Record> {
     }
 
     public Record() {
-        this.timestamp = System.currentTimeMillis();
+
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        this.dateString = dateFormat.format(date);
+        this.timestamp = date.getTime();
+
     }
 
     public long getTimestamp() {

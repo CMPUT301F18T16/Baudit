@@ -20,9 +20,9 @@ public class CareProviderTest {
 
         Patient patient = new Patient();
         Problem problem0 = new Problem();
-        patient.addProblem(problem0);
+        patient.getProblemTreeSet().add(problem0);
         Problem problem1 = new Problem();
-        patient.addProblem(problem1);
+        patient.getProblemTreeSet().add(problem1);
 
         CareProvider cp = new CareProvider();
         cp.assignPatient(patient);
@@ -36,7 +36,7 @@ public class CareProviderTest {
 
         Patient patient = new Patient();
         Problem problem0 = new Problem();
-        patient.addProblem(problem0);
+        patient.getProblemTreeSet().add(problem0);
         CareProvider cp = new CareProvider();
         cp.assignPatient(patient);
 
@@ -93,9 +93,9 @@ public class CareProviderTest {
 
 
         Patient patient = new Patient();
-        patient.addProblem(problem0);
-        patient.addProblem(problem1);
-        patient.addProblem(problem2);
+        patient.getProblemTreeSet().add(problem0);
+        patient.getProblemTreeSet().add(problem1);
+        patient.getProblemTreeSet().add(problem2);
 
         ProblemTreeSet results = cp.searchProblem("hello");
         assertTrue(results.contains(problem0));

@@ -20,7 +20,14 @@ public class Password {
     private String password;
 
     public Password(@NonNull String password) {
-        this.password = password;
+
+        Pattern p = Pattern.compile(VALID_PASSWORD);
+        Matcher m = p.matcher(password);
+        if (m.matches()){
+            this.password = password;
+        } else {
+            throw new IllegalArgumentException("Invalid password string");
+        }
     }
 
     @NonNull
@@ -34,7 +41,7 @@ public class Password {
         if (m.matches()){
             this.password = password;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid password string");
         }
     }
 

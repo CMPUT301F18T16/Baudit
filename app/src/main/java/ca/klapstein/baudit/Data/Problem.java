@@ -1,5 +1,9 @@
 package ca.klapstein.baudit.Data;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Data class representing a Medical Problem for a {@code Patient}.
  *
@@ -10,11 +14,16 @@ public class Problem implements Comparable<Problem> {
     private RecordTreeSet recordTreeSet;
 
     private long timestamp;
+    private String dateString;
     private String title;
 
     public Problem() {
-        this.timestamp = System.currentTimeMillis();
+
         this.recordTreeSet = new RecordTreeSet();
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        this.dateString = dateFormat.format(date);
+        this.timestamp = date.getTime();
     }
 
     public void setTitle(String title){

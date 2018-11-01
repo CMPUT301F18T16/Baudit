@@ -16,23 +16,6 @@ public class PatientTest {
     }
 
     @Test
-    public void addProblem() {
-
-        Patient patient = new Patient();
-
-        // One Problem
-        Problem problem0 = new Problem();
-        patient.addProblem(problem0);
-        assertTrue(patient.getProblemTreeSet().contains(problem0));
-
-        // Two Problems
-        Problem problem1 = new Problem();
-        patient.addProblem(problem1);
-        assertTrue(patient.getProblemTreeSet().contains(problem0) &&
-                patient.getProblemTreeSet().contains(problem1));
-    }
-
-    @Test
     public void getProblemTreeSet() {
 
         Patient patient = new Patient();
@@ -50,32 +33,11 @@ public class PatientTest {
     }
 
     @Test
-    public void deleteProblem() {
-
-        Patient patient = new Patient();
-
-        // Add Three Problems
-        Problem problem0 = new Problem();
-        Problem problem1 = new Problem();
-        Problem problem2 = new Problem();
-        patient.addProblem(problem0);
-        patient.addProblem(problem1);
-        patient.addProblem(problem2);
-
-        assertTrue(patient.getProblemTreeSet().contains(problem2));
-        patient.deleteProblem(problem2);
-        assertFalse(patient.getProblemTreeSet().contains(problem2));
-
-        patient.deleteProblem(problem0);
-        assertFalse(patient.getProblemTreeSet().contains(problem1));
-    }
-
-    @Test
     public void listProblemRecords() {
 
         Patient patient = new Patient();
         Problem problem0 = new Problem();
-        patient.addProblem(problem0);
+        patient.getProblemTreeSet().add(problem0);
 
         Record record0 = new Record();
         patient.addRecordToProblem(record0, problem0);
@@ -96,7 +58,7 @@ public class PatientTest {
         Patient patient = new Patient();
 
         Problem problem0 = new Problem();
-        patient.addProblem(problem0);
+        patient.getProblemTreeSet().add(problem0);
 
         Record record0 = new Record();
         Record record1 = new Record();
@@ -123,9 +85,9 @@ public class PatientTest {
         problem2.setTitle("melo");
 
 
-        patient.addProblem(problem0);
-        patient.addProblem(problem1);
-        patient.addProblem(problem2);
+        patient.getProblemTreeSet().add(problem0);
+        patient.getProblemTreeSet().add(problem1);
+        patient.getProblemTreeSet().add(problem2);
 
         ProblemTreeSet results = patient.searchProblem("hello");
         assertTrue(results.contains(problem0));
