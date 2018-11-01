@@ -40,4 +40,19 @@ public class LoginCareProviderActivity extends LoginActivity {
         Intent intent = new Intent(this, PatientListActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void setUserNameError() {
+
+    }
+
+    @Override
+    public void setPasswordError() {
+
+    }
+
+    @Override
+    public void setLoginSuccess() {
+
+    }
 }

@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.presenters.LoginPresenter;
+import ca.klapstein.baudit.views.LoginView;
 
 /**
  * Activity presenting a login page for Baudit. Providing a page for the {@code User} to login with their
@@ -15,8 +17,10 @@ import ca.klapstein.baudit.data.User;
  * @see ca.klapstein.baudit.data.Password
  * @see ca.klapstein.baudit.data.User
  */
-public abstract class LoginActivity extends AppCompatActivity {
+public abstract class LoginActivity extends AppCompatActivity implements LoginView {
     private static final String TAG = "LoginActivity";
+
+    protected LoginPresenter presenter;
 
     @Nullable
     protected User user;
