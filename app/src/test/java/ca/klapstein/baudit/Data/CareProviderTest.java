@@ -7,28 +7,25 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CareProviderTest {
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void getProblemTreeSet() {
 
-        Patient patient = new Patient();
-        Problem problem0 = new Problem();
-        patient.getProblemTreeSet().add(problem0);
-        Problem problem1 = new Problem();
-        patient.getProblemTreeSet().add(problem1);
+        try {
+            Patient patient = new Patient();
+            Problem problem0 = new Problem();
+            patient.getProblemTreeSet().add(problem0);
+            Problem problem1 = new Problem();
+            patient.getProblemTreeSet().add(problem1);
 
-        CareProvider cp = new CareProvider();
-        cp.assignPatient(patient);
-        ProblemTreeSet patientProblemTreeSet = cp.getProblemTreeSet(patient);
-        assertTrue(patientProblemTreeSet.contains(problem0) &&
-                patientProblemTreeSet.contains(problem1));
+            CareProvider cp = new CareProvider();
+            cp.getAssignedPatientTreeSet().add(patient);
+            ProblemTreeSet patientProblemTreeSet = cp.getProblemTreeSet(patient);
+            assertTrue(patientProblemTreeSet.contains(problem0) &&
+                    patientProblemTreeSet.contains(problem1));
+        }catch (IllegalArgumentException e){
+            fail();
+        }
     }
 
     @Test
@@ -78,57 +75,6 @@ public class CareProviderTest {
         cp.assignPatient(patient1);
         patientTreeSet = cp.getAssignedPatientTreeSet();
         assertTrue(patientTreeSet.contains(patient1));
-    }
-
-    @Test
-    public void searchProblem(){
-        CareProvider cp = new CareProvider();
-
-        Problem problem0 = new Problem();
-        Problem problem1 = new Problem();
-        Problem problem2 = new Problem();
-        problem0.setTitle("helloo");
-        problem1.setTitle("yellow");
-        problem2.setTitle("melo");
-
-
-        Patient patient = new Patient();
-        patient.getProblemTreeSet().add(problem0);
-        patient.getProblemTreeSet().add(problem1);
-        patient.getProblemTreeSet().add(problem2);
-
-        ProblemTreeSet results = cp.searchProblem("hello");
-        assertTrue(results.contains(problem0));
-        results = cp.searchProblem("elo");
-        assertTrue(results.contains(problem0));
-        assertTrue(results.contains(problem1));
-        assertTrue(results.contains(problem2));
-    }
-
-    @Test
-    public void searchRecords(){
-
-        CareProvider cp = new CareProvider();
-
-        Problem problem0 = new Problem();
-        Record record0 = new Record();
-        Record record1 = new Record();
-        Record record2 = new Record();
-        record0.setComment("hello");
-        record1.setComment("yellow");
-        record2.setComment("melo");
-
-        Patient patient = new Patient();
-        patient.addRecordToProblem(record0, problem0);
-        patient.addRecordToProblem(record1, problem0);
-        patient.addRecordToProblem(record2, problem0);
-
-        RecordTreeSet results = cp.searchRecords("hello");
-        assertTrue(results.contains(record0));
-        results = cp.searchRecords("elo");
-        assertTrue(results.contains(record0));
-        assertTrue(results.contains(record1));
-        assertTrue(results.contains(record2));
     }
 
     @Test
@@ -195,7 +141,8 @@ public class CareProviderTest {
     @Test
     public void setPassword() {
         CareProvider cp = new CareProvider();
-        Password password = new Password("hidden");
+        String string = "hidden";
+        Password password = new Password(string);
 
         cp.setPassword(password);
         assertTrue(cp.getPassword().equals(password));

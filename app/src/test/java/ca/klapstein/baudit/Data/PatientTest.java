@@ -7,13 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PatientTest {
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void getProblemTreeSet() {
@@ -71,82 +64,6 @@ public class PatientTest {
         assertTrue(recordTreeSet.contains(record1));
     }
 
-
-    @Test
-    public void searchProblem(){
-
-        Patient patient = new Patient();
-
-        Problem problem0 = new Problem();
-        Problem problem1 = new Problem();
-        Problem problem2 = new Problem();
-        problem0.setTitle("helloo");
-        problem1.setTitle("yellow");
-        problem2.setTitle("melo");
-
-
-        patient.getProblemTreeSet().add(problem0);
-        patient.getProblemTreeSet().add(problem1);
-        patient.getProblemTreeSet().add(problem2);
-
-        ProblemTreeSet results = patient.searchProblem("hello");
-        assertTrue(results.contains(problem0));
-        results = patient.searchProblem("elo");
-        assertTrue(results.contains(problem0));
-        assertTrue(results.contains(problem1));
-        assertTrue(results.contains(problem2));
-    }
-
-    @Test
-    public void searchRecords(){
-        Patient patient = new Patient();
-
-        Problem problem0 = new Problem();
-
-        Record record0 = new Record();
-        Record record1 = new Record();
-        Record record2 = new Record();
-        record0.setComment("hello");
-        record1.setComment("yellow");
-        record2.setComment("melo");
-
-        patient.addRecordToProblem(record0, problem0);
-        patient.addRecordToProblem(record1, problem0);
-        patient.addRecordToProblem(record2, problem0);
-
-        RecordTreeSet results = patient.searchRecords("hello");
-        assertTrue(results.contains(record0));
-        results = patient.searchRecords("elo");
-        assertTrue(results.contains(record0));
-        assertTrue(results.contains(record1));
-        assertTrue(results.contains(record2));
-    }
-
-    /* Done in activity???
-    @Test
-    public void editContactInfo(){
-        Patient patient = new Patient();
-        ContactInfo contactInfo = new ContactInfo();
-
-        Email email = new Email("John@hotmail.com");
-        contactInfo.setEmail(email);
-        PhoneNumber number = new PhoneNumber("780-123-4567");
-        contactInfo.setPhoneNumber(number);
-        patient.setContactInfo(contactInfo);
-
-        assertTrue(patient.getContactInfo().getEmail().getEmail().equals("John@hotmail.com"));
-        assertTrue(patient.getContactInfo().getPhoneNumber().getPhoneNumber().equals("780-123-4567"));
-
-        ContactInfo newContactInfo = new ContactInfo();
-        newContactInfo.setEmail(new Email("NotJohn@hotmail.com"));
-        newContactInfo.setPhoneNumber(new PhoneNumber("123-456-7890"));
-        patient.edit
-
-        assertTrue(patient.getContactInfo().getEmail().getEmail().equals("NotJohn@hotmail.com"));
-        assertTrue(patient.getContactInfo().getPhoneNumber().getPhoneNumber().equals("123-456-7890"));
-    }
-    */
-
     @Test
     public void getUsername() {
         Patient patient = new Patient();
@@ -202,7 +119,7 @@ public class PatientTest {
     @Test
     public void getPassword() {
         Patient patient = new Patient();
-        Password password = new Password("hidden");
+        Password password = new Password("hidden12");
 
         patient.setPassword(password);
         assertTrue(patient.getPassword().equals(password));
@@ -212,7 +129,7 @@ public class PatientTest {
     @Test
     public void setPassword() {
         Patient patient = new Patient();
-        Password password = new Password("hidden");
+        Password password = new Password("hidden12");
 
         patient.setPassword(password);
         assertTrue(patient.getPassword().equals(password));

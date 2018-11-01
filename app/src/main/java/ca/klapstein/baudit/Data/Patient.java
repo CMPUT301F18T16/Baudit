@@ -7,9 +7,9 @@ import java.util.Iterator;
  */
 public class Patient extends User implements Comparable<Patient> {
     private static final String TAG = "Patient";
-    private ProblemTreeSet problemTreeSet;
+    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
-    public void Patient(){
+    public Patient(){
         this.problemTreeSet = new ProblemTreeSet();
     }
 
@@ -30,20 +30,9 @@ public class Patient extends User implements Comparable<Patient> {
 
     // UC-02.03.03: remind patient to add photo TODO
 
-    // UC-04.01.01: search for problem or record
-    public ProblemTreeSet searchProblem(String searchString){
-        ProblemTreeSet results = new ProblemTreeSet();
-        return results;
-    }
-
-    public RecordTreeSet searchRecords(String searchString){
-        RecordTreeSet results = new RecordTreeSet();
-        return results;
-    }
-
     @Override
     public int compareTo(Patient p) {
-        return this.getUsername().getUsername().compareTo(p.getUsername().getUsername());
+        return  (int)(this.getUsername().getUsername().compareTo(p.getUsername().getUsername()));
     }
 
 }

@@ -35,16 +35,6 @@ public class Password {
         return password;
     }
 
-    public void setPassword(@NonNull String password) throws IllegalArgumentException {
-        Pattern p = Pattern.compile(VALID_PASSWORD);
-        Matcher m = p.matcher(password);
-        if (m.matches()){
-            this.password = password;
-        } else {
-            throw new IllegalArgumentException("Invalid password string");
-        }
-    }
-
     @Override
     public int hashCode() {
         int result = 17;

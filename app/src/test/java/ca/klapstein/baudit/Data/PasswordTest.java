@@ -5,16 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertFalse;
 
 public class PasswordTest {
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void getPassword() {
@@ -24,20 +18,35 @@ public class PasswordTest {
     }
 
     @Test
-    public void setPassword() {
+    public void testPasswordValid() {
 
-        Password password0 = new Password("test123"); // password too short
-        assertFalse(password0.getPassword().equals("test123"));
-        assertTrue(password0.getPassword().equals(null));
+        try{
+            Password password0 = new Password("ABC123abc"); // viable password
+            assertTrue(password0.getPassword().equals("ABC123abc"));
+            Password password1 = new Password("abcdefghik1234567890");
+            assertTrue(password1.getPassword().equals("abcdefghik1234567890"));
+        } catch(IllegalArgumentException e){
+            fail();
+        }
+    }
 
-        Password password1 = new Password("abcdefghijk1234567890"); // password too long
-        assertFalse(password1.getPassword().equals("abcdefghijk1234567890"));
-        assertTrue(password1.getPassword().equals(null));
+    public void testSetPasswordInvalid() {
 
-        Password password2 = new Password("ABC123abc"); // viable password
-        assertTrue(password1.getPassword().equals("ABC123abc"));
-        assertFalse(password1.getPassword().equals(null));
+        boolean success = true;
 
+        try{
+            Password password0 = new Password("test1234");
+            assertFalse(password0.getPassword().equals("test123"));
+            assertTrue(password0.getPassword().equals(null));
+            Password password1 = new Password("abcdefghijk1234567890");
+            assertFalse(password1.getPassword().equals("abcdefghijk1234567890"));
+            assertTrue(password1.getPassword().equals(null));
+        } catch (IllegalArgumentException e){
+            success = false;
+        }
 
+        if (success){
+            fail();
+        }
     }
 }

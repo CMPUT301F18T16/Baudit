@@ -13,19 +13,25 @@ public class CareProvider extends User {
 
     private PatientTreeSet assignedPatientTreeSet;
 
-    public void CareProvider(){
+    public CareProvider(){
         this.assignedPatientTreeSet = new PatientTreeSet();
     }
 
     // UC-01.02.01: list all medical problems for a related account
-    public ProblemTreeSet getProblemTreeSet(Patient patient){ return patient.getProblemTreeSet(); }
+    public ProblemTreeSet getProblemTreeSet(Patient patient) {
+        if (this.getAssignedPatientTreeSet().contains(patient))
+            return patient.getProblemTreeSet();
+        else{
+            throw new IllegalArgumentException("Patient not assigned to care provider");
+        }
+    }
 
     // UC-02.01.01:  list all the records for a related medical problem
     public RecordTreeSet getRecordTreeSet(Patient patient, Problem problem){ return problem.getRecordTreeSet(); }
 
     // UC-06.01.01: list patients assigned to care providers
     public PatientTreeSet getAssignedPatientTreeSet(){
-        return assignedPatientTreeSet;
+        return this.assignedPatientTreeSet;
     }
 
     // UC-07-01.01: assign patient to care providers
@@ -35,15 +41,4 @@ public class CareProvider extends User {
 
     // UC-07.02.01: list all patients TODO: not sure how to
     // This is implemented in PatientListActivity
-
-    // UC-04.01.01: search for problem or record
-    public ProblemTreeSet searchProblem(String searchString){
-        ProblemTreeSet results = new ProblemTreeSet();
-        return results;
-    }
-
-    public RecordTreeSet searchRecords(String searchString){
-        RecordTreeSet results = new RecordTreeSet();
-        return results;
-    }
 }
