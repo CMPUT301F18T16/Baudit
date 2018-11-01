@@ -3,7 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import ca.klapstein.baudit.Adapters.PatientAdapter;
+import ca.klapstein.baudit.adapters.PatientAdapter;
 import ca.klapstein.baudit.Data.PatientTreeSet;
 import ca.klapstein.baudit.R;
 

@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Adapters;
+package ca.klapstein.baudit.adapters;
 
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.After;

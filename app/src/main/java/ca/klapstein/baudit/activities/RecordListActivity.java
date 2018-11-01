@@ -3,7 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import ca.klapstein.baudit.Adapters.RecordAdapter;
+import ca.klapstein.baudit.adapters.RecordAdapter;
 import ca.klapstein.baudit.Data.RecordTreeSet;
 import ca.klapstein.baudit.R;
 
