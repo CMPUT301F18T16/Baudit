@@ -16,44 +16,119 @@ public class CareProviderTest {
     }
 
     @Test
-    public void testStub() {
-        // TODO: write tests
+    public void getProblemTreeSet() {
+
+        Patient patient = new Patient();
+        Problem problem0 = new Problem();
+        patient.addProblem(problem0);
+        Problem problem1 = new Problem();
+        patient.addProblem(problem1);
+
+        CareProvider cp = new CareProvider();
+        cp.assignPatient(patient);
+        ProblemTreeSet patientProblemTreeSet = cp.getProblemTreeSet(patient);
+        assertTrue(patientProblemTreeSet.contains(problem0) &&
+                patientProblemTreeSet.contains(problem1));
     }
 
     @Test
-    public void editContactInfo(){
+    public void getRecordTreeSet(){
+
+        Patient patient = new Patient();
+        Problem problem0 = new Problem();
+        patient.addProblem(problem0);
         CareProvider cp = new CareProvider();
-        ContactInfo contactInfo = new ContactInfo();
+        cp.assignPatient(patient);
 
-        Email email = new Email("John@hotmail.com");
-        contactInfo.setEmail(email);
-        PhoneNumber number = new PhoneNumber("780-123-4567");
-        contactInfo.setPhoneNumber(number);
-        cp.setContactInfo(contactInfo);
+        Record record0 = new Record();
+        problem0.getRecordTreeSet().add(record0);
+        RecordTreeSet patientRecordTreeSet = cp.getRecordTreeSet(patient, problem0);
+        assertTrue(patientRecordTreeSet.contains(record0));
 
-        assertTrue(cp.getContactInfo().getEmail().getEmail().equals("John@hotmail.com"));
-        assertTrue(cp.getContactInfo().getPhoneNumber().getPhoneNumber().equals("780-123-4567"));
-
-        email.setEmail("NotJohn@hotmail.com");
-        contactInfo.setEmail(email);
-        number.setPhoneNumber("123-456-7890");
-
-        assertTrue(cp.getContactInfo().getEmail().getEmail().equals("NotJohn@hotmail.com"));
-        assertTrue(cp.getContactInfo().getPhoneNumber().getPhoneNumber().equals("123-456-7890"));
+        Record record1 = new Record();
+        problem0.getRecordTreeSet().add(record1);
+        patientRecordTreeSet = cp.getRecordTreeSet(patient, problem0);
+        assertTrue(patientRecordTreeSet.contains(record1));
     }
 
     @Test
-    public void attemptLogin(){
-        CareProvider cp = new CareProvider();
-        Username username = new Username("John");
-        Password password = new Password("hidden");
-        cp.setUsername(username);
-        cp.setPassword(password);
+    public void getAssignedPatientTreeSet(){
 
-        assertFalse(cp.attemptLogin(new Username("Wrong"), new Password("Wrong")));
-        assertFalse(cp.attemptLogin(new Username("Wrong"), new Password("hidden")));
-        assertFalse(cp.attemptLogin(new Username("John"), new Password("Wrong")));
-        assertTrue(cp.attemptLogin(new Username("John"), new Password("hidden")));
+        Patient patient0 = new Patient();
+        CareProvider cp = new CareProvider();
+        cp.assignPatient(patient0);
+        PatientTreeSet patientTreeSet = cp.getAssignedPatientTreeSet();
+        assertTrue(patientTreeSet.contains(patient0));
+
+        Patient patient1 = new Patient();
+        cp.assignPatient(patient1);
+        patientTreeSet = cp.getAssignedPatientTreeSet();
+        assertTrue(patientTreeSet.contains(patient1));
+    }
+
+    @Test
+    public void assignPatient(){
+        Patient patient0 = new Patient();
+        CareProvider cp = new CareProvider();
+        cp.assignPatient(patient0);
+        PatientTreeSet patientTreeSet = cp.getAssignedPatientTreeSet();
+        assertTrue(patientTreeSet.contains(patient0));
+
+        Patient patient1 = new Patient();
+        cp.assignPatient(patient1);
+        patientTreeSet = cp.getAssignedPatientTreeSet();
+        assertTrue(patientTreeSet.contains(patient1));
+    }
+
+    @Test
+    public void searchProblem(){
+        CareProvider cp = new CareProvider();
+
+        Problem problem0 = new Problem();
+        Problem problem1 = new Problem();
+        Problem problem2 = new Problem();
+        problem0.setTitle("helloo");
+        problem1.setTitle("yellow");
+        problem2.setTitle("melo");
+
+
+        Patient patient = new Patient();
+        patient.addProblem(problem0);
+        patient.addProblem(problem1);
+        patient.addProblem(problem2);
+
+        ProblemTreeSet results = cp.searchProblem("hello");
+        assertTrue(results.contains(problem0));
+        results = cp.searchProblem("elo");
+        assertTrue(results.contains(problem0));
+        assertTrue(results.contains(problem1));
+        assertTrue(results.contains(problem2));
+    }
+
+    @Test
+    public void searchRecords(){
+
+        CareProvider cp = new CareProvider();
+
+        Problem problem0 = new Problem();
+        Record record0 = new Record();
+        Record record1 = new Record();
+        Record record2 = new Record();
+        record0.setComment("hello");
+        record1.setComment("yellow");
+        record2.setComment("melo");
+
+        Patient patient = new Patient();
+        patient.addRecordToProblem(record0, problem0);
+        patient.addRecordToProblem(record1, problem0);
+        patient.addRecordToProblem(record2, problem0);
+
+        RecordTreeSet results = cp.searchRecords("hello");
+        assertTrue(results.contains(record0));
+        results = cp.searchRecords("elo");
+        assertTrue(results.contains(record0));
+        assertTrue(results.contains(record1));
+        assertTrue(results.contains(record2));
     }
 
     @Test

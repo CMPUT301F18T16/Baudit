@@ -71,7 +71,27 @@ public class PatientTest {
     }
 
     @Test
-    public void addRecordToProblem(){
+    public void listProblemRecords() {
+
+        Patient patient = new Patient();
+        Problem problem0 = new Problem();
+        patient.addProblem(problem0);
+
+        Record record0 = new Record();
+        patient.addRecordToProblem(record0, problem0);
+
+        assertTrue(patient.getProblemTreeSet().contains(problem0));
+        assertTrue(problem0.getRecordTreeSet().contains(record0));
+
+        Record record1 = new Record();
+        patient.addRecordToProblem(record1, problem0);
+        assertTrue(patient.getProblemTreeSet().contains(problem0));
+        assertTrue(problem0.getRecordTreeSet().contains(record1));
+
+    }
+
+    @Test
+    public void addRecordToProblem() {
 
         Patient patient = new Patient();
 
@@ -89,6 +109,58 @@ public class PatientTest {
         assertTrue(recordTreeSet.contains(record1));
     }
 
+
+    @Test
+    public void searchProblem(){
+
+        Patient patient = new Patient();
+
+        Problem problem0 = new Problem();
+        Problem problem1 = new Problem();
+        Problem problem2 = new Problem();
+        problem0.setTitle("helloo");
+        problem1.setTitle("yellow");
+        problem2.setTitle("melo");
+
+
+        patient.addProblem(problem0);
+        patient.addProblem(problem1);
+        patient.addProblem(problem2);
+
+        ProblemTreeSet results = patient.searchProblem("hello");
+        assertTrue(results.contains(problem0));
+        results = patient.searchProblem("elo");
+        assertTrue(results.contains(problem0));
+        assertTrue(results.contains(problem1));
+        assertTrue(results.contains(problem2));
+    }
+
+    @Test
+    public void searchRecords(){
+        Patient patient = new Patient();
+
+        Problem problem0 = new Problem();
+
+        Record record0 = new Record();
+        Record record1 = new Record();
+        Record record2 = new Record();
+        record0.setComment("hello");
+        record1.setComment("yellow");
+        record2.setComment("melo");
+
+        patient.addRecordToProblem(record0, problem0);
+        patient.addRecordToProblem(record1, problem0);
+        patient.addRecordToProblem(record2, problem0);
+
+        RecordTreeSet results = patient.searchRecords("hello");
+        assertTrue(results.contains(record0));
+        results = patient.searchRecords("elo");
+        assertTrue(results.contains(record0));
+        assertTrue(results.contains(record1));
+        assertTrue(results.contains(record2));
+    }
+
+    /* Done in activity???
     @Test
     public void editContactInfo(){
         Patient patient = new Patient();
@@ -103,28 +175,15 @@ public class PatientTest {
         assertTrue(patient.getContactInfo().getEmail().getEmail().equals("John@hotmail.com"));
         assertTrue(patient.getContactInfo().getPhoneNumber().getPhoneNumber().equals("780-123-4567"));
 
-        email.setEmail("NotJohn@hotmail.com");
-        contactInfo.setEmail(email);
-        number.setPhoneNumber("123-456-7890");
+        ContactInfo newContactInfo = new ContactInfo();
+        newContactInfo.setEmail(new Email("NotJohn@hotmail.com"));
+        newContactInfo.setPhoneNumber(new PhoneNumber("123-456-7890"));
+        patient.edit
 
         assertTrue(patient.getContactInfo().getEmail().getEmail().equals("NotJohn@hotmail.com"));
         assertTrue(patient.getContactInfo().getPhoneNumber().getPhoneNumber().equals("123-456-7890"));
     }
-
-    @Test
-    public void attemptLogin(){
-        Patient patient = new Patient();
-        Username username = new Username("John");
-        Password password = new Password("hidden");
-        patient.setUsername(username);
-        patient.setPassword(password);
-
-        assertFalse(patient.attemptLogin(new Username("Wrong"), new Password("Wrong")));
-        assertFalse(patient.attemptLogin(new Username("Wrong"), new Password("hidden")));
-        assertFalse(patient.attemptLogin(new Username("John"), new Password("Wrong")));
-        assertTrue(patient.attemptLogin(new Username("John"), new Password("hidden")));
-    }
-
+    */
 
     @Test
     public void getUsername() {

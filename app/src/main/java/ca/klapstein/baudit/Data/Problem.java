@@ -10,10 +10,19 @@ public class Problem implements Comparable<Problem> {
     private RecordTreeSet recordTreeSet;
 
     private long timestamp;
+    private String title;
 
     public Problem() {
         this.timestamp = System.currentTimeMillis();
         this.recordTreeSet = new RecordTreeSet();
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return this.title;
     }
 
     public long getTimestamp() {

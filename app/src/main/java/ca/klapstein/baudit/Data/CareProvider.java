@@ -13,6 +13,10 @@ public class CareProvider extends User {
 
     private PatientTreeSet assignedPatientTreeSet;
 
+    public void CareProvider(){
+        this.assignedPatientTreeSet = new PatientTreeSet();
+    }
+
     // UC-01.02.01: list all medical problems for a related account
     public ProblemTreeSet getProblemTreeSet(Patient patient){ return patient.getProblemTreeSet(); }
 
@@ -30,14 +34,11 @@ public class CareProvider extends User {
         return recordTreeSet;
     }
 
-    // UC-03.02.01: edit account contact information
-    public void editContactInfo(ContactInfo contactInfo){ this.setContactInfo(contactInfo);}
-
     // UC-06.01.01: list patients assigned to care providers
     public PatientTreeSet getAssignedPatientTreeSet(){ return assignedPatientTreeSet; }
 
     // UC-07-01.01: assign patient to care providers
-    public void assignPatient(Patient patient){ assignedPatientTreeSet.add(patient); }
+    public void assignPatient(Patient patient){ this.getAssignedPatientTreeSet().add(patient); }
 
     // UC-07.02.01: list all patients TODO: not sure how to
     // This is implemented in PatientListActivity
@@ -63,4 +64,3 @@ public class CareProvider extends User {
         return matchingRecords;
     }
 }
-
