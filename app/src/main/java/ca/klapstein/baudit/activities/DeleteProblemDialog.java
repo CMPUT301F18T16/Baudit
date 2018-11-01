@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import ca.klapstein.baudit.data.Problem;
+
 /**
  * Dialog providing a confirmation prompt to delete a {@code Problem}.
  *
@@ -11,5 +13,9 @@ public class DeleteProblemDialog extends DeleteDialog {
     @Override
     public CharSequence getDialogTitle() {
         return "Delete Problem";
+    }
+
+    public interface onDeleteProblemListener {
+        void onDeleteProblem(Problem problem);
     }
 }

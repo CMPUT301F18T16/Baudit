@@ -3,9 +3,10 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.PatientAdapter;
 import ca.klapstein.baudit.data.PatientTreeSet;
-import ca.klapstein.baudit.R;
 
 /**
  * Activity for listing {@code Patient}s.
@@ -28,5 +29,9 @@ public class PatientListActivity extends AppCompatActivity {
         patientAdapter = new PatientAdapter(patientTreeSet);
 
         // TODO: init patientRecyclerView
+    }
+
+    private void onPatientListItemClick(View view, final int position) {
+        // TODO: create add menu
     }
 }

@@ -2,8 +2,8 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Record;
 
 
 /**
@@ -22,5 +22,9 @@ public class AddRecordActivity extends RecordActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+    }
+
+    public interface onAddRecordListener {
+        void onAddRecord(Record record);
     }
 }

@@ -2,6 +2,7 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Problem;
 
 /**
  * Activity for editing a {@code Problem}.
@@ -17,5 +18,9 @@ public class EditProblemActivity extends ProblemActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
+    }
+
+    public interface onEditProblemListener {
+        void onEditProblem(Problem problem, final int position);
     }
 }

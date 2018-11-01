@@ -8,8 +8,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.User;
 
 /**
  * Dialog providing a logout prompt.
@@ -34,10 +34,10 @@ public class LogoutDialog extends DialogFragment {
     }
 
     /**
-     * On a proper logout go back to MainActivity.
+     * On a proper logout go back to SplashActivity.
      */
     private void onLogout(){
-        Intent intent = new Intent(getContext(), MainActivity.class);
+        Intent intent = new Intent(getContext(), SplashActivity.class);
         startActivity(intent);
     }
 }

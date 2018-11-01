@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Activities;
+package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
@@ -14,7 +14,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     private Solo solo;
 
     public LoginPatientActivityTest() {
-        super(ca.klapstein.baudit.Activities.LoginPatientActivity.class);
+        super(ca.klapstein.baudit.activities.LoginPatientActivity.class);
     }
 
     @Before
