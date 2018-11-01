@@ -3,7 +3,7 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * data class representing a Baudit's {@code User}'s password.
+ * Data class representing a Baudit's {@code User}'s password.
  *
  * @see User
  */

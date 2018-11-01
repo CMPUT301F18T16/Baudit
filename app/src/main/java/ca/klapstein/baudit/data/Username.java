@@ -3,7 +3,7 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * data class representing a Baudit's {@code User}'s username.
+ * Data class representing a Baudit's {@code User}'s username.
  *
  * @see User
  */

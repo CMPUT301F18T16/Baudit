@@ -3,7 +3,7 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * data class representing the contact info of a {@code User}.
+ * Data class representing the contact info of a {@code User}.
  * <p>
  * This is viewed by both the {@code CareProvider} and the {@code Patients}.
  *

@@ -1,8 +1,8 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import ca.klapstein.baudit.R;
 
 /**
  * Starting Activity for Baudit.
@@ -15,12 +15,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // if already logged in go to respective User type homepage
-        // if Patient goto ProblemListActivity
-        // if CareProvider goto PatientListActivity
-
-        // if not logged in provide page for account creation or login
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

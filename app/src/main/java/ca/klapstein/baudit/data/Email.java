@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * data class representing a Baudit's {@code User}'s email.
+ * Data class representing a Baudit's {@code User}'s email.
  *
  * @see User
  */

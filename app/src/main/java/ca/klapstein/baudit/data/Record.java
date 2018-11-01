@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.data;
 
 /**
- * data class representing a Record for a Medical Problem {@code Problem}.
+ * Data class representing a Record for a Medical Problem {@code Problem}.
  *
  * @see Problem
  */

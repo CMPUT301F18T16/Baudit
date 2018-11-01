@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ca.klapstein.baudit">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.klapstein.baudit">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera2" android:required="true" />
+    <uses-feature android:name="android.hardware.camera2.front" android:required="true" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:logo="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+        <activity android:name=".activities.AccountCreateActivity" />
+        <activity android:name=".activities.CreateCareProviderAccountActivity" />
+        <activity android:name=".activities.EditAccountActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.CreatePatientAccountActivity" />
+        <activity android:name=".activities.LocationActivity" />
+        <activity android:name=".activities.EditProblemActivity" />
+        <activity android:name=".activities.AddProblemActivity" />
+        <activity android:name=".activities.AddRecordActivity" />
+        <activity android:name=".activities.EditRecordActivity" />
+        <activity android:name=".activities.PatientListActivity" />
+        <activity android:name=".activities.PhotoActivity" />
+        <activity android:name=".activities.ProblemListActivity" />
+        <activity android:name=".activities.RecordListActivity" />
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AccountCreateActivity">
-        </activity>
-        <activity android:name=".activities.CreateCareProviderAccountActivity">
-        </activity>
-        <activity android:name=".activities.EditAccountActivity">
-        </activity>
-        <activity android:name=".activities.LoginActivity">
-        </activity>
-        <activity android:name=".activities.CreatePatientAccountActivity">
-        </activity>
-        <activity android:name=".activities.LocationActivity">
-        </activity>
-        <activity android:name=".activities.EditProblemActivity">
-        </activity>
-        <activity android:name=".activities.AddProblemActivity">
-        </activity>
-        <activity android:name=".activities.AddRecordActivity">
-        </activity>
-        <activity android:name=".activities.EditRecordActivity">
-        </activity>
-        <activity android:name=".activities.PatientListActivity">
-        </activity>
-        <activity android:name=".activities.PhotoActivity">
-        </activity>
-        <activity android:name=".activities.ProblemListActivity">
-        </activity>
-        <activity android:name=".activities.RecordListActivity">
-        </activity>
     </application>
-
 </manifest>
