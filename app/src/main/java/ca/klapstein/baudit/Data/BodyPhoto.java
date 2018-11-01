@@ -1,4 +1,4 @@
 package ca.klapstein.baudit.Data;
 
-public class BodyPhoto implements Photo {
+public class BodyPhoto extends Photo {
 }
