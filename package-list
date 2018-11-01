@@ -1,5 +1,5 @@
-ca.klapstein.baudit.Activities
-ca.klapstein.baudit.Adapters
-ca.klapstein.baudit.Data
-ca.klapstein.baudit.Listeners
-ca.klapstein.baudit.Managers
+ca.klapstein.baudit.activities
+ca.klapstein.baudit.adapters
+ca.klapstein.baudit.data
+ca.klapstein.baudit.listeners
+ca.klapstein.baudit.managers
