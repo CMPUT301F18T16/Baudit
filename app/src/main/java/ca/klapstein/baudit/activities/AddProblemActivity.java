@@ -14,9 +14,6 @@ import ca.klapstein.baudit.data.Problem;
 public class AddProblemActivity extends ProblemActivity {
     private static final String TAG = "AddProblemActivity";
 
-    @Nullable
-    Problem problem;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

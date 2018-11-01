@@ -15,9 +15,6 @@ import ca.klapstein.baudit.data.Record;
 public class AddRecordActivity extends RecordActivity {
     private static final String TAG = "AddRecordActivity";
 
-    @Nullable
-    Record record;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
