@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.Listeners;
+package ca.klapstein.baudit.listeners;
 
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.After;
