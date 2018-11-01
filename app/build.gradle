@@ -31,7 +31,7 @@ dependencies {
     // Add a recyclerview
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     // gson
-    implementation 'com.google.code.gson:gson:2.8.2'
+    // implementation 'com.google.code.gson:gson:2.8.2'
     // Android instrument tests
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
@@ -41,6 +41,9 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
     // Required for local unit tests (JUnit 4 framework)
     testImplementation 'junit:junit:4.12'
+    // Elastic Search
+    implementation 'io.searchbox:jest-droid:2.0.0'
+
 }
 
 buildscript {
