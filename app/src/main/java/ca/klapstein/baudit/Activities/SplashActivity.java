@@ -9,8 +9,8 @@ import ca.klapstein.baudit.R;
  * <p>
  * Acts as a start page for Baudit providing access to Account Creation and Login.
  */
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+public class SplashActivity extends AppCompatActivity {
+    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
