@@ -6,7 +6,7 @@ import ca.klapstein.baudit.views.View;
 /**
  * MVP presenter for a {@code User}.
  */
-public class AccountPresenter<V extends View> extends Presenter<V> {
+abstract public class AccountPresenter<V extends View> extends Presenter<V> {
     private static final String TAG = "AccountPresenter";
 
     protected User user;
