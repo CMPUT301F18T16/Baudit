@@ -7,4 +7,8 @@ public class CareProvider extends User {
     private static final String TAG = "CareProvider";
 
     private PatientTreeSet assignedPatientTreeSet;
+
+    public PatientTreeSet getAssignedPatientTreeSet() {
+        return assignedPatientTreeSet;
+    }
 }
