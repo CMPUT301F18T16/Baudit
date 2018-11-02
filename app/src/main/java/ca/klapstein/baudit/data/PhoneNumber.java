@@ -22,6 +22,12 @@ public class PhoneNumber {
         return this.phoneNumber;
     }
 
+    /**
+     * Check that a string representing a phone number is valid.
+     *
+     * @param phoneNumber {@code String} the phone number string to test.
+     * @return {@code boolean} {@code true} if the phone number is valid, otherwise {@code false}.
+     */
     static public boolean isValid(String phoneNumber) {
         Matcher m = phoneNumberPattern.matcher(phoneNumber);
         return m.matches();
