@@ -8,8 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.BodyPhoto;
-import ca.klapstein.baudit.data.BodyPhotoCoords;
+import ca.klapstein.baudit.presenters.BodyLocationPresenter;
+import ca.klapstein.baudit.views.BodyLocationView;
 
 
 /**
@@ -19,12 +19,10 @@ import ca.klapstein.baudit.data.BodyPhotoCoords;
  * @see ca.klapstein.baudit.data.BodyPhoto
  * @see ca.klapstein.baudit.data.BodyPhotoCoords
  */
-public class BodyLocationDialog extends DialogFragment {
+public class BodyLocationDialog extends DialogFragment implements BodyLocationView {
     private static final String TAG = "BodyLocationDialog";
 
-    @NonNull
-    private BodyPhoto bodyPhoto;
-    private BodyPhotoCoords bodyPhotoCoords;
+    private BodyLocationPresenter presenter;
 
     @NonNull
     @Override
@@ -36,8 +34,19 @@ public class BodyLocationDialog extends DialogFragment {
         // TODO: more implementation
 
         // TODO: if no BodyPhoto is present prompt the user to provide one
+        presenter = new BodyLocationPresenter(this);
 
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    @Override
+    public void setBodyLocationView() {
+
+    }
+
+    @Override
+    public void setBodyLocationError() {
+
     }
 }

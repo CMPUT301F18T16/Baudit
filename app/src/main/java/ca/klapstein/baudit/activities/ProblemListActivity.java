@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
@@ -23,8 +22,7 @@ import ca.klapstein.baudit.views.ProblemRowView;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class ProblemListActivity extends AppCompatActivity
-    implements ProblemListView, DeleteProblemDialog.onDeleteProblemListener {
+public class ProblemListActivity extends AppCompatActivity implements ProblemListView {
     private static final String TAG = "ProblemListActivity";
 
     private ProblemListPresenter presenter;
@@ -64,16 +62,6 @@ public class ProblemListActivity extends AppCompatActivity
         Intent intent = new Intent(this, AddProblemActivity.class);
         // TODO: add required args
         startActivity(intent);
-    }
-
-    /**
-     * Dialog callback for when a problem is deleted.
-     *
-     * @param problem {@code Problem}
-     */
-    @Override
-    public void onDeleteProblem(Problem problem) {
-        // TODO: implement
     }
 
     @Override

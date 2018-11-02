@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Record;
@@ -24,7 +23,7 @@ import ca.klapstein.baudit.views.RecordRowView;
  *
  * @see ca.klapstein.baudit.data.Record
  */
-public class RecordListActivity extends AppCompatActivity implements RecordListView, DeleteRecordDialog.onDeleteRecordListener {
+public class RecordListActivity extends AppCompatActivity implements RecordListView {
     private static final String TAG = "RecordListActivity";
 
     private RecordListPresenter presenter;
@@ -64,16 +63,6 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         Intent intent = new Intent(this, AddRecordActivity.class);
         // TODO: add required args
         startActivity(intent);
-    }
-
-    /**
-     * Dialog callback for when a Record is deleted.
-     *
-     * @param record {@code Record}
-     */
-    @Override
-    public void onDeleteRecord(Record record) {
-        // TODO: implement
     }
 
     @Override
