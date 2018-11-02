@@ -2,7 +2,7 @@ package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
 
-import ca.klapstein.baudit.Managers.BauditRemoteManager;
+import ca.klapstein.baudit.managers.BauditRemoteManager;
 
 /**
  * Data class representing a Baudit's {@code User}'s username.
@@ -28,13 +28,34 @@ public class Username {
     public void setUsername(@NonNull String username) throws IllegalArgumentException{
         BauditRemoteManager remoteManager = new BauditRemoteManager();
         int len = username.length();
-        if(len > 8 && len <=20 && remoteManager.uniqueID(username)){
+        if(isValidLength(username)){
             this.username = username;
         } else{
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid username length, please try again");
+        }
+
+        if(remoteManager.uniqueID(username)){
+            this.username = username;
+        } else{
+            throw new IllegalArgumentException("Username not unique, please try again");
+        }
+
+        if(isAlphaNumeric(username)){
+            this.username = username;
+        } else{
+            throw new IllegalArgumentException("Invalid username length, please try again");
         }
 
     }
+
+    public boolean isValidLength(String username){
+        return (username.length()>=8 && username.length()<=20);
+    }
+
+    public boolean isAlphaNumeric(String filename){
+        return filename.matches("^.*[^a-zA-Z0-9 ].*$");
+    }
+
 
     @Override
     public int hashCode() {

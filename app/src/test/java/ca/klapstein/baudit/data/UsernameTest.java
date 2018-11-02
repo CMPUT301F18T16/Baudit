@@ -62,6 +62,11 @@ public class UsernameTest {
         } catch (IllegalArgumentException e) {}
 
         try {
+            new Username("Ťéŝţ");
+            success = true;
+        } catch (IllegalArgumentException e) {}
+
+        try {
             new Username("");
             success = true;
         } catch (IllegalArgumentException e) {}
