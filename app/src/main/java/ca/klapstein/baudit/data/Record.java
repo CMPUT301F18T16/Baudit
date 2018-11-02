@@ -24,6 +24,8 @@ public class Record {
 
     public Record(){
         this.setTimestamp();
+        this.keywords = new ArrayList<>();
+        this.bodyPhotoCoords = new ArrayList<>();
     }
 
     public void setTimestamp() {

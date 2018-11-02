@@ -29,7 +29,7 @@ public class Username {
         int len = username.length();
         if (len < 8 || len > 20) {
             throw new IllegalArgumentException("Invalid username length. Expected 8-20.");
-        } else if (remoteManager.uniqueID(username)) {
+        } else if (!remoteManager.uniqueID(username)) {
             throw new IllegalArgumentException("Username not unique.");
         } else {
             this.username = username;
