@@ -11,4 +11,8 @@ public class CreateAccountPresenter<V extends CreateUserView> extends Presenter<
     public CreateAccountPresenter(V view) {
         super(view);
     }
+
+    public boolean validateBaseAccount(String username, String email) {
+        return true;
+    }
 }

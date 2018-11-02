@@ -8,4 +8,8 @@ public class CreateCareProviderAccountPresenter extends CreateAccountPresenter<C
     public CreateCareProviderAccountPresenter(CreateCareProviderAccountView view) {
         super(view);
     }
+
+    public boolean validateCareProviderAccount(String username, String email, String careProviderID) {
+        return true;
+    }
 }
