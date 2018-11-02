@@ -3,433 +3,1362 @@
   <ID>JAVA</ID>
   <OriginalElement>ca.klapstein.baudit</OriginalElement>
   <nodes>
-    <node x="1927.0" y="881.0">ca.klapstein.baudit.test.R</node>
-    <node x="477.0357142857142" y="327.0">ca.klapstein.baudit.Data.ProblemTreeSet</node>
-    <node x="47.5" y="79.0">ca.klapstein.baudit.Data.Email</node>
-    <node x="1257.0357142857142" y="486.0">ca.klapstein.baudit.Activities.EditRecordActivity</node>
-    <node x="126.0" y="807.0">ca.klapstein.baudit.Data.RecordPhoto</node>
-    <node x="579.8333333333331" y="228.0">ca.klapstein.baudit.Data.Username</node>
-    <node x="1175.0" y="881.0">ca.klapstein.baudit.BuildConfig</node>
-    <node x="1611.0" y="728.0">ca.klapstein.baudit.Data.ProblemTreeSetTest</node>
-    <node x="2211.8561252626037" y="575.0">ca.klapstein.baudit.Activities.AddProblemActivity</node>
-    <node x="1470.602410495448" y="575.0">ca.klapstein.baudit.Adapters.ProblemAdapter</node>
-    <node x="1016.0" y="881.0">ca.klapstein.baudit.Listeners.RecyclerTouchListener.ClickListener</node>
-    <node x="2344.852410495448" y="486.0">ca.klapstein.baudit.Activities.CreatePatientAccountActivity</node>
-    <node x="1193.0" y="728.0">ca.klapstein.baudit.Listeners.RecyclerTouchListener</node>
-    <node x="857.0" y="881.0">ca.klapstein.baudit.Data.ProblemTest</node>
-    <node x="294.83333333333314" y="228.0">ca.klapstein.baudit.Data.Password</node>
-    <node x="363.0" y="881.0">ca.klapstein.baudit.Data.UsernameTest</node>
-    <node x="236.6024104954481" y="486.0">ca.klapstein.baudit.Activities.LogoutDialog</node>
-    <node x="622.0357142857141" y="486.0">ca.klapstein.baudit.Activities.LoginActivity</node>
-    <node x="1113.0357142857142" y="486.0">ca.klapstein.baudit.Activities.RecordActivity</node>
-    <node x="943.0357142857141" y="486.0">ca.klapstein.baudit.Activities.EditAccountActivity</node>
-    <node x="2636.8690476190473" y="79.0">ca.klapstein.baudit.Data.RecordTreeSet</node>
-    <node x="2401.0" y="728.0">ca.klapstein.baudit.Data.PatientTreeSetTest</node>
-    <node x="287.0" y="728.0">ca.klapstein.baudit.Managers.BauditPreferencesManager</node>
-    <node x="182.0" y="881.0">ca.klapstein.baudit.ExampleUnitTest</node>
-    <node x="65.60241049544811" y="486.0">ca.klapstein.baudit.Activities.ViewAccountDialog</node>
-    <node x="2632.5357142857138" y="228.0">ca.klapstein.baudit.Data.Problem</node>
-    <node x="0.0" y="228.0">ca.klapstein.baudit.Data.EmailTest</node>
-    <node x="1637.0" y="881.0">ca.klapstein.baudit.Data.RecordTest</node>
-    <node x="2717.852410495448" y="486.0">ca.klapstein.baudit.Activities.PhotoActivity</node>
-    <node x="2593.0" y="728.0">ca.klapstein.baudit.Data.BodyPhotoCoords</node>
-    <node x="2091.852410495448" y="486.0">ca.klapstein.baudit.Activities.CreateCareProviderAccountActivity</node>
-    <node x="2855.852410495448" y="486.0">ca.klapstein.baudit.Activities.LocationActivity</node>
-    <node x="0.0" y="881.0">ca.klapstein.baudit.Activities.SlideShowDialog</node>
-    <node x="1330.0" y="881.0">ca.klapstein.baudit.test.BuildConfig</node>
-    <node x="1378.231125262604" y="654.0">ca.klapstein.baudit.Activities.ProblemListActivity</node>
-    <node x="502.602410495448" y="575.0">ca.klapstein.baudit.Adapters.PatientAdapter</node>
-    <node x="322.6024104954481" y="327.0">ca.klapstein.baudit.Data.User</node>
-    <node x="1900.602410495448" y="327.0">ca.klapstein.baudit.R</node>
-    <node x="376.602410495448" y="486.0">ca.klapstein.baudit.Data.Patient</node>
-    <node x="1789.0" y="881.0">ca.klapstein.baudit.Data.UserTest</node>
-    <node x="2782.0" y="728.0">ca.klapstein.baudit.Data.CareProviderTest</node>
-    <node x="1772.602410495448" y="486.0">ca.klapstein.baudit.Activities.AddRecordActivity</node>
-    <node x="1811.0" y="728.0">ca.klapstein.baudit.Activities.DeleteRecordDialog</node>
-    <node x="2010.0" y="728.0">ca.klapstein.baudit.Activities.BodyLocationDialog</node>
-    <node x="1485.0" y="881.0">ca.klapstein.baudit.Data.PatientTest</node>
-    <node x="531.0" y="881.0">ca.klapstein.baudit.Data.PasswordTest</node>
-    <node x="2209.0" y="728.0">ca.klapstein.baudit.Data.RecordTreeSetTest</node>
-    <node x="1422.0357142857142" y="486.0">ca.klapstein.baudit.Adapters.RecyclerTreeSetAdapter</node>
-    <node x="2566.852410495448" y="486.0">ca.klapstein.baudit.Activities.ProblemActivity</node>
-    <node x="163.83333333333303" y="228.0">ca.klapstein.baudit.Data.ContactInfo</node>
-    <node x="86.6120776435564" y="654.0">ca.klapstein.baudit.Data.CareProvider</node>
-    <node x="437.727410495448" y="654.0">ca.klapstein.baudit.Activities.PatientListActivity</node>
-    <node x="523.0" y="728.0">ca.klapstein.baudit.ExampleInstrumentedTest</node>
-    <node x="356.602410495448" y="575.0">ca.klapstein.baudit.Data.PatientTreeSet</node>
-    <node x="1890.352410495448" y="575.0">ca.klapstein.baudit.Activities.EditProblemActivity</node>
-    <node x="2788.547821472338" y="654.0">ca.klapstein.baudit.Activities.RecordListActivity</node>
-    <node x="0.0" y="807.0">ca.klapstein.baudit.Data.BodyPhoto</node>
-    <node x="1938.602410495448" y="486.0">ca.klapstein.baudit.Activities.MainActivity</node>
-    <node x="754.0" y="728.0">ca.klapstein.baudit.Managers.BauditDataBaseManager</node>
-    <node x="1867.227410495448" y="0.0">ca.klapstein.baudit.Data.Record</node>
-    <node x="411.83333333333314" y="228.0">ca.klapstein.baudit.Data.PhoneNumberTest</node>
-    <node x="695.0" y="881.0">ca.klapstein.baudit.Activities.DeleteDialog</node>
-    <node x="1404.0" y="728.0">ca.klapstein.baudit.Activities.DeleteProblemDialog</node>
-    <node x="1624.602410495448" y="575.0">ca.klapstein.baudit.Adapters.RecordAdapter</node>
-    <node x="758.0357142857141" y="486.0">ca.klapstein.baudit.Activities.AccountCreateActivity</node>
-    <node x="79.0" y="728.0">ca.klapstein.baudit.Data.Photo</node>
-    <node x="86.5" y="327.0">ca.klapstein.baudit.Data.ContactInfoTest</node>
-    <node x="977.0" y="728.0">ca.klapstein.baudit.Managers.BauditRemoteManager</node>
-    <node x="175.20833333333303" y="79.0">ca.klapstein.baudit.Data.PhoneNumber</node>
+    <node x="3026.697916666666" y="2505.0">ca.klapstein.baudit.activities.SlideShowDialog</node>
+    <node x="7485.147916666667" y="3524.5">ca.klapstein.baudit.activities.SplashActivity</node>
+    <node x="7490.585101120758" y="1773.0">ca.klapstein.baudit.views.PatientListView</node>
+    <node x="8007.168434454092" y="2238.0">ca.klapstein.baudit.presenters.ProblemListPresenter</node>
+    <node x="3761.22821969697" y="389.5">ca.klapstein.baudit.data.ContactInfo</node>
+    <node x="51.53125" y="2283.5">ca.klapstein.baudit.data.BodyPhoto</node>
+    <node x="8822.002083333333" y="2516.5">ca.klapstein.baudit.activities.ProblemActivity</node>
+    <node x="1451.302083333333" y="2739.0">ca.klapstein.baudit.activities.AddRecordActivity</node>
+    <node x="8428.168434454092" y="2283.5">ca.klapstein.baudit.views.EditProblemView</node>
+    <node x="7007.864583333334" y="2450.0">ca.klapstein.baudit.activities.PatientListActivity</node>
+    <node x="4947.8597505510825" y="1740.0">ca.klapstein.baudit.views.CreateUserView</node>
+    <node x="3586.60321969697" y="122.0">ca.klapstein.baudit.data.PhoneNumber</node>
+    <node x="3637.15625" y="2260.5">ca.klapstein.baudit.presenters.DeleteRecordPresenter</node>
+    <node x="964.114583333333" y="2527.5">ca.klapstein.baudit.presenters.EditRecordPresenter</node>
+    <node x="8875.439583333333" y="1740.0">ca.klapstein.baudit.views.ProblemView</node>
+    <node x="5182.072916666666" y="1349.5">ca.klapstein.baudit.views.View</node>
+    <node x="842.302083333333" y="0.0">ca.klapstein.baudit.data.Record</node>
+    <node x="1824.156249999999" y="2494.0">ca.klapstein.baudit.activities.PhotoActivity</node>
+    <node x="5753.40625" y="2294.5">ca.klapstein.baudit.views.CreatePatientAccountView</node>
+    <node x="1841.031249999999" y="2249.5">ca.klapstein.baudit.presenters.PhotoPresenter</node>
+    <node x="6237.072916666666" y="2249.5">ca.klapstein.baudit.presenters.AccountPresenter</node>
+    <node x="3919.15625" y="2260.5">ca.klapstein.baudit.presenters.DeleteProblemPresenter</node>
+    <node x="7485.147916666667" y="3235.5">ca.klapstein.baudit.activities.LoginActivity</node>
+    <node x="7326.742703187651" y="2849.0">ca.klapstein.baudit.presenters.LoginPresenter</node>
+    <node x="8777.793434454092" y="2249.5">ca.klapstein.baudit.presenters.ProblemPresenter</node>
+    <node x="1792.718749999999" y="1784.0">ca.klapstein.baudit.views.PhotoView</node>
+    <node x="7214.927083333334" y="3481.0">ca.klapstein.baudit.activities.LoginCareProviderActivity</node>
+    <node x="3899.60321969697" y="111.0">ca.klapstein.baudit.data.Email</node>
+    <node x="4464.15625" y="2283.5">ca.klapstein.baudit.views.CreateCareProviderAccountView</node>
+    <node x="3118.037870405401" y="3702.0">ca.klapstein.baudit.presenters.LogoutPresenter</node>
+    <node x="3863.90625" y="2494.0">ca.klapstein.baudit.activities.DeleteRecordDialog</node>
+    <node x="5513.084369854318" y="2794.0">ca.klapstein.baudit.activities.CreatePatientAccountActivity</node>
+    <node x="596.0628704054002" y="3180.0">ca.klapstein.baudit.activities.RecordListActivity</node>
+    <node x="3775.886265702599" y="1023.0">ca.klapstein.baudit.managers.BauditDataBaseManager</node>
+    <node x="6835.947916666667" y="1795.5">ca.klapstein.baudit.views.PatientRowView</node>
+    <node x="6765.03125" y="2238.0">ca.klapstein.baudit.presenters.PatientListPresenter</node>
+    <node x="203.53125" y="1795.5">ca.klapstein.baudit.data.Photo</node>
+    <node x="6538.03125" y="2239.0">ca.klapstein.baudit.views.EditAccountView</node>
+    <node x="6288.642037072067" y="3702.5">ca.klapstein.baudit.activities.LogoutDialog</node>
+    <node x="3350.322916666666" y="2494.5">ca.klapstein.baudit.activities.LocationActivity</node>
+    <node x="7388.7764172177485" y="869.0">ca.klapstein.baudit.data.Patient</node>
+    <node x="1306.3628704054004" y="1674.0">ca.klapstein.baudit.views.RecordView</node>
+    <node x="4096.997601120758" y="1795.5">ca.klapstein.baudit.views.DeleteView</node>
+    <node x="880.447916666667" y="2283.5">ca.klapstein.baudit.views.EditRecordView</node>
+    <node x="9293.980934454092" y="1773.0">ca.klapstein.baudit.views.ProblemListView</node>
+    <node x="8731.458703738734" y="3180.0">ca.klapstein.baudit.activities.ProblemListActivity</node>
+    <node x="0.0" y="3888.0">ca.klapstein.baudit.BuildConfig</node>
+    <node x="8641.863536520985" y="2805.0">ca.klapstein.baudit.activities.EditProblemActivity</node>
+    <node x="3023.9214910664386" y="189.5">ca.klapstein.baudit.data.RecordTreeSet</node>
+    <node x="3371.15625" y="2272.0">ca.klapstein.baudit.presenters.LocationPresenter</node>
+    <node x="6055.90625" y="2527.5">ca.klapstein.baudit.presenters.ViewAccountPresenter</node>
+    <node x="5491.072916666666" y="2527.5">ca.klapstein.baudit.presenters.CreatePatientAccountPresenter</node>
+    <node x="1255.114583333333" y="2516.5">ca.klapstein.baudit.activities.RecordActivity</node>
+    <node x="1462.114583333333" y="2527.5">ca.klapstein.baudit.presenters.AddRecordPresenter</node>
+    <node x="3169.9214910664386" y="389.0">ca.klapstein.baudit.data.Password</node>
+    <node x="6442.78125" y="2816.0">ca.klapstein.baudit.activities.EditAccountActivity</node>
+    <node x="7536.085101120758" y="1023.0">ca.klapstein.baudit.data.PatientTreeSet</node>
+    <node x="2238.0312499999995" y="2494.5">ca.klapstein.baudit.activities.BodyLocationDialog</node>
+    <node x="4692.417703187652" y="2783.0">ca.klapstein.baudit.activities.CreateCareProviderAccountActivity</node>
+    <node x="2340.031249999999" y="2260.5">ca.klapstein.baudit.presenters.BodyLocationPresenter</node>
+    <node x="3052.031249999999" y="2272.0">ca.klapstein.baudit.presenters.SlideShowPresenter</node>
+    <node x="1286.114583333333" y="2249.5">ca.klapstein.baudit.presenters.RecordPresenter</node>
+    <node x="474.44791666666697" y="2238.0">ca.klapstein.baudit.presenters.RecordListPresenter</node>
+    <node x="6367.90625" y="2527.5">ca.klapstein.baudit.presenters.EditAccountPresenter</node>
+    <node x="6033.572916666666" y="2838.0">ca.klapstein.baudit.activities.ViewAccountDialog</node>
+    <node x="7986.272916666667" y="1327.5">ca.klapstein.baudit.data.CareProvider</node>
+    <node x="3599.489583333333" y="1773.0">ca.klapstein.baudit.presenters.Presenter</node>
+    <node x="9029.002083333333" y="2527.5">ca.klapstein.baudit.presenters.AddProblemPresenter</node>
+    <node x="4882.072916666666" y="2249.5">ca.klapstein.baudit.presenters.CreateAccountPresenter</node>
+    <node x="604.53125" y="1795.5">ca.klapstein.baudit.views.RecordRowView</node>
+    <node x="5176.072916666666" y="3525.0">ca.klapstein.baudit.views.LogoutView</node>
+    <node x="7828.2764172177485" y="3481.0">ca.klapstein.baudit.activities.LoginPatientActivity</node>
+    <node x="9194.543434454092" y="2283.5">ca.klapstein.baudit.views.AddProblemView</node>
+    <node x="4208.15625" y="2260.5">ca.klapstein.baudit.activities.DeleteDialog</node>
+    <node x="3379.9214910664386" y="411.5">ca.klapstein.baudit.data.Username</node>
+    <node x="8446.772916666667" y="423.0">ca.klapstein.baudit.data.Problem</node>
+    <node x="236.0" y="3888.0">ca.klapstein.baudit.managers.BauditPreferencesManager</node>
+    <node x="3478.6714910664386" y="611.0">ca.klapstein.baudit.data.User</node>
+    <node x="2335.031249999999" y="1772.5">ca.klapstein.baudit.data.BodyPhotoCoords</node>
+    <node x="4678.322916666666" y="2516.0">ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter</node>
+    <node x="8512.939583333333" y="2527.5">ca.klapstein.baudit.presenters.EditProblemPresenter</node>
+    <node x="7697.647916666667" y="644.5">ca.klapstein.baudit.data.ProblemTreeSet</node>
+    <node x="2099.031249999999" y="1784.5">ca.klapstein.baudit.views.BodyLocationView</node>
+    <node x="5284.072916666666" y="2527.5">ca.klapstein.baudit.activities.AccountCreateActivity</node>
+    <node x="1031.427083333333" y="2739.0">ca.klapstein.baudit.activities.EditRecordActivity</node>
+    <node x="7529.409369854318" y="2517.0">ca.klapstein.baudit.views.LoginView</node>
+    <node x="3532.822916666667" y="1194.0">ca.klapstein.baudit.managers.BauditDataManager</node>
+    <node x="7749.585101120758" y="1795.5">ca.klapstein.baudit.views.ProblemRowView</node>
+    <node x="203.53125" y="2283.5">ca.klapstein.baudit.data.RecordPhoto</node>
+    <node x="2602.031249999999" y="1795.5">ca.klapstein.baudit.views.SlideShowView</node>
+    <node x="2816.031249999999" y="1784.5">ca.klapstein.baudit.views.LocationView</node>
+    <node x="355.53125" y="1773.0">ca.klapstein.baudit.views.RecordListView</node>
+    <node x="5961.40625" y="2261.0">ca.klapstein.baudit.views.ViewAccountView</node>
+    <node x="9043.276036520985" y="2805.0">ca.klapstein.baudit.activities.AddProblemActivity</node>
+    <node x="1617.031249999999" y="2283.5">ca.klapstein.baudit.views.AddRecordView</node>
+    <node x="2734.171491066438" y="1023.0">ca.klapstein.baudit.managers.BauditRemoteManager</node>
+    <node x="4237.65625" y="2494.0">ca.klapstein.baudit.activities.DeleteProblemDialog</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="ca.klapstein.baudit.Data.PatientTreeSet" target="ca.klapstein.baudit.Data.Patient">
+    <edge source="ca.klapstein.baudit.presenters.AddRecordPresenter" target="ca.klapstein.baudit.presenters.RecordPresenter">
+      <point x="0.0" y="-37.0" />
+      <point x="1599.114583333333" y="2430.0" />
+      <point x="1530.0145833333327" y="2430.0" />
+      <point x="108.39999999999964" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.Problem">
+      <point x="0.0" y="-170.0" />
+      <point x="3682.822916666667" y="1174.0" />
+      <point x="3666.5795370720675" y="1174.0" />
+      <point x="3666.5795370720675" y="571.0" />
+      <point x="8464.022916666667" y="571.0" />
+      <point x="-86.25" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.AddProblemPresenter" target="ca.klapstein.baudit.presenters.ProblemPresenter">
+      <point x="0.0" y="-37.0" />
+      <point x="9173.002083333333" y="2410.0" />
+      <point x="9056.793434454092" y="2410.0" />
+      <point x="124.0" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.EditProblemView" target="ca.klapstein.baudit.views.ProblemView">
+      <point x="0.0" y="-25.5" />
+      <point x="8532.668434454092" y="2208.0" />
+      <point x="8901.314583333333" y="2208.0" />
+      <point x="-77.625" y="81.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.CreatePatientAccountActivity" target="ca.klapstein.baudit.views.CreatePatientAccountView">
+      <point x="106.5" y="-125.5" />
+      <point x="5761.584369854318" y="2719.0" />
+      <point x="5884.572916666666" y="2719.0" />
+      <point x="5884.572916666666" y="2430.0" />
+      <point x="5894.40625" y="2430.0" />
+      <point x="47.0" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.EditRecordActivity" target="ca.klapstein.baudit.activities.RecordActivity">
+      <point x="43.19999999999982" y="-180.5" />
+      <point x="1182.6270833333328" y="2709.0" />
+      <point x="1278.489583333333" y="2709.0" />
+      <point x="-70.125" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.activities.AddProblemActivity">
+      <point x="38.85714285714312" y="-125.5" />
+      <point x="8906.315846595877" y="3140.0" />
+      <point x="9148.776036520985" y="3140.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordPresenter" target="ca.klapstein.baudit.views.RecordView">
+      <point x="-33.875" y="-59.5" />
+      <point x="1387.739583333333" y="2068.0" />
+      <point x="1441.3628704054004" y="2068.0" />
+      <point x="27.0" y="147.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.EditRecordView" target="ca.klapstein.baudit.views.RecordView">
+      <point x="0.0" y="-25.5" />
+      <point x="981.447916666667" y="2048.0" />
+      <point x="1333.3628704054004" y="2048.0" />
+      <point x="-81.0" y="147.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ViewAccountDialog" target="ca.klapstein.baudit.presenters.ViewAccountPresenter">
+      <point x="79.33333333333337" y="-81.5" />
+      <point x="6231.90625" y="2719.0" />
+      <point x="6274.90625" y="2719.0" />
+      <point x="73.0" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.CreatePatientAccountView" target="ca.klapstein.baudit.views.CreateUserView">
       <point x="0.0" y="-14.5" />
-      <point x="0.0" y="14.5" />
+      <point x="5847.40625" y="2148.0" />
+      <point x="5113.6930838844155" y="2148.0" />
+      <point x="66.33333333333326" y="81.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.RecordActivity" target="ca.klapstein.baudit.R">
-      <point x="31.0" y="-14.5" />
-      <point x="1206.0357142857142" y="426.0" />
-      <point x="1911.9259399072125" y="426.0" />
-      <point x="-16.17647058823536" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.EditProblemActivity" target="ca.klapstein.baudit.presenters.EditProblemPresenter">
+      <point x="-41.80000000000018" y="-114.5" />
+      <point x="8704.563536520986" y="2709.0" />
+      <point x="8584.189583333333" y="2709.0" />
+      <point x="-71.25" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ContactInfoTest" target="ca.klapstein.baudit.Data.ContactInfo">
-      <point x="33.0" y="-14.5" />
-      <point x="185.5" y="297.0" />
-      <point x="205.08333333333303" y="297.0" />
-      <point x="-13.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.data.ProblemTreeSet">
+      <point x="-116.57142857142844" y="-125.5" />
+      <point x="8750.887275167304" y="3160.0" />
+      <point x="7971.647916666667" y="3160.0" />
+      <point x="7971.647916666667" y="779.0" />
+      <point x="7774.647916666667" y="779.0" />
+      <point x="11.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.Problem" target="ca.klapstein.baudit.Data.RecordTreeSet">
-      <point x="-23.0" y="-14.5" />
-      <point x="2655.5357142857138" y="208.0" />
-      <point x="2657.7023809523807" y="208.0" />
-      <point x="-41.66666666666666" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LoginCareProviderActivity" target="ca.klapstein.baudit.activities.LoginActivity">
+      <point x="24.875" y="-80.5" />
+      <point x="7339.302083333334" y="3451.0" />
+      <point x="7503.847916666666" y="3451.0" />
+      <point x="-74.80000000000018" y="70.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.User" target="ca.klapstein.baudit.Data.Password">
-      <point x="5.916666666666686" y="-14.5" />
-      <point x="364.01907716211485" y="307.0" />
-      <point x="367.58333333333314" y="307.0" />
-      <point x="24.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.EditRecordPresenter" target="ca.klapstein.baudit.presenters.RecordPresenter">
+      <point x="0.0" y="-37.0" />
+      <point x="1099.614583333333" y="2420.0" />
+      <point x="1313.2145833333334" y="2420.0" />
+      <point x="-108.39999999999964" y="59.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Adapters.PatientAdapter" target="ca.klapstein.baudit.Adapters.RecyclerTreeSetAdapter">
-      <point x="0.0" y="-14.5" />
-      <point x="566.102410495448" y="555.0" />
-      <point x="1451.0357142857142" y="555.0" />
-      <point x="-58.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.LocationPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="0.0" y="-37.0" />
+      <point x="3493.65625" y="2188.0" />
+      <point x="3695.322916666666" y="2188.0" />
+      <point x="-29.16666666666697" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.Patient" target="ca.klapstein.baudit.Data.User">
-      <point x="-28.33333333333333" y="-14.5" />
-      <point x="390.7690771621146" y="466.0" />
-      <point x="358.1024104954481" y="466.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.PatientListActivity" target="ca.klapstein.baudit.data.Patient">
+      <point x="0.0" y="-114.5" />
+      <point x="7139.864583333334" y="2410.0" />
+      <point x="7251.739583333333" y="2410.0" />
+      <point x="7251.739583333333" y="2158.0" />
+      <point x="7480.085101120758" y="2158.0" />
+      <point x="7480.085101120758" y="1003.0" />
+      <point x="7533.419274360606" y="1003.0" />
+      <point x="32.14285714285734" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ContactInfo" target="ca.klapstein.baudit.Data.Email">
-      <point x="-13.75" y="-14.5" />
-      <point x="205.08333333333303" y="178.0" />
-      <point x="117.16666666666652" y="178.0" />
-      <point x="31.666666666666515" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.views.PatientRowView">
+      <point x="-32.083333333333485" y="-71.0" />
+      <point x="0.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.EditRecordActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="1329.0357142857142" y="436.0" />
-      <point x="1915.1612340248598" y="436.0" />
-      <point x="-12.941176470588289" y="14.5" />
+    <edge source="ca.klapstein.baudit.views.PatientRowView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-25.5" />
+      <point x="6925.447916666667" y="1604.0" />
+      <point x="5234.997916666666" y="1604.0" />
+      <point x="16.425000000000182" y="14.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ProblemListActivity" target="ca.klapstein.baudit.R">
-      <point x="49.66666666666663" y="-14.5" />
-      <point x="1502.3977919292706" y="634.0" />
-      <point x="1762.102410495448" y="634.0" />
-      <point x="1762.102410495448" y="456.0" />
-      <point x="1921.631822260154" y="456.0" />
-      <point x="-6.470588235294144" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.ProblemPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-38.75" y="-59.5" />
+      <point x="8894.043434454092" y="2028.0" />
+      <point x="3845.322916666666" y="2028.0" />
+      <point x="120.83333333333303" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.LoginActivity" target="ca.klapstein.baudit.R">
-      <point x="29.0" y="-14.5" />
-      <point x="709.0357142857141" y="396.0" />
-      <point x="1902.2200575542715" y="396.0" />
-      <point x="-25.882352941176578" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.Patient" target="ca.klapstein.baudit.data.ProblemTreeSet">
+      <point x="0.0" y="-37.0" />
+      <point x="7501.2764172177485" y="839.0" />
+      <point x="7730.647916666667" y="839.0" />
+      <point x="-33.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ContactInfoTest" target="ca.klapstein.baudit.Data.Email">
-      <point x="-33.0" y="-14.5" />
-      <point x="119.5" y="198.0" />
-      <point x="91.83333333333348" y="198.0" />
-      <point x="6.333333333333485" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.LogoutPresenter" target="ca.klapstein.baudit.managers.BauditRemoteManager">
+      <point x="-70.0" y="-70.5" />
+      <point x="3188.037870405401" y="3672.0" />
+      <point x="11.0" y="3672.0" />
+      <point x="11.0" y="1174.0" />
+      <point x="2748.421491066438" y="1174.0" />
+      <point x="-71.25" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.RecordListActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="2859.047821472338" y="624.0" />
-      <point x="2998.352410495448" y="624.0" />
-      <point x="2998.352410495448" y="396.0" />
-      <point x="1953.9847634366242" y="396.0" />
-      <point x="25.88235294117635" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.SlideShowDialog" target="ca.klapstein.baudit.views.SlideShowView">
+      <point x="-78.66666666666652" y="-59.5" />
+      <point x="3066.03125" y="2430.0" />
+      <point x="2650.531249999999" y="2430.0" />
+      <point x="-48.5" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ProblemTreeSet" target="ca.klapstein.baudit.Data.Problem">
-      <point x="0.0" y="-14.5" />
-      <point x="543.5357142857142" y="307.0" />
-      <point x="2655.5357142857138" y="307.0" />
-      <point x="-23.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LoginPatientActivity" target="ca.klapstein.baudit.activities.ProblemListActivity">
+      <point x="74.625" y="-80.5" />
+      <point x="8002.4014172177485" y="3461.0" />
+      <point x="8867.458703738734" y="3461.0" />
+      <point x="0.0" y="125.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.LoginActivity" target="ca.klapstein.baudit.Data.User">
-      <point x="-29.0" y="-14.5" />
-      <point x="651.0357142857141" y="446.0" />
-      <point x="368.2452676383052" y="446.0" />
-      <point x="10.142857142857167" y="14.5" />
+    <edge source="ca.klapstein.baudit.views.ProblemView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-81.0" />
+      <point x="8978.939583333333" y="1564.0" />
+      <point x="5249.597916666666" y="1564.0" />
+      <point x="31.024999999999636" y="14.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.RecordListActivity" target="ca.klapstein.baudit.Data.RecordTreeSet">
-      <point x="47.0" y="-14.5" />
-      <point x="2906.047821472338" y="634.0" />
-      <point x="3009.352410495448" y="634.0" />
-      <point x="3009.352410495448" y="208.0" />
-      <point x="2741.0357142857138" y="208.0" />
-      <point x="41.66666666666674" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.EditAccountActivity" target="ca.klapstein.baudit.presenters.EditAccountPresenter">
+      <point x="-77.66666666666669" y="-103.5" />
+      <point x="6481.614583333334" y="2719.0" />
+      <point x="6438.40625" y="2719.0" />
+      <point x="-70.5" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ProblemActivity" target="ca.klapstein.baudit.Data.Problem">
-      <point x="32.75" y="-14.5" />
-      <point x="2665.102410495448" y="466.0" />
-      <point x="2701.5357142857138" y="466.0" />
-      <point x="23.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.views.ProblemListView">
+      <point x="167.08333333333303" y="-71.0" />
+      <point x="8374.751767787424" y="2218.0" />
+      <point x="9351.980934454092" y="2218.0" />
+      <point x="-58.0" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.EmailTest" target="ca.klapstein.baudit.Data.Email">
-      <point x="-24.5" y="-14.5" />
-      <point x="24.5" y="208.0" />
-      <point x="53.833333333333485" y="208.0" />
-      <point x="-31.666666666666515" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LoginPatientActivity" target="ca.klapstein.baudit.presenters.LoginPresenter">
+      <point x="24.875" y="-80.5" />
+      <point x="7952.6514172177485" y="3150.0" />
+      <point x="7560.076036520984" y="3150.0" />
+      <point x="93.33333333333303" y="70.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.PatientListActivity" target="ca.klapstein.baudit.Adapters.PatientAdapter">
-      <point x="47.0" y="-14.5" />
-      <point x="555.227410495448" y="634.0" />
-      <point x="566.102410495448" y="634.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.CareProvider" target="ca.klapstein.baudit.data.User">
+      <point x="67.75" y="-36.5" />
+      <point x="8189.522916666667" y="769.0" />
+      <point x="3643.0286339235813" y="769.0" />
+      <point x="75.85714285714266" y="59.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ViewAccountDialog" target="ca.klapstein.baudit.Data.User">
-      <point x="0.0" y="-14.5" />
-      <point x="141.1024104954481" y="456.0" />
-      <point x="337.8166962097339" y="456.0" />
-      <point x="-20.285714285714278" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.AddRecordPresenter" target="ca.klapstein.baudit.views.AddRecordView">
+      <point x="91.33333333333303" y="-37.0" />
+      <point x="1690.447916666666" y="2430.0" />
+      <point x="1667.781249999999" y="2430.0" />
+      <point x="-50.75" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.User" target="ca.klapstein.baudit.Data.ContactInfo">
-      <point x="-29.58333333333337" y="-14.5" />
-      <point x="328.51907716211474" y="297.0" />
-      <point x="232.58333333333303" y="297.0" />
-      <point x="13.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.Patient" target="ca.klapstein.baudit.data.User">
+      <point x="-75.0" y="-37.0" />
+      <point x="7426.2764172177485" y="799.0" />
+      <point x="3592.457205352153" y="799.0" />
+      <point x="25.28571428571422" y="59.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ProblemActivity" target="ca.klapstein.baudit.R">
-      <point x="-32.75" y="-14.5" />
-      <point x="2599.602410495448" y="426.0" />
-      <point x="1944.2788810836832" y="426.0" />
-      <point x="16.17647058823536" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LoginCareProviderActivity" target="ca.klapstein.baudit.activities.PatientListActivity">
+      <point x="-74.625" y="-80.5" />
+      <point x="7239.802083333334" y="3461.0" />
+      <point x="7139.864583333334" y="3461.0" />
+      <point x="0.0" y="114.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ProblemListActivity" target="ca.klapstein.baudit.Data.ProblemTreeSet">
-      <point x="-49.66666666666663" y="-14.5" />
-      <point x="1403.0644585959374" y="634.0" />
-      <point x="640.102410495448" y="634.0" />
-      <point x="640.102410495448" y="535.0" />
-      <point x="611.5357142857141" y="535.0" />
-      <point x="611.5357142857141" y="466.0" />
-      <point x="587.8690476190476" y="466.0" />
-      <point x="44.33333333333337" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.data.ProblemTreeSet">
+      <point x="33.41666666666697" y="-71.0" />
+      <point x="8241.085101120758" y="2218.0" />
+      <point x="8267.772916666667" y="2218.0" />
+      <point x="8267.772916666667" y="759.0" />
+      <point x="7796.647916666667" y="759.0" />
+      <point x="33.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.PhotoActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="2776.852410495448" y="416.0" />
-      <point x="1947.5141752013305" y="416.0" />
-      <point x="19.411764705882433" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LocationActivity" target="ca.klapstein.baudit.presenters.LocationPresenter">
+      <point x="71.66666666666697" y="-70.0" />
+      <point x="3529.489583333333" y="2430.0" />
+      <point x="3554.90625" y="2430.0" />
+      <point x="61.25" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.EditProblemActivity" target="ca.klapstein.baudit.R">
-      <point x="-37.75" y="-14.5" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.CreateAccountPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-37.75" y="-59.5" />
+      <point x="4995.322916666666" y="2178.0" />
+      <point x="3761.989583333333" y="2178.0" />
+      <point x="37.5" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.User" target="ca.klapstein.baudit.Data.Username">
-      <point x="17.75" y="-14.5" />
-      <point x="375.8524104954481" y="287.0" />
-      <point x="605.0833333333331" y="287.0" />
-      <point x="-25.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.LocationActivity" target="ca.klapstein.baudit.views.LocationView">
+      <point x="-71.66666666666697" y="-70.0" />
+      <point x="3386.156249999999" y="2430.0" />
+      <point x="3326.53125" y="2430.0" />
+      <point x="3326.53125" y="2058.0" />
+      <point x="2863.281249999999" y="2058.0" />
+      <point x="-47.25" y="36.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.MainActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="1995.602410495448" y="466.0" />
-      <point x="1931.337704613095" y="466.0" />
-      <point x="3.235294117647072" y="14.5" />
+    <edge source="ca.klapstein.baudit.views.PhotoView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-37.0" />
+      <point x="1880.218749999999" y="1594.0" />
+      <point x="5194.847916666666" y="1594.0" />
+      <point x="-23.725000000000364" y="14.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.LogoutDialog" target="ca.klapstein.baudit.Data.User">
-      <point x="0.0" y="-14.5" />
-      <point x="296.6024104954481" y="466.0" />
-      <point x="347.959553352591" y="466.0" />
-      <point x="-10.14285714285711" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.EditProblemActivity" target="ca.klapstein.baudit.views.EditProblemView">
+      <point x="-83.60000000000036" y="-114.5" />
+      <point x="8662.763536520984" y="2719.0" />
+      <point x="8502.439583333333" y="2719.0" />
+      <point x="8502.439583333333" y="2430.0" />
+      <point x="8480.418434454092" y="2430.0" />
+      <point x="-52.25" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.BodyPhoto" target="ca.klapstein.baudit.Data.Photo">
-      <point x="0.0" y="-14.5" />
-      <point x="53.0" y="782.0" />
-      <point x="98.75" y="782.0" />
-      <point x="-19.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.views.CreateCareProviderAccountView" target="ca.klapstein.baudit.views.CreateUserView">
+      <point x="0.0" y="-25.5" />
+      <point x="4575.65625" y="2218.0" />
+      <point x="4981.026417217749" y="2218.0" />
+      <point x="-66.33333333333326" y="81.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.Patient" target="ca.klapstein.baudit.Data.ProblemTreeSet">
-      <point x="28.33333333333333" y="-14.5" />
-      <point x="447.43574382878137" y="466.0" />
-      <point x="543.5357142857142" y="466.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.CreateCareProviderAccountActivity" target="ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter">
+      <point x="39.375" y="-136.5" />
+      <point x="4889.292703187652" y="2709.0" />
+      <point x="5012.072916666666" y="2709.0" />
+      <point x="111.25" y="48.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.RecordTreeSet" target="ca.klapstein.baudit.Data.Record">
-      <point x="0.0" y="-14.5" />
-      <point x="2699.3690476190473" y="54.0" />
-      <point x="1930.977410495448" y="54.0" />
-      <point x="21.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.EditAccountPresenter" target="ca.klapstein.baudit.views.EditAccountView">
+      <point x="94.0" y="-37.0" />
+      <point x="6602.90625" y="2430.0" />
+      <point x="6589.78125" y="2430.0" />
+      <point x="-51.75" y="70.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.EditProblemActivity" target="ca.klapstein.baudit.Activities.ProblemActivity">
-      <point x="37.75" y="-14.5" />
-      <point x="2003.602410495448" y="545.0" />
-      <point x="2599.602410495448" y="545.0" />
-      <point x="-32.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.BodyLocationDialog" target="ca.klapstein.baudit.presenters.BodyLocationPresenter">
+      <point x="80.66666666666652" y="-70.0" />
+      <point x="2439.697916666666" y="2430.0" />
+      <point x="2565.031249999999" y="2430.0" />
+      <point x="75.0" y="48.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.RecordActivity" target="ca.klapstein.baudit.Data.Record">
-      <point x="-31.0" y="-14.5" />
-      <point x="1144.0357142857142" y="386.0" />
-      <point x="1107.3687850140047" y="386.0" />
-      <point x="1107.3687850140047" y="54.0" />
-      <point x="1888.477410495448" y="54.0" />
-      <point x="-21.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-100.25" y="-71.0" />
+      <point x="8107.418434454092" y="2058.0" />
+      <point x="3828.65625" y="2058.0" />
+      <point x="104.16666666666697" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Adapters.RecordAdapter" target="ca.klapstein.baudit.Adapters.RecyclerTreeSetAdapter">
-      <point x="0.0" y="-14.5" />
-      <point x="1688.102410495448" y="555.0" />
-      <point x="1567.0357142857142" y="555.0" />
-      <point x="58.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.PatientTreeSet">
+      <point x="136.36363636363603" y="-170.0" />
+      <point x="3819.186553030303" y="1164.0" />
+      <point x="7548.585101120758" y="1164.0" />
+      <point x="-50.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.EditAccountActivity" target="ca.klapstein.baudit.R">
-      <point x="37.5" y="-14.5" />
-      <point x="1055.5357142857142" y="416.0" />
-      <point x="1908.6906457895657" y="416.0" />
-      <point x="-19.411764705882433" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.RecordTreeSet" target="ca.klapstein.baudit.data.Record">
+      <point x="0.0" y="-25.5" />
+      <point x="3086.4214910664386" y="81.0" />
+      <point x="936.052083333333" y="81.0" />
+      <point x="31.25" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.AddRecordActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="1845.102410495448" y="466.0" />
-      <point x="1924.8671163778008" y="466.0" />
-      <point x="-3.235294117647072" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.CreateAccountPresenter" target="ca.klapstein.baudit.data.User">
+      <point x="37.75" y="-59.5" />
+      <point x="5070.822916666666" y="2168.0" />
+      <point x="4877.497601120758" y="2168.0" />
+      <point x="4877.497601120758" y="819.0" />
+      <point x="3541.8857767807244" y="819.0" />
+      <point x="-25.28571428571422" y="59.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.CreateCareProviderAccountActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="2208.352410495448" y="446.0" />
-      <point x="1937.808292848389" y="446.0" />
-      <point x="9.705882352941217" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.RecordPresenter" target="ca.klapstein.baudit.data.Record">
+      <point x="-101.625" y="-59.5" />
+      <point x="1319.989583333333" y="2038.0" />
+      <point x="1273.0635365209837" y="2038.0" />
+      <point x="1273.0635365209837" y="91.0" />
+      <point x="915.2187499999991" y="91.0" />
+      <point x="10.41666666666606" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.LocationActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="2921.852410495448" y="406.0" />
-      <point x="1950.7494693189774" y="406.0" />
-      <point x="22.647058823529505" y="14.5" />
+    <edge source="ca.klapstein.baudit.views.RecordListView" target="ca.klapstein.baudit.data.RecordTreeSet">
+      <point x="-27.125" y="-48.0" />
+      <point x="436.90624999999955" y="1144.0" />
+      <point x="377.5805838844162" y="1144.0" />
+      <point x="377.5805838844162" y="359.0" />
+      <point x="3055.1714910664386" y="359.0" />
+      <point x="-31.25" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.RecordPhoto" target="ca.klapstein.baudit.Data.Photo">
-      <point x="0.0" y="-14.5" />
-      <point x="184.0" y="782.0" />
-      <point x="138.25" y="782.0" />
-      <point x="19.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.LogoutPresenter" target="ca.klapstein.baudit.views.LogoutView">
+      <point x="116.66666666666663" y="-70.5" />
+      <point x="3374.7045370720675" y="3682.0" />
+      <point x="5224.822916666666" y="3682.0" />
+      <point x="-48.75" y="36.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.AccountCreateActivity" target="ca.klapstein.baudit.R">
-      <point x="41.25" y="-14.5" />
-      <point x="881.7857142857141" y="406.0" />
-      <point x="1905.4553516719184" y="406.0" />
-      <point x="-22.647058823529505" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.BodyLocationPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="37.5" y="-48.5" />
+      <point x="2527.531249999999" y="2138.0" />
+      <point x="3653.65625" y="2138.0" />
+      <point x="-70.83333333333303" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.PatientListActivity" target="ca.klapstein.baudit.Data.PatientTreeSet">
-      <point x="-47.0" y="-14.5" />
-      <point x="461.227410495448" y="634.0" />
-      <point x="450.352410495448" y="634.0" />
-      <point x="31.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.managers.BauditDataBaseManager">
+      <point x="27.272727272727025" y="-170.0" />
+      <point x="3710.095643939394" y="1124.0" />
+      <point x="3820.886265702599" y="1124.0" />
+      <point x="-45.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.CareProvider" target="ca.klapstein.baudit.Data.PatientTreeSet">
-      <point x="29.0" y="-14.5" />
-      <point x="173.6120776435564" y="634.0" />
-      <point x="387.852410495448" y="634.0" />
-      <point x="-31.25" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.User" target="ca.klapstein.baudit.data.Password">
+      <point x="-73.75" y="-59.0" />
+      <point x="3493.4214910664386" y="591.0" />
+      <point x="3217.4214910664386" y="591.0" />
+      <point x="-47.5" y="71.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.AddProblemActivity" target="ca.klapstein.baudit.R">
-      <point x="-38.25" y="-14.5" />
-      <point x="2250.1061252626037" y="535.0" />
-      <point x="2081.352410495448" y="535.0" />
-      <point x="2081.352410495448" y="456.0" />
-      <point x="1934.5729987307423" y="456.0" />
-      <point x="6.470588235294144" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.views.ProblemListView">
+      <point x="77.71428571428532" y="-125.5" />
+      <point x="8945.172989453018" y="3150.0" />
+      <point x="9467.980934454092" y="3150.0" />
+      <point x="58.0" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.CreatePatientAccountActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="2445.852410495448" y="436.0" />
-      <point x="1941.0435869660364" y="436.0" />
-      <point x="12.941176470588289" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.views.PatientListView">
+      <point x="160.41666666666652" y="-71.0" />
+      <point x="7117.947916666666" y="2168.0" />
+      <point x="7544.585101120758" y="2168.0" />
+      <point x="-54.0" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.AddProblemActivity" target="ca.klapstein.baudit.Activities.ProblemActivity">
-      <point x="38.25" y="-14.5" />
-      <point x="2326.6061252626037" y="555.0" />
-      <point x="2665.102410495448" y="555.0" />
-      <point x="32.75" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.PhotoActivity" target="ca.klapstein.baudit.views.PhotoView">
+      <point x="-67.0" y="-70.5" />
+      <point x="1857.656249999999" y="2430.0" />
+      <point x="1830.531249999999" y="2430.0" />
+      <point x="1830.531249999999" y="2068.0" />
+      <point x="1836.468749999999" y="2068.0" />
+      <point x="-43.75" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.AccountCreateActivity" target="ca.klapstein.baudit.Data.User">
-      <point x="-41.25" y="-14.5" />
-      <point x="799.2857142857141" y="386.0" />
-      <point x="378.38812478116233" y="386.0" />
-      <point x="20.285714285714278" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.BodyLocationPresenter" target="ca.klapstein.baudit.views.BodyLocationView">
+      <point x="-112.5" y="-48.5" />
+      <point x="2377.531249999999" y="2068.0" />
+      <point x="2261.031249999999" y="2068.0" />
+      <point x="54.0" y="36.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.ProblemListActivity" target="ca.klapstein.baudit.Adapters.ProblemAdapter">
-      <point x="0.0" y="-14.5" />
-      <point x="1452.731125262604" y="624.0" />
-      <point x="1537.602410495448" y="624.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.PatientListActivity" target="ca.klapstein.baudit.presenters.PatientListPresenter">
+      <point x="-105.59999999999991" y="-114.5" />
+      <point x="7034.264583333334" y="2430.0" />
+      <point x="6861.28125" y="2430.0" />
+      <point x="-96.25" y="71.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.PatientListActivity" target="ca.klapstein.baudit.R">
-      <point x="0.0" y="-14.5" />
-      <point x="508.227410495448" y="634.0" />
-      <point x="492.102410495448" y="634.0" />
-      <point x="492.102410495448" y="545.0" />
-      <point x="1411.5357142857142" y="545.0" />
-      <point x="1411.5357142857142" y="446.0" />
-      <point x="1918.3965281425067" y="446.0" />
-      <point x="-9.705882352941217" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.DeleteRecordDialog" target="ca.klapstein.baudit.presenters.DeleteRecordPresenter">
+      <point x="0.0" y="-70.5" />
+      <point x="3984.90625" y="2420.0" />
+      <point x="3833.65625" y="2420.0" />
+      <point x="65.5" y="48.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.CareProvider" target="ca.klapstein.baudit.Data.User">
-      <point x="-29.0" y="-14.5" />
-      <point x="115.6120776435564" y="634.0" />
-      <point x="55.10241049544811" y="634.0" />
-      <point x="55.10241049544811" y="446.0" />
-      <point x="327.67383906687667" y="446.0" />
-      <point x="-30.428571428571445" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.AddRecordActivity" target="ca.klapstein.baudit.presenters.AddRecordPresenter">
+      <point x="0.0" y="-180.5" />
+      <point x="1559.302083333333" y="2719.0" />
+      <point x="1530.614583333333" y="2719.0" />
+      <point x="-68.5" y="37.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.EditAccountActivity" target="ca.klapstein.baudit.Data.User">
-      <point x="-37.5" y="-14.5" />
-      <point x="980.5357142857141" y="376.0" />
-      <point x="388.53098192401956" y="376.0" />
-      <point x="30.428571428571445" y="14.5" />
+    <edge source="ca.klapstein.baudit.data.User" target="ca.klapstein.baudit.data.Username">
+      <point x="-14.75" y="-59.0" />
+      <point x="3552.4214910664386" y="571.0" />
+      <point x="3420.9214910664386" y="571.0" />
+      <point x="-41.0" y="48.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Activities.RecordListActivity" target="ca.klapstein.baudit.Adapters.RecordAdapter">
-      <point x="-47.0" y="-14.5" />
-      <point x="2812.047821472338" y="624.0" />
-      <point x="1688.102410495448" y="624.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.RecordActivity" target="ca.klapstein.baudit.views.RecordView">
+      <point x="-46.75" y="-48.0" />
+      <point x="1301.864583333333" y="2410.0" />
+      <point x="1275.614583333333" y="2410.0" />
+      <point x="1275.614583333333" y="2058.0" />
+      <point x="1387.3628704054004" y="2058.0" />
+      <point x="-27.0" y="147.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ContactInfo" target="ca.klapstein.baudit.Data.PhoneNumber">
-      <point x="41.25" y="-14.5" />
-      <point x="260.08333333333303" y="158.0" />
-      <point x="227.70833333333303" y="158.0" />
-      <point x="-10.5" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.EditAccountActivity" target="ca.klapstein.baudit.views.EditAccountView">
+      <point x="77.66666666666674" y="-103.5" />
+      <point x="6636.947916666667" y="2719.0" />
+      <point x="6670.28125" y="2719.0" />
+      <point x="6670.28125" y="2430.0" />
+      <point x="6693.28125" y="2430.0" />
+      <point x="51.75" y="70.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.PhoneNumberTest" target="ca.klapstein.baudit.Data.PhoneNumber">
-      <point x="37.0" y="-14.5" />
-      <point x="522.8333333333331" y="128.0" />
-      <point x="290.70833333333303" y="128.0" />
-      <point x="52.5" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.RecordActivity" target="ca.klapstein.baudit.presenters.RecordPresenter">
+      <point x="46.75" y="-48.0" />
+      <point x="1395.364583333333" y="2430.0" />
+      <point x="1421.614583333333" y="2430.0" />
+      <point x="0.0" y="59.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Adapters.ProblemAdapter" target="ca.klapstein.baudit.Adapters.RecyclerTreeSetAdapter">
-      <point x="0.0" y="-14.5" />
-      <point x="1537.602410495448" y="555.0" />
-      <point x="1509.0357142857142" y="555.0" />
-      <point x="0.0" y="14.5" />
+    <edge source="ca.klapstein.baudit.presenters.EditProblemPresenter" target="ca.klapstein.baudit.presenters.ProblemPresenter">
+      <point x="0.0" y="-37.0" />
+      <point x="8655.439583333333" y="2410.0" />
+      <point x="8808.793434454092" y="2410.0" />
+      <point x="-124.0" y="59.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.Data.ContactInfoTest" target="ca.klapstein.baudit.Data.PhoneNumber">
-      <point x="-11.0" y="-14.5" />
-      <point x="141.5" y="307.0" />
-      <point x="130.5" y="307.0" />
-      <point x="130.5" y="208.0" />
-      <point x="185.70833333333303" y="208.0" />
-      <point x="-52.5" y="14.5" />
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.data.Problem">
+      <point x="116.57142857142844" y="-125.5" />
+      <point x="8984.030132310163" y="3160.0" />
+      <point x="9536.480934454092" y="3160.0" />
+      <point x="9536.480934454092" y="571.0" />
+      <point x="8636.522916666667" y="571.0" />
+      <point x="86.25000000000045" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.LoginView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-47.5" />
+      <point x="7628.909369854318" y="2078.0" />
+      <point x="7367.2764172177485" y="2078.0" />
+      <point x="7367.2764172177485" y="1594.0" />
+      <point x="5238.647916666666" y="1594.0" />
+      <point x="20.074999999999818" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.DeleteRecordPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-87.33333333333303" y="-48.5" />
+      <point x="3680.822916666667" y="2218.0" />
+      <point x="3720.322916666666" y="2218.0" />
+      <point x="-4.16666666666697" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.presenters.RecordListPresenter">
+      <point x="16.5625" y="-125.5" />
+      <point x="745.1253704054002" y="3120.0" />
+      <point x="672.947916666667" y="3120.0" />
+      <point x="672.947916666667" y="2430.0" />
+      <point x="763.947916666667" y="2430.0" />
+      <point x="96.5" y="71.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.SlideShowPresenter" target="ca.klapstein.baudit.views.SlideShowView">
+      <point x="-88.0" y="-37.0" />
+      <point x="3096.031249999999" y="2068.0" />
+      <point x="2747.531249999999" y="2068.0" />
+      <point x="48.5" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PhotoPresenter" target="ca.klapstein.baudit.views.PhotoView">
+      <point x="-29.625" y="-59.5" />
+      <point x="1929.906249999999" y="2068.0" />
+      <point x="1923.968749999999" y="2068.0" />
+      <point x="43.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordListPresenter" target="ca.klapstein.baudit.views.RecordListView">
+      <point x="-160.83333333333303" y="-71.0" />
+      <point x="506.61458333333394" y="2218.0" />
+      <point x="518.28125" y="2218.0" />
+      <point x="54.25" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.PatientListView" target="ca.klapstein.baudit.data.Patient">
+      <point x="72.0" y="-48.0" />
+      <point x="7670.585101120758" y="1654.0" />
+      <point x="7688.835101120758" y="1654.0" />
+      <point x="7688.835101120758" y="993.0" />
+      <point x="7597.704988646321" y="993.0" />
+      <point x="96.42857142857156" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.Problem" target="ca.klapstein.baudit.data.RecordTreeSet">
+      <point x="-51.75" y="-37.0" />
+      <point x="8498.522916666667" y="349.0" />
+      <point x="3117.6714910664386" y="349.0" />
+      <point x="31.25" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.DeleteProblemDialog" target="ca.klapstein.baudit.presenters.DeleteProblemPresenter">
+      <point x="0.0" y="-70.5" />
+      <point x="4362.15625" y="2400.0" />
+      <point x="4120.90625" y="2400.0" />
+      <point x="67.25" y="48.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.RecordListView" target="ca.klapstein.baudit.views.View">
+      <point x="81.375" y="-48.0" />
+      <point x="545.40625" y="1564.0" />
+      <point x="5183.897916666666" y="1564.0" />
+      <point x="-34.67500000000018" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.EditAccountView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-70.0" />
+      <point x="6641.53125" y="1614.0" />
+      <point x="5231.347916666666" y="1614.0" />
+      <point x="12.774999999999636" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.DeleteDialog" target="ca.klapstein.baudit.views.DeleteView">
+      <point x="0.0" y="-48.5" />
+      <point x="4326.15625" y="2218.0" />
+      <point x="4246.164267787425" y="2218.0" />
+      <point x="59.66666666666697" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LoginPresenter" target="ca.klapstein.baudit.views.LoginView">
+      <point x="116.66666666666697" y="-70.5" />
+      <point x="7583.409369854318" y="2719.0" />
+      <point x="7579.159369854318" y="2719.0" />
+      <point x="-49.75" y="47.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.PhotoActivity" target="ca.klapstein.baudit.presenters.PhotoPresenter">
+      <point x="0.0" y="-70.5" />
+      <point x="1924.656249999999" y="2430.0" />
+      <point x="1900.281249999999" y="2430.0" />
+      <point x="-59.25" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ProblemPresenter" target="ca.klapstein.baudit.views.ProblemView">
+      <point x="116.25" y="-59.5" />
+      <point x="9049.043434454092" y="2008.0" />
+      <point x="8953.064583333333" y="2008.0" />
+      <point x="-25.875" y="81.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.Presenter" target="ca.klapstein.baudit.views.View">
+      <point x="83.33333333333303" y="-48.0" />
+      <point x="3807.822916666666" y="1634.0" />
+      <point x="5209.447916666666" y="1634.0" />
+      <point x="-9.125" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.EditRecordPresenter" target="ca.klapstein.baudit.views.EditRecordView">
+      <point x="-90.33333333333303" y="-37.0" />
+      <point x="1009.28125" y="2430.0" />
+      <point x="1031.947916666667" y="2430.0" />
+      <point x="50.5" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.CreatePatientAccountActivity" target="ca.klapstein.baudit.activities.AccountCreateActivity">
+      <point x="-106.5" y="-125.5" />
+      <point x="5548.584369854318" y="2719.0" />
+      <point x="5424.322916666666" y="2719.0" />
+      <point x="46.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.EditProblemPresenter" target="ca.klapstein.baudit.views.EditProblemView">
+      <point x="-95.0" y="-37.0" />
+      <point x="8560.439583333333" y="2430.0" />
+      <point x="8584.918434454092" y="2430.0" />
+      <point x="52.25" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.managers.BauditRemoteManager">
+      <point x="-109.09090909090901" y="-170.0" />
+      <point x="3573.732007575758" y="1154.0" />
+      <point x="2833.921491066438" y="1154.0" />
+      <point x="14.25" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LogoutPresenter" target="ca.klapstein.baudit.data.User">
+      <point x="-116.66666666666674" y="-70.5" />
+      <point x="3141.371203738734" y="3682.0" />
+      <point x="0.0" y="3682.0" />
+      <point x="0.0" y="1164.0" />
+      <point x="2398.076704545454" y="1164.0" />
+      <point x="2398.076704545454" y="849.0" />
+      <point x="3491.314348209296" y="849.0" />
+      <point x="-75.85714285714266" y="59.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LoginActivity" target="ca.klapstein.baudit.presenters.LoginPresenter">
+      <point x="-46.75" y="-70.0" />
+      <point x="7531.897916666667" y="3160.0" />
+      <point x="7466.742703187651" y="3160.0" />
+      <point x="0.0" y="70.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LogoutDialog" target="ca.klapstein.baudit.activities.SplashActivity">
+      <point x="59.0" y="-70.0" />
+      <point x="6465.642037072067" y="3682.0" />
+      <point x="7578.647916666667" y="3682.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LoginPresenter" target="ca.klapstein.baudit.data.User">
+      <point x="70.0" y="-70.5" />
+      <point x="7536.742703187651" y="2719.0" />
+      <point x="7518.909369854318" y="2719.0" />
+      <point x="7518.909369854318" y="2218.0" />
+      <point x="7938.085101120758" y="2218.0" />
+      <point x="7938.085101120758" y="789.0" />
+      <point x="3617.742919637867" y="789.0" />
+      <point x="50.57142857142844" y="59.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.ContactInfo" target="ca.klapstein.baudit.data.PhoneNumber">
+      <point x="-26.0" y="-70.5" />
+      <point x="3839.22821969697" y="369.0" />
+      <point x="3806.35321969697" y="369.0" />
+      <point x="73.25" y="93.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.BodyPhoto" target="ca.klapstein.baudit.data.Photo">
+      <point x="0.0" y="-25.5" />
+      <point x="117.53125" y="2218.0" />
+      <point x="225.53125" y="2218.0" />
+      <point x="-44.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.PatientListView" target="ca.klapstein.baudit.data.PatientTreeSet">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.PatientListActivity" target="ca.klapstein.baudit.views.PatientListView">
+      <point x="52.80000000000018" y="-114.5" />
+      <point x="7192.664583333333" y="2420.0" />
+      <point x="7319.209369854318" y="2420.0" />
+      <point x="7319.209369854318" y="2178.0" />
+      <point x="7652.585101120758" y="2178.0" />
+      <point x="54.0" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.AddProblemActivity" target="ca.klapstein.baudit.presenters.AddProblemPresenter">
+      <point x="0.0" y="-114.5" />
+      <point x="9148.776036520985" y="2699.0" />
+      <point x="9101.002083333333" y="2699.0" />
+      <point x="-72.0" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.ProblemRowView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-25.5" />
+      <point x="7838.585101120758" y="1574.0" />
+      <point x="5245.947916666666" y="1574.0" />
+      <point x="27.375" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.RecordView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-147.0" />
+      <point x="1414.3628704054004" y="1584.0" />
+      <point x="5191.197916666666" y="1584.0" />
+      <point x="-27.375" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.ProblemTreeSet" target="ca.klapstein.baudit.data.Problem">
+      <point x="0.0" y="-25.5" />
+      <point x="7763.647916666667" y="581.0" />
+      <point x="8498.522916666667" y="581.0" />
+      <point x="-51.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.AccountPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-90.0" y="-59.5" />
+      <point x="6267.072916666666" y="2138.0" />
+      <point x="3770.322916666666" y="2138.0" />
+      <point x="45.83333333333303" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ProblemActivity" target="ca.klapstein.baudit.views.ProblemView">
+      <point x="46.75" y="-48.0" />
+      <point x="8962.252083333333" y="2430.0" />
+      <point x="9104.855934454092" y="2430.0" />
+      <point x="9104.855934454092" y="1998.0" />
+      <point x="9004.814583333333" y="1998.0" />
+      <point x="25.875" y="81.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.activities.EditRecordActivity">
+      <point x="49.6875" y="-125.5" />
+      <point x="778.2503704054002" y="3140.0" />
+      <point x="1139.427083333333" y="3140.0" />
+      <point x="0.0" y="180.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter" target="ca.klapstein.baudit.presenters.CreateAccountPresenter">
+      <point x="0.0" y="-48.5" />
+      <point x="4900.822916666666" y="2430.0" />
+      <point x="4919.822916666666" y="2430.0" />
+      <point x="-113.25" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.AddProblemPresenter" target="ca.klapstein.baudit.views.AddProblemView">
+      <point x="96.0" y="-37.0" />
+      <point x="9269.002083333333" y="2430.0" />
+      <point x="9247.293434454092" y="2430.0" />
+      <point x="-52.75" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.views.RecordListView">
+      <point x="-49.6875" y="-125.5" />
+      <point x="678.8753704054002" y="3140.0" />
+      <point x="409.78125" y="3140.0" />
+      <point x="-54.25" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.ProblemTreeSet">
+      <point x="81.81818181818198" y="-170.0" />
+      <point x="3764.641098484849" y="1144.0" />
+      <point x="3966.386265702599" y="1144.0" />
+      <point x="3966.386265702599" y="829.0" />
+      <point x="7708.647916666667" y="829.0" />
+      <point x="-55.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.DeleteProblemPresenter" target="ca.klapstein.baudit.views.DeleteView">
+      <point x="89.66666666666697" y="-48.5" />
+      <point x="4143.322916666667" y="2218.0" />
+      <point x="4186.497601120758" y="2218.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.data.Record">
+      <point x="-115.9375" y="-125.5" />
+      <point x="612.6253704054002" y="3160.0" />
+      <point x="30.03125" y="3160.0" />
+      <point x="30.03125" y="71.0" />
+      <point x="852.7187499999991" y="71.0" />
+      <point x="-52.08333333333394" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.AccountPresenter" target="ca.klapstein.baudit.data.User">
+      <point x="90.0" y="-59.5" />
+      <point x="6447.072916666666" y="2128.0" />
+      <point x="7378.2764172177485" y="2128.0" />
+      <point x="7378.2764172177485" y="809.0" />
+      <point x="3567.1714910664386" y="809.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.ProblemListView" target="ca.klapstein.baudit.data.ProblemTreeSet">
+      <point x="0.0" y="-48.0" />
+      <point x="9409.980934454092" y="1654.0" />
+      <point x="9422.455203187652" y="1654.0" />
+      <point x="9422.455203187652" y="749.0" />
+      <point x="7818.647916666667" y="749.0" />
+      <point x="55.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.AddRecordActivity" target="ca.klapstein.baudit.views.AddRecordView">
+      <point x="86.39999999999964" y="-180.5" />
+      <point x="1645.7020833333327" y="2719.0" />
+      <point x="1746.614583333333" y="2719.0" />
+      <point x="1746.614583333333" y="2430.0" />
+      <point x="1769.281249999999" y="2430.0" />
+      <point x="50.75" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.EditRecordActivity" target="ca.klapstein.baudit.views.EditRecordView">
+      <point x="-86.39999999999964" y="-180.5" />
+      <point x="1053.0270833333334" y="2719.0" />
+      <point x="953.614583333333" y="2719.0" />
+      <point x="953.614583333333" y="2430.0" />
+      <point x="930.947916666667" y="2430.0" />
+      <point x="-50.5" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordListPresenter" target="ca.klapstein.baudit.data.RecordTreeSet">
+      <point x="-32.16666666666606" y="-71.0" />
+      <point x="635.2812500000009" y="2218.0" />
+      <point x="594.03125" y="2218.0" />
+      <point x="594.03125" y="1144.0" />
+      <point x="497.0760365209835" y="1144.0" />
+      <point x="497.0760365209835" y="369.0" />
+      <point x="3076.0048243997726" y="369.0" />
+      <point x="-10.41666666666606" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.RecordListView" target="ca.klapstein.baudit.data.Record">
+      <point x="-81.375" y="-48.0" />
+      <point x="382.65625" y="1654.0" />
+      <point x="425.90624999999955" y="1654.0" />
+      <point x="425.90624999999955" y="1154.0" />
+      <point x="366.5805838844162" y="1154.0" />
+      <point x="366.5805838844162" y="81.0" />
+      <point x="873.552083333333" y="81.0" />
+      <point x="-31.25" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.EditAccountPresenter" target="ca.klapstein.baudit.presenters.AccountPresenter">
+      <point x="0.0" y="-37.0" />
+      <point x="6508.90625" y="2430.0" />
+      <point x="6447.072916666666" y="2430.0" />
+      <point x="90.0" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ProblemPresenter" target="ca.klapstein.baudit.data.Problem">
+      <point x="38.75" y="-59.5" />
+      <point x="8971.543434454092" y="2018.0" />
+      <point x="8864.939583333333" y="2018.0" />
+      <point x="8864.939583333333" y="591.0" />
+      <point x="8567.522916666667" y="591.0" />
+      <point x="17.25" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.Patient">
+      <point x="109.09090909090901" y="-170.0" />
+      <point x="3791.913825757576" y="1154.0" />
+      <point x="3977.386265702599" y="1154.0" />
+      <point x="3977.386265702599" y="983.0" />
+      <point x="7469.133560074892" y="983.0" />
+      <point x="-32.14285714285734" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PhotoPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="29.625" y="-59.5" />
+      <point x="1989.156249999999" y="2118.0" />
+      <point x="3636.989583333333" y="2118.0" />
+      <point x="-87.5" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.DeleteRecordDialog" target="ca.klapstein.baudit.activities.DeleteDialog">
+      <point x="80.66666666666697" y="-70.5" />
+      <point x="4065.572916666667" y="2420.0" />
+      <point x="4267.15625" y="2420.0" />
+      <point x="-59.0" y="48.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.SplashActivity" target="ca.klapstein.baudit.activities.LoginActivity">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.ViewAccountView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-48.0" />
+      <point x="6067.40625" y="1634.0" />
+      <point x="5224.047916666666" y="1634.0" />
+      <point x="5.475000000000364" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.data.Patient">
+      <point x="32.083333333333485" y="-71.0" />
+      <point x="6989.614583333334" y="2138.0" />
+      <point x="7458.085101120758" y="2138.0" />
+      <point x="7458.085101120758" y="993.0" />
+      <point x="7501.2764172177485" y="993.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.BodyLocationDialog" target="ca.klapstein.baudit.views.BodyLocationView">
+      <point x="-80.66666666666652" y="-70.0" />
+      <point x="2278.364583333333" y="2430.0" />
+      <point x="2153.031249999999" y="2430.0" />
+      <point x="-54.0" y="36.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordListPresenter" target="ca.klapstein.baudit.views.RecordRowView">
+      <point x="32.16666666666606" y="-71.0" />
+      <point x="699.614583333333" y="2218.0" />
+      <point x="687.53125" y="2218.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.DeleteProblemDialog" target="ca.klapstein.baudit.activities.DeleteDialog">
+      <point x="83.0" y="-70.5" />
+      <point x="4445.15625" y="2420.0" />
+      <point x="4385.15625" y="2420.0" />
+      <point x="59.0" y="48.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.presenters.ProblemListPresenter">
+      <point x="-38.85714285714312" y="-125.5" />
+      <point x="8828.60156088159" y="3140.0" />
+      <point x="8283.413536520984" y="3140.0" />
+      <point x="8283.413536520984" y="2430.0" />
+      <point x="8307.918434454092" y="2430.0" />
+      <point x="100.25" y="71.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.User" target="ca.klapstein.baudit.data.ContactInfo">
+      <point x="44.25" y="-59.0" />
+      <point x="3611.4214910664386" y="551.0" />
+      <point x="3813.22821969697" y="551.0" />
+      <point x="-52.0" y="70.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.PatientListActivity" target="ca.klapstein.baudit.data.PatientTreeSet">
+      <point x="105.59999999999991" y="-114.5" />
+      <point x="7245.464583333333" y="2430.0" />
+      <point x="7356.959369854318" y="2430.0" />
+      <point x="7356.959369854318" y="2188.0" />
+      <point x="7717.085101120758" y="2188.0" />
+      <point x="7717.085101120758" y="1174.0" />
+      <point x="7623.585101120758" y="1174.0" />
+      <point x="25.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.CreateCareProviderAccountActivity" target="ca.klapstein.baudit.activities.AccountCreateActivity">
+      <point x="118.125" y="-136.5" />
+      <point x="4968.042703187652" y="2719.0" />
+      <point x="5330.822916666666" y="2719.0" />
+      <point x="-46.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.BodyLocationView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-36.5" />
+      <point x="2207.031249999999" y="1604.0" />
+      <point x="5198.497916666666" y="1604.0" />
+      <point x="-20.074999999999818" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.AddRecordActivity" target="ca.klapstein.baudit.activities.RecordActivity">
+      <point x="-43.19999999999982" y="-180.5" />
+      <point x="1516.1020833333332" y="2709.0" />
+      <point x="1418.739583333333" y="2709.0" />
+      <point x="70.125" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.data.Problem">
+      <point x="100.25" y="-71.0" />
+      <point x="8307.918434454092" y="2208.0" />
+      <point x="8414.188185951309" y="2208.0" />
+      <point x="8414.188185951309" y="591.0" />
+      <point x="8533.022916666667" y="591.0" />
+      <point x="-17.25" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.RecordListView" target="ca.klapstein.baudit.data.Patient">
+      <point x="27.125" y="-48.0" />
+      <point x="491.15625" y="1654.0" />
+      <point x="447.90625" y="1654.0" />
+      <point x="447.90625" y="1134.0" />
+      <point x="388.5805838844162" y="1134.0" />
+      <point x="388.5805838844162" y="963.0" />
+      <point x="7404.847845789178" y="963.0" />
+      <point x="-96.42857142857156" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LocationPresenter" target="ca.klapstein.baudit.views.LocationView">
+      <point x="-81.66666666666697" y="-37.0" />
+      <point x="3411.989583333333" y="2048.0" />
+      <point x="2957.781249999999" y="2048.0" />
+      <point x="47.25" y="36.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter" target="ca.klapstein.baudit.views.CreateCareProviderAccountView">
+      <point x="-148.33333333333337" y="-48.5" />
+      <point x="4752.489583333333" y="2430.0" />
+      <point x="4631.40625" y="2430.0" />
+      <point x="55.75" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.activities.AddRecordActivity">
+      <point x="82.8125" y="-125.5" />
+      <point x="811.3753704054002" y="3150.0" />
+      <point x="1559.302083333333" y="3150.0" />
+      <point x="0.0" y="180.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.BodyLocationPresenter" target="ca.klapstein.baudit.data.BodyPhotoCoords">
+      <point x="-37.5" y="-48.5" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ViewAccountDialog" target="ca.klapstein.baudit.views.ViewAccountView">
+      <point x="-79.33333333333326" y="-81.5" />
+      <point x="6073.239583333333" y="2719.0" />
+      <point x="6037.822916666666" y="2719.0" />
+      <point x="6037.822916666666" y="2430.0" />
+      <point x="6014.40625" y="2430.0" />
+      <point x="-53.0" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.CreateUserView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-81.0" />
+      <point x="5047.3597505510825" y="1654.0" />
+      <point x="5216.747916666666" y="1654.0" />
+      <point x="-1.824999999999818" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.AddProblemActivity" target="ca.klapstein.baudit.activities.ProblemActivity">
+      <point x="-84.39999999999964" y="-114.5" />
+      <point x="9064.376036520986" y="2719.0" />
+      <point x="8938.877083333333" y="2719.0" />
+      <point x="23.375" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LogoutDialog" target="ca.klapstein.baudit.views.LogoutView">
+      <point x="-59.0" y="-70.0" />
+      <point x="6347.642037072067" y="3682.0" />
+      <point x="5322.322916666666" y="3682.0" />
+      <point x="48.75" y="36.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.DeleteView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-25.5" />
+      <point x="4186.497601120758" y="1644.0" />
+      <point x="5213.097916666666" y="1644.0" />
+      <point x="-5.475000000000364" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.PatientListView" target="ca.klapstein.baudit.views.View">
+      <point x="-72.0" y="-48.0" />
+      <point x="7526.585101120758" y="1584.0" />
+      <point x="5242.297916666666" y="1584.0" />
+      <point x="23.725000000000364" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.RecordPhoto" target="ca.klapstein.baudit.data.Photo">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-96.25" y="-71.0" />
+      <point x="6861.28125" y="2108.0" />
+      <point x="3795.322916666666" y="2108.0" />
+      <point x="70.83333333333303" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.data.Patient">
+      <point x="115.9375" y="-125.5" />
+      <point x="844.5003704054002" y="3160.0" />
+      <point x="2088.531249999999" y="3160.0" />
+      <point x="2088.531249999999" y="1154.0" />
+      <point x="1982.7510365209837" y="1154.0" />
+      <point x="1982.7510365209837" y="973.0" />
+      <point x="7436.990702932035" y="973.0" />
+      <point x="-64.28571428571422" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.RecordTreeSet">
+      <point x="-81.81818181818198" y="-170.0" />
+      <point x="3601.004734848485" y="1144.0" />
+      <point x="3096.8381577331047" y="1144.0" />
+      <point x="10.41666666666606" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.CreatePatientAccountActivity" target="ca.klapstein.baudit.presenters.CreatePatientAccountPresenter">
+      <point x="35.5" y="-125.5" />
+      <point x="5690.584369854318" y="2709.0" />
+      <point x="5778.322916666666" y="2709.0" />
+      <point x="95.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordListPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="96.5" y="-71.0" />
+      <point x="763.947916666667" y="2078.0" />
+      <point x="3603.65625" y="2078.0" />
+      <point x="-120.83333333333303" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.RecordRowView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-25.5" />
+      <point x="687.53125" y="1574.0" />
+      <point x="5187.547916666666" y="1574.0" />
+      <point x="-31.024999999999636" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordListPresenter" target="ca.klapstein.baudit.data.Record">
+      <point x="-96.5" y="-71.0" />
+      <point x="570.947916666667" y="2218.0" />
+      <point x="583.03125" y="2218.0" />
+      <point x="583.03125" y="1154.0" />
+      <point x="486.0760365209835" y="1154.0" />
+      <point x="486.0760365209835" y="91.0" />
+      <point x="894.385416666667" y="91.0" />
+      <point x="-10.41666666666606" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.ProblemListView" target="ca.klapstein.baudit.data.Problem">
+      <point x="77.33333333333303" y="-48.0" />
+      <point x="9487.314267787424" y="1654.0" />
+      <point x="9485.705203187652" y="1654.0" />
+      <point x="9485.705203187652" y="581.0" />
+      <point x="8602.022916666667" y="581.0" />
+      <point x="51.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.SlideShowPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="88.0" y="-37.0" />
+      <point x="3272.031249999999" y="2168.0" />
+      <point x="3678.65625" y="2168.0" />
+      <point x="-45.83333333333303" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.AddProblemView" target="ca.klapstein.baudit.views.ProblemView">
+      <point x="0.0" y="-25.5" />
+      <point x="9300.043434454092" y="1988.0" />
+      <point x="9056.564583333333" y="1988.0" />
+      <point x="77.625" y="81.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LoginPatientActivity" target="ca.klapstein.baudit.activities.LoginActivity">
+      <point x="-74.625" y="-80.5" />
+      <point x="7853.1514172177485" y="3461.0" />
+      <point x="7616.047916666666" y="3461.0" />
+      <point x="37.399999999999636" y="70.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.EditProblemActivity" target="ca.klapstein.baudit.activities.ProblemActivity">
+      <point x="83.60000000000036" y="-114.5" />
+      <point x="8829.963536520985" y="2719.0" />
+      <point x="8892.127083333333" y="2719.0" />
+      <point x="-23.375" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.CreateCareProviderAccountActivity" target="ca.klapstein.baudit.views.CreateCareProviderAccountView">
+      <point x="-118.125" y="-136.5" />
+      <point x="4731.792703187652" y="2719.0" />
+      <point x="4217.364583333333" y="2719.0" />
+      <point x="4217.364583333333" y="2430.0" />
+      <point x="4519.90625" y="2430.0" />
+      <point x="-55.75" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.EditRecordActivity" target="ca.klapstein.baudit.presenters.EditRecordPresenter">
+      <point x="0.0" y="-180.5" />
+      <point x="1139.427083333333" y="2719.0" />
+      <point x="1167.364583333333" y="2719.0" />
+      <point x="67.75" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.LocationView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-36.5" />
+      <point x="2910.531249999999" y="1624.0" />
+      <point x="5205.797916666666" y="1624.0" />
+      <point x="-12.774999999999636" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.RecordListActivity" target="ca.klapstein.baudit.data.RecordTreeSet">
+      <point x="-82.8125" y="-125.5" />
+      <point x="645.7503704054002" y="3150.0" />
+      <point x="41.03125" y="3150.0" />
+      <point x="41.03125" y="349.0" />
+      <point x="3034.3381577331047" y="349.0" />
+      <point x="-52.08333333333394" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.AddProblemActivity" target="ca.klapstein.baudit.views.AddProblemView">
+      <point x="84.39999999999964" y="-114.5" />
+      <point x="9233.176036520985" y="2719.0" />
+      <point x="9332.101036520984" y="2719.0" />
+      <point x="9332.101036520984" y="2430.0" />
+      <point x="9352.793434454092" y="2430.0" />
+      <point x="52.75" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.ContactInfo" target="ca.klapstein.baudit.data.Email">
+      <point x="78.0" y="-70.5" />
+      <point x="3943.22821969697" y="369.0" />
+      <point x="4070.60321969697" y="369.0" />
+      <point x="57.0" y="104.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.ProblemListView" target="ca.klapstein.baudit.views.View">
+      <point x="-77.33333333333303" y="-48.0" />
+      <point x="9332.64760112076" y="1554.0" />
+      <point x="5253.247916666666" y="1554.0" />
+      <point x="34.67500000000018" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LoginActivity" target="ca.klapstein.baudit.views.LoginView">
+      <point x="46.75" y="-70.0" />
+      <point x="7625.397916666667" y="3160.0" />
+      <point x="7678.659369854318" y="3160.0" />
+      <point x="49.75" y="47.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.SlideShowDialog" target="ca.klapstein.baudit.presenters.SlideShowPresenter">
+      <point x="0.0" y="-59.5" />
+      <point x="3144.697916666666" y="2430.0" />
+      <point x="3118.031249999999" y="2430.0" />
+      <point x="-66.0" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.Record">
+      <point x="-54.54545454545496" y="-170.0" />
+      <point x="3628.277462121212" y="1134.0" />
+      <point x="3159.4214910664386" y="1134.0" />
+      <point x="3159.4214910664386" y="71.0" />
+      <point x="956.885416666667" y="71.0" />
+      <point x="52.08333333333394" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.CreatePatientAccountPresenter" target="ca.klapstein.baudit.views.CreatePatientAccountView">
+      <point x="127.66666666666674" y="-37.0" />
+      <point x="5810.239583333333" y="2430.0" />
+      <point x="5800.40625" y="2430.0" />
+      <point x="-47.0" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.CreateAccountPresenter" target="ca.klapstein.baudit.views.CreateUserView">
+      <point x="113.25" y="-59.5" />
+      <point x="5146.322916666666" y="2158.0" />
+      <point x="5047.3597505510825" y="2158.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LoginPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-70.0" y="-70.5" />
+      <point x="7396.742703187651" y="2719.0" />
+      <point x="7391.909369854318" y="2719.0" />
+      <point x="7391.909369854318" y="2088.0" />
+      <point x="3811.989583333333" y="2088.0" />
+      <point x="87.5" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.LoginCareProviderActivity" target="ca.klapstein.baudit.presenters.LoginPresenter">
+      <point x="-24.875" y="-80.5" />
+      <point x="7289.552083333334" y="3461.0" />
+      <point x="7270.177083333334" y="3461.0" />
+      <point x="7270.177083333334" y="3160.0" />
+      <point x="7373.409369854318" y="3160.0" />
+      <point x="-93.33333333333348" y="70.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ViewAccountPresenter" target="ca.klapstein.baudit.presenters.AccountPresenter">
+      <point x="97.33333333333337" y="-37.0" />
+      <point x="6299.239583333334" y="2430.0" />
+      <point x="6327.072916666666" y="2430.0" />
+      <point x="-30.0" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.AddRecordView" target="ca.klapstein.baudit.views.RecordView">
+      <point x="0.0" y="-25.5" />
+      <point x="1718.531249999999" y="2068.0" />
+      <point x="1495.3628704054004" y="2068.0" />
+      <point x="81.0" y="147.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.PatientTreeSet" target="ca.klapstein.baudit.data.Patient">
+      <point x="0.0" y="-25.5" />
+      <point x="7598.585101120758" y="1003.0" />
+      <point x="7565.562131503463" y="1003.0" />
+      <point x="64.28571428571422" y="37.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.activities.EditProblemActivity">
+      <point x="0.0" y="-125.5" />
+      <point x="8867.458703738734" y="3130.0" />
+      <point x="8746.363536520985" y="3130.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.DeleteRecordPresenter" target="ca.klapstein.baudit.views.DeleteView">
+      <point x="87.33333333333303" y="-48.5" />
+      <point x="3855.489583333333" y="2218.0" />
+      <point x="4126.830934454091" y="2218.0" />
+      <point x="-59.66666666666697" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.activities.ProblemActivity" target="ca.klapstein.baudit.presenters.ProblemPresenter">
+      <point x="-46.75" y="-48.0" />
+      <point x="8868.752083333333" y="2430.0" />
+      <point x="8932.793434454092" y="2430.0" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.views.ProblemRowView">
+      <point x="-33.41666666666697" y="-71.0" />
+      <point x="8174.251767787424" y="2048.0" />
+      <point x="7838.585101120758" y="2048.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.data.CareProvider" target="ca.klapstein.baudit.data.PatientTreeSet">
+      <point x="-67.75" y="-36.5" />
+      <point x="8054.022916666667" y="1094.0" />
+      <point x="7648.585101120758" y="1094.0" />
+      <point x="50.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.DeleteProblemPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="-89.66666666666697" y="-48.5" />
+      <point x="3963.989583333333" y="2208.0" />
+      <point x="3736.989583333333" y="2208.0" />
+      <point x="12.5" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.LogoutView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-36.5" />
+      <point x="5273.572916666666" y="1644.0" />
+      <point x="5220.397916666666" y="1644.0" />
+      <point x="1.824999999999818" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LogoutPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="70.0" y="-70.5" />
+      <point x="3328.037870405401" y="3672.0" />
+      <point x="3626.65625" y="3672.0" />
+      <point x="3626.65625" y="2208.0" />
+      <point x="3711.989583333333" y="2208.0" />
+      <point x="-12.5" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.data.PatientTreeSet">
+      <point x="96.25" y="-71.0" />
+      <point x="7053.78125" y="2148.0" />
+      <point x="7469.085101120758" y="2148.0" />
+      <point x="7469.085101120758" y="1174.0" />
+      <point x="7573.585101120758" y="1174.0" />
+      <point x="-25.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.Presenter" target="ca.klapstein.baudit.managers.BauditDataManager">
+      <point x="0.0" y="-48.0" />
+      <point x="3724.489583333333" y="1554.0" />
+      <point x="3757.822916666667" y="1554.0" />
+      <point x="75.0" y="170.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.PhotoPresenter" target="ca.klapstein.baudit.data.Photo">
+      <point x="-88.875" y="-59.5" />
+      <point x="1870.656249999999" y="2028.0" />
+      <point x="313.53125" y="2028.0" />
+      <point x="44.0" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.managers.BauditDataManager" target="ca.klapstein.baudit.data.User">
+      <point x="-27.272727272727025" y="-170.0" />
+      <point x="3655.55018939394" y="1124.0" />
+      <point x="3585.8857767807244" y="1124.0" />
+      <point x="3585.8857767807244" y="849.0" />
+      <point x="3516.60006249501" y="849.0" />
+      <point x="-50.57142857142844" y="59.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.LoginPresenter" target="ca.klapstein.baudit.managers.BauditRemoteManager">
+      <point x="23.333333333333485" y="-70.5" />
+      <point x="7490.076036520984" y="2709.0" />
+      <point x="7413.909369854318" y="2709.0" />
+      <point x="7413.909369854318" y="2208.0" />
+      <point x="7739.085101120758" y="2208.0" />
+      <point x="7739.085101120758" y="1104.0" />
+      <point x="2890.921491066438" y="1104.0" />
+      <point x="71.25" y="25.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.ViewAccountPresenter" target="ca.klapstein.baudit.views.ViewAccountView">
+      <point x="-97.33333333333331" y="-37.0" />
+      <point x="6104.572916666667" y="2430.0" />
+      <point x="6120.40625" y="2430.0" />
+      <point x="53.0" y="48.0" />
+    </edge>
+    <edge source="ca.klapstein.baudit.views.SlideShowView" target="ca.klapstein.baudit.views.View">
+      <point x="0.0" y="-25.5" />
+      <point x="2699.031249999999" y="1614.0" />
+      <point x="5202.147916666666" y="1614.0" />
+      <point x="-16.425000000000182" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.AccountPresenter" target="ca.klapstein.baudit.views.View">
+      <point x="30.0" y="-59.5" />
+      <point x="6387.072916666666" y="1624.0" />
+      <point x="5227.697916666666" y="1624.0" />
+      <point x="9.125" y="14.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.CreatePatientAccountPresenter" target="ca.klapstein.baudit.presenters.CreateAccountPresenter">
+      <point x="-127.66666666666674" y="-37.0" />
+      <point x="5554.90625" y="2430.0" />
+      <point x="5070.822916666666" y="2430.0" />
+      <point x="37.75" y="59.5" />
+    </edge>
+    <edge source="ca.klapstein.baudit.presenters.RecordPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+      <point x="33.875" y="-59.5" />
+      <point x="1455.489583333333" y="2098.0" />
+      <point x="3620.322916666666" y="2098.0" />
+      <point x="-104.16666666666697" y="48.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="577.1666666666665" y="437.0952380952382" />
-  <SelectedNodes>
-    <node>ca.klapstein.baudit.Adapters.RecordAdapter</node>
-  </SelectedNodes>
-  <Categories />
-  <SCOPE>All</SCOPE>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="3524.333333333332" y="1711.428571428572" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>Production</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
 

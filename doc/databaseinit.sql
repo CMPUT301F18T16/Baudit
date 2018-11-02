@@ -1,4 +1,4 @@
-/* 
+/*
 This table represents care providers i.e. doctors, nurses, etc.
 Does not have contact information as it is not necessary
 */
@@ -40,9 +40,9 @@ amounts for each patient, and storing photos separately
 increases performance.
 */
 CREATE TABLE bodyphoto (
-id INT NOT NULL AUTO_INCREMENT,
+id INT NOT NULL,
 patient VARCHAR(20) NOT NULL,
-photo VARBINARY(max),
+photo BLOB,
 PRIMARY KEY (patient, id),
 FOREIGN KEY (patient) REFERENCES patient(id)
 );
@@ -52,7 +52,7 @@ This table represents all of the problems by all of the patients.
 Contains general information about the problem.
 */
 CREATE TABLE problem (
-id INT NOT NULL AUTO_INCREMENT,
+id INT NOT NULL,
 patient VARCHAR(20) NOT NULL,
 title VARCHAR(30),
 description VARCHAR(300),
@@ -66,7 +66,7 @@ This table represents all of the records of each problem of each patient.
 Contails the details of the problem at the time the patient inserts the record.
 */
 CREATE TABLE record (
-id INT NOT NULL AUTO_INCREMENT,
+id INT NOT NULL,
 problem INT NOT NULL,
 title VARCHAR(30),
 date TIMESTAMP,
@@ -89,10 +89,10 @@ amounts for each record, and storing photos separately
 increases performance.
 */
 CREATE TABLE photo (
-id  INT NOT NULL AUTO_INCREMENT,
+id  INT NOT NULL,
 record INT,
-photo VARBINARY(max),
+photo BLOB,
 PRIMARY KEY (record, id),
-FOREIGN KEY record REFERENCES record(id)
+FOREIGN KEY (record) REFERENCES record(id)
 ON DELETE CASCADE
 );
