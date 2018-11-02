@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +22,7 @@ public class ProblemTest {
 
 
     @Test
-    public void ProblemConstructor() {
+    public void problemConstructor() {
         Problem problem = new Problem("test_title", "");
         assertNotNull(problem);
         assertEquals("test_title", problem.getTitle());
