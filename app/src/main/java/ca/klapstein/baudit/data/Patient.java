@@ -6,6 +6,10 @@ package ca.klapstein.baudit.data;
 public class Patient extends User {
     private static final String TAG = "Patient";
     private ProblemTreeSet problemTreeSet;
+
+    /**
+     * A {@code Patient} can only have one {@code BodyPhoto}.
+     */
     private BodyPhoto bodyPhoto;
 
     public ProblemTreeSet getProblemTreeSet() {
@@ -16,6 +20,11 @@ public class Patient extends User {
         return bodyPhoto;
     }
 
+    /**
+     * Setter for a {@code Patient}'s {@code BodyPhoto}.
+     *
+     * @param bodyPhoto {@code BodyPhoto}
+     */
     public void setBodyPhoto(BodyPhoto bodyPhoto) {
         this.bodyPhoto = bodyPhoto;
     }
