@@ -38,44 +38,8 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         adapter = new RecordListAdapter();
         recordRecyclerView.setAdapter(adapter);
     }
-  
-    /**
-     * Launch a EditRecordActivity with the selected Record noted by its position within the {@code RecordTreeSet}.
-     *
-     * @param view     {@code View}
-     * @param position {@code int} the position of the selected Record within the {@code RecordTreeSet}.
-     */
-    private void onRecordListItemClick(View view, final int position) {
-        Intent intent = new Intent(this, EditRecordActivity.class);
-        // TODO: add required args
-        startActivity(intent);
-    }
-
-    /**
-     * Launch a AddRecordActivity.
-     */
-    private void onAddRecordClick() {
-        Intent intent = new Intent(this, AddRecordActivity.class);
-        // TODO: add required args
-        startActivity(intent);
-    }
 
     @Override
-    public void addRecord(Record record) {
-
-    }
-
-    @Override
-    public void editRecord(Patient patient, int position) {
-
-    }
-
-    @Override
-    public void setRecordList(RecordTreeSet recordTreeSet) {
-
-    }
-  
-   @Override
    public void update() {
         this.adapter.notifyDataSetChanged();
    }
