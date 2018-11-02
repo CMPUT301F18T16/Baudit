@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
@@ -27,6 +28,16 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         presenter = new LoginPresenter(this);
     }
 
+    /**
+     * Attempt a login as a {@code Patient}.
+     *
+     * @return {@code true} if the login was successful, otherwise return {@code false}.
+     */
+    public boolean login() {
+        // TODO: implement
+        return true;
+    }
+
     @Override
     public void setUserNameError() {
 
@@ -39,6 +50,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void setLoginSuccess() {
-
+        Intent intent = new Intent(this, ProblemListActivity.class);
+        startActivity(intent);
     }
 }

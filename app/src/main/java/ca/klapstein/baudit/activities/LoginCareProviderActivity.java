@@ -38,16 +38,6 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         return true;
     }
 
-    /**
-     * After logging in as a {@code CareProvider} start the {@code PatientListActivity}.
-     *
-     * @see PatientListActivity
-     */
-    public void onLogin() {
-        Intent intent = new Intent(this, PatientListActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void setUserNameError() {
 
@@ -58,8 +48,14 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
 
     }
 
+    /**
+     * After logging in as a {@code CareProvider} start the {@code PatientListActivity}.
+     *
+     * @see PatientListActivity
+     */
     @Override
     public void setLoginSuccess() {
-
+        Intent intent = new Intent(this, PatientListActivity.class);
+        startActivity(intent);
     }
 }
