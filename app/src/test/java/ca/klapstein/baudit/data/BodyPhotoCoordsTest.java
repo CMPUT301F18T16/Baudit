@@ -1,7 +1,5 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.fail;
@@ -10,14 +8,6 @@ import static org.junit.Assert.assertNotNull;
 
 
 public class BodyPhotoCoordsTest {
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void testBodyPhotoCoordsConstructor() {
@@ -31,9 +21,9 @@ public class BodyPhotoCoordsTest {
     public void testGetBodyPhotoCoords(){
         BodyPhotoCoords bodyPhotoCoords = null;
 
-        try{
+        try {
             bodyPhotoCoords = new BodyPhotoCoords(200,500);
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             fail();
         }
         assertNotNull(bodyPhotoCoords);
@@ -60,16 +50,8 @@ public class BodyPhotoCoordsTest {
         }
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testSetBodyPhotoCoordsInvalid(){
-        boolean success = true;
-        try{
-            new BodyPhotoCoords(-2, -1);
-        }catch(IllegalArgumentException e){
-            success = false;
-        }
-        if (success){
-            fail();
-        }
+        new BodyPhotoCoords(-2, -1);
     }
 }

@@ -1,6 +1,6 @@
 package ca.klapstein.baudit.data;
 
-public class BodyPhotoCoords{
+public class BodyPhotoCoords {
     private int x;
     private int y;
 
@@ -10,16 +10,14 @@ public class BodyPhotoCoords{
     }
 
     public void setX(int x) throws  IllegalArgumentException{
-        if(x <= 0) {
+        if (x <= 0) {
             throw new IllegalArgumentException("X coord < 0");
         }
-        else {
-            this.x = x;
-        }
+        this.x = x;
     }
 
     public void setY(int y)throws IllegalArgumentException{
-        if(y <=0){
+        if (y <= 0){
             throw new IllegalArgumentException("Y coord < 0");
         }
         this.y = y;

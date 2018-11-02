@@ -1,13 +1,10 @@
 package ca.klapstein.baudit.data;
 
-import android.location.Location;
-
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.zip.DataFormatException;
+import java.util.Locale;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -17,21 +14,21 @@ import java.util.zip.DataFormatException;
 public class Record {
     private static final String TAG = "Record";
 
-    public String timestamp;
+    private String timestamp;
     private String title;
     private String comment;
-    private double xcoord;
-    private double ycoord;
-    private BodyPhotoCoords bodyPhotoCoords[];
-    public String[] keywords;
+    private double xCoord;
+    private double yCoord;
+    private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
+    private ArrayList<String> keywords;
 
     public Record(){
-        this.setTimeStamp();
+        this.setTimestamp();
     }
 
-    public String setTimeStamp() {
-        DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        return date.format(new Date());
+    public void setTimestamp() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA);
+        this.timestamp = dateFormat.format(new Date());
     }
 
     public String getTimestamp(){
@@ -39,7 +36,7 @@ public class Record {
     }
 
     public void setTitle(String title){
-        if(title.length()<=30) {
+        if (title.length() <= 30) {
             this.title = title;
         }else{
             throw new IllegalArgumentException("Title too long");
@@ -51,27 +48,26 @@ public class Record {
     }
 
     public void setComment(String comment){
-        if(comment.length()<=300) {
+        if (comment.length() <= 300) {
             this.comment = comment;
         }else{
             throw new IllegalArgumentException("Comment too long");
         }
     }
+
     public String getComment(){
         return this.comment;
     }
 
     public void addKeyword(String keyword){
-        int len = this.keywords.length;
-        len++;
-        keywords[len]=keyword;
+        this.keywords.add(keyword);
     }
 
-    public String popKeyword(){
-        return this.keywords[this.keywords.length+1];
+    public void removeKeyword(String keyword) {
+        this.keywords.remove(keyword);
     }
 
-    public String[] getKeywords(){
+    public ArrayList<String> getKeywords(){
         return this.keywords;
     }
 }
