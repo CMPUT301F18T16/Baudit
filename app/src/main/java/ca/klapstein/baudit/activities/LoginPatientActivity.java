@@ -3,6 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.LoginPresenter;
 
 /**
  * Activity presenting a login page for a Patient Baudit. Providing a page for the {@code Patient}
@@ -19,6 +20,8 @@ public class LoginPatientActivity extends LoginActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_patient);
+
+        presenter = new LoginPresenter(this);
     }
 
     /**

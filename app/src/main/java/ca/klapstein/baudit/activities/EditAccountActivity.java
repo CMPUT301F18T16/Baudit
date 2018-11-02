@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.presenters.EditAccountPresenter;
+import ca.klapstein.baudit.views.EditAccountView;
 
 /**
  * Activity for editing a {@code User}.
@@ -14,9 +16,10 @@ import ca.klapstein.baudit.data.User;
  * @see ca.klapstein.baudit.data.Patient
  * @see ca.klapstein.baudit.data.CareProvider
  */
-public class EditAccountActivity extends AppCompatActivity {
+public class EditAccountActivity extends AppCompatActivity implements EditAccountView {
     private static final String TAG = "EditAccountActivity";
 
+    private EditAccountPresenter presenter;
     @NonNull
     private User user;
 
@@ -24,5 +27,27 @@ public class EditAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
+
+        presenter = new EditAccountPresenter(this);
+    }
+
+    @Override
+    public void setEmail(String string) {
+
+    }
+
+    @Override
+    public void setEmailError() {
+
+    }
+
+    @Override
+    public void setUsername(String string) {
+
+    }
+
+    @Override
+    public void setUserNameError() {
+
     }
 }

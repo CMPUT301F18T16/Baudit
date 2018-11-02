@@ -17,10 +17,10 @@ import ca.klapstein.baudit.views.LoginView;
  * @see ca.klapstein.baudit.data.Password
  * @see ca.klapstein.baudit.data.User
  */
-public abstract class LoginActivity extends AppCompatActivity implements LoginView {
+public abstract class LoginActivity<P extends LoginPresenter> extends AppCompatActivity implements LoginView {
     private static final String TAG = "LoginActivity";
 
-    protected LoginPresenter presenter;
+    protected P presenter;
 
     @Nullable
     protected User user;
@@ -29,6 +29,7 @@ public abstract class LoginActivity extends AppCompatActivity implements LoginVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
     }
 
     /**

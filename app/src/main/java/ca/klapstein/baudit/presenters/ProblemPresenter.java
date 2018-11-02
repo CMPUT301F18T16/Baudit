@@ -3,8 +3,12 @@ package ca.klapstein.baudit.presenters;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.views.ProblemView;
 
-public class ProblemPresenter {
-    private ProblemView view;
-    private Problem problem;
+abstract public class ProblemPresenter<T extends ProblemView> {
+    protected Problem problem;
+    private T view;
+
+    public ProblemPresenter(T view) {
+        this.view = view;
+    }
 
 }

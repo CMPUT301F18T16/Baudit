@@ -9,18 +9,21 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.ProblemAdapter;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.presenters.ProblemListPresenter;
+import ca.klapstein.baudit.views.ProblemListView;
 
 /**
  * Activity for listing {@code Problem}s.
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class ProblemListActivity extends AppCompatActivity implements DeleteProblemDialog.onDeleteProblemListener {
+public class ProblemListActivity extends AppCompatActivity implements DeleteProblemDialog.onDeleteProblemListener, ProblemListView {
     private static final String TAG = "ProblemListActivity";
 
     private ProblemTreeSet problemTreeSet;
     private ProblemAdapter problemAdapter;
     private RecyclerView problemRecyclerView;
+    private ProblemListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class ProblemListActivity extends AppCompatActivity implements DeleteProb
         // TODO: get problemTreeSet from local storage/remote
         problemAdapter = new ProblemAdapter(problemTreeSet);
 
+        presenter = new ProblemListPresenter(this);
         // TODO: init problemRecyclerView
     }
 
@@ -62,5 +66,15 @@ public class ProblemListActivity extends AppCompatActivity implements DeleteProb
     @Override
     public void onDeleteProblem(Problem problem) {
         // TODO: implement
+    }
+
+    @Override
+    public void addProblem(Problem problem) {
+
+    }
+
+    @Override
+    public void setProblemList(ProblemTreeSet problemTreeSet) {
+
     }
 }

@@ -31,6 +31,6 @@ public class DeleteRecordDialog extends DeleteDialog {
      * Provides a callback stub when a {@code Record} is deleted.
      */
     public interface onDeleteRecordListener {
-        void onDeleteRecord(Record problem);
+        void onDeleteRecord(Record record);
     }
 }

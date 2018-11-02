@@ -10,11 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.views.LogoutView;
 
 /**
  * Dialog providing a logout prompt.
  */
-public class LogoutDialog extends DialogFragment {
+public class LogoutDialog extends DialogFragment implements LogoutView {
     private static final String TAG = "LogoutDialog";
 
     @NonNull
@@ -39,5 +40,15 @@ public class LogoutDialog extends DialogFragment {
     private void onLogout() {
         Intent intent = new Intent(getContext(), SplashActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void setLogoutError() {
+
+    }
+
+    @Override
+    public void setLogoutSuccess() {
+
     }
 }

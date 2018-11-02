@@ -9,18 +9,21 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.RecordAdapter;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
+import ca.klapstein.baudit.presenters.RecordListPresenter;
+import ca.klapstein.baudit.views.RecordListView;
 
 /**
  * Activity for listing {@code Record}s.
  *
  * @see ca.klapstein.baudit.data.Record
  */
-public class RecordListActivity extends AppCompatActivity implements DeleteRecordDialog.onDeleteRecordListener {
+public class RecordListActivity extends AppCompatActivity implements DeleteRecordDialog.onDeleteRecordListener, RecordListView {
     private static final String TAG = "RecordListActivity";
 
     private RecordTreeSet recordTreeSet;
     private RecordAdapter recordAdapter;
     private RecyclerView recordRecyclerView;
+    private RecordListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class RecordListActivity extends AppCompatActivity implements DeleteRecor
         // TODO: get recordTreeSet from local storage/remote
         recordAdapter = new RecordAdapter(recordTreeSet);
 
+        presenter = new RecordListPresenter(this);
         // TODO: init recordRecyclerView
     }
 
@@ -62,5 +66,15 @@ public class RecordListActivity extends AppCompatActivity implements DeleteRecor
     @Override
     public void onDeleteRecord(Record record) {
         // TODO: implement
+    }
+
+    @Override
+    public void addRecord(Record record) {
+
+    }
+
+    @Override
+    public void setRecordList(RecordTreeSet recordTreeSet) {
+
     }
 }

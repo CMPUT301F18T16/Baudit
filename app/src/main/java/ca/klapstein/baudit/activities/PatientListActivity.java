@@ -7,13 +7,14 @@ import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.PatientAdapter;
 import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.views.PatientListView;
 
 /**
  * Activity for listing {@code Patient}s.
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class PatientListActivity extends AppCompatActivity {
+public class PatientListActivity extends AppCompatActivity implements PatientListView {
     private static final String TAG = "PatientListActivity";
 
     private PatientTreeSet patientTreeSet;

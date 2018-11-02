@@ -9,14 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.presenters.AccountPresenter;
+import ca.klapstein.baudit.views.ViewAccountView;
 
 /**
  * Dialog providing a overview of an {@code User}.
  *
  * @see ca.klapstein.baudit.data.User
  */
-public class ViewAccountDialog extends DialogFragment {
+public class ViewAccountDialog extends DialogFragment implements ViewAccountView {
     private static final String TAG = "ViewAccountDialog";
+
+    private AccountPresenter presenter;
 
     @NonNull
     private User user;
@@ -30,7 +34,24 @@ public class ViewAccountDialog extends DialogFragment {
         builder.setView(view);
         // TODO: more implementation
 
+        presenter = new AccountPresenter();
+
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    @Override
+    public void setViewAccountError() {
+
+    }
+
+    @Override
+    public void setUsername(String username) {
+
+    }
+
+    @Override
+    public void setEmail(String email) {
+
     }
 }
