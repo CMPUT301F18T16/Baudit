@@ -84,7 +84,10 @@ public class PatientTest {
     }
 
     @Test
-    public void getContactInfo() {
+    public void setGetContactInfo() {
+
+        // Test for both setContactInfo and getContactInfo
+
         Patient patient = new Patient();
         ContactInfo contactInfo = new ContactInfo();
 
@@ -98,22 +101,6 @@ public class PatientTest {
         assertTrue(patient.getContactInfo().getEmail().equals(email));
         assertTrue(patient.getContactInfo().getPhoneNumber().equals(number));
 
-    }
-
-    @Test
-    public void setContactInfo() {
-        Patient patient = new Patient();
-        ContactInfo contactInfo = new ContactInfo();
-
-        Email email = new Email("John@hotmail.com");
-        contactInfo.setEmail(email);
-        PhoneNumber number = new PhoneNumber("780-123-4567");
-        contactInfo.setPhoneNumber(number);
-        patient.setContactInfo(contactInfo);
-
-        assertTrue(patient.getContactInfo().equals(contactInfo));
-        assertTrue(patient.getContactInfo().getEmail().equals(email));
-        assertTrue(patient.getContactInfo().getPhoneNumber().equals(number));
     }
 
     @Test

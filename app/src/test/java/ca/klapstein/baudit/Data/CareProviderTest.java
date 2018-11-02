@@ -97,7 +97,10 @@ public class CareProviderTest {
     }
 
     @Test
-    public void getContactInfo() {
+    public void setGetContactInfo() {
+
+        // Test for both setContactInfo and getContactInfo
+
         CareProvider cp = new CareProvider();
         ContactInfo contactInfo = new ContactInfo();
 
@@ -114,25 +117,9 @@ public class CareProviderTest {
     }
 
     @Test
-    public void setContactInfo() {
-        CareProvider cp = new CareProvider();
-        ContactInfo contactInfo = new ContactInfo();
-
-        Email email = new Email("Johnnymail.com");
-        contactInfo.setEmail(email);
-        PhoneNumber number = new PhoneNumber("780-123-4567");
-        contactInfo.setPhoneNumber(number);
-        cp.setContactInfo(contactInfo);
-
-        assertTrue(cp.getContactInfo().equals(contactInfo));
-        assertTrue(cp.getContactInfo().getEmail().equals(email));
-        assertTrue(cp.getContactInfo().getPhoneNumber().equals(number));
-    }
-
-    @Test
     public void getPassword() {
         CareProvider cp = new CareProvider();
-        Password password = new Password("hidden");
+        Password password = new Password("hidden12");
 
         cp.setPassword(password);
         assertTrue(cp.getPassword().equals(password));
@@ -141,7 +128,7 @@ public class CareProviderTest {
     @Test
     public void setPassword() {
         CareProvider cp = new CareProvider();
-        String string = "hidden";
+        String string = "hidden12";
         Password password = new Password(string);
 
         cp.setPassword(password);

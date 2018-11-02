@@ -20,7 +20,6 @@ public class Problem implements Comparable<Problem> {
 
         this.recordTreeSet = new RecordTreeSet();
         Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         this.timestamp = date.getTime();
     }
 
