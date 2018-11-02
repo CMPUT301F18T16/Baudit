@@ -2,6 +2,7 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.AddProblemPresenter;
 import ca.klapstein.baudit.views.AddProblemView;
 
 import java.util.Date;
@@ -12,13 +13,15 @@ import java.util.Date;
  * @see ca.klapstein.baudit.data.Problem
  * @see ca.klapstein.baudit.data.Patient
  */
-public class AddProblemActivity extends ProblemActivity implements AddProblemView {
+public class AddProblemActivity extends ProblemActivity<AddProblemPresenter> implements AddProblemView {
     private static final String TAG = "AddProblemActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
+
+        presenter = new AddProblemPresenter(this);
     }
 
     @Override

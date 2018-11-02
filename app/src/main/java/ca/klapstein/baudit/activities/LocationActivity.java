@@ -13,6 +13,7 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
     private static final String TAG = "LocationActivity";
 
     private LocationPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -21,6 +21,8 @@ public class AddRecordActivity extends RecordActivity<AddRecordPresenter> implem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+
+        presenter = new AddRecordPresenter(this);
     }
 
     @Override

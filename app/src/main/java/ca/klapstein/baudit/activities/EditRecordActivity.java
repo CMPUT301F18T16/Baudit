@@ -2,6 +2,7 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.EditRecordPresenter;
 import ca.klapstein.baudit.views.EditRecordView;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * @see ca.klapstein.baudit.data.Record
  */
-public class EditRecordActivity extends RecordActivity implements EditRecordView {
+public class EditRecordActivity extends RecordActivity<EditRecordPresenter> implements EditRecordView {
     private static final String TAG = "EditRecordActivity";
 
 
@@ -21,6 +22,8 @@ public class EditRecordActivity extends RecordActivity implements EditRecordView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_record);
+
+        presenter = new EditRecordPresenter(this);
     }
 
     @Override

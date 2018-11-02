@@ -22,7 +22,7 @@ public class EditProblemActivity extends ProblemActivity<EditProblemPresenter> i
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
-        this.presenter = new EditProblemPresenter(this);
+        presenter = new EditProblemPresenter(this);
     }
 
     @Override

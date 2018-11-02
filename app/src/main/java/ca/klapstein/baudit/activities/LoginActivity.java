@@ -29,7 +29,6 @@ public abstract class LoginActivity<P extends LoginPresenter> extends AppCompatA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
     }
 
     /**
