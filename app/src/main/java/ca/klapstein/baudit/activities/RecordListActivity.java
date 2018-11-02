@@ -1,19 +1,14 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.presenters.RecordListPresenter;
 import ca.klapstein.baudit.views.RecordListView;
 import ca.klapstein.baudit.views.RecordRowView;
@@ -43,7 +38,7 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         adapter = new RecordListAdapter();
         recordRecyclerView.setAdapter(adapter);
     }
-
+  
     /**
      * Launch a EditRecordActivity with the selected Record noted by its position within the {@code RecordTreeSet}.
      *
@@ -79,6 +74,11 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
     public void setRecordList(RecordTreeSet recordTreeSet) {
 
     }
+  
+   @Override
+   public void update() {
+        this.adapter.notifyDataSetChanged();
+   }
 
     private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         private static final String TAG = "RecordListAdapter";

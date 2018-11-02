@@ -10,4 +10,6 @@ public interface RecordListView extends View {
     void editRecord(Patient patient, final int position);
 
     void setRecordList(RecordTreeSet recordTreeSet);
+
+    void update();
 }

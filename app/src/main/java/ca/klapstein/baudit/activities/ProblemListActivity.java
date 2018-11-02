@@ -1,18 +1,14 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.presenters.ProblemListPresenter;
 import ca.klapstein.baudit.views.ProblemListView;
 import ca.klapstein.baudit.views.ProblemRowView;
@@ -73,10 +69,10 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
     public void editProblem(Problem problem, int position) {
 
     }
-
+  
     @Override
-    public void setProblemList(ProblemTreeSet problemTreeSet) {
-
+    public void update() {
+        this.adapter.notifyDataSetChanged();
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {

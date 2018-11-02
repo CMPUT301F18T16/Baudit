@@ -9,4 +9,6 @@ public interface PatientListView extends View {
     void editPatient(Patient patient, final int position);
 
     void setPatientList(PatientTreeSet patientList);
+
+    void update();
 }

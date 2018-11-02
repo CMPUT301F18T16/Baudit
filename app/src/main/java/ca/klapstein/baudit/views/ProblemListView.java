@@ -9,4 +9,6 @@ public interface ProblemListView extends View {
     void editProblem(Problem problem, final int position);
 
     void setProblemList(ProblemTreeSet problemTreeSet);
+
+    void update();
 }
