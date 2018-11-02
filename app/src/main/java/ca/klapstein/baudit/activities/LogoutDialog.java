@@ -30,21 +30,17 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
         return builder.create();
     }
 
-    /**
-     * On a proper logout go back to SplashActivity.
-     */
-    private void onLogout() {
-        Intent intent = new Intent(getContext(), SplashActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public void setLogoutError() {
 
     }
 
+    /**
+     * On a proper logout go back to SplashActivity.
+     */
     @Override
     public void setLogoutSuccess() {
-
+        Intent intent = new Intent(getContext(), SplashActivity.class);
+        startActivity(intent);
     }
 }
