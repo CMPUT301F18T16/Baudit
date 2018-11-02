@@ -3,7 +3,6 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
@@ -16,8 +15,6 @@ abstract public class ProblemActivity<P extends ProblemPresenter> extends AppCom
     private static final String TAG = "ProblemActivity";
 
     protected P presenter;
-
-    protected Problem problem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

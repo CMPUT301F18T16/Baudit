@@ -3,7 +3,6 @@ package ca.klapstein.baudit.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
 
@@ -16,8 +15,6 @@ abstract public class RecordActivity<P extends RecordPresenter> extends AppCompa
     private static final String TAG = "RecordActivity";
 
     protected P presenter;
-
-    protected Record record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
