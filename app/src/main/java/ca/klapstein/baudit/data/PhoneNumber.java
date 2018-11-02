@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class PhoneNumber {
     private static final String TAG = "PhoneNumber";
-    private static final String VALID_TEN_DIGIT_PHONE_NUMBER
-        = "\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})";
+    private static final Pattern phoneNumberPattern =
+            Pattern.compile("\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})");
 
     @NonNull
     private String phoneNumber;
@@ -22,13 +22,17 @@ public class PhoneNumber {
         return this.phoneNumber;
     }
 
+    static public boolean isValid(String phoneNumber) {
+        Matcher m = phoneNumberPattern.matcher(phoneNumber);
+        return m.matches();
+    }
+
     public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
-        Pattern p = Pattern.compile(VALID_TEN_DIGIT_PHONE_NUMBER);
-        Matcher m = p.matcher(phoneNumber);
-        if (m.matches()) {
-            this.phoneNumber = m.group(1) + m.group(2) + m.group(3);
+        if (!isValid(phoneNumber)) {
+            throw new IllegalArgumentException("invalid phone number");
         } else {
-            throw new IllegalArgumentException();
+            // strip all non numeric characters
+            this.phoneNumber = phoneNumber.replaceAll("[^\\d]", "");
         }
     }
 
