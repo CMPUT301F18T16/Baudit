@@ -8,4 +8,5 @@ package ca.klapstein.baudit.managers;
  * @see BauditRemoteManager
  */
 public class BauditDataManager {
+    private static final String TAG = "BauditDataManager";
 }
