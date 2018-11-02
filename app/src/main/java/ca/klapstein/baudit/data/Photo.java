@@ -27,7 +27,4 @@ abstract public class Photo extends AsyncTask<String,Void, Bitmap> {
         }
         return bitmap;
     }
-
-
-
 }
