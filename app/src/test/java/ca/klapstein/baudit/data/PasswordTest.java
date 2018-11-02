@@ -17,58 +17,24 @@ import static org.junit.Assert.assertTrue;
 
 
     @RunWith(Parameterized.class)
-    public class PasswordTestValid {
+    public class ValidInputs {
 
         private String input;
 
-        public PasswordTestValid(String input) {
+        public ValidInputs(String input) {
             this.input = input;
         }
 
         @Parameters
-        public String[] data1() {
-            return new String[]{"abcd1234", "password", "011235813"};
+        public String[] dataValid() {
+            return new String[]{"abcd1234", "password", "011235813", "passwordConstruct", "passwordGet"};
         }
 
         @Test
         public void test_validPassword() {
             assertTrue(Password.isValid(input));
         }
-    }
 
-    @RunWith(Parameterized.class)
-    public class PasswordTestInvalid {
-
-        private String input;
-
-        public PasswordTestInvalid(String input) {
-            this.input = input;
-        }
-
-        @Parameters
-        public String[] data2() {
-            return new String[]{"password!", "short", "thisPasswordIsWayTooExcessive"};
-        }
-
-        @Test
-        public void test_invalidPassword() {
-            assertFalse(Password.isValid(input));
-        }
-    }
-
-    @RunWith(Parameterized.class)
-    public class PasswordTestConstructor {
-
-        private String input;
-
-        public PasswordTestConstructor(String input) {
-            this.input = input;
-        }
-
-        @Parameters
-        public String[] data3() {
-            return new String[]{"passwordConstruct"};
-        }
 
         @Test
         public void testPasswordConstructor() {
@@ -76,43 +42,12 @@ import static org.junit.Assert.assertTrue;
             assertNotNull(password);
             assertEquals(input, password.getPassword());
         }
-    }
-
-    @RunWith(Parameterized.class)
-    public class PasswordTestGet {
-
-        private String input;
-
-        public PasswordTestGet(String input) {
-            this.input = input;
-        }
-
-        @Parameters
-        public String[] data4() {
-            return new String[]{"passwordGet"};
-        }
 
         @Test
         public void testGetPassword() {
             Password password = new Password(input);
             assertNotNull(password);
             assertEquals(input, password.getPassword());
-        }
-    }
-
-    @RunWith(Parameterized.class)
-    public class PasswordTestSetValid {
-
-        private String input;
-
-        public PasswordTestSetValid(String input) {
-            this.input = input;
-        }
-
-
-        @Parameters
-        public String[] data5() {
-            return new String[]{"abcd1234", "password", "011235813"};
         }
 
         @Test
@@ -123,18 +58,24 @@ import static org.junit.Assert.assertTrue;
     }
 
     @RunWith(Parameterized.class)
-    public class PasswordTestSetInvalid {
+    public class InvalidInputs {
 
         private String input;
 
-        public PasswordTestSetInvalid(String input) {
+        public InvalidInputs (String input) {
             this.input = input;
         }
 
         @Parameters
-        public String[] data6() {
-            return new String[] { "@bad!password", "", "thisPasswordIsWayTooExcessive"};
+        public String[] dataInvalid() {
+            return new String[]{"password!", "short", "@bad!password", "thisPasswordIsWayTooExcessive"};
         }
+
+        @Test
+        public void test_invalidPassword() {
+            assertFalse(Password.isValid(input));
+        }
+
 
         @Test
         public void testSetPasswordInvalid() {
