@@ -15,7 +15,6 @@ public class Record implements Comparable<Record> {
     public Collection<RecordPhoto> recordPhotos; //not approved yet
     public Collection<BodyPhoto> bodyPhotos; // not approved yet
     private long timestamp;
-    private String dateString;
     public String comment;
 
     public void setComment(String comment){
@@ -30,7 +29,6 @@ public class Record implements Comparable<Record> {
 
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        this.dateString = dateFormat.format(date);
         this.timestamp = date.getTime();
 
     }

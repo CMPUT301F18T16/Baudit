@@ -14,7 +14,6 @@ public class Problem implements Comparable<Problem> {
     private RecordTreeSet recordTreeSet;
 
     private long timestamp;
-    private String dateString;
     private String title;
 
     public Problem() {
@@ -22,7 +21,6 @@ public class Problem implements Comparable<Problem> {
         this.recordTreeSet = new RecordTreeSet();
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        this.dateString = dateFormat.format(date);
         this.timestamp = date.getTime();
     }
 

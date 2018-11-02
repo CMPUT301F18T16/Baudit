@@ -1,6 +1,5 @@
 package ca.klapstein.baudit.Data;
 
-import java.util.Iterator;
 
 /**
  * Class that represents a Patient.
@@ -28,7 +27,7 @@ public class Patient extends User implements Comparable<Patient> {
     /* UC-02.03.01: edit record of medical problem TODO: get problem from treeset then replace edited record or done in record?
      public void editRecord(Problem problem, Record editedRecord, Record record){ } */
 
-    // UC-02.03.03: remind patient to add photo TODO
+    // UC-02.03.03: remind patient to add photo, implement later
 
     @Override
     public int compareTo(Patient p) {

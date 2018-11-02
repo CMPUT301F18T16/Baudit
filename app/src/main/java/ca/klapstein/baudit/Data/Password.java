@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ca.klapstein.baudit.Managers.BauditRemoteManager;
-
 /**
  * Data class representing a Baudit's {@code User}'s password.
  *

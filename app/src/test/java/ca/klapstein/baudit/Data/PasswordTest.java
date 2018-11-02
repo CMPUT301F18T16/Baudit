@@ -37,10 +37,10 @@ public class PasswordTest {
         try{
             Password password0 = new Password("test1234");
             assertFalse(password0.getPassword().equals("test123"));
-            assertTrue(password0.getPassword().equals(null));
+            assertTrue(password0.getPassword() == null);
             Password password1 = new Password("abcdefghijk1234567890");
             assertFalse(password1.getPassword().equals("abcdefghijk1234567890"));
-            assertTrue(password1.getPassword().equals(null));
+            assertTrue(password1.getPassword() == null);
         } catch (IllegalArgumentException e){
             success = false;
         }

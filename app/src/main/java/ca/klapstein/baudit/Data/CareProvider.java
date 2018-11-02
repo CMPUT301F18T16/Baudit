@@ -1,9 +1,5 @@
 package ca.klapstein.baudit.Data;
 
-import java.util.Iterator;
-
-import ca.klapstein.baudit.Activities.LogoutDialog;
-import ca.klapstein.baudit.Managers.BauditRemoteManager;
 
 /**
  * Class that represents a Care Provider.
@@ -39,6 +35,6 @@ public class CareProvider extends User {
         this.getAssignedPatientTreeSet().add(patient);
     }
 
-    // UC-07.02.01: list all patients TODO: not sure how to
+    // UC-07.02.01: list all patients
     // This is implemented in PatientListActivity
 }

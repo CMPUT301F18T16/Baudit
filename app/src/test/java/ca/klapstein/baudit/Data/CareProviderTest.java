@@ -65,11 +65,11 @@ public class CareProviderTest {
 
     @Test
     public void assignPatient(){
-        Patient patient0 = new Patient();
+        Patient patient = new Patient();
         CareProvider cp = new CareProvider();
-        cp.assignPatient(patient0);
+        cp.assignPatient(patient);
         PatientTreeSet patientTreeSet = cp.getAssignedPatientTreeSet();
-        assertTrue(patientTreeSet.contains(patient0));
+        assertTrue(patientTreeSet.contains(patient));
 
         Patient patient1 = new Patient();
         cp.assignPatient(patient1);
@@ -118,7 +118,7 @@ public class CareProviderTest {
         CareProvider cp = new CareProvider();
         ContactInfo contactInfo = new ContactInfo();
 
-        Email email = new Email("John@hotmail.com");
+        Email email = new Email("Johnnymail.com");
         contactInfo.setEmail(email);
         PhoneNumber number = new PhoneNumber("780-123-4567");
         contactInfo.setPhoneNumber(number);

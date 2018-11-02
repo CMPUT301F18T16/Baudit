@@ -2,12 +2,6 @@ package ca.klapstein.baudit.Data;
 
 import android.support.annotation.NonNull;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.sql.Timestamp;
-import java.util.TimeZone;
-
 /**
  * Abstract class representing a basic account/user of Baudit.
  */
