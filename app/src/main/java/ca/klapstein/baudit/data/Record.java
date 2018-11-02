@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -14,7 +15,7 @@ import java.util.zip.DataFormatException;
  *
  * @see Problem
  */
-public class Record {
+public class Record implements Comparable<Record> {
     private static final String TAG = "Record";
 
     public String timestamp;
@@ -29,9 +30,10 @@ public class Record {
         this.setTimeStamp();
     }
 
-    public String setTimeStamp() {
-        DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        return date.format(new Date());
+
+    public void setTimeStamp() {
+        DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+        this.timestamp = date.format(new Date());
     }
 
     public String getTimestamp(){
@@ -73,5 +75,10 @@ public class Record {
 
     public String[] getKeywords(){
         return this.keywords;
+    }
+
+    @Override
+    public int compareTo(@NonNull Record record) {
+        return this.getTimestamp().compareTo(record.getTimestamp());
     }
 }

@@ -22,22 +22,24 @@ public class RecordTest {
 
     @Test
     public void testNewRecord() {
-        Record record = new Record();
         Record record1 = new Record();
-        assertNotNull(record.timestamp);
-        assertNotNull(record1.timestamp);
-        assertNotEquals(record.timestamp, record1.timestamp);
+        Record record2 = new Record();
+        assertNotNull(record1.getTimestamp());
+        assertNotNull(record2.getTimestamp());
+        assertNotEquals(record1.timestamp, record2.timestamp);
     }
 
+    @Test
     public void testTitle(){
         Record record = new Record();
         record.setTitle("Test title");
         assertEquals("Test title", record.getTitle());
     }
 
+    @Test
     public void testComment(){
         Record record = new Record();
-        record.setTitle("Just testing out a comment here");
+        record.setComment("Just testing out a comment here");
         assertEquals("Just testing out a comment here", record.getComment());
     }
 
