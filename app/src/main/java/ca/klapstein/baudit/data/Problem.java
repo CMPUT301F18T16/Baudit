@@ -28,25 +28,27 @@ public class Problem {
     }
 
     //BauditRemoteManager: handles data for remote
-    private void setTitle(@NonNull String title)throws IllegalArgumentException {
+    public void setTitle(@NonNull String title)throws IllegalArgumentException {
         int len = title.length();
-        if(len < 30){
+        if( len < 30 && 0 < len ){
             this.title = title;
         } else throw new IllegalArgumentException();
+
+
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         int len = description.length();
         if (len < 300){
             this.description = description;
         } else throw new IllegalArgumentException();
     }
 
-    private String getTitle(){
+    public String getTitle(){
         return this.title;
     }
 
-    private String getDescription(){
+    public String getDescription(){
         return this.description;
     }
 
