@@ -6,5 +6,7 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
 public interface ProblemListView {
     void addProblem(Problem problem);
 
+    void editProblem(Problem problem, final int position);
+
     void setProblemList(ProblemTreeSet problemTreeSet);
 }

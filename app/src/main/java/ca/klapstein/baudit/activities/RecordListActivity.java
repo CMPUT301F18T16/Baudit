@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.RecordAdapter;
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.presenters.RecordListPresenter;
@@ -70,6 +71,11 @@ public class RecordListActivity extends AppCompatActivity implements DeleteRecor
 
     @Override
     public void addRecord(Record record) {
+
+    }
+
+    @Override
+    public void editRecord(Patient patient, int position) {
 
     }
 

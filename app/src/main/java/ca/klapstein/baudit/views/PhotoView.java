@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.views;
 
-public interface PhotoView {
+import android.graphics.Bitmap;
 
+public interface PhotoView {
+    void setPhoto(Bitmap bitmap);
 }

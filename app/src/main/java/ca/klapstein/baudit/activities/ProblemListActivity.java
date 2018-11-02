@@ -74,6 +74,11 @@ public class ProblemListActivity extends AppCompatActivity implements DeleteProb
     }
 
     @Override
+    public void editProblem(Problem problem, int position) {
+
+    }
+
+    @Override
     public void setProblemList(ProblemTreeSet problemTreeSet) {
 
     }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.adapters.PatientAdapter;
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.views.PatientListView;
 
@@ -34,5 +35,20 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
 
     private void onPatientListItemClick(View view, final int position) {
         // TODO: create add menu
+    }
+
+    @Override
+    public void addPatient(Patient patient) {
+
+    }
+
+    @Override
+    public void editPatient(Patient patient, int position) {
+
+    }
+
+    @Override
+    public void setPatientList(PatientTreeSet patientList) {
+
     }
 }
