@@ -4,8 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class ProblemTest {
@@ -25,6 +28,23 @@ public class ProblemTest {
         assertNotNull(problem);
         assertEquals("test_title", problem.getTitle());
         assertEquals("",problem.getDescription());
+    }
+
+    @Test
+    public void testSetTimeStamp() {
+        Problem problem1 = new Problem("test1", "");
+       // System.out.print(problem1.getTimestamp());
+        assertNotNull(problem1.getTimestamp());
+        Problem problem2 = new Problem("test2", "");
+       // System.out.print(problem2.getTimestamp());
+        assertNotNull(problem2.getTimestamp());
+        assertNotEquals(problem1.getTimestamp(), problem2.getTimestamp());
+    }
+
+    @Test
+    public void testGetTimeStamp(){
+        Problem problem = new Problem("test", "");
+        assertNotNull(problem.getTimestamp());
     }
 
     @Test
@@ -51,6 +71,7 @@ public class ProblemTest {
         }
         assertEquals("test_description", problem.getDescription());
     }
+
 
     @Test
     public void testSetTitleValid(){

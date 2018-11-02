@@ -29,9 +29,9 @@ public class ProblemTreeSetTest {
         Problem problem2 = new Problem("title2", "2");
         Problem problem3 = new Problem("title3", "3");
         Problem problem4 = new Problem("title4", "4");
+
         assertTrue(problemTreeSet.add(problem1));
         assertTrue(problemTreeSet.add(problem2));
-
         assertTrue(problemTreeSet.contains(problem2));
 
         assertTrue(problemTreeSet.remove(problem2));
