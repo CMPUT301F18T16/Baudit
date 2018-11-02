@@ -33,8 +33,8 @@ public class BodyPhotoCoords {
      * @param posY {@code int}
      * @return {@code boolean} {@code true} if the integer pair is valid, otherwise {@code false}.
      */
-    public boolean isValid(int posX, int posY) {
-        return posX > 0 && posY > 0;
+    static public boolean isValid(int posX, int posY) {
+        return posX >= 0 && posY >= 0;
     }
 
     public int getPosX() {
