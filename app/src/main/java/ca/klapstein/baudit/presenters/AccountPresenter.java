@@ -15,7 +15,7 @@ abstract public class AccountPresenter<V extends View> extends Presenter<V> {
         super(view);
     }
 
-    public boolean validUser(String username, String email) {
+    public boolean validateUser(String username, String email) {
         return true;
     }
 }
