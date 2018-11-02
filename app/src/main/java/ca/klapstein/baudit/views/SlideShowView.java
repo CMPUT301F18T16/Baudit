@@ -1,9 +1,9 @@
 package ca.klapstein.baudit.views;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-public interface SlideShowView {
-    void setImages(ArrayList<Image> images);
+public interface SlideShowView extends View {
+    void setImages(ArrayList<Bitmap> images);
 }

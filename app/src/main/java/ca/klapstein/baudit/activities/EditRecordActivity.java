@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditRecordPresenter;
 import ca.klapstein.baudit.views.EditRecordView;
@@ -14,9 +15,9 @@ import java.util.Date;
  *
  * @see ca.klapstein.baudit.data.Record
  */
-public class EditRecordActivity extends RecordActivity<EditRecordPresenter> implements EditRecordView {
+public class EditRecordActivity extends AppCompatActivity implements EditRecordView {
     private static final String TAG = "EditRecordActivity";
-
+    private EditRecordPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,11 @@ public class EditRecordActivity extends RecordActivity<EditRecordPresenter> impl
 
     @Override
     public void setDate(Date date) {
+
+    }
+
+    @Override
+    public void setDateError() {
 
     }
 
@@ -62,12 +68,27 @@ public class EditRecordActivity extends RecordActivity<EditRecordPresenter> impl
     }
 
     @Override
-    public void setBODYLocation() {
+    public void setGEOLocationError() {
 
     }
 
     @Override
-    public void setBODYPhoto() {
+    public void setBodyLocation() {
+
+    }
+
+    @Override
+    public void setBodyLocationError() {
+
+    }
+
+    @Override
+    public void setBodyPhoto() {
+
+    }
+
+    @Override
+    public void setBodyPhotoError() {
 
     }
 }

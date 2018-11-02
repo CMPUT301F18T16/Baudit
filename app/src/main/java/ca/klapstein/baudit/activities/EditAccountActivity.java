@@ -1,10 +1,8 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.presenters.EditAccountPresenter;
 import ca.klapstein.baudit.views.EditAccountView;
 
@@ -20,8 +18,6 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     private static final String TAG = "EditAccountActivity";
 
     private EditAccountPresenter presenter;
-    @NonNull
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +44,11 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
     @Override
     public void setUserNameError() {
+
+    }
+
+    @Override
+    public void commitEditAccount() {
 
     }
 }

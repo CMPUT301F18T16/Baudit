@@ -1,13 +1,23 @@
 package ca.klapstein.baudit.presenters;
 
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.views.LocationView;
 
-public class LocationPresenter {
+/**
+ * MVP presenter for presenting locational data.
+ *
+ * @see LocationView
+ */
+public class LocationPresenter extends Presenter<LocationView> {
     private static final String TAG = "LocationPresenter";
 
-    private LocationView view;
+    public GeoLocation location;
 
     public LocationPresenter(LocationView view) {
-        this.view = view;
+        super(view);
+    }
+
+    public boolean validateLocation(long posx, long posy) {
+        return true;
     }
 }

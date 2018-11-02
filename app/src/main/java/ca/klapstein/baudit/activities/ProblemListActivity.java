@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.ProblemListPresenter;
 import ca.klapstein.baudit.views.ProblemListView;

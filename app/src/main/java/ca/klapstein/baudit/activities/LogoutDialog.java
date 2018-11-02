@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.views.LogoutView;
 
 /**
@@ -17,9 +16,6 @@ import ca.klapstein.baudit.views.LogoutView;
  */
 public class LogoutDialog extends DialogFragment implements LogoutView {
     private static final String TAG = "LogoutDialog";
-
-    @NonNull
-    private User user;
 
     @NonNull
     @Override

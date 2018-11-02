@@ -1,7 +1,9 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter;
 import ca.klapstein.baudit.views.CreateCareProviderAccountView;
 
 /**
@@ -10,13 +12,15 @@ import ca.klapstein.baudit.views.CreateCareProviderAccountView;
  *
  * @see ca.klapstein.baudit.data.CareProvider
  */
-public class CreateCareProviderAccountActivity extends AccountCreateActivity implements CreateCareProviderAccountView {
+public class CreateCareProviderAccountActivity extends AppCompatActivity implements CreateCareProviderAccountView {
     private static final String TAG = "CreateCareProviderAccountActivity";
 
+    private CreateCareProviderAccountPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_care_provider_account);
+        this.presenter = new CreateCareProviderAccountPresenter(this);
     }
 
     @Override
@@ -52,5 +56,10 @@ public class CreateCareProviderAccountActivity extends AccountCreateActivity imp
     @Override
     public void setPasswordError() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

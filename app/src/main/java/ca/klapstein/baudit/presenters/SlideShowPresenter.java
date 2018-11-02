@@ -2,12 +2,15 @@ package ca.klapstein.baudit.presenters;
 
 import ca.klapstein.baudit.views.SlideShowView;
 
-public class SlideShowPresenter {
+/**
+ * MVP presenter for presenting a series of images on a {@code SlideShowView}.
+ *
+ * @see SlideShowView
+ */
+public class SlideShowPresenter extends Presenter<SlideShowView> {
     private static final String TAG = "SlideShowPresenter";
 
-    private SlideShowView view;
-
     public SlideShowPresenter(SlideShowView view) {
-        this.view = view;
+        super(view);
     }
 }

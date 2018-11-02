@@ -5,14 +5,19 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.ProblemListView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
-public class ProblemListPresenter {
+/**
+ * MVP presenter for presenting a {@code ProblemTreeSet} on a {@code ProblemListView}.
+ *
+ * @see ProblemTreeSet
+ * @see ProblemListView
+ */
+public class ProblemListPresenter extends Presenter<ProblemListView> {
     private static final String TAG = "ProblemListPresenter";
 
-    private ProblemListView view;
     private ProblemTreeSet problemTreeSet;
 
     public ProblemListPresenter(ProblemListView view) {
-        this.view = view;
+        super(view);
     }
 
     public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {

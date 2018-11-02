@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordListPresenter;
 import ca.klapstein.baudit.views.RecordListView;
@@ -40,7 +39,7 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         recordRecyclerView.setAdapter(adapter);
     }
 
-   @Override
+    @Override
    public void update() {
         this.adapter.notifyDataSetChanged();
    }

@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.views.DeleteView;
 
 /**
  * Abstract class defining the basis for {@code DeleteProblemDialog} and {@code DeleteRecordDialog}.
@@ -15,7 +16,7 @@ import ca.klapstein.baudit.R;
  * @see DeleteProblemDialog
  * @see DeleteRecordDialog
  */
-abstract public class DeleteDialog extends DialogFragment {
+abstract public class DeleteDialog extends DialogFragment implements DeleteView {
     private static final String TAG = "DeleteDialog";
 
     @NonNull
