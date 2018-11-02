@@ -5,6 +5,8 @@ import java.util.Date;
 public interface RecordView extends View {
     void setDate(Date date);
 
+    void setDateError();
+
     void setTitle(String title);
 
     void setTitleError();
@@ -14,6 +16,14 @@ public interface RecordView extends View {
     void setCommentError();
 
     void setGEOLocation();
-    void setBODYLocation();
-    void setBODYPhoto();
+
+    void setGEOLocationError();
+
+    void setBodyLocation();
+
+    void setBodyLocationError();
+
+    void setBodyPhoto();
+
+    void setBodyPhotoError();
 }

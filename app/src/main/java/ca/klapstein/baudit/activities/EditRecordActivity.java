@@ -36,6 +36,11 @@ public class EditRecordActivity extends RecordActivity<EditRecordPresenter> impl
     }
 
     @Override
+    public void setDateError() {
+
+    }
+
+    @Override
     public void setTitle(String title) {
 
     }
@@ -61,12 +66,27 @@ public class EditRecordActivity extends RecordActivity<EditRecordPresenter> impl
     }
 
     @Override
-    public void setBODYLocation() {
+    public void setGEOLocationError() {
 
     }
 
     @Override
-    public void setBODYPhoto() {
+    public void setBodyLocation() {
+
+    }
+
+    @Override
+    public void setBodyLocationError() {
+
+    }
+
+    @Override
+    public void setBodyPhoto() {
+
+    }
+
+    @Override
+    public void setBodyPhotoError() {
 
     }
 }

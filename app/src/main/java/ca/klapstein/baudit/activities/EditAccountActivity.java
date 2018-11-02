@@ -46,4 +46,9 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     public void setUserNameError() {
 
     }
+
+    @Override
+    public void commitEditAccount() {
+
+    }
 }

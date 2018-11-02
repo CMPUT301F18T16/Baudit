@@ -8,4 +8,6 @@ public interface EditAccountView extends View {
     void setUsername(String string);
 
     void setUserNameError();
+
+    void commitEditAccount();
 }

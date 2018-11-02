@@ -5,6 +5,8 @@ import java.util.Date;
 public interface ProblemView extends View {
     void setDateStarted(Date date);
 
+    void setDateStartedError();
+
     void setTitle(String title);
 
     void setTitleError();

@@ -36,6 +36,11 @@ public class EditProblemActivity extends ProblemActivity<EditProblemPresenter> i
     }
 
     @Override
+    public void setDateStartedError() {
+
+    }
+
+    @Override
     public void setTitle(String title) {
 
     }

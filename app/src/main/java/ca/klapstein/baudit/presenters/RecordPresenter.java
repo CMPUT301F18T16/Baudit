@@ -19,5 +19,8 @@ abstract public class RecordPresenter<V extends RecordView> extends Presenter<V>
         super(view);
     }
 
+    public boolean validateRecord(String title, String comment) {
+        return true;
+    }
 
 }

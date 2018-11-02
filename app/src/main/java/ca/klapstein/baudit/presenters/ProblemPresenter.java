@@ -3,6 +3,8 @@ package ca.klapstein.baudit.presenters;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.views.ProblemView;
 
+import java.util.Date;
+
 /**
  * Abstract MVP presenter for presenting {@code Problem}s.
  *
@@ -17,5 +19,9 @@ abstract public class ProblemPresenter<V extends ProblemView> extends Presenter<
 
     ProblemPresenter(V view) {
         super(view);
+    }
+
+    public boolean validateProblem(String title, String description, Date startDate) {
+        return true;
     }
 }

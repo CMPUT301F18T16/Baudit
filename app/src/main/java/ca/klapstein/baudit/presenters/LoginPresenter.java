@@ -25,7 +25,6 @@ public class LoginPresenter extends Presenter<LoginView> {
     }
 
     public boolean validateLogin(String username, String password){
-        // TODO: implement
         return true;
     }
 }
