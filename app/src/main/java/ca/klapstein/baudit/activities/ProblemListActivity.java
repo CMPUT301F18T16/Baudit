@@ -23,8 +23,7 @@ import ca.klapstein.baudit.views.ProblemRowView;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class ProblemListActivity extends AppCompatActivity
-    implements ProblemListView, DeleteProblemDialog.onDeleteProblemListener {
+public class ProblemListActivity extends AppCompatActivity implements ProblemListView {
     private static final String TAG = "ProblemListActivity";
 
     private ProblemListPresenter presenter;
@@ -45,50 +44,9 @@ public class ProblemListActivity extends AppCompatActivity
         problemRecyclerView.setAdapter(adapter);
     }
 
-    /**
-     * Launch a EditProblemActivity with the selected Problem noted by its position within the {@code ProblemTreeSet}.
-     *
-     * @param view     {@code View}
-     * @param position {@code int} the position of the selected Problem within the {@code ProblemTreeSet}.
-     */
-    private void onProblemListItemClick(View view, final int position) {
-        Intent intent = new Intent(this, EditProblemActivity.class);
-        // TODO: add required args
-        startActivity(intent);
-    }
-
-    /**
-     * Launch a AddProblemActivity.
-     */
-    private void onAddProblemClick() {
-        Intent intent = new Intent(this, AddProblemActivity.class);
-        // TODO: add required args
-        startActivity(intent);
-    }
-
-    /**
-     * Dialog callback for when a problem is deleted.
-     *
-     * @param problem {@code Problem}
-     */
     @Override
-    public void onDeleteProblem(Problem problem) {
-        // TODO: implement
-    }
-
-    @Override
-    public void addProblem(Problem problem) {
-
-    }
-
-    @Override
-    public void editProblem(Problem problem, int position) {
-
-    }
-
-    @Override
-    public void setProblemList(ProblemTreeSet problemTreeSet) {
-
+    public void update() {
+        this.adapter.notifyDataSetChanged();
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {

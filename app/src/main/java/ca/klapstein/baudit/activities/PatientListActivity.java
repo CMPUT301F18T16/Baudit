@@ -6,13 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.presenters.PatientListPresenter;
 import ca.klapstein.baudit.views.PatientListView;
 import ca.klapstein.baudit.views.PatientRowView;
@@ -43,23 +40,9 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         patientRecyclerView.setAdapter(adapter);
     }
 
-    private void onPatientListItemClick(View view, final int position) {
-        // TODO: create add menu
-    }
-
     @Override
-    public void addPatient(Patient patient) {
-
-    }
-
-    @Override
-    public void editPatient(Patient patient, int position) {
-
-    }
-
-    @Override
-    public void setPatientList(PatientTreeSet patientList) {
-
+    public void update() {
+        this.adapter.notifyDataSetChanged();
     }
 
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
