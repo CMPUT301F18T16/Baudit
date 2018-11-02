@@ -37,7 +37,7 @@ public class Username {
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
-    public boolean isValid(String username) {
+    static public boolean isValid(String username) {
         BauditRemoteManager remoteManager = new BauditRemoteManager();
         int len = username.length();
         return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
