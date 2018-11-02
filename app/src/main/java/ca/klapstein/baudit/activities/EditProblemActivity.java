@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditProblemPresenter;
 import ca.klapstein.baudit.views.EditProblemView;
@@ -14,8 +15,9 @@ import java.util.Date;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class EditProblemActivity extends ProblemActivity<EditProblemPresenter> implements EditProblemView {
+public class EditProblemActivity extends AppCompatActivity implements EditProblemView {
     private static final String TAG = "EditProblemActivity";
+    private EditProblemPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

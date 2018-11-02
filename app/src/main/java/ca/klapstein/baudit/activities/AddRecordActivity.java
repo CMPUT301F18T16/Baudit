@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.AddRecordPresenter;
 import ca.klapstein.baudit.views.AddRecordView;
@@ -14,8 +15,9 @@ import java.util.Date;
  * @see ca.klapstein.baudit.data.Record
  * @see ca.klapstein.baudit.data.Problem
  */
-public class AddRecordActivity extends RecordActivity<AddRecordPresenter> implements AddRecordView {
+public class AddRecordActivity extends AppCompatActivity implements AddRecordView {
     private static final String TAG = "AddRecordActivity";
+    private AddRecordPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,9 +1,10 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
+import ca.klapstein.baudit.views.LoginView;
 
 /**
  * Activity presenting a login page for a Patient Baudit. Providing a page for the {@code Patient}
@@ -14,7 +15,9 @@ import ca.klapstein.baudit.presenters.LoginPresenter;
  * @see ca.klapstein.baudit.data.Password
  * @see ca.klapstein.baudit.data.Patient
  */
-public class LoginPatientActivity extends LoginActivity {
+public class LoginPatientActivity extends AppCompatActivity implements LoginView {
+
+    private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +25,6 @@ public class LoginPatientActivity extends LoginActivity {
         setContentView(R.layout.activity_login_patient);
 
         presenter = new LoginPresenter(this);
-    }
-
-    /**
-     * Attempt a login as a {@code Patient}.
-     *
-     * @return {@code true} if the login was successful, otherwise return {@code false}.
-     */
-    public boolean login(){
-        // TODO: implement
-        return true;
-    }
-
-    /**
-     * After logging in as a {@code Patient} start the {@code ProblemListActivity}.
-     *
-     * @see ProblemListActivity
-     */
-    public void onLogin() {
-        Intent intent = new Intent(this, ProblemListActivity.class);
-        startActivity(intent);
     }
 
     @Override

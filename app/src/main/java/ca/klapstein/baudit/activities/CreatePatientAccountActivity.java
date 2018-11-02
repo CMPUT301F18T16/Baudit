@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.CreatePatientAccountPresenter;
 import ca.klapstein.baudit.views.CreatePatientAccountView;
@@ -11,7 +12,7 @@ import ca.klapstein.baudit.views.CreatePatientAccountView;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class CreatePatientAccountActivity extends AccountCreateActivity implements CreatePatientAccountView {
+public class CreatePatientAccountActivity extends AppCompatActivity implements CreatePatientAccountView {
     private static final String TAG = "CreatePatientAccountActivity";
 
     private CreatePatientAccountPresenter presenter;
