@@ -2,6 +2,7 @@ package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.CreatePatientAccountPresenter;
 import ca.klapstein.baudit.views.CreatePatientAccountView;
 
 /**
@@ -13,10 +14,14 @@ import ca.klapstein.baudit.views.CreatePatientAccountView;
 public class CreatePatientAccountActivity extends AccountCreateActivity implements CreatePatientAccountView {
     private static final String TAG = "CreatePatientAccountActivity";
 
+    private CreatePatientAccountPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_patient_account);
+        this.presenter = new CreatePatientAccountPresenter(this);
+
     }
 
     @Override
@@ -47,5 +52,10 @@ public class CreatePatientAccountActivity extends AccountCreateActivity implemen
     @Override
     public void setPasswordError() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

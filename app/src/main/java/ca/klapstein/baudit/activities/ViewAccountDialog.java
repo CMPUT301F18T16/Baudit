@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.User;
-import ca.klapstein.baudit.presenters.AccountPresenter;
+import ca.klapstein.baudit.presenters.ViewAccountPresenter;
 import ca.klapstein.baudit.views.ViewAccountView;
 
 /**
@@ -20,7 +20,7 @@ import ca.klapstein.baudit.views.ViewAccountView;
 public class ViewAccountDialog extends DialogFragment implements ViewAccountView {
     private static final String TAG = "ViewAccountDialog";
 
-    private AccountPresenter presenter;
+    private ViewAccountPresenter presenter;
 
     @NonNull
     private User user;
@@ -34,7 +34,7 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
         builder.setView(view);
         // TODO: more implementation
 
-        presenter = new AccountPresenter<ViewAccountView>(this);
+        presenter = new ViewAccountPresenter(this);
 
         // Create the AlertDialog object and return it
         return builder.create();

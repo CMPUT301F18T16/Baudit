@@ -4,9 +4,11 @@ import ca.klapstein.baudit.managers.BauditDataManager;
 import ca.klapstein.baudit.views.View;
 
 /**
- * Abstract MVP presenter acting as a base template to build presenters off of.
+ * Abstract MVP presenter base class.
  *
- * @param <V>
+ * @param <V> the type of MVP view to apply to the presenter
+ *
+ * @see View
  */
 abstract public class Presenter<V extends View> {
 
@@ -17,4 +19,9 @@ abstract public class Presenter<V extends View> {
         this.view = view;
         this.dataManager = new BauditDataManager();
     }
+//
+//    /**
+//     * Hook to define behavior to be done when a Activity notifies that they have started.
+//     */
+//    abstract void notifyStart();
 }
