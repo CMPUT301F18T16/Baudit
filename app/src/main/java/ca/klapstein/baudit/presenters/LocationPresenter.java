@@ -7,12 +7,10 @@ import ca.klapstein.baudit.views.LocationView;
  *
  * @see LocationView
  */
-public class LocationPresenter {
+public class LocationPresenter extends Presenter<LocationView> {
     private static final String TAG = "LocationPresenter";
 
-    private LocationView view;
-
     public LocationPresenter(LocationView view) {
-        this.view = view;
+        super(view);
     }
 }

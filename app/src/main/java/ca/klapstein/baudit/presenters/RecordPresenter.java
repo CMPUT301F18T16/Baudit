@@ -10,13 +10,14 @@ import ca.klapstein.baudit.views.RecordView;
  * @see Record
  * @see RecordView
  */
-abstract public class RecordPresenter<V extends RecordView> {
+abstract public class RecordPresenter<V extends RecordView> extends Presenter<V> {
     private static final String TAG = "RecordPresenter";
 
     protected Record record;
-    private V view;
 
     RecordPresenter(V view) {
-        this.view = view;
+        super(view);
     }
+
+
 }

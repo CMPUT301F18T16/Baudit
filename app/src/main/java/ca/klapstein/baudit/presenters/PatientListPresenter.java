@@ -11,12 +11,13 @@ import ca.klapstein.baudit.views.PatientRowView;
  * @see PatientTreeSet
  * @see PatientListView
  */
-public class PatientListPresenter {
-    private PatientListView view;
+public class PatientListPresenter extends Presenter<PatientListView> {
+    private static final String TAG = "PatientListPresenter";
+
     private PatientTreeSet patientTreeSet;
 
     public PatientListPresenter(PatientListView view) {
-        this.view = view;
+        super(view);
     }
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {

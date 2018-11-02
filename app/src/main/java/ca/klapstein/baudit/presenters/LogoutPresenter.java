@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LogoutView;
 
 /**
@@ -11,14 +12,15 @@ import ca.klapstein.baudit.views.LogoutView;
  * @see User
  * @see LogoutView
  */
-public class LogoutPresenter {
+public class LogoutPresenter extends Presenter<LogoutView> {
     private static final String TAG = "LogoutPresenter";
 
-    private LogoutView view;
+    private BauditRemoteManager remoteManager;
     private User user;
 
     public LogoutPresenter(LogoutView view){
-        this.view = view;
+        super(view);
+        this.remoteManager = new BauditRemoteManager();
     }
 
     public void validateLogout(){

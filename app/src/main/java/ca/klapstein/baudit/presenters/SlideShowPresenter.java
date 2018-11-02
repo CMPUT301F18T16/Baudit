@@ -7,12 +7,10 @@ import ca.klapstein.baudit.views.SlideShowView;
  *
  * @see SlideShowView
  */
-public class SlideShowPresenter {
+public class SlideShowPresenter extends Presenter<SlideShowView> {
     private static final String TAG = "SlideShowPresenter";
 
-    private SlideShowView view;
-
     public SlideShowPresenter(SlideShowView view) {
-        this.view = view;
+        super(view);
     }
 }

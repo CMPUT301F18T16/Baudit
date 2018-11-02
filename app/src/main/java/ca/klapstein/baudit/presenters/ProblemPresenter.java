@@ -10,13 +10,12 @@ import ca.klapstein.baudit.views.ProblemView;
  * @see Problem
  * @see ProblemView
  */
-abstract public class ProblemPresenter<V extends ProblemView> {
+abstract public class ProblemPresenter<V extends ProblemView> extends Presenter<V> {
     private static final String TAG = "ProblemPresenter";
 
     protected Problem problem;
-    private V view;
 
-    public ProblemPresenter(V view) {
-        this.view = view;
+    ProblemPresenter(V view) {
+        super(view);
     }
 }

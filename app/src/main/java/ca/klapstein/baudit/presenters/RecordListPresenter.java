@@ -11,14 +11,13 @@ import ca.klapstein.baudit.views.RecordRowView;
  * @see RecordTreeSet
  * @see RecordListView
  */
-public class RecordListPresenter {
+public class RecordListPresenter extends Presenter<RecordListView> {
     private static final String TAG = "RecordListPresenter";
 
-    private RecordListView view;
     private RecordTreeSet recordTreeSet;
 
     public RecordListPresenter(RecordListView view) {
-        this.view = view;
+        super(view);
     }
 
     public void onBindRecordRowViewAtPosition(RecordRowView rowView, int position) {

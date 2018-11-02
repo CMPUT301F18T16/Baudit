@@ -1,6 +1,6 @@
 package ca.klapstein.baudit.views;
 
-public interface CreateUserView {
+public interface CreateUserView extends View {
     void setEmail(String string);
     void setEmailError();
 

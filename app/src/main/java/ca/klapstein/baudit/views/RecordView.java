@@ -2,7 +2,7 @@ package ca.klapstein.baudit.views;
 
 import java.util.Date;
 
-public interface RecordView {
+public interface RecordView extends View {
     void setDate(Date date);
 
     void setTitle(String title);

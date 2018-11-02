@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;
 
@@ -12,14 +13,15 @@ import ca.klapstein.baudit.views.LogoutView;
  * @see User
  * @see LogoutView
  */
-public class LoginPresenter {
+public class LoginPresenter extends Presenter<LoginView> {
     private static final String TAG = "LoginPresenter";
 
-    private LoginView view;
+    private BauditRemoteManager remoteManager;
     private User user;
 
     public LoginPresenter(LoginView view){
-        this.view = view;
+        super(view);
+        this.remoteManager = new BauditRemoteManager();
     }
 
     public boolean validateLogin(String username, String password){
