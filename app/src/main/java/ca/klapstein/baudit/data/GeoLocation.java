@@ -17,7 +17,11 @@ public class GeoLocation {
     }
 
     public void setLon(double lon) {
-        this.lon = lon;
+        if (isValidLon(lon)) {
+            this.lon = lon;
+        } else {
+            throw new IllegalArgumentException("Invalid Longitude value");
+        }
     }
 
     public double getLat() {
@@ -25,11 +29,18 @@ public class GeoLocation {
     }
 
     public void setLat(double lat) {
-        this.lat = lat;
+        if (isValidLat(lat)) {
+            this.lat = lat;
+        } else {
+            throw new IllegalArgumentException("Invalid Latitude value");
+        }
     }
 
-    public boolean isValid(double coord) {
-        // TODO: implement
-        return true;
+    public boolean isValidLat(double lat) {
+        return lat >= -90 && lat <= 90;
+    }
+
+    public boolean isValidLon(double lon) {
+        return lon >= -180 && lon <= 180;
     }
 }
