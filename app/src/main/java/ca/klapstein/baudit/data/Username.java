@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 
 /**
@@ -25,15 +24,23 @@ public class Username {
     }
 
     public void setUsername(@NonNull String username) throws IllegalArgumentException{
-        BauditRemoteManager remoteManager = new BauditRemoteManager();
-        int len = username.length();
-        if (len < 8 || len > 20) {
-            throw new IllegalArgumentException("Invalid username length. Expected 8-20.");
-        } else if (remoteManager.uniqueID(username)) {
-            throw new IllegalArgumentException("Username not unique.");
+        if (!isValid(username)) {
+            throw new IllegalArgumentException("Invalid username");
         } else {
             this.username = username;
         }
+    }
+
+    /**
+     * Check that a {@code User}'s username is valid.
+     *
+     * @param username {@code String} the username string to test.
+     * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
+     */
+    public boolean isValid(String username) {
+        BauditRemoteManager remoteManager = new BauditRemoteManager();
+        int len = username.length();
+        return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
     }
 
     @Override
