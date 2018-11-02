@@ -17,8 +17,7 @@ public class Record {
     private String timestamp;
     private String title;
     private String comment;
-    private double xCoord;
-    private double yCoord;
+    private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
     private ArrayList<String> keywords;
 
@@ -69,5 +68,13 @@ public class Record {
 
     public ArrayList<String> getKeywords(){
         return this.keywords;
+    }
+
+    public GeoLocation getGeoLocation() {
+        return geoLocation;
+    }
+
+    public void setGeoLocation(GeoLocation geoLocation) {
+        this.geoLocation = geoLocation;
     }
 }
