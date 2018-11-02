@@ -41,12 +41,6 @@ public class BodyPhotoCoords {
         return coords.first;
     }
 
-    public void setPosX(int posX) throws IllegalArgumentException {
-        if (posX <= 0) {
-            throw new IllegalArgumentException("invalid BodyPhotoCoords");
-        }
-    }
-
     public int getPosY() {
         return coords.second;
     }
