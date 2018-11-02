@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
  *
  * @see Patient
  */
-public class Problem {
+public class Problem implements Comparable<Problem> {
     private static final String TAG = "Problem";
     private String title;
     private String description;
@@ -53,4 +53,8 @@ public class Problem {
     }
 
 
+    @Override
+    public int compareTo(@NonNull Problem problem) {
+      return this.getTitle().compareTo(problem.getTitle());
+    }
 }
