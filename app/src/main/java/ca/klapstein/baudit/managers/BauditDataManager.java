@@ -36,6 +36,10 @@ public class BauditDataManager {
         return true;
     }
 
+    public boolean deleteProblem(Problem problem) {
+        return true;
+    }
+
     public PatientTreeSet getPatients() {
         return null;
     }
@@ -49,6 +53,10 @@ public class BauditDataManager {
     }
 
     public boolean commitRecord(Record record) {
+        return true;
+    }
+
+    public boolean deleteRecord(Record record) {
         return true;
     }
 }
