@@ -27,7 +27,7 @@ public class PatientTest {
     private ContactInfo contactInfo;
     private PhoneNumber phoneNumber;
     private Email email;
-    private Username userName;
+    private Username username;
     private Password password;
     private Patient patient;
 
@@ -42,9 +42,9 @@ public class PatientTest {
         this.email = new Email(this.emailInput);
         contactInfo.setEmail(this.email);
         contactInfo.setPhoneNumber(this.phoneNumber);
-        this.userName = new Username(this.usernameInput);
+        this.username = new Username(this.usernameInput);
         this.password = new Password(this.passwordInput);
-        this.patient = new Patient(this.userName, this.password, this.contactInfo);
+        this.patient = new Patient(this.username, this.password, this.contactInfo);
     }
 
     @Parameterized.Parameters
@@ -61,7 +61,7 @@ public class PatientTest {
 
     @Test
     public void testGetPatientUsername() {
-        assertEquals(usernameInput, patient.getUsername());
+        assertEquals(username, patient.getUsername());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class PatientTest {
     public void testSetPatientContactInfo() {
 
         ContactInfo newContactInfo = new ContactInfo();
-        PhoneNumber newPhoneNumber = new PhoneNumber("123-4567-890");
+        PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
         Email newEmail = new Email("newemail@example.com");
         newContactInfo.setEmail(newEmail);
         newContactInfo.setPhoneNumber(newPhoneNumber);
