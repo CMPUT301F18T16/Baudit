@@ -22,11 +22,6 @@ public class Problem implements Comparable<Problem> {
         return recordTreeSet;
     }
 
-
-//Create Medical Problem Object
-    //Add,edit,delete   Medical Problem    UC-01.01.01, UC-01.02.01, UC-01.03.01, UC-01.04.0, User has a
-    //List,Add,Edit     Record to Medical Problem UC-02.01.01, UC-02.02.01, UC-02.03.01
-
     public Problem(@NonNull String title, String description) throws IllegalArgumentException{
         this.setTitle(title);
         this.setDescription(description);
@@ -45,7 +40,6 @@ public class Problem implements Comparable<Problem> {
     }
 
 
-    //BauditRemoteManager: handles data for remote
     public void setTitle(@NonNull String title)throws IllegalArgumentException {
         int len = title.length();
         if( len < 30 && 0 < len ){
