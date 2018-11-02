@@ -1,4 +1,10 @@
 package ca.klapstein.baudit.data;
 
-public class RecordPhoto {
+import android.graphics.Bitmap;
+
+public class RecordPhoto implements Photo {
+    @Override
+    public Bitmap getBitmap() {
+        return null;
+    }
 }

@@ -56,7 +56,6 @@ public class Username {
         return filename.matches("^.*[^a-zA-Z0-9 ].*$");
     }
 
-
     @Override
     public int hashCode() {
         int result = 17;

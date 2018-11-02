@@ -20,12 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.AccountCreateActivity" />
         <activity android:name=".activities.CreateCareProviderAccountActivity" />
         <activity android:name=".activities.EditAccountActivity" />
-        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.CreatePatientAccountActivity" />
         <activity android:name=".activities.LocationActivity" />
+        <activity android:name=".activities.LoginCareProviderActivity"/>
+        <activity android:name=".activities.LoginPatientActivity"/>
         <activity android:name=".activities.EditProblemActivity" />
         <activity android:name=".activities.AddProblemActivity" />
         <activity android:name=".activities.AddRecordActivity" />
@@ -34,10 +34,9 @@
         <activity android:name=".activities.PhotoActivity" />
         <activity android:name=".activities.ProblemListActivity" />
         <activity android:name=".activities.RecordListActivity" />
-
         <activity
-            android:name=".activities.SplashActivity"
-            android:theme="@style/SplashTheme">
+        android:name=".activities.SplashActivity"
+        android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
