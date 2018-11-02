@@ -5,6 +5,12 @@ import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.views.RecordListView;
 import ca.klapstein.baudit.views.RecordRowView;
 
+/**
+ * MVP presenter for presenting a {@code RecordTreeSet} on a {@code RecordListView}.
+ *
+ * @see RecordTreeSet
+ * @see RecordListView
+ */
 public class RecordListPresenter {
     private static final String TAG = "RecordListPresenter";
 
