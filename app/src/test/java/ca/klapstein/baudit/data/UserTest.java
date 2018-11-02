@@ -12,25 +12,30 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserTest {
 
+
+
+    @Test
     public void testUserConstructor() {
 
     }
 
-    @NonNull
+    @Test
     public void testGetUserUsername() {
     }
 
+    @Test
     public void testSetUserUsername() {
     }
 
-    @NonNull
+    @Test
     public void testGetUserContactInfo() {
     }
 
+    @Test
     public void testSetUserContactInfo() {
     }
 
-    @NonNull
+    @Test
     public void testGetUserPassword() {
     }
 
