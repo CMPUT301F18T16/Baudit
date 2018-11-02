@@ -8,4 +8,8 @@ public class DeleteProblemPresenter extends Presenter<DeleteView> {
     public DeleteProblemPresenter(DeleteView view) {
         super(view);
     }
+
+    public void notifyClickedDelete(final int position) {
+
+    }
 }

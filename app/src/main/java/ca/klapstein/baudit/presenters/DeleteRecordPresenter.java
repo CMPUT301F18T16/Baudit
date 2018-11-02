@@ -8,4 +8,8 @@ public class DeleteRecordPresenter extends Presenter<DeleteView> {
     public DeleteRecordPresenter(DeleteView view) {
         super(view);
     }
+
+    public void notifyClickedDelete(final int position) {
+
+    }
 }
