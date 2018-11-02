@@ -1,10 +1,8 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.User;
 
 /**
  * Activity presenting a account creation page for Baudit.
@@ -19,9 +17,6 @@ import ca.klapstein.baudit.data.User;
  */
 abstract public class AccountCreateActivity extends AppCompatActivity {
     private static final String TAG = "AccountCreateActivity";
-
-    @Nullable
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

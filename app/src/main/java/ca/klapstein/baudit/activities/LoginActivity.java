@@ -1,10 +1,8 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
 
@@ -21,9 +19,6 @@ public abstract class LoginActivity<P extends LoginPresenter> extends AppCompatA
     private static final String TAG = "LoginActivity";
 
     protected P presenter;
-
-    @Nullable
-    protected User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

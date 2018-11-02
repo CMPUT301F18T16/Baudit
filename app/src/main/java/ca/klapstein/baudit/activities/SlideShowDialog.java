@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.app.Dialog;
-import android.media.Image;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.RecordPhoto;
 import ca.klapstein.baudit.presenters.SlideShowPresenter;
 import ca.klapstein.baudit.views.SlideShowView;
 
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 public class SlideShowDialog extends DialogFragment implements SlideShowView {
     private static final String TAG = "SlideShowDialog";
     private SlideShowPresenter presenter;
-    private ArrayList<RecordPhoto> photos;
 
     @NonNull
     @Override
@@ -39,7 +37,7 @@ public class SlideShowDialog extends DialogFragment implements SlideShowView {
     }
 
     @Override
-    public void setImages(ArrayList<Image> images) {
+    public void setImages(ArrayList<Bitmap> images) {
 
     }
 }

@@ -17,7 +17,6 @@ import java.util.Date;
 public class EditRecordActivity extends RecordActivity<EditRecordPresenter> implements EditRecordView {
     private static final String TAG = "EditRecordActivity";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.User;
 import ca.klapstein.baudit.presenters.ViewAccountPresenter;
 import ca.klapstein.baudit.views.ViewAccountView;
 
@@ -21,9 +20,6 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
     private static final String TAG = "ViewAccountDialog";
 
     private ViewAccountPresenter presenter;
-
-    @NonNull
-    private User user;
 
     @NonNull
     @Override
