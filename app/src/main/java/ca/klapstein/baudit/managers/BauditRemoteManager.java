@@ -7,7 +7,7 @@ public class BauditRemoteManager {
     private static final String TAG = "BauditRemoteManager";
 
     public boolean uniqueID(String s){
-        //TODO: implement uniqueness checking of a userid given a string
+        // TODO: implement uniqueness checking of a userid given a string
         return true;
     }
 }
