@@ -27,10 +27,21 @@ public class GeoLocation {
         setLat(lat);
     }
 
+    /**
+     * Getter for a longitude value.
+     *
+     * @return {@code double} a longitude value that is between -90 and +90.
+     */
     public double getLon() {
         return lon;
     }
 
+
+    /**
+     * Setter for a longitude value.
+     *
+     * @param lon {@code double} a longitude value that must be between -90 and +90.
+     */
     public void setLon(double lon) {
         if (isValidLon(lon)) {
             this.lon = lon;
@@ -39,10 +50,20 @@ public class GeoLocation {
         }
     }
 
+    /**
+     * Getter for a latitude value.
+     *
+     * @return {@code double} a latitude value that is between -90 and +90.
+     */
     public double getLat() {
         return lat;
     }
 
+    /**
+     * Setter for a latitude value.
+     *
+     * @param lat {@code double} a latitude value that must be between -90 and +90.
+     */
     public void setLat(double lat) {
         if (isValidLat(lat)) {
             this.lat = lat;
