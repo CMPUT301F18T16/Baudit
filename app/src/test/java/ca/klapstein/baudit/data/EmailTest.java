@@ -22,6 +22,11 @@ public class EmailTest {
         assertEquals(email.getEmail(), "foo@example.com");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void test_EmailConstructorInvalid() {
+        Email email = new Email("foobar");
+    }
+
     @Test
     public void test_getEmail() {
         Email email = new Email("foo@example.com");
