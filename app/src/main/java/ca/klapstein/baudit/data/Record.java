@@ -13,6 +13,9 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 public class Record {
     private static final String TAG = "Record";
 
+    public static final int MAX_COMMENT_LENGTH = 300;
+    public static final int MAX_TITLE_LENGTH = 30;
+
     private Date date;
     private String title;
     private String comment;
@@ -39,24 +42,30 @@ public class Record {
         return getBauditDateFormat().format(date);
     }
 
-    public void setTitle(String title){
-        if (title.length() <= 30) {
-            this.title = title;
-        }else{
-            throw new IllegalArgumentException("Title too long");
-        }
+    static public boolean isValidRecordTitle(String title) {
+        return title.length() <= MAX_TITLE_LENGTH;
+    }
+
+    static public boolean isValidRecordComment(String comment) {
+        return comment.length() <= MAX_COMMENT_LENGTH;
     }
 
     public String getTitle(){
         return this.title;
     }
 
-    public void setComment(String comment){
-        if (comment.length() <= 300) {
-            this.comment = comment;
-        }else{
-            throw new IllegalArgumentException("Comment too long");
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (!isValidRecordTitle(title)) {
+            throw new IllegalArgumentException("invalid record title: too long");
         }
+        this.title = title;
+    }
+
+    public void setComment(String comment) throws IllegalArgumentException {
+        if (!isValidRecordComment(comment)) {
+            throw new IllegalArgumentException("invalid record comment: too long");
+        }
+        this.comment = comment;
     }
 
     public String getComment(){
