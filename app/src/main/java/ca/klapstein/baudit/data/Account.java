@@ -3,10 +3,10 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * Abstract class representing a basic account/user of Baudit.
+ * Abstract class representing a basic account/account of Baudit.
  */
-public abstract class User {
-    private static final String TAG = "User";
+public abstract class Account {
+    private static final String TAG = "Account";
 
     @NonNull
     private ContactInfo contactInfo;

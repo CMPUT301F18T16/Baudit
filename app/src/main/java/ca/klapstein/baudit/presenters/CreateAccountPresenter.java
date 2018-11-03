@@ -1,12 +1,12 @@
 package ca.klapstein.baudit.presenters;
 
-import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 abstract public class CreateAccountPresenter<V extends CreateAccountView> extends Presenter<V> {
     private static final String TAG = "CreateAccountPresenter";
 
-    protected User user;
+    protected Account account;
 
     public CreateAccountPresenter(V view) {
         super(view);

@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 
 /**
- * Data class representing a Baudit's {@code User}'s username.
+ * Data class representing a Baudit's {@code Account}'s username.
  *
- * @see User
+ * @see Account
  */
 public class Username {
     private static final String TAG = "Username";
@@ -32,7 +32,7 @@ public class Username {
     }
 
     /**
-     * Check that a {@code User}'s username is valid.
+     * Check that a {@code Account}'s username is valid.
      *
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.

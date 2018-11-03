@@ -1,22 +1,22 @@
 package ca.klapstein.baudit.presenters;
 
-import ca.klapstein.baudit.data.User;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LogoutView;
 
 /**
  * MVP presenter for presenting a {@code LogoutView}.
  * <p>
- * Provides the controlling logic for logging out a {@code User} from the application and remote.
+ * Provides the controlling logic for logging out a {@code Account} from the application and remote.
  *
- * @see User
+ * @see Account
  * @see LogoutView
  */
 public class LogoutPresenter extends Presenter<LogoutView> {
     private static final String TAG = "LogoutPresenter";
 
     private BauditRemoteManager remoteManager;
-    private User user;
+    private Account account;
 
     public LogoutPresenter(LogoutView view){
         super(view);

@@ -1,11 +1,12 @@
 package ca.klapstein.baudit.presenters;
 
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.views.EditAccountView;
 
 /**
- * MVP presenter for presenting and controlling the editing of a {@code User} via a {@code EditAccountView}.
+ * MVP presenter for presenting and controlling the editing of a {@code Account} via a {@code EditAccountView}.
  *
- * @see ca.klapstein.baudit.data.User
+ * @see Account
  * @see EditAccountView
  */
 public class EditAccountPresenter extends AccountPresenter<EditAccountView> {

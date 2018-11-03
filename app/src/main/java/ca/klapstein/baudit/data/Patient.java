@@ -3,7 +3,7 @@ package ca.klapstein.baudit.data;
 /**
  * Class that represents a Patient.
  */
-public class Patient extends User {
+public class Patient extends Account {
     private static final String TAG = "Patient";
     private ProblemTreeSet problemTreeSet;
 
