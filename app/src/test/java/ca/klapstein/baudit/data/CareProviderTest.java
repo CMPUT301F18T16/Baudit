@@ -17,13 +17,7 @@ import static junit.framework.TestCase.assertTrue;
 @RunWith(Parameterized.class)
 public class CareProviderTest {
 
-    private String usernameInput;
-    private String passwordInput;
-    private String emailInput;
-    private String phoneInput;
     private ContactInfo contactInfo;
-    private PhoneNumber phoneNumber;
-    private Email email;
     private Username username;
     private Password password;
     private CareProvider careProvider;
@@ -33,17 +27,12 @@ public class CareProviderTest {
     private Problem patient0problem0;
 
     public CareProviderTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
-        this.usernameInput = usernameInput;
-        this.passwordInput = passwordInput;
-        this.emailInput = emailInput;
-        this.phoneInput = phoneInput;
+
         this.contactInfo = new ContactInfo();
-        this.phoneNumber = new PhoneNumber(this.phoneInput);
-        this.email = new Email(this.emailInput);
-        contactInfo.setEmail(this.email);
-        contactInfo.setPhoneNumber(this.phoneNumber);
-        this.username = new Username(this.usernameInput);
-        this.password = new Password(this.passwordInput);
+        contactInfo.setEmail(new Email(emailInput));
+        contactInfo.setPhoneNumber(new PhoneNumber(phoneInput));
+        this.username = new Username(usernameInput);
+        this.password = new Password(passwordInput);
         this.careProvider = new CareProvider(this.username, this.password, this.contactInfo);
 
         ContactInfo patient0ContactInfo = new ContactInfo();
@@ -117,7 +106,7 @@ public class CareProviderTest {
     }
 
     @Test
-    public void testSetPatientContactInfo() {
+    public void testSetCareProviderContactInfo() {
         ContactInfo newContactInfo = new ContactInfo();
         PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
         Email newEmail = new Email("newemail@example.com");
@@ -128,12 +117,12 @@ public class CareProviderTest {
     }
 
     @Test
-    public void testGetPatientPassword() {
+    public void testGetCareProviderPassword() {
         assertEquals(careProvider.getPassword(), password);
     }
 
     @Test
-    public void testSetPatientPassword() {
+    public void testSetCareProviderPassword() {
         Password newPassword = new Password("newpassword");
         careProvider.setPassword(newPassword);
         assertEquals(careProvider.getPassword(), newPassword);
