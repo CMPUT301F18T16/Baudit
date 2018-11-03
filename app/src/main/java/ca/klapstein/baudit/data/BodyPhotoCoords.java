@@ -1,27 +1,24 @@
 package ca.klapstein.baudit.data;
 
-import android.util.Pair;
-
 /**
  * DataClass representing the coordinates of a location specified within a {@code BodyPhoto}.
  *
  * @see BodyPhoto
  */
 public class BodyPhotoCoords {
-    private Pair<Integer, Integer> coords;
+    private int posX;
+    private int posY;
 
     public BodyPhotoCoords(int posX, int posY) throws IllegalArgumentException {
-        if (!isValid(posX, posY)) {
-            throw new IllegalArgumentException("invalid BodyPhotoCoords");
-        }
-        coords = new Pair<Integer, Integer>(posX, posY);
+        setCoords(posX, posY);
     }
 
     public void setCoords(int posX, int posY) throws IllegalArgumentException {
         if (!isValid(posX, posY)) {
             throw new IllegalArgumentException("Y coord < 0");
         }
-        coords = new Pair<>(posX, posY);
+        this.posX = posX;
+        this.posY = posY;
     }
 
     /**
@@ -38,10 +35,10 @@ public class BodyPhotoCoords {
     }
 
     public int getPosX() {
-        return coords.first;
+        return posX;
     }
 
     public int getPosY() {
-        return coords.second;
+        return posY;
     }
 }

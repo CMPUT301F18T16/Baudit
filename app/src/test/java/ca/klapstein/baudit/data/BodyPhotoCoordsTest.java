@@ -3,8 +3,7 @@ package ca.klapstein.baudit.data;
 import org.junit.Test;
 
 import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 public class BodyPhotoCoordsTest {
@@ -13,8 +12,8 @@ public class BodyPhotoCoordsTest {
     public void testBodyPhotoCoordsConstructor() {
         BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100,150);
         assertNotNull(bodyPhotoCoords);
-        assertEquals(100, bodyPhotoCoords.getX());
-        assertEquals(150, bodyPhotoCoords.getY());
+        assertEquals(100, bodyPhotoCoords.getPosX());
+        assertEquals(150, bodyPhotoCoords.getPosY());
     }
 
     @Test
@@ -27,24 +26,22 @@ public class BodyPhotoCoordsTest {
             fail();
         }
         assertNotNull(bodyPhotoCoords);
-        assertEquals(200, bodyPhotoCoords.getX());
-        assertEquals(500, bodyPhotoCoords.getY());
+        assertEquals(200, bodyPhotoCoords.getPosX());
+        assertEquals(500, bodyPhotoCoords.getPosY());
     }
 
     @Test
     public void testSetBodyPhotoCoordsValid(){
         try{
             BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100,100);
-            assertEquals(100, bodyPhotoCoords.getX());
-            assertEquals(100, bodyPhotoCoords.getY());
-            bodyPhotoCoords.setX(150);
-            bodyPhotoCoords.setY(300);
-            assertEquals(150, bodyPhotoCoords.getX());
-            assertEquals(300, bodyPhotoCoords.getY());
-            bodyPhotoCoords.setX(17);
-            bodyPhotoCoords.setY(31);
-            assertEquals(17, bodyPhotoCoords.getX());
-            assertEquals(31, bodyPhotoCoords.getY());
+            assertEquals(100, bodyPhotoCoords.getPosY());
+            assertEquals(100, bodyPhotoCoords.getPosY());
+            bodyPhotoCoords.setCoords(150, 300);
+            assertEquals(150, bodyPhotoCoords.getPosX());
+            assertEquals(300, bodyPhotoCoords.getPosY());
+            bodyPhotoCoords.setCoords(17, 31);
+            assertEquals(17, bodyPhotoCoords.getPosX());
+            assertEquals(31, bodyPhotoCoords.getPosY());
         } catch(IllegalArgumentException e){
             fail();
         }
@@ -53,5 +50,19 @@ public class BodyPhotoCoordsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetBodyPhotoCoordsInvalid(){
         new BodyPhotoCoords(-2, -1);
+    }
+
+    @Test
+    public void testIsValid() {
+        // TODO: parameterize these tests
+        // test some valid coords
+        assertTrue(BodyPhotoCoords.isValid(0, 0));
+        assertTrue(BodyPhotoCoords.isValid(100, 100));
+        assertTrue(BodyPhotoCoords.isValid(1000000000, 1000000000));
+
+        // test some invalid coords
+        assertFalse(BodyPhotoCoords.isValid(-1, 0));
+        assertFalse(BodyPhotoCoords.isValid(0, -1));
+        assertFalse(BodyPhotoCoords.isValid(-1, -1));
     }
 }
