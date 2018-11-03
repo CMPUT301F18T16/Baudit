@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 public class RecordTest {
 
     /**
@@ -23,6 +24,7 @@ public class RecordTest {
     /**
      * Test setting and retrieving the title of the record
      */
+    @Test
     public void testTitle(){
         Record record = new Record();
         record.setTitle("Test title");
@@ -32,15 +34,17 @@ public class RecordTest {
     /**
      * Test setting and retrieving the comment of the record
      */
+    @Test
     public void testComment(){
         Record record = new Record();
-        record.setTitle("Just testing out a comment here");
+        record.setComment("Just testing out a comment here");
         assertEquals("Just testing out a comment here", record.getComment());
     }
 
     /**
      * Test adding a keyword
      */
+    @Test
     public void testKeywords(){
         Record record = new Record();
         record.addKeyword("Test");

@@ -22,6 +22,9 @@ public class Record {
 
     public Record(){
         this.date = new Date();
+        // TODO: populate these properly
+        this.keywords = new ArrayList<>();
+        this.bodyPhotoCoords = new ArrayList<>();
     }
 
     public Date getDate() {
