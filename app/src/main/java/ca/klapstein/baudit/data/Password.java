@@ -13,7 +13,7 @@ public class Password {
     @NonNull
     private String password;
 
-    public Password(@NonNull String password) {
+    public Password(@NonNull String password) throws IllegalArgumentException {
         if (isValid(password)) {
             this.password = password;
         } else {
