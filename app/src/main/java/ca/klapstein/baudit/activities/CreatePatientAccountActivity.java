@@ -56,6 +56,11 @@ public class CreatePatientAccountActivity extends AppCompatActivity implements C
     }
 
     @Override
+    public void commitCreateAccount() {
+        finish();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
     }

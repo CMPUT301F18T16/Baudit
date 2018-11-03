@@ -49,6 +49,6 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
     @Override
     public void commitEditAccount() {
-
+        finish();
     }
 }

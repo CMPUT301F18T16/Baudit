@@ -29,7 +29,7 @@ public class AddRecordActivity extends AppCompatActivity implements AddRecordVie
 
     @Override
     public void commitAddRecord() {
-
+        finish();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
 
     @Override
     public void commitEditProblem() {
-
+        finish();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class AddProblemActivity extends AppCompatActivity implements AddProblemV
 
     @Override
     public void commitAddProblem() {
-
+        finish();
     }
 
     @Override

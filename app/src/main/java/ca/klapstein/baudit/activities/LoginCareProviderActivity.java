@@ -57,5 +57,6 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
     public void setLoginSuccess() {
         Intent intent = new Intent(this, PatientListActivity.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -59,6 +59,11 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     }
 
     @Override
+    public void commitCreateAccount() {
+        finish();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
     }

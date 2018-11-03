@@ -29,7 +29,7 @@ public class EditRecordActivity extends AppCompatActivity implements EditRecordV
 
     @Override
     public void commitEditRecord() {
-
+        finish();
     }
 
     @Override
