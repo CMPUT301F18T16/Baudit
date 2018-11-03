@@ -14,9 +14,10 @@ public class RecordTest {
         Record record = new Record();
         Thread.sleep(1000);
         Record record1 = new Record();
-        assertNotNull(record.getTimestamp());
-        assertNotNull(record1.getTimestamp());
-        assertNotEquals(record.getTimestamp(), record1.getTimestamp());
+        assertNotNull(record.getTimeStamp());
+        assertNotNull(record1.getTimeStamp());
+        assertNotEquals(record.getTimeStamp(), record1.getTimeStamp());
+        assertNotEquals(record.getDate(), record1.getDate());
     }
 
     /**
