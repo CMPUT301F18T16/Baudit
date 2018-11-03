@@ -3,18 +3,147 @@ package ca.klapstein.baudit.data;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+
+
+@RunWith(Parameterized.class)
 public class CareProviderTest {
-    @Before
-    public void setUp() {
+
+    private String usernameInput;
+    private String passwordInput;
+    private String emailInput;
+    private String phoneInput;
+    private ContactInfo contactInfo;
+    private PhoneNumber phoneNumber;
+    private Email email;
+    private Username username;
+    private Password password;
+    private CareProvider careProvider;
+
+    private Patient patient0;
+    private Patient patient1;
+    private Problem patient0problem0;
+
+    public CareProviderTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
+        this.usernameInput = usernameInput;
+        this.passwordInput = passwordInput;
+        this.emailInput = emailInput;
+        this.phoneInput = phoneInput;
+        this.contactInfo = new ContactInfo();
+        this.phoneNumber = new PhoneNumber(this.phoneInput);
+        this.email = new Email(this.emailInput);
+        contactInfo.setEmail(this.email);
+        contactInfo.setPhoneNumber(this.phoneNumber);
+        this.username = new Username(this.usernameInput);
+        this.password = new Password(this.passwordInput);
+        this.careProvider = new CareProvider(this.username, this.password, this.contactInfo);
+
+        ContactInfo patient0ContactInfo = new ContactInfo();
+        patient0ContactInfo.setEmail(new Email("patient0@hotmail.com"));
+        patient0ContactInfo.setPhoneNumber(new PhoneNumber("123-456-7890"));
+        this.patient0 = new Patient(new Username("patient0"), new Password("password0"), patient0ContactInfo);
+
+        ContactInfo patient1ContactInfo = new ContactInfo();
+        patient1ContactInfo.setEmail(new Email("patient1@hotmail.com"));
+        patient1ContactInfo.setPhoneNumber(new PhoneNumber("012-345-5678"));
+        this.patient1 = new Patient(new Username("patient0"), new Password("password0"), patient1ContactInfo);
+
+        careProvider.getAssignedPatientTreeSet().add(patient0);
+        careProvider.getAssignedPatientTreeSet().add(patient1);
+
+        this.patient0problem0 = new Problem();
+        Record record0 = new Record();
+        Record record1 = new Record();
+        this.patient0problem0.getRecordTreeSet().add(record0);
+        this.patient0problem0.getRecordTreeSet().add(record1);
+        this.patient0.getProblemTreeSet().add(this.patient0problem0);
     }
 
-    @After
-    public void tearDown() {
+    @Parameterized.Parameters
+    public static Collection careProviderData() {
+        return Arrays.asList(new Object[][]{
+                {"nameuser", "password", "email@example.com", "780-123-1234"}
+        });
     }
 
     @Test
-    public void testStub() {
-        // TODO: write tests
+    public void testCareProviderConstructor() {
+        assertNotNull(this.careProvider);
     }
+
+    @Test
+    public void testGetAssignedPatients(){
+
+        assertTrue(careProvider.getAssignedPatientTreeSet().contains(patient0));
+        assertTrue(careProvider.getAssignedPatientTreeSet().contains(patient1));
+    }
+
+    @Test
+    public void testGetRecordTreeSet(){
+
+        assertEquals(careProvider.getRecordTreeSet(this.patient0,this.patient0problem0),
+                patient0problem0.getRecordTreeSet());
+    }
+
+    @Test
+    public void testGetProblemTreeSet(){
+
+        assertTrue(careProvider.getProblemTreeSet(patient0).contains(patient0problem0));
+    }
+
+    @Test
+    public void testGetCareProviderUsername() {
+        assertEquals(this.username, careProvider.getUsername());
+    }
+
+    @Test
+    public void testSetCareProviderUsername() {
+        Username newusername = new Username("newusername");
+        careProvider.setUsername(newusername);
+        assertEquals(careProvider.getUsername(), newusername);
+    }
+
+    @Test
+    public void testCareProvidertContactInfo() {
+        assertEquals(careProvider.getContactInfo(), contactInfo);
+    }
+
+    @Test
+    public void testSetPatientContactInfo() {
+        ContactInfo newContactInfo = new ContactInfo();
+        PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
+        Email newEmail = new Email("newemail@example.com");
+        newContactInfo.setEmail(newEmail);
+        newContactInfo.setPhoneNumber(newPhoneNumber);
+        careProvider.setContactInfo(newContactInfo);
+        assertEquals(careProvider.getContactInfo(), newContactInfo);
+    }
+
+    @Test
+    public void testGetPatientPassword() {
+        assertEquals(careProvider.getPassword(), password);
+    }
+
+    @Test
+    public void testSetPatientPassword() {
+        Password newPassword = new Password("newpassword");
+        careProvider.setPassword(newPassword);
+        assertEquals(careProvider.getPassword(), newPassword);
+    }
+
+
+
+
+
+
+
 }
+
