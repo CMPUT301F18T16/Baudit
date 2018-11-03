@@ -10,8 +10,8 @@ import ca.klapstein.baudit.views.PhotoView;
 /**
  * Activity providing a camera widget to take photos for use in Baudit.
  */
-public class PhotoActivity extends AppCompatActivity implements PhotoView {
-    private static final String TAG = "PhotoActivity";
+public class ViewPhotoActivity extends AppCompatActivity implements PhotoView {
+    private static final String TAG = "ViewPhotoActivity";
 
     private PhotoPresenter presenter;
 
