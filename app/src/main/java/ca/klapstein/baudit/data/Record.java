@@ -1,10 +1,9 @@
 package ca.klapstein.baudit.data;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+
+import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -26,8 +25,7 @@ public class Record {
     }
 
     public void setTimestamp() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA);
-        this.timestamp = dateFormat.format(new Date());
+        this.timestamp = getBauditDateFormat().format(new Date());
     }
 
     public String getTimestamp(){
