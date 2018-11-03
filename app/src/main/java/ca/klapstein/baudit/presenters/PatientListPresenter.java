@@ -21,7 +21,7 @@ public class PatientListPresenter extends Presenter<PatientListView> {
     }
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {
-        Patient patient = (Patient)patientTreeSet.toArray()[position];
+        Patient patient = (Patient) patientTreeSet.toArray()[position];
         // rowView.setPatientNameText(patient.name);
     }
 

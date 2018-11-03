@@ -18,12 +18,12 @@ public class LogoutPresenter extends Presenter<LogoutView> {
     private BauditRemoteManager remoteManager;
     private Account account;
 
-    public LogoutPresenter(LogoutView view){
+    public LogoutPresenter(LogoutView view) {
         super(view);
         this.remoteManager = new BauditRemoteManager();
     }
 
-    public void validateLogout(){
+    public void validateLogout() {
         view.setLogoutSuccess();
     }
 }

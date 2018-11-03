@@ -13,14 +13,6 @@ public class BodyPhotoCoords {
         setCoords(posX, posY);
     }
 
-    public void setCoords(int posX, int posY) throws IllegalArgumentException {
-        if (!isValid(posX, posY)) {
-            throw new IllegalArgumentException("Y coord < 0");
-        }
-        this.posX = posX;
-        this.posY = posY;
-    }
-
     /**
      * Check that a the given integer pair can represent a {@code BodyPhotoCoords}.
      * <p>
@@ -32,6 +24,14 @@ public class BodyPhotoCoords {
      */
     static public boolean isValid(int posX, int posY) {
         return posX >= 0 && posY >= 0;
+    }
+
+    public void setCoords(int posX, int posY) throws IllegalArgumentException {
+        if (!isValid(posX, posY)) {
+            throw new IllegalArgumentException("Y coord < 0");
+        }
+        this.posX = posX;
+        this.posY = posY;
     }
 
     public int getPosX() {

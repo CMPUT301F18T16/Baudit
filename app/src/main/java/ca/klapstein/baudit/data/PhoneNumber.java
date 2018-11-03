@@ -17,11 +17,6 @@ public class PhoneNumber {
         this.setPhoneNumber(phoneNumber);
     }
 
-    @NonNull
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
     /**
      * Check that a string representing a phone number is valid.
      *
@@ -31,6 +26,11 @@ public class PhoneNumber {
     static public boolean isValid(String phoneNumber) {
         Matcher m = phoneNumberPattern.matcher(phoneNumber);
         return m.matches();
+    }
+
+    @NonNull
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {

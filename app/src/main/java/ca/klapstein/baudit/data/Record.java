@@ -11,11 +11,9 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record {
-    private static final String TAG = "Record";
-
     public static final int MAX_COMMENT_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
-
+    private static final String TAG = "Record";
     private Date date;
     private String title;
     private String comment;
@@ -23,11 +21,19 @@ public class Record {
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
     private ArrayList<String> keywords;
 
-    public Record(){
+    public Record() {
         this.date = new Date();
         // TODO: populate these properly
         this.keywords = new ArrayList<>();
         this.bodyPhotoCoords = new ArrayList<>();
+    }
+
+    static public boolean isValidRecordTitle(String title) {
+        return title.length() <= MAX_TITLE_LENGTH;
+    }
+
+    static public boolean isValidRecordComment(String comment) {
+        return comment.length() <= MAX_COMMENT_LENGTH;
     }
 
     public Date getDate() {
@@ -42,15 +48,7 @@ public class Record {
         return getBauditDateFormat().format(date);
     }
 
-    static public boolean isValidRecordTitle(String title) {
-        return title.length() <= MAX_TITLE_LENGTH;
-    }
-
-    static public boolean isValidRecordComment(String comment) {
-        return comment.length() <= MAX_COMMENT_LENGTH;
-    }
-
-    public String getTitle(){
+    public String getTitle() {
         return this.title;
     }
 
@@ -61,6 +59,10 @@ public class Record {
         this.title = title;
     }
 
+    public String getComment() {
+        return this.comment;
+    }
+
     public void setComment(String comment) throws IllegalArgumentException {
         if (!isValidRecordComment(comment)) {
             throw new IllegalArgumentException("invalid record comment: too long");
@@ -68,11 +70,7 @@ public class Record {
         this.comment = comment;
     }
 
-    public String getComment(){
-        return this.comment;
-    }
-
-    public void addKeyword(String keyword){
+    public void addKeyword(String keyword) {
         this.keywords.add(keyword);
     }
 
@@ -80,7 +78,7 @@ public class Record {
         this.keywords.remove(keyword);
     }
 
-    public ArrayList<String> getKeywords(){
+    public ArrayList<String> getKeywords() {
         return this.keywords;
     }
 

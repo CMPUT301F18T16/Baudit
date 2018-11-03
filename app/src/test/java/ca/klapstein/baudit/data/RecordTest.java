@@ -25,7 +25,7 @@ public class RecordTest {
      * Test setting and retrieving the title of the record
      */
     @Test
-    public void testTitle(){
+    public void testTitle() {
         Record record = new Record();
         record.setTitle("Test title");
         assertEquals("Test title", record.getTitle());
@@ -35,7 +35,7 @@ public class RecordTest {
      * Test setting and retrieving the comment of the record
      */
     @Test
-    public void testComment(){
+    public void testComment() {
         Record record = new Record();
         record.setComment("Just testing out a comment here");
         assertEquals("Just testing out a comment here", record.getComment());
@@ -45,7 +45,7 @@ public class RecordTest {
      * Test adding a keyword
      */
     @Test
-    public void testKeywords(){
+    public void testKeywords() {
         Record record = new Record();
         record.addKeyword("Test");
         assertEquals("Test", record.getKeywords().get(0));

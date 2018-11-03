@@ -40,9 +40,9 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
     }
 
     @Override
-   public void update() {
+    public void update() {
         this.adapter.notifyDataSetChanged();
-   }
+    }
 
     private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         private static final String TAG = "RecordListAdapter";
@@ -55,7 +55,7 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         @Override
         public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_record, viewGroup, false);
+                    .inflate(R.layout.card_record, viewGroup, false);
             return new RecordViewHolder(v); //Wrap it in a ViewHolder.
         }
 

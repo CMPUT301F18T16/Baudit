@@ -14,21 +14,8 @@ public class Username {
     @NonNull
     private String username;
 
-    public Username(@NonNull String username) throws IllegalArgumentException{
+    public Username(@NonNull String username) throws IllegalArgumentException {
         this.setUsername(username);
-    }
-
-    @NonNull
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(@NonNull String username) throws IllegalArgumentException{
-        if (!isValid(username)) {
-            throw new IllegalArgumentException("Invalid username");
-        } else {
-            this.username = username;
-        }
     }
 
     /**
@@ -41,6 +28,19 @@ public class Username {
         BauditRemoteManager remoteManager = new BauditRemoteManager();
         int len = username.length();
         return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
+    }
+
+    @NonNull
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(@NonNull String username) throws IllegalArgumentException {
+        if (!isValid(username)) {
+            throw new IllegalArgumentException("Invalid username");
+        } else {
+            this.username = username;
+        }
     }
 
     @Override

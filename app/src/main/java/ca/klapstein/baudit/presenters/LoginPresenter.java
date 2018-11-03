@@ -19,12 +19,12 @@ public class LoginPresenter extends Presenter<LoginView> {
     private BauditRemoteManager remoteManager;
     private Account account;
 
-    public LoginPresenter(LoginView view){
+    public LoginPresenter(LoginView view) {
         super(view);
         this.remoteManager = new BauditRemoteManager();
     }
 
-    public boolean validateLogin(String username, String password){
+    public boolean validateLogin(String username, String password) {
         return true;
     }
 }

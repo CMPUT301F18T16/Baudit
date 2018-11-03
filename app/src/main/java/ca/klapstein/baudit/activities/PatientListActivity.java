@@ -55,7 +55,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         @Override
         public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_patient, viewGroup, false);
+                    .inflate(R.layout.card_patient, viewGroup, false);
             return new PatientViewHolder(v); //Wrap it in a ViewHolder.
         }
 

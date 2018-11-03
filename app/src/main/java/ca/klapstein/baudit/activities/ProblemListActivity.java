@@ -55,7 +55,7 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
         @Override
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_problem, viewGroup, false);
+                    .inflate(R.layout.card_problem, viewGroup, false);
             return new ProblemViewHolder(v); //Wrap it in a ViewHolder.
         }
 

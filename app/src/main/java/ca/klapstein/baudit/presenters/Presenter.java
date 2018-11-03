@@ -7,7 +7,6 @@ import ca.klapstein.baudit.views.View;
  * Abstract MVP presenter base class.
  *
  * @param <V> the type of MVP view to apply to the presenter
- *
  * @see View
  */
 abstract public class Presenter<V extends View> {

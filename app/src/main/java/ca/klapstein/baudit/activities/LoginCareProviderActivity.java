@@ -33,7 +33,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
      *
      * @return {@code true} if the login was successful, otherwise return {@code false}.
      */
-    public boolean login(){
+    public boolean login() {
         // TODO: implement
         return true;
     }

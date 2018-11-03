@@ -21,7 +21,7 @@ public class ProblemListPresenter extends Presenter<ProblemListView> {
     }
 
     public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
-        Problem patient = (Problem)problemTreeSet.toArray()[position];
+        Problem patient = (Problem) problemTreeSet.toArray()[position];
         // rowView.setProblemTitleText(problem.title);
     }
 

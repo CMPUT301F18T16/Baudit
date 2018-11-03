@@ -10,18 +10,18 @@ public class BodyPhotoCoordsTest {
 
     @Test
     public void testBodyPhotoCoordsConstructor() {
-        BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100,150);
+        BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100, 150);
         assertNotNull(bodyPhotoCoords);
         assertEquals(100, bodyPhotoCoords.getPosX());
         assertEquals(150, bodyPhotoCoords.getPosY());
     }
 
     @Test
-    public void testGetBodyPhotoCoords(){
+    public void testGetBodyPhotoCoords() {
         BodyPhotoCoords bodyPhotoCoords = null;
 
         try {
-            bodyPhotoCoords = new BodyPhotoCoords(200,500);
+            bodyPhotoCoords = new BodyPhotoCoords(200, 500);
         } catch (IllegalArgumentException e) {
             fail();
         }
@@ -31,9 +31,9 @@ public class BodyPhotoCoordsTest {
     }
 
     @Test
-    public void testSetBodyPhotoCoordsValid(){
-        try{
-            BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100,100);
+    public void testSetBodyPhotoCoordsValid() {
+        try {
+            BodyPhotoCoords bodyPhotoCoords = new BodyPhotoCoords(100, 100);
             assertEquals(100, bodyPhotoCoords.getPosY());
             assertEquals(100, bodyPhotoCoords.getPosY());
             bodyPhotoCoords.setCoords(150, 300);
@@ -42,13 +42,13 @@ public class BodyPhotoCoordsTest {
             bodyPhotoCoords.setCoords(17, 31);
             assertEquals(17, bodyPhotoCoords.getPosX());
             assertEquals(31, bodyPhotoCoords.getPosY());
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetBodyPhotoCoordsInvalid(){
+    public void testSetBodyPhotoCoordsInvalid() {
         new BodyPhotoCoords(-2, -1);
     }
 

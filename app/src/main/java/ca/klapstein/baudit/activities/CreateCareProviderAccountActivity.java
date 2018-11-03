@@ -16,6 +16,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     private static final String TAG = "CreateCareProviderAccountActivity";
 
     private CreateCareProviderAccountPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
