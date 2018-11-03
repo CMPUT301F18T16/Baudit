@@ -59,4 +59,10 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

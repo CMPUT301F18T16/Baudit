@@ -91,4 +91,9 @@ public class AddRecordActivity extends AppCompatActivity implements AddRecordVie
     public void setBodyPhotoError() {
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }

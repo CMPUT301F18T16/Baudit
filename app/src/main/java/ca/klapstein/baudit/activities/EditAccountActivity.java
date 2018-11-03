@@ -51,4 +51,10 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     public void commitEditAccount() {
         finish();
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

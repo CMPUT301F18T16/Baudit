@@ -54,4 +54,10 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

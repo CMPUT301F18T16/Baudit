@@ -61,4 +61,10 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
     public void setDescriptionError() {
 
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

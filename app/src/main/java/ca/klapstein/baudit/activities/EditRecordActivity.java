@@ -91,4 +91,10 @@ public class EditRecordActivity extends AppCompatActivity implements EditRecordV
     public void setBodyPhotoError() {
 
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

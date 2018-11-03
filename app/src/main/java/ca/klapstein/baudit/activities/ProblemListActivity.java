@@ -44,6 +44,12 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
         this.adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
+
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
         private static final String TAG = "ProblemListAdapter";
 
@@ -85,6 +91,11 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
         @Override
         public void setProblemTitleText(String title) {
             mTitleView.setText(title);
+        }
+
+        @Override
+        public void onStart() {
+
         }
     }
 }

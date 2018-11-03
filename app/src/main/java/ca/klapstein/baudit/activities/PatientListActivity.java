@@ -44,6 +44,12 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         this.adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
+
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
         private static final String TAG = "PatientListAdapter";
 
@@ -85,6 +91,11 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         @Override
         public void setPatientNameText(String patientName) {
             mNameView.setText(patientName);
+        }
+
+        @Override
+        public void onStart() {
+
         }
     }
 }

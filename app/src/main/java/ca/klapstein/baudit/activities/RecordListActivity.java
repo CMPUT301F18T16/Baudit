@@ -44,6 +44,12 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         this.adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
+
     private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         private static final String TAG = "RecordListAdapter";
 
@@ -85,6 +91,11 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
         @Override
         public void setTimestampText(String timestamp) {
             mTimestampView.setText(timestamp);
+        }
+
+        @Override
+        public void onStart() {
+
         }
     }
 }

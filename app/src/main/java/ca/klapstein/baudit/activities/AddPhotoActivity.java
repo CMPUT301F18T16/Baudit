@@ -33,4 +33,9 @@ public class AddPhotoActivity extends AppCompatActivity implements AddPhotoView 
     public void commitAddPhoto() {
         finish();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }

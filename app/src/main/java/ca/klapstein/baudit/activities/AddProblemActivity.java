@@ -60,4 +60,9 @@ public class AddProblemActivity extends AppCompatActivity implements AddProblemV
     public void setDescriptionError() {
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
