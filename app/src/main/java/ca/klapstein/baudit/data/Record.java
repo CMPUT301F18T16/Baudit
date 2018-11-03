@@ -13,7 +13,7 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 public class Record {
     private static final String TAG = "Record";
 
-    private String timestamp;
+    private Date date;
     private String title;
     private String comment;
     private GeoLocation geoLocation;
@@ -21,15 +21,19 @@ public class Record {
     private ArrayList<String> keywords;
 
     public Record(){
-        this.setTimestamp();
+        this.date = new Date();
     }
 
-    public void setTimestamp() {
-        this.timestamp = getBauditDateFormat().format(new Date());
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getTimestamp(){
-        return this.timestamp;
+        return getBauditDateFormat().format(date);
     }
 
     public void setTitle(String title){
