@@ -12,10 +12,20 @@ public class Patient extends User {
      */
     private BodyPhoto bodyPhoto;
 
+    /**
+     * Get the list of {@code Problem}s owned by the {@code Patient}.
+     *
+     * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
+     */
     public ProblemTreeSet getProblemTreeSet() {
         return problemTreeSet;
     }
 
+    /**
+     * Get a {@code Patient}'s {@code BodyPhoto}.
+     *
+     * @return {@code BodyPhoto} belonging to the patient.
+     */
     public BodyPhoto getBodyPhoto() {
         return bodyPhoto;
     }
