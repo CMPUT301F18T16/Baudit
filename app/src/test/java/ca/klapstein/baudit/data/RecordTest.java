@@ -2,9 +2,7 @@ package ca.klapstein.baudit.data;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class RecordTest {
 
@@ -12,8 +10,9 @@ public class RecordTest {
      * Test that records created at different times are not equal
      */
     @Test
-    public void testNewRecord() {
+    public void testNewRecord() throws InterruptedException {
         Record record = new Record();
+        Thread.sleep(1000);
         Record record1 = new Record();
         assertNotNull(record.getTimestamp());
         assertNotNull(record1.getTimestamp());
