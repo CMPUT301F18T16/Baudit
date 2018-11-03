@@ -15,7 +15,7 @@ public class PhotoTest {
     }
 
     @Test
-    public void test(){
+    public void test() {
         // TODO: write test
     }
 }

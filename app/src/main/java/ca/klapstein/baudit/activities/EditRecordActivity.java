@@ -29,7 +29,7 @@ public class EditRecordActivity extends AppCompatActivity implements EditRecordV
 
     @Override
     public void commitEditRecord() {
-
+        finish();
     }
 
     @Override
@@ -90,5 +90,11 @@ public class EditRecordActivity extends AppCompatActivity implements EditRecordV
     @Override
     public void setBodyPhotoError() {
 
+    }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
     }
 }

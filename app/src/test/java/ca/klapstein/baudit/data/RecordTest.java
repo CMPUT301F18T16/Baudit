@@ -2,13 +2,8 @@ package ca.klapstein.baudit.data;
 
 import org.junit.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class RecordTest {
 
@@ -16,18 +11,21 @@ public class RecordTest {
      * Test that records created at different times are not equal
      */
     @Test
-    public void testNewRecord() {
+    public void testNewRecord() throws InterruptedException {
         Record record = new Record();
-        assertNotNull(record.getTimestamp());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA);
-        assertEquals(dateFormat.format(new Date()), record.getTimestamp());
+        Thread.sleep(1000);
+        Record record1 = new Record();
+        assertNotNull(record.getTimeStamp());
+        assertNotNull(record1.getTimeStamp());
+        assertNotEquals(record.getTimeStamp(), record1.getTimeStamp());
+        assertNotEquals(record.getDate(), record1.getDate());
     }
 
     /**
      * Test setting and retrieving the title of the record
      */
     @Test
-    public void testTitle(){
+    public void testTitle() {
         Record record = new Record();
         record.setTitle("Test title");
         assertEquals("Test title", record.getTitle());
@@ -37,7 +35,7 @@ public class RecordTest {
      * Test setting and retrieving the comment of the record
      */
     @Test
-    public void testComment(){
+    public void testComment() {
         Record record = new Record();
         record.setComment("Just testing out a comment here");
         assertEquals("Just testing out a comment here", record.getComment());
@@ -47,7 +45,7 @@ public class RecordTest {
      * Test adding a keyword
      */
     @Test
-    public void testKeywords(){
+    public void testKeywords() {
         Record record = new Record();
         record.addKeyword("Test");
         assertEquals("Test", record.getKeywords().get(0));

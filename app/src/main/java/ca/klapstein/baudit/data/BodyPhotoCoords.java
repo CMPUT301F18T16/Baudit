@@ -1,33 +1,44 @@
 package ca.klapstein.baudit.data;
 
+/**
+ * DataClass representing the coordinates of a location specified within a {@code BodyPhoto}.
+ *
+ * @see BodyPhoto
+ */
 public class BodyPhotoCoords {
-    private int x;
-    private int y;
+    private int posX;
+    private int posY;
 
-    public BodyPhotoCoords(int x, int y) throws IllegalArgumentException{
-        this.setX(x);
-        this.setY(y);
+    public BodyPhotoCoords(int posX, int posY) throws IllegalArgumentException {
+        setCoords(posX, posY);
     }
 
-    public void setX(int x) throws  IllegalArgumentException{
-        if (x <= 0) {
-            throw new IllegalArgumentException("X coord < 0");
-        }
-        this.x = x;
+    /**
+     * Check that a the given integer pair can represent a {@code BodyPhotoCoords}.
+     * <p>
+     * Note: posX and posY must both be greater than or equal to 0.
+     *
+     * @param posX {@code int}
+     * @param posY {@code int}
+     * @return {@code boolean} {@code true} if the integer pair is valid, otherwise {@code false}.
+     */
+    static public boolean isValid(int posX, int posY) {
+        return posX >= 0 && posY >= 0;
     }
 
-    public void setY(int y)throws IllegalArgumentException{
-        if (y <= 0){
+    public void setCoords(int posX, int posY) throws IllegalArgumentException {
+        if (!isValid(posX, posY)) {
             throw new IllegalArgumentException("Y coord < 0");
         }
-        this.y = y;
+        this.posX = posX;
+        this.posY = posY;
     }
 
-    public int getX(){
-        return this.x;
+    public int getPosX() {
+        return posX;
     }
 
-    public int getY(){
-        return this.y;
+    public int getPosY() {
+        return posY;
     }
 }

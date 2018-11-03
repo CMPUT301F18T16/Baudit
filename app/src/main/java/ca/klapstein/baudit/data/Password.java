@@ -3,9 +3,9 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * Data class representing a Baudit's {@code User}'s password.
+ * Data class representing a Baudit's {@code Account}'s password.
  *
- * @see User
+ * @see Account
  */
 public class Password {
     private static final String TAG = "Password";
@@ -13,7 +13,7 @@ public class Password {
     @NonNull
     private String password;
 
-    public Password(@NonNull String password) {
+    public Password(@NonNull String password) throws IllegalArgumentException {
         if (isValid(password)) {
             this.password = password;
         } else {
