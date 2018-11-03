@@ -16,31 +16,31 @@ public class EmailTest {
     }
 
     @Test
-    public void test_EmailConstructor() {
+    public void EmailConstructor() {
         Email email = new Email("foo@example.com");
         assertNotNull(email);
         assertEquals(email.getEmail(), "foo@example.com");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_EmailConstructorInvalid() {
-        Email email = new Email("foobar");
+    public void EmailConstructorInvalid() {
+        new Email("foobar");
     }
 
     @Test
-    public void test_getEmail() {
+    public void getEmail() {
         Email email = new Email("foo@example.com");
         assertNotNull(email.getEmail());
         assertEquals(email.getEmail(), "foo@example.com");
     }
 
     @Test
-    public void test_validEmail() {
+    public void validEmail() {
         assertTrue(Email.isValid("foo@example.com"));
     }
 
     @Test
-    public void test_invalidEmail() {
+    public void invalidEmail() {
         assertFalse(Email.isValid("foobar"));
     }
 }
