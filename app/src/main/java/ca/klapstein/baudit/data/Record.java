@@ -32,7 +32,7 @@ public class Record {
         this.date = date;
     }
 
-    public String getTimestamp(){
+    public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
 

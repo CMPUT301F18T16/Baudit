@@ -2,6 +2,8 @@ package ca.klapstein.baudit.data;
 
 import java.util.Date;
 
+import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
+
 /**
  * Data class representing a Medical Problem for a {@code Patient}.
  *
@@ -12,7 +14,7 @@ public class Problem {
     private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
-    private Date dateStarted;
+    private Date date;
 
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
@@ -34,5 +36,17 @@ public class Problem {
     public void setTitle(String title) {
         // TODO: add validator
         this.title = title;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTimeStamp() {
+        return getBauditDateFormat().format(date);
     }
 }
