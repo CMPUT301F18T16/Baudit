@@ -11,6 +11,10 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  */
 public class Problem {
     private static final String TAG = "Problem";
+
+    public static final int MAX_DESCRIPTION_LENGTH = 300;
+    public static final int MAX_TITLE_LENGTH = 30;
+
     private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
@@ -24,17 +28,29 @@ public class Problem {
         return description;
     }
 
-    public void setDescription(String description) {
-        // TODO: add validator
-        this.description = description;
+    static public boolean isValidProblemDescription(String description) {
+        return description.length() <= MAX_DESCRIPTION_LENGTH;
+    }
+
+    static public boolean isValidProblemTitle(String title) {
+        return title.length() <= MAX_TITLE_LENGTH;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        // TODO: add validator
+    public void setDescription(String description) throws IllegalArgumentException {
+        if (!isValidProblemDescription(description)) {
+            throw new IllegalArgumentException("invalid problem description");
+        }
+        this.description = description;
+    }
+
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (!isValidProblemTitle(title)) {
+            throw new IllegalArgumentException("invalid problem title");
+        }
         this.title = title;
     }
 
