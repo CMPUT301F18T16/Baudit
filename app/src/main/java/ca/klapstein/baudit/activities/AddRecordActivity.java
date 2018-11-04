@@ -29,7 +29,7 @@ public class AddRecordActivity extends AppCompatActivity implements AddRecordVie
 
     @Override
     public void commitAddRecord() {
-
+        finish();
     }
 
     @Override
@@ -90,5 +90,10 @@ public class AddRecordActivity extends AppCompatActivity implements AddRecordVie
     @Override
     public void setBodyPhotoError() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

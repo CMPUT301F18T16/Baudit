@@ -7,4 +7,9 @@ public class BodyPhoto implements Photo {
     public Bitmap getBitmap() {
         return null;
     }
+
+    @Override
+    public void setBitmap(Bitmap bitmap) {
+
+    }
 }

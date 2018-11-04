@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * Data class representing a Baudit's {@code User}'s email.
+ * Data class representing a Baudit's {@code Account}'s email.
  *
- * @see User
+ * @see Account
  */
 public class Email {
     private static final String TAG = "Email";

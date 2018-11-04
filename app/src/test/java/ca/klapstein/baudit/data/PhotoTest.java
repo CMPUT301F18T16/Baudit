@@ -15,7 +15,7 @@ public class PhotoTest {
     }
 
     @Test
-    public void testStub() {
-        // TODO: write tests
+    public void test() {
+        // TODO: write test
     }
 }
