@@ -20,6 +20,17 @@ android:
   - build-tools-27.0.3
   - extra-android-m2repository
 
+# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
+# after every build you need to add the following
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+
 stages:
 - test
 # only run deploy stage on master branch
