@@ -22,20 +22,19 @@ android:
   - build-tools-27.0.3
   - extra-android-m2repository
 
-# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
-# after every build you need to add the following
-before_cache:
-- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.android/build-cache
+#
+## A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
+## after every build you need to add the following
+#before_cache:
+#- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+#- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+#cache:
+#  directories:
+#  - $HOME/.gradle/caches/
+#  - $HOME/.gradle/wrapper/
+#  - $HOME/.android/build-cache
 
 stages:
-- test
-# only run deploy stage on master branch
 - name: deploy
   if: branch = master
 
@@ -44,20 +43,15 @@ before_install:
 - sudo chmod +x scripts/*
 - yes | sdkmanager "platforms;android-28"
 
+before_script:
+- bash scripts/travis_before_script.sh
 script:
 - echo "starting tests for $COMPONENT"
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 
 jobs:
   include:
-  - stage: test
-    name: "Test"
-    before_script:
-    - bash scripts/travis_before_script.sh
-    script:
-    - bash scripts/travis_script.sh
-    - echo "test complete"
-    after_success:
-    - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
     name: "Deploy Javadoc"
     script:
