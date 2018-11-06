@@ -17,8 +17,6 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-27.0.3
-  - extra-android-m2repository
 
 # A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
 # after every build you need to add the following
@@ -40,7 +38,9 @@ stages:
 before_install:
 - sudo chmod +x ./gradlew
 - sudo chmod +x scripts/*
+- yes | sdkmanager "build-tools;27.0.3"
 - yes | sdkmanager "platforms;android-28"
+- yes | sdkmanager "extras;android;m2repository"
 
 before_script:
 - bash scripts/travis_before_script.sh
