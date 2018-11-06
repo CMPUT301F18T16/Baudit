@@ -28,10 +28,22 @@ public class Record {
         this.bodyPhotoCoords = new ArrayList<>();
     }
 
+    /**
+     * Check if a given string is a valid Record title.
+     *
+     * @param title {@code String} the title to validate
+     * @return {@code boolean} {@code true} if the Record's title is valid, otherwise {@code false}
+     */
     static public boolean isValidRecordTitle(String title) {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
+    /**
+     * Check if a given string is a valid Record comment.
+     *
+     * @param comment {@code String} the comment to validate
+     * @return {@code boolean} {@code true} if the Record's comment is valid, otherwise {@code false}
+     */
     static public boolean isValidRecordComment(String comment) {
         return comment.length() <= MAX_COMMENT_LENGTH;
     }
