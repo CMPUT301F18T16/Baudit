@@ -32,6 +32,7 @@ public class LoginPresenter extends Presenter<LoginView> {
      * @return {@code boolean} {@code true} if the authentication was successful, otherwise {@code false}
      */
     public boolean validateLogin(String username, String password) {
+        view.setLoginSuccess();
         return true;
     }
 }

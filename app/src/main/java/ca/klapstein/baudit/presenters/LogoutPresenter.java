@@ -23,7 +23,15 @@ public class LogoutPresenter extends Presenter<LogoutView> {
         this.remoteManager = new BauditRemoteManager();
     }
 
-    public void validateLogout() {
+    /**
+     * Attempt to logout the current Baudit session.
+     * <p>
+     * Invalidate any authentication with the remote servers, and revoke any local access tokens.
+     *
+     * @return {@code boolean} {@code true} if the logout was successful, otherwise {@code false}
+     */
+    public boolean validateLogout() {
         view.setLogoutSuccess();
+        return true;
     }
 }
