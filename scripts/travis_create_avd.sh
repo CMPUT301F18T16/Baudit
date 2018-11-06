@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Creates and starts an emulator.
+# Creates and starts an android emulator.
 
 # the android-16 emulator is very quick for some reason
 
