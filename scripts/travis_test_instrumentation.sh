@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # We can build this part of the instrumentation tests before we need the emulator
-./gradlew clean build jacocoTestReport assembleDebug assembleDebugAndroidTest
+./gradlew clean assemble jacocoTestReport assembleAndroidTest
 
 # Now we absolutely need the emulator, so we check to see if we are on travis,
 # and then we wait for it to start.
