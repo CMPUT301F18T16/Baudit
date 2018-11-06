@@ -11,9 +11,9 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record {
+    private static final String TAG = "Record";
     public static final int MAX_COMMENT_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
-    private static final String TAG = "Record";
     private Date date;
     private String title;
     private String comment;
