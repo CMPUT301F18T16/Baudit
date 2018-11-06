@@ -6,6 +6,8 @@ package ca.klapstein.baudit.data;
  * @see BodyPhoto
  */
 public class BodyPhotoCoords {
+    private static final String TAG = "BodyPhotoCoords";
+
     private int posX;
     private int posY;
 
