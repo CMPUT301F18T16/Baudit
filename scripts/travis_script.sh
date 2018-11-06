@@ -6,8 +6,6 @@ if [ "$COMPONENT" == "unit" ]; then
     ./scripts/travis_test_unit.sh
 elif [ "$COMPONENT" == "instrumentation" ]; then
     ./scripts/travis_test_instrumentation.sh
-elif [ "$COMPONENT" == "doc" ]; then
-    ./scripts/travis_test_docs.sh
 else
     echo "That module doesn't exist, now does it? ;)"
     exit 1
