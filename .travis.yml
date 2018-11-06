@@ -38,7 +38,7 @@ stages:
 before_install:
 - sudo chmod +x ./gradlew
 - sudo chmod +x scripts/*
-- yes | sdkmanager "build-tools;27.0.3"
+- yes | sdkmanager "build-tools;28.0.3"
 - yes | sdkmanager "platforms;android-28"
 - yes | sdkmanager "extras;android;m2repository"
 
