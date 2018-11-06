@@ -44,6 +44,9 @@ before_install:
 - sudo chmod +x scripts/*
 - yes | sdkmanager "platforms;android-28"
 
+script:
+- echo "starting tests for $COMPONENT"
+
 jobs:
   include:
   - stage: test
