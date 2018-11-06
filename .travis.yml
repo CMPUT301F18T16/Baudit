@@ -41,7 +41,8 @@ stages:
   if: branch = master
 
 before_install:
-- chmod +x scripts/*
+- sudo chmod +x ./gradlew
+- sudo chmod +x scripts/*
 
 jobs:
   include:
