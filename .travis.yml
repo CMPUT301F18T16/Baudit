@@ -22,7 +22,7 @@ android:
   - build-tools-27.0.3
   - extra-android-m2repository
 
-#
+
 ## A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
 ## after every build you need to add the following
 #before_cache:
@@ -35,6 +35,7 @@ android:
 #  - $HOME/.android/build-cache
 
 stages:
+- test
 # only run deploy stage on master branch
 - name: deploy
   if: branch = master
@@ -48,9 +49,9 @@ before_script:
 - bash scripts/travis_before_script.sh
 script:
 - echo "starting tests for $COMPONENT"
+- bash scripts/travis_script.sh
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-
 
 
 jobs:

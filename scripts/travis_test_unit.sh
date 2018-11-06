@@ -5,5 +5,6 @@
 # create test reports
 ./gradlew jacocoTestReport
 # run unit tests
+./gradlew clean test
 ./gradlew --settings-file settings_only_providers.gradle clean :ZendeskProviders:assembleDebug :ZendeskProviders:lintDebug :ZendeskProviders:testDebug :ZendeskProviders:debugJavadoc
 ./gradlew --settings-file settings_only_sdk.gradle :ZendeskSDK:assembleDebug :ZendeskSDK:lintDebug :ZendeskSDK:testDebug :ZendeskSDK:debugJavadoc
