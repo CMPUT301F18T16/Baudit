@@ -31,4 +31,10 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
     public void setLocationError() {
 
     }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
 }

@@ -1,25 +1,52 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
 
 import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+
+import static org.junit.Assert.*;
 
 public class RecordTest {
-    @Before
-    public void setUp() {
+
+    /**
+     * Test that records created at different times are not equal
+     */
+    @Test
+    public void testNewRecord() throws InterruptedException {
+        Record record = new Record();
+        Thread.sleep(1000);
+        Record record1 = new Record();
+        assertNotNull(record.getTimeStamp());
+        assertNotNull(record1.getTimeStamp());
+        assertNotEquals(record.getTimeStamp(), record1.getTimeStamp());
+        assertNotEquals(record.getDate(), record1.getDate());
     }
 
-    @After
-    public void tearDown() {
+    /**
+     * Test setting and retrieving the title of the record
+     */
+    @Test
+    public void testTitle() {
+        Record record = new Record();
+        record.setTitle("Test title");
+        assertEquals("Test title", record.getTitle());
     }
 
+    /**
+     * Test setting and retrieving the comment of the record
+     */
+    @Test
+    public void testComment() {
+        Record record = new Record();
+        record.setComment("Just testing out a comment here");
+        assertEquals("Just testing out a comment here", record.getComment());
+    }
+
+    /**
+     * Test adding a keyword
+     */
     @Test
     public void testNewRecord() {
         Record record1 = new Record();
@@ -34,6 +61,12 @@ public class RecordTest {
         Record record = new Record();
         record.setTitle("Test title");
         assertEquals("Test title", record.getTitle());
+
+    @Test
+    public void testKeywords() {
+        Record record = new Record();
+        record.addKeyword("Test");
+        assertEquals("Test", record.getKeywords().get(0));
     }
 
     @Test
@@ -42,11 +75,4 @@ public class RecordTest {
         record.setComment("Just testing out a comment here");
         assertEquals("Just testing out a comment here", record.getComment());
     }
-
-    public void testKeywords(){
-        Record record = new Record();
-        record.addKeyword("Test");
-        assertEquals("Test", record.keywords[record.keywords.length+1]);
-    }
-
 }

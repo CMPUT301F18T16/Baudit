@@ -4,12 +4,13 @@ import android.support.annotation.NonNull;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- * Data class representing a Baudit's {@code User}'s email.
+ * Data class representing a Baudit's {@code Account}'s email.
  *
- * @see User
+ * @see Account
  */
 public class Email {
     private static final String TAG = "Email";
+
     /**
      * Apache commons EmailValidator.
      */
@@ -31,7 +32,7 @@ public class Email {
      * Wrapping of the Apache Commons EmailValidator.
      *
      * @param email {@code String}
-     * @return {@code boolean}
+     * @return {@code boolean} {@code true} if the email is valid, otherwise {@code false}
      * @see EmailValidator
      */
     static public boolean isValid(String email) {

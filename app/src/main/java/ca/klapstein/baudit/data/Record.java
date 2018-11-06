@@ -6,9 +6,14 @@ import android.support.annotation.NonNull;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
+
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -17,68 +22,99 @@ import java.util.zip.DataFormatException;
  */
 public class Record implements Comparable<Record> {
     private static final String TAG = "Record";
-
-    public String timestamp;
+    
+    public static final int MAX_COMMENT_LENGTH = 300;
+    public static final int MAX_TITLE_LENGTH = 30;
+    private Date date;
     private String title;
     private String comment;
-    private double xcoord;
-    private double ycoord;
-    private BodyPhotoCoords bodyPhotoCoords[];
-    public String[] keywords;
+    private GeoLocation geoLocation;
+    private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
+    private ArrayList<String> keywords;
 
-    public Record(){
-        this.setTimeStamp();
+    public Record() {
+        this.date = new Date();
+        // TODO: populate these properly
+        this.keywords = new ArrayList<>();
+        this.bodyPhotoCoords = new ArrayList<>();
     }
 
-
-    public void setTimeStamp() {
-        DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz");
-        this.timestamp = date.format(new Date());
+    /**
+     * Check if a given string is a valid Record title.
+     *
+     * @param title {@code String} the title to validate
+     * @return {@code boolean} {@code true} if the Record's title is valid, otherwise {@code false}
+     */
+    static public boolean isValidRecordTitle(String title) {
+        return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    public String getTimestamp(){
-        return this.timestamp;
+    /**
+     * Check if a given string is a valid Record comment.
+     *
+     * @param comment {@code String} the comment to validate
+     * @return {@code boolean} {@code true} if the Record's comment is valid, otherwise {@code false}
+     */
+    static public boolean isValidRecordComment(String comment) {
+        return comment.length() <= MAX_COMMENT_LENGTH;
     }
 
-    public void setTitle(String title){
-        if(title.length()<=30) {
-            this.title = title;
-        }else{
-            throw new IllegalArgumentException("Title too long");
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTimeStamp() {
+        return getBauditDateFormat().format(date);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (!isValidRecordTitle(title)) {
+            throw new IllegalArgumentException("invalid record title: too long");
         }
+        this.title = title;
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComment(String comment){
-        if(comment.length()<=300) {
-            this.comment = comment;
-        }else{
-            throw new IllegalArgumentException("Comment too long");
+    public void setComment(String comment) throws IllegalArgumentException {
+        if (!isValidRecordComment(comment)) {
+            throw new IllegalArgumentException("invalid record comment: too long");
         }
-    }
-    public String getComment(){
-        return this.comment;
+        this.comment = comment;
     }
 
-    public void addKeyword(String keyword){
-        int len = this.keywords.length;
-        len++;
-        keywords[len]=keyword;
+    public void addKeyword(String keyword) {
+        this.keywords.add(keyword);
     }
 
-    public String popKeyword(){
-        return this.keywords[this.keywords.length+1];
+    public void removeKeyword(String keyword) {
+        this.keywords.remove(keyword);
     }
 
-    public String[] getKeywords(){
-        return this.keywords;
+    public ArrayList<String> getKeywords() {
+        return keywords;
     }
 
+    public GeoLocation getGeoLocation() {
+        return geoLocation;
+    }
+
+    public void setGeoLocation(GeoLocation geoLocation) {
+        this.geoLocation = geoLocation;
+    }
+    
     @Override
     public int compareTo(@NonNull Record record) {
         return this.getTimestamp().compareTo(record.getTimestamp());
-    }
+    }    
 }

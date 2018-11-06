@@ -16,6 +16,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     private static final String TAG = "CreateCareProviderAccountActivity";
 
     private CreateCareProviderAccountPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,11 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     @Override
     public void setPasswordError() {
 
+    }
+
+    @Override
+    public void commitCreateAccount() {
+        finish();
     }
 
     @Override

@@ -1,79 +1,81 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@RunWith(Enclosed.class)
 public class UsernameTest {
+// TODO: enable when a BauditRemoteManager is implemented or mocked
+//    @RunWith(Parameterized.class)
+//    public static class ValidUserNameTest {
+//        @Parameterized.Parameters(name = "{index}: valid({0})={1}")
+//        public static String[] validUserName() {
+//            return new String[]{"testUser", "testUser1", "@!516!@4!@$!2°▐"};
+//        }
+//
+//        private String input;
+//
+//        public ValidUserNameTest(String input) {
+//            this.input = input;
+//        }
+//
+//        @Test
+//        public void testUsernameConstructor() {
+//            Username username = new Username(input);
+//            assertNotNull(username);
+//            assertEquals(input, username.getUsername());
+//        }
+//
+//        @Test
+//        public void testGetUsername() {
+//            Username username = new Username(input);
+//            assertNotNull(username);
+//            assertEquals(input, username.getUsername());
+//        }
+//
+//        @Test
+//        public void testSetUsername() {
+//            Username username = new Username(input);
+//            username.setUsername(input);
+//            assertEquals(input, username.getUsername());
+//        }
+//    }
 
-    @Test
-    public void testUsernameConstructor() {
-        Username username = new Username("testUser");
-        assertNotNull(username);
-        assertEquals("testUser", username.getUsername());
-    }
+    @RunWith(Parameterized.class)
+    public static class InvalidUserNameTest {
+        private String input;
 
-    @Test
-    public void testGetUsername() {
-        Username username = null;
-
-        try {
-            username = new Username("testUser");
-        } catch(IllegalArgumentException e) {
-            fail();
+        public InvalidUserNameTest(String input) {
+            this.input = input;
         }
 
-        assertNotNull(username);
-        assertEquals("testUser", username.getUsername());
-    }
-
-    @Test
-    public void testSetUsername() {
-        try {
-            Username username = new Username("testUser");
-            assertEquals("testUser", username.getUsername());
-            username.setUsername("testUser1");
-            assertEquals("testUser1", username.getUsername());
-            username.setUsername("1234567890");
-            assertEquals("1234567890", username.getUsername());
-            username.setUsername("123test123");
-            assertEquals("123test123", username.getUsername());
-        } catch (IllegalArgumentException e) {
-            fail();
+        @Parameterized.Parameters(name = "{index}: invalid({0})={1}")
+        public static String[] invalidUserName() {
+            return new String[]{"short", "testUserThatIsWayTooLong", ""};
         }
 
-    }
+        @Test(expected = IllegalArgumentException.class)
+        public void testUsernameConstructor() {
+            Username username = new Username(input);
+            assertNotNull(username);
+            assertEquals(input, username.getUsername());
+        }
 
-    @Test
-    public void testSetUsernameInvalid() {
-        boolean success = false;
-        try {
-            new Username("test");
-            success = true;
-        } catch (IllegalArgumentException e) {}
+        @Test(expected = IllegalArgumentException.class)
+        public void testSetUsername() {
+            Username username = new Username("validuser");
+            username.setUsername(input);
+            assertEquals(input, username.getUsername());
+        }
 
-        try {
-            new Username("testUserThatIsWayTooLong");
-            success = true;
-        } catch (IllegalArgumentException e) {}
-
-        try {
-            new Username("Ťéŝţ");
-            success = true;
-        } catch (IllegalArgumentException e) {}
-
-        try {
-            new Username("");
-            success = true;
-        } catch (IllegalArgumentException e) {}
-
-
-        if (success) {
-            fail();
+        @Test(expected = IllegalArgumentException.class)
+        public void testUsernameConstructorInvalid() {
+            Username username = new Username(input);
         }
     }
 }
