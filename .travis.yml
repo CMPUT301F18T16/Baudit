@@ -58,8 +58,10 @@ jobs:
   include:
   - stage: deploy
     name: "Deploy Javadoc"
+    before_script: skip
     script:
     - ./gradlew generateReleaseJavadoc
+    after_success: skip
     deploy:
       provider: pages
       local-dir: docs/javadoc/release
