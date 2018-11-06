@@ -1,86 +1,30 @@
+sudo: required
+dist: precise
 language: android
-jdk: oraclejdk8
-sudo: true
+
+jdk:
+- oraclejdk8
 
 env:
+  matrix:
+  - COMPONENT=unit
+  - COMPONENT=instrumentation
+  - COMPONENT=doc
   global:
-    - secure: trXCHpPotQVd7eP/+miReg17lXhJa4fDQ/otxuuslFk9WN7P4XsyKmz0tLyJmJdBbOy1x2rLwYMlF60rx3kRBcvJ/jDHSkLexxLpkIABZqO1XLLugVhOradaWD2XS89lWNXQeoWacNx7E1HScO6mkBziHYAcg8+usP9K9BRQqRi0SUS/C6m+aL+nSe/wCYJ+4lh4xe+cHh9CFumKLM+u74QarKvF7784K+Dd0Xf6hZZa4PQEPBKtPfXU42YM1KJM6wFj2K93idesOou7w6QCvVVIsrHzDyDDTEOFIcQsL/XFkgYAU1+TQB0sGBzAiT07U3KlR9WrVymjruq4mozxnwak57F3YlzM6g3ZpgV3Dhw4SnwwCdVtorIhRniYhmvBrb4ovI6EsJ4xEwD3a1jrnA5/0SlSrb6V/gQYfDOhazFVeuPtRLC/fK2ODIKF/mxhhxPX3SOlk4zPKgYxi+mPKE0wIUpCXBbuQYPUc9MseefDhrG8d95Fb5syYwtIgmaNf0jl9icaxqdzC0zwkChWf+ZqFcLmZuww8eiEunxCQ1VF/Xt12anz2U2A8T6ytGGNnQeGX5vzjOc/EzvBZpVf59lD0C1KtS7So+6uenOx4N7oEG+2Q/IEBGi/G2wesyhPAc8RrGCdx1lylgQDUSiDHIsEDJQQwU/sB9NiQZEB87w=
-    - ANDROID_API_LEVEL=28
-    - ANDROID_EMULATOR_LEVEL=18
-    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
-    - ADB_INSTALL_TIMEOUT=20
-    - ANDROID_ABI=armeabi-v7a
-    - ANDROID_TAG=google_apis
-    - QEMU_AUDIO_DRV=none
+  - secure: trXCHpPotQVd7eP/+miReg17lXhJa4fDQ/otxuuslFk9WN7P4XsyKmz0tLyJmJdBbOy1x2rLwYMlF60rx3kRBcvJ/jDHSkLexxLpkIABZqO1XLLugVhOradaWD2XS89lWNXQeoWacNx7E1HScO6mkBziHYAcg8+usP9K9BRQqRi0SUS/C6m+aL+nSe/wCYJ+4lh4xe+cHh9CFumKLM+u74QarKvF7784K+Dd0Xf6hZZa4PQEPBKtPfXU42YM1KJM6wFj2K93idesOou7w6QCvVVIsrHzDyDDTEOFIcQsL/XFkgYAU1+TQB0sGBzAiT07U3KlR9WrVymjruq4mozxnwak57F3YlzM6g3ZpgV3Dhw4SnwwCdVtorIhRniYhmvBrb4ovI6EsJ4xEwD3a1jrnA5/0SlSrb6V/gQYfDOhazFVeuPtRLC/fK2ODIKF/mxhhxPX3SOlk4zPKgYxi+mPKE0wIUpCXBbuQYPUc9MseefDhrG8d95Fb5syYwtIgmaNf0jl9icaxqdzC0zwkChWf+ZqFcLmZuww8eiEunxCQ1VF/Xt12anz2U2A8T6ytGGNnQeGX5vzjOc/EzvBZpVf59lD0C1KtS7So+6uenOx4N7oEG+2Q/IEBGi/G2wesyhPAc8RrGCdx1lylgQDUSiDHIsEDJQQwU/sB9NiQZEB87w=
 
 android:
   components:
-    - tools
-    - platform-tools
-    - tools
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-$ANDROID_API_LEVEL
-    - android-$ANDROID_EMULATOR_LEVEL
-    - extra-android-support
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMULATOR_LEVEL
+  - tools
+  - platform-tools
+  - android-22
+  - android-24
+  - android-25
+  - build-tools-25.0.2
+  - extra-android-m2repository
 
-licenses:
-  - android-sdk-preview-license-.+
-  - android-sdk-license-.+
-  - google-gdk-license-.+
+before_script:
+  ./scripts/travis_before_script.sh
 
-# A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
-# after every build you need to add the following
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-
-before_install:
-  # If permission for Gradlew Dependencies fail, use this.
-  - sudo chmod +x ./gradlew
-  - yes | sdkmanager "platforms;android-28"
-
-stages:
-  - test
-  # only run deploy stage on master branch
-  - name: deploy
-    if: branch = master
-
-jobs:
-  include:
-    - stage: test
-      name: "Test"
-      before_script:
-#        # Useful command for debugging ci emulator issues
-#        - android list targets
-        - echo "no" | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-        - emulator -avd test -no-window &
-        - android-wait-for-emulator
-      script:
-        # ensure javadoc generates correctly
-        - ./gradlew clean build generateJavadoc
-        # assemble code coverage reports
-        - ./gradlew clean build jacocoTestReport assembleDebugAndroidTest
-        # run connected (instrumented) tests
-        - ./gradlew connectedCheck
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
-    - stage: deploy
-      name: "Deploy Javadoc"
-      script:
-        - ./gradlew clean build generateReleaseJavadoc
-      deploy:
-        provider: pages
-        local-dir: docs/javadoc/release
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        on:
-          branch: master
+script:
+  ./scripts/travis_script.sh
