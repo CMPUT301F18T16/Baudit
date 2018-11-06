@@ -10,6 +10,7 @@ import ca.klapstein.baudit.views.View;
  * @see View
  */
 abstract public class Presenter<V extends View> {
+    private static final String TAG = "Presenter";
 
     protected V view;
     protected BauditDataManager dataManager;
