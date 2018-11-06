@@ -18,7 +18,6 @@ android:
   - tools
   - platform-tools
   - tools
-  - android-22
   - build-tools-27.0.3
   - extra-android-m2repository
 
@@ -44,6 +43,9 @@ before_install:
 - sudo chmod +x ./gradlew
 - sudo chmod +x scripts/*
 - yes | sdkmanager "platforms;android-28"
+
+install:
+
 
 before_script:
 - bash scripts/travis_before_script.sh
