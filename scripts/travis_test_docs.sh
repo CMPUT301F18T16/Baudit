@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-./gradlew generateJavadoc
+# test creating the javadoc
+
+./gradlew clean build generateJavadoc
