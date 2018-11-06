@@ -24,7 +24,15 @@ public class LoginPresenter extends Presenter<LoginView> {
         this.remoteManager = new BauditRemoteManager();
     }
 
+    /**
+     * Attempt a login with a given user/pass combination with the remote authentication server.
+     *
+     * @param username {@code String}
+     * @param password {@code String}
+     * @return {@code boolean} {@code true} if the authentication was successful, otherwise {@code false}
+     */
     public boolean validateLogin(String username, String password) {
+        view.setLoginSuccess();
         return true;
     }
 }

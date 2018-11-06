@@ -25,7 +25,7 @@ public class Password {
      * Validate whether a string is a valid Password.
      *
      * @param password {@code String}
-     * @return {@code boolean}
+     * @return {@code boolean} {@code true} if the password is valid, otherwise {@code false}
      */
     static public boolean isValid(String password) {
         // TODO: implement

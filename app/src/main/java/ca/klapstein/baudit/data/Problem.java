@@ -18,10 +18,22 @@ public class Problem {
     private String description;
     private Date date;
 
+    /**
+     * Check if a given string is a valid Problem description.
+     *
+     * @param description {@code String} the description to validate
+     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise {@code false}
+     */
     static public boolean isValidProblemDescription(String description) {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
 
+    /**
+     * Check if a given string is a valid Problem title.
+     *
+     * @param title {@code String} the title to validate
+     * @return {@code boolean} {@code true} if the Problem's title is valid, otherwise {@code false}
+     */
     static public boolean isValidProblemTitle(String title) {
         return title.length() <= MAX_TITLE_LENGTH;
     }

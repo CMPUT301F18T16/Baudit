@@ -6,6 +6,8 @@ package ca.klapstein.baudit.data;
  * @see BodyPhoto
  */
 public class BodyPhotoCoords {
+    private static final String TAG = "BodyPhotoCoords";
+
     private int posX;
     private int posY;
 
@@ -34,10 +36,20 @@ public class BodyPhotoCoords {
         this.posY = posY;
     }
 
+    /**
+     * Get the X-axis point of the body photo coordinate.
+     *
+     * @return {@code int}
+     */
     public int getPosX() {
         return posX;
     }
 
+    /**
+     * Get the Y-axis point of the body photo coordinate.
+     *
+     * @return {@code int}
+     */
     public int getPosY() {
         return posY;
     }

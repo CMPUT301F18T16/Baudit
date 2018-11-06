@@ -13,6 +13,12 @@ public class PhotoPresenter extends Presenter<PhotoView> {
         super(view);
     }
 
+    /**
+     * Check if a given Bitmap image is valid for usage in Baudit.
+     *
+     * @param bitmap {@code Bitmap} the Bitmap image to validate
+     * @return {@code boolean} {@code true} if the given bitmap image is valid, otherwise {@code false}
+     */
     public boolean ValidatePhoto(Bitmap bitmap) {
         return true;
     }
