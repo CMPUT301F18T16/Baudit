@@ -34,10 +34,20 @@ public class BodyPhotoCoords {
         this.posY = posY;
     }
 
+    /**
+     * Get the X-axis point of the body photo coordinate.
+     *
+     * @return {@code int}
+     */
     public int getPosX() {
         return posX;
     }
 
+    /**
+     * Get the Y-axis point of the body photo coordinate.
+     *
+     * @return {@code int}
+     */
     public int getPosY() {
         return posY;
     }
