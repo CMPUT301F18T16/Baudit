@@ -20,24 +20,20 @@ public class SplashActivity extends AppCompatActivity {
     private void onCreateCareProviderAccountClick() {
         Intent intent = new Intent(this, CreateCareProviderAccountActivity.class);
         startActivity(intent);
-        finish();
     }
 
     private void onPatientAccountClick() {
         Intent intent = new Intent(this, CreatePatientAccountActivity.class);
         startActivity(intent);
-        finish();
     }
 
     private void onCareProviderLoginClick() {
         Intent intent = new Intent(this, LoginCareProviderActivity.class);
         startActivity(intent);
-        finish();
     }
 
     private void onPatientLoginClick() {
         Intent intent = new Intent(this, LoginPatientActivity.class);
         startActivity(intent);
-        finish();
     }
 }

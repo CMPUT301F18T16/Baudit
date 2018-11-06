@@ -1,9 +1,9 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 /**
  * Data class representing a Medical Problem for a {@code Patient}.
@@ -11,61 +11,84 @@ import java.util.Date;
  * @see Patient
  */
 public class Problem implements Comparable<Problem> {
+    public static final int MAX_DESCRIPTION_LENGTH = 300;
+    public static final int MAX_TITLE_LENGTH = 30;
+  
     private static final String TAG = "Problem";
     private String title;
     private String description;
     private String timestamp;
     private RecordTreeSet recordTreeSet;
+    private String title;
+    private String description;
+    private Date date;
+
+    /**
+     * Check if a given string is a valid Problem description.
+     *
+     * @param description {@code String} the description to validate
+     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise {@code false}
+     */
+    static public boolean isValidProblemDescription(String description) {
+        return description.length() <= MAX_DESCRIPTION_LENGTH;
+    }
+
+    /**
+     * Check if a given string is a valid Problem title.
+     *
+     * @param title {@code String} the title to validate
+     * @return {@code boolean} {@code true} if the Problem's title is valid, otherwise {@code false}
+     */
+    static public boolean isValidProblemTitle(String title) {
+        return title.length() <= MAX_TITLE_LENGTH;
+    }
 
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
-
+    
     public Problem(@NonNull String title, String description) throws IllegalArgumentException{
         this.setTitle(title);
         this.setDescription(description);
-        this.setTimeStamp();
-
+        this.date = new Date();
     }
 
-
-    public void setTimeStamp() {
-        DateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz");
-        this.timestamp = date.format(new Date());
-    }
-
-    public String getTimestamp(){
-        return this.timestamp;
-    }
-
-
-    public void setTitle(@NonNull String title)throws IllegalArgumentException {
-        int len = title.length();
-        if( len < 30 && 0 < len ){
-            this.title = title;
-        } else throw new IllegalArgumentException();
-    }
-
-    public void setDescription(String description) {
-        int len = description.length();
-        if (len < 300){
-            this.description = description;
-        } else throw new IllegalArgumentException();
-    }
-
-
-    public String getTitle(){
-        return this.title;
-    }
-
-    public String getDescription(){
-        return this.description;
-    }
-
-
-    @Override
+     @Override
     public int compareTo(@NonNull Problem problem) {
       return this.getTimestamp().compareTo(problem.getTimestamp()); //Order by date
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) throws IllegalArgumentException {
+        if (!isValidProblemDescription(description)) {
+            throw new IllegalArgumentException("invalid problem description");
+        }
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (!isValidProblemTitle(title)) {
+            throw new IllegalArgumentException("invalid problem title");
+        }
+        this.title = title;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTimeStamp() {
+        return getBauditDateFormat().format(date);
+    }
 }

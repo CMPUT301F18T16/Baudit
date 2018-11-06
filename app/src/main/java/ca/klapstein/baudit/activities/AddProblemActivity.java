@@ -28,7 +28,7 @@ public class AddProblemActivity extends AppCompatActivity implements AddProblemV
 
     @Override
     public void commitAddProblem() {
-
+        finish();
     }
 
     @Override
@@ -59,5 +59,10 @@ public class AddProblemActivity extends AppCompatActivity implements AddProblemV
     @Override
     public void setDescriptionError() {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

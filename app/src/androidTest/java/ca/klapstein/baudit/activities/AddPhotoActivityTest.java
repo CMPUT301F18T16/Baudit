@@ -2,22 +2,19 @@ package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 import com.robotium.solo.Solo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
-@RunWith(AndroidJUnit4.class)
-public class PhotoActivityTest extends ActivityTestRule<PhotoActivity> {
+public class AddPhotoActivityTest extends ActivityTestRule<AddPhotoActivity> {
 
     private Solo solo;
 
-    public PhotoActivityTest() {
-        super(ca.klapstein.baudit.activities.PhotoActivity.class);
+    public AddPhotoActivityTest() {
+        super(AddPhotoActivity.class);
     }
 
     @Before
@@ -32,6 +29,14 @@ public class PhotoActivityTest extends ActivityTestRule<PhotoActivity> {
 
     @Test
     public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", PhotoActivity.class);
+    }
+
+    @Test
+    public void setPhoto() {
+    }
+
+    @Test
+    public void setPhotoError() {
+        solo.assertCurrentActivity("Wrong Activity", AddPhotoActivity.class);
     }
 }

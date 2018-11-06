@@ -7,7 +7,7 @@ import ca.klapstein.baudit.presenters.EditAccountPresenter;
 import ca.klapstein.baudit.views.EditAccountView;
 
 /**
- * Activity for editing a {@code User}.
+ * Activity for editing a {@code Account}.
  * <p>
  * Should be accessed by both a {@code Patient} and {@code CareProvider}.
  *
@@ -49,6 +49,12 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
     @Override
     public void commitEditAccount() {
+        finish();
+    }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
     }
 }

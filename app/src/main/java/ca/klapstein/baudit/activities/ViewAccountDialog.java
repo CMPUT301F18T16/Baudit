@@ -8,13 +8,14 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.presenters.ViewAccountPresenter;
 import ca.klapstein.baudit.views.ViewAccountView;
 
 /**
- * Dialog providing a overview of an {@code User}.
+ * Dialog providing a overview of an {@code Account}.
  *
- * @see ca.klapstein.baudit.data.User
+ * @see Account
  */
 public class ViewAccountDialog extends DialogFragment implements ViewAccountView {
     private static final String TAG = "ViewAccountDialog";
