@@ -1,10 +1,11 @@
-package ca.klapstein.baudit.data;
+package ca.klapstein.baudit.presenters;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class UserTest {
+public class AddPhotoPresenterTest {
+
     @Before
     public void setUp() {
     }
@@ -14,7 +15,6 @@ public class UserTest {
     }
 
     @Test
-    public void testStub() {
-        // TODO: write tests
+    public void validatePhoto() {
     }
 }

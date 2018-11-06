@@ -3,11 +3,11 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * Data class representing the contact info of a {@code User}.
+ * Data class representing the contact info of a {@code Account}.
  * <p>
  * This is viewed by both the {@code CareProvider} and the {@code Patients}.
  *
- * @see User
+ * @see Account
  */
 public class ContactInfo {
     private static final String TAG = "ContactInfo";

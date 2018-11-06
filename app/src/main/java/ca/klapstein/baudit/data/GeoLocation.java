@@ -22,7 +22,7 @@ public class GeoLocation {
      * @param lat {@code double} a latitude value that must be between -90 and +90.
      * @param lon {@code double} a longitude value that must be between -180 and +180.
      */
-    public GeoLocation(double lat, double lon) {
+    public GeoLocation(double lat, double lon) throws IllegalArgumentException {
         setLon(lon);
         setLat(lat);
     }
@@ -42,7 +42,7 @@ public class GeoLocation {
      *
      * @param lon {@code double} a longitude value that must be between -90 and +90.
      */
-    public void setLon(double lon) {
+    public void setLon(double lon) throws IllegalArgumentException {
         if (isValidLon(lon)) {
             this.lon = lon;
         } else {
@@ -64,7 +64,7 @@ public class GeoLocation {
      *
      * @param lat {@code double} a latitude value that must be between -90 and +90.
      */
-    public void setLat(double lat) {
+    public void setLat(double lat) throws IllegalArgumentException {
         if (isValidLat(lat)) {
             this.lat = lat;
         } else {

@@ -1,23 +1,81 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+@RunWith(Enclosed.class)
 public class UsernameTest {
-    @Before
-    public void setUp() {
-    }
+// TODO: enable when a BauditRemoteManager is implemented or mocked
+//    @RunWith(Parameterized.class)
+//    public static class ValidUserNameTest {
+//        @Parameterized.Parameters(name = "{index}: valid({0})={1}")
+//        public static String[] validUserName() {
+//            return new String[]{"testUser", "testUser1", "@!516!@4!@$!2°▐"};
+//        }
+//
+//        private String input;
+//
+//        public ValidUserNameTest(String input) {
+//            this.input = input;
+//        }
+//
+//        @Test
+//        public void testUsernameConstructor() {
+//            Username username = new Username(input);
+//            assertNotNull(username);
+//            assertEquals(input, username.getUsername());
+//        }
+//
+//        @Test
+//        public void testGetUsername() {
+//            Username username = new Username(input);
+//            assertNotNull(username);
+//            assertEquals(input, username.getUsername());
+//        }
+//
+//        @Test
+//        public void testSetUsername() {
+//            Username username = new Username(input);
+//            username.setUsername(input);
+//            assertEquals(input, username.getUsername());
+//        }
+//    }
 
-    @After
-    public void tearDown() {
-    }
+    @RunWith(Parameterized.class)
+    public static class InvalidUserNameTest {
+        private String input;
 
-    @Test
-    public void getUsername() {
-    }
+        public InvalidUserNameTest(String input) {
+            this.input = input;
+        }
 
-    @Test
-    public void setUsername() {
+        @Parameterized.Parameters(name = "{index}: invalid({0})={1}")
+        public static String[] invalidUserName() {
+            return new String[]{"short", "testUserThatIsWayTooLong", ""};
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testUsernameConstructor() {
+            Username username = new Username(input);
+            assertNotNull(username);
+            assertEquals(input, username.getUsername());
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testSetUsername() {
+            Username username = new Username("validuser");
+            username.setUsername(input);
+            assertEquals(input, username.getUsername());
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testUsernameConstructorInvalid() {
+            Username username = new Username(input);
+        }
     }
 }

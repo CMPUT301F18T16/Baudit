@@ -4,4 +4,6 @@ import android.graphics.Bitmap;
 
 public interface Photo {
     Bitmap getBitmap();
+
+    void setBitmap(Bitmap bitmap);
 }

@@ -4,6 +4,7 @@ import ca.klapstein.baudit.data.BodyPhotoCoords;
 import ca.klapstein.baudit.views.BodyLocationView;
 
 public class BodyLocationPresenter extends Presenter<BodyLocationView> {
+    private static final String TAG = "BodyLocationPresenter";
 
     private BodyPhotoCoords bodyPhotoCoords;
 

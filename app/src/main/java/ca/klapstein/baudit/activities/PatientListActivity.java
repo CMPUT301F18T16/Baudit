@@ -44,6 +44,12 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         this.adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
+    }
+
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
         private static final String TAG = "PatientListAdapter";
 
@@ -55,7 +61,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         @Override
         public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_patient, viewGroup, false);
+                    .inflate(R.layout.card_patient, viewGroup, false);
             return new PatientViewHolder(v); //Wrap it in a ViewHolder.
         }
 
@@ -85,6 +91,11 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         @Override
         public void setPatientNameText(String patientName) {
             mNameView.setText(patientName);
+        }
+
+        @Override
+        public void onStart() {
+
         }
     }
 }
