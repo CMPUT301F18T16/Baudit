@@ -5,7 +5,7 @@ package ca.klapstein.baudit.data;
 /**
  * Class that represents a Patient.
  */
-public class Patient extends User implements Comparable<Patient> {
+public class Patient extends Account implements Comparable<Patient> {
     private static final String TAG = "Patient";
     private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
@@ -16,26 +16,40 @@ public class Patient extends User implements Comparable<Patient> {
         this.problemTreeSet = new ProblemTreeSet();
     }
 
-    // UC-01.02.01: list problems
-    public ProblemTreeSet getProblemTreeSet() { return problemTreeSet; }
-
-    /* UC-01.03.01: edit medical problem TODO: replace edited record or done in problem class?
-     public void editProblem(Problem editedProblem, Problem problem){} */
-
-    // UC-02.01.01: list medical problem records
-    public RecordTreeSet listProblemRecords(Problem problem){ return problem.getRecordTreeSet();}
-
-    // UC-02.02.01: add record to medical problem
-    public void addRecordToProblem(Record record, Problem problem){ problem.getRecordTreeSet().add(record); }
-
-    /* UC-02.03.01: edit record of medical problem TODO: get problem from treeset then replace edited record or done in record?
-     public void editRecord(Problem problem, Record editedRecord, Record record){ } */
-
-    // UC-02.03.03: remind patient to add photo, implement later
-
     @Override
     public int compareTo(Patient p) {
         return  (int)(this.getUsername().getUsername().compareTo(p.getUsername().getUsername()));
     }
+  
+    /**
+     * A {@code Patient} can only have one {@code BodyPhoto}.
+     */
+    private BodyPhoto bodyPhoto;
 
+    /**
+     * Get the list of {@code Problem}s owned by the {@code Patient}.
+     *
+     * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
+     */
+    public ProblemTreeSet getProblemTreeSet() {
+        return problemTreeSet;
+    }
+
+    /**
+     * Get a {@code Patient}'s {@code BodyPhoto}.
+     *
+     * @return {@code BodyPhoto} belonging to the patient.
+     */
+    public BodyPhoto getBodyPhoto() {
+        return bodyPhoto;
+    }
+
+    /**
+     * Setter for a {@code Patient}'s {@code BodyPhoto}.
+     *
+     * @param bodyPhoto {@code BodyPhoto}
+     */
+    public void setBodyPhoto(BodyPhoto bodyPhoto) {
+        this.bodyPhoto = bodyPhoto;
+    }
 }
