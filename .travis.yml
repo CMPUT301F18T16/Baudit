@@ -40,14 +40,17 @@ stages:
 - name: deploy
   if: branch = master
 
+before_install:
+- chmod +x scripts/*
+
 jobs:
   include:
   - stage: test
     name: "Test"
     before_script:
-    - scripts/travis_before_script.sh
+    - ./scripts/travis_before_script.sh
     script:
-    - scripts/travis_script.sh
+    - ./scripts/travis_script.sh
     after_success:
     - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
