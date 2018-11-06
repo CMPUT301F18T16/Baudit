@@ -10,6 +10,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  */
 public class Email {
     private static final String TAG = "Email";
+
     /**
      * Apache commons EmailValidator.
      */
@@ -31,7 +32,7 @@ public class Email {
      * Wrapping of the Apache Commons EmailValidator.
      *
      * @param email {@code String}
-     * @return {@code boolean}
+     * @return {@code boolean} {@code true} if the email is valid, otherwise {@code false}
      * @see EmailValidator
      */
     static public boolean isValid(String email) {
