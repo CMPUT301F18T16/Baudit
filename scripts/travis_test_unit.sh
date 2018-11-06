@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # run unit tests
-./gradlew clean build jacocoTestReport assembleDebug lintDebug testDebug test
+./gradlew clean assemble lint test
