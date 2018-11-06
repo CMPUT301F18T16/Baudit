@@ -16,6 +16,7 @@ env:
   - ANDROID_BUILD_TOOLS_VERSION=27.0.3
   - ADB_INSTALL_TIMEOUT=20
   - ANDROID_ABI=armeabi-v7a
+
 android:
   components:
   - tools
@@ -24,7 +25,6 @@ android:
   #  - android-$ANDROID_EMULATOR_LEVEL
   - build-tools-$ANDROID_BUILD_TOOLS_VERSION
   - extra-android-m2repository
-
 
 # A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
 # after every build you need to add the following
@@ -54,7 +54,6 @@ script:
 - bash scripts/travis_script.sh
 after_success:
 - bash <(curl -s https://codecov.io/bash)  -cF $COMPONENT
-
 
 jobs:
   include:
