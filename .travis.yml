@@ -44,16 +44,15 @@ before_install:
 - yes | sdkmanager "platforms;android-28"
 
 
-before_script:
-- bash scripts/travis_before_script.sh
-script:
-- bash scripts/travis_script.sh
-after_success:
-- bash <(curl -s https://codecov.io/bash)
-
-
 jobs:
   include:
+  - stage: test
+    before_script:
+    - bash scripts/travis_before_script.sh
+    script:
+    - bash scripts/travis_script.sh
+    after_success:
+    - bash <(curl -s https://codecov.io/bash)
   - stage: deploy
     name: "Deploy Javadoc"
     script:
