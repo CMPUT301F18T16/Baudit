@@ -20,11 +20,11 @@ public class BauditDataManager {
         this.dataBaseManager = new BauditDataBaseManager();
     }
 
-    public User getUser(String username) {
+    public Account getUser(String username) {
         return null;
     }
 
-    public boolean commitUser(User user) {
+    public boolean commitUser(Account account) {
         return true;
     }
 

@@ -21,7 +21,7 @@ public class RecordListPresenter extends Presenter<RecordListView> {
     }
 
     public void onBindRecordRowViewAtPosition(RecordRowView rowView, int position) {
-        Record record = (Record)recordTreeSet.toArray()[position];
+        Record record = (Record) recordTreeSet.toArray()[position];
         // rowView.setTimestampText(record.timestamp.toString());
     }
 

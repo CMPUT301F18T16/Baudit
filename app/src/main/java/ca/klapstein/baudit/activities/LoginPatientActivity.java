@@ -52,5 +52,12 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     public void setLoginSuccess() {
         Intent intent = new Intent(this, ProblemListActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
     }
 }

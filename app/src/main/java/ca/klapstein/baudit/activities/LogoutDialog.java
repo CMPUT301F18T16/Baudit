@@ -42,5 +42,6 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
     public void setLogoutSuccess() {
         Intent intent = new Intent(getContext(), SplashActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 }
