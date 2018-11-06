@@ -55,7 +55,7 @@ jobs:
   - stage: deploy
     name: "Deploy Javadoc"
     script:
-    - ./gradlew clean build generateReleaseJavadoc
+    - ./gradlew generateReleaseJavadoc
     deploy:
       provider: pages
       local-dir: docs/javadoc/release
