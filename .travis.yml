@@ -19,9 +19,12 @@ android:
   - platform-tools
   #  - android-22
   #  - android-24
+  - android-22
   - android-25
   - build-tools-25.0.2
   - extra-android-m2repository
+  - extra-android-support
+  - extra-google-m2repository
 
 # A peculiarity of dependency caching in Gradle means that to avoid uploading the cache
 # after every build you need to add the following
