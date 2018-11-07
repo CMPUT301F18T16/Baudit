@@ -20,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 
         private String input;
 
-
         public ValidInputs(String input) {
             this.input = input;
         }
@@ -75,7 +74,6 @@ import static org.junit.Assert.assertTrue;
             assertFalse(Password.isValid(input));
         }
 
-
         @Test(expected = IllegalArgumentException.class)
         public void testPasswordConstructorInvalid() {
             new Password(input);
@@ -85,7 +83,6 @@ import static org.junit.Assert.assertTrue;
         public void testSetPasswordInvalid() {
             Password password = new Password("validpassword");
             password.setPassword(input);
-
         }
     }
 }
