@@ -81,5 +81,12 @@ import static org.junit.Assert.assertTrue;
         public void testPasswordConstructorInvalid() {
             new Password(input);
         }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testSetPasswordInvalid() {
+            Password password = new Password("validpassword");
+            password.setPassword(input);
+
+        }
     }
 }
