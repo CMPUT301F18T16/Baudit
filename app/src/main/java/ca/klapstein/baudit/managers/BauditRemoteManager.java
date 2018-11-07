@@ -6,7 +6,7 @@ package ca.klapstein.baudit.managers;
 public class BauditRemoteManager {
     private static final String TAG = "BauditRemoteManager";
 
-    public boolean uniqueID(String s) {
+    public boolean uniqueID(String username) {
         // TODO: implement uniqueness checking of a userid given a string
         return true;
     }
