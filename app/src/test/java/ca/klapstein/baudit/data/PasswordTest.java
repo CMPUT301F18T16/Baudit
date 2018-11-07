@@ -1,36 +1,88 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class PasswordTest {
-    @Before
-    public void setUp() {
+@RunWith(Enclosed.class)
+    public class PasswordTest {
+
+    @RunWith(Parameterized.class)
+    public static class ValidInputs {
+
+        private String input;
+
+        public ValidInputs(String input) {
+            this.input = input;
+        }
+
+        @Parameters
+        public static String[] validPasswords() {
+            return new String[]{"abcd1234", "password", "011235813", "passwordConstruct", "passwordGet"};
+        }
+
+        @Test
+        public void test_validPassword() {
+            assertTrue(Password.isValid(input));
+        }
+
+
+        @Test
+        public void testPasswordConstructor() {
+            Password password = new Password(input);
+            assertNotNull(password);
+        }
+
+        @Test
+        public void testGetPassword() {
+            Password password = new Password(input);
+            assertEquals(input, password.getPassword());
+        }
+
+        @Test
+        public void testSetPassword() {
+            Password password = new Password(input);
+            password.setPassword("differentPassword");
+            assertEquals("differentPassword", password.getPassword());
+        }
     }
 
-    @After
-    public void tearDown() {
-    }
+    @RunWith(Parameterized.class)
+    public static class InvalidInputs {
 
-    @Test
-    public void getPassword() {
-    }
+        private String input;
 
-    @Test
-    public void setPassword() {
-    }
+        public InvalidInputs (String input) {
+            this.input = input;
+        }
 
-    @Test
-    public void test_validPassword() {
-        assertTrue(Password.isValid("foobar"));
-        assertTrue(Password.isValid("hunter1"));
-    }
+        @Parameters
+        public static String[] invalidPasswords() {
+            return new String[]{"password!", "short", "@bad!password", "thisPasswordIsWayTooExcessive"};
+        }
 
-    @Test
-    public void test_invalidPassword() {
-        // TODO: implement
+        @Test
+        public void test_invalidPassword() {
+            assertFalse(Password.isValid(input));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testPasswordConstructorInvalid() {
+            new Password(input);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void testSetPasswordInvalid() {
+            Password password = new Password("validpassword");
+            password.setPassword(input);
+        }
     }
 }
