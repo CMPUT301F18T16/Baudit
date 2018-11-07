@@ -104,7 +104,7 @@ public class Record implements Comparable<Record> {
     }
 
     @Override
-    public int compareTo(Record r) {
-        return (int)(this.getTimestamp() - r.getTimestamp());
+    public int compareTo(Record record) {
+        return this.date.compareTo(record.getDate());
     }
 }

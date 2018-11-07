@@ -39,26 +39,10 @@ public class Problem implements Comparable<Problem> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    private long timestamp;
-    private String title;
-
     public Problem() {
 
         this.recordTreeSet = new RecordTreeSet();
-        Date date = new Date();
-        this.timestamp = date.getTime();
-    }
-
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public String getTitle(){
-        return this.title;
-    }
-
-    public long getTimestamp() {
-        return this.timestamp;
+        this.date = new Date();
     }
 
     public RecordTreeSet getRecordTreeSet() {
@@ -100,7 +84,7 @@ public class Problem implements Comparable<Problem> {
     }
   
     @Override
-    public int compareTo(Problem p) {
-        return (int)(this.getTimestamp() - p.getTimestamp());
+    public int compareTo(Problem problem) {
+        return this.date.compareTo(problem.getDate());
     }
 }

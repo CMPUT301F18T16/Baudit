@@ -9,13 +9,26 @@ public class CareProvider extends Account {
     private PatientTreeSet assignedPatientTreeSet;
 
     public CareProvider(Username username, Password password, ContactInfo contactInfo){
-        this.setUsername(username);
-        this.setPassword(password);
-        this.setContactInfo(contactInfo);
+        super(username, password, contactInfo);
         this.assignedPatientTreeSet = new PatientTreeSet();
     }
 
-    public PatientTreeSet getAssignedPatientTreeSet() {
-        return assignedPatientTreeSet;
+    public ProblemTreeSet getProblemTreeSet(Patient patient) {
+        if (this.getAssignedPatientTreeSet().contains(patient))
+            return patient.getProblemTreeSet();
+        else{
+            throw new IllegalArgumentException("Patient not assigned to care provider");
+        }
     }
+    public RecordTreeSet getRecordTreeSet(Patient patient, Problem problem) {
+        if (this.getAssignedPatientTreeSet().contains(patient))
+            return problem.getRecordTreeSet();
+        else {
+            throw new IllegalArgumentException("Patient not assigned to care provider");
+        }
+    }
+    public PatientTreeSet getAssignedPatientTreeSet(){
+        return this.assignedPatientTreeSet;
+    }
+
 }

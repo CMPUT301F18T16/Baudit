@@ -17,6 +17,12 @@ public abstract class Account {
     @NonNull
     private Password password;
 
+    public Account(Username username, Password password, ContactInfo contactInfo){
+        this.username = username;
+        this.password = password;
+        this.contactInfo = contactInfo;
+
+    }
     @NonNull
     public Username getUsername() {
         return username;

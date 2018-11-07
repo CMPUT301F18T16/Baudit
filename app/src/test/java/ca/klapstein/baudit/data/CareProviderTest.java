@@ -127,12 +127,4 @@ public class CareProviderTest {
         careProvider.setPassword(newPassword);
         assertEquals(careProvider.getPassword(), newPassword);
     }
-
-
-
-
-
-
-
 }
-
