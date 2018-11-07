@@ -17,10 +17,7 @@ public class Problem implements Comparable<Problem> {
     private static final String TAG = "Problem";
     private String title;
     private String description;
-    private String timestamp;
     private RecordTreeSet recordTreeSet;
-    private String title;
-    private String description;
     private Date date;
 
     /**
@@ -55,7 +52,7 @@ public class Problem implements Comparable<Problem> {
 
      @Override
     public int compareTo(@NonNull Problem problem) {
-      return this.getTimestamp().compareTo(problem.getTimestamp()); //Order by date
+      return this.getTitle().compareTo(problem.getTitle()); //Order by date
     }
 
     public String getDescription() {

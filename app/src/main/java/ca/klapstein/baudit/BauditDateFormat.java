@@ -10,6 +10,7 @@ import java.util.Locale;
  */
 public class BauditDateFormat {
     static public SimpleDateFormat getBauditDateFormat() {
-        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
+        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX\n", Locale.getDefault());
+       // return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ\n", Locale.getDefault());
     }
 }

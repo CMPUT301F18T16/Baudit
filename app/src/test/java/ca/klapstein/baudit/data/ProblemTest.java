@@ -29,22 +29,6 @@ public class ProblemTest {
         assertEquals("",problem.getDescription());
     }
 
-    @Test
-    public void testSetTimeStamp() {
-        Problem problem1 = new Problem("test1", "");
-       // System.out.print(problem1.getTimestamp());
-        assertNotNull(problem1.getTimestamp());
-        Problem problem2 = new Problem("test2", "");
-       // System.out.print(problem2.getTimestamp());
-        assertNotNull(problem2.getTimestamp());
-        assertNotEquals(problem1.getTimestamp(), problem2.getTimestamp());
-    }
-
-    @Test
-    public void testGetTimeStamp(){
-        Problem problem = new Problem("test", "");
-        assertNotNull(problem.getTimestamp());
-    }
 
     @Test
     public void testGetTitle(){
