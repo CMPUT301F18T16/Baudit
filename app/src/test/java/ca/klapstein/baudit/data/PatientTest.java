@@ -13,7 +13,6 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(Parameterized.class)
 public class PatientTest {
 
-    private Email email;
     private Username username;
     private Password password;
     private Patient patient;
@@ -21,10 +20,10 @@ public class PatientTest {
 
 
     public PatientTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
-        this.email = new Email(emailInput);
+        Email email = new Email(emailInput);
         PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
         this.contactInfo = new ContactInfo();
-        this.contactInfo.setEmail(this.email);
+        this.contactInfo.setEmail(email);
         this.contactInfo.setPhoneNumber(phoneNumber);
         this.username = new Username(usernameInput);
         this.password = new Password(passwordInput);
