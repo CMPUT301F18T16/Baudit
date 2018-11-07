@@ -3,6 +3,7 @@ package ca.klapstein.baudit.data;
 
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -15,18 +16,18 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Enclosed.class)
     public class PasswordTest {
 
-
     @RunWith(Parameterized.class)
-    public class ValidInputs {
+    public static class ValidInputs {
 
         private String input;
+
 
         public ValidInputs(String input) {
             this.input = input;
         }
 
         @Parameters
-        public String[] dataValid() {
+        public static String[] validPasswords() {
             return new String[]{"abcd1234", "password", "011235813", "passwordConstruct", "passwordGet"};
         }
 
@@ -40,25 +41,24 @@ import static org.junit.Assert.assertTrue;
         public void testPasswordConstructor() {
             Password password = new Password(input);
             assertNotNull(password);
-            assertEquals(input, password.getPassword());
         }
 
         @Test
         public void testGetPassword() {
             Password password = new Password(input);
-            assertNotNull(password);
             assertEquals(input, password.getPassword());
         }
 
         @Test
-        public void testSetPasswordValid() {
+        public void testSetPassword() {
             Password password = new Password(input);
-            assertEquals(input, password.getPassword());
+            password.setPassword("differentPassword");
+            assertEquals("differentPassword", password.getPassword());
         }
     }
 
     @RunWith(Parameterized.class)
-    public class InvalidInputs {
+    public static class InvalidInputs {
 
         private String input;
 
@@ -67,7 +67,7 @@ import static org.junit.Assert.assertTrue;
         }
 
         @Parameters
-        public String[] dataInvalid() {
+        public static String[] invalidPasswords() {
             return new String[]{"password!", "short", "@bad!password", "thisPasswordIsWayTooExcessive"};
         }
 
@@ -77,8 +77,8 @@ import static org.junit.Assert.assertTrue;
         }
 
 
-        @Test
-        public void testSetPasswordInvalid() {
+        @Test(expected = IllegalArgumentException.class)
+        public void testPasswordConstructorInvalid() {
             new Password(input);
         }
     }

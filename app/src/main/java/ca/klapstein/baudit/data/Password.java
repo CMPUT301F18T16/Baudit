@@ -2,6 +2,8 @@ package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
 
+import java.util.regex.Pattern;
+
 /**
  * Data class representing a Baudit's {@code Account}'s password.
  *
@@ -28,7 +30,9 @@ public class Password {
      * @return {@code boolean} {@code true} if the password is valid, otherwise {@code false}
      */
     static public boolean isValid(String password) {
-        // TODO: implement
+        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        boolean hasSpecialChar = p.matcher(password).find();
+        if (password.length() < 8 || password.length() > 20 || hasSpecialChar) {return false;}
         return true;
     }
 
