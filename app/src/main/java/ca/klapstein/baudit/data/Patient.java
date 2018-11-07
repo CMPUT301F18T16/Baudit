@@ -13,9 +13,7 @@ public class Patient extends Account implements Comparable<Patient> {
     private BodyPhoto bodyPhoto;
     
     public Patient(Username username, Password password, ContactInfo contactInfo){
-        setUsername(username);
-        setPassword(password);
-        setContactInfo(contactInfo);
+        super(username, password, contactInfo);
         this.problemTreeSet = new ProblemTreeSet();
     }
     
