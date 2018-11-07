@@ -7,18 +7,16 @@ package ca.klapstein.baudit.data;
  */
 public class Patient extends Account implements Comparable<Patient> {
     private static final String TAG = "Patient";
-    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
+    private ProblemTreeSet problemTreeSet;
 
     public Patient(Username username, Password password, ContactInfo contactInfo){
-        setUsername(username);
-        setPassword(password);
-        setContactInfo(contactInfo);
+        super(username, contactInfo, password);
         this.problemTreeSet = new ProblemTreeSet();
     }
 
     @Override
-    public int compareTo(Patient p) {
-        return  (int)(this.getUsername().getUsername().compareTo(p.getUsername().getUsername()));
+    public int compareTo(Patient patient) {
+        return  (int)(this.getUsername().getUsernameString().compareTo(patient.getUsername().getUsernameString()));
     }
   
     /**

@@ -31,7 +31,7 @@ public class Username {
     }
 
     @NonNull
-    public String getUsername() {
+    public String getUsernameString() {
         return this.username;
     }
 
@@ -46,7 +46,7 @@ public class Username {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.getUsername().hashCode();
+        result = 31 * result + this.getUsernameString().hashCode();
         return result;
     }
 
@@ -56,7 +56,7 @@ public class Username {
             return false;
         } else if (obj.getClass().equals(Username.class)) {
             Username otherUsername = (Username) obj;
-            return this.getUsername().equals(otherUsername.getUsername());
+            return this.getUsernameString().equals(otherUsername.getUsernameString());
         } else {
             return false;
         }
