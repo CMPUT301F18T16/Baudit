@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:text="@string/BAUDIT"
+        android:text="@string/baudit"
         android:textColor="#FF71CE"
         android:textSize="36sp"
         android:textStyle="bold"
