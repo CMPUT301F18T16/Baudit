@@ -1,9 +1,5 @@
 package ca.klapstein.baudit.data;
 
-import android.support.annotation.NonNull;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -12,42 +8,30 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
-
-import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
 public class PatientTest {
 
-    private String usernameInput;
-    private String passwordInput;
-    private String emailInput;
-    private String phoneInput;
-    private ContactInfo contactInfo;
-    private PhoneNumber phoneNumber;
     private Email email;
     private Username username;
     private Password password;
     private Patient patient;
+    private ContactInfo contactInfo;
 
 
     public PatientTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
-        this.usernameInput = usernameInput;
-        this.passwordInput = passwordInput;
-        this.emailInput = emailInput;
-        this.phoneInput = phoneInput;
+        this.email = new Email(emailInput);
+        PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
         this.contactInfo = new ContactInfo();
-        this.phoneNumber = new PhoneNumber(this.phoneInput);
-        this.email = new Email(this.emailInput);
-        contactInfo.setEmail(this.email);
-        contactInfo.setPhoneNumber(this.phoneNumber);
-        this.username = new Username(this.usernameInput);
-        this.password = new Password(this.passwordInput);
-        this.patient = new Patient(this.username, this.password, this.contactInfo);
+        this.contactInfo.setEmail(this.email);
+        this.contactInfo.setPhoneNumber(phoneNumber);
+        this.username = new Username(usernameInput);
+        this.password = new Password(passwordInput);
+        this.patient = new Patient(this.username, this.password, contactInfo);
     }
 
-    @Parameterized.Parameters
+    @Parameters
     public static Collection patientData() {
         return Arrays.asList(new Object[][] {
                 { "username", "password", "email@example.com", "780-123-1234" }
