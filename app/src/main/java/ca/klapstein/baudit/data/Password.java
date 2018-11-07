@@ -32,8 +32,7 @@ public class Password {
     static public boolean isValid(String password) {
         Pattern p = Pattern.compile("[^a-zA-Z0-9]");
         boolean hasSpecialChar = p.matcher(password).find();
-        if (password.length() < 8 || password.length() > 20 || hasSpecialChar) {return false;}
-        return true;
+        return !(password.length() < 8 || password.length() > 20 || hasSpecialChar);
     }
 
     @NonNull
