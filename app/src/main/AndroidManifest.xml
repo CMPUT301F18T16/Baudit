@@ -22,13 +22,17 @@
             android:logo="@mipmap/ic_launcher_round"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/BauditTheme">
         <activity android:name=".activities.CreateCareProviderAccountActivity"/>
         <activity android:name=".activities.EditAccountActivity"/>
         <activity android:name=".activities.CreatePatientAccountActivity"/>
         <activity android:name=".activities.LocationActivity"/>
-        <activity android:name=".activities.LoginCareProviderActivity"/>
-        <activity android:name=".activities.LoginPatientActivity"/>
+        <activity
+            android:name=".activities.LoginCareProviderActivity"
+            android:theme="@style/BauditCareProviderTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.LoginPatientActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity android:name=".activities.EditProblemActivity"/>
         <activity android:name=".activities.AddProblemActivity"/>
         <activity android:name=".activities.AddRecordActivity"/>
@@ -39,7 +43,7 @@
         <activity android:name=".activities.RecordListActivity"/>
         <activity
                 android:name=".activities.SplashActivity"
-                android:theme="@style/SplashTheme">
+                android:theme="@style/BauditPatientTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01cdfe</color>
-    <color name="colorPrimaryDark">#b967ff</color>
-    <color name="colorAccent">#ff71ce</color>
-
     <color name="dark_grey">#1f1f1f</color>
 
     <!-- VaporWave Palette https://www.color-hex.com/color-palette/10221 -->
