@@ -3,8 +3,8 @@ package ca.klapstein.baudit.managers;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import ca.klapstein.baudit.events.BauditRemoteManager.LoginVerdict;
-import ca.klapstein.baudit.events.LoginPresenter.ValidateLoginInformation;
+import ca.klapstein.baudit.events.LoginVerdict;
+import ca.klapstein.baudit.events.ValidateLoginInformation;
 
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.

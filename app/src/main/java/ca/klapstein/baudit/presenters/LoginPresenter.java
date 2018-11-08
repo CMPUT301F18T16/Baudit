@@ -4,11 +4,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.events.BauditRemoteManager.LoginVerdict;
-import ca.klapstein.baudit.events.LoginPatientActivity.PatientLogInButtonClicked;
-import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInFailed;
-import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInSucceeded;
-import ca.klapstein.baudit.events.LoginPresenter.ValidateLoginInformation;
+import ca.klapstein.baudit.events.LoginVerdict;
+import ca.klapstein.baudit.events.PatientLogInButtonClicked;
+import ca.klapstein.baudit.events.NotifyLogInFailed;
+import ca.klapstein.baudit.events.NotifyLogInSucceeded;
+import ca.klapstein.baudit.events.ValidateLoginInformation;
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;

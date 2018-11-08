@@ -1,11 +1,10 @@
-package ca.klapstein.baudit.events.LoginPresenter;
+package ca.klapstein.baudit.events;
 
-public class ValidateLoginInformation {
-
+public class PatientLogInButtonClicked {
     private String username;
     private String password;
 
-    public ValidateLoginInformation(String username, String password) {
+    public PatientLogInButtonClicked(String username, String password) {
         this.username = username;
         this.password = password;
     }

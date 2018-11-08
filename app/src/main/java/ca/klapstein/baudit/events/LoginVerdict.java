@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.events.BauditRemoteManager;
+package ca.klapstein.baudit.events;
 
 public class LoginVerdict {
     private boolean isLoginValid;

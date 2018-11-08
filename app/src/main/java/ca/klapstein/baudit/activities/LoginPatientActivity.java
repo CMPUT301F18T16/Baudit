@@ -11,10 +11,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.events.LoginPatientActivity.PatientLogInButtonClicked;
-import ca.klapstein.baudit.events.LoginPatientActivity.PatientSignUpButtonClicked;
-import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInFailed;
-import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInSucceeded;
+import ca.klapstein.baudit.events.PatientLogInButtonClicked;
+import ca.klapstein.baudit.events.PatientSignUpButtonClicked;
+import ca.klapstein.baudit.events.NotifyLogInFailed;
+import ca.klapstein.baudit.events.NotifyLogInSucceeded;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
 
@@ -34,8 +34,6 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     private EditText usernameInput;
     private EditText passwordInput;
-    private Button logInButton;
-    private Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         usernameInput = findViewById(R.id.enterUsername);
         passwordInput = findViewById(R.id.enterPassword);
 
-        logInButton = findViewById(R.id.loginButton);
+        Button logInButton = findViewById(R.id.loginButton);
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +56,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
             }
         });
 
-        signUpButton = findViewById(R.id.registerButton);
+        Button signUpButton = findViewById(R.id.registerButton);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
