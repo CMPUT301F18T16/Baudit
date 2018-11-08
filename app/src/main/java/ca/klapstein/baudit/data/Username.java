@@ -1,6 +1,9 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+
+import org.greenrobot.eventbus.EventBus;
+
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 
 /**
@@ -25,7 +28,7 @@ public class Username {
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
     static public boolean isValid(String username) {
-        BauditRemoteManager remoteManager = new BauditRemoteManager();
+        BauditRemoteManager remoteManager = new BauditRemoteManager(EventBus.getDefault());
         int len = username.length();
         return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
     }

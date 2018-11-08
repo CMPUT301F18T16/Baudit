@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
+import org.greenrobot.eventbus.EventBus;
+
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LogoutView;
@@ -15,12 +17,15 @@ import ca.klapstein.baudit.views.LogoutView;
 public class LogoutPresenter extends Presenter<LogoutView> {
     private static final String TAG = "LogoutPresenter";
 
+    private final EventBus bus;
+
     private BauditRemoteManager remoteManager;
     private Account account;
 
-    public LogoutPresenter(LogoutView view) {
+    public LogoutPresenter(LogoutView view, EventBus bus) {
         super(view);
-        this.remoteManager = new BauditRemoteManager();
+        this.bus = bus;
+        this.remoteManager = new BauditRemoteManager(bus);
     }
 
     /**

@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.managers;
 
+import org.greenrobot.eventbus.EventBus;
+
 import ca.klapstein.baudit.data.*;
 
 /**
@@ -12,11 +14,14 @@ import ca.klapstein.baudit.data.*;
 public class BauditDataManager {
     private static final String TAG = "BauditDataManager";
 
+    private EventBus bus;
+
     private BauditRemoteManager remoteManager;
     private BauditDataBaseManager dataBaseManager;
 
-    public BauditDataManager() {
-        this.remoteManager = new BauditRemoteManager();
+    public BauditDataManager(EventBus bus) {
+        this.bus = bus;
+        this.remoteManager = new BauditRemoteManager(bus);
         this.dataBaseManager = new BauditDataBaseManager();
     }
 
