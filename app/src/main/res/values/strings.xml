@@ -4,10 +4,11 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="splash_image_content_description">Logo Splash Image</string>
     <string name="patient_login">Patient Login</string>
-    <string name="enterUsername">Enter username</string>
-    <string name="enterPassword">Enter password</string>
-    <string name="loginButton">LOG IN</string>
-    <string name="registerButton">SIGN UP</string>
-    <string name="notAUser">Not a user?</string>
-    <string name="switchUserType1">Log in as Care Provider</string>
+    <string name="care_provider_login">Care Provider Login</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="log_in">LOG IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="log_in_as_care_provider">Log in as Care Provider</string>
+    <string name="log_in_as_patient">Log in as Patient</string>
 </resources>

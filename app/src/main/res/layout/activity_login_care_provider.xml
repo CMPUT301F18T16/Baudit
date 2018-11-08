@@ -1,57 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bg"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="#01CDFE">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/vaporwave_blue">
 
     <TextView
-        android:id="@+id/BAUDIT"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:text="@string/baudit"
-        android:textColor="#FF71CE"
+        android:textColor="@color/vaporwave_pink"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="BAUDIT" />
+        android:typeface="monospace" />
 
     <TextView
         android:id="@+id/patient_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="@string/patient_login"
+        android:text="@string/care_provider_login"
         android:textColor="@android:color/black"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BAUDIT"
-        tools:text="Patient Login" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/enter_care_provider_username"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/enterUsername"
+        android:hint="@string/enter_username"
         android:inputType="text"
-        android:text="@string/enterUsername"
-        android:textColor="@color/dark_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
-        tools:text="Username" />
+        android:textColor="@color/dark_grey" />
 
     <EditText
         android:id="@+id/enter_care_provider_password"
@@ -59,56 +42,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/enterPassword"
+        android:hint="@string/enter_password"
         android:inputType="textPassword"
-        android:text="@string/enterPassword"
-        android:textColor="@color/dark_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_care_provider_username"
-        tools:text="Password" />
+        android:textColor="@color/dark_grey" />
 
     <Button
         android:id="@+id/login_care_provider_button"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
-        android:background="#FFFB96"
-        android:text="@string/loginButton"
-        android:textColor="#FF71CE"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_care_provider_password"
-        tools:text="LOGIN" />
+        android:background="@color/vaporwave_yellow"
+        android:text="@string/log_in"
+        android:textColor="@color/vaporwave_pink"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/register_care_provider_button"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="14dp"
-        android:background="#FFFB96"
-        android:text="@string/registerButton"
-        android:textColor="#FF71CE"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Register" />
+        android:background="@color/vaporwave_yellow"
+        android:text="@string/sign_up"
+        android:textColor="@color/vaporwave_pink"
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/log_in_as_patient_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="66dp"
-        android:text="@string/switchUserType1"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Log in as a Patient" />
+        android:text="@string/log_in_as_patient"
+        android:textColor="@android:color/black"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

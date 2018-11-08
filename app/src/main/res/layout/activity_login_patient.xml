@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#01cdfe">
+    android:background="@color/vaporwave_blue">
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/enterUsername"
+        android:hint="@string/enter_username"
         android:inputType="text"
         android:textColor="@color/dark_grey" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/enterPassword"
+        android:hint="@string/enter_password"
         android:inputType="textPassword"
         android:textColor="@color/dark_grey" />
 
@@ -51,7 +51,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
         android:background="#FFFB96"
-        android:text="@string/loginButton"
+        android:text="@string/log_in"
         android:textColor="#FF71CE"
         android:textSize="18sp" />
 
@@ -61,7 +61,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="14dp"
         android:background="#FFFB96"
-        android:text="@string/registerButton"
+        android:text="@string/sign_up"
         android:textColor="#FF71CE"
         android:textSize="14sp" />
 
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="66dp"
-        android:text="@string/switchUserType1"
+        android:text="@string/log_in_as_care_provider"
         android:textColor="@android:color/black" />
 
 </LinearLayout>
