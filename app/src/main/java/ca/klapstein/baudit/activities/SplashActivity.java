@@ -15,25 +15,28 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    private void onCreateCareProviderAccountClick() {
-        Intent intent = new Intent(this, CreateCareProviderAccountActivity.class);
-        startActivity(intent);
-    }
-
-    private void onPatientAccountClick() {
-        Intent intent = new Intent(this, CreatePatientAccountActivity.class);
-        startActivity(intent);
-    }
-
-    private void onCareProviderLoginClick() {
-        Intent intent = new Intent(this, LoginCareProviderActivity.class);
-        startActivity(intent);
-    }
-
-    private void onPatientLoginClick() {
         Intent intent = new Intent(this, LoginPatientActivity.class);
         startActivity(intent);
+        finish();
     }
+
+//    private void onCreateCareProviderAccountClick() {
+//        Intent intent = new Intent(this, CreateCareProviderAccountActivity.class);
+//        startActivity(intent);
+//    }
+//
+//    private void onPatientAccountClick() {
+//        Intent intent = new Intent(this, CreatePatientAccountActivity.class);
+//        startActivity(intent);
+//    }
+//
+//    private void onCareProviderLoginClick() {
+//        Intent intent = new Intent(this, LoginCareProviderActivity.class);
+//        startActivity(intent);
+//    }
+//
+//    private void onPatientLoginClick() {
+//        Intent intent = new Intent(this, LoginPatientActivity.class);
+//        startActivity(intent);
+//    }
 }

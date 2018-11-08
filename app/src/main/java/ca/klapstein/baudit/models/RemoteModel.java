@@ -10,4 +10,8 @@ public class RemoteModel {
         // TODO: implement uniqueness checking of a userid given a string
         return true;
     }
+
+    public boolean validateLogin(String username, String password) {
+        return true;
+    }
 }

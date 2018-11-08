@@ -28,41 +28,20 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         presenter = new LoginPresenter(this);
     }
 
-    /**
-     * Attempt a login as a {@code CareProvider}.
-     *
-     * @return {@code true} if the login was successful, otherwise return {@code false}.
-     */
-    public boolean login() {
-        // TODO: implement
-        return true;
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
-    public void setUserNameError() {
-
-    }
-
-    @Override
-    public void setPasswordError() {
-
-    }
-
-    /**
-     * After logging in as a {@code CareProvider} start the {@code PatientListActivity}.
-     *
-     * @see PatientListActivity
-     */
-    @Override
-    public void setLoginSuccess() {
+    public void loginValidationSuccess() {
         Intent intent = new Intent(this, PatientListActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
-    public void onStart() {
-
-        super.onStart();
+    public void loginValidationFailure() {
+        // TODO: Implement
     }
 }
