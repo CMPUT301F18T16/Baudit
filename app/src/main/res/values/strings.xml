@@ -6,8 +6,8 @@
     <string name="care_provider_login">Care Provider Login</string>
     <string name="enter_username">Enter username</string>
     <string name="enter_password">Enter password</string>
-    <string name="log_in">LOG IN</string>
-    <string name="sign_up">SIGN UP</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
     <string name="log_in_as_care_provider">Log in as Care Provider</string>
     <string name="log_in_as_patient">Log in as Patient</string>
 </resources>
