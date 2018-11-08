@@ -12,7 +12,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:text="@string/baudit"
-        android:textColor="#FF71CE"
+        android:textColor="@color/vaporwave_pink"
         android:textSize="36sp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -50,9 +50,9 @@
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
-        android:background="#FFFB96"
+        android:background="@color/vaporwave_yellow"
         android:text="@string/log_in"
-        android:textColor="#FF71CE"
+        android:textColor="@color/vaporwave_pink"
         android:textSize="18sp" />
 
     <Button
@@ -60,9 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="14dp"
-        android:background="#FFFB96"
+        android:background="@color/vaporwave_yellow"
         android:text="@string/sign_up"
-        android:textColor="#FF71CE"
+        android:textColor="@color/vaporwave_pink"
         android:textSize="14sp" />
 
     <Button
