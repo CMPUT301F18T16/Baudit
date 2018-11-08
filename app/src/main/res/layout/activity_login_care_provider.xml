@@ -29,8 +29,10 @@
 
     <EditText
         android:id="@+id/enter_care_provider_username"
-        android:layout_width="285dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="@string/enter_username"
         android:inputType="text"
@@ -38,8 +40,10 @@
 
     <EditText
         android:id="@+id/enter_care_provider_password"
-        android:layout_width="285dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/enter_password"
@@ -48,8 +52,8 @@
 
     <Button
         android:id="@+id/login_care_provider_button"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/log_in"
         android:textSize="18sp" />
@@ -57,7 +61,7 @@
     <Button
         android:id="@+id/register_care_provider_button"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/sign_up"
         android:textSize="14sp"/>
@@ -66,7 +70,6 @@
         android:id="@+id/log_in_as_patient_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="66dp"
         android:text="@string/log_in_as_patient"
         android:textColor="@android:color/black"/>
 
