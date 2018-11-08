@@ -219,7 +219,7 @@
         tools:text="Add" />
 
     <ScrollView
-        android:id="@+id/patient_create_problem_record_scroll"
+        android:id="@+id/ScrollView"
         android:layout_width="361dp"
         android:layout_height="81dp"
         android:layout_marginStart="16dp"
@@ -232,6 +232,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <LinearLayout
+            android:id="@+id/patient_create_problem_record_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
@@ -250,7 +251,7 @@
         android:textColor="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patient_create_problem_record_scroll"
+        app:layout_constraintTop_toBottomOf="@+id/ScrollView"
         tools:text="Save" />
 
 </android.support.constraint.ConstraintLayout>
