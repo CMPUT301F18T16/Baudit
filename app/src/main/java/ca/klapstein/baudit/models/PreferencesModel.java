@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.managers;
+package ca.klapstein.baudit.models;
 
 /**
  * Helper class for accessing the Android's SharedPreferences for use in Baudit.
@@ -10,6 +10,6 @@ package ca.klapstein.baudit.managers;
  * @see android.content.SharedPreferences
  * @see android.preference.PreferenceManager
  */
-public class BauditPreferencesManager {
+public class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
 }
