@@ -34,14 +34,14 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
     }
 
     @Override
-    public void loginValidationSuccess() {
+    public void onLoginValidationSuccess() {
         Intent intent = new Intent(this, PatientListActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
-    public void loginValidationFailure() {
+    public void onLoginValidationFailure() {
         // TODO: Implement
     }
 }

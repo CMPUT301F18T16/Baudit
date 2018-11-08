@@ -32,9 +32,9 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     public void onLoginButtonClicked(String username, String password) {
         if (remoteModel.validateLogin(username, password)) {
-            this.view.loginValidationSuccess();
+            this.view.onLoginValidationSuccess();
         } else {
-            this.view.loginValidationFailure();
+            this.view.onLoginValidationFailure();
         }
     }
 }

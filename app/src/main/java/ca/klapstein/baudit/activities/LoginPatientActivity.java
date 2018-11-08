@@ -61,14 +61,14 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     }
 
     @Override
-    public void loginValidationSuccess() {
+    public void onLoginValidationSuccess() {
         Intent intent = new Intent(this, ProblemListActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
-    public void loginValidationFailure() {
+    public void onLoginValidationFailure() {
         // TODO: Implement
     }
 }
