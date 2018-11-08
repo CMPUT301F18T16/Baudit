@@ -44,22 +44,8 @@ public class ProblemTreeSetTest {
         assertTrue(problemTreeSet.contains(problem3));
         assertTrue(problemTreeSet.remove(problem3));
 
-
-
-
         assertFalse(problemTreeSet.contains(problem3));
         assertTrue(problemTreeSet.contains(problem4));
 
-
-
-
-
-
-
-
-
-
-
-        // TODO: write tests
     }
 }
