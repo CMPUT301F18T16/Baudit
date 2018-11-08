@@ -2,6 +2,13 @@ package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
 
+/**
+ * Data class representing a {@code Record}'s photo.
+ * <p>
+ * A {@code Record} can optionally have a {@code RecordPhoto}.
+ *
+ * @see Record
+ */
 public class RecordPhoto implements Photo {
     private static final String TAG = "RecordPhoto";
 
