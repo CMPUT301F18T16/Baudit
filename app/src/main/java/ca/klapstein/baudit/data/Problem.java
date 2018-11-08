@@ -82,9 +82,18 @@ public class Problem implements Comparable<Problem> {
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
-  
+
+
+    /**
+     * Used to compare two records for RecordTreeSet by time
+     *
+     * @param problem {@code Problem} the comment to validate
+     * @return {@code int} {@code 0} if both problem time are the same  or
+     * {@code -1} if problem is earlier in time
+     * {@code +1} if problem is later in time
+     */
     @Override
     public int compareTo(Problem problem) {
-        return this.date.compareTo(problem.getDate());
+        return (int) (date.getTime() - problem.getDate().getTime());
     }
 }

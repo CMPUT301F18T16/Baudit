@@ -103,8 +103,17 @@ public class Record implements Comparable<Record> {
         this.geoLocation = geoLocation;
     }
 
+
+    /**
+     * Used to compare two records for RecordTreeSet by time
+     *
+     * @param record {@code Record} the comment to validate
+     * @return {@code int} {@code 0} if both record time are the same  or
+     * {@code -1} if record is earlier in time
+     * {@code +1} if record is later in time
+     */
     @Override
     public int compareTo(Record record) {
-        return this.date.compareTo(record.getDate());
+        return (int) (date.getTime() - record.getDate().getTime());
     }
 }
