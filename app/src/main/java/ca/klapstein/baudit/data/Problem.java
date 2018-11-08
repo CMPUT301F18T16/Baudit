@@ -89,8 +89,8 @@ public class Problem implements Comparable<Problem> {
      *
      * @param problem {@code Problem} the comment to validate
      * @return {@code int} {@code 0} if both problem time are the same  or
-     * {@code -1} if problem is earlier in time
-     * {@code +1} if problem is later in time
+     * {@code -int} if problem is earlier in time
+     * {@code +int} if problem is later in time
      */
     @Override
     public int compareTo(Problem problem) {

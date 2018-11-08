@@ -109,8 +109,8 @@ public class Record implements Comparable<Record> {
      *
      * @param record {@code Record} the comment to validate
      * @return {@code int} {@code 0} if both record time are the same  or
-     * {@code -1} if record is earlier in time
-     * {@code +1} if record is later in time
+     * {@code -int} if record is earlier in time
+     * {@code +int} if record is later in time
      */
     @Override
     public int compareTo(Record record) {

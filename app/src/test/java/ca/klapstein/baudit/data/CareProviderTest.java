@@ -24,7 +24,6 @@ public class CareProviderTest {
 
     private Patient patient0;
     private Patient patient1;
-    private Problem patient0problem0;
 
     public CareProviderTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
 
@@ -47,13 +46,6 @@ public class CareProviderTest {
 
         careProvider.getAssignedPatientTreeSet().add(patient0);
         careProvider.getAssignedPatientTreeSet().add(patient1);
-
-        this.patient0problem0 = new Problem();
-        Record record0 = new Record();
-        Record record1 = new Record();
-        this.patient0problem0.getRecordTreeSet().add(record0);
-        this.patient0problem0.getRecordTreeSet().add(record1);
-        this.patient0.getProblemTreeSet().add(this.patient0problem0);
     }
 
     @Parameterized.Parameters
@@ -73,19 +65,6 @@ public class CareProviderTest {
 
         assertTrue(careProvider.getAssignedPatientTreeSet().contains(patient0));
         assertTrue(careProvider.getAssignedPatientTreeSet().contains(patient1));
-    }
-
-    @Test
-    public void testGetRecordTreeSet(){
-
-        assertEquals(careProvider.getRecordTreeSet(this.patient0,this.patient0problem0),
-                patient0problem0.getRecordTreeSet());
-    }
-
-    @Test
-    public void testGetProblemTreeSet(){
-
-        assertTrue(careProvider.getProblemTreeSet(patient0).contains(patient0problem0));
     }
 
     @Test
