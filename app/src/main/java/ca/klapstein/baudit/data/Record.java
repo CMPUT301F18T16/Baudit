@@ -1,14 +1,5 @@
 package ca.klapstein.baudit.data;
-
-import android.location.Location;
 import android.support.annotation.NonNull;
-
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.zip.DataFormatException;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,9 +23,13 @@ public class Record implements Comparable<Record> {
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
     private ArrayList<String> keywords;
 
+    /**
+     * Record Constructor
+     */
     public Record() {
         this.date = new Date();
-        // TODO: populate these properly
+        this.title = getTitle();
+        this.comment = getComment();
         this.keywords = new ArrayList<>();
         this.bodyPhotoCoords = new ArrayList<>();
     }
@@ -115,6 +110,6 @@ public class Record implements Comparable<Record> {
     
     @Override
     public int compareTo(@NonNull Record record) {
-        return this.getTimestamp().compareTo(record.getTimestamp());
+        return this.getTimeStamp().compareTo(record.getTimeStamp());
     }    
 }
