@@ -1,11 +1,7 @@
 package ca.klapstein.baudit.views;
 
-public interface EditAccountView extends View {
-    void setEmail(String string);
-
+public interface EditAccountView extends AccountView {
     void setEmailError();
-
-    void setUsername(String string);
 
     void setUserNameError();
 
