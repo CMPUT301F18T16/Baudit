@@ -1,10 +1,10 @@
-package ca.klapstein.baudit.managers;
+package ca.klapstein.baudit.models;
 
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.
  */
-public class BauditRemoteManager {
-    private static final String TAG = "BauditRemoteManager";
+public class RemoteModel {
+    private static final String TAG = "RemoteModel";
 
     public boolean uniqueID(String username) {
         // TODO: implement uniqueness checking of a userid given a string

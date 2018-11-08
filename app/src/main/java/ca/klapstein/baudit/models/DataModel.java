@@ -1,23 +1,23 @@
-package ca.klapstein.baudit.managers;
+package ca.klapstein.baudit.models;
 
 import ca.klapstein.baudit.data.*;
 
 /**
- * Helper class that interacts with the {@code BauditDataBaseManager} (local) and {@code BauditRemoteManager} (remote)
+ * Helper class that interacts with the {@code DatabaseModel} (local) and {@code RemoteModel} (remote)
  * to keep MVP presenters blind to the fact data may be coming from either a remote or local source.
  *
- * @see BauditDataBaseManager
- * @see BauditRemoteManager
+ * @see DatabaseModel
+ * @see RemoteModel
  */
-public class BauditDataManager {
-    private static final String TAG = "BauditDataManager";
+public class DataModel {
+    private static final String TAG = "DataModel";
 
-    private BauditRemoteManager remoteManager;
-    private BauditDataBaseManager dataBaseManager;
+    private RemoteModel remoteManager;
+    private DatabaseModel dataBaseManager;
 
-    public BauditDataManager() {
-        this.remoteManager = new BauditRemoteManager();
-        this.dataBaseManager = new BauditDataBaseManager();
+    public DataModel() {
+        this.remoteManager = new RemoteModel();
+        this.dataBaseManager = new DatabaseModel();
     }
 
     public Account getUser(String username) {
