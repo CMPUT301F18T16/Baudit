@@ -15,6 +15,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/textview"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:fontFamily="sans-serif"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Home" />
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="41dp"
@@ -24,7 +42,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="none"
-        android:contentDescription="Search view button"
+        android:contentDescription="@string/search_view_button"
         android:tint="light @color/dark_grey"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
@@ -32,23 +50,21 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_menu_search" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="TextView"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:fontFamily="monospace"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="none"
+        android:contentDescription="@string/map_view_button"
+        android:tint="light_grey"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Home" />
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -97,22 +113,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView"
         app:srcCompat="@android:drawable/ic_menu_add" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="41dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="none"
-        android:contentDescription="Map view button"
-        android:tint="light_grey"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
     <TextView
         android:id="@+id/patient_problem_count"
