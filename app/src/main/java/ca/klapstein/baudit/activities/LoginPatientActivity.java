@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
@@ -24,6 +25,9 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     private LoginPresenter presenter;
 
+    private EditText usernameInput;
+    private EditText passwordInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +35,10 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
         presenter = new LoginPresenter(this);
 
-        final EditText usernameInput = findViewById(R.id.enterUsername);
-        final EditText passwordInput = findViewById(R.id.enterPassword);
+        usernameInput = findViewById(R.id.enter_patient_username);
+        passwordInput = findViewById(R.id.enter_patient_password);
 
-        Button loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.login_patient_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,12 +49,23 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
             }
         });
 
-        Button registerButton = findViewById(R.id.registerButton);
+        Button registerButton = findViewById(R.id.register_patient_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), CreatePatientAccountActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        Button switchLoginButton = findViewById(R.id.log_in_as_care_provider_button);
+        switchLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), LoginCareProviderActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -69,6 +84,11 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void onLoginValidationFailure() {
-        // TODO: Implement
+        passwordInput.setText("");
+        Toast.makeText(
+            getBaseContext(),
+            "Login failed: Invalid credentials",
+            Toast.LENGTH_SHORT
+        ).show();
     }
 }
