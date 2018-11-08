@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 /**
  * Data class representing a {@code Patient}'s photo of their own body.
  * <p>
- * A {@code Patient} can only set one body photo of themselves to maintain consistency.
+ * A {@code Patient} can only set one {@code BodyPhoto} of themselves to maintain consistency.
  *
  * @see Patient
  */
