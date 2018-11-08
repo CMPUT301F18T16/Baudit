@@ -1,9 +1,10 @@
 package ca.klapstein.baudit.views;
 
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInFailed;
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInSucceeded;
+
 public interface LoginView extends View {
-    void setUserNameError();
+    void onLogInSuccess(NotifyLogInSucceeded event);
 
-    void setPasswordError();
-
-    void setLoginSuccess();
+    void onLogInFailure(NotifyLogInFailed event);
 }

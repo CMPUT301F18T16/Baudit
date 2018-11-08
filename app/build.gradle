@@ -52,6 +52,9 @@ dependencies {
     // Elastic Search
     implementation 'io.searchbox:jest-droid:2.0.0'
 
+    // EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
 }
 
 buildscript {

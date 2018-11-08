@@ -1,6 +1,14 @@
 package ca.klapstein.baudit.presenters;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.events.BauditRemoteManager.LoginVerdict;
+import ca.klapstein.baudit.events.LoginPatientActivity.PatientLogInButtonClicked;
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInFailed;
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInSucceeded;
+import ca.klapstein.baudit.events.LoginPresenter.ValidateLoginInformation;
 import ca.klapstein.baudit.managers.BauditRemoteManager;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;
@@ -16,23 +24,34 @@ import ca.klapstein.baudit.views.LogoutView;
 public class LoginPresenter extends Presenter<LoginView> {
     private static final String TAG = "LoginPresenter";
 
+    private final EventBus bus;
+
     private BauditRemoteManager remoteManager;
     private Account account;
 
-    public LoginPresenter(LoginView view) {
+    public LoginPresenter(LoginView view, EventBus bus) {
         super(view);
-        this.remoteManager = new BauditRemoteManager();
+        this.bus = bus;
+        this.remoteManager = new BauditRemoteManager(bus);
     }
 
     /**
-     * Attempt a login with a given user/pass combination with the remote authentication server.
+     * Send an event to the BauditRemoteManager to validate login information
      *
-     * @param username {@code String}
-     * @param password {@code String}
-     * @return {@code boolean} {@code true} if the authentication was successful, otherwise {@code false}
+     * @param event {@code PatientLoginButtonClicked}
      */
-    public boolean validateLogin(String username, String password) {
-        view.setLoginSuccess();
-        return true;
+    @Subscribe
+    public void validateLogin(PatientLogInButtonClicked event) {
+        bus.post(new ValidateLoginInformation(event.getUsername(), event.getPassword()));
+    }
+
+    @Subscribe
+    public void onLoginVerdict(LoginVerdict event) {
+        if (event.isLoginValid()) {
+            bus.post(new NotifyLogInSucceeded());
+        } else {
+            bus.post(new NotifyLogInFailed());
+        }
+
     }
 }

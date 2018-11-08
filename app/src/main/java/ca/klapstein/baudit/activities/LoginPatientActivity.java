@@ -3,7 +3,18 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.events.LoginPatientActivity.PatientLogInButtonClicked;
+import ca.klapstein.baudit.events.LoginPatientActivity.PatientSignUpButtonClicked;
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInFailed;
+import ca.klapstein.baudit.events.LoginPresenter.NotifyLogInSucceeded;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
 
@@ -18,46 +29,65 @@ import ca.klapstein.baudit.views.LoginView;
  */
 public class LoginPatientActivity extends AppCompatActivity implements LoginView {
 
+    private final EventBus bus = EventBus.getDefault();
     private LoginPresenter presenter;
+
+    private EditText usernameInput;
+    private EditText passwordInput;
+    private Button logInButton;
+    private Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_patient);
 
-        presenter = new LoginPresenter(this);
-    }
+        presenter = new LoginPresenter(this, bus);
 
-    /**
-     * Attempt a login as a {@code Patient}.
-     *
-     * @return {@code true} if the login was successful, otherwise return {@code false}.
-     */
-    public boolean login() {
-        // TODO: implement
-        return true;
+        usernameInput = findViewById(R.id.enterUsername);
+        passwordInput = findViewById(R.id.enterPassword);
+
+        logInButton = findViewById(R.id.loginButton);
+        logInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bus.post(new PatientLogInButtonClicked(
+                    usernameInput.getText().toString(),
+                    passwordInput.getText().toString()
+                ));
+            }
+        });
+
+        signUpButton = findViewById(R.id.registerButton);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bus.post(new PatientSignUpButtonClicked());
+            }
+        });
     }
 
     @Override
-    public void setUserNameError() {
-
+    public void onStart() {
+        super.onStart();
+        bus.register(this);
     }
 
     @Override
-    public void setPasswordError() {
-
+    public void onStop() {
+        super.onStop();
+        bus.unregister(this);
     }
 
-    @Override
-    public void setLoginSuccess() {
+    @Subscribe @Override
+    public void onLogInSuccess(NotifyLogInSucceeded event) {
         Intent intent = new Intent(this, ProblemListActivity.class);
         startActivity(intent);
         finish();
     }
 
-    @Override
-    public void onStart() {
-
-        super.onStart();
+    @Subscribe @Override
+    public void onLogInFailure(NotifyLogInFailed event) {
+        // TODO: Do something!
     }
 }
