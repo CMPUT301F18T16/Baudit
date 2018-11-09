@@ -1,10 +1,10 @@
-package ca.klapstein.baudit.managers;
+package ca.klapstein.baudit.models;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BauditDataManagerTest {
+public class DataModelTest {
 
     @Before
     public void setUp() {

@@ -1,6 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
-import ca.klapstein.baudit.managers.BauditDataManager;
+import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.views.View;
 
 /**
@@ -13,11 +13,11 @@ abstract public class Presenter<V extends View> {
     private static final String TAG = "Presenter";
 
     protected V view;
-    protected BauditDataManager dataManager;
+    protected DataModel dataManager;
 
     public Presenter(V view) {
         this.view = view;
-        this.dataManager = new BauditDataManager();
+        this.dataManager = new DataModel();
     }
 //
 //    /**

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(Enclosed.class)
 public class UsernameTest {
-// TODO: enable when a BauditRemoteManager is implemented or mocked
+// TODO: enable when a RemoteModel is implemented or mocked
 //    @RunWith(Parameterized.class)
 //    public static class ValidUserNameTest {
 //        @Parameterized.Parameters(name = "{index}: valid({0})={1}")

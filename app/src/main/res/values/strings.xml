@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Baudit</string>
+    <string name="baudit">BAUDIT</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="splash_image_content_description">Logo Splash Image</string>
+    <string name="patient_login">Patient Login</string>
+    <string name="enterUsername">Enter username</string>
+    <string name="enterPassword">Enter password</string>
+    <string name="loginButton">LOG IN</string>
+    <string name="registerButton">SIGN UP</string>
+    <string name="notAUser">Not a user?</string>
+    <string name="switchUserType1">Log in as Care Provider</string>
 </resources>
