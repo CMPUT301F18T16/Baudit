@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.models;
 
+import android.util.Log;
+
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.
  */
@@ -12,6 +14,7 @@ public class RemoteModel {
     }
 
     public boolean validateLogin(String username, String password) {
-        return false;
+        Log.d(username, password);
+        return username.equals("test") && password.equals("foo");
     }
 }

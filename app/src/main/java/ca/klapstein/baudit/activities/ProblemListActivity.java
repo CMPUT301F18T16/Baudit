@@ -22,7 +22,6 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
     private static final String TAG = "ProblemListActivity";
 
     private ProblemListPresenter presenter;
-    private RecyclerView problemRecyclerView;
     private ProblemListAdapter adapter;
 
     @Override
@@ -34,7 +33,7 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
 
         presenter = new ProblemListPresenter(this);
 
-        problemRecyclerView = findViewById(R.id.problem_list);
+        RecyclerView problemRecyclerView = findViewById(R.id.problem_list);
         adapter = new ProblemListAdapter();
         problemRecyclerView.setAdapter(adapter);
     }
@@ -53,7 +52,7 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
         private static final String TAG = "ProblemListAdapter";
 
-        public ProblemListAdapter() {
+        private ProblemListAdapter() {
             super();
         }
 
@@ -82,7 +81,7 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
         CardView mCardView;
         TextView mTitleView;
 
-        ProblemViewHolder(CardView card) {
+        private ProblemViewHolder(CardView card) {
             super(card);
             mCardView = card;
             mTitleView = card.findViewById(R.id.problem_title);
