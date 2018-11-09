@@ -35,7 +35,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
 
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        solo.waitForActivity(LoginPatientActivity.class, 2000);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_username), "wrong");
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "wrong");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
-        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        solo.waitForActivity(LoginPatientActivity.class, 2000);
     }
 
     @Test
