@@ -15,6 +15,6 @@ public class RemoteModel {
 
     public boolean validateLogin(String username, String password) {
         Log.d(username, password);
-        return username.equals("test") && password.equals("foo");
+        return "test".equals(username) && "foo".equals(password);
     }
 }
