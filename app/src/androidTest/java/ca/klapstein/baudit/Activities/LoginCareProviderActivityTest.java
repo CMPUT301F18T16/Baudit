@@ -28,7 +28,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception {
         solo = null;
     }
 
@@ -64,6 +64,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "wrong");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
         solo.waitForActivity(LoginCareProviderActivity.class, 2000);
+        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
 

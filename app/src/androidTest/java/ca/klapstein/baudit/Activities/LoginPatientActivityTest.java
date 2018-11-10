@@ -65,6 +65,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "wrong");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
         solo.waitForActivity(LoginPatientActivity.class, 2000);
+        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
         solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
 
