@@ -70,7 +70,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    LoginPatientActivity.this,
+                    getBaseContext(),
                     LoginCareProviderActivity.class
                 );
                 startActivity(intent);
