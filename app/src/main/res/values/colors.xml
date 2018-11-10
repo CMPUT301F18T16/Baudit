@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark_grey">#1f1f1f</color>
+    <color name="red">#FF0000</color>
 
     <!-- VaporWave Palette https://www.color-hex.com/color-palette/10221 -->
     <color name="vaporwave_blue">#01cdfe</color>

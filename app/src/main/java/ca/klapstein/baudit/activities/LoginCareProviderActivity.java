@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
@@ -27,6 +27,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
 
     private EditText usernameInput;
     private EditText passwordInput;
+    private TextView errorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
 
         usernameInput = findViewById(R.id.enter_care_provider_username);
         passwordInput = findViewById(R.id.enter_care_provider_password);
+        errorText = findViewById(R.id.care_provider_login_error_text);
 
         Button loginButton = findViewById(R.id.login_care_provider_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -94,10 +96,6 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
     @Override
     public void onLoginValidationFailure() {
         passwordInput.setText("");
-        Toast.makeText(
-            getBaseContext(),
-            "Login failed: Invalid credentials",
-            Toast.LENGTH_SHORT
-        ).show();
+        errorText.setText(getResources().getString(R.string.login_failed));
     }
 }
