@@ -52,10 +52,6 @@ public class ProblemListActivity extends AppCompatActivity implements ProblemLis
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
         private static final String TAG = "ProblemListAdapter";
 
-        private ProblemListAdapter() {
-            super();
-        }
-
         @NonNull
         @Override
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
