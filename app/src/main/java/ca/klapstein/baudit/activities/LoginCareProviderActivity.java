@@ -69,7 +69,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    getBaseContext(),
+                    LoginCareProviderActivity.this,
                     LoginPatientActivity.class
                 );
                 startActivity(intent);
