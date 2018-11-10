@@ -57,7 +57,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    getApplicationContext(),
+                    LoginPatientActivity.this,
                     CreatePatientAccountActivity.class
                 );
                 startActivity(intent);
@@ -70,7 +70,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    getApplicationContext(),
+                    LoginPatientActivity.this,
                     LoginCareProviderActivity.class
                 );
                 startActivity(intent);
@@ -87,7 +87,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     @Override
     public void onLoginValidationSuccess() {
         Intent intent = new Intent(
-            getApplicationContext(),
+            this,
             ProblemListActivity.class
         );
         startActivity(intent);

@@ -56,7 +56,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    getApplicationContext(),
+                    LoginCareProviderActivity.this,
                     CreateCareProviderAccountActivity.class
                 );
                 startActivity(intent);
@@ -69,7 +69,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(
-                    getApplicationContext(),
+                    LoginCareProviderActivity.this,
                     LoginPatientActivity.class
                 );
                 startActivity(intent);
@@ -86,7 +86,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
     @Override
     public void onLoginValidationSuccess() {
         Intent intent = new Intent(
-            getApplicationContext(),
+            this,
             PatientListActivity.class
         );
         startActivity(intent);
