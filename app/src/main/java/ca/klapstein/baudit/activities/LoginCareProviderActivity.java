@@ -53,7 +53,10 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), CreateCareProviderAccountActivity.class);
+                Intent intent = new Intent(
+                    getApplicationContext(),
+                    CreateCareProviderAccountActivity.class
+                );
                 startActivity(intent);
                 finish();
             }
@@ -63,7 +66,10 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         switchLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), LoginPatientActivity.class);
+                Intent intent = new Intent(
+                    getApplicationContext(),
+                    LoginPatientActivity.class
+                );
                 startActivity(intent);
                 finish();
             }
@@ -77,7 +83,10 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
 
     @Override
     public void onLoginValidationSuccess() {
-        Intent intent = new Intent(this, PatientListActivity.class);
+        Intent intent = new Intent(
+            getApplicationContext(),
+            PatientListActivity.class
+        );
         startActivity(intent);
         finish();
     }

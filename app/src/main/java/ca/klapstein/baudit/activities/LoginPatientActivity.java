@@ -53,7 +53,10 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), CreatePatientAccountActivity.class);
+                Intent intent = new Intent(
+                    getApplicationContext(),
+                    CreatePatientAccountActivity.class
+                );
                 startActivity(intent);
                 finish();
             }
@@ -63,7 +66,10 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         switchLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), LoginCareProviderActivity.class);
+                Intent intent = new Intent(
+                    getApplicationContext(),
+                    LoginCareProviderActivity.class
+                );
                 startActivity(intent);
                 finish();
             }
@@ -77,7 +83,10 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void onLoginValidationSuccess() {
-        Intent intent = new Intent(this, ProblemListActivity.class);
+        Intent intent = new Intent(
+            getApplicationContext(),
+            ProblemListActivity.class
+        );
         startActivity(intent);
         finish();
     }
