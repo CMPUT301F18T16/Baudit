@@ -2,8 +2,7 @@
 
 # Creates and starts an android emulator.
 
-android-update-sdk --components=sys-img-armeabi-v7a-android-28 --accept-licenses='android-sdk-license-[0-9a-f]{8}'
-echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a --skin QVGA
+echo no | android create avd --force -n test -t android-28 --abi google_apis/armeabi-v7a
 emulator -avd test -no-audio -no-skin -netfast -no-window &
 
 exit 0
