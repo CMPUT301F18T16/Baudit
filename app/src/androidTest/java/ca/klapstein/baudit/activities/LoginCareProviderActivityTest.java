@@ -37,7 +37,6 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
      */
     @Test
     public void testOnCreate() {
-        solo.waitForActivity(LoginCareProviderActivity.class);
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
 
@@ -50,6 +49,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "test");
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foo");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
+        solo = new Solo(getInstrumentation());
         solo.waitForActivity(PatientListActivity.class);
         solo.assertCurrentActivity("Wrong Activity", PatientListActivity.class);
     }
@@ -63,7 +63,6 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "wrong");
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "wrong");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForActivity(LoginCareProviderActivity.class);
         solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
@@ -74,6 +73,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     @Test
     public void testRegister() {
         solo.clickOnView(solo.getView(R.id.register_care_provider_button));
+        solo = new Solo(getInstrumentation());
         solo.waitForActivity(CreateCareProviderAccountActivity.class);
         solo.assertCurrentActivity("Wrong Activity", CreateCareProviderAccountActivity.class);
     }
@@ -84,6 +84,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     @Test
     public void testSwitchToPatientLogin() {
         solo.clickOnView(solo.getView(R.id.log_in_as_patient_button));
+        solo = new Solo(getInstrumentation());
         solo.waitForActivity(LoginPatientActivity.class);
         solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
