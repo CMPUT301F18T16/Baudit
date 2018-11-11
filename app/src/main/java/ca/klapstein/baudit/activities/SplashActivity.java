@@ -35,5 +35,6 @@ public class SplashActivity extends AppCompatActivity {
     private void onPatientLoginClick() {
         Intent intent = new Intent(this, LoginPatientActivity.class);
         startActivity(intent);
+        finish();
     }
 }
