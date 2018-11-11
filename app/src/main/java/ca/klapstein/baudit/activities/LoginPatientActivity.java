@@ -50,7 +50,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void setLoginSuccess() {
-        Intent intent = new Intent(this, ProblemListActivity.class);
+        Intent intent = new Intent(this, PatientHomeActivity.class);
         startActivity(intent);
         finish();
     }

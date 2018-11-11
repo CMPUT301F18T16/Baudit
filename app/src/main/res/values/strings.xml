@@ -10,4 +10,5 @@
     <string name="registerButton">SIGN UP</string>
     <string name="notAUser">Not a user?</string>
     <string name="switchUserType1">Log in as Care Provider</string>
+    <string name="problem_card_content_description">The most recent image of the problem area</string>
 </resources>

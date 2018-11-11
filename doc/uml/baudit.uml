@@ -7,13 +7,13 @@
     <node x="6352.25" y="169.0">ca.klapstein.baudit.views.RecordView</node>
     <node x="10665.75" y="290.5">ca.klapstein.baudit.views.PatientListView</node>
     <node x="2397.0" y="1258.0">ca.klapstein.baudit.activities.SplashActivity</node>
-    <node x="2764.0" y="605.5">ca.klapstein.baudit.presenters.ProblemListPresenter</node>
+    <node x="2764.0" y="605.5">ca.klapstein.baudit.presenters.PatientHomePresenter</node>
     <node x="9715.25" y="290.5">ca.klapstein.baudit.views.DeleteView</node>
     <node x="3529.0" y="1258.0">ca.klapstein.baudit.data.ContactInfo</node>
     <node x="6607.75" y="651.0">ca.klapstein.baudit.views.EditRecordView</node>
     <node x="2965.0" y="1359.0">ca.klapstein.baudit.data.BodyPhoto</node>
     <node x="10393.75" y="290.5">ca.klapstein.baudit.views.ProblemListView</node>
-    <node x="10335.75" y="595.5">ca.klapstein.baudit.activities.ProblemListActivity</node>
+    <node x="10335.75" y="595.5">ca.klapstein.baudit.activities.PatientHomeActivity</node>
     <node x="6345.75" y="830.0">ca.klapstein.baudit.activities.AddRecordActivity</node>
     <node x="2729.0" y="1258.0">ca.klapstein.baudit.BuildConfig</node>
     <node x="7712.75" y="896.0">ca.klapstein.baudit.activities.EditProblemActivity</node>
@@ -270,7 +270,7 @@
       <point x="0.0" y="-81.5" />
       <point x="0.0" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.presenters.ProblemListPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+    <edge source="ca.klapstein.baudit.presenters.PatientHomePresenter" target="ca.klapstein.baudit.presenters.Presenter">
       <point x="0.0" y="-71.0" />
       <point x="2964.5" y="523.0" />
       <point x="4215.333333333333" y="523.0" />
@@ -314,7 +314,7 @@
       <point x="0.0" y="-48.5" />
       <point x="0.0" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.activities.ProblemListActivity" target="ca.klapstein.baudit.views.ProblemListView">
+    <edge source="ca.klapstein.baudit.activities.PatientHomeActivity" target="ca.klapstein.baudit.views.ProblemListView">
       <point x="0.0" y="-81.0" />
       <point x="0.0" y="25.5" />
     </edge>

@@ -11,18 +11,16 @@ import ca.klapstein.baudit.views.ProblemRowView;
  * @see ProblemTreeSet
  * @see ProblemListView
  */
-public class ProblemListPresenter extends Presenter<ProblemListView> {
-    private static final String TAG = "ProblemListPresenter";
+public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     private ProblemTreeSet problemTreeSet;
 
-    public ProblemListPresenter(ProblemListView view) {
+    public PatientHomePresenter(ProblemListView view) {
         super(view);
     }
 
-    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
-        Problem patient = (Problem) problemTreeSet.toArray()[position];
-        // rowView.setProblemTitleText(problem.title);
+    public Problem getProblemAt(int position) {
+        return (Problem) problemTreeSet.toArray()[position];
     }
 
     public int getProblemCount() {
