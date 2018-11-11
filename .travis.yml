@@ -59,9 +59,6 @@ install:
 
 # main test script
 before_script:
-# Prepare pre-accepted licenses to not be prompted at installation
-- mkdir -p "$ANDROID_HOME/licenses"
-- cp ./google-licenses/* "$ANDROID_HOME/licenses/"
 - bash scripts/travis_before_script.sh
 script:
 - bash scripts/travis_script.sh
