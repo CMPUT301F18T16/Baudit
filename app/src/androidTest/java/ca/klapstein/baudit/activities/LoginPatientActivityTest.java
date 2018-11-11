@@ -30,7 +30,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
 
     @After
     public void tearDown() {
-        solo = null;
+        solo.finishOpenedActivities();
     }
 
     /**
@@ -50,8 +50,6 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_username), "test");
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "foo");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
-        solo = new Solo(getInstrumentation());
-        solo.waitForActivity(ProblemListActivity.class);
         solo.assertCurrentActivity("Wrong Activity", ProblemListActivity.class);
     }
 
@@ -74,8 +72,6 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @Test
     public void testRegister() {
         solo.clickOnView(solo.getView(R.id.register_patient_button));
-        solo = new Solo(getInstrumentation());
-        solo.waitForActivity(CreatePatientAccountActivity.class);
         solo.assertCurrentActivity("Wrong Activity", CreatePatientAccountActivity.class);
     }
 
@@ -85,8 +81,6 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @Test
     public void testSwitchToCareProviderLogin() {
         solo.clickOnView(solo.getView(R.id.log_in_as_care_provider_button));
-        solo = new Solo(getInstrumentation());
-        solo.waitForActivity(LoginCareProviderActivity.class);
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
 }
