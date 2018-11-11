@@ -10,11 +10,11 @@ import android.support.v7.app.AppCompatActivity;
  * Acts as a start page for Baudit providing access to Account Creation and Login.
  */
 public class SplashActivity extends AppCompatActivity {
-    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.onPatientLoginClick();
     }
 
     private void onCreateCareProviderAccountClick() {
