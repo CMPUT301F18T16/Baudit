@@ -26,11 +26,11 @@
             android:background="@color/white"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingLeft="@dimen/default_margin"
+            android:paddingRight="@dimen/default_margin"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/default_margin"
                 android:src="@drawable/ic_plus_white_24dp"/>
 
         </FrameLayout>

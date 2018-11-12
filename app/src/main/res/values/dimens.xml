@@ -6,4 +6,5 @@
     <dimen name="card_spacing">8dp</dimen>
     <dimen name="elevation">6dp</dimen>
     <dimen name="toolbar_spacing">24dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
 </resources>

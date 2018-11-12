@@ -111,7 +111,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         }
     }
 
-    public void updateProblemCountText() {
+    private void updateProblemCountText() {
         problemCountText.setText(String.format(
             getResources().getString(R.string.problem_count),
             presenter.getProblemCount()
