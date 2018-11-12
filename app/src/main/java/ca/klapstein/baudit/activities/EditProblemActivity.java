@@ -26,13 +26,14 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
 
         presenter = new EditProblemPresenter(this);
 
-        int problemId = getIntent().getIntExtra("problemId", 0);
-        if (problemId == 0) {
-            // Set app bar title to say "New Problem"
-        } else {
-            // Set app bar title to say "Edit Problem"
-            // Populate all fields with the problem data
-        }
+        // TODO:
+        // int problemId = getIntent().getIntExtra("problemId", 0);
+        // if (problemId == 0) {
+        //     // Set app bar title to say "New Problem"
+        // } else {
+        //     // Set app bar title to say "Edit Problem"
+        //     // Populate all fields with the problem data
+        // }
     }
 
     @Override
