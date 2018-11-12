@@ -20,7 +20,6 @@ public class MapAllProblemsActivity extends AppCompatActivity
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     private MapView mapView;
-    private GoogleMap gmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class MapAllProblemsActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        gmap = googleMap;
+        GoogleMap gmap = googleMap;
         LatLng ny = new LatLng(40.7143528, -74.0059731);
         gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
     }
