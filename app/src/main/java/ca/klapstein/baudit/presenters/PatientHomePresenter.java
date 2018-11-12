@@ -1,12 +1,8 @@
 package ca.klapstein.baudit.presenters;
 
-import android.util.Log;
-
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.models.DatabaseModel;
 import ca.klapstein.baudit.views.ProblemListView;
-import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
  * MVP presenter for presenting a {@code ProblemTreeSet} on a {@code ProblemListView}.
@@ -33,6 +29,5 @@ public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     public void notifyStarted() {
         view.update();
-        Log.d("Length of TreeSet", String.valueOf(problemTreeSet.size()));
     }
 }

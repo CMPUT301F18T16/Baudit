@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,7 +25,6 @@ import ca.klapstein.baudit.views.ProblemRowView;
 public class PatientHomeActivity extends AppCompatActivity implements ProblemListView {
 
     private PatientHomePresenter presenter;
-    private RecyclerView problemRecyclerView;
     private ProblemListAdapter adapter;
 
     @Override
@@ -36,7 +34,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
         presenter = new PatientHomePresenter(this);
 
-        problemRecyclerView = findViewById(R.id.problem_list);
+        RecyclerView problemRecyclerView = findViewById(R.id.problem_list);
         adapter = new ProblemListAdapter();
         problemRecyclerView.setAdapter(adapter);
         problemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -65,9 +63,6 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         @Override
         public void onBindViewHolder(@NonNull ProblemViewHolder viewHolder, int i) {
             Problem problem = presenter.getProblemAt(i);
-
-            Log.d("Problem: ", problem.toString());
-
             viewHolder.setProblemTitleText(problem.getTitle());
             viewHolder.setProblemDateText(problem.getTimeStamp());
             viewHolder.setProblemDescriptionText(problem.getDescription());
@@ -81,15 +76,13 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
     private class ProblemViewHolder extends RecyclerView.ViewHolder implements ProblemRowView {
 
-        CardView cardView;
-        ImageView imageView;
-        TextView titleView;
-        TextView dateView;
-        TextView descriptionView;
+        private ImageView imageView;
+        private TextView titleView;
+        private TextView dateView;
+        private TextView descriptionView;
 
-        ProblemViewHolder(CardView card) {
+        private ProblemViewHolder(CardView card) {
             super(card);
-            cardView = card;
             imageView = card.findViewById(R.id.problem_card_image);
             titleView = card.findViewById(R.id.problem_card_title);
             dateView = card.findViewById(R.id.problem_card_date);
