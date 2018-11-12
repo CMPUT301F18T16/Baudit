@@ -53,10 +53,6 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
         private static final String TAG = "PatientListAdapter";
 
-        public PatientListAdapter() {
-            super();
-        }
-
         @NonNull
         @Override
         public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
