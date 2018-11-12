@@ -7,7 +7,6 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
  * Helper class for managing Baudit's local SQL database usage.
  */
 public class DatabaseModel {
-    private static final String TAG = "DatabaseModel";
 
     private ProblemTreeSet testProblemTreeSet = new ProblemTreeSet();
 

@@ -2,6 +2,7 @@ package ca.klapstein.baudit.presenters;
 
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.models.DatabaseModel;
 import ca.klapstein.baudit.views.ProblemListView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
@@ -13,10 +14,13 @@ import ca.klapstein.baudit.views.ProblemRowView;
  */
 public class PatientHomePresenter extends Presenter<ProblemListView> {
 
+    private DatabaseModel dbModel;
     private ProblemTreeSet problemTreeSet;
 
     public PatientHomePresenter(ProblemListView view) {
         super(view);
+        dbModel = new DatabaseModel();
+        problemTreeSet = dbModel.getTestProblemTreeSet();
     }
 
     public Problem getProblemAt(int position) {
