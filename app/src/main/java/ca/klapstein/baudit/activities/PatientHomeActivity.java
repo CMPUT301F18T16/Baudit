@@ -46,12 +46,11 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.home);
 
-        // Navigation drawer setup
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this);
 
@@ -143,11 +142,23 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ProblemViewHolder viewHolder, int i) {
+        public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
             Problem problem = presenter.getProblemAt(i);
             viewHolder.setProblemTitleText(problem.getTitle());
             viewHolder.setProblemDateText(problem.getTimeStamp());
             viewHolder.setProblemDescriptionText(problem.getDescription());
+
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(
+                        PatientHomeActivity.this,
+                        EditProblemActivity.class
+                    );
+                    // TODO: Need a way to get the problem's ID to add to the intent
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -158,6 +169,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
     private class ProblemViewHolder extends RecyclerView.ViewHolder implements ProblemRowView {
 
+        private CardView cardView;
         private ImageView imageView;
         private TextView titleView;
         private TextView dateView;
@@ -165,6 +177,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
         private ProblemViewHolder(CardView card) {
             super(card);
+            cardView = card;
             imageView = card.findViewById(R.id.problem_card_image);
             titleView = card.findViewById(R.id.problem_card_title);
             dateView = card.findViewById(R.id.problem_card_date);

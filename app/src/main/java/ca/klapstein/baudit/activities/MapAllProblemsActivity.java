@@ -16,7 +16,8 @@ public class MapAllProblemsActivity extends AppCompatActivity implements MapAllP
         setContentView(R.layout.activity_map_all_problems);
         Toolbar toolbar = findViewById(R.id.map_all_problems_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.problem_locations);
+
+        getSupportActionBar().setTitle(R.string.problem_locations);
     }
 
     @Override
