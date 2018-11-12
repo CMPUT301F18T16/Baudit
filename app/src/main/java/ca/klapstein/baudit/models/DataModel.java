@@ -11,12 +11,12 @@ import ca.klapstein.baudit.data.*;
  */
 public class DataModel {
 
-    private RemoteModel remoteModel;
+//    private RemoteModel remoteModel;
     private DatabaseModel databaseModel;
 
     public DataModel() {
-        this.remoteModel = new RemoteModel();
-        this.databaseModel = new DatabaseModel();
+//        remoteModel = new RemoteModel();
+        databaseModel = new DatabaseModel();
     }
 
     public Account getUser(String username) {
