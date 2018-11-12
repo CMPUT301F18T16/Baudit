@@ -17,21 +17,24 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
     private Solo solo;
 
     public EditProblemActivityTest() {
-        super(ca.klapstein.baudit.activities.EditProblemActivity.class);
+        super(EditProblemActivity.class);
     }
 
     @Before
     public void setUp() {
-        super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test
     public void onCreate() {
+        Intent intent = new Intent();
+        intent.putExtra("problemId", 0);
+        super.launchActivity(intent);
         solo.assertCurrentActivity("Wrong Activity", EditProblemActivity.class);
     }
 }

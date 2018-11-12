@@ -19,7 +19,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     private Solo solo;
 
     public LoginPatientActivityTest() {
-        super(ca.klapstein.baudit.activities.LoginPatientActivity.class);
+        super(LoginPatientActivity.class);
     }
 
     @Before
