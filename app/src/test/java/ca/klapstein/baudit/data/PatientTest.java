@@ -1,43 +1,85 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.Collection;
+import static org.junit.Assert.assertNotNull;
+
+@RunWith(Parameterized.class)
 public class PatientTest {
-    @Before
-    public void setUp() {
+
+    private Username username;
+    private Password password;
+    private Patient patient;
+    private ContactInfo contactInfo;
+
+
+    public PatientTest(String usernameInput, String passwordInput, String emailInput,
+                       String phoneInput) {
+        Email email = new Email(emailInput);
+        PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
+        this.contactInfo = new ContactInfo();
+        this.contactInfo.setEmail(email);
+        this.contactInfo.setPhoneNumber(phoneNumber);
+        this.username = new Username(usernameInput);
+        this.password = new Password(passwordInput);
+        this.patient = new Patient(this.username, this.password, contactInfo);
     }
 
-    @After
-    public void tearDown() {
-    }
-
-    @Test
-    public void getProblemTreeSet() {
-    }
-
-    @Test
-    public void getUsername() {
-    }
-
-    @Test
-    public void setUsername() {
-    }
-
-    @Test
-    public void getContactInfo() {
-    }
-
-    @Test
-    public void setContactInfo() {
-    }
-
-    @Test
-    public void getPassword() {
+    @Parameters
+    public static Collection patientData() {
+        return Arrays.asList(new Object[][] {
+                { "username", "password", "email@example.com", "780-123-1234" }
+        });
     }
 
     @Test
-    public void setPassword() {
+    public void testPatientConstructor() {
+        assertNotNull(this.patient);
+    }
+
+    @Test
+    public void testGetPatientUsername() {
+        assertEquals(username, patient.getUsername());
+    }
+
+    @Test
+    public void testSetPatientUsername() {
+        Username newusername = new Username("newusername");
+        patient.setUsername(newusername);
+        assertEquals(patient.getUsername(), newusername);
+    }
+
+    @Test
+    public void testGetPatientContactInfo() {
+        assertEquals(patient.getContactInfo(), contactInfo);
+    }
+
+    @Test
+    public void testSetPatientContactInfo() {
+        ContactInfo newContactInfo = new ContactInfo();
+        PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
+        Email newEmail = new Email("newemail@example.com");
+        newContactInfo.setEmail(newEmail);
+        newContactInfo.setPhoneNumber(newPhoneNumber);
+        patient.setContactInfo(newContactInfo);
+        assertEquals(patient.getContactInfo(), newContactInfo);
+    }
+
+    @Test
+    public void testGetPatientPassword() {
+        assertEquals(patient.getPassword(), password);
+    }
+
+    @Test
+    public void testSetPatientPassword() {
+        Password newPassword = new Password("newpassword");
+        patient.setPassword(newPassword);
+        assertEquals(patient.getPassword(), newPassword);
     }
 }

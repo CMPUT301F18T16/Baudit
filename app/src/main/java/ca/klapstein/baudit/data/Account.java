@@ -8,6 +8,12 @@ import android.support.annotation.NonNull;
 public abstract class Account {
     private static final String TAG = "Account";
 
+    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo, @NonNull Password password) {
+        setUsername(username);
+        setContactInfo(contactInfo);
+        setPassword(password);
+    }
+
     @NonNull
     private ContactInfo contactInfo;
 

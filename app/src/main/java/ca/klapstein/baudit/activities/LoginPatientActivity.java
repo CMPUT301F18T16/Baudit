@@ -3,6 +3,11 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
@@ -20,44 +25,78 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     private LoginPresenter presenter;
 
+    private EditText usernameInput;
+    private EditText passwordInput;
+    private TextView errorText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_patient);
 
         presenter = new LoginPresenter(this);
-    }
 
-    /**
-     * Attempt a login as a {@code Patient}.
-     *
-     * @return {@code true} if the login was successful, otherwise return {@code false}.
-     */
-    public boolean login() {
-        // TODO: implement
-        return true;
+        usernameInput = findViewById(R.id.enter_patient_username);
+        passwordInput = findViewById(R.id.enter_patient_password);
+
+        errorText = findViewById(R.id.patient_login_error_text);
+
+        Button loginButton = findViewById(R.id.login_patient_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLoginButtonClicked(
+                    usernameInput.getText().toString(),
+                    passwordInput.getText().toString()
+                );
+            }
+        });
+
+        Button registerButton = findViewById(R.id.register_patient_button);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                    LoginPatientActivity.this,
+                    CreatePatientAccountActivity.class
+                );
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Button switchLoginButton = findViewById(R.id.log_in_as_care_provider_button);
+        switchLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                    LoginPatientActivity.this,
+                    LoginCareProviderActivity.class
+                );
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
-    public void setUserNameError() {
-
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
-    public void setPasswordError() {
-
-    }
-
-    @Override
-    public void setLoginSuccess() {
-        Intent intent = new Intent(this, ProblemListActivity.class);
+    public void onLoginValidationSuccess() {
+        Intent intent = new Intent(
+            this,
+            ProblemListActivity.class
+        );
         startActivity(intent);
         finish();
     }
 
     @Override
-    public void onStart() {
-
-        super.onStart();
+    public void onLoginValidationFailure() {
+        passwordInput.setText("");
+        errorText.setText(getResources().getString(R.string.login_failed));
     }
 }

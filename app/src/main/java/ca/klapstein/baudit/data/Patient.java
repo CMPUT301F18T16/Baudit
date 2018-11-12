@@ -1,20 +1,28 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Class that represents a Patient.
  */
 public class Patient extends Account implements Comparable<Patient> {
-    private static final String TAG = "Patient";
+
     private ProblemTreeSet problemTreeSet;
-    
+  
     /**
      * A {@code Patient} can only have one {@code BodyPhoto}.
      */
     private BodyPhoto bodyPhoto;
-    
+
     public Patient(Username username, Password password, ContactInfo contactInfo){
-        super(username, password, contactInfo);
+        super(username, contactInfo, password);
         this.problemTreeSet = new ProblemTreeSet();
+    }
+
+    @Override
+    public int compareTo(@NonNull Patient patient) {
+        return this.getUsername().getUsernameString()
+            .compareTo(patient.getUsername().getUsernameString());
     }
     
     /**
@@ -42,10 +50,5 @@ public class Patient extends Account implements Comparable<Patient> {
      */
     public void setBodyPhoto(BodyPhoto bodyPhoto) {
         this.bodyPhoto = bodyPhoto;
-    }
-    
-    @Override
-    public int compareTo(Patient p) {
-        return  (int)(this.getUsername().getUsername().compareTo(p.getUsername().getUsername()));
     }
 }

@@ -16,12 +16,12 @@ import ca.klapstein.baudit.views.LogoutView;
 public class LoginPresenter extends Presenter<LoginView> {
     private static final String TAG = "LoginPresenter";
 
-    private RemoteModel remoteManager;
+    private RemoteModel remoteModel;
     private Account account;
 
     public LoginPresenter(LoginView view) {
         super(view);
-        this.remoteManager = new RemoteModel();
+        this.remoteModel = new RemoteModel();
     }
 
     /**
@@ -29,10 +29,12 @@ public class LoginPresenter extends Presenter<LoginView> {
      *
      * @param username {@code String}
      * @param password {@code String}
-     * @return {@code boolean} {@code true} if the authentication was successful, otherwise {@code false}
      */
-    public boolean validateLogin(String username, String password) {
-        view.setLoginSuccess();
-        return true;
+    public void onLoginButtonClicked(String username, String password) {
+        if (remoteModel.validateLogin(username, password)) {
+            this.view.onLoginValidationSuccess();
+        } else {
+            this.view.onLoginValidationFailure();
+        }
     }
 }

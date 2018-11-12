@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
 import java.util.Date;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
@@ -10,14 +11,26 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Patient
  */
 public class Problem implements Comparable<Problem> {
-    private static final String TAG = "Problem";
     
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
+  
     private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
+    private RecordTreeSet recordTreeSet;
     private Date date;
+  
+    public Problem() {
+        this.recordTreeSet = new RecordTreeSet();
+        this.date = new Date();
+    }
+    
+    public Problem(@NonNull String title, String description) throws IllegalArgumentException{
+        this.setTitle(title);
+        this.setDescription(description);
+        this.date = new Date();
+    }
 
     /**
      * Check if a given string is a valid Problem description.
@@ -39,12 +52,19 @@ public class Problem implements Comparable<Problem> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    public Problem() {
-
-        this.recordTreeSet = new RecordTreeSet();
-        this.date = new Date();
+    /**
+     * Used to compare two problems by time.
+     *
+     * @param problem {@code Problem} the comment to validate
+     * @return {@code int} {@code 0} if both problem time are the same  or
+     * {@code -int} if problem is earlier in time
+     * {@code +int} if problem is later in time
+     */
+    @Override
+    public int compareTo(@NonNull Problem problem) {
+      return this.getDate().compareTo(problem.getDate()); // Order by date
     }
-
+  
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
@@ -81,19 +101,5 @@ public class Problem implements Comparable<Problem> {
 
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
-    }
-
-
-    /**
-     * Used to compare two records for RecordTreeSet by time
-     *
-     * @param problem {@code Problem} the comment to validate
-     * @return {@code int} {@code 0} if both problem time are the same  or
-     * {@code -int} if problem is earlier in time
-     * {@code +int} if problem is later in time
-     */
-    @Override
-    public int compareTo(Problem problem) {
-        return (int) (date.getTime() - problem.getDate().getTime());
     }
 }
