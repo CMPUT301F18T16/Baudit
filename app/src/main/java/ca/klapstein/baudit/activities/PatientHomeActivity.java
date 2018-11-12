@@ -3,6 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,9 +45,10 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this);
 
@@ -68,10 +71,14 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         problemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         problemCountText = findViewById(R.id.problem_count);
-        problemCountText.setText(String.format(
-            getResources().getString(R.string.problem_count),
-            presenter.getProblemCount()
-        ));
+        updateProblemCountText();
+
+        FloatingActionButton fab = findViewById(R.id.patient_home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     @Override
@@ -83,10 +90,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     @Override
     public void update() {
         adapter.notifyDataSetChanged();
-        problemCountText.setText(String.format(
-            getResources().getString(R.string.problem_count),
-            presenter.getProblemCount()
-        ));
+        updateProblemCountText();
     }
 
     @Override
@@ -105,6 +109,13 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void updateProblemCountText() {
+        problemCountText.setText(String.format(
+            getResources().getString(R.string.problem_count),
+            presenter.getProblemCount()
+        ));
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {

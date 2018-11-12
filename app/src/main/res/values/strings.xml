@@ -13,4 +13,7 @@
     <string name="login_failed">⚠ Login error: Invalid credentials</string>
     <string name="problem_card_content_description">The most recent image of the problem area</string>
     <string name="problem_count">Problems (%1$d):</string>
+    <string name="home">Home</string>
+    <string name="patient_search_title">Search</string>
+    <string name="patient_view_map_title">View Map</string>
 </resources>

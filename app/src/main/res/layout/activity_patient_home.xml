@@ -17,28 +17,25 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </android.support.v7.widget.Toolbar>
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
         <TextView
             android:id="@+id/problem_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:background="@color/white"
+            android:textColor="#000000"
             android:textStyle="bold"
+            android:textSize="18dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:background="@color/white">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/problem_list"
@@ -46,9 +43,12 @@
                 android:layout_height="match_parent" />
 
             <android.support.design.widget.FloatingActionButton
+                android:id="@+id/patient_home_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end" />
+                android:layout_gravity="bottom|end"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_plus_white_24dp"/>
 
         </FrameLayout>
 
