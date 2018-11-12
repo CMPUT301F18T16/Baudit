@@ -32,9 +32,7 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
 
     @Test
     public void onCreate() {
-        Intent intent = new Intent();
-        intent.putExtra("problemId", 0);
-        super.launchActivity(intent);
+        super.launchActivity(new Intent());
         solo.assertCurrentActivity("Wrong Activity", EditProblemActivity.class);
     }
 }

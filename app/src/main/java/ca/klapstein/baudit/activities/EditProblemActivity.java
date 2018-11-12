@@ -26,7 +26,7 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
 
         presenter = new EditProblemPresenter(this);
 
-        int problemId = savedInstanceState.getInt("problemId");
+        int problemId = getIntent().getIntExtra("problemId", 0);
         if (problemId == 0) {
             // Set app bar title to say "New Problem"
         } else {

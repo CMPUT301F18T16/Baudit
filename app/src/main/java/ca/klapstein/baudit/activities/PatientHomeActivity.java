@@ -82,7 +82,6 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                     PatientHomeActivity.this,
                     EditProblemActivity.class
                 );
-                intent.putExtra("problemId", 0);
                 startActivity(intent);
             }
         });
