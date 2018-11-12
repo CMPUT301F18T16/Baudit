@@ -3,7 +3,6 @@ package ca.klapstein.baudit.presenters;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.ProblemListView;
-import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
  * MVP presenter for presenting a {@code ProblemTreeSet} on a {@code ProblemListView}.
@@ -11,21 +10,24 @@ import ca.klapstein.baudit.views.ProblemRowView;
  * @see ProblemTreeSet
  * @see ProblemListView
  */
-public class ProblemListPresenter extends Presenter<ProblemListView> {
-    private static final String TAG = "ProblemListPresenter";
+public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     private ProblemTreeSet problemTreeSet;
 
-    public ProblemListPresenter(ProblemListView view) {
+    public PatientHomePresenter(ProblemListView view) {
         super(view);
+        problemTreeSet = dataManager.getProblemTreeSet();
     }
 
-    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
-        Problem patient = (Problem) problemTreeSet.toArray()[position];
-        // rowView.setProblemTitleText(problem.title);
+    public Problem getProblemAt(int position) {
+        return (Problem) problemTreeSet.toArray()[position];
     }
 
     public int getProblemCount() {
         return problemTreeSet.size();
+    }
+
+    public void notifyStarted() {
+        view.update();
     }
 }

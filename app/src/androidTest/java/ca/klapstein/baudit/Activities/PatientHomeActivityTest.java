@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class ProblemListActivityTest extends ActivityTestRule<ProblemListActivity> {
+public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivity> {
 
     private Solo solo;
 
-    public ProblemListActivityTest() {
-        super(ca.klapstein.baudit.activities.ProblemListActivity.class);
+    public PatientHomeActivityTest() {
+        super(PatientHomeActivity.class);
     }
 
     @Before
@@ -28,10 +28,11 @@ public class ProblemListActivityTest extends ActivityTestRule<ProblemListActivit
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test
-    public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", ProblemListActivity.class);
+    public void testOnCreate() {
+        solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 }

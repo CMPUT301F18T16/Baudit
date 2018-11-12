@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ca.klapstein.baudit">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.klapstein.baudit">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -31,17 +32,25 @@
         <activity
             android:name=".activities.LoginPatientActivity"
             android:theme="@style/BauditPatientTheme.NoActionBar"/>
-        <activity android:name=".activities.EditProblemActivity"/>
+
+        <activity
+            android:name=".activities.EditProblemActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar" />
+
         <activity android:name=".activities.AddProblemActivity"/>
         <activity android:name=".activities.AddRecordActivity"/>
         <activity android:name=".activities.EditRecordActivity"/>
         <activity android:name=".activities.PatientListActivity"/>
         <activity android:name=".activities.ViewPhotoActivity"/>
-        <activity android:name=".activities.ProblemListActivity"/>
+
+        <activity
+            android:name=".activities.PatientHomeActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar" />
+
         <activity android:name=".activities.RecordListActivity"/>
         <activity
                 android:name=".activities.SplashActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar">
+                android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -53,6 +62,10 @@
         </activity>
         <activity android:name=".activities.AddPhotoActivity">
         </activity>
+
+        <activity
+            android:name=".activities.MapAllProblemsActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar" />
     </application>
 
 </manifest>

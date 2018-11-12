@@ -1,7 +1,8 @@
 <resources>
-    <style name="BauditTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="BauditTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorAccent">@color/vaporwave_pink</item>
         <item name="colorButtonNormal">@color/vaporwave_yellow</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
     <style name="BauditPatientTheme" parent="BauditTheme">
@@ -26,7 +27,7 @@
         <item name="windowNoTitle">true</item>
     </style>
   
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/baudit_logo</item>
     </style>
 </resources>
