@@ -10,14 +10,13 @@ import ca.klapstein.baudit.data.*;
  * @see RemoteModel
  */
 public class DataModel {
-    private static final String TAG = "DataModel";
 
-    private RemoteModel remoteManager;
-    private DatabaseModel dataBaseManager;
+    private RemoteModel remoteModel;
+    private DatabaseModel databaseModel;
 
     public DataModel() {
-        this.remoteManager = new RemoteModel();
-        this.dataBaseManager = new DatabaseModel();
+        this.remoteModel = new RemoteModel();
+        this.databaseModel = new DatabaseModel();
     }
 
     public Account getUser(String username) {
@@ -58,5 +57,9 @@ public class DataModel {
 
     public boolean deleteRecord(Record record) {
         return true;
+    }
+
+    public ProblemTreeSet getProblemTreeSet() {
+        return this.databaseModel.getTestProblemTreeSet();
     }
 }

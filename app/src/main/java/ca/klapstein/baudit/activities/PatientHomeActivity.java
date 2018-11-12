@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,11 +39,13 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         problemRecyclerView = findViewById(R.id.problem_list);
         adapter = new ProblemListAdapter();
         problemRecyclerView.setAdapter(adapter);
+        problemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        presenter.notifyStarted();
     }
 
     @Override
@@ -61,6 +65,8 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         @Override
         public void onBindViewHolder(@NonNull ProblemViewHolder viewHolder, int i) {
             Problem problem = presenter.getProblemAt(i);
+
+            Log.d("Problem: ", problem.toString());
 
             viewHolder.setProblemTitleText(problem.getTitle());
             viewHolder.setProblemDateText(problem.getTimeStamp());

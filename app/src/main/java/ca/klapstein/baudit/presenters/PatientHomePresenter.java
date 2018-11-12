@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
+import android.util.Log;
+
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.models.DatabaseModel;
@@ -14,13 +16,11 @@ import ca.klapstein.baudit.views.ProblemRowView;
  */
 public class PatientHomePresenter extends Presenter<ProblemListView> {
 
-    private DatabaseModel dbModel;
     private ProblemTreeSet problemTreeSet;
 
     public PatientHomePresenter(ProblemListView view) {
         super(view);
-        dbModel = new DatabaseModel();
-        problemTreeSet = dbModel.getTestProblemTreeSet();
+        problemTreeSet = dataManager.getProblemTreeSet();
     }
 
     public Problem getProblemAt(int position) {
@@ -29,5 +29,10 @@ public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     public int getProblemCount() {
         return problemTreeSet.size();
+    }
+
+    public void notifyStarted() {
+        view.update();
+        Log.d("Length of TreeSet", String.valueOf(problemTreeSet.size()));
     }
 }

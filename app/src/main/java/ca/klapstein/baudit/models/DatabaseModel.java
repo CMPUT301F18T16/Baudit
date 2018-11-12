@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.models;
 
+import android.util.Log;
+
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 
@@ -8,24 +10,31 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
  */
 public class DatabaseModel {
 
-    private ProblemTreeSet testProblemTreeSet = new ProblemTreeSet();
+    private ProblemTreeSet testProblemTreeSet;
 
     public DatabaseModel() {
         super();
-        Problem testProblem1 = new Problem();
-        testProblem1.setTitle("Ouch");
-        testProblem1.setDescription("Big hole in my brain");
-        testProblemTreeSet.add(testProblem1);
+        testProblemTreeSet = new ProblemTreeSet();
+        testProblemTreeSet.add(new Problem(
+            "Ouch",
+            "Big hole in my brain"
+        ));
 
-        Problem testProblem2 = new Problem();
-        testProblem2.setTitle("Strange spot");
-        testProblem2.setDescription("Large purple spot on my eyeball");
-        testProblemTreeSet.add(testProblem2);
+        Log.d("Added 1", String.valueOf(testProblemTreeSet.size()));
 
-        Problem testProblem3 = new Problem();
-        testProblem3.setTitle("Absence of limbs");
-        testProblem3.setDescription("I swear I had them all not too long ago...");
-        testProblemTreeSet.add(testProblem3);
+        testProblemTreeSet.add(new Problem(
+            "Strange spot",
+            "Large purple spot on my eyeball"
+        ));
+
+        Log.d("Added 2", String.valueOf(testProblemTreeSet.size()));
+
+        testProblemTreeSet.add(new Problem(
+            "Absence of limbs",
+            "I swear I had them all not too long ago..."
+        ));
+
+        Log.d("Added 3", String.valueOf(testProblemTreeSet.size()));
     }
 
     public ProblemTreeSet getTestProblemTreeSet() {

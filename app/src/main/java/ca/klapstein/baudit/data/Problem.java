@@ -13,12 +13,15 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 public class Problem implements Comparable<Problem> {
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
-  
-    private static final String TAG = "Problem";
+
     private String title;
     private String description;
     private RecordTreeSet recordTreeSet;
     private Date date;
+
+    public Problem() {
+        this.date = new Date();
+    }
 
     /**
      * Check if a given string is a valid Problem description.
@@ -43,16 +46,25 @@ public class Problem implements Comparable<Problem> {
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
-    
+
     public Problem(@NonNull String title, String description) throws IllegalArgumentException{
         this.setTitle(title);
         this.setDescription(description);
         this.date = new Date();
     }
 
-     @Override
+    @Override
     public int compareTo(@NonNull Problem problem) {
-      return this.getDate().compareTo(problem.getDate()); // Order by date
+        // NOTE: Remove this code once remote is working.
+        // Users are physically unable to add more than one problem per ms.
+        // However, when adding programmatically, there can be 2-3 added per ms.
+        // Thus, the ProblemTReeSet thinks they are the same object unless there is another check.
+        // Hence, this code.
+        if (getDate().compareTo(problem.getDate()) == 0) {
+            return getTitle().compareTo(problem.getTitle());
+        } else {
+            return getDate().compareTo(problem.getDate()); // Order by date
+        }
     }
 
     public String getDescription() {
