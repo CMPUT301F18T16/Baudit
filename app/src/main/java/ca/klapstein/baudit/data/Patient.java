@@ -1,12 +1,25 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Class that represents a Patient.
  */
-public class Patient extends Account {
-    private static final String TAG = "Patient";
+public class Patient extends Account implements Comparable<Patient> {
+
     private ProblemTreeSet problemTreeSet;
 
+    public Patient(Username username, Password password, ContactInfo contactInfo){
+        super(username, contactInfo, password);
+        this.problemTreeSet = new ProblemTreeSet();
+    }
+
+    @Override
+    public int compareTo(@NonNull Patient patient) {
+        return this.getUsername().getUsernameString()
+            .compareTo(patient.getUsername().getUsernameString());
+    }
+  
     /**
      * A {@code Patient} can only have one {@code BodyPhoto}.
      */

@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
 import java.util.Date;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
@@ -9,13 +10,14 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  *
  * @see Patient
  */
-public class Problem {
+public class Problem implements Comparable<Problem> {
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
+  
     private static final String TAG = "Problem";
-    private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
+    private RecordTreeSet recordTreeSet;
     private Date date;
 
     /**
@@ -40,6 +42,17 @@ public class Problem {
 
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
+    }
+    
+    public Problem(@NonNull String title, String description) throws IllegalArgumentException{
+        this.setTitle(title);
+        this.setDescription(description);
+        this.date = new Date();
+    }
+
+     @Override
+    public int compareTo(@NonNull Problem problem) {
+      return this.getDate().compareTo(problem.getDate()); // Order by date
     }
 
     public String getDescription() {
