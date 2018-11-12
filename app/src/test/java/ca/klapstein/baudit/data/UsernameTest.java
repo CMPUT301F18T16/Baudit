@@ -41,7 +41,7 @@ public class UsernameTest {
 //        @Test
 //        public void testSetUsername() {
 //            Username username = new Username(input);
-//            username.setUsername(input);
+//            username.setUsernameString(input);
 //            assertEquals(input, username.getUsernameString());
 //        }
 //    }
@@ -69,7 +69,7 @@ public class UsernameTest {
         @Test(expected = IllegalArgumentException.class)
         public void testSetUsername() {
             Username username = new Username("validuser");
-            username.setUsername(input);
+            username.setUsernameString(input);
             assertEquals(input, username.getUsernameString());
         }
 

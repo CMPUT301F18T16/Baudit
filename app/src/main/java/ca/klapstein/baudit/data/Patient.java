@@ -1,12 +1,12 @@
-
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
 
 /**
  * Class that represents a Patient.
  */
 public class Patient extends Account implements Comparable<Patient> {
-    private static final String TAG = "Patient";
+
     private ProblemTreeSet problemTreeSet;
 
     public Patient(Username username, Password password, ContactInfo contactInfo){
@@ -15,8 +15,9 @@ public class Patient extends Account implements Comparable<Patient> {
     }
 
     @Override
-    public int compareTo(Patient patient) {
-        return  (int)(this.getUsername().getUsernameString().compareTo(patient.getUsername().getUsernameString()));
+    public int compareTo(@NonNull Patient patient) {
+        return this.getUsername().getUsernameString()
+            .compareTo(patient.getUsername().getUsernameString());
     }
   
     /**

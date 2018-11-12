@@ -9,13 +9,11 @@ import ca.klapstein.baudit.models.RemoteModel;
  * @see Account
  */
 public class Username {
-    private static final String TAG = "Username";
 
-    @NonNull
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException {
-        this.setUsername(username);
+        this.setUsernameString(username);
     }
 
     /**
@@ -35,7 +33,7 @@ public class Username {
         return this.username;
     }
 
-    public void setUsername(@NonNull String username) throws IllegalArgumentException {
+    public void setUsernameString(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {
             throw new IllegalArgumentException("Invalid username");
         } else {

@@ -19,7 +19,8 @@ public class PatientTest {
     private ContactInfo contactInfo;
 
 
-    public PatientTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
+    public PatientTest(String usernameInput, String passwordInput, String emailInput,
+                       String phoneInput) {
         Email email = new Email(emailInput);
         PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
         this.contactInfo = new ContactInfo();
@@ -61,7 +62,6 @@ public class PatientTest {
 
     @Test
     public void testSetPatientContactInfo() {
-
         ContactInfo newContactInfo = new ContactInfo();
         PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
         Email newEmail = new Email("newemail@example.com");
