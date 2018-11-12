@@ -46,10 +46,12 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.home);
+
+        // Navigation drawer setup
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this);
 
@@ -113,7 +115,11 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.patient_home_view_map:
-                // Open map view activity
+                Intent intent = new Intent(
+                    PatientHomeActivity.this,
+                    MapAllProblemsActivity.class
+                );
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

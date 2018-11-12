@@ -16,4 +16,5 @@
     <string name="home">Home</string>
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
+    <string name="problem_locations">Problem locations</string>
 </resources>
