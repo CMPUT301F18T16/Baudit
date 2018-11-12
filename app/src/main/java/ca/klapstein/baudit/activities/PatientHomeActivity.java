@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,11 +27,14 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
+    private TextView problemCountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paitent_home);
+        setContentView(R.layout.activity_patient_home);
+        Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
+        setSupportActionBar(toolbar);
 
         presenter = new PatientHomePresenter(this);
 
@@ -38,6 +42,12 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         adapter = new ProblemListAdapter();
         problemRecyclerView.setAdapter(adapter);
         problemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        problemCountText = findViewById(R.id.problem_count);
+        problemCountText.setText(String.format(
+            getResources().getString(R.string.problem_count),
+            presenter.getProblemCount()
+        ));
     }
 
     @Override
@@ -48,7 +58,11 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
 
     @Override
     public void update() {
-        this.adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
+        problemCountText.setText(String.format(
+            getResources().getString(R.string.problem_count),
+            presenter.getProblemCount()
+        ));
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
