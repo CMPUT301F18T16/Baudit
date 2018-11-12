@@ -16,7 +16,7 @@ import java.util.Date;
  * @see ca.klapstein.baudit.data.Patient
  */
 public class EditProblemActivity extends AppCompatActivity implements EditProblemView {
-    private static final String TAG = "EditProblemActivity";
+
     private EditProblemPresenter presenter;
 
     @Override
@@ -25,6 +25,14 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
         setContentView(R.layout.activity_edit_problem);
 
         presenter = new EditProblemPresenter(this);
+
+        int problemId = savedInstanceState.getInt("problemId");
+        if (problemId == 0) {
+            // Set app bar title to say "New Problem"
+        } else {
+            // Set app bar title to say "Edit Problem"
+            // Populate all fields with the problem data
+        }
     }
 
     @Override
@@ -64,7 +72,6 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
 
     @Override
     public void onStart() {
-
         super.onStart();
     }
 }

@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -77,6 +78,12 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(
+                    PatientHomeActivity.this,
+                    EditProblemActivity.class
+                );
+                intent.putExtra("problemId", 0);
+                startActivity(intent);
             }
         });
     }
@@ -105,6 +112,9 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.patient_home_view_map:
+                // Open map view activity
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
