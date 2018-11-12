@@ -28,10 +28,11 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test
-    public void onCreate() {
+    public void testOnCreate() {
         solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 }
