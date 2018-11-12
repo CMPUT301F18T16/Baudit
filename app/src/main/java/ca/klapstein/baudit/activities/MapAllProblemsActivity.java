@@ -89,9 +89,8 @@ public class MapAllProblemsActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap gmap = googleMap;
         LatLng ny = new LatLng(40.7143528, -74.0059731);
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
     }
 
     @Override
