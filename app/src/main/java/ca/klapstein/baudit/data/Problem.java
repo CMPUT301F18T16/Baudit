@@ -52,7 +52,7 @@ public class Problem implements Comparable<Problem> {
 
      @Override
     public int compareTo(@NonNull Problem problem) {
-      return this.getTitle().compareTo(problem.getTitle()); //Order by date
+      return this.getDate().compareTo(problem.getDate()); // Order by date
     }
 
     public String getDescription() {

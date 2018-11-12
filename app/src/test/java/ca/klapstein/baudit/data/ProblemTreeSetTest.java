@@ -4,11 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-
 
 public class ProblemTreeSetTest {
 
@@ -25,27 +23,26 @@ public class ProblemTreeSetTest {
     }
 
     @Test
-    public void testStub() {
-        problemTreeSet = new ProblemTreeSet();
+    public void testGetProblem() {
+        Problem problem = new Problem("title", "test");
+        problemTreeSet.add(problem);
+        assertEquals("title", problemTreeSet.first().getTitle());
+        assertEquals("test", problemTreeSet.first().getDescription());
+    }
 
-        Problem problem1 = new Problem("title1", "1");
-        assertTrue(problemTreeSet.add(problem1));
+    @Test
+    public void testAddProblem() {
+        Problem problem = new Problem("title", "test");
+        problemTreeSet.add(problem);
+        assertTrue(problemTreeSet.contains(problem));
+    }
 
-        Problem problem2 = new Problem("title2", "2");
-        assertTrue(problemTreeSet.add(problem2));
-
-        Problem problem3 = new Problem("title3", "3");
-        assertTrue(problemTreeSet.add(problem3));
-
-        Problem problem4 = new Problem("title4", "4");
-        assertTrue(problemTreeSet.add(problem4));
-
-
-        assertTrue(problemTreeSet.contains(problem3));
-        assertTrue(problemTreeSet.remove(problem3));
-
-        assertFalse(problemTreeSet.contains(problem3));
-        assertTrue(problemTreeSet.contains(problem4));
-
+    @Test
+    public void testRemoveProblem() {
+        Problem problem = new Problem("title", "test");
+        problemTreeSet.add(problem);
+        assertTrue(problemTreeSet.contains(problem));
+        problemTreeSet.remove(problem);
+        assertFalse(problemTreeSet.contains(problem));
     }
 }
