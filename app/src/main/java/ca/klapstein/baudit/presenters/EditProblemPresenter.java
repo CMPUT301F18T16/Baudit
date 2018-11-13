@@ -9,9 +9,16 @@ import ca.klapstein.baudit.views.EditProblemView;
  * @see EditProblemView
  */
 public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
-    private static final String TAG = "EditProblemPresenter";
 
     public EditProblemPresenter(EditProblemView view) {
         super(view);
+    }
+
+    public void clickedDateButton() {
+        // TODO: Get date from db and convert to calendar
+    }
+
+    public void clickedTimeButton() {
+        // TODO: Get time from db and convert to calendar
     }
 }

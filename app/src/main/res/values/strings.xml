@@ -17,4 +17,16 @@
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
     <string name="problem_locations">Problem locations</string>
+    <string name="title_label">Title:</string>
+    <string name="date_label">Date:</string>
+    <string name="description_label">Description:</string>
+    <string name="notifications_label">Notifications:</string>
+    <string name="hourly">Hourly</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="biweekly">Biweekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+    <string name="new_problem">New problem</string>
+    <string name="edit_problem">Edit problem</string>
 </resources>
