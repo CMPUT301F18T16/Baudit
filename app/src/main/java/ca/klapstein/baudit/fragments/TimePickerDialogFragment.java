@@ -4,16 +4,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
 import ca.klapstein.baudit.activities.EditProblemActivity;
 
 public class TimePickerDialogFragment extends DialogFragment {
-    static final String HOUR = "hour";
-    static final String MINUTES = "minutes";
+    
+    private static final String HOUR = "hour";
+    private static final String MINUTES = "minutes";
 
-    public static TimePickerDialogFragment newInstance(Calendar time) {
+    public static TimePickerDialogFragment newInstance(@NonNull Calendar time) {
         TimePickerDialogFragment fragment = new TimePickerDialogFragment();
 
         Bundle args = new Bundle();

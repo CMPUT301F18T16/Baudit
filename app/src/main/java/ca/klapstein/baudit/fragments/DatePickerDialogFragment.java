@@ -4,17 +4,19 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
 import ca.klapstein.baudit.activities.EditProblemActivity;
 
 public class DatePickerDialogFragment extends DialogFragment {
-    static final String YEAR = "year";
-    static final String MONTH = "month";
-    static final String DAY = "day";
 
-    public static DatePickerDialogFragment newInstance(Calendar date) {
+    private static final String YEAR = "year";
+    private static final String MONTH = "month";
+    private static final String DAY = "day";
+
+    public static DatePickerDialogFragment newInstance(@NonNull Calendar date) {
         DatePickerDialogFragment fragment = new DatePickerDialogFragment();
 
         Bundle args = new Bundle();
