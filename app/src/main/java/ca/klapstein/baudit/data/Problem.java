@@ -11,24 +11,13 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Patient
  */
 public class Problem implements Comparable<Problem> {
-    
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
-    private RecordTreeSet recordTreeSet;
+
     private String title;
     private String description;
+    private RecordTreeSet recordTreeSet;
     private Date date;
-  
-    public Problem() {
-        this.recordTreeSet = new RecordTreeSet();
-        this.date = new Date();
-    }
-    
-    public Problem(@NonNull String title, String description) throws IllegalArgumentException{
-        this.setTitle(title);
-        this.setDescription(description);
-        this.date = new Date();
-    }
 
     public Problem() {
         this.date = new Date();
@@ -54,6 +43,16 @@ public class Problem implements Comparable<Problem> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
+    public RecordTreeSet getRecordTreeSet() {
+        return recordTreeSet;
+    }
+
+    public Problem(@NonNull String title, String description) throws IllegalArgumentException{
+        this.setTitle(title);
+        this.setDescription(description);
+        this.date = new Date();
+    }
+
     @Override
     public int compareTo(@NonNull Problem problem) {
         // NOTE: Remove this code once remote is working.
@@ -66,10 +65,6 @@ public class Problem implements Comparable<Problem> {
         } else {
             return getDate().compareTo(problem.getDate()); // Order by date
         }
-    }
-  
-    public RecordTreeSet getRecordTreeSet() {
-        return recordTreeSet;
     }
 
     public String getDescription() {
