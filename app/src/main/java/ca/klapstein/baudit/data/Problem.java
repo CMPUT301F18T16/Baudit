@@ -14,7 +14,6 @@ public class Problem implements Comparable<Problem> {
     
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
-  
     private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
@@ -28,6 +27,10 @@ public class Problem implements Comparable<Problem> {
     public Problem(@NonNull String title, String description) throws IllegalArgumentException{
         this.setTitle(title);
         this.setDescription(description);
+        this.date = new Date();
+    }
+
+    public Problem() {
         this.date = new Date();
     }
 
@@ -51,17 +54,18 @@ public class Problem implements Comparable<Problem> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    /**
-     * Used to compare two problems by time.
-     *
-     * @param problem {@code Problem} the comment to validate
-     * @return {@code int} {@code 0} if both problem time are the same  or
-     * {@code -int} if problem is earlier in time
-     * {@code +int} if problem is later in time
-     */
     @Override
     public int compareTo(@NonNull Problem problem) {
-      return this.getDate().compareTo(problem.getDate()); // Order by date
+        // NOTE: Remove this code once remote is working.
+        // Users are physically unable to add more than one problem per ms.
+        // However, when adding programmatically, there can be 2-3 added per ms.
+        // Thus, the ProblemTReeSet thinks they are the same object unless there is another check.
+        // Hence, this code.
+        if (getDate().compareTo(problem.getDate()) == 0) {
+            return getTitle().compareTo(problem.getTitle());
+        } else {
+            return getDate().compareTo(problem.getDate()); // Order by date
+        }
     }
   
     public RecordTreeSet getRecordTreeSet() {

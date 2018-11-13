@@ -19,7 +19,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     private Solo solo;
 
     public LoginPatientActivityTest() {
-        super(ca.klapstein.baudit.activities.LoginPatientActivity.class);
+        super(LoginPatientActivity.class);
     }
 
     @Before
@@ -50,7 +50,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_username), "test");
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "foo");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
-        solo.assertCurrentActivity("Wrong Activity", ProblemListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 
     /**

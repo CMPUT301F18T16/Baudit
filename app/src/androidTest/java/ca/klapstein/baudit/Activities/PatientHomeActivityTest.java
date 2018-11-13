@@ -12,16 +12,17 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivity> {
+public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivity> {
 
     private Solo solo;
 
-    public EditProblemActivityTest() {
-        super(EditProblemActivity.class);
+    public PatientHomeActivityTest() {
+        super(PatientHomeActivity.class);
     }
 
     @Before
     public void setUp() {
+        super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -31,8 +32,7 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
     }
 
     @Test
-    public void onCreate() {
-        super.launchActivity(new Intent());
-        solo.assertCurrentActivity("Wrong Activity", EditProblemActivity.class);
+    public void testOnCreate() {
+        solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 }
