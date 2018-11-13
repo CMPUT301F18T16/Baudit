@@ -18,7 +18,6 @@ public class Problem implements Comparable<Problem> {
     private RecordTreeSet recordTreeSet;
     private String title;
     private String description;
-    private RecordTreeSet recordTreeSet;
     private Date date;
   
     public Problem() {

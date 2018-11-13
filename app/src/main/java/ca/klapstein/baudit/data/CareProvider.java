@@ -13,7 +13,7 @@ public class CareProvider extends Account {
     private PatientTreeSet assignedPatientTreeSet;
 
     public CareProvider(Username username, Password password, ContactInfo contactInfo){
-        super(username, password, contactInfo);
+        super(username, contactInfo, password);
         this.assignedPatientTreeSet = new PatientTreeSet();
     }
 
