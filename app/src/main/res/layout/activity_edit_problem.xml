@@ -33,9 +33,10 @@
                 android:text="@string/title_label"/>
 
             <EditText
-                android:id="@+id/edit_problem_title"
+                android:id="@+id/edit_problem_title_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:maxLength="30"
@@ -77,8 +78,10 @@
                 android:text="@string/description_label" />
 
             <EditText
+                android:id="@+id/edit_problem_description_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dark_grey"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
                 android:maxLength="300" />

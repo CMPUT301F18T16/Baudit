@@ -14,6 +14,13 @@ public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
         super(view);
     }
 
+    public void viewStarted(int problemId) {
+        if (problemId != 0) {
+            view.updateTitleField("Test");
+            view.updateDescriptionField("Test");
+        }
+    }
+
     public void clickedDateButton() {
         // TODO: Get date from db and convert to calendar
     }

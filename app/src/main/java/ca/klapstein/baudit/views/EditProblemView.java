@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.views;
 
-public interface EditProblemView extends ProblemView {
-    void commitEditProblem();
+public interface EditProblemView extends View {
+    void updateTitleField(String title);
+    void updateDescriptionField(String description);
 }
