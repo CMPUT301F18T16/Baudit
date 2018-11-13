@@ -59,12 +59,14 @@
                 <Button
                     android:id="@+id/edit_problem_date_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_grey" />
 
                 <Button
                     android:id="@+id/edit_problem_time_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_grey" />
 
             </LinearLayout>
 

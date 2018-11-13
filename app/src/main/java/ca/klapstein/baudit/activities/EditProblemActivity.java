@@ -18,6 +18,7 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.EditProblemPresenter;
 import ca.klapstein.baudit.views.EditProblemView;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 
 /**
@@ -33,6 +34,8 @@ public class EditProblemActivity extends AppCompatActivity
 
     private EditProblemPresenter presenter;
     private EditText titleInput;
+    private Button dateButton;
+    private Button timeButton;
     private EditText descriptionInput;
 
     @Override
@@ -46,7 +49,7 @@ public class EditProblemActivity extends AppCompatActivity
 
         titleInput = findViewById(R.id.edit_problem_title_input);
 
-        Button dateButton = findViewById(R.id.edit_problem_date_button);
+        dateButton = findViewById(R.id.edit_problem_date_button);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +57,7 @@ public class EditProblemActivity extends AppCompatActivity
             }
         });
 
-        Button timeButton = findViewById(R.id.edit_problem_time_button);
+        timeButton = findViewById(R.id.edit_problem_time_button);
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,16 +87,28 @@ public class EditProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateDateButton(String dateString) {
+        dateButton.setText(dateString);
+    }
+
+    @Override
+    public void updateTimeButton(String timeString) {
+        timeButton.setText(timeString);
+    }
+
+    @Override
     public void updateDescriptionField(String description) {
         descriptionInput.setText(description);
     }
 
+    @Override
     public void showDatePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DatePickerDialogFragment mDateFragment = DatePickerDialogFragment.newInstance(calendar);
         mDateFragment.show(ft, "datePicker");
     }
 
+    @Override
     public void showTimePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TimePickerDialogFragment mTimeFragment = TimePickerDialogFragment.newInstance(calendar);
@@ -102,9 +117,22 @@ public class EditProblemActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
+        DateFormat mDateFormat = DateFormat.getDateInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        String dateForButton = mDateFormat.format(calendar.getTime());
+        updateDateButton(dateForButton);
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
+        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        String timeForButton = mTimeFormat.format(calendar.getTime());
+        updateTimeButton(timeForButton);
     }
 }
