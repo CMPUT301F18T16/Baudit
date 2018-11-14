@@ -6,6 +6,7 @@
 
     <!-- VaporWave Palette https://www.color-hex.com/color-palette/10221 -->
     <color name="vaporwave_blue">#01cdfe</color>
+    <color name="vaporwave_blue_dark">#00a4cb</color>
     <color name="vaporwave_pink">#ff71ce</color>
     <color name="vaporwave_green">#05ffa1</color>
     <color name="vaporwave_purple">#b967ff</color>
