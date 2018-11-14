@@ -9,10 +9,20 @@ import ca.klapstein.baudit.views.EditAccountView;
  * @see Account
  * @see EditAccountView
  */
-public class EditAccountPresenter extends AccountPresenter<EditAccountView> {
-    private static final String TAG = "EditAccountPresenter";
+public class EditAccountPresenter extends Presenter<EditAccountView> {
+
+    protected Account account; // TODO: Perhaps this information should be pulled from remote
 
     public EditAccountPresenter(EditAccountView view) {
         super(view);
+    }
+
+    public void viewStarted() {
+        // TODO: Get account details
+        view.updateFields("Test", "help@me.com", "(780) 400-0400");
+    }
+
+    public void saveClicked(String name, String email, String phoneNumber) {
+        // TODO: Commit the new information
     }
 }
