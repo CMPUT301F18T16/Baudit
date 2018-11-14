@@ -4,21 +4,31 @@ import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
 import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.EditProblemPresenter;
 import ca.klapstein.baudit.views.EditProblemView;
+import ca.klapstein.baudit.views.RecordRowView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -35,6 +45,7 @@ public class EditProblemActivity extends AppCompatActivity
     TimePickerDialog.OnTimeSetListener {
 
     private EditProblemPresenter presenter;
+    private RecordListAdapter adapter;
     private EditText titleInput;
     private Button dateButton;
     private Button timeButton;
@@ -82,6 +93,11 @@ public class EditProblemActivity extends AppCompatActivity
                 ));
             }
         });
+
+        RecyclerView recordRecyclerView = findViewById(R.id.edit_problem_records_list);
+        adapter = new RecordListAdapter();
+        recordRecyclerView.setAdapter(adapter);
+        recordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -96,6 +112,7 @@ public class EditProblemActivity extends AppCompatActivity
 
         presenter.viewStarted(problemId);
         updateRecordCountText();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -158,5 +175,86 @@ public class EditProblemActivity extends AppCompatActivity
             getResources().getString(R.string.records_label),
             presenter.getRecordCount()
         ));
+    }
+
+    private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
+
+        @Override @NonNull
+        public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.card_record, viewGroup, false);
+            return new RecordViewHolder(v); //Wrap it in a ViewHolder.
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final RecordViewHolder viewHolder, int i) {
+            Record record = presenter.getRecordAt(i);
+
+            // TODO: Need a way to get image from records
+            viewHolder.setTimestampText(record.getTimeStamp());
+            viewHolder.setTitleText(record.getTitle());
+            viewHolder.setCommentText(record.getComment());
+
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(
+                        EditProblemActivity.this,
+                        EditRecordActivity.class
+                    );
+                    intent.putExtra("recordId", 1); // Test ID
+                    // TODO: Need a way to get the problem's ID to add to the intent
+                    startActivity(intent);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return presenter.getRecordCount();
+        }
+    }
+
+    private class RecordViewHolder extends RecyclerView.ViewHolder implements RecordRowView {
+
+        private CardView cardView;
+        private ImageView imageView;
+        private TextView timestampView;
+        private TextView titleView;
+        private TextView commentView;
+
+        private RecordViewHolder(CardView card) {
+            super(card);
+            cardView = card;
+            imageView = card.findViewById(R.id.record_card_image);
+            timestampView = card.findViewById(R.id.record_card_timestamp);
+            titleView = card.findViewById(R.id.record_card_title);
+            commentView = card.findViewById(R.id.record_card_description);
+        }
+
+        @Override
+        public void onStart() {
+            // Do nothing.
+        }
+
+        @Override
+        public void setPreviewImage(Bitmap bmp) {
+            imageView.setImageBitmap(bmp);
+        }
+
+        @Override
+        public void setTimestampText(String timestamp) {
+            timestampView.setText(timestamp);
+        }
+
+        @Override
+        public void setTitleText(String title) {
+            titleView.setText(title);
+        }
+
+        @Override
+        public void setCommentText(String comment) {
+            commentView.setText(comment);
+        }
     }
 }

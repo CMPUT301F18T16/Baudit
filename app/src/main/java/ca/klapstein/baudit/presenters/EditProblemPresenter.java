@@ -3,6 +3,8 @@ package ca.klapstein.baudit.presenters;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.views.EditProblemView;
 
 /**
@@ -12,6 +14,8 @@ import ca.klapstein.baudit.views.EditProblemView;
  * @see EditProblemView
  */
 public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
+
+    RecordTreeSet recordTreeSet;
 
     public EditProblemPresenter(EditProblemView view) {
         super(view);
@@ -34,7 +38,7 @@ public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
             view.updateDateButton("November 12, 2018");
             view.updateTimeButton("21:42");
             view.updateDescriptionField("Test");
-
+//            recordTreeSet = dataManager.getRecords();
         }
     }
 
@@ -48,7 +52,11 @@ public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
         view.showTimePicker(Calendar.getInstance());
     }
 
+    public Record getRecordAt(int position) {
+        return new Record("TODO", "Implement actual records.");
+    }
+
     public int getRecordCount() {
-        return 0;
+        return 1;
     }
 }

@@ -234,13 +234,10 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/problem_records_layout"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/edit_problem_records_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
