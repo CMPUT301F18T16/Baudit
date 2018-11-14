@@ -15,7 +15,7 @@ import ca.klapstein.baudit.views.EditProblemView;
  */
 public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
 
-    RecordTreeSet recordTreeSet;
+    private RecordTreeSet recordTreeSet;
 
     public EditProblemPresenter(EditProblemView view) {
         super(view);
