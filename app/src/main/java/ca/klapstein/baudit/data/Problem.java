@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+
 import java.util.Date;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
@@ -13,6 +14,8 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 public class Problem implements Comparable<Problem> {
     public static final int MAX_DESCRIPTION_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
+
+    public static final String ES_TYPE = "problem";
 
     private String title;
     private String description;
@@ -100,4 +103,11 @@ public class Problem implements Comparable<Problem> {
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
+
+    private String id;
+
+    public void setProblemID(String id) {
+        this.id = id;
+    }
+
 }
