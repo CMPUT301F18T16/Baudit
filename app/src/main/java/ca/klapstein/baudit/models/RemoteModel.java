@@ -47,7 +47,7 @@ public class RemoteModel {
         @Override
         protected PatientTreeSet doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
-            Log.d(TAG, "Elastic search parameters: " + Arrays.toString(search_parameters));
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             PatientTreeSet patientTreeSet = new PatientTreeSet();
             Search search = new Search.Builder(search_parameters[0])
                     .addIndex(PATIENT_INDEX)
@@ -62,7 +62,7 @@ public class RemoteModel {
                     patientTreeSet.addAll(patientList);
                 }
             } catch (Exception e) {
-                Log.e(TAG, "Something went wrong when we tried to communicate with the elasticsearch server!", e);
+                Log.e(TAG, "failed to get patients from remote", e);
             }
             return patientTreeSet;
         }
@@ -81,10 +81,10 @@ public class RemoteModel {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         assert patient.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added patient remoteID: " + patient.getUsername().getUsernameString());
+                        Log.d(TAG, "successfully added patient to remote: remoteID: " + patient.getUsername().getUsernameString());
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "The application failed to build and send the patient", e);
+                    Log.e(TAG, "failed to add patient to remote", e);
                 }
             }
             return null;
@@ -104,10 +104,10 @@ public class RemoteModel {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         assert careProvider.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added care provider remoteID: " + careProvider.getUsername().getUsernameString());
+                        Log.d(TAG, "successfully added care provider to remote: remoteID: " + careProvider.getUsername().getUsernameString());
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "The application failed to build and send the patient", e);
+                    Log.e(TAG, "failed to add the care provider to remote", e);
                 }
             }
             return null;
