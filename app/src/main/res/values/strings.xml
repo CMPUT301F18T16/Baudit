@@ -35,4 +35,9 @@
     <string name="edit_account">Edit account</string>
     <string name="test_username">test@foo.com</string>
     <string name="test_patient_name">Firstname Lastname</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>

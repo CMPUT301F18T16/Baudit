@@ -30,17 +30,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     }
 
     @Override
-    public void setEmail(String string) {
-
-    }
-
-    @Override
     public void setEmailError() {
-
-    }
-
-    @Override
-    public void setUsername(String string) {
 
     }
 

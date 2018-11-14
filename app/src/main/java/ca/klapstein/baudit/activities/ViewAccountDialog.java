@@ -41,14 +41,4 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
     public void setViewAccountError() {
 
     }
-
-    @Override
-    public void setUsername(String username) {
-
-    }
-
-    @Override
-    public void setEmail(String email) {
-
-    }
 }

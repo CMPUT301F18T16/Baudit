@@ -32,7 +32,11 @@
             android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc" />
 
         <activity android:name=".activities.CreateCareProviderAccountActivity"/>
-        <activity android:name=".activities.EditAccountActivity"/>
+
+        <activity
+            android:name=".activities.EditAccountActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar" />
+
         <activity android:name=".activities.CreatePatientAccountActivity"/>
         <activity android:name=".activities.LocationActivity"/>
         <activity

@@ -61,7 +61,6 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
             new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    menuItem.setChecked(true);
                     drawerLayout.closeDrawers();
 
                     switch (menuItem.getItemId()) {
