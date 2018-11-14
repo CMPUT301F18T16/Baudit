@@ -11,7 +11,7 @@ import java.util.Calendar;
 import ca.klapstein.baudit.activities.EditProblemActivity;
 
 public class TimePickerDialogFragment extends DialogFragment {
-    
+
     private static final String HOUR = "hour";
     private static final String MINUTES = "minutes";
 
