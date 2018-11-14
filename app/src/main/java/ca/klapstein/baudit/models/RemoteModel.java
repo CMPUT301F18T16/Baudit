@@ -86,8 +86,8 @@ public class RemoteModel {
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        patient.setESID(result.getId());
-                        Log.d(TAG, "successfully added patient remoteID: " + patient.getESID());
+                        assert patient.getUsername().getUsernameString().equals(result.getId());
+                        Log.d(TAG, "successfully added patient remoteID: " + patient.getUsername().getUsernameString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "The application failed to build and send the patient", e);
@@ -109,8 +109,8 @@ public class RemoteModel {
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        careProvider.setESID(result.getId());
-                        Log.d(TAG, "successfully added care provider remoteID: " + careProvider.getESID());
+                        assert careProvider.getUsername().getUsernameString().equals(result.getId());
+                        Log.d(TAG, "successfully added care provider remoteID: " + careProvider.getUsername().getUsernameString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "The application failed to build and send the patient", e);

@@ -1,6 +1,10 @@
 package ca.klapstein.baudit.models;
 
+import android.content.Context;
+import android.util.Log;
 import ca.klapstein.baudit.data.*;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Helper class that interacts with the {@code DatabaseModel} (local) and {@code RemoteModel} (remote)
@@ -11,12 +15,15 @@ import ca.klapstein.baudit.data.*;
  */
 public class DataModel {
 
-//    private RemoteModel remoteModel;
+    private static final String TAG = "DataModel";
+    private final Context context;
+    //    private RemoteModel remoteModel;
     private DatabaseModel databaseModel;
 
-    public DataModel() {
+    public DataModel(Context context) {
 //        remoteModel = new RemoteModel();
         databaseModel = new DatabaseModel();
+        this.context = context;
     }
 
     public Account getUser(String username) {
@@ -40,10 +47,28 @@ public class DataModel {
     }
 
     public PatientTreeSet getPatients() {
-        return null;
+        PatientTreeSet patientTreeSet = new PatientTreeSet();
+        // get from the remote
+        try {
+            patientTreeSet.addAll(new RemoteModel.GetPatients().execute("").get());
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            Log.e(TAG, "failure getting patientTreeSet from remote", e);
+        }
+        // TODO: dedupe figure out newest
+        // TODO: get from local
+        patientTreeSet.addAll(PreferencesModel.loadSharedPreferencesPatientTreeSet(context));
+        return patientTreeSet;
     }
 
-    public boolean commitPatient(Patient patient) {
+    public boolean commitPatients(PatientTreeSet patientTreeSet) {
+        // add patients to the remote
+        new RemoteModel.AddPatientTask().execute(
+                patientTreeSet.toArray(new Patient[0])
+        );
+
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
         return true;
     }
 
