@@ -44,7 +44,7 @@ public class RemoteModel {
     }
 
     public boolean validateLogin(String username, String password) {
-        Log.d(TAG, "validating username: " + username);
+        Log.d(TAG, "Validating username: " + username);
         return "test".equals(username) && "foo".equals(password);
     }
 
@@ -64,7 +64,6 @@ public class RemoteModel {
                 if (result.isSucceeded()) {
                     List<Patient> patientList;
                     patientList = result.getSourceAsObjectList(Patient.class);
-                    Log.d(TAG, "obtained patients: " + patientList.toString() + " username: " + patientList.get(0).getUsername().getUsernameString());
                     patientTreeSet.addAll(patientList);
                 }
             } catch (Exception e) {
