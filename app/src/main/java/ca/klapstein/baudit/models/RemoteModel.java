@@ -75,7 +75,7 @@ public class RemoteModel {
     public static class AddProblemsTask extends AsyncTask<Problem, Void, Void> {
         @Override
         protected Void doInBackground(Problem... problems) {
-            verifySettings();
+            RemoteModel.verifySettings();
             Index index = new Index.Builder(problems[0])
                     .index(PROBLEM_INDEX)
                     .type(Problem.ES_TYPE)
@@ -89,6 +89,11 @@ public class RemoteModel {
                 Log.e(TAG, "The application failed to build and send the tweets", e);
             }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
         }
     }
 }
