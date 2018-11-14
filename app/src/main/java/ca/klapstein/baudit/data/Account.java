@@ -49,4 +49,16 @@ public abstract class Account {
     public void setPassword(@NonNull Password password) {
         this.password = password;
     }
+
+
+    private String id;
+
+    public String getESID() {
+        return id;
+    }
+
+    public void setESID(String id) {
+        this.id = id;
+    }
+
 }
