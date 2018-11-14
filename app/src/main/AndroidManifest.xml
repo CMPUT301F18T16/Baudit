@@ -50,7 +50,6 @@
             android:name=".activities.EditProblemActivity"
             android:theme="@style/BauditPatientTheme.NoActionBar" />
 
-        <activity android:name=".activities.AddProblemActivity"/>
         <activity android:name=".activities.AddRecordActivity"/>
         <activity android:name=".activities.EditRecordActivity"/>
         <activity android:name=".activities.PatientListActivity"/>
@@ -60,7 +59,6 @@
             android:name=".activities.PatientHomeActivity"
             android:theme="@style/BauditPatientTheme.NoActionBar" />
 
-        <activity android:name=".activities.RecordListActivity"/>
         <activity
                 android:name=".activities.SplashActivity"
                 android:theme="@style/SplashTheme">

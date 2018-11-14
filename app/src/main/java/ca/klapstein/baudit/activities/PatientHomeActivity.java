@@ -170,6 +170,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                         PatientHomeActivity.this,
                         EditProblemActivity.class
                     );
+                    intent.putExtra("problemId", 1); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent
                     startActivity(intent);
                 }
