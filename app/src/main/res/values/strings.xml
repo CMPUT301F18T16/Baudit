@@ -28,4 +28,7 @@
     <string name="save">Save</string>
     <string name="not_a_patient">Not a Patient?</string>
     <string name="not_a_car_provider">Not a Car Provider?</string>
+    <string name="patient_edit_problem_title_input" />
+    <string name="search_view_button" />
+    <string name="patient_create_problem_title_input" />
 </resources>
