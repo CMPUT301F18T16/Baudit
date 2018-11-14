@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,11 +22,9 @@ import ca.klapstein.baudit.views.EditAccountView;
 public class EditAccountActivity extends AppCompatActivity implements EditAccountView {
 
     private EditAccountPresenter presenter;
-    EditText nameInput;
-    EditText emailInput;
-    EditText phoneNumberInput;
-    Button cancelButton;
-    Button saveButton;
+    private EditText nameInput;
+    private EditText emailInput;
+    private EditText phoneNumberInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
         emailInput = findViewById(R.id.edit_account_email_input);
         phoneNumberInput = findViewById(R.id.edit_account_phone_number_input);
 
-        cancelButton = findViewById(R.id.edit_account_cancel_button);
+        Button cancelButton = findViewById(R.id.edit_account_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +49,7 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
             }
         });
 
-        saveButton = findViewById(R.id.edit_account_save_button);
+        Button saveButton = findViewById(R.id.edit_account_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
