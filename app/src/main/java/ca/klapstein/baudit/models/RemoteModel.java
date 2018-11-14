@@ -2,8 +2,9 @@ package ca.klapstein.baudit.models;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PatientTreeSet;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -20,21 +21,21 @@ import java.util.List;
  */
 public class RemoteModel {
     private static final String TAG = "RemoteModel";
-
     private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
-    private static final String REMOTE_PROD_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16/";
+    private static final String PATIENT_INDEX = "patient";
+    private static final String CARE_PROVIDER_INDEX = "careprovider";
 
-    private static final String PROBLEM_INDEX = "baudit-problems";
 
-    private static JestDroidClient client;
+    private static JestDroidClient verifyJestDroidConfig(DroidClientConfig config) {
+        JestClientFactory factory = new JestClientFactory();
+        factory.setDroidClientConfig(config);
+        return (JestDroidClient) factory.getObject();
+    }
 
-    private static void verifySettings() {
-        if (client == null) {
-            DroidClientConfig config = new DroidClientConfig.Builder(REMOTE_TEST_URL).build();
-            JestClientFactory factory = new JestClientFactory();
-            factory.setDroidClientConfig(config);
-            client = (JestDroidClient) factory.getObject();
-        }
+
+    private static JestDroidClient createBaseClient() {
+        DroidClientConfig config = new DroidClientConfig.Builder(REMOTE_TEST_URL).build();
+        return verifyJestDroidConfig(config);
     }
 
     public boolean uniqueID(String username) {
@@ -43,58 +44,79 @@ public class RemoteModel {
     }
 
     public boolean validateLogin(String username, String password) {
-        Log.d(username, password);
+        Log.d(TAG, "validating username: " + username);
         return "test".equals(username) && "foo".equals(password);
     }
 
-    public static class GetProblemsTask extends AsyncTask<String, Void, ProblemTreeSet> {
+    public static class GetPatients extends AsyncTask<String, Void, PatientTreeSet> {
         @Override
-        protected ProblemTreeSet doInBackground(String... search_parameters) {
-            verifySettings();
+        protected PatientTreeSet doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
             Log.d(TAG, "Elastic search parameters: " + Arrays.toString(search_parameters));
-            ProblemTreeSet problemTreeSet = new ProblemTreeSet();
-            Search search = new Search.Builder(Arrays.toString(search_parameters))
-                    .addIndex(PROBLEM_INDEX)
-                    .addType(Problem.ES_TYPE)
+            PatientTreeSet patientTreeSet = new PatientTreeSet();
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex(PATIENT_INDEX)
                     .build();
+            Log.d(TAG, "search json: " + search.toString());
             try {
                 JestResult result = client.execute(search);
+
                 if (result.isSucceeded()) {
-                    List<Problem> problemList;
-                    problemList = result.getSourceAsObjectList(Problem.class);
-                    Log.d(TAG, "obtained tweets: " + problemList.toString());
-                    problemTreeSet.addAll(problemList);
+                    List<Patient> patientList;
+                    patientList = result.getSourceAsObjectList(Patient.class);
+                    Log.d(TAG, "obtained patients: " + patientList.toString() + " username: " + patientList.get(0).getUsername().getUsernameString());
+                    patientTreeSet.addAll(patientList);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Something went wrong when we tried to communicate with the elasticsearch server!", e);
             }
-            return problemTreeSet;
+            return patientTreeSet;
         }
     }
 
-    public static class AddProblemsTask extends AsyncTask<Problem, Void, Void> {
+    public static class AddPatientTask extends AsyncTask<Patient, Void, Void> {
         @Override
-        protected Void doInBackground(Problem... problems) {
-            RemoteModel.verifySettings();
-            for (Problem problem : problems) {
-                Index index = new Index.Builder(problem)
-                        .index(Problem.ES_TYPE) // this sets the type...
+        protected Void doInBackground(Patient... patients) {
+            JestDroidClient client = createBaseClient();
+            for (Patient patient : patients) {
+                Index index = new Index.Builder(patient)
+                        .index(PATIENT_INDEX)
+                        .id(patient.getUsername().getUsernameString()) // this sets the id...
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        problem.setProblemID(result.getId());
+                        patient.setESID(result.getId());
+                        Log.d(TAG, "successfully added patient remoteID: " + patient.getESID());
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "The application failed to build and send the Problems", e);
+                    Log.e(TAG, "The application failed to build and send the patient", e);
                 }
             }
             return null;
         }
+    }
 
+    public static class AddCareProviderTask extends AsyncTask<CareProvider, Void, Void> {
         @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
+        protected Void doInBackground(CareProvider... careProviders) {
+            JestDroidClient client = createBaseClient();
+            for (CareProvider careProvider : careProviders) {
+                Index index = new Index.Builder(careProvider)
+                        .index(CARE_PROVIDER_INDEX)
+                        .id(careProvider.getUsername().getUsernameString()) // this sets the id...
+                        .build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        careProvider.setESID(result.getId());
+                        Log.d(TAG, "successfully added care provider remoteID: " + careProvider.getESID());
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "The application failed to build and send the patient", e);
+                }
+            }
+            return null;
         }
     }
 }
