@@ -10,8 +10,9 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  *
  * @see Problem
  */
-public class Record {
+public class Record implements Comparable<Record> {
     private static final String TAG = "Record";
+
     public static final int MAX_COMMENT_LENGTH = 300;
     public static final int MAX_TITLE_LENGTH = 30;
     private Date date;
@@ -61,7 +62,7 @@ public class Record {
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(String title) throws IllegalArgumentException {
@@ -72,7 +73,7 @@ public class Record {
     }
 
     public String getComment() {
-        return this.comment;
+        return comment;
     }
 
     public void setComment(String comment) throws IllegalArgumentException {
@@ -91,7 +92,7 @@ public class Record {
     }
 
     public ArrayList<String> getKeywords() {
-        return this.keywords;
+        return keywords;
     }
 
     public GeoLocation getGeoLocation() {
@@ -100,5 +101,19 @@ public class Record {
 
     public void setGeoLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
+    }
+
+
+    /**
+     * Used to compare two records for RecordTreeSet by time
+     *
+     * @param record {@code Record} the comment to validate
+     * @return {@code int} {@code 0} if both record time are the same  or
+     * {@code -int} if record is earlier in time
+     * {@code +int} if record is later in time
+     */
+    @Override
+    public int compareTo(Record record) {
+        return (int) (date.getTime() - record.getDate().getTime());
     }
 }
