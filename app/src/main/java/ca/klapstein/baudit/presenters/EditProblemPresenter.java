@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.views.EditProblemView;
 
 /**
@@ -14,8 +13,6 @@ import ca.klapstein.baudit.views.EditProblemView;
  * @see EditProblemView
  */
 public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
-
-    private RecordTreeSet recordTreeSet;
 
     public EditProblemPresenter(EditProblemView view) {
         super(view);
