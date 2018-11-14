@@ -22,6 +22,7 @@ import java.util.List;
 public class RemoteModel {
     private static final String TAG = "RemoteModel";
     private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
+    private static final String REMOTE_PROD_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16/";
     private static final String PATIENT_INDEX = "patient";
     private static final String CARE_PROVIDER_INDEX = "careprovider";
 
