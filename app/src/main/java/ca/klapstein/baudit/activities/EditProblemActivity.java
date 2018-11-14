@@ -3,6 +3,7 @@ package ca.klapstein.baudit.activities;
 import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -70,6 +71,17 @@ public class EditProblemActivity extends AppCompatActivity
         descriptionInput = findViewById(R.id.edit_problem_description_input);
 
         recordsLabel = findViewById(R.id.records_label);
+
+        Button addRecord = findViewById(R.id.edit_problem_add_record);
+        addRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(
+                    EditProblemActivity.this,
+                    EditRecordActivity.class
+                ));
+            }
+        });
     }
 
     @Override

@@ -223,6 +223,7 @@
                     android:textStyle="bold" />
 
                 <Button
+                    android:id="@+id/edit_problem_add_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
