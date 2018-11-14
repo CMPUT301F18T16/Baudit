@@ -47,4 +47,8 @@ public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
         // TODO: Get time from db and convert to calendar
         view.showTimePicker(Calendar.getInstance());
     }
+
+    public int getRecordCount() {
+        return 0;
+    }
 }

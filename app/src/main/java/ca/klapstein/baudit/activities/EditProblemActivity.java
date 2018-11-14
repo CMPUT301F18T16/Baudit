@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import ca.klapstein.baudit.R;
@@ -37,6 +38,7 @@ public class EditProblemActivity extends AppCompatActivity
     private Button dateButton;
     private Button timeButton;
     private EditText descriptionInput;
+    private TextView recordsLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class EditProblemActivity extends AppCompatActivity
         });
 
         descriptionInput = findViewById(R.id.edit_problem_description_input);
+
+        recordsLabel = findViewById(R.id.records_label);
     }
 
     @Override
@@ -79,6 +83,7 @@ public class EditProblemActivity extends AppCompatActivity
         }
 
         presenter.viewStarted(problemId);
+        updateRecordCountText();
     }
 
     @Override
@@ -134,5 +139,12 @@ public class EditProblemActivity extends AppCompatActivity
         calendar.set(Calendar.MINUTE, minute);
         String timeForButton = mTimeFormat.format(calendar.getTime());
         updateTimeButton(timeForButton);
+    }
+
+    private void updateRecordCountText() {
+        recordsLabel.setText(String.format(
+            getResources().getString(R.string.records_label),
+            presenter.getRecordCount()
+        ));
     }
 }

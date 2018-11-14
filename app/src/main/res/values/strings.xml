@@ -19,6 +19,7 @@
     <string name="problem_locations">Problem locations</string>
     <string name="title_label">Title:</string>
     <string name="date_label">Date:</string>
+    <string name="records_label">Records (%1$d):</string>
     <string name="description_label">Description:</string>
     <string name="notifications_label">Notifications:</string>
     <string name="hourly">Hourly</string>
@@ -29,4 +30,5 @@
     <string name="yearly">Yearly</string>
     <string name="new_problem">New problem</string>
     <string name="edit_problem">Edit problem</string>
+    <string name="add">Add</string>
 </resources>
