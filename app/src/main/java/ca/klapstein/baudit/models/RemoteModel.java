@@ -26,17 +26,11 @@ public class RemoteModel {
     private static final String PATIENT_INDEX = "patient";
     private static final String CARE_PROVIDER_INDEX = "careprovider";
 
-
-    private static JestDroidClient verifyJestDroidConfig(DroidClientConfig config) {
+    private static JestDroidClient createBaseClient() {
+        DroidClientConfig config = new DroidClientConfig.Builder(REMOTE_TEST_URL).build();
         JestClientFactory factory = new JestClientFactory();
         factory.setDroidClientConfig(config);
         return (JestDroidClient) factory.getObject();
-    }
-
-
-    private static JestDroidClient createBaseClient() {
-        DroidClientConfig config = new DroidClientConfig.Builder(REMOTE_TEST_URL).build();
-        return verifyJestDroidConfig(config);
     }
 
     public boolean uniqueID(String username) {
