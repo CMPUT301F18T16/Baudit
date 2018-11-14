@@ -8,6 +8,11 @@ import android.support.annotation.NonNull;
 public class Patient extends Account implements Comparable<Patient> {
 
     private ProblemTreeSet problemTreeSet;
+  
+    /**
+     * A {@code Patient} can only have one {@code BodyPhoto}.
+     */
+    private BodyPhoto bodyPhoto;
 
     public Patient(Username username, Password password, ContactInfo contactInfo){
         super(username, contactInfo, password);
@@ -19,12 +24,7 @@ public class Patient extends Account implements Comparable<Patient> {
         return this.getUsername().getUsernameString()
             .compareTo(patient.getUsername().getUsernameString());
     }
-  
-    /**
-     * A {@code Patient} can only have one {@code BodyPhoto}.
-     */
-    private BodyPhoto bodyPhoto;
-
+    
     /**
      * Get the list of {@code Problem}s owned by the {@code Patient}.
      *
