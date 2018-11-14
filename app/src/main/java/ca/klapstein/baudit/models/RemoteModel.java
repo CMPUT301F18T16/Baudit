@@ -76,17 +76,18 @@ public class RemoteModel {
         @Override
         protected Void doInBackground(Problem... problems) {
             RemoteModel.verifySettings();
-            Index index = new Index.Builder(problems[0])
-                    .index(PROBLEM_INDEX)
-                    .type(Problem.ES_TYPE)
-                    .build();
-            try {
-                DocumentResult result = client.execute(index);
-                if (result.isSucceeded()) {
-                    problems[0].setProblemID(result.getId());
+            for (Problem problem : problems) {
+                Index index = new Index.Builder(problem)
+                        .index(Problem.ES_TYPE) // this sets the type...
+                        .build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        problem.setProblemID(result.getId());
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "The application failed to build and send the Problems", e);
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "The application failed to build and send the tweets", e);
             }
             return null;
         }
