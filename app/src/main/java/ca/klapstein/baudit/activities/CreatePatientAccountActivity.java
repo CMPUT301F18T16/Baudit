@@ -26,17 +26,7 @@ public class CreatePatientAccountActivity extends AppCompatActivity implements C
     }
 
     @Override
-    public void setEmail(String string) {
-
-    }
-
-    @Override
     public void setEmailError() {
-
-    }
-
-    @Override
-    public void setUsername(String string) {
 
     }
 
