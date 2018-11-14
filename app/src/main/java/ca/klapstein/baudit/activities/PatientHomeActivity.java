@@ -63,7 +63,24 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     menuItem.setChecked(true);
                     drawerLayout.closeDrawers();
-                    return true;
+
+                    switch (menuItem.getItemId()) {
+                        case (R.id.nav_edit_account):
+                            startActivity(new Intent(
+                                PatientHomeActivity.this,
+                                EditAccountActivity.class
+                            ));
+                            return true;
+                        case (R.id.nav_logout):
+                            startActivity(new Intent(
+                                PatientHomeActivity.this,
+                                LoginPatientActivity.class
+                            ));
+                            finish();
+                            return true;
+                        default:
+                            return true;
+                    }
                 }
             });
 
@@ -79,11 +96,10 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
+                startActivity(new Intent(
                     PatientHomeActivity.this,
                     EditProblemActivity.class
-                );
-                startActivity(intent);
+                ));
             }
         });
     }
