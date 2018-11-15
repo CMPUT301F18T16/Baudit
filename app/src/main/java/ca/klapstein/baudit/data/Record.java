@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,10 +13,10 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
-    private static final String TAG = "Record";
 
-    public static final int MAX_COMMENT_LENGTH = 300;
-    public static final int MAX_TITLE_LENGTH = 30;
+    private static final int MAX_COMMENT_LENGTH = 300;
+    private static final int MAX_TITLE_LENGTH = 30;
+
     private Date date;
     private String title;
     private String comment;
@@ -23,29 +25,42 @@ public class Record implements Comparable<Record> {
     private ArrayList<String> keywords;
 
     public Record() {
-        this.date = new Date();
+        date = new Date();
         // TODO: populate these properly
         this.keywords = new ArrayList<>();
         this.bodyPhotoCoords = new ArrayList<>();
     }
 
+    public Record(String title) {
+        date = new Date();
+        this.title = title;
+    }
+
+    public Record(String title, String comment) {
+        date = new Date();
+        this.title = title;
+        this.comment = comment;
+    }
+
+    // TODO: This check might not be needed because the UI limits the title length
     /**
      * Check if a given string is a valid Record title.
      *
      * @param title {@code String} the title to validate
      * @return {@code boolean} {@code true} if the Record's title is valid, otherwise {@code false}
      */
-    static public boolean isValidRecordTitle(String title) {
+    static private boolean isValidRecordTitle(@NonNull String title) {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
+    // TODO: This check might not be needed because the UI limits comment length
     /**
      * Check if a given string is a valid Record comment.
      *
      * @param comment {@code String} the comment to validate
      * @return {@code boolean} {@code true} if the Record's comment is valid, otherwise {@code false}
      */
-    static public boolean isValidRecordComment(String comment) {
+    static private boolean isValidRecordComment(@NonNull String comment) {
         return comment.length() <= MAX_COMMENT_LENGTH;
     }
 

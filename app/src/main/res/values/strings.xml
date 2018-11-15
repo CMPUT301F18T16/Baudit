@@ -18,6 +18,20 @@
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
     <string name="problem_locations">Problem locations</string>
+    <string name="title_label">Title:</string>
+    <string name="date_label">Date:</string>
+    <string name="records_label">Records (%1$d):</string>
+    <string name="description_label">Description:</string>
+    <string name="notifications_label">Notifications:</string>
+    <string name="hourly">Hourly</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="biweekly">Biweekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+    <string name="new_problem">New problem</string>
+    <string name="edit_problem">Edit problem</string>
+    <string name="add">Add</string>
     <string name="edit_account">Edit account</string>
     <string name="test_username">test@foo.com</string>
     <string name="test_patient_name">Firstname Lastname</string>
@@ -26,4 +40,5 @@
     <string name="phone_number">Phone number</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="record_card_content_description">The most recent image of the problem record</string>
 </resources>
