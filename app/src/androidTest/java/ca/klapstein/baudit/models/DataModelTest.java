@@ -89,7 +89,7 @@ public class DataModelTest {
         Thread.sleep(10000);
         Patient patient3 = dataModel.getPatient(new Username("TESTPatient3"));
         assertNotNull(patient3);
-        assertEquals(new Username("TESTPatient1"), patient3.getUsername());
+        assertEquals(new Username("TESTPatient3"), patient3.getUsername());
     }
 
     @Test
