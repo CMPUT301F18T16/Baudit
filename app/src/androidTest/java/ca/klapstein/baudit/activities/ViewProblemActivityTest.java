@@ -40,7 +40,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
 
     @Test
     public void testNewRecord() {
-        solo.clickOnView(solo.getView(R.id.edit_problem_add_record));
+        solo.clickOnView(solo.getView(R.id.problem_add_record_button));
         solo.waitForActivity(EditRecordActivity.class);
         solo.assertCurrentActivity("Wrong Activity", EditRecordActivity.class);
     }
