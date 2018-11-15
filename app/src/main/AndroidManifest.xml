@@ -47,7 +47,7 @@
             android:theme="@style/BauditPatientTheme.NoActionBar"/>
 
         <activity
-            android:name=".activities.EditProblemActivity"
+            android:name=".activities.ViewProblemActivity"
             android:theme="@style/BauditPatientTheme.NoActionBar" />
 
         <activity android:name=".activities.AddRecordActivity"/>
