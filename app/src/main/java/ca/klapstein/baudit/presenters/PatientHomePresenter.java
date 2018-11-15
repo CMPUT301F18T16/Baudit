@@ -18,7 +18,9 @@ public class PatientHomePresenter extends Presenter<ProblemListView> {
     public PatientHomePresenter(ProblemListView view, Context context) {
         super(view, context);
         // TODO: get problems
-        problemTreeSet = dataManager.getProblems(null);
+//        problemTreeSet = dataManager.getProblems(null);
+        // TODO: mock for now
+        problemTreeSet = new ProblemTreeSet();
     }
 
 
