@@ -15,6 +15,7 @@ import io.searchbox.core.Search;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.
@@ -88,6 +89,33 @@ public class RemoteModel {
                 }
             }
             return null;
+        }
+    }
+
+    // TODO: rethink and clean
+    public static class GetCareProviders extends AsyncTask<String, Void, TreeSet<CareProvider>> {
+        @Override
+        protected TreeSet<CareProvider> doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            TreeSet<CareProvider> careProviderTreeSet = new TreeSet<>();
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex(CARE_PROVIDER_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+            try {
+                JestResult result = client.execute(search);
+
+                if (result.isSucceeded()) {
+                    List<CareProvider> careProviderList;
+                    careProviderList = result.getSourceAsObjectList(CareProvider.class);
+                    careProviderTreeSet.addAll(careProviderList);
+                }
+
+            } catch (Exception e) {
+                Log.e(TAG, "failed to get care providers from remote", e);
+            }
+            return careProviderTreeSet;
         }
     }
 
