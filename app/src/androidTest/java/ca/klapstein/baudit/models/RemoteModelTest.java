@@ -9,7 +9,9 @@ import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+// TODO: coverage is provided by DataModelTest but we should still develop unit tests for this
 public class RemoteModelTest {
 
     @Test
@@ -39,10 +41,9 @@ public class RemoteModelTest {
     }
 
     @Test
-    public void getCareProvider() throws ExecutionException, InterruptedException {
-        // TODO: implement
+    public void getCareProviderNull() throws ExecutionException, InterruptedException {
         CareProvider careProvider = new RemoteModel.GetCareProvider().execute("").get();
-        assertNotNull(careProvider);
+        assertNull(careProvider);
     }
 
     @Test
