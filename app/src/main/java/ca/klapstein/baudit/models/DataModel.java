@@ -3,7 +3,10 @@ package ca.klapstein.baudit.models;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import ca.klapstein.baudit.data.*;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.data.Username;
 
 import java.util.concurrent.ExecutionException;
 
@@ -23,13 +26,10 @@ public class DataModel {
         this.context = context;
     }
 
-    public ProblemTreeSet getProblems(Patient patient) {
-        return null;
-    }
-
     public boolean validateLogin(String username, String password) {
         // TODO: implement from RemoteModel
-        return true;
+        // TODO: implement offline login method? Cookie/token based
+        return RemoteModel.validateLogin(username, password);
     }
 
     public boolean uniqueID(String username) {

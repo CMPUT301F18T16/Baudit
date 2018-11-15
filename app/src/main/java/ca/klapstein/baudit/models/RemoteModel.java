@@ -39,7 +39,7 @@ public class RemoteModel {
         return true;
     }
 
-    public boolean validateLogin(String username, String password) {
+    public static boolean validateLogin(String username, String password) {
         Log.d(TAG, "Validating username: " + username);
         return "test".equals(username) && "foo".equals(password);
     }
