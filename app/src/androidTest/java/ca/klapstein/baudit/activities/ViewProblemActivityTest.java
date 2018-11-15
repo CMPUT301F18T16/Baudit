@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
+import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
         solo.assertCurrentActivity("Wrong Activity", ViewProblemActivity.class);
     }
 
-    @Test
+    @UiThreadTest
     public void testEditAndSaveTitle() {
         ((TextView)solo.getView(R.id.problem_title_view)).setText("Before");
         solo.clickOnView(solo.getView(R.id.problem_title_edit_button));
@@ -57,7 +58,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
         );
     }
 
-    @Test
+    @UiThreadTest
     public void testEditAndCancelTitle() {
         ((TextView)solo.getView(R.id.problem_title_view)).setText("Before");
         solo.clickOnView(solo.getView(R.id.problem_title_edit_button));
@@ -71,7 +72,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
         );
     }
 
-    @Test
+    @UiThreadTest
     public void testEditAndSaveDescription() {
         ((TextView)solo.getView(R.id.problem_description_view)).setText("Before");
         solo.clickOnView(solo.getView(R.id.problem_description_edit_button));
@@ -86,7 +87,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
         );
     }
 
-    @Test
+    @UiThreadTest
     public void testEditAndCancelDescription() {
         ((TextView)solo.getView(R.id.problem_description_view)).setText("Before");
         solo.clickOnView(solo.getView(R.id.problem_description_edit_button));
