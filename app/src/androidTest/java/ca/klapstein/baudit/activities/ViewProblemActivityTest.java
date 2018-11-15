@@ -14,12 +14,12 @@ import ca.klapstein.baudit.R;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivity> {
+public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivity> {
 
     private Solo solo;
 
-    public EditProblemActivityTest() {
-        super(EditProblemActivity.class);
+    public ViewProblemActivityTest() {
+        super(ViewProblemActivity.class);
     }
 
     @Before
@@ -35,7 +35,7 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
 
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", EditProblemActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewProblemActivity.class);
     }
 
     @Test
