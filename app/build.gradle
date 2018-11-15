@@ -13,7 +13,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
 
-        // Enabling multidex support.
+        // Enabling multidex support
         multiDexEnabled true
     }
     buildTypes {
@@ -63,7 +63,8 @@ dependencies {
 
     // Google Maps Services
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
-
+    
+    // Enabling multidex support
     implementation 'com.android.support:multidex:1.0.3'
 }
 
