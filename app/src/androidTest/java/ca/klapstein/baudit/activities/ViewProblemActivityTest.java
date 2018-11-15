@@ -33,11 +33,11 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
     @Before
     public void setUp() {
         super.launchActivity(new Intent());
-        titleView = getActivity().findViewById(R.id.problem_title_view);
-        titleInput = getActivity().findViewById(R.id.problem_title_edit_text);
-        descriptionView = getActivity().findViewById(R.id.problem_description_view);
-        descriptionInput = getActivity().findViewById(R.id.problem_description_edit_text);
         solo = new Solo(getInstrumentation(), getActivity());
+        titleView = (TextView) solo.getView(R.id.problem_title_view);
+        titleInput = (EditText) solo.getView(R.id.problem_title_edit_text);
+        descriptionView = (TextView) solo.getView(R.id.problem_description_view);
+        descriptionInput = (EditText) solo.getView(R.id.problem_description_edit_text);
     }
 
     @After
