@@ -1,7 +1,5 @@
 package ca.klapstein.baudit.data;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,9 +7,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 
 @RunWith(Parameterized.class)
@@ -27,21 +23,15 @@ public class CareProviderTest {
 
     public CareProviderTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
 
-        this.contactInfo = new ContactInfo();
-        contactInfo.setEmail(new Email(emailInput));
-        contactInfo.setPhoneNumber(new PhoneNumber(phoneInput));
+        this.contactInfo = new ContactInfo(new Email(emailInput), new PhoneNumber(phoneInput));
         this.username = new Username(usernameInput);
         this.password = new Password(passwordInput);
         this.careProvider = new CareProvider(this.username, this.password, this.contactInfo);
 
-        ContactInfo patient0ContactInfo = new ContactInfo();
-        patient0ContactInfo.setEmail(new Email("patient0@hotmail.com"));
-        patient0ContactInfo.setPhoneNumber(new PhoneNumber("123-456-7890"));
+        ContactInfo patient0ContactInfo = new ContactInfo(new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"));
         this.patient0 = new Patient(new Username("patient0"), new Password("password0"), patient0ContactInfo);
 
-        ContactInfo patient1ContactInfo = new ContactInfo();
-        patient1ContactInfo.setEmail(new Email("patient1@hotmail.com"));
-        patient1ContactInfo.setPhoneNumber(new PhoneNumber("012-345-5678"));
+        ContactInfo patient1ContactInfo = new ContactInfo(new Email("patient1@hotmail.com"), new PhoneNumber("012-345-5678"));
         this.patient1 = new Patient(new Username("patient0"), new Password("password0"), patient1ContactInfo);
 
         careProvider.getAssignedPatientTreeSet().add(patient0);
@@ -86,11 +76,7 @@ public class CareProviderTest {
 
     @Test
     public void testSetCareProviderContactInfo() {
-        ContactInfo newContactInfo = new ContactInfo();
-        PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
-        Email newEmail = new Email("newemail@example.com");
-        newContactInfo.setEmail(newEmail);
-        newContactInfo.setPhoneNumber(newPhoneNumber);
+        ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         careProvider.setContactInfo(newContactInfo);
         assertEquals(careProvider.getContactInfo(), newContactInfo);
     }

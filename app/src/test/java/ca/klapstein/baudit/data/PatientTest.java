@@ -1,13 +1,14 @@
 package ca.klapstein.baudit.data;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.junit.runner.RunWith;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
@@ -23,9 +24,7 @@ public class PatientTest {
                        String phoneInput) {
         Email email = new Email(emailInput);
         PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
-        this.contactInfo = new ContactInfo();
-        this.contactInfo.setEmail(email);
-        this.contactInfo.setPhoneNumber(phoneNumber);
+        this.contactInfo = new ContactInfo(email, phoneNumber);
         this.username = new Username(usernameInput);
         this.password = new Password(passwordInput);
         this.patient = new Patient(this.username, this.password, contactInfo);
@@ -62,11 +61,7 @@ public class PatientTest {
 
     @Test
     public void testSetPatientContactInfo() {
-        ContactInfo newContactInfo = new ContactInfo();
-        PhoneNumber newPhoneNumber = new PhoneNumber("123-456-7890");
-        Email newEmail = new Email("newemail@example.com");
-        newContactInfo.setEmail(newEmail);
-        newContactInfo.setPhoneNumber(newPhoneNumber);
+        ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         patient.setContactInfo(newContactInfo);
         assertEquals(patient.getContactInfo(), newContactInfo);
     }
