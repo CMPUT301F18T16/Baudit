@@ -15,14 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.TimePicker;
-
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
@@ -68,7 +61,7 @@ public class ViewProblemActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
 
-        presenter = new ViewProblemPresenter(this);
+        presenter = new ViewProblemPresenter(this, getApplicationContext());
 
         titleView = findViewById(R.id.problem_title_view);
         titleInput = findViewById(R.id.problem_title_edit_text);

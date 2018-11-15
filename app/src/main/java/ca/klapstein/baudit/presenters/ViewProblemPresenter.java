@@ -1,9 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-import java.text.DateFormat;
-import java.util.Calendar;
-
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
 
@@ -17,9 +14,10 @@ import java.util.Calendar;
  * @see ProblemView
  */
 public class ViewProblemPresenter extends Presenter<ProblemView> {
+    private static final String TAG = "ViewProblemPresenter";
 
-    public ViewProblemPresenter(ProblemView view) {
-        super(view);
+    public ViewProblemPresenter(ProblemView view, Context context) {
+        super(view, context);
     }
 
     public void viewStarted(int problemId) {
