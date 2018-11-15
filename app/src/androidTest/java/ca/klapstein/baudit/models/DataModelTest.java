@@ -7,9 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.NoSuchElementException;
-
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 // TODO: improve these tests they don't actually cover failure or edge cases well
 public class DataModelTest {
@@ -40,29 +38,93 @@ public class DataModelTest {
     }
 
     @Test
+    public void commitPatient() {
+        Patient patient3 = new Patient(
+                new Username("TESTPatient3"), new Password("foobar123"),
+                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+        );
+        dataModel.commitPatient(patient3);
+    }
+
+    @Test
+    public void commitPatientTreeSetNull() {
+        // commit an patientTreeSet this does nothing to the remote
+        PatientTreeSet patientTreeSet = new PatientTreeSet();
+        dataModel.commitPatientTreeSet(patientTreeSet);
+    }
+
+    @Test
+    public void commitPatientTreeSet() {
+        PatientTreeSet patientTreeSet = new PatientTreeSet();
+        Patient patient1 = new Patient(
+                new Username("TESTPatient1"), new Password("foobar123"),
+                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+        );
+        patientTreeSet.add(patient1);
+        Patient patient2 = new Patient(
+                new Username("TESTPatient2"), new Password("foobar123"),
+                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+        );
+        patientTreeSet.add(patient2);
+        dataModel.commitPatientTreeSet(patientTreeSet);
+    }
+
+    @Test
+    public void getPatientNull() {
+        Patient patient = dataModel.getPatient(new Username("NONSUCHPATIENT"));
+        assertNull(patient);
+    }
+
+    @Test
+    public void getPatient() throws InterruptedException {
+        this.commitPatientTreeSet();
+        // wait for remote elastic search cluster to settle
+        Thread.sleep(10000);
+        Patient patient1 = dataModel.getPatient(new Username("TESTPatient1"));
+        assertNotNull(patient1);
+        assertEquals(new Username("TESTPatient1"), patient1.getUsername());
+
+        this.commitPatient();
+        // wait for remote elastic search cluster to settle
+        Thread.sleep(10000);
+        Patient patient3 = dataModel.getPatient(new Username("TESTPatient3"));
+        assertNotNull(patient3);
+        assertEquals(new Username("TESTPatient1"), patient3.getUsername());
+    }
+
+    @Test
     public void getPatients() {
         PatientTreeSet patientTreeSet = dataModel.getPatients();
         assertNotNull(patientTreeSet);
     }
 
     @Test
-    public void commitPatients() {
-        // commit an patientTreeSet this does nothing to the remote
-        PatientTreeSet patientTreeSet = new PatientTreeSet();
-        dataModel.commitPatients(patientTreeSet);
-    }
-
-    @Test(expected = NoSuchElementException.class)
-    public void getCareProvider() {
-        dataModel.getCareProvider(new Username("NONSUCHCAREPROVIDER"));
+    public void getCareProviderNull() {
+        CareProvider careProvider = dataModel.getCareProvider(new Username("NONSUCHCAREPROVIDER"));
+        assertNull(careProvider);
     }
 
     @Test
     public void commitCareProvider() {
-        CareProvider careProvider = new CareProvider(
-                new Username("CareProvider"), new Password("foobar123"),
-                new ContactInfo(new Email("careprovider@example.com"), new PhoneNumber("123-456-7890"))
+        CareProvider careProvider1 = new CareProvider(
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
-        dataModel.commitCareProvider(careProvider);
+        dataModel.commitCareProvider(careProvider1);
+        CareProvider careProvider2 = new CareProvider(
+                new Username("TESTCareProvider2"), new Password("foobar123"),
+                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+        );
+        dataModel.commitCareProvider(careProvider2);
+    }
+
+    @Test
+    public void getCareProvider() throws InterruptedException {
+        this.commitCareProvider();
+        // wait for remote elastic search cluster to settle
+        Thread.sleep(10000);
+        CareProvider careProvider = dataModel.getCareProvider(new Username("TESTCareProvider1"));
+        assertNotNull(careProvider);
+        assertEquals(new Username("TESTCareProvider1"), careProvider.getUsername());
     }
 }

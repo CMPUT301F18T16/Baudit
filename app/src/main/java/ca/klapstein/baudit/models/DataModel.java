@@ -46,6 +46,33 @@ public class DataModel {
     }
 
     /**
+     * Get the {@code Patient} with the specified {@code Username}.
+     * <p>
+     * If no such {@code Patient} exists with the given {@code Username} return {@code null}.
+     *
+     * @param username {@code UserName} the username of the {@code Patient} to get
+     * @return {@code Patient}
+     */
+    @Nullable
+    public Patient getPatient(Username username) {
+        // check remote
+        try {
+            return new RemoteModel.GetPatient().execute(username.getUsernameString()).get();
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e(TAG, "failure getting Patient from remote", e);
+        }
+
+        // check local
+        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
+        for (Patient patient_i : patientTreeSet) {
+            if (patient_i.getUsername().equals(username)) {
+                return patient_i;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Get all the {@code Patient}s currently registered to Baudit.
      * <p>
      * TODO: this getter should be narrowed down in scope/reach
@@ -68,11 +95,33 @@ public class DataModel {
     }
 
     /**
+     * Commit the given {@code Patient} into both local and remote storage.
+     *
+     * @param patient {@code Patient}
+     */
+    public void commitPatient(Patient patient) {
+        // add patients to the remote
+        new RemoteModel.AddPatientTask().execute(
+                patient
+        );
+
+        // get the patientTreeSet from local and update it
+        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
+        if (patientTreeSet.contains(patient)) {
+            patientTreeSet.remove(patient);
+            patientTreeSet.add(patient);
+        }
+
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
+    }
+
+    /**
      * Commit the given {@code PatientTreeSet} into both local and remote storage.
      *
      * @param patientTreeSet {@code PatientTreeSet}
      */
-    public void commitPatients(PatientTreeSet patientTreeSet) {
+    public void commitPatientTreeSet(PatientTreeSet patientTreeSet) {
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patientTreeSet.toArray(new Patient[0])
@@ -92,18 +141,15 @@ public class DataModel {
      */
     @Nullable
     public CareProvider getCareProvider(Username username) {
-        CareProvider careProvider = null;
-        // TODO: attempt to get the care provider from the remote
+        // check remote
         try {
-            careProvider = new RemoteModel.GetCareProviders().execute(username.getUsernameString()).get().first();
+            return new RemoteModel.GetCareProvider().execute(username.getUsernameString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting CareProvider from remote", e);
         }
-        if (careProvider == null) {
-            careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
-        }
 
-        return careProvider;
+        // check local
+        return PreferencesModel.loadSharedPreferencesCareProvider(context);
     }
 
     /**

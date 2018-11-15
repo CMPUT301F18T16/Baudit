@@ -13,9 +13,9 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.
@@ -49,6 +49,49 @@ public class RemoteModel {
     public static boolean validateLogin(String username, String password) {
         Log.d(TAG, "Validating username: " + username);
         return "test".equals(username) && "foo".equals(password);
+    }
+
+    public static class GetPatient extends AsyncTask<String, Void, Patient> {
+        @Override
+        protected Patient doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            ArrayList<Patient> patientArrayList = new ArrayList<>();
+            String query =
+                    "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"ids\" : {\n" +
+                            "            \"type\" : \"patient\",\n" +
+                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                            "         }\n" +
+                            "     }\n" +
+                            "}";
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
+                    .addIndex(PATIENT_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+            try {
+                JestResult result = client.execute(search);
+
+                if (result.isSucceeded()) {
+                    List<Patient> patientList;
+                    patientList = result.getSourceAsObjectList(Patient.class);
+                    patientArrayList.addAll(patientList);
+                }
+
+            } catch (Exception e) {
+                Log.e(TAG, "failed to get care providers from remote", e);
+            }
+            if (patientArrayList.size() > 1) {
+                Log.w(TAG, "more than one patients found via query using the first result");
+            } else if (patientArrayList.size() == 0) {
+                Log.w(TAG, "no matching patients found via query");
+                return null;
+            }
+            return patientArrayList.get(0);
+        }
     }
 
     public static class GetPatients extends AsyncTask<String, Void, PatientTreeSet> {
@@ -99,14 +142,26 @@ public class RemoteModel {
         }
     }
 
+
     // TODO: rethink and clean
-    public static class GetCareProviders extends AsyncTask<String, Void, TreeSet<CareProvider>> {
+    public static class GetCareProvider extends AsyncTask<String, Void, CareProvider> {
         @Override
-        protected TreeSet<CareProvider> doInBackground(String... search_parameters) {
+        protected CareProvider doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
-            TreeSet<CareProvider> careProviderTreeSet = new TreeSet<>();
-            Search search = new Search.Builder(search_parameters[0])
+            ArrayList<CareProvider> careProviderArrayList = new ArrayList<>();
+            String query =
+                    "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"ids\" : {\n" +
+                            "            \"type\" : \"careprovider\",\n" +
+                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                            "         }\n" +
+                            "     }\n" +
+                            "}";
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
                     .addIndex(CARE_PROVIDER_INDEX)
                     .build();
             Log.d(TAG, "search json: " + search.toString());
@@ -116,13 +171,19 @@ public class RemoteModel {
                 if (result.isSucceeded()) {
                     List<CareProvider> careProviderList;
                     careProviderList = result.getSourceAsObjectList(CareProvider.class);
-                    careProviderTreeSet.addAll(careProviderList);
+                    careProviderArrayList.addAll(careProviderList);
                 }
 
             } catch (Exception e) {
                 Log.e(TAG, "failed to get care providers from remote", e);
             }
-            return careProviderTreeSet;
+            if (careProviderArrayList.size() > 1) {
+                Log.w(TAG, "more than one care provider found via query using the first result");
+            } else if (careProviderArrayList.size() == 0) {
+                Log.w(TAG, "no matching care providers found via query");
+                return null;
+            }
+            return careProviderArrayList.get(0);
         }
     }
 

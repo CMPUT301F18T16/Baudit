@@ -41,7 +41,7 @@ public class RemoteModelTest {
     @Test
     public void getCareProvider() throws ExecutionException, InterruptedException {
         // TODO: implement
-        TreeSet<CareProvider> careProvider = new RemoteModel.GetCareProviders().execute("").get();
+        CareProvider careProvider = new RemoteModel.GetCareProvider().execute("").get();
         assertNotNull(careProvider);
     }
 
@@ -51,7 +51,5 @@ public class RemoteModelTest {
         new RemoteModel.AddCareProviderTask().execute(
                 new TreeSet<CareProvider>().toArray(new CareProvider[0])
         );
-
-        // TODO: actually add a test CareProvider to the test remote?
     }
 }
