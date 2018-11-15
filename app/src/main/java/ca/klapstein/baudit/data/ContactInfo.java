@@ -12,7 +12,7 @@ import android.support.annotation.NonNull;
 public class ContactInfo {
     private static final String TAG = "ContactInfo";
 
-    public ContactInfo(Email email, PhoneNumber phoneNumber) {
+    public ContactInfo(@NonNull Email email, @NonNull PhoneNumber phoneNumber) {
         this.setEmail(email);
         this.setPhoneNumber(phoneNumber);
     }
