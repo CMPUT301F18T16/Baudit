@@ -1,18 +1,18 @@
 package ca.klapstein.baudit.presenters;
 
 import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.views.ProblemView;
+import ca.klapstein.baudit.views.EditProblemView;
 
 import java.util.Date;
 
 /**
  * Abstract MVP presenter for presenting {@code Problem}s.
  *
- * @param <V> the {@code ProblemView} subclass to apply to the presenter.
+ * @param <V> the {@code EditProblemView} subclass to apply to the presenter.
  * @see Problem
- * @see ProblemView
+ * @see EditProblemView
  */
-abstract public class ProblemPresenter<V extends ProblemView> extends Presenter<V> {
+abstract public class ProblemPresenter<V extends EditProblemView> extends Presenter<V> {
     private static final String TAG = "ProblemPresenter";
 
     protected Problem problem;

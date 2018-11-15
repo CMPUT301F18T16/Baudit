@@ -11,13 +11,14 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Patient
  */
 public class Problem implements Comparable<Problem> {
-    public static final int MAX_DESCRIPTION_LENGTH = 300;
-    public static final int MAX_TITLE_LENGTH = 30;
+
+    private static final int MAX_DESCRIPTION_LENGTH = 300;
+    private static final int MAX_TITLE_LENGTH = 30;
 
     private String title;
     private String description;
-    private RecordTreeSet recordTreeSet;
     private Date date;
+    private RecordTreeSet recordTreeSet;
 
     public Problem() {
         this.date = new Date();
@@ -29,7 +30,7 @@ public class Problem implements Comparable<Problem> {
      * @param description {@code String} the description to validate
      * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise {@code false}
      */
-    static public boolean isValidProblemDescription(String description) {
+    static public boolean isValidProblemDescription(@NonNull String description) {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
 
@@ -39,12 +40,8 @@ public class Problem implements Comparable<Problem> {
      * @param title {@code String} the title to validate
      * @return {@code boolean} {@code true} if the Problem's title is valid, otherwise {@code false}
      */
-    static public boolean isValidProblemTitle(String title) {
+    static public boolean isValidProblemTitle(@NonNull String title) {
         return title.length() <= MAX_TITLE_LENGTH;
-    }
-
-    public RecordTreeSet getRecordTreeSet() {
-        return recordTreeSet;
     }
 
     public Problem(@NonNull String title, String description) throws IllegalArgumentException{
@@ -53,18 +50,12 @@ public class Problem implements Comparable<Problem> {
         this.date = new Date();
     }
 
-    @Override
-    public int compareTo(@NonNull Problem problem) {
-        // NOTE: Remove this code once remote is working.
-        // Users are physically unable to add more than one problem per ms.
-        // However, when adding programmatically, there can be 2-3 added per ms.
-        // Thus, the ProblemTReeSet thinks they are the same object unless there is another check.
-        // Hence, this code.
-        if (getDate().compareTo(problem.getDate()) == 0) {
-            return getTitle().compareTo(problem.getTitle());
-        } else {
-            return getDate().compareTo(problem.getDate()); // Order by date
-        }
+    public RecordTreeSet getRecordTreeSet() {
+        return recordTreeSet;
+    }
+
+    public void setRecordTreeSet(RecordTreeSet recordTreeSet) {
+        this.recordTreeSet = recordTreeSet;
     }
 
     public String getDescription() {
@@ -99,5 +90,14 @@ public class Problem implements Comparable<Problem> {
 
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
+    }
+
+    @Override
+    public int compareTo(@NonNull Problem problem) {
+        if (getDate().compareTo(problem.getDate()) == 0) {
+            return getTitle().compareTo(problem.getTitle());
+        } else {
+            return getDate().compareTo(problem.getDate()); // Order by date
+        }
     }
 }
