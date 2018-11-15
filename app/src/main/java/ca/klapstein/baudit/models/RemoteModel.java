@@ -34,7 +34,14 @@ public class RemoteModel {
         return (JestDroidClient) factory.getObject();
     }
 
-    public boolean uniqueID(String username) {
+    /**
+     * Validate whether a given username {@code String} representation is not already
+     * taken within both remote.
+     *
+     * @param username {@code String}
+     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     */
+    static public boolean uniqueID(String username) {
         // TODO: implement uniqueness checking of a userid given a string
         return true;
     }

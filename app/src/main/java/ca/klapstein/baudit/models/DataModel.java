@@ -32,7 +32,15 @@ public class DataModel {
         return RemoteModel.validateLogin(username, password);
     }
 
-    public boolean uniqueID(String username) {
+    /**
+     * Validate whether a given username {@code String} representation is not already
+     * taken within both the local and remote.
+     *
+     * @param username {@code String}
+     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     */
+    static public boolean uniqueID(String username) {
+        // TODO: validate from the local?
         // TODO: implement from RemoteModel
         return true;
     }
