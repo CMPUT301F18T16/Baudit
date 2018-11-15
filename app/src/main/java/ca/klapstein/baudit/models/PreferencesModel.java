@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  * @see android.content.SharedPreferences
  * @see android.preference.PreferenceManager
  */
-public class PreferencesModel {
+class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
 
     private static final String PATIENT_TREESET_PREF_NAME = "mPatientTreeSet";
