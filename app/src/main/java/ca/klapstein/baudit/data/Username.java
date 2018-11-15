@@ -19,6 +19,9 @@ public class Username {
     /**
      * Check that a {@code Account}'s username is valid.
      *
+     * TODO: we are going to have to move the uniqueID checking outside of this class else
+     * construction issues will occur in the full implementation
+     *
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
