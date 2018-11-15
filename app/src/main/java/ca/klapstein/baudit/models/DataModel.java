@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.models;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import ca.klapstein.baudit.data.*;
 
@@ -22,14 +23,6 @@ public class DataModel {
         this.context = context;
     }
 
-    public Account getUser(String username) {
-        return null;
-    }
-
-    public boolean commitUser(Account account) {
-        return true;
-    }
-
     public ProblemTreeSet getProblems(Patient patient) {
         return null;
     }
@@ -41,14 +34,6 @@ public class DataModel {
 
     public boolean uniqueID(String username) {
         // TODO: implement from RemoteModel
-        return true;
-    }
-
-    public boolean commitProblem(Problem problem) {
-        return true;
-    }
-
-    public boolean deleteProblem(Problem problem) {
         return true;
     }
 
@@ -78,15 +63,28 @@ public class DataModel {
         return true;
     }
 
-    public RecordTreeSet getRecords(Problem problem) {
-        return null;
+    @Nullable
+    public CareProvider getCareProvider(Username username) {
+        CareProvider careProvider = null;
+
+        // TODO: attempt to get the care provider from the remote
+        try {
+            careProvider = new RemoteModel.GetCareProviders().execute(username.getUsernameString()).get().first();
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e(TAG, "failure getting care provider from remote", e);
+        }
+        if (careProvider == null) {
+            careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
+        }
+
+        return careProvider;
     }
 
-    public boolean commitRecord(Record record) {
-        return true;
-    }
-
-    public boolean deleteRecord(Record record) {
+    public boolean commitCareProvider(CareProvider careProvider) {
+        // TODO: save to remote
+        new RemoteModel.AddCareProviderTask().execute(careProvider);
+        // save to local
+        PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
         return true;
     }
 }

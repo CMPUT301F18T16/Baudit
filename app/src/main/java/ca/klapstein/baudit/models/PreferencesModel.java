@@ -2,6 +2,8 @@ package ca.klapstein.baudit.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
+import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.PatientTreeSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,6 +25,8 @@ class PreferencesModel {
 
     private static final String PATIENT_TREESET_PREF_NAME = "mPatientTreeSet";
     private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
+    private static final String CAREPROVIDER_PREF_NAME = "mCareProvider";
+    private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
     /**
      * Save a {@code PatientTreeSet} using Android's SharedPreferences.
@@ -58,5 +62,30 @@ class PreferencesModel {
             patientTreeSet = gson.fromJson(json, type);
         }
         return patientTreeSet;
+    }
+
+    @Nullable
+    public static CareProvider loadSharedPreferencesCareProvider(Context context) {
+        CareProvider careProvider;
+        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(CAREPROVIDER_PREF_NAME, "");
+        if (json.isEmpty()) {
+            careProvider = null;
+        } else {
+            Type type = new TypeToken<CareProvider>() {
+            }.getType();
+            careProvider = gson.fromJson(json, type);
+        }
+        return careProvider;
+    }
+
+    static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
+        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(careProvider);
+        prefsEditor.putString(CAREPROVIDER_PREF_JSON_KEY, json);
+        prefsEditor.apply();
     }
 }
