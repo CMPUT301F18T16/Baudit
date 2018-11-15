@@ -7,22 +7,18 @@ import ca.klapstein.baudit.data.*;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Helper class that interacts with the {@code DatabaseModel} (local) and {@code RemoteModel} (remote)
+ * Helper class that interacts with the {@code PreferencesModel} (local) and {@code RemoteModel} (remote)
  * to keep MVP presenters blind to the fact data may be coming from either a remote or local source.
  *
- * @see DatabaseModel
  * @see RemoteModel
+ * @see PreferencesModel
  */
 public class DataModel {
 
     private static final String TAG = "DataModel";
     private final Context context;
-    //    private RemoteModel remoteModel;
-    private DatabaseModel databaseModel;
 
     public DataModel(Context context) {
-//        remoteModel = new RemoteModel();
-        databaseModel = new DatabaseModel();
         this.context = context;
     }
 
@@ -82,9 +78,5 @@ public class DataModel {
 
     public boolean deleteRecord(Record record) {
         return true;
-    }
-
-    public ProblemTreeSet getProblemTreeSet() {
-        return this.databaseModel.getTestProblemTreeSet();
     }
 }
