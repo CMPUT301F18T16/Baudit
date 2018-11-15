@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.views.EditAccountView;
 
@@ -13,9 +14,10 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
 
     protected Account account; // TODO: Perhaps this information should be pulled from remote
 
-    public EditAccountPresenter(EditAccountView view) {
-        super(view);
+    public EditAccountPresenter(EditAccountView view, Context context) {
+        super(view, context);
     }
+
 
     public void viewStarted() {
         // TODO: Get account details

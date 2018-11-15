@@ -21,7 +21,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_care_provider_account);
-        this.presenter = new CreateCareProviderAccountPresenter(this);
+        this.presenter = new CreateCareProviderAccountPresenter(this, getApplicationContext());
     }
 
     @Override

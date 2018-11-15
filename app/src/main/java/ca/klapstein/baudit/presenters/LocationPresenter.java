@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.views.LocationView;
 
@@ -13,9 +14,10 @@ public class LocationPresenter extends Presenter<LocationView> {
 
     public GeoLocation location;
 
-    public LocationPresenter(LocationView view) {
-        super(view);
+    public LocationPresenter(LocationView view, Context context) {
+        super(view, context);
     }
+
 
     public boolean validateLocation(long posx, long posy) {
         return true;
