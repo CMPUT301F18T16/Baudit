@@ -25,6 +25,7 @@ class PreferencesModel {
 
     private static final String PATIENT_TREESET_PREF_NAME = "mPatientTreeSet";
     private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
+
     private static final String CAREPROVIDER_PREF_NAME = "mCareProvider";
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
@@ -34,7 +35,7 @@ class PreferencesModel {
      * @param context        {@code Context}
      * @param patientTreeSet {@code PatientTreeSet}
      */
-    static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
+    public static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
         SharedPreferences mPrefs = context.getSharedPreferences(PATIENT_TREESET_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -49,7 +50,7 @@ class PreferencesModel {
      * @param context {@code Context}
      * @return {@code PatientTreeSet}
      */
-    static PatientTreeSet loadSharedPreferencesPatientTreeSet(Context context) {
+    public static PatientTreeSet loadSharedPreferencesPatientTreeSet(Context context) {
         PatientTreeSet patientTreeSet;
         SharedPreferences mPrefs = context.getSharedPreferences(PATIENT_TREESET_PREF_NAME, Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -64,6 +65,27 @@ class PreferencesModel {
         return patientTreeSet;
     }
 
+    /**
+     * Save a {@code CareProvider} using Android's SharedPreferences.
+     *
+     * @param context      {@code Context}
+     * @param careProvider {@code CareProvider}
+     */
+    public static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
+        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(careProvider);
+        prefsEditor.putString(CAREPROVIDER_PREF_JSON_KEY, json);
+        prefsEditor.apply();
+    }
+
+    /**
+     * Load the {@code CareProvider} using Android's SharedPreferences.
+     *
+     * @param context {@code Context}
+     * @return {@code CareProvider}
+     */
     @Nullable
     public static CareProvider loadSharedPreferencesCareProvider(Context context) {
         CareProvider careProvider;
@@ -78,14 +100,5 @@ class PreferencesModel {
             careProvider = gson.fromJson(json, type);
         }
         return careProvider;
-    }
-
-    static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
-        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(careProvider);
-        prefsEditor.putString(CAREPROVIDER_PREF_JSON_KEY, json);
-        prefsEditor.apply();
     }
 }
