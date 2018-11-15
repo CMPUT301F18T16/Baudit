@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.views.ProblemView;
 
@@ -17,9 +18,10 @@ abstract public class ProblemPresenter<V extends ProblemView> extends Presenter<
 
     protected Problem problem;
 
-    ProblemPresenter(V view) {
-        super(view);
+    public ProblemPresenter(V view, Context context) {
+        super(view, context);
     }
+
 
     public boolean validateProblem(String title, String description, Date startDate) {
         return true;

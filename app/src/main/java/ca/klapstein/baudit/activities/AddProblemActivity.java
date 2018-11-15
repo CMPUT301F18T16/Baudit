@@ -23,7 +23,7 @@ public class AddProblemActivity extends AppCompatActivity implements AddProblemV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_problem);
 
-        presenter = new AddProblemPresenter(this);
+        presenter = new AddProblemPresenter(this, getApplicationContext());
     }
 
     @Override

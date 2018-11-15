@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.views.PatientListView;
@@ -16,8 +17,8 @@ public class PatientListPresenter extends Presenter<PatientListView> {
 
     private PatientTreeSet patientTreeSet;
 
-    public PatientListPresenter(PatientListView view) {
-        super(view);
+    public PatientListPresenter(PatientListView view, Context context) {
+        super(view, context);
     }
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {

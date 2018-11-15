@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.views.SlideShowView;
 
 /**
@@ -10,7 +11,7 @@ import ca.klapstein.baudit.views.SlideShowView;
 public class SlideShowPresenter extends Presenter<SlideShowView> {
     private static final String TAG = "SlideShowPresenter";
 
-    public SlideShowPresenter(SlideShowView view) {
-        super(view);
+    public SlideShowPresenter(SlideShowView view, Context context) {
+        super(view, context);
     }
 }

@@ -24,7 +24,7 @@ public class EditProblemActivity extends AppCompatActivity implements EditProble
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_problem);
 
-        presenter = new EditProblemPresenter(this);
+        presenter = new EditProblemPresenter(this, getApplicationContext());
 
         // TODO:
         // int problemId = getIntent().getIntExtra("problemId", 0);

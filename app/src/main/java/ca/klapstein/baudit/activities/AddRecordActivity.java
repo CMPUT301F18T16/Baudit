@@ -24,7 +24,7 @@ public class AddRecordActivity extends AppCompatActivity implements AddRecordVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
 
-        presenter = new AddRecordPresenter(this);
+        presenter = new AddRecordPresenter(this, getApplicationContext());
     }
 
     @Override

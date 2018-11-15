@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.views.EditProblemView;
 
 /**
@@ -11,7 +12,7 @@ import ca.klapstein.baudit.views.EditProblemView;
 public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
     private static final String TAG = "EditProblemPresenter";
 
-    public EditProblemPresenter(EditProblemView view) {
-        super(view);
+    public EditProblemPresenter(EditProblemView view, Context context) {
+        super(view, context);
     }
 }

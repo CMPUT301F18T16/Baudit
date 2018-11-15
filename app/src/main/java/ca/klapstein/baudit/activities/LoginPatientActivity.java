@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
@@ -23,6 +22,7 @@ import ca.klapstein.baudit.views.LoginView;
  */
 public class LoginPatientActivity extends AppCompatActivity implements LoginView {
 
+    private static final String TAG = "LoginPatientActivity";
     private LoginPresenter presenter;
 
     private EditText usernameInput;
@@ -34,7 +34,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_patient);
 
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this, getApplicationContext());
 
         usernameInput = findViewById(R.id.enter_patient_username);
         passwordInput = findViewById(R.id.enter_patient_password);

@@ -32,7 +32,7 @@ public class RecordListActivity extends AppCompatActivity implements RecordListV
 
         // TODO: get recordTreeSet from local storage/remote
 
-        presenter = new RecordListPresenter(this);
+        presenter = new RecordListPresenter(this, getApplicationContext());
 
         recordRecyclerView = findViewById(R.id.record_list);
         adapter = new RecordListAdapter();

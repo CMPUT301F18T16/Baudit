@@ -24,7 +24,7 @@ public class EditRecordActivity extends AppCompatActivity implements EditRecordV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_record);
 
-        presenter = new EditRecordPresenter(this);
+        presenter = new EditRecordPresenter(this, getApplicationContext());
     }
 
     @Override

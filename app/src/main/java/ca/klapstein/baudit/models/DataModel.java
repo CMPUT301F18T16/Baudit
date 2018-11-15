@@ -34,6 +34,16 @@ public class DataModel {
         return null;
     }
 
+    public boolean validateLogin(String username, String password) {
+        // TODO: implement from RemoteModel
+        return true;
+    }
+
+    public boolean uniqueID(String username) {
+        // TODO: implement from RemoteModel
+        return true;
+    }
+
     public boolean commitProblem(Problem problem) {
         return true;
     }
