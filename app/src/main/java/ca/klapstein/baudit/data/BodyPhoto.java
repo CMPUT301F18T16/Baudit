@@ -29,11 +29,21 @@ public class BodyPhoto implements Photo {
         return true;
     }
 
+    /**
+     * Get the {@code Bitmap} of the {@code BodyPhoto}
+     *
+     * @return {@code Bitmap}
+     */
     @Override
     public Bitmap getBitmap() {
         return bitmap;
     }
 
+    /**
+     * Setter for a {@code BodyPhoto}'s {@code Bitmap}.
+     *
+     * @param bitmap {@code Bitmap}
+     */
     @Override
     public void setBitmap(Bitmap bitmap) throws IllegalArgumentException {
         if (!isValid(bitmap)) {

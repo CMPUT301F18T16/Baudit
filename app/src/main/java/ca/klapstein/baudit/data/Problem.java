@@ -50,6 +50,11 @@ public class Problem implements Comparable<Problem> {
         this.date = new Date();
     }
 
+    /**
+     * Get the {@code RecordTreeSet} of the {@code Problem}
+     *
+     * @return {@code RecordTreeSet}
+     */
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
@@ -58,10 +63,20 @@ public class Problem implements Comparable<Problem> {
         this.recordTreeSet = recordTreeSet;
     }
 
+    /**
+     * Get the {@code description} of the {@code Problem}
+     *
+     * @return {@code String}
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Setter for a {@code Problem}'s description.
+     *
+     * @param description {@code String}
+     */
     public void setDescription(String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
             throw new IllegalArgumentException("invalid problem description");
@@ -69,10 +84,20 @@ public class Problem implements Comparable<Problem> {
         this.description = description;
     }
 
+    /**
+     * Get the {@code title} of the {@code Problem}
+     *
+     * @return {@code String}
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Setter for a {@code Problem}'s title
+     *
+     * @param title {@code String}
+     */
     public void setTitle(String title) throws IllegalArgumentException {
         if (!isValidProblemTitle(title)) {
             throw new IllegalArgumentException("invalid problem title");
@@ -80,14 +105,29 @@ public class Problem implements Comparable<Problem> {
         this.title = title;
     }
 
+    /**
+     * Get the {@code Date} of the {@code Problem}
+     *
+     * @return {@code Date}
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Setter for a {@code Problem}'s {@code Date}.
+     *
+     * @param date {@code Date}
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Get the timestamp of the {@code Date} for the {@code Problem}
+     *
+     * @return {@code String}
+     */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }

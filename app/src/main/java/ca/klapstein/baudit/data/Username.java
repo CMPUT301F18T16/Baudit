@@ -28,11 +28,21 @@ public class Username {
         return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
     }
 
+    /**
+     * Get the username string
+     *
+     * @return {@code String}
+     */
     @NonNull
     public String getUsernameString() {
         return this.username;
     }
 
+    /**
+     * Setter for a {@code Username}'s username
+     *
+     * @param username {@code String}
+     */
     public void setUsernameString(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {
             throw new IllegalArgumentException("Invalid username");

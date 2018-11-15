@@ -28,6 +28,12 @@ public class BodyPhotoCoords {
         return posX >= 0 && posY >= 0;
     }
 
+    /**
+     * Setter for a {@code BodyPhotoCoords}'s {@code posX} and {@code poxY}.
+     *
+     * @param posX {@code posX}
+     * @param posY {@code posY}
+     */
     public void setCoords(int posX, int posY) throws IllegalArgumentException {
         if (!isValid(posX, posY)) {
             throw new IllegalArgumentException("Y coord < 0");

@@ -28,11 +28,21 @@ public class PhoneNumber {
         return m.matches();
     }
 
+    /**
+     * Get the {@code String} of the {@code PhoneNumber}
+     *
+     * @return {@code String}
+     */
     @NonNull
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
+    /**
+     * Setter for a phoneNumber
+     *
+     * @param phoneNumber {@code String}
+     */
     public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
         if (!isValid(phoneNumber)) {
             throw new IllegalArgumentException("invalid phone number");

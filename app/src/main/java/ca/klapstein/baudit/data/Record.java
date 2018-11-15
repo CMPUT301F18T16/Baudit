@@ -64,22 +64,47 @@ public class Record implements Comparable<Record> {
         return comment.length() <= MAX_COMMENT_LENGTH;
     }
 
+    /**
+     * Get the {@code Date} of the {@code Record}
+     *
+     * @return {@code Date}
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Setter for a {@code Record}'s {@code Date}.
+     *
+     * @param date {@code Date}
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Get the timestamp of the {@code Record}
+     *
+     * @return {@code String}
+     */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
 
+    /**
+     * Get the {@code title} of the {@code Record}
+     *
+     * @return {@code String}
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Setter for a {@code Records}'s title.
+     *
+     * @param title {@code String}
+     */
     public void setTitle(String title) throws IllegalArgumentException {
         if (!isValidRecordTitle(title)) {
             throw new IllegalArgumentException("invalid record title: too long");
@@ -87,10 +112,20 @@ public class Record implements Comparable<Record> {
         this.title = title;
     }
 
+    /**
+     * Get the {@code comment} of the {@code Record}
+     *
+     * @return {@code String}
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * Setter for a {@code Records}'s comment.
+     *
+     * @param comment {@code String}
+     */
     public void setComment(String comment) throws IllegalArgumentException {
         if (!isValidRecordComment(comment)) {
             throw new IllegalArgumentException("invalid record comment: too long");
@@ -98,22 +133,43 @@ public class Record implements Comparable<Record> {
         this.comment = comment;
     }
 
+    /**
+     * Add keywords from {@code keywords}
+     */
     public void addKeyword(String keyword) {
         this.keywords.add(keyword);
     }
 
+    /**
+     * Remove keywords from {@code keywords}
+     */
     public void removeKeyword(String keyword) {
         this.keywords.remove(keyword);
     }
 
+    /**
+     * Get the {@code keywords} of the {@code Record}
+     *
+     * @return {@code ArrayList<String>}
+     */
     public ArrayList<String> getKeywords() {
         return keywords;
     }
 
+    /**
+     * Get the {@code geoLocation} of the {@code Record}
+     *
+     * @return {@code GeoLocation}
+     */
     public GeoLocation getGeoLocation() {
         return geoLocation;
     }
 
+    /**
+     * Setter for a {@code Records}'s {@code GeoLocation}.
+     *
+     * @param geoLocation {@code GeoLocation}
+     */
     public void setGeoLocation(GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
     }

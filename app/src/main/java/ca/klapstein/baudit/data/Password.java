@@ -35,11 +35,21 @@ public class Password {
         return !(password.length() < 8 || password.length() > 20 || hasSpecialChar);
     }
 
+    /**
+     * Get the {@code String} of the {@code Password}
+     *
+     * @return {@code String}
+     */
     @NonNull
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Setter for a password
+     *
+     * @param password {@code String}
+     */
     public void setPassword(@NonNull String password) {
         if (isValid(password)) {
             this.password = password;

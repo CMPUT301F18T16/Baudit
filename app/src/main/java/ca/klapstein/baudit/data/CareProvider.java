@@ -17,6 +17,11 @@ public class CareProvider extends Account {
         this.assignedPatientTreeSet = new PatientTreeSet();
     }
 
+    /**
+     * Get the {@code PatientTreeSet} of the {@code CareProvider}
+     *
+     * @return {@code PatientTreeSet}
+     */
     public PatientTreeSet getAssignedPatientTreeSet(){
         return this.assignedPatientTreeSet;
     }
