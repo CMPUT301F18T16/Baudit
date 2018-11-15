@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ca.klapstein.baudit.R;
+
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
@@ -22,6 +24,7 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
 
     @Before
     public void setUp() {
+        super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -31,8 +34,14 @@ public class EditProblemActivityTest extends ActivityTestRule<EditProblemActivit
     }
 
     @Test
-    public void onCreate() {
-        super.launchActivity(new Intent());
+    public void testOnCreate() {
         solo.assertCurrentActivity("Wrong Activity", EditProblemActivity.class);
+    }
+
+    @Test
+    public void testNewRecord() {
+        solo.clickOnView(solo.getView(R.id.edit_problem_add_record));
+        solo.waitForActivity(EditRecordActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", EditRecordActivity.class);
     }
 }

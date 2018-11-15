@@ -7,6 +7,27 @@ import static org.junit.Assert.*;
 
 public class RecordTest {
 
+    @Test
+    public void testConstructor1() {
+        Record record = new Record();
+        assertNull(record.getTitle());
+        assertNull(record.getComment());
+    }
+
+    @Test
+    public void testConstructor2() {
+        Record record = new Record("title");
+        assertEquals("title", record.getTitle());
+        assertNull(record.getComment());
+    }
+
+    @Test
+    public void testConstructor3() {
+        Record record = new Record("title", "comment");
+        assertEquals("title", record.getTitle());
+        assertEquals("comment", record.getComment());
+    }
+
     /**
      * Test that records created at different times are not equal
      */
