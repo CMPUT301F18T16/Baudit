@@ -12,7 +12,6 @@
     <string name="log_in_as_care_provider">Log in as Care Provider</string>
     <string name="log_in_as_patient">Log in as Patient</string>
     <string name="login_failed">⚠ Login error: Invalid credentials</string>
-    <string name="problem_card_content_description">The most recent image of the problem area</string>
     <string name="problem_count">Problems (%1$d):</string>
     <string name="home">Home</string>
     <string name="patient_search_title">Search</string>
@@ -40,5 +39,5 @@
     <string name="phone_number">Phone number</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="record_card_content_description">The most recent image of the problem record</string>
+    <string name="edit">Edit</string>
 </resources>

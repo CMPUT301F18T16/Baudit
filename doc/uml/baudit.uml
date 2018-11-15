@@ -16,8 +16,8 @@
     <node x="10335.75" y="595.5">ca.klapstein.baudit.activities.PatientHomeActivity</node>
     <node x="6345.75" y="830.0">ca.klapstein.baudit.activities.AddRecordActivity</node>
     <node x="2729.0" y="1258.0">ca.klapstein.baudit.BuildConfig</node>
-    <node x="7712.75" y="896.0">ca.klapstein.baudit.activities.EditProblemActivity</node>
-    <node x="7725.75" y="651.0">ca.klapstein.baudit.views.EditProblemView</node>
+    <node x="7712.75" y="896.0">ca.klapstein.baudit.activities.ViewProblemActivity</node>
+    <node x="7725.75" y="651.0">ca.klapstein.baudit.views.ProblemView</node>
     <node x="10611.75" y="595.5">ca.klapstein.baudit.activities.PatientListActivity</node>
     <node x="5172.0" y="1258.0">ca.klapstein.baudit.data.RecordTreeSet</node>
     <node x="3185.0" y="617.0">ca.klapstein.baudit.presenters.LocationPresenter</node>
@@ -28,7 +28,7 @@
     <node x="6051.75" y="984.5">ca.klapstein.baudit.presenters.AddRecordPresenter</node>
     <node x="5625.0" y="628.0">ca.klapstein.baudit.presenters.DeleteRecordPresenter</node>
     <node x="5760.75" y="984.5">ca.klapstein.baudit.presenters.EditRecordPresenter</node>
-    <node x="7470.75" y="235.0">ca.klapstein.baudit.views.EditProblemView</node>
+    <node x="7470.75" y="235.0">ca.klapstein.baudit.views.ProblemView</node>
     <node x="8171.5" y="0.0">ca.klapstein.baudit.views.View</node>
     <node x="3294.0" y="1258.0">ca.klapstein.baudit.data.Password</node>
     <node x="5342.0" y="1258.0">ca.klapstein.baudit.data.PatientTreeSet</node>
@@ -69,7 +69,7 @@
     <node x="1450.0" y="973.0">ca.klapstein.baudit.presenters.CreateCareProviderAccountPresenter</node>
     <node x="3782.0" y="1258.0">ca.klapstein.baudit.data.BodyPhotoCoords</node>
     <node x="758.0" y="651.0">ca.klapstein.baudit.views.CreateCareProviderAccountView</node>
-    <node x="6842.75" y="984.5">ca.klapstein.baudit.presenters.EditProblemPresenter</node>
+    <node x="6842.75" y="984.5">ca.klapstein.baudit.presenters.ViewProblemPresenter</node>
     <node x="4995.0" y="1258.0">ca.klapstein.baudit.data.ProblemTreeSet</node>
     <node x="8999.75" y="279.5">ca.klapstein.baudit.views.BodyLocationView</node>
     <node x="5325.0" y="606.0">ca.klapstein.baudit.presenters.LogoutPresenter</node>
@@ -106,7 +106,7 @@
       <point x="6110.25" y="805.0" />
       <point x="67.75" y="59.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.views.EditProblemView" target="ca.klapstein.baudit.views.EditProblemView">
+    <edge source="ca.klapstein.baudit.views.ProblemView" target="ca.klapstein.baudit.views.ProblemView">
       <point x="0.0" y="-25.5" />
       <point x="7830.25" y="553.0" />
       <point x="7643.25" y="553.0" />
@@ -204,7 +204,7 @@
       <point x="0.0" y="-59.5" />
       <point x="0.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.views.EditProblemView" target="ca.klapstein.baudit.views.View">
+    <edge source="ca.klapstein.baudit.views.ProblemView" target="ca.klapstein.baudit.views.View">
       <point x="0.0" y="-81.0" />
       <point x="7574.25" y="139.0" />
       <point x="8202.525" y="139.0" />
@@ -250,7 +250,7 @@
       <point x="8220.775" y="109.0" />
       <point x="12.774999999999636" y="14.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.activities.EditProblemActivity" target="ca.klapstein.baudit.views.EditProblemView">
+    <edge source="ca.klapstein.baudit.activities.ViewProblemActivity" target="ca.klapstein.baudit.views.ProblemView">
       <point x="0.0" y="-125.5" />
       <point x="0.0" y="25.5" />
     </edge>
@@ -340,7 +340,7 @@
       <point x="4298.666666666667" y="553.0" />
       <point x="16.66666666666697" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.views.AddProblemView" target="ca.klapstein.baudit.views.EditProblemView">
+    <edge source="ca.klapstein.baudit.views.AddProblemView" target="ca.klapstein.baudit.views.ProblemView">
       <point x="0.0" y="-25.5" />
       <point x="0.0" y="81.0" />
     </edge>
@@ -352,7 +352,7 @@
       <point x="0.0" y="-136.5" />
       <point x="0.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.presenters.EditProblemPresenter" target="ca.klapstein.baudit.presenters.ProblemPresenter">
+    <edge source="ca.klapstein.baudit.presenters.ViewProblemPresenter" target="ca.klapstein.baudit.presenters.ProblemPresenter">
       <point x="0.0" y="-37.0" />
       <point x="6985.25" y="805.0" />
       <point x="7061.0" y="805.0" />
@@ -424,7 +424,7 @@
       <point x="0.0" y="-48.5" />
       <point x="0.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.presenters.ProblemPresenter" target="ca.klapstein.baudit.views.EditProblemView">
+    <edge source="ca.klapstein.baudit.presenters.ProblemPresenter" target="ca.klapstein.baudit.views.ProblemView">
       <point x="77.5" y="-59.5" />
       <point x="7216.0" y="553.0" />
       <point x="7505.25" y="553.0" />
