@@ -3,8 +3,6 @@ package ca.klapstein.baudit.models;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.TreeSet;
@@ -13,13 +11,6 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.assertNotNull;
 
 public class RemoteModelTest {
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void uniqueID() {
