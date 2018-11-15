@@ -37,6 +37,13 @@ public class DataModel {
         return true;
     }
 
+    /**
+     * Get all the {@code Patient}s currently registered to Baudit.
+     * <p>
+     * TODO: this getter should be narrowed down in scope/reach
+     *
+     * @return {@code PatientTreeSet}
+     */
     public PatientTreeSet getPatients() {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
         // get from the remote
@@ -52,7 +59,12 @@ public class DataModel {
         return patientTreeSet;
     }
 
-    public boolean commitPatients(PatientTreeSet patientTreeSet) {
+    /**
+     * Commit the given {@code PatientTreeSet} into both local and remote storage.
+     *
+     * @param patientTreeSet {@code PatientTreeSet}
+     */
+    public void commitPatients(PatientTreeSet patientTreeSet) {
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patientTreeSet.toArray(new Patient[0])
@@ -60,18 +72,24 @@ public class DataModel {
 
         // add the patients to the local
         PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
-        return true;
     }
 
+    /**
+     * Get the {@code CareProvider} with the specified {@code Username}.
+     *
+     * If no such {@code CareProvider} exists with the given {@code Username} return {@code null}.
+     *
+     * @param username {@code UserName} the username of the {@code CareProvider} to get
+     * @return {@code CareProvider}
+     */
     @Nullable
     public CareProvider getCareProvider(Username username) {
         CareProvider careProvider = null;
-
         // TODO: attempt to get the care provider from the remote
         try {
             careProvider = new RemoteModel.GetCareProviders().execute(username.getUsernameString()).get().first();
         } catch (ExecutionException | InterruptedException e) {
-            Log.e(TAG, "failure getting care provider from remote", e);
+            Log.e(TAG, "failure getting CareProvider from remote", e);
         }
         if (careProvider == null) {
             careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
@@ -80,11 +98,15 @@ public class DataModel {
         return careProvider;
     }
 
-    public boolean commitCareProvider(CareProvider careProvider) {
+    /**
+     * Commit the given {@code CareProvider} into both local and remote storage.
+     *
+     * @param careProvider {@code CareProvider}
+     */
+    public void commitCareProvider(CareProvider careProvider) {
         // TODO: save to remote
         new RemoteModel.AddCareProviderTask().execute(careProvider);
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
-        return true;
     }
 }
