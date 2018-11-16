@@ -16,7 +16,7 @@ public class AddPhotoActivity extends AppCompatActivity implements AddPhotoView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo);
 
-        presenter = new AddPhotoPresenter(this);
+        presenter = new AddPhotoPresenter(this, getApplicationContext());
     }
 
     @Override

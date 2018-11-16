@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import ca.klapstein.baudit.data.Photo;
 import ca.klapstein.baudit.views.PhotoView;
@@ -9,8 +10,8 @@ public class PhotoPresenter extends Presenter<PhotoView> {
 
     public Photo photo;
 
-    public PhotoPresenter(PhotoView view) {
-        super(view);
+    public PhotoPresenter(PhotoView view, Context context) {
+        super(view, context);
     }
 
     /**

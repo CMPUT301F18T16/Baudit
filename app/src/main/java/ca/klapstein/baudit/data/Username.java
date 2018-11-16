@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-import ca.klapstein.baudit.models.RemoteModel;
+import ca.klapstein.baudit.models.DataModel;
 
 /**
  * Data class representing a Baudit's {@code Account}'s username.
@@ -19,13 +19,15 @@ public class Username {
     /**
      * Check that a {@code Account}'s username is valid.
      *
+     * TODO: we are going to have to move the uniqueID checking outside of this class else
+     * construction issues will occur in the full implementation
+     *
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
     static public boolean isValid(String username) {
-        RemoteModel remoteManager = new RemoteModel();
         int len = username.length();
-        return len >= 8 && len <= 20 && remoteManager.uniqueID(username);
+        return len >= 8 && len <= 20 && DataModel.uniqueID(username);
     }
 
     /**

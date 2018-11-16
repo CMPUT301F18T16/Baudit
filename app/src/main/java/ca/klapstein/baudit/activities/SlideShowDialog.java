@@ -30,7 +30,7 @@ public class SlideShowDialog extends DialogFragment implements SlideShowView {
         builder.setView(view);
         // TODO: more implementation
 
-        presenter = new SlideShowPresenter(this);
+        presenter = new SlideShowPresenter(this, getContext());
 
         // Create the AlertDialog object and return it
         return builder.create();

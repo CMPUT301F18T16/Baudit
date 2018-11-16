@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.views.View;
 
@@ -15,9 +16,10 @@ abstract public class Presenter<V extends View> {
     protected V view;
     protected DataModel dataManager;
 
-    public Presenter(V view) {
+    public Presenter(V view, Context context) {
         this.view = view;
-        this.dataManager = new DataModel();
+        // TODO: pass context
+        this.dataManager = new DataModel(context);
     }
 //
 //    /**
