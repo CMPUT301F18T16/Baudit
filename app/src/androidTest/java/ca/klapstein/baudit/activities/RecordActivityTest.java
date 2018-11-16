@@ -28,6 +28,7 @@ public class RecordActivityTest extends ActivityTestRule<RecordActivity> {
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test

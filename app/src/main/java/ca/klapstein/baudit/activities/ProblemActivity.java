@@ -99,10 +99,9 @@ public class ProblemActivity extends AppCompatActivity
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(
-                    ProblemActivity.this,
-                    RecordActivity.class
-                ));
+                Intent intent = new Intent(ProblemActivity.this, RecordActivity.class);
+                intent.putExtra("recordId", 0);
+                startActivity(intent);
             }
         });
 

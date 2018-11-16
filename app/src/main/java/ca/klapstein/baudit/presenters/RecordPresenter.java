@@ -15,7 +15,13 @@ public class RecordPresenter extends Presenter<RecordView> {
     }
 
     public void viewStarted(int recordId) {
-
+        if (recordId == 0) { // If the record is new
+            view.updateTitleField("");
+        } else { // If the record exists and is being edited
+            // TODO: Replace with real data once implemented
+            view.updateTitleField("Test");
+            view.updateCommentField("Test");
+        }
     }
 
     public void saveTitleClicked(String newTitle) {
