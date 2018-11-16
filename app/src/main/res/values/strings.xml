@@ -40,4 +40,9 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="edit">Edit</string>
+    <string name="comment_label">Comment:</string>
+    <string name="location_label">Location:</string>
+    <string name="photos_label">Photos:</string>
+    <string name="body_location_label">Body location:</string>
+    <string name="keywords_label">Keywords:</string>
 </resources>

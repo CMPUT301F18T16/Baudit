@@ -1,26 +1,16 @@
 package ca.klapstein.baudit.presenters;
 
-import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.RecordView;
 
 /**
- * Abstract MVP presenter for presenting {@code Records}s.
+ * MVP presenter for presenting and controlling the editing of a {@code Record} via a {@code EditRecordView}.
  *
- * @param <V> the {@code RecordView} subclass to apply to the presenter.
- * @see Record
+ * @see ca.klapstein.baudit.data.Record
  * @see RecordView
  */
-abstract public class RecordPresenter<V extends RecordView> extends Presenter<V> {
-    private static final String TAG = "RecordPresenter";
+public class RecordPresenter extends Presenter<RecordView> {
 
-    protected Record record;
-
-    RecordPresenter(V view) {
+    public RecordPresenter(RecordView view) {
         super(view);
     }
-
-    public boolean validateRecord(String title, String comment) {
-        return true;
-    }
-
 }

@@ -97,7 +97,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
             public void onClick(View v) {
                 startActivity(new Intent(
                     PatientHomeActivity.this,
-                    ViewProblemActivity.class
+                    ProblemActivity.class
                 ));
             }
         });
@@ -168,7 +168,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                 public void onClick(View v) {
                     Intent intent = new Intent(
                         PatientHomeActivity.this,
-                        ViewProblemActivity.class
+                        ProblemActivity.class
                     );
                     intent.putExtra("problemId", 1); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent

@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-import ca.klapstein.baudit.activities.ViewProblemActivity;
+import ca.klapstein.baudit.activities.ProblemActivity;
 
 public class TimePickerDialogFragment extends DialogFragment {
 
@@ -30,7 +30,7 @@ public class TimePickerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new TimePickerDialog(
             getActivity(),
-            (ViewProblemActivity)getActivity(),
+            (ProblemActivity)getActivity(),
             getArguments().getInt(HOUR),
             getArguments().getInt(MINUTES),
             false

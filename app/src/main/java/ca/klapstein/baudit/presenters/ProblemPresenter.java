@@ -12,9 +12,9 @@ import ca.klapstein.baudit.views.ProblemView;
  * @see ca.klapstein.baudit.data.Problem
  * @see ProblemView
  */
-public class ViewProblemPresenter extends Presenter<ProblemView> {
+public class ProblemPresenter extends Presenter<ProblemView> {
 
-    public ViewProblemPresenter(ProblemView view) {
+    public ProblemPresenter(ProblemView view) {
         super(view);
     }
 

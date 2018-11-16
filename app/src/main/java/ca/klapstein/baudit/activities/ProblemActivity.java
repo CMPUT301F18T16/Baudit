@@ -27,7 +27,7 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
 import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
-import ca.klapstein.baudit.presenters.ViewProblemPresenter;
+import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 import ca.klapstein.baudit.views.RecordRowView;
 
@@ -41,11 +41,11 @@ import java.util.Calendar;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class ViewProblemActivity extends AppCompatActivity
+public class ProblemActivity extends AppCompatActivity
     implements ProblemView, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
-    private ViewProblemPresenter presenter;
+    private ProblemPresenter presenter;
     private RecordListAdapter adapter;
     private TextView titleView;
     private EditText titleInput;
@@ -68,7 +68,7 @@ public class ViewProblemActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
 
-        presenter = new ViewProblemPresenter(this);
+        presenter = new ProblemPresenter(this);
 
         titleView = findViewById(R.id.problem_title_view);
         titleInput = findViewById(R.id.problem_title_edit_text);
@@ -145,8 +145,8 @@ public class ViewProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(
-                    ViewProblemActivity.this,
-                    EditRecordActivity.class
+                    ProblemActivity.this,
+                    RecordActivity.class
                 ));
             }
         });
@@ -301,8 +301,8 @@ public class ViewProblemActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(
-                        ViewProblemActivity.this,
-                        EditRecordActivity.class
+                        ProblemActivity.this,
+                        RecordActivity.class
                     );
                     intent.putExtra("recordId", 1); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent

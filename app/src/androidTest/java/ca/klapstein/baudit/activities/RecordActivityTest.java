@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class EditRecordActivityTest extends ActivityTestRule<EditRecordActivity> {
+public class RecordActivityTest extends ActivityTestRule<RecordActivity> {
 
     private Solo solo;
 
-    public EditRecordActivityTest() {
-        super(ca.klapstein.baudit.activities.EditRecordActivity.class);
+    public RecordActivityTest() {
+        super(RecordActivity.class);
     }
 
     @Before
@@ -32,6 +32,6 @@ public class EditRecordActivityTest extends ActivityTestRule<EditRecordActivity>
 
     @Test
     public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", EditRecordActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RecordActivity.class);
     }
 }
