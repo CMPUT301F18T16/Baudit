@@ -30,7 +30,7 @@ public class BodyPhoto implements Photo {
     }
 
     /**
-     * Get the {@code Bitmap} of the {@code BodyPhoto}
+     * Get the {@code Bitmap} of the {@code BodyPhoto}.
      *
      * @return {@code Bitmap}
      */
