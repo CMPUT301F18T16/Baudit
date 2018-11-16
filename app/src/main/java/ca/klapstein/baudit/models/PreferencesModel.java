@@ -30,18 +30,30 @@ class PreferencesModel {
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
     /**
+     * Save a {@code Gson} compatible object into Android's Shared Preferences.
+     *
+     * @param context  {@code Context}
+     * @param object   {@code Object}
+     * @param prefName {@code String}
+     * @param JSONKey  {@code String}
+     */
+    private static void saveSharedPreferencesObject(Context context, Object object, String prefName, String JSONKey) {
+        SharedPreferences mPrefs = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        prefsEditor.putString(JSONKey, json);
+        prefsEditor.apply();
+    }
+
+    /**
      * Save a {@code PatientTreeSet} using Android's SharedPreferences.
      *
      * @param context        {@code Context}
      * @param patientTreeSet {@code PatientTreeSet}
      */
     public static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
-        SharedPreferences mPrefs = context.getSharedPreferences(PATIENT_TREESET_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(patientTreeSet);
-        prefsEditor.putString(PATIENT_TREESET_PREF_JSON_KEY, json);
-        prefsEditor.apply();
+        saveSharedPreferencesObject(context, patientTreeSet, PATIENT_TREESET_PREF_NAME, PATIENT_TREESET_PREF_JSON_KEY);
     }
 
     /**
@@ -72,12 +84,7 @@ class PreferencesModel {
      * @param careProvider {@code CareProvider}
      */
     public static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
-        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(careProvider);
-        prefsEditor.putString(CAREPROVIDER_PREF_JSON_KEY, json);
-        prefsEditor.apply();
+        saveSharedPreferencesObject(context, careProvider, CAREPROVIDER_PREF_NAME, CAREPROVIDER_PREF_JSON_KEY);
     }
 
     /**
