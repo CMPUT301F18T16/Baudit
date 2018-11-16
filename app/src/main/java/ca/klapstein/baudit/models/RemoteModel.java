@@ -18,12 +18,22 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Helper class for managing Baudit's remote (i.e. ElasticSearch) usage.
+ * Helper class for managing Baudit's remote storage/databasing solution.
+ * <p>
+ * Baudit uses a open ElasticSearch cluster located at:
+ * <p>
+ * http://cmput301.softwareprocess.es:8080
+ * <p>
+ * Note: all {@code Patient}s and {@code CareProviders} are uniquely identified by their username within
+ * the remote ElasticSearch.
  */
 public class RemoteModel {
     private static final String TAG = "RemoteModel";
     private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
+
+    // TODO: switch to PROD URL on release
     private static final String REMOTE_PROD_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16/";
+
     private static final String PATIENT_INDEX = "patient";
     private static final String CARE_PROVIDER_INDEX = "careprovider";
 
@@ -37,6 +47,8 @@ public class RemoteModel {
     /**
      * Validate whether a given username {@code String} representation is not already
      * taken within both remote.
+     * <p>
+     * TODO: implement
      *
      * @param username {@code String}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
@@ -46,11 +58,27 @@ public class RemoteModel {
         return true;
     }
 
+    /**
+     * Validate that a given username and password pair match to valid use within the remote ElasticSearch.
+     * <p>
+     * TODO: implement
+     *
+     * @param username {@code String}
+     * @param password {@code String}
+     * @return {@code boolean}
+     */
     public static boolean validateLogin(String username, String password) {
+        // TODO: implement
         Log.d(TAG, "Validating username: " + username);
         return "test".equals(username) && "foo".equals(password);
     }
 
+    /**
+     * Search the remote ElasticSearch for a {@code Patient} with the given username.
+     * <p>
+     * Return either {@code null} if no {@code Patient} was found with the given username.
+     * Or return an instance of the first found {@code Patient} with a matching username.
+     */
     public static class GetPatient extends AsyncTask<String, Void, Patient> {
         @Override
         protected Patient doInBackground(String... search_parameters) {
@@ -85,6 +113,8 @@ public class RemoteModel {
                 Log.e(TAG, "failed to get care providers from remote", e);
             }
             if (patientArrayList.size() > 1) {
+                // we shouldn't encounter this. But, someone could poison our elasticsearch
+                // writing a log of abnormal results is the least we can do
                 Log.w(TAG, "more than one patients found via query using the first result");
             } else if (patientArrayList.size() == 0) {
                 Log.w(TAG, "no matching patients found via query");
@@ -94,6 +124,10 @@ public class RemoteModel {
         }
     }
 
+    /**
+     * Get all {@code Patient}s contained within the remote ElasticSearch.
+     * Return them as a {@code PatientTreeSet}.
+     */
     public static class GetPatients extends AsyncTask<String, Void, PatientTreeSet> {
         @Override
         protected PatientTreeSet doInBackground(String... search_parameters) {
@@ -119,6 +153,9 @@ public class RemoteModel {
         }
     }
 
+    /**
+     * Add/update a single {@code Patient} within the remote ElasticSearch.
+     */
     public static class AddPatientTask extends AsyncTask<Patient, Void, Void> {
         @Override
         protected Void doInBackground(Patient... patients) {
@@ -142,8 +179,12 @@ public class RemoteModel {
         }
     }
 
-
-    // TODO: rethink and clean
+    /**
+     * Search the remote ElasticSearch for a {@code CareProvider} with the given username.
+     * <p>
+     * Return either {@code null} if no {@code CareProvider} was found with the given username.
+     * Or return an instance of the first found {@code CareProvider} with a matching username.
+     */
     public static class GetCareProvider extends AsyncTask<String, Void, CareProvider> {
         @Override
         protected CareProvider doInBackground(String... search_parameters) {
@@ -187,6 +228,9 @@ public class RemoteModel {
         }
     }
 
+    /**
+     * Add/update a single {@code CareProvider} within the remote ElasticSearch.
+     */
     public static class AddCareProviderTask extends AsyncTask<CareProvider, Void, Void> {
         @Override
         protected Void doInBackground(CareProvider... careProviders) {
