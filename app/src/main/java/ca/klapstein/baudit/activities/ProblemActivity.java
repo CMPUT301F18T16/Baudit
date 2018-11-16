@@ -71,7 +71,7 @@ public class ProblemActivity extends AppCompatActivity
 
         problemId = getIntent().getIntExtra("problemId", 0);
 
-        presenter = new ProblemPresenter(this);
+        presenter = new ProblemPresenter(this, getApplicationContext());
 
         initTitleViews();
 

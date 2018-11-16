@@ -45,7 +45,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         recordId = getIntent().getIntExtra("recordId", 0);
 
-        presenter = new RecordPresenter(this);
+        presenter = new RecordPresenter(this, getApplicationContext());
 
         initTitleViews();
         initCommentViews();
