@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.models.RemoteModel;
 import ca.klapstein.baudit.views.LogoutView;
 
 /**
@@ -15,12 +15,10 @@ import ca.klapstein.baudit.views.LogoutView;
 public class LogoutPresenter extends Presenter<LogoutView> {
     private static final String TAG = "LogoutPresenter";
 
-    private RemoteModel remoteManager;
     private Account account;
 
-    public LogoutPresenter(LogoutView view) {
-        super(view);
-        this.remoteManager = new RemoteModel();
+    public LogoutPresenter(LogoutView view, Context context) {
+        super(view, context);
     }
 
     /**

@@ -30,7 +30,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        presenter = new PatientListPresenter(this);
+        presenter = new PatientListPresenter(this, getApplicationContext());
 
         // TODO: get patientTreeSet from local storage/remote
 

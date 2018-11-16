@@ -34,7 +34,7 @@ public class BodyLocationDialog extends DialogFragment implements BodyLocationVi
         // TODO: more implementation
 
         // TODO: if no BodyPhoto is present prompt the account to provide one
-        presenter = new BodyLocationPresenter(this);
+        presenter = new BodyLocationPresenter(this, getContext());
 
         // Create the AlertDialog object and return it
         return builder.create();

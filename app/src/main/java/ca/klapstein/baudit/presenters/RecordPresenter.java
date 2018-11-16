@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.RecordView;
 
@@ -15,9 +16,10 @@ abstract public class RecordPresenter<V extends RecordView> extends Presenter<V>
 
     protected Record record;
 
-    RecordPresenter(V view) {
-        super(view);
+    public RecordPresenter(V view, Context context) {
+        super(view, context);
     }
+
 
     public boolean validateRecord(String title, String comment) {
         return true;

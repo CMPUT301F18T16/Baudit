@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditAccountPresenter;
 import ca.klapstein.baudit.views.EditAccountView;
@@ -35,7 +34,7 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
         getSupportActionBar().setTitle(R.string.edit_account);
 
-        presenter = new EditAccountPresenter(this);
+        presenter = new EditAccountPresenter(this, getApplicationContext());
 
         nameInput = findViewById(R.id.edit_account_name_input);
         emailInput = findViewById(R.id.edit_account_email_input);

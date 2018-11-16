@@ -19,7 +19,7 @@ public class ViewPhotoActivity extends AppCompatActivity implements PhotoView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
-        this.presenter = new PhotoPresenter(this);
+        this.presenter = new PhotoPresenter(this, getApplicationContext());
     }
 
     @Override

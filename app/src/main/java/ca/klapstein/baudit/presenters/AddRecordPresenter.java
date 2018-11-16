@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.views.AddRecordView;
 
 /**
@@ -11,7 +12,7 @@ import ca.klapstein.baudit.views.AddRecordView;
 public class AddRecordPresenter extends RecordPresenter<AddRecordView> {
     private static final String TAG = "AddRecordPresenter";
 
-    public AddRecordPresenter(AddRecordView view) {
-        super(view);
+    public AddRecordPresenter(AddRecordView view, Context context) {
+        super(view, context);
     }
 }
