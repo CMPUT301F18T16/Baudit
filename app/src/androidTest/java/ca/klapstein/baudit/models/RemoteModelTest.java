@@ -31,13 +31,11 @@ public class RemoteModelTest {
     }
 
     @Test
-    public void addPatients() {
+    public void addPatientsNull() {
         // adding a null list for an initial test (this does effectively nothing to the remote)
         new RemoteModel.AddPatientTask().execute(
                 new PatientTreeSet().toArray(new Patient[0])
         );
-
-        // TODO: actually add a test Patient to the test remote?
     }
 
     @Test
@@ -47,7 +45,7 @@ public class RemoteModelTest {
     }
 
     @Test
-    public void addCareProvider() {
+    public void addCareProviderNull() {
         // adding a null list for an initial test (this does effectively nothing to the remote)
         new RemoteModel.AddCareProviderTask().execute(
                 new TreeSet<CareProvider>().toArray(new CareProvider[0])
