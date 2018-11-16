@@ -18,7 +18,7 @@ public class CareProvider extends Account {
     }
 
     /**
-     * Get the {@code PatientTreeSet} of the {@code CareProvider}
+     * Get the {@code PatientTreeSet} of the {@code CareProvider}.
      *
      * @return {@code PatientTreeSet}
      */

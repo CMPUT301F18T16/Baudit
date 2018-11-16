@@ -29,7 +29,7 @@ public class Username {
     }
 
     /**
-     * Get the username string
+     * Get the {@code String} representation of the {@code Username}.
      *
      * @return {@code String}
      */
@@ -39,7 +39,7 @@ public class Username {
     }
 
     /**
-     * Setter for a {@code Username}'s username
+     * Setter for a {@code Username}'s username.
      *
      * @param username {@code String}
      */

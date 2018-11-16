@@ -51,7 +51,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Get the {@code RecordTreeSet} of the {@code Problem}
+     * Get the {@code RecordTreeSet} of the {@code Problem}.
      *
      * @return {@code RecordTreeSet}
      */
@@ -64,7 +64,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Get the {@code description} of the {@code Problem}
+     * Get the {@code description} of the {@code Problem}.
      *
      * @return {@code String}
      */
@@ -85,7 +85,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Get the {@code title} of the {@code Problem}
+     * Get the {@code title} of the {@code Problem}.
      *
      * @return {@code String}
      */
@@ -94,7 +94,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Setter for a {@code Problem}'s title
+     * Setter for a {@code Problem}'s title.
      *
      * @param title {@code String}
      */
@@ -106,7 +106,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Get the {@code Date} of the {@code Problem}
+     * Get the {@code Date} of the {@code Problem}.
      *
      * @return {@code Date}
      */
@@ -124,7 +124,7 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Get the timestamp of the {@code Date} for the {@code Problem}
+     * Get the timestamp of the {@code Date} for the {@code Problem}.
      *
      * @return {@code String}
      */

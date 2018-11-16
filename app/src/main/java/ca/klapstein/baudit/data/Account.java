@@ -24,7 +24,7 @@ public abstract class Account {
     private Password password;
 
     /**
-     * Get the {@code Username} of the {@code Account}
+     * Get the {@code Username} of the {@code Account}.
      *
      * @return {@code Username}
      */
@@ -43,7 +43,7 @@ public abstract class Account {
     }
 
     /**
-     * Get the {@code ContactInfo} of the {@code Account}
+     * Get the {@code ContactInfo} of the {@code Account}.
      *
      * @return {@code ContactInfo}
      */
@@ -62,7 +62,7 @@ public abstract class Account {
     }
 
     /**
-     * Get the {@code Password} of the {@code Account}
+     * Get the {@code Password} of the {@code Account}.
      *
      * @return {@code Password}
      */

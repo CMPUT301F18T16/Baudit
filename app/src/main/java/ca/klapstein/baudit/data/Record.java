@@ -65,7 +65,7 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Get the {@code Date} of the {@code Record}
+     * Get the {@code Date} of the {@code Record}.
      *
      * @return {@code Date}
      */
@@ -83,7 +83,7 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Get the timestamp of the {@code Record}
+     * Get the timestamp of the {@code Record}.
      *
      * @return {@code String}
      */
@@ -92,7 +92,7 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Get the {@code title} of the {@code Record}
+     * Get the {@code title} of the {@code Record}.
      *
      * @return {@code String}
      */
@@ -113,7 +113,7 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Get the {@code comment} of the {@code Record}
+     * Get the {@code comment} of the {@code Record}.
      *
      * @return {@code String}
      */
@@ -134,21 +134,21 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Add keywords from {@code keywords}
+     * Add keywords from {@code keywords}.
      */
     public void addKeyword(String keyword) {
         this.keywords.add(keyword);
     }
 
     /**
-     * Remove keywords from {@code keywords}
+     * Remove keywords from {@code keywords}.
      */
     public void removeKeyword(String keyword) {
         this.keywords.remove(keyword);
     }
 
     /**
-     * Get the {@code keywords} of the {@code Record}
+     * Get the {@code keywords} of the {@code Record}.
      *
      * @return {@code ArrayList<String>}
      */
@@ -157,7 +157,7 @@ public class Record implements Comparable<Record> {
     }
 
     /**
-     * Get the {@code geoLocation} of the {@code Record}
+     * Get the {@code geoLocation} of the {@code Record}.
      *
      * @return {@code GeoLocation}
      */
@@ -176,7 +176,7 @@ public class Record implements Comparable<Record> {
 
 
     /**
-     * Used to compare two records for RecordTreeSet by time
+     * Used to compare two records for RecordTreeSet by time.
      *
      * @param record {@code Record} the comment to validate
      * @return {@code int} {@code 0} if both record time are the same  or

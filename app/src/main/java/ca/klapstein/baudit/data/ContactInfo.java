@@ -18,7 +18,7 @@ public class ContactInfo {
     private PhoneNumber phone;
 
     /**
-     * Get the {@code PhoneNumber} of the {@code ContactInfo}
+     * Get the {@code PhoneNumber} of the {@code ContactInfo}.
      *
      * @return {@code PhoneNumber}
      */
@@ -36,7 +36,7 @@ public class ContactInfo {
     }
 
     /**
-     * Get the {@code Email} of the {@code ContactInfo}
+     * Get the {@code Email} of the {@code ContactInfo}.
      *
      * @return {@code Email}
      */

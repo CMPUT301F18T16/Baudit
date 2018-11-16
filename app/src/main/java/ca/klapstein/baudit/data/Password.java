@@ -36,7 +36,7 @@ public class Password {
     }
 
     /**
-     * Get the {@code String} of the {@code Password}
+     * Get the {@code String} representation of the {@code Password}.
      *
      * @return {@code String}
      */
@@ -46,7 +46,7 @@ public class Password {
     }
 
     /**
-     * Setter for a password
+     * Set the {@code String} representation of the {@code Password}.
      *
      * @param password {@code String}
      */

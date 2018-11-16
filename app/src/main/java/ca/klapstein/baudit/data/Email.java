@@ -40,7 +40,7 @@ public class Email {
     }
 
     /**
-     * Get the {@code String} of the {@code Email}
+     * Get the {@code String} representation of the {@code Email}.
      *
      * @return {@code String}
      */
@@ -50,7 +50,7 @@ public class Email {
     }
 
     /**
-     * Setter for a email
+     * Set the {@code String} representation of the {@code Email}.
      *
      * @param email {@code String}
      */

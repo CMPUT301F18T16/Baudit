@@ -29,7 +29,7 @@ public class PhoneNumber {
     }
 
     /**
-     * Get the {@code String} of the {@code PhoneNumber}
+     * Get the {@code String} representation of the {@code PhoneNumber}.
      *
      * @return {@code String}
      */
@@ -39,7 +39,7 @@ public class PhoneNumber {
     }
 
     /**
-     * Setter for a phoneNumber
+     * Set the {@code String} representation of the {@code PhoneNumber}.
      *
      * @param phoneNumber {@code String}
      */
