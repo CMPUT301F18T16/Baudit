@@ -13,4 +13,18 @@ public class RecordPresenter extends Presenter<RecordView> {
     public RecordPresenter(RecordView view) {
         super(view);
     }
+
+    public void viewStarted(int recordId) {
+
+    }
+
+    public void saveTitleClicked(String newTitle) {
+        // TODO: Commit change to database
+        view.updateTitleField(newTitle);
+    }
+
+    public void saveCommentClicked(String newComment) {
+        // TODO: Commit change to database
+        view.updateCommentField(newComment);
+    }
 }

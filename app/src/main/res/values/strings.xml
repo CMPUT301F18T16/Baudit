@@ -45,4 +45,6 @@
     <string name="photos_label">Photos:</string>
     <string name="body_location_label">Body location:</string>
     <string name="keywords_label">Keywords:</string>
+    <string name="new_record">New record</string>
+    <string name="edit_record">Edit record</string>
 </resources>
