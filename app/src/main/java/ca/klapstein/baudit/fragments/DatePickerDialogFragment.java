@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-import ca.klapstein.baudit.activities.ViewProblemActivity;
+import ca.klapstein.baudit.activities.ProblemActivity;
 
 public class DatePickerDialogFragment extends DialogFragment {
 
@@ -32,7 +32,7 @@ public class DatePickerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new DatePickerDialog(
             getActivity(),
-            (ViewProblemActivity)getActivity(),
+            (ProblemActivity)getActivity(),
             getArguments().getInt(YEAR),
             getArguments().getInt(MONTH),
             getArguments().getInt(DAY)

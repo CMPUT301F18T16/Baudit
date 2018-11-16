@@ -13,10 +13,9 @@ import java.util.Calendar;
  * @see ca.klapstein.baudit.data.Problem
  * @see ProblemView
  */
-public class ViewProblemPresenter extends Presenter<ProblemView> {
-    private static final String TAG = "ViewProblemPresenter";
+public class ProblemPresenter extends Presenter<ProblemView> {
 
-    public ViewProblemPresenter(ProblemView view, Context context) {
+    public ProblemPresenter(ProblemView view, Context context) {
         super(view, context);
     }
 
@@ -31,6 +30,8 @@ public class ViewProblemPresenter extends Presenter<ProblemView> {
             DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
             String timeForButton = timeFormat.format(calendar.getTime());
             view.updateTimeButton(timeForButton);
+
+            view.updateTitleField("");
         } else { // If the problem exists and is being edited
             // TODO: Replace with real data once implemented
             view.updateTitleField("Test");
@@ -61,9 +62,11 @@ public class ViewProblemPresenter extends Presenter<ProblemView> {
 
     public void saveTitleClicked(String newTitle) {
         // TODO: Save the new title
+        view.updateTitleField(newTitle);
     }
 
     public void saveDescriptionClicked(String newDescription) {
         // TODO: Save the new description
+        view.updateDescriptionField(newDescription);
     }
 }
