@@ -1,10 +1,11 @@
 package ca.klapstein.baudit.presenters;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-
+import android.content.Context;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -14,8 +15,8 @@ import ca.klapstein.baudit.views.ProblemView;
  */
 public class ProblemPresenter extends Presenter<ProblemView> {
 
-    public ProblemPresenter(ProblemView view) {
-        super(view);
+    public ProblemPresenter(ProblemView view, Context context) {
+        super(view, context);
     }
 
     public void viewStarted(int problemId) {

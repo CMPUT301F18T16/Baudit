@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.ProblemListView;
@@ -14,10 +15,14 @@ public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     private ProblemTreeSet problemTreeSet;
 
-    public PatientHomePresenter(ProblemListView view) {
-        super(view);
-        problemTreeSet = dataManager.getProblemTreeSet();
+    public PatientHomePresenter(ProblemListView view, Context context) {
+        super(view, context);
+        // TODO: get problems
+//        problemTreeSet = dataManager.getProblems(null);
+        // TODO: mock for now
+        problemTreeSet = new ProblemTreeSet();
     }
+
 
     public Problem getProblemAt(int position) {
         return (Problem) problemTreeSet.toArray()[position];

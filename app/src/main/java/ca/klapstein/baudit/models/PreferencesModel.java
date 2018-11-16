@@ -1,5 +1,15 @@
 package ca.klapstein.baudit.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.PatientTreeSet;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
 /**
  * Helper class for accessing the Android's SharedPreferences for use in Baudit.
  * <p>
@@ -10,6 +20,92 @@ package ca.klapstein.baudit.models;
  * @see android.content.SharedPreferences
  * @see android.preference.PreferenceManager
  */
-public class PreferencesModel {
+class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
+
+    private static final String PATIENT_TREESET_PREF_NAME = "mPatientTreeSet";
+    private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
+
+    private static final String CAREPROVIDER_PREF_NAME = "mCareProvider";
+    private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
+
+    /**
+     * Save a {@code Gson} compatible object into Android's Shared Preferences.
+     *
+     * @param context  {@code Context}
+     * @param object   {@code Object}
+     * @param prefName {@code String}
+     * @param JSONKey  {@code String}
+     */
+    private static void saveSharedPreferencesObject(Context context, Object object, String prefName, String JSONKey) {
+        SharedPreferences mPrefs = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        prefsEditor.putString(JSONKey, json);
+        prefsEditor.apply();
+    }
+
+    /**
+     * Save a {@code PatientTreeSet} using Android's SharedPreferences.
+     *
+     * @param context        {@code Context}
+     * @param patientTreeSet {@code PatientTreeSet}
+     */
+    public static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
+        saveSharedPreferencesObject(context, patientTreeSet, PATIENT_TREESET_PREF_NAME, PATIENT_TREESET_PREF_JSON_KEY);
+    }
+
+    /**
+     * Load the {@code PatientTreeSet} using Android's SharedPreferences.
+     *
+     * @param context {@code Context}
+     * @return {@code PatientTreeSet}
+     */
+    public static PatientTreeSet loadSharedPreferencesPatientTreeSet(Context context) {
+        PatientTreeSet patientTreeSet;
+        SharedPreferences mPrefs = context.getSharedPreferences(PATIENT_TREESET_PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(PATIENT_TREESET_PREF_NAME, "");
+        if (json.isEmpty()) {
+            patientTreeSet = new PatientTreeSet();
+        } else {
+            Type type = new TypeToken<PatientTreeSet>() {
+            }.getType();
+            patientTreeSet = gson.fromJson(json, type);
+        }
+        return patientTreeSet;
+    }
+
+    /**
+     * Save a {@code CareProvider} using Android's SharedPreferences.
+     *
+     * @param context      {@code Context}
+     * @param careProvider {@code CareProvider}
+     */
+    public static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
+        saveSharedPreferencesObject(context, careProvider, CAREPROVIDER_PREF_NAME, CAREPROVIDER_PREF_JSON_KEY);
+    }
+
+    /**
+     * Load the {@code CareProvider} using Android's SharedPreferences.
+     *
+     * @param context {@code Context}
+     * @return {@code CareProvider}
+     */
+    @Nullable
+    public static CareProvider loadSharedPreferencesCareProvider(Context context) {
+        CareProvider careProvider;
+        SharedPreferences mPrefs = context.getSharedPreferences(CAREPROVIDER_PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(CAREPROVIDER_PREF_NAME, "");
+        if (json.isEmpty()) {
+            careProvider = null;
+        } else {
+            Type type = new TypeToken<CareProvider>() {
+            }.getType();
+            careProvider = gson.fromJson(json, type);
+        }
+        return careProvider;
+    }
 }

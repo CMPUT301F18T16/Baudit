@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
+
 import ca.klapstein.baudit.views.RecordView;
 
 /**
@@ -10,8 +12,8 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordPresenter extends Presenter<RecordView> {
 
-    public RecordPresenter(RecordView view) {
-        super(view);
+    public RecordPresenter(RecordView view, Context context) {
+        super(view, context);
     }
 
     public void viewStarted(int recordId) {

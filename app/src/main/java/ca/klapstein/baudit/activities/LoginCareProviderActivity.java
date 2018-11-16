@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
@@ -34,7 +33,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_care_provider);
 
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this, getApplicationContext());
 
         usernameInput = findViewById(R.id.enter_care_provider_username);
         passwordInput = findViewById(R.id.enter_care_provider_password);

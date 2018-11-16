@@ -15,7 +15,7 @@ public class DeleteProblemDialog extends DeleteDialog {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        presenter = new DeleteProblemPresenter(this);
+        presenter = new DeleteProblemPresenter(this, getContext());
     }
 
     @Override

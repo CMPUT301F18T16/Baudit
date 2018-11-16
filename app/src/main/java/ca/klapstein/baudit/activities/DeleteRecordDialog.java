@@ -21,7 +21,7 @@ public class DeleteRecordDialog extends DeleteDialog {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        presenter = new DeleteRecordPresenter(this);
+        presenter = new DeleteRecordPresenter(this, getContext());
     }
 
     @Override
