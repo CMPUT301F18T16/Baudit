@@ -19,12 +19,12 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
-public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivity> {
+public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
 
     private Solo solo;
 
-    public ViewProblemActivityTest() {
-        super(ViewProblemActivity.class);
+    public ProblemActivityTest() {
+        super(ProblemActivity.class);
     }
 
     @Before
@@ -40,7 +40,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
 
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", ViewProblemActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProblemActivity.class);
     }
 
     @UiThreadTest
@@ -104,7 +104,7 @@ public class ViewProblemActivityTest extends ActivityTestRule<ViewProblemActivit
     @Test
     public void testNewRecord() {
         solo.clickOnView(solo.getView(R.id.problem_add_record_button));
-        solo.waitForActivity(EditRecordActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", EditRecordActivity.class);
+        solo.waitForActivity(RecordActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RecordActivity.class);
     }
 }
