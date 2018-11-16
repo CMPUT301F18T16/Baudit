@@ -26,15 +26,11 @@ public class DataModel {
         this.context = context;
     }
 
-    public boolean validateLogin(String username, String password) {
-        // TODO: implement from RemoteModel
-        // TODO: implement offline login method? Cookie/token based
-        return RemoteModel.validateLogin(username, password);
-    }
-
     /**
      * Validate whether a given username {@code String} representation is not already
      * taken within both the local and remote.
+     * <p>
+     * TODO: implement
      *
      * @param username {@code String}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
@@ -43,6 +39,22 @@ public class DataModel {
         // TODO: validate from the local?
         // TODO: implement from RemoteModel
         return true;
+    }
+
+    /**
+     * Validate that a given username and password pair match to a valid user within the remote ElasticSearch.
+     * Or validate that a local authentication token exists within the local.
+     * <p>
+     * TODO: implement
+     *
+     * @param username {@code String}
+     * @param password {@code String}
+     * @return {@code boolean}
+     */
+    public boolean validateLogin(String username, String password) {
+        // TODO: implement from RemoteModel
+        // TODO: implement offline login method? Cookie/token based
+        return RemoteModel.validateLogin(username, password);
     }
 
     /**

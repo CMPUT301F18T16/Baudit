@@ -59,7 +59,7 @@ public class RemoteModel {
     }
 
     /**
-     * Validate that a given username and password pair match to valid use within the remote ElasticSearch.
+     * Validate that a given username and password pair match to valid user within the remote ElasticSearch.
      * <p>
      * TODO: implement
      *
