@@ -21,7 +21,7 @@ public class CreatePatientAccountActivity extends AppCompatActivity implements C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_patient_account);
-        this.presenter = new CreatePatientAccountPresenter(this);
+        this.presenter = new CreatePatientAccountPresenter(this, getApplicationContext());
 
     }
 

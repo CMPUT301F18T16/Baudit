@@ -1,21 +1,23 @@
 package ca.klapstein.baudit.presenters;
 
+import android.content.Context;
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.views.ProblemView;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.views.EditProblemView;
-
 /**
- * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code EditProblemView}.
+ * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
  *
  * @see ca.klapstein.baudit.data.Problem
- * @see EditProblemView
+ * @see ProblemView
  */
-public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
+public class ViewProblemPresenter extends Presenter<ProblemView> {
+    private static final String TAG = "ViewProblemPresenter";
 
-    public EditProblemPresenter(EditProblemView view) {
-        super(view);
+    public ViewProblemPresenter(ProblemView view, Context context) {
+        super(view, context);
     }
 
     public void viewStarted(int problemId) {
@@ -55,5 +57,13 @@ public class EditProblemPresenter extends ProblemPresenter<EditProblemView> {
 
     public int getRecordCount() {
         return 1;
+    }
+
+    public void saveTitleClicked(String newTitle) {
+        // TODO: Save the new title
+    }
+
+    public void saveDescriptionClicked(String newDescription) {
+        // TODO: Save the new description
     }
 }

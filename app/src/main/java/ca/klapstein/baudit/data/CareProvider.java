@@ -1,9 +1,11 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Class that represents a Care Provider.
  */
-public class CareProvider extends Account {
+public class CareProvider extends Account implements Comparable<CareProvider> {
     private static final String TAG = "CareProvider";
 
     public CareProvider(Username username, ContactInfo contactInfo, Password password) {
@@ -17,13 +19,18 @@ public class CareProvider extends Account {
         this.assignedPatientTreeSet = new PatientTreeSet();
     }
 
+    @Override
+    public int compareTo(@NonNull CareProvider careProvider) {
+        return this.getUsername().getUsernameString()
+                .compareTo(careProvider.getUsername().getUsernameString());
+    }
+  
     /**
-     * Get the {@code PatientTreeSet} of the {@code CareProvider}
+     * Get the {@code PatientTreeSet} of the {@code CareProvider}.
      *
      * @return {@code PatientTreeSet}
      */
     public PatientTreeSet getAssignedPatientTreeSet(){
         return this.assignedPatientTreeSet;
     }
-
 }

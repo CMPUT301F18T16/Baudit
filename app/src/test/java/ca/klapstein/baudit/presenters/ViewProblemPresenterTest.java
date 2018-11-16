@@ -3,7 +3,7 @@ package ca.klapstein.baudit.presenters;
 import org.junit.After;
 import org.junit.Before;
 
-public class EditProblemPresenterTest {
+public class ViewProblemPresenterTest {
 
     @Before
     public void setUp() {

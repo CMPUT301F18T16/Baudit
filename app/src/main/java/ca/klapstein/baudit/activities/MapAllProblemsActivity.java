@@ -4,15 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.views.MapAllProblemsView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.views.MapAllProblemsView;
 
 public class MapAllProblemsActivity extends AppCompatActivity
     implements MapAllProblemsView, OnMapReadyCallback {

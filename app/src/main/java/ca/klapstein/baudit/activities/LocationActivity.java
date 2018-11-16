@@ -19,7 +19,7 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        presenter = new LocationPresenter(this);
+        presenter = new LocationPresenter(this, getApplicationContext());
     }
 
     @Override

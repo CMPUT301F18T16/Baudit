@@ -4,54 +4,62 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class ContactInfoTest {
     private ContactInfo contactInfo;
 
     @Before
     public void setUp() {
-        contactInfo = new ContactInfo();
+        contactInfo = new ContactInfo(getExampleEmail1(), getExamplePhoneNumber1());
     }
 
     @After
     public void tearDown() {
+        contactInfo = null;
     }
 
-    private Email ExampleEmail() {
+    private Email getExampleEmail1() {
         return new Email("foo@example.com");
     }
 
-    private PhoneNumber ExamplePhoneNumber() {
+    private Email getExampleEmail2() {
+        return new Email("bar@example.com");
+    }
+
+    private PhoneNumber getExamplePhoneNumber1() {
         return new PhoneNumber("111-111-1111");
+    }
+
+    private PhoneNumber getExamplePhoneNumber2() {
+        return new PhoneNumber("222-222-2222");
     }
 
     @Test
     public void getPhone() {
-        assertNull(contactInfo.getPhoneNumber());
-        contactInfo.setPhoneNumber(ExamplePhoneNumber());
-        assertEquals(ExamplePhoneNumber(), contactInfo.getPhoneNumber());
+        assertNotNull(contactInfo.getPhoneNumber());
+        assertEquals(getExamplePhoneNumber1(), contactInfo.getPhoneNumber());
     }
 
     @Test
     public void setPhone() {
-        assertNull(contactInfo.getPhoneNumber());
-        contactInfo.setPhoneNumber(ExamplePhoneNumber());
-        assertEquals(ExamplePhoneNumber(), contactInfo.getPhoneNumber());
+        assertEquals(getExamplePhoneNumber1(), contactInfo.getPhoneNumber());
+        contactInfo.setPhoneNumber(getExamplePhoneNumber2());
+        assertEquals(getExamplePhoneNumber2(), contactInfo.getPhoneNumber());
+        assertNotEquals(getExamplePhoneNumber1(), getExamplePhoneNumber2());
     }
 
     @Test
     public void getEmail() {
-        assertNull(contactInfo.getEmail());
-        contactInfo.setEmail(ExampleEmail());
-        assertEquals(ExampleEmail(), contactInfo.getEmail());
+        assertNotNull(contactInfo.getEmail());
+        assertEquals(getExampleEmail1(), contactInfo.getEmail());
     }
 
     @Test
     public void setEmail() {
-        assertNull(contactInfo.getEmail());
-        contactInfo.setEmail(ExampleEmail());
-        assertEquals(ExampleEmail(), contactInfo.getEmail());
+        assertEquals(getExampleEmail1(), contactInfo.getEmail());
+        contactInfo.setEmail(getExampleEmail2());
+        assertEquals(getExampleEmail2(), contactInfo.getEmail());
+        assertNotEquals(getExampleEmail1(), getExampleEmail2());
     }
 }

@@ -31,7 +31,7 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
         builder.setView(view);
         // TODO: more implementation
 
-        presenter = new ViewAccountPresenter(this);
+        presenter = new ViewAccountPresenter(this, getContext());
 
         // Create the AlertDialog object and return it
         return builder.create();
