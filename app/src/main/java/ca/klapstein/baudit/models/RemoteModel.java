@@ -50,12 +50,41 @@ public class RemoteModel {
      * <p>
      * TODO: implement
      *
-     * @param username {@code String}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
-    static public boolean uniqueID(String username) {
-        // TODO: implement uniqueness checking of a userid given a string
-        return true;
+    public static class IsIdUnique extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            String query =
+                    "{\n" +
+                            "    \"query\": {\n" +
+                            "        \"ids\" : {\n" +
+                            "            \"type\" : \"patient\",\n" +
+                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                            "         }\n" +
+                            "     }\n" +
+                            "}";
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
+                    .addIndex(PATIENT_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+            List<Patient> patientList;
+
+            try {
+                JestResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    patientList = result.getSourceAsObjectList(Patient.class);
+                    return (patientList.size() != 0);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "failed to get care providers from remote", e);
+            }
+            return null;
+        }
     }
 
     /**
