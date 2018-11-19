@@ -55,7 +55,7 @@ public class RemoteModelTest {
     public void ValidateLoginInvalidUser() {
         assertNull(new RemoteModel.ValidateLogin().execute(
                 new Username("NONSUCH_ACCOUNT").getUsernameString(),
-                new Password("NONSUCH_PASSWORD").getPassword()));
+                new Password("BADPASSWORD").getPassword()));
     }
 
     @Test
