@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LoginPresenter;
 import ca.klapstein.baudit.views.LoginView;
@@ -41,6 +40,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         passwordInput = findViewById(R.id.enter_patient_password);
 
         errorText = findViewById(R.id.patient_login_error_text);
+
         Button loginButton = findViewById(R.id.login_patient_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
