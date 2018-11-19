@@ -24,11 +24,10 @@ public class DataModel {
     }
 
     /**
-     * Validate whether a given username {@code String} representation is not already
-     * taken within both the local and remote.
+     * Validate whether a given {@code Username} is not already taken within both the local and remote.
      *
      * @param username {@code Username}
-     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     * @return {@code true} if the {@code Username} is not already taken, otherwise {@code false}
      */
     public boolean uniqueID(Username username) {
         return getPatient(username) == null && getCareProvider(username) == null;
@@ -40,7 +39,6 @@ public class DataModel {
      * <p>
      * TODO: implement offline login method? Cookie/token based
      *
-     * considering param type {@code String}
      * @param username {@code Username}
      * @param password {@code Password}
      * @return {@code boolean}
