@@ -52,7 +52,7 @@ public class RemoteModel {
      *
      * return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
-    public static class uniqueID extends AsyncTask<String, Void, Boolean> {
+    public static class UniqueID extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
@@ -94,7 +94,7 @@ public class RemoteModel {
      *
      * return {@code Patient} corresponding to the username and password, or null if no such user is found
      */
-    public static class validateLogin extends AsyncTask<String, Void, Patient> {
+    public static class ValidateLogin extends AsyncTask<String, Void, Patient> {
         @Override
         protected Patient doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();

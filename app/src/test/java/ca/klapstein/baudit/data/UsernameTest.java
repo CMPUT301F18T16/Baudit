@@ -14,12 +14,13 @@ public class UsernameTest {
 // TODO: enable when a RemoteModel is implemented or mocked
     @RunWith(Parameterized.class)
     public static class ValidUserNameTest {
+
+        private String input;
+
         @Parameters(name = "{index}: valid({0})={1}")
         public static String[] validUserName() {
             return new String[]{"testUser", "testUser1", "@!516!@4!@$!2°▐"};
         }
-
-        private String input;
 
         public ValidUserNameTest(String input) {
             this.input = input;
