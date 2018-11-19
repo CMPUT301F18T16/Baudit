@@ -28,7 +28,7 @@ import java.util.List;
  * Note: all {@code Patient}s and {@code CareProviders} are uniquely identified by their username within
  * the remote ElasticSearch.
  */
-public class RemoteModel {
+class RemoteModel {
     private static final String TAG = "RemoteModel";
     private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
 
