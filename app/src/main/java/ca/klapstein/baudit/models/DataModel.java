@@ -26,8 +26,6 @@ public class DataModel {
     /**
      * Validate whether a given username {@code String} representation is not already
      * taken within both the local and remote.
-     * <p>
-     * TODO: implement
      *
      * @param username {@code Username}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
@@ -40,7 +38,7 @@ public class DataModel {
      * Validate that a given username and password pair match to a valid user within the remote ElasticSearch.
      * Or validate that a local authentication token exists within the local.
      * <p>
-     * TODO: implement
+     * TODO: implement offline login method? Cookie/token based
      *
      * considering param type {@code String}
      * @param username {@code Username}
@@ -48,8 +46,6 @@ public class DataModel {
      * @return {@code boolean}
      */
     public boolean validateLogin(Username username, Password password) {
-
-        // TODO: implement offline login method? Cookie/token based
         try {
             Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
             return account != null;
