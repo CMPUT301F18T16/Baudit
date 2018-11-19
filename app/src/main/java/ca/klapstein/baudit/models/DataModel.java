@@ -37,8 +37,12 @@ public class DataModel {
      */
     static public boolean uniqueID(String username) {
         // TODO: validate from the local?
-        // TODO: implement from RemoteModel
-        return true;
+        try {
+            return new RemoteModel.uniqueID().execute(username).get();
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e(TAG, "failure getting Patient from remote", e);
+            return false;
+        }
     }
 
     /**
@@ -47,14 +51,19 @@ public class DataModel {
      * <p>
      * TODO: implement
      *
+     * considering param type {@code String}
      * @param username {@code String}
      * @param password {@code String}
      * @return {@code boolean}
      */
-    public boolean validateLogin(String username, String password) {
-        // TODO: implement from RemoteModel
+    public Patient validateLogin(/*String type, */String username, String password) {
         // TODO: implement offline login method? Cookie/token based
-        return RemoteModel.validateLogin(username, password);
+        try {
+            return new RemoteModel.validateLogin().execute(/*type, */username, password).get();
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e(TAG, "failure getting Patient from remote", e);
+            return null;
+        }
     }
 
     /**

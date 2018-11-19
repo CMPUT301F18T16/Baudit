@@ -50,9 +50,9 @@ public class RemoteModel {
      * <p>
      * TODO: implement
      *
-     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     * return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
-    public static class IsIdUnique extends AsyncTask<String, Void, Boolean> {
+    public static class uniqueID extends AsyncTask<String, Void, Boolean> {
         @Override
         protected Boolean doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
@@ -78,10 +78,10 @@ public class RemoteModel {
                 JestResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     patientList = result.getSourceAsObjectList(Patient.class);
-                    return (patientList.size() != 0);
+                    return (patientList.size() == 0);
                 }
             } catch (Exception e) {
-                Log.e(TAG, "failed to get care providers from remote", e);
+                Log.e(TAG, "failed to get patient username from remote", e);
             }
             return null;
         }
@@ -92,14 +92,60 @@ public class RemoteModel {
      * <p>
      * TODO: implement
      *
-     * @param username {@code String}
-     * @param password {@code String}
-     * @return {@code boolean}
+     * return {@code Patient} corresponding to the username and password, or null if no such user is found
      */
-    public static boolean validateLogin(String username, String password) {
-        // TODO: implement
-        Log.d(TAG, "Validating username: " + username);
-        return "test".equals(username) && "foo".equals(password);
+    public static class validateLogin extends AsyncTask<String, Void, Patient> {
+        @Override
+        protected Patient doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            ArrayList<Patient> patientArrayList = new ArrayList<>();
+            String query = "{\n" +
+                    "   \"query\": {\n" +
+                    "       \"bool\": {\n" +
+                    "           \"must\": [\n" +
+                    /*"                {\"match\": \n" +
+                    "                    {\"_type\" : \"" + search_parameters[0] + "\"} \n" +
+                    "                }, \n" +
+                    */"                {\"match\": \n" +
+                    "                    {\"_id\" : \"" + search_parameters[1/**/-/**/1] + "\"} \n" +
+                    "                }, \n" +
+                    "                {\"match\": \n" +
+                    "                    {\"password\" : \"" + search_parameters[2/**/-/**/1] + "\"} \n" +
+                    "                } \n" +
+                    "           ] \n" +
+                    "       } \n" +
+                    "   } \n" +
+                    "}";
+
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
+                    .addIndex(PATIENT_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+            try {
+                JestResult result = client.execute(search);
+
+                if (result.isSucceeded()) {
+                    List<Patient> patientList;
+                    patientList = result.getSourceAsObjectList(Patient.class);
+                    patientArrayList.addAll(patientList);
+                }
+
+            } catch (Exception e) {
+                Log.e(TAG, "failed to get patients from remote", e);
+            }
+            if (patientArrayList.size() > 1) {
+                // we shouldn't encounter this. But, someone could poison our elasticsearch
+                // writing a log of abnormal results is the least we can do
+                Log.w(TAG, "more than one patients found via query using the first result");
+            } else if (patientArrayList.size() == 0) {
+                Log.w(TAG, "no matching patients found via query");
+                return null;
+            }
+            return patientArrayList.get(0);
+        }
     }
 
     /**

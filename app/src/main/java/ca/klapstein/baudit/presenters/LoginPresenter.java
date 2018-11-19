@@ -28,8 +28,8 @@ public class LoginPresenter extends Presenter<LoginView> {
      * @param username {@code String}
      * @param password {@code String}
      */
-    public void onLoginButtonClicked(String username, String password) {
-        if (dataManager.validateLogin(username, password)) {
+    public void onLoginButtonClicked(/*String type, */String username, String password) {
+        if (dataManager.validateLogin(/*type, */username, password) != null) {
             this.view.onLoginValidationSuccess();
         } else {
             this.view.onLoginValidationFailure();
