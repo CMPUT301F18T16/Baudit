@@ -29,7 +29,7 @@ public class DataModel {
      * <p>
      * TODO: implement
      *
-     * @param username {@code String}
+     * @param username {@code Username}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
     public boolean uniqueID(Username username) {
