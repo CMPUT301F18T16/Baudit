@@ -2,6 +2,8 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.Password;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;
 
@@ -29,9 +31,13 @@ public class LoginPresenter extends Presenter<LoginView> {
      * @param password {@code String}
      */
     public void onLoginButtonClicked(/*String type, */String username, String password) {
-        if (dataManager.validateLogin(/*type, */username, password) != null) {
-            this.view.onLoginValidationSuccess();
-        } else {
+        try {
+            if (dataManager.validateLogin(new Username(username), new Password(password))) {
+                this.view.onLoginValidationSuccess();
+            } else {
+                this.view.onLoginValidationFailure();
+            }
+        } catch (IllegalArgumentException e) {
             this.view.onLoginValidationFailure();
         }
     }

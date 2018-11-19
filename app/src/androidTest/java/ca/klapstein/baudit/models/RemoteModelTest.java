@@ -1,13 +1,12 @@
 package ca.klapstein.baudit.models;
 
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.data.*;
 import org.junit.Test;
 
 import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -50,5 +49,18 @@ public class RemoteModelTest {
         new RemoteModel.AddCareProviderTask().execute(
                 new TreeSet<CareProvider>().toArray(new CareProvider[0])
         );
+    }
+
+    @Test
+    public void ValidateLoginInvalidUser() {
+        assertNull(new RemoteModel.ValidateLogin().execute(
+                new Username("NONSUCH_ACCOUNT").getUsernameString(),
+                new Password("NONSUCH_PASSWORD").getPassword()));
+    }
+
+    @Test
+    public void uniqueIDTrue() throws InterruptedException, ExecutionException {
+        // wait for remote elastic search cluster to settle
+        assertTrue(new RemoteModel.UniqueID().execute("NONSUCH_ACCOUNT").get());
     }
 }

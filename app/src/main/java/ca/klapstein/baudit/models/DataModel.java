@@ -3,10 +3,7 @@ package ca.klapstein.baudit.models;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
-import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.data.*;
 
 import java.util.concurrent.ExecutionException;
 
@@ -35,14 +32,8 @@ public class DataModel {
      * @param username {@code String}
      * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
-    static public boolean uniqueID(String username) {
-        // TODO: validate from the local?
-        try {
-            return new RemoteModel.uniqueID().execute(username).get();
-        } catch (ExecutionException | InterruptedException e) {
-            Log.e(TAG, "failure getting Patient from remote", e);
-            return false;
-        }
+    public boolean uniqueID(Username username) {
+        return getPatient(username) == null && getCareProvider(username) == null;
     }
 
     /**
@@ -52,17 +43,19 @@ public class DataModel {
      * TODO: implement
      *
      * considering param type {@code String}
-     * @param username {@code String}
-     * @param password {@code String}
+     * @param username {@code Username}
+     * @param password {@code Password}
      * @return {@code boolean}
      */
-    public Patient validateLogin(/*String type, */String username, String password) {
+    public boolean validateLogin(Username username, Password password) {
+
         // TODO: implement offline login method? Cookie/token based
         try {
-            return new RemoteModel.validateLogin().execute(/*type, */username, password).get();
+            Account account = new RemoteModel.ValidateLogin().execute(username.getUsernameString(), password.getPassword()).get();
+            return account != null;
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
-            return null;
+            return false;
         }
     }
 

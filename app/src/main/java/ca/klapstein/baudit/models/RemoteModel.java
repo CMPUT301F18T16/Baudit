@@ -2,6 +2,7 @@ package ca.klapstein.baudit.models;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
@@ -47,8 +48,6 @@ public class RemoteModel {
     /**
      * Validate whether a given username {@code String} representation is not already
      * taken within both remote.
-     * <p>
-     * TODO: implement
      *
      * return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
@@ -57,8 +56,7 @@ public class RemoteModel {
         protected Boolean doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
-            String query =
-                    "{\n" +
+            String query = "{\n" +
                             "    \"query\": {\n" +
                             "        \"ids\" : {\n" +
                             "            \"type\" : \"patient\",\n" +
@@ -82,36 +80,33 @@ public class RemoteModel {
                 }
             } catch (Exception e) {
                 Log.e(TAG, "failed to get patient username from remote", e);
+                return false; // assume false on failure to avoid an unexpected state
             }
-            return null;
+            return false;
         }
     }
 
     /**
-     * Validate that a given username and password pair match to valid user within the remote ElasticSearch.
+     * Validate that a given username and password pair match to valid {@code Account} within the remote ElasticSearch.
      * <p>
-     * TODO: implement
      *
-     * return {@code Patient} corresponding to the username and password, or null if no such user is found
+     * return {@code Account} corresponding to the username and password, or null if no such account is found
      */
-    public static class ValidateLogin extends AsyncTask<String, Void, Patient> {
+    public static class ValidateLogin extends AsyncTask<String, Void, Account> {
         @Override
-        protected Patient doInBackground(String... search_parameters) {
+        protected Account doInBackground(String... search_parameters) {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
-            ArrayList<Patient> patientArrayList = new ArrayList<>();
+            ArrayList<Account> accountArrayList = new ArrayList<>();
             String query = "{\n" +
                     "   \"query\": {\n" +
                     "       \"bool\": {\n" +
                     "           \"must\": [\n" +
-                    /*"                {\"match\": \n" +
-                    "                    {\"_type\" : \"" + search_parameters[0] + "\"} \n" +
-                    "                }, \n" +
-                    */"                {\"match\": \n" +
-                    "                    {\"_id\" : \"" + search_parameters[1/**/-/**/1] + "\"} \n" +
+                    "                {\"match\": \n" +
+                    "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
                     "                }, \n" +
                     "                {\"match\": \n" +
-                    "                    {\"password\" : \"" + search_parameters[2/**/-/**/1] + "\"} \n" +
+                    "                    {\"password\" : \"" + search_parameters[1] + "\"} \n" +
                     "                } \n" +
                     "           ] \n" +
                     "       } \n" +
@@ -122,29 +117,30 @@ public class RemoteModel {
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
                     .addIndex(PATIENT_INDEX)
+                    .addIndex(CARE_PROVIDER_INDEX)
                     .build();
             Log.d(TAG, "search json: " + search.toString());
             try {
                 JestResult result = client.execute(search);
 
                 if (result.isSucceeded()) {
-                    List<Patient> patientList;
-                    patientList = result.getSourceAsObjectList(Patient.class);
-                    patientArrayList.addAll(patientList);
+                    List<Account> accountList;
+                    accountList = result.getSourceAsObjectList(Account.class);
+                    accountArrayList.addAll(accountList);
                 }
 
             } catch (Exception e) {
                 Log.e(TAG, "failed to get patients from remote", e);
             }
-            if (patientArrayList.size() > 1) {
+            if (accountArrayList.size() > 1) {
                 // we shouldn't encounter this. But, someone could poison our elasticsearch
                 // writing a log of abnormal results is the least we can do
-                Log.w(TAG, "more than one patients found via query using the first result");
-            } else if (patientArrayList.size() == 0) {
-                Log.w(TAG, "no matching patients found via query");
+                Log.w(TAG, "more than one account found via query using the first result");
+            } else if (accountArrayList.size() == 0) {
+                Log.w(TAG, "no matching account found via query");
                 return null;
             }
-            return patientArrayList.get(0);
+            return accountArrayList.get(0);
         }
     }
 
@@ -160,15 +156,14 @@ public class RemoteModel {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Patient> patientArrayList = new ArrayList<>();
-            String query =
-                    "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"ids\" : {\n" +
-                            "            \"type\" : \"patient\",\n" +
-                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
-                            "         }\n" +
-                            "     }\n" +
-                            "}";
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"type\" : \"patient\",\n" +
+                    "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                    "         }\n" +
+                    "     }\n" +
+                    "}";
 
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
@@ -266,15 +261,14 @@ public class RemoteModel {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<CareProvider> careProviderArrayList = new ArrayList<>();
-            String query =
-                    "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"ids\" : {\n" +
-                            "            \"type\" : \"careprovider\",\n" +
-                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
-                            "         }\n" +
-                            "     }\n" +
-                            "}";
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"type\" : \"careprovider\",\n" +
+                    "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                    "         }\n" +
+                    "     }\n" +
+                    "}";
 
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
