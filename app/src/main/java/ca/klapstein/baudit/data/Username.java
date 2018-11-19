@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-import ca.klapstein.baudit.models.DataModel;
 
 /**
  * Data class representing a Baudit's {@code Account}'s username.
@@ -27,7 +26,7 @@ public class Username {
      */
     static public boolean isValid(String username) {
         int len = username.length();
-        return len >= 8 && len <= 20 && DataModel.uniqueID(username);
+        return len >= 8 && len <= 20;
     }
 
     @NonNull
