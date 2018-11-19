@@ -57,29 +57,33 @@ public class RemoteModel {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             String query = "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"ids\" : {\n" +
-                            "            \"type\" : \"patient\",\n" +
-                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
-                            "         }\n" +
-                            "     }\n" +
+                    "   \"query\": {\n" +
+                    "       \"bool\": {\n" +
+                    "           \"must\": [\n" +
+                    "                {\"match\": \n" +
+                    "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
+                    "                } \n" +
+                    "           ] \n" +
+                    "       } \n" +
+                    "   } \n" +
                             "}";
 
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
+                    .addIndex(CARE_PROVIDER_INDEX)
                     .addIndex(PATIENT_INDEX)
                     .build();
             Log.d(TAG, "search json: " + search.toString());
-            List<Patient> patientList;
 
             try {
                 JestResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    patientList = result.getSourceAsObjectList(Patient.class);
-                    return (patientList.size() == 0);
+                    List<Account> accountList;
+                    accountList = result.getSourceAsObjectList(Account.class);
+                    return (accountList.size() == 0);
                 }
             } catch (Exception e) {
-                Log.e(TAG, "failed to get patient username from remote", e);
+                Log.e(TAG, "failed to validate account username from remote", e);
                 return false; // assume false on failure to avoid an unexpected state
             }
             return false;

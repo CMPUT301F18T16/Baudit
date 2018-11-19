@@ -7,8 +7,7 @@ import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 // TODO: coverage is provided by DataModelTest but we should still develop unit tests for this
 public class RemoteModelTest {
@@ -60,7 +59,13 @@ public class RemoteModelTest {
 
     @Test
     public void uniqueIDTrue() throws InterruptedException, ExecutionException {
-        // wait for remote elastic search cluster to settle
         assertTrue(new RemoteModel.UniqueID().execute("NONSUCH_ACCOUNT").get());
+    }
+
+    @Test
+    public void uniqueIDFalse() throws InterruptedException, ExecutionException {
+        // TODO: add hook to ensure the test account is added to the remote or make some mock
+        assertFalse(new RemoteModel.UniqueID().execute("TESTCareProvider1").get());
+        assertFalse(new RemoteModel.UniqueID().execute("TESTPatient1").get());
     }
 }
