@@ -51,7 +51,7 @@ public class DataModel {
 
         // TODO: implement offline login method? Cookie/token based
         try {
-            Account account = new RemoteModel.ValidateLogin().execute(username.getUsernameString(), password.getPassword()).get();
+            Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
             return account != null;
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
@@ -71,7 +71,7 @@ public class DataModel {
     public Patient getPatient(Username username) {
         // check remote
         try {
-            return new RemoteModel.GetPatient().execute(username.getUsernameString()).get();
+            return new RemoteModel.GetPatient().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
         }
@@ -157,7 +157,7 @@ public class DataModel {
     public CareProvider getCareProvider(Username username) {
         // check remote
         try {
-            return new RemoteModel.GetCareProvider().execute(username.getUsernameString()).get();
+            return new RemoteModel.GetCareProvider().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting CareProvider from remote", e);
         }

@@ -12,7 +12,7 @@ public class Username {
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException {
-        this.setUsernameString(username);
+        this.setUsername(username);
     }
 
     /**
@@ -30,11 +30,12 @@ public class Username {
     }
 
     @NonNull
-    public String getUsernameString() {
+    @Override
+    public String toString() {
         return this.username;
     }
 
-    public void setUsernameString(@NonNull String username) throws IllegalArgumentException {
+    public void setUsername(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {
             throw new IllegalArgumentException("Invalid username");
         } else {
@@ -45,7 +46,7 @@ public class Username {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.getUsernameString().hashCode();
+        result = 31 * result + this.toString().hashCode();
         return result;
     }
 
@@ -55,7 +56,7 @@ public class Username {
             return false;
         } else if (obj.getClass().equals(Username.class)) {
             Username otherUsername = (Username) obj;
-            return this.getUsernameString().equals(otherUsername.getUsernameString());
+            return this.toString().equals(otherUsername.toString());
         } else {
             return false;
         }

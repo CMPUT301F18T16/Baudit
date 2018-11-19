@@ -30,21 +30,21 @@ public class UsernameTest {
         public void testUsernameConstructor() {
             Username username = new Username(input);
             assertNotNull(username);
-            assertEquals(input, username.getUsernameString());
+            assertEquals(input, username.toString());
         }
 
         @Test
         public void testGetUsername() {
             Username username = new Username(input);
             assertNotNull(username);
-            assertEquals(input, username.getUsernameString());
+            assertEquals(input, username.toString());
         }
 
         @Test
         public void testSetUsername() {
             Username username = new Username(input);
-            username.setUsernameString(input);
-            assertEquals(input, username.getUsernameString());
+            username.setUsername(input);
+            assertEquals(input, username.toString());
         }
     }
 
@@ -65,19 +65,19 @@ public class UsernameTest {
         public void testUsernameConstructor() {
             Username username = new Username(input);
             assertNotNull(username);
-            assertEquals(input, username.getUsernameString());
+            assertEquals(input, username.toString());
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void testSetUsername() {
             Username username = new Username("validuser");
-            username.setUsernameString(input);
-            assertEquals(input, username.getUsernameString());
+            username.setUsername(input);
+            assertEquals(input, username.toString());
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void testUsernameConstructorInvalid() {
-            Username username = new Username(input);
+            new Username(input);
         }
     }
 }

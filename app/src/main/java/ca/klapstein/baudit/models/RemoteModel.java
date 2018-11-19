@@ -237,13 +237,13 @@ public class RemoteModel {
             for (Patient patient : patients) {
                 Index index = new Index.Builder(patient)
                         .index(PATIENT_INDEX)
-                        .id(patient.getUsername().getUsernameString()) // this sets the id...
+                        .id(patient.getUsername().toString()) // this sets the id...
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        assert patient.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added patient to remote: remoteID: " + patient.getUsername().getUsernameString());
+                        assert patient.getUsername().toString().equals(result.getId());
+                        Log.d(TAG, "successfully added patient to remote: remoteID: " + patient.getUsername().toString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "failed to add patient to remote", e);
@@ -311,13 +311,13 @@ public class RemoteModel {
             for (CareProvider careProvider : careProviders) {
                 Index index = new Index.Builder(careProvider)
                         .index(CARE_PROVIDER_INDEX)
-                        .id(careProvider.getUsername().getUsernameString()) // this sets the id...
+                        .id(careProvider.getUsername().toString()) // this sets the id...
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        assert careProvider.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added care provider to remote: remoteID: " + careProvider.getUsername().getUsernameString());
+                        assert careProvider.getUsername().toString().equals(result.getId());
+                        Log.d(TAG, "successfully added care provider to remote: remoteID: " + careProvider.getUsername().toString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "failed to add the care provider to remote", e);
