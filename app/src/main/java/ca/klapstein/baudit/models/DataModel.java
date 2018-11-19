@@ -84,8 +84,6 @@ public class DataModel {
 
     /**
      * Get all the {@code Patient}s currently registered to Baudit.
-     * <p>
-     * TODO: this getter should be narrowed down in scope/reach
      *
      * @return {@code PatientTreeSet}
      */
