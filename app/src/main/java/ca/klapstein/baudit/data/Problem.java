@@ -103,11 +103,4 @@ public class Problem implements Comparable<Problem> {
             return getDate().compareTo(problem.getDate()); // Order by date
         }
     }
-
-    private String id;
-
-    public void setProblemID(String id) {
-        this.id = id;
-    }
-
 }
