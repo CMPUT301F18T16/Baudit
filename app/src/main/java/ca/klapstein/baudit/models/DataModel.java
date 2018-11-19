@@ -168,7 +168,6 @@ public class DataModel {
      * @param careProvider {@code CareProvider}
      */
     public void commitCareProvider(CareProvider careProvider) {
-        // TODO: save to remote
         new RemoteModel.AddCareProviderTask().execute(careProvider);
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
