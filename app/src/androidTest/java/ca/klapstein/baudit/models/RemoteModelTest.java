@@ -51,10 +51,10 @@ public class RemoteModelTest {
     }
 
     @Test
-    public void ValidateLoginInvalidUser() {
+    public void ValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
         assertNull(new RemoteModel.ValidateLogin().execute(
                 new Username("NONSUCH_ACCOUNT").getUsernameString(),
-                new Password("BADPASSWORD").getPassword()));
+                new Password("BADPASSWORD").getPassword()).get());
     }
 
     @Test
