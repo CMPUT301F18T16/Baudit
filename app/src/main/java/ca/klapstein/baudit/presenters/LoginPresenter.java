@@ -18,8 +18,6 @@ import ca.klapstein.baudit.views.LogoutView;
 public class LoginPresenter extends Presenter<LoginView> {
     private static final String TAG = "LoginPresenter";
 
-    private Account account;
-
     public LoginPresenter(LoginView view, Context context) {
         super(view, context);
     }
@@ -30,7 +28,7 @@ public class LoginPresenter extends Presenter<LoginView> {
      * @param username {@code String}
      * @param password {@code String}
      */
-    public void onLoginButtonClicked(/*String type, */String username, String password) {
+    public void onLoginButtonClicked(String username, String password) {
         try {
             if (dataManager.validateLogin(new Username(username), new Password(password))) {
                 this.view.onLoginValidationSuccess();
