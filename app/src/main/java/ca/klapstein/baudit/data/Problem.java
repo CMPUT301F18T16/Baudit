@@ -16,8 +16,6 @@ public class Problem implements Comparable<Problem> {
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-    public static final String ES_TYPE = "problem";
-
     private String title;
     private String description;
     private Date date;
