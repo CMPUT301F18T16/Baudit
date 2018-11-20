@@ -15,7 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.DrawerPresenter;
 import ca.klapstein.baudit.presenters.PatientListPresenter;
+import ca.klapstein.baudit.views.DrawerView;
 import ca.klapstein.baudit.views.PatientListView;
 import ca.klapstein.baudit.views.PatientRowView;
 
@@ -24,13 +26,16 @@ import ca.klapstein.baudit.views.PatientRowView;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class PatientListActivity extends AppCompatActivity implements PatientListView {
+public class PatientListActivity extends AppCompatActivity implements PatientListView, DrawerView {
     private static final String TAG = "PatientListActivity";
 
     private PatientListPresenter presenter;
+    private DrawerPresenter drawerPresenter;
     private RecyclerView patientRecyclerView;
     private PatientListAdapter adapter;
     private DrawerLayout drawerLayout;
+    private TextView navHeaderUsername;
+    private TextView navHeaderEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +51,25 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         actionBar.setTitle(R.string.home);
 
         presenter = new PatientListPresenter(this, getApplicationContext());
-
+        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
         drawerLayout = findViewById(R.id.patient_list_drawer_layout);
 
+        // TODO: is this overkill?
+        drawerLayout.addDrawerListener(
+                new DrawerLayout.SimpleDrawerListener() {
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        drawerPresenter.viewStarted();
+                    }
+                }
+        );
+
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
+        navHeaderUsername = navHeaderView.findViewById(R.id.nav_header_username);
+        navHeaderEmail = navHeaderView.findViewById(R.id.nav_header_email);
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -88,8 +108,8 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
 
     @Override
     public void onStart() {
-
         super.onStart();
+        drawerPresenter.viewStarted();
     }
 
     @Override
@@ -108,6 +128,16 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void setUsername(String name) {
+        navHeaderUsername.setText(name);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        navHeaderEmail.setText(email);
     }
 
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
