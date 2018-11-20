@@ -5,7 +5,9 @@ import android.util.Log;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Password;
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.activities.LoginCareProviderActivity;
 import ca.klapstein.baudit.activities.LoginPatientActivity;
