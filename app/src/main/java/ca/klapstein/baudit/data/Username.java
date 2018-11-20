@@ -47,10 +47,10 @@ public class Username {
      * @throws IllegalArgumentException if the given username string is invalid
      */
     public void setUsername(@NonNull String username) throws IllegalArgumentException {
-        if (!isValid(username)) {
-            throw new IllegalArgumentException("Invalid username");
-        } else {
+        if (isValid(username)) {
             this.username = username;
+        } else {
+            throw new IllegalArgumentException("Invalid username");
         }
     }
 
