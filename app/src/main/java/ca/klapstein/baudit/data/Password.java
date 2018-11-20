@@ -35,13 +35,24 @@ public class Password {
         return !(password.length() < 8 || password.length() > 20 || hasSpecialChar);
     }
 
+    /**
+     * Get the {@code String} representation of the {@code Password}.
+     *
+     * @return {@code String}
+     */
     @NonNull
     @Override
     public String toString() {
         return password;
     }
 
-    public void setPassword(@NonNull String password) {
+    /**
+     * Set the {@code String} representation of the {@code Password}.
+     *
+     * @param password {@code String}
+     * @throws IllegalArgumentException if the given password string is invalid
+     */
+    public void setPassword(@NonNull String password) throws IllegalArgumentException {
         if (isValid(password)) {
             this.password = password;
         } else {

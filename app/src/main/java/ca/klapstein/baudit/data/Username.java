@@ -18,9 +18,6 @@ public class Username {
     /**
      * Check that a {@code Account}'s username is valid.
      *
-     * TODO: we are going to have to move the uniqueID checking outside of this class else
-     * construction issues will occur in the full implementation
-     *
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
@@ -29,17 +26,28 @@ public class Username {
         return len >= 8 && len <= 20;
     }
 
+    /**
+     * Get the {@code String} representation of the {@code Username}.
+     *
+     * @return {@code String}
+     */
     @NonNull
     @Override
     public String toString() {
         return this.username;
     }
 
+    /**
+     * Set the {@code String} representation of the {@code Username}.
+     *
+     * @param username {@code String}
+     * @throws IllegalArgumentException if the given username string is invalid
+     */
     public void setUsername(@NonNull String username) throws IllegalArgumentException {
-        if (!isValid(username)) {
-            throw new IllegalArgumentException("Invalid username");
-        } else {
+        if (isValid(username)) {
             this.username = username;
+        } else {
+            throw new IllegalArgumentException("Invalid username");
         }
     }
 

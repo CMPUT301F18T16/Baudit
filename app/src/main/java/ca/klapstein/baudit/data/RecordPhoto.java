@@ -29,11 +29,21 @@ public class RecordPhoto implements Photo {
         return true;
     }
 
+    /**
+     * Get the {@code Bitmap} of the {@code RecordPhoto}
+     *
+     * @return {@code Bitmap}
+     */
     @Override
     public Bitmap getBitmap() {
         return bitmap;
     }
 
+    /**
+     * Setter for a {@code RecordPhoto}'s {@code Bitmap}.
+     *
+     * @param bitmap {@code Bitmap}
+     */
     @Override
     public void setBitmap(Bitmap bitmap) throws IllegalArgumentException {
         if (!isValid(bitmap)) {

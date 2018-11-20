@@ -22,18 +22,38 @@ public class ContactInfo {
     @NonNull
     private PhoneNumber phone;
 
+    /**
+     * Get the {@code PhoneNumber} of the {@code ContactInfo}.
+     *
+     * @return {@code PhoneNumber}
+     */
     public PhoneNumber getPhoneNumber() {
         return phone;
     }
 
+    /**
+     * Setter for a {@code ContactInfo}'s {@code PhoneNumber}.
+     *
+     * @param phone {@code PhoneNumber}
+     */
     public void setPhoneNumber(PhoneNumber phone) {
         this.phone = phone;
     }
 
+    /**
+     * Get the {@code Email} of the {@code ContactInfo}.
+     *
+     * @return {@code Email}
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Setter for a {@code ContactInfo}'s {@code Email}.
+     *
+     * @param email {@code Email}
+     */
     public void setEmail(Email email) {
         this.email = email;
     }
