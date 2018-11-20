@@ -63,6 +63,7 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     public void testLogOut() {
         solo.clickOnActionBarHomeButton();
         solo.clickOnMenuItem(getActivity().getResources().getString(R.string.log_out));
+        solo.clickOnButton(getActivity().getResources().getString(R.string.log_out));
         solo.waitForActivity(LoginPatientActivity.class);
         solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
