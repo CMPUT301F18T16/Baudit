@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="create_careprovider_firstname" type="id" />
+    <item name="toolbar4" type="id" />
+    <item name="create_careprovider_id_error" type="id" />
+    <item name="create_careprovider_lastName" type="id" />
+    <item name="create_careprovider_username_error" type="id" />
+    <item name="create_careprovider_email_error" type="id" />
+    <item name="create_careprovider_phonenumber_error" type="id" />
+    <item name="create_careprovider_password_error" type="id" />
+    <item name="create_careprovider_password" type="id" />
+    <item name="create_careprovider_id" type="id" />
+    <item name="create_careprovider_email" type="id" />
+    <item name="create_careprovider_username" type="id" />
+    <item name="create_careprovider_phone" type="id" />
+    <item name="create_careprovider_confirmpassword" type="id" />
+    <item name="create_careprovider_verify_button" type="id" />
+</resources>
