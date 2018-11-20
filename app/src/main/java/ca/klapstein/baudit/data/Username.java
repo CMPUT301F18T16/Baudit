@@ -40,6 +40,12 @@ public class Username {
         return this.username;
     }
 
+    /**
+     * Set the {@code String} representation of the {@code Username}.
+     *
+     * @param username {@code String}
+     * @throws IllegalArgumentException
+     */
     public void setUsername(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {
             throw new IllegalArgumentException("Invalid username");
