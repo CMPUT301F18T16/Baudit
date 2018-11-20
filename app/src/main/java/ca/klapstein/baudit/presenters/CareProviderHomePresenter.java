@@ -36,6 +36,8 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
     }
 
     public void viewStarted() {
+        view.updateUsernameDisplay(account.getUsername().toString());
+        view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
         view.updateList();
     }
 }

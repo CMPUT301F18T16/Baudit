@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,7 +16,12 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
@@ -73,8 +80,26 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             ));
                             return true;
                         case (R.id.nav_logout):
-                            new LogoutDialog().show(getSupportFragmentManager(), LogoutDialog.TAG);
-                            finish();
+                            new AlertDialog.Builder(
+                                    PatientHomeActivity.this,
+                                    R.style.BauditDialogTheme)
+                                .setTitle(R.string.log_out_question)
+                                .setCancelable(true)
+                                .setNegativeButton(R.string.cancel, null)
+                                .setPositiveButton(R.string.log_out,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface mDialogInterface,
+                                                            int i) {
+                                            presenter.logoutClicked();
+                                            startActivity(new Intent(
+                                                PatientHomeActivity.this,
+                                                SplashActivity.class
+                                            ));
+                                            finish();
+                                        }
+                                    })
+                                .show();
                             return true;
                         default:
                             return true;
