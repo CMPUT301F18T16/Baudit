@@ -26,13 +26,10 @@ import java.lang.reflect.Type;
 class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
 
-    private static final String PATIENT_TREESET_PREF_NAME = "mPatientTreeSet";
     private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
 
-    private static final String CAREPROVIDER_PREF_NAME = "mCareProvider";
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
-    private static final String LOGIN_ACCOUNT_USERNAME_PREF_NAME = "mLoginAccountUsername";
     private static final String LOGIN_ACCOUNT_USERNAME_JSON_KEY = "mLoginAccountUsernameJson";
 
     /**
@@ -40,7 +37,6 @@ class PreferencesModel {
      *
      * @param context  {@code Context}
      * @param object   {@code Object}
-     * @param prefName {@code String}
      * @param JSONKey  {@code String}
      */
     private static void saveSharedPreferencesObject(Context context, Object object, String JSONKey) {
@@ -96,7 +92,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(PATIENT_TREESET_PREF_JSON_KEY, "");
-        Log.d(TAG, "loaded mCareProviderJson: " + json);
+        Log.d(TAG, "loaded json: " + json);
 
         if (json.isEmpty()) {
             patientTreeSet = new PatientTreeSet();
@@ -131,6 +127,8 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(CAREPROVIDER_PREF_JSON_KEY, "");
+        Log.d(TAG, "loaded json: " + json);
+
         if (json.isEmpty()) {
             careProvider = null;
         } else {
