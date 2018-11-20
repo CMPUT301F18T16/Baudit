@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
@@ -77,6 +78,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         patientRecyclerView = findViewById(R.id.patient_list);
         adapter = new PatientListAdapter();
         patientRecyclerView.setAdapter(adapter);
+        patientRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
