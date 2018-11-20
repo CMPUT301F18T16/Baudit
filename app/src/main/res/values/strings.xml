@@ -61,5 +61,6 @@
     <string name="email_error">⚠ Invalid email.</string>
     <string name="phone_number_error">⚠ Invalid phone number.</string>
     <string name="password_match_error">⚠ Passwords do not match.</string>
+    <string name="password_error">⚠Password must be 8&#8211;25 characters.</string>
     <string name="verify" />
 </resources>

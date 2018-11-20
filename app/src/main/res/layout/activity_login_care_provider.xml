@@ -65,6 +65,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/log_in"
         android:textAllCaps="true"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <Button
@@ -74,7 +75,8 @@
         android:layout_marginTop="14dp"
         android:text="@string/sign_up"
         android:textAllCaps="true"
-        android:textSize="14sp"/>
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/log_in_as_patient_button"

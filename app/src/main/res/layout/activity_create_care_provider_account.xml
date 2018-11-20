@@ -41,26 +41,29 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/id"
+        android:id="@+id/create_careprovider_id"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="Identification (MNC)"
         android:inputType="number"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/create_careprovider_firstname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/firstName"
+        android:id="@+id/create_careprovider_firstname"
         android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -68,13 +71,14 @@
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_id_error" />
 
     <EditText
-        android:id="@+id/lastName"
+        android:id="@+id/create_careprovider_lastName"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -84,15 +88,16 @@
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_firstname" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/create_careprovider_username"
         android:layout_width="400dp"
-        android:layout_height="55dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -100,15 +105,16 @@
         android:ems="10"
         android:hint="username (8 -20 characters)"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastName" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_lastName" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/create_careprovider_email"
         android:layout_width="400dp"
-        android:layout_height="64dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -116,15 +122,16 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_username_error" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/create_careprovider_phone"
         android:layout_width="400dp"
-        android:layout_height="42dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -132,13 +139,14 @@
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="phone"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_email_error" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/create_careprovider_password"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -148,30 +156,33 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_phonenumber_error" />
 
     <Button
-        android:id="@+id/verify_button"
+        android:id="@+id/create_careprovider_verify_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/verify"
+        android:text="Verify"
         android:textColor="@color/vaporwave_pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_password_error"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/confirmpassword"
+        android:id="@+id/create_careprovider_confirmpassword"
         android:layout_width="400dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -182,30 +193,109 @@
         android:ems="10"
         android:hint="@string/confirm_password"
         android:inputType="textPersonName"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_password"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/password_error"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
+        android:id="@+id/create_careprovider_id_error"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/verify_button"
-        app:layout_constraintHorizontal_bias="0.101"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/create_careprovider_firstname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmpassword"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_id" />
+
+    <TextView
+        android:id="@+id/create_careprovider_username_error"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/create_careprovider_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_username"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/create_careprovider_email_error"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/create_careprovider_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_email"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/create_careprovider_phonenumber_error"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/create_careprovider_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_phone"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/create_careprovider_password_error"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_confirmpassword"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/create_careprovider_cancel_button"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cancel"
+        android:textColor="@color/vaporwave_pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/create_careprovider_verify_button"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_careprovider_password_error"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>
