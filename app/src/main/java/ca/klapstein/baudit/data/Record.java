@@ -176,7 +176,9 @@ public class Record implements Comparable<Record> {
 
 
     /**
-     * Used to compare two records for RecordTreeSet by time.
+     * Compare two {@code Records} by their creation time.
+     *
+     * This is used for sorting a {@code RecordTreeSet} by a {@code Record}'s creation time.
      *
      * @param record {@code Record} the comment to validate
      * @return {@code int} {@code 0} if both record time are the same  or
