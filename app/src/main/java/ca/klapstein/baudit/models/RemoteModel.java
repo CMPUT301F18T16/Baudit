@@ -2,6 +2,7 @@ package ca.klapstein.baudit.models;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
@@ -27,7 +28,7 @@ import java.util.List;
  * Note: all {@code Patient}s and {@code CareProviders} are uniquely identified by their username within
  * the remote ElasticSearch.
  */
-public class RemoteModel {
+class RemoteModel {
     private static final String TAG = "RemoteModel";
     private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
 
@@ -47,30 +48,104 @@ public class RemoteModel {
     /**
      * Validate whether a given username {@code String} representation is not already
      * taken within both remote.
-     * <p>
-     * TODO: implement
      *
-     * @param username {@code String}
-     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     * return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
      */
-    static public boolean uniqueID(String username) {
-        // TODO: implement uniqueness checking of a userid given a string
-        return true;
+    public static class UniqueID extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            String query = "{\n" +
+                    "   \"query\": {\n" +
+                    "       \"bool\": {\n" +
+                    "           \"must\": [\n" +
+                    "                {\"match\": \n" +
+                    "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
+                    "                } \n" +
+                    "           ] \n" +
+                    "       } \n" +
+                    "   } \n" +
+                            "}";
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
+                    .addIndex(CARE_PROVIDER_INDEX)
+                    .addIndex(PATIENT_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+
+            try {
+                JestResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Account> accountList;
+                    accountList = result.getSourceAsObjectList(Account.class);
+                    return (accountList.size() == 0);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "failed to validate account username from remote", e);
+                return false; // assume false on failure to avoid an unexpected state
+            }
+            return false;
+        }
     }
 
     /**
-     * Validate that a given username and password pair match to valid user within the remote ElasticSearch.
+     * Validate that a given username and password pair match to valid {@code Account} within the remote ElasticSearch.
      * <p>
-     * TODO: implement
      *
-     * @param username {@code String}
-     * @param password {@code String}
-     * @return {@code boolean}
+     * return {@code Account} corresponding to the username and password, or null if no such account is found
      */
-    public static boolean validateLogin(String username, String password) {
-        // TODO: implement
-        Log.d(TAG, "Validating username: " + username);
-        return "test".equals(username) && "foo".equals(password);
+    public static class ValidateLogin extends AsyncTask<String, Void, Account> {
+        @Override
+        protected Account doInBackground(String... search_parameters) {
+            JestDroidClient client = createBaseClient();
+            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
+            ArrayList<Account> accountArrayList = new ArrayList<>();
+            String query = "{\n" +
+                    "   \"query\": {\n" +
+                    "       \"bool\": {\n" +
+                    "           \"must\": [\n" +
+                    "                {\"match\": \n" +
+                    "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
+                    "                }, \n" +
+                    "                {\"match\": \n" +
+                    "                    {\"password\" : \"" + search_parameters[1] + "\"} \n" +
+                    "                } \n" +
+                    "           ] \n" +
+                    "       } \n" +
+                    "   } \n" +
+                    "}";
+
+
+            Log.d(TAG, "search query:\n" + query);
+            Search search = new Search.Builder(query)
+                    .addIndex(PATIENT_INDEX)
+                    .addIndex(CARE_PROVIDER_INDEX)
+                    .build();
+            Log.d(TAG, "search json: " + search.toString());
+            try {
+                JestResult result = client.execute(search);
+
+                if (result.isSucceeded()) {
+                    List<Account> accountList;
+                    accountList = result.getSourceAsObjectList(Account.class);
+                    accountArrayList.addAll(accountList);
+                }
+
+            } catch (Exception e) {
+                Log.e(TAG, "failed to get patients from remote", e);
+            }
+            if (accountArrayList.size() > 1) {
+                // we shouldn't encounter this. But, someone could poison our elasticsearch
+                // writing a log of abnormal results is the least we can do
+                Log.w(TAG, "more than one account found via query using the first result");
+            } else if (accountArrayList.size() == 0) {
+                Log.w(TAG, "no matching account found via query");
+                return null;
+            }
+            return accountArrayList.get(0);
+        }
     }
 
     /**
@@ -85,15 +160,14 @@ public class RemoteModel {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Patient> patientArrayList = new ArrayList<>();
-            String query =
-                    "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"ids\" : {\n" +
-                            "            \"type\" : \"patient\",\n" +
-                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
-                            "         }\n" +
-                            "     }\n" +
-                            "}";
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"type\" : \"patient\",\n" +
+                    "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                    "         }\n" +
+                    "     }\n" +
+                    "}";
 
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
@@ -163,13 +237,13 @@ public class RemoteModel {
             for (Patient patient : patients) {
                 Index index = new Index.Builder(patient)
                         .index(PATIENT_INDEX)
-                        .id(patient.getUsername().getUsernameString()) // this sets the id...
+                        .id(patient.getUsername().toString()) // this sets the id...
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        assert patient.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added patient to remote: remoteID: " + patient.getUsername().getUsernameString());
+                        assert patient.getUsername().toString().equals(result.getId());
+                        Log.d(TAG, "successfully added patient to remote: remoteID: " + patient.getUsername().toString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "failed to add patient to remote", e);
@@ -191,15 +265,14 @@ public class RemoteModel {
             JestDroidClient client = createBaseClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<CareProvider> careProviderArrayList = new ArrayList<>();
-            String query =
-                    "{\n" +
-                            "    \"query\": {\n" +
-                            "        \"ids\" : {\n" +
-                            "            \"type\" : \"careprovider\",\n" +
-                            "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
-                            "         }\n" +
-                            "     }\n" +
-                            "}";
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"ids\" : {\n" +
+                    "            \"type\" : \"careprovider\",\n" +
+                    "            \"values\" : [\"" + search_parameters[0] + "\"]\n" +
+                    "         }\n" +
+                    "     }\n" +
+                    "}";
 
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
@@ -238,13 +311,13 @@ public class RemoteModel {
             for (CareProvider careProvider : careProviders) {
                 Index index = new Index.Builder(careProvider)
                         .index(CARE_PROVIDER_INDEX)
-                        .id(careProvider.getUsername().getUsernameString()) // this sets the id...
+                        .id(careProvider.getUsername().toString()) // this sets the id...
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
-                        assert careProvider.getUsername().getUsernameString().equals(result.getId());
-                        Log.d(TAG, "successfully added care provider to remote: remoteID: " + careProvider.getUsername().getUsernameString());
+                        assert careProvider.getUsername().toString().equals(result.getId());
+                        Log.d(TAG, "successfully added care provider to remote: remoteID: " + careProvider.getUsername().toString());
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "failed to add the care provider to remote", e);

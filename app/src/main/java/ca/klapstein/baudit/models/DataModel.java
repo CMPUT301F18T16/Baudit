@@ -3,10 +3,7 @@ package ca.klapstein.baudit.models;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
-import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.data.*;
 
 import java.util.concurrent.ExecutionException;
 
@@ -27,34 +24,33 @@ public class DataModel {
     }
 
     /**
-     * Validate whether a given username {@code String} representation is not already
-     * taken within both the local and remote.
-     * <p>
-     * TODO: implement
+     * Validate whether a given {@code Username} is not already taken within the remote.
      *
-     * @param username {@code String}
-     * @return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
+     * @param username {@code Username}
+     * @return {@code true} if the {@code Username} is not already taken, otherwise {@code false}
      */
-    static public boolean uniqueID(String username) {
-        // TODO: validate from the local?
-        // TODO: implement from RemoteModel
-        return true;
+    public boolean uniqueID(Username username) {
+        return getPatient(username) == null && getCareProvider(username) == null;
     }
 
     /**
      * Validate that a given username and password pair match to a valid user within the remote ElasticSearch.
      * Or validate that a local authentication token exists within the local.
      * <p>
-     * TODO: implement
+     * TODO: implement offline login method? Cookie/token based
      *
-     * @param username {@code String}
-     * @param password {@code String}
+     * @param username {@code Username}
+     * @param password {@code Password}
      * @return {@code boolean}
      */
-    public boolean validateLogin(String username, String password) {
-        // TODO: implement from RemoteModel
-        // TODO: implement offline login method? Cookie/token based
-        return RemoteModel.validateLogin(username, password);
+    public boolean validateLogin(Username username, Password password) {
+        try {
+            Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
+            return account != null;
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e(TAG, "failure getting Patient from remote", e);
+            return false;
+        }
     }
 
     /**
@@ -69,7 +65,7 @@ public class DataModel {
     public Patient getPatient(Username username) {
         // check remote
         try {
-            return new RemoteModel.GetPatient().execute(username.getUsernameString()).get();
+            return new RemoteModel.GetPatient().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
         }
@@ -86,8 +82,6 @@ public class DataModel {
 
     /**
      * Get all the {@code Patient}s currently registered to Baudit.
-     * <p>
-     * TODO: this getter should be narrowed down in scope/reach
      *
      * @return {@code PatientTreeSet}
      */
@@ -155,7 +149,7 @@ public class DataModel {
     public CareProvider getCareProvider(Username username) {
         // check remote
         try {
-            return new RemoteModel.GetCareProvider().execute(username.getUsernameString()).get();
+            return new RemoteModel.GetCareProvider().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting CareProvider from remote", e);
         }
@@ -170,7 +164,6 @@ public class DataModel {
      * @param careProvider {@code CareProvider}
      */
     public void commitCareProvider(CareProvider careProvider) {
-        // TODO: save to remote
         new RemoteModel.AddCareProviderTask().execute(careProvider);
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);

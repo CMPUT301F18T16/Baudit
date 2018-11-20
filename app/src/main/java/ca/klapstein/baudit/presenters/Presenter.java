@@ -21,9 +21,4 @@ abstract public class Presenter<V extends View> {
         // TODO: pass context
         this.dataManager = new DataModel(context);
     }
-//
-//    /**
-//     * Hook to define behavior to be done when a Activity notifies that they have started.
-//     */
-//    abstract void notifyStart();
 }

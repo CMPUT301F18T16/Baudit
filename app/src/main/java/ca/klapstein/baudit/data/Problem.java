@@ -16,8 +16,6 @@ public class Problem implements Comparable<Problem> {
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-    public static final String ES_TYPE = "problem";
-
     private String title;
     private String description;
     private Date date;
@@ -53,18 +51,39 @@ public class Problem implements Comparable<Problem> {
         this.date = new Date();
     }
 
+    /**
+     * Get the {@code RecordTreeSet} of the {@code Problem}.
+     *
+     * @return {@code RecordTreeSet}
+     */
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
 
+    /**
+     * Setter for a {@code Problem}'s {@code RecordTreeSet}.
+     *
+     * @param recordTreeSet {@code RecordTreeSet}
+     */
     public void setRecordTreeSet(RecordTreeSet recordTreeSet) {
         this.recordTreeSet = recordTreeSet;
     }
 
+    /**
+     * Get the {@code description} of the {@code Problem}.
+     *
+     * @return {@code String}
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Setter for a {@code Problem}'s description.
+     *
+     * @param description {@code String}
+     * @throws IllegalArgumentException if the {@code Problem}'s description is invalid
+     */
     public void setDescription(String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
             throw new IllegalArgumentException("invalid problem description");
@@ -72,10 +91,21 @@ public class Problem implements Comparable<Problem> {
         this.description = description;
     }
 
+    /**
+     * Get the {@code title} of the {@code Problem}.
+     *
+     * @return {@code String}
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Setter for a {@code Problem}'s title.
+     *
+     * @param title {@code String}
+     * @throws IllegalArgumentException if the {@code Problem}'s title is invalid
+     */
     public void setTitle(String title) throws IllegalArgumentException {
         if (!isValidProblemTitle(title)) {
             throw new IllegalArgumentException("invalid problem title");
@@ -83,18 +113,43 @@ public class Problem implements Comparable<Problem> {
         this.title = title;
     }
 
+    /**
+     * Get the {@code Date} of the {@code Problem}.
+     *
+     * @return {@code Date}
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Setter for a {@code Problem}'s {@code Date}.
+     *
+     * @param date {@code Date}
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Get the timestamp of the {@code Date} for the {@code Problem}.
+     *
+     * @return {@code String}
+     */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
 
+    /**
+     * Compare two {@code Problem}s by their creation time and if equal creation times by their titles.
+     * <p>
+     * This is used for sorting a {@code ProblemTreeSet} by a {@code Problem}'s creation time and title.
+     *
+     * @param problem {@code Problem} the given {@code Problem} to compare.
+     * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are the same or
+     *                     {@code -int} if the this {@code Problem} is less than the given {@code Problem}
+     *                     {@code +int} if the this {@code Problem} is greater than the given {@code Problem}.
+     */
     @Override
     public int compareTo(@NonNull Problem problem) {
         if (getDate().compareTo(problem.getDate()) == 0) {
@@ -103,11 +158,4 @@ public class Problem implements Comparable<Problem> {
             return getDate().compareTo(problem.getDate()); // Order by date
         }
     }
-
-    private String id;
-
-    public void setProblemID(String id) {
-        this.id = id;
-    }
-
 }

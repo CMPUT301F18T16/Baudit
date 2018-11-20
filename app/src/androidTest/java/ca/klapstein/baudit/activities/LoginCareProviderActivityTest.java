@@ -3,13 +3,11 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.widget.EditText;
-
+import ca.klapstein.baudit.R;
 import com.robotium.solo.Solo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import ca.klapstein.baudit.R;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
@@ -46,8 +44,9 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
      */
     @Test
     public void testLoginSuccess() {
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "test");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foo");
+        // TODO: add hook to ensure test care provider is added to the remote or make some mock
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
         solo.assertCurrentActivity("Wrong Activity", PatientListActivity.class);
     }
@@ -58,8 +57,8 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
      */
     @Test
     public void testLoginFail() {
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "wrong");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "wrong");
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "BADPASSWORD");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
         solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
