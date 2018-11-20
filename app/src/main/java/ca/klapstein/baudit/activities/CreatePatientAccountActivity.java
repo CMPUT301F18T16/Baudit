@@ -99,26 +99,49 @@ public class CreatePatientAccountActivity extends AppCompatActivity
         super.onStart();
     }
 
+    /**
+     * Displays an error message if the inputted username is invalid.
+     *
+     * @param message {@code String}
+     */
     @Override
     public void updateUsernameError(String message) {
         usernameErrorText.setText(message);
     }
 
+    /**
+     * Displays an error message if the inputted email is invalid.
+     *
+     * @param message {@code String}
+     */
     @Override
     public void updateEmailError(String message) {
         emailErrorText.setText(message);
     }
 
+    /**
+     * Displays an error message if the inputted phone number is invalid.
+     *
+     * @param message {@code String}
+     */
     @Override
     public void updatePhoneNumberError(String message) {
         phoneNumberErrorText.setText(message);
     }
 
+    /**
+     * Displays an error message if the inputted password(s) is/are invalid.
+     *
+     * @param message {@code String}
+     */
     @Override
     public void updatePasswordError(String message) {
         passwordErrorText.setText(message);
     }
 
+    /**
+     * Responds to account confirmation by opening the new patient account's home screen.
+     */
     @Override
     public void onAccountConfirmed() {
         startActivity(new Intent(
