@@ -7,8 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class PreferencesModelTest {
 
@@ -39,8 +38,8 @@ public class PreferencesModelTest {
     @Test
     public void saveSharedPreferencesCareProvider() {
         CareProvider careProvider = new CareProvider(
-                new Username("CareProvider"), new Password("foobar123"),
-                new ContactInfo(new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"))
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         );
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
     }
@@ -49,5 +48,19 @@ public class PreferencesModelTest {
     public void loadSharedPreferencesCareProvider() {
         CareProvider careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
         assertNull(careProvider);
+    }
+
+    @Test
+    public void saveSharedPreferencesLoginAccountUsername() {
+        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, new Username("TESTUsername"));
+    }
+
+    @Test
+    public void loadSharedPreferencesLoginAccountUsername() {
+        this.saveSharedPreferencesCareProvider();
+        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, new Username("TESTUsername"));
+        Username username = PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
+        assertNotNull(username);
+        assertEquals("TESTUsername", username.toString());
     }
 }
