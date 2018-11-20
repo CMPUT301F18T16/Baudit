@@ -1,19 +1,20 @@
 package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import ca.klapstein.baudit.R;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertEquals;
@@ -22,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
 
     private Solo solo;
+    private DataModel dataModel;
 
     public ProblemActivityTest() {
         super(ProblemActivity.class);
@@ -29,12 +31,15 @@ public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
 
     @Before
     public void setUp() {
+        dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
+        dataModel.setLoginAccountUserName(new Username("TESTPatient1"));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @After
     public void tearDown() {
+        dataModel.clearLoginAccountUserName();
         solo.finishOpenedActivities();
     }
 
