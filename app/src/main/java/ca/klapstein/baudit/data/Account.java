@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
  * Data class representing a basic account/account of Baudit.
  */
 public class Account implements Comparable<Account> {
-    private static final String TAG = "Account";
 
-    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo, @NonNull Password password) {
+    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo,
+                   @NonNull Password password) {
         setUsername(username);
         setContactInfo(contactInfo);
         setPassword(password);

@@ -2,6 +2,7 @@ package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Data class representing a Baudit's {@code Account}'s email.
@@ -9,16 +10,15 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @see Account
  */
 public class Email {
-    private static final String TAG = "Email";
 
     /**
      * Apache commons EmailValidator.
      */
     private static final EmailValidator emailValidator = EmailValidator.getInstance();
-    @NonNull
-    private String email;
 
-    public Email(String email) {
+    @NonNull private String email;
+
+    public Email(@NonNull String email) {
         if (isValid(email)) {
             this.email = email;
         } else {
@@ -70,7 +70,7 @@ public class Email {
         return result;
     }
 
-    @Override
+    @Override @Contract(value = "null -> false", pure = true)
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
