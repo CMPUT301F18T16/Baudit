@@ -60,6 +60,11 @@ public class Problem implements Comparable<Problem> {
         return recordTreeSet;
     }
 
+    /**
+     * Setter for a {@code Problem}'s {@code RecordTreeSet}.
+     *
+     * @param recordTreeSet {@code RecordTreeSet}
+     */
     public void setRecordTreeSet(RecordTreeSet recordTreeSet) {
         this.recordTreeSet = recordTreeSet;
     }
@@ -77,6 +82,7 @@ public class Problem implements Comparable<Problem> {
      * Setter for a {@code Problem}'s description.
      *
      * @param description {@code String}
+     * @throws IllegalArgumentException if the {@code Problem}'s description is invalid
      */
     public void setDescription(String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
@@ -98,6 +104,7 @@ public class Problem implements Comparable<Problem> {
      * Setter for a {@code Problem}'s title.
      *
      * @param title {@code String}
+     * @throws IllegalArgumentException if the {@code Problem}'s title is invalid
      */
     public void setTitle(String title) throws IllegalArgumentException {
         if (!isValidProblemTitle(title)) {
