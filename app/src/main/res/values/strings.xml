@@ -47,4 +47,18 @@
     <string name="keywords_label">Keywords:</string>
     <string name="new_record">New record</string>
     <string name="edit_record">Edit record</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="username_with_constraint">Username (8&#8211;20 characters)</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="body_location_template">Body location template</string>
+    <string name="upload">Upload</string>
+    <string name="body_location_disclaimer">Body location images are full-body images used to indicate the location of problems on the body. Please note that these images will be viewable by you primary care provider.</string>
+    <string name="confirm">Confirm</string>
+    <string name="create_account">Create account</string>
+    <string name="username_error">⚠ Username must be 8&#8211;20 characters.</string>
+    <string name="email_error">⚠ Invalid email.</string>
+    <string name="phone_number_error">⚠ Invalid phone number.</string>
+    <string name="password_match_error">⚠ Passwords do not match.</string>
 </resources>

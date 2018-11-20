@@ -18,14 +18,13 @@ import ca.klapstein.baudit.views.ViewAccountView;
  * @see Account
  */
 public class ViewAccountDialog extends DialogFragment implements ViewAccountView {
-    private static final String TAG = "ViewAccountDialog";
 
     private ViewAccountPresenter presenter;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_account_create, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_view_account, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
