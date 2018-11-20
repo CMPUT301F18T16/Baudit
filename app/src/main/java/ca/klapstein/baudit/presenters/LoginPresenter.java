@@ -27,10 +27,6 @@ public class LoginPresenter extends Presenter<LoginView> {
         super(view, context);
         this.context = context;
 
-        // If the user is already logged in, go to patient home without validation
-        if (dataManager.getLoggedInAccount() != null) {
-            view.onLoginValidationSuccess();
-        }
         // attempt to login from local saved state
         processOfflineLoginAccount();
     }
@@ -40,7 +36,6 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     private void offlineLoginCareProvider(CareProvider careProvider) {
         if (view.getClass() == LoginCareProviderActivity.class) {
-            dataManager.setLoginAccountUserName(careProvider.getUsername());
             view.onLoginValidationSuccess();
         } else {
             view.switchLoginScreen();
@@ -52,7 +47,6 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     private void offlineLoginPatient(Patient patient) {
         if (view.getClass() == LoginPatientActivity.class) {
-            dataManager.setLoginAccountUserName(patient.getUsername());
             view.onLoginValidationSuccess();
         } else {
             view.switchLoginScreen();
