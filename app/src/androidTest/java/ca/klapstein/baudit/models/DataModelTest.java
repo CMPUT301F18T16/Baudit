@@ -162,21 +162,21 @@ public class DataModelTest {
     }
 
     @Test
-    public void setAccountUserName() {
+    public void setLoginAccountUserName() {
         dataModel.setLoginAccountUserName(new Username("TESTUsername"));
         Username username = dataModel.getLoginAccountUsername();
         assertEquals("TESTUsername", username.toString());
     }
 
     @Test
-    public void clearAccountUserName() {
+    public void clearLoginAccountUserName() {
         dataModel.clearLoginAccountUserName();
         Username username = dataModel.getLoginAccountUsername();
         assertNull(username);
     }
 
     @Test
-    public void getLoggedInAccount() {
+    public void getLoginAccountUserName() {
         this.commitCareProvider();
         this.commitPatient();
 
