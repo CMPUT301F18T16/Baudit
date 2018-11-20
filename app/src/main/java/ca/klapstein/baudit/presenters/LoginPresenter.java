@@ -30,10 +30,10 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     private void offlineLoginCareProvider(CareProvider careProvider) {
         if (view.getClass() == LoginPatientActivity.class) {
-            this.view.switchLoginScreen();
+            view.switchLoginScreen();
         } else {
             dataManager.setLoginAccountUserName(careProvider.getUsername());
-            this.view.onLoginValidationSuccess();
+            view.onLoginValidationSuccess();
         }
     }
 
@@ -42,10 +42,10 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     private void offlineLoginPatient(Patient patient) {
         if (view.getClass() == LoginCareProviderActivity.class) {
-            this.view.switchLoginScreen();
+            view.switchLoginScreen();
         } else {
             dataManager.setLoginAccountUserName(patient.getUsername());
-            this.view.onLoginValidationSuccess();
+            view.onLoginValidationSuccess();
         }
     }
 
@@ -78,22 +78,22 @@ public class LoginPresenter extends Presenter<LoginView> {
             Account account = dataManager.validateLogin(new Username(username), new Password(password));
             // if it is null we failed the login
             if (account == null) {
-                this.view.onLoginValidationFailure();
+                view.onLoginValidationFailure();
                 // if we are logging in a CareProvider ensure the account is actually a CareProvider
             } else if (view.getClass() == LoginCareProviderActivity.class &&
                     dataManager.getCareProvider(account.getUsername()) != null) {
                 dataManager.setLoginAccountUserName(account.getUsername());
-                this.view.onLoginValidationSuccess();
+                view.onLoginValidationSuccess();
                 // if we are logging in a Patient ensure the account is actually a Patient
             } else if (view.getClass() == LoginPatientActivity.class &&
                     dataManager.getPatient(account.getUsername()) != null) {
                 dataManager.setLoginAccountUserName(account.getUsername());
-                this.view.onLoginValidationSuccess();
+                view.onLoginValidationSuccess();
             } else {  // else we have failed the login
-                this.view.onLoginValidationFailure();
+                view.onLoginValidationFailure();
             }
         } catch (IllegalArgumentException e) {  // likely invalid username or password string: fail the login
-            this.view.onLoginValidationFailure();
+            view.onLoginValidationFailure();
         }
     }
 }
