@@ -32,8 +32,8 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
 
     @After
     public void tearDown() {
-        solo.finishOpenedActivities();
         dataModel.clearLoginAccountUserName();
+        solo.finishOpenedActivities();
     }
 
     /**
@@ -54,7 +54,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.assertCurrentActivity("Wrong Activity", PatientListActivity.class);
+        solo.waitForActivity(PatientListActivity.class, 10);
     }
 
     /**

@@ -32,8 +32,8 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
 
     @After
     public void tearDown() {
-        solo.finishOpenedActivities();
         dataModel.clearLoginAccountUserName();
+        solo.finishOpenedActivities();
     }
 
     /**
@@ -54,7 +54,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_username), "TESTPatient1");
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
-        solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
+        solo.waitForActivity(PatientHomeActivity.class, 10);
     }
 
     /**
