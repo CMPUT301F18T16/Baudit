@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
  * Abstract class representing a basic account/account of Baudit.
  */
 public abstract class Account {
-    private static final String TAG = "Account";
 
-    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo, @NonNull Password password) {
+    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo,
+                   @NonNull Password password) {
         setUsername(username);
         setContactInfo(contactInfo);
         setPassword(password);

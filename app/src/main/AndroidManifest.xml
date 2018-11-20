@@ -40,8 +40,12 @@
             android:name=".activities.EditAccountActivity"
             android:theme="@style/BauditPatientTheme.NoActionBar" />
 
-        <activity android:name=".activities.CreatePatientAccountActivity"/>
+        <activity
+            android:name=".activities.CreatePatientAccountActivity"
+            android:theme="@style/BauditPatientTheme.NoActionBar"/>
+
         <activity android:name=".activities.LocationActivity"/>
+
         <activity
             android:name=".activities.LoginCareProviderActivity"
             android:theme="@style/BauditCareProviderTheme.NoActionBar"/>
