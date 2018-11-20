@@ -174,7 +174,6 @@ public class Record implements Comparable<Record> {
         this.geoLocation = geoLocation;
     }
 
-
     /**
      * Compare two {@code Record}s by their creation time.
      *
@@ -186,7 +185,7 @@ public class Record implements Comparable<Record> {
      *                     {@code +int} if this {@code Record} is created later in time than the given {@code Record}.
      */
     @Override
-    public int compareTo(Record record) {
+    public int compareTo(@NonNull Record record) {
         return (int) (date.getTime() - record.getDate().getTime());
     }
 }
