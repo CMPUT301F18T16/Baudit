@@ -117,7 +117,10 @@ public class DataModel {
 
         // check local
         Patient localPatient = PreferencesModel.loadSharedPreferencesPatient(context);
-
+        if (localPatient != null && !localPatient.getUsername().equals(username)) {
+            localPatient = null;
+            //TODO: deconflicting
+        }
         // merge both remote and local
         if (localPatient != null && remotePatient != null) {
             localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
