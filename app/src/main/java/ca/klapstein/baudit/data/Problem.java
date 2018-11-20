@@ -147,8 +147,8 @@ public class Problem implements Comparable<Problem> {
      *
      * @param problem {@code Problem} the given {@code Problem} to compare.
      * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are the same or
-     * {@code -int} if the this {@code Problem} is less than the given {@code Problem}
-     * {@code +int} if the this {@code Problem} is greater than the given {@code Problem}.
+     *                     {@code -int} if the this {@code Problem} is less than the given {@code Problem}
+     *                     {@code +int} if the this {@code Problem} is greater than the given {@code Problem}.
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
