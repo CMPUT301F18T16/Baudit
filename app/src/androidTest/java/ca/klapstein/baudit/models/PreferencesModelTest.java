@@ -7,8 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public class PreferencesModelTest {
 
@@ -21,6 +21,7 @@ public class PreferencesModelTest {
 
     @After
     public void tearDown() {
+        // TODO: empty shared prefs
         context = null;
     }
 
@@ -39,15 +40,30 @@ public class PreferencesModelTest {
     @Test
     public void saveSharedPreferencesCareProvider() {
         CareProvider careProvider = new CareProvider(
-                new Username("CareProvider"), new Password("foobar123"),
-                new ContactInfo(new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"))
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         );
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
     }
 
     @Test
     public void loadSharedPreferencesCareProvider() {
+        this.saveSharedPreferencesCareProvider();
         CareProvider careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
-        assertNull(careProvider);
+        assertNotNull(careProvider);
+        assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
+    }
+
+    @Test
+    public void saveSharedPreferencesLoginAccountUsername() {
+        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, new Username("TESTUsername"));
+    }
+
+    @Test
+    public void loadSharedPreferencesLoginAccountUsername() {
+        this.saveSharedPreferencesCareProvider();
+        Username username = PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
+        assertNotNull(username);
+        assertEquals("TESTUsername", username.toString());
     }
 }

@@ -17,12 +17,8 @@ public class PatientHomePresenter extends Presenter<ProblemListView> {
 
     public PatientHomePresenter(ProblemListView view, Context context) {
         super(view, context);
-        // TODO: get problems
-//        problemTreeSet = dataManager.getProblems(null);
-        // TODO: mock for now
-        problemTreeSet = new ProblemTreeSet();
+        problemTreeSet = dataManager.getLoggedInPatient().getProblemTreeSet();
     }
-
 
     public Problem getProblemAt(int position) {
         return (Problem) problemTreeSet.toArray()[position];

@@ -34,8 +34,9 @@ public class PhoneNumber {
      * @return {@code String}
      */
     @NonNull
-    public String getPhoneNumber() {
-        return this.phoneNumber;
+    @Override
+    public String toString() {
+        return phoneNumber;
     }
 
     /**
@@ -55,7 +56,7 @@ public class PhoneNumber {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.getPhoneNumber().hashCode();
+        result = 31 * result + this.toString().hashCode();
         return result;
     }
 
@@ -65,7 +66,7 @@ public class PhoneNumber {
             return false;
         } else if (obj.getClass().equals(PhoneNumber.class)) {
             PhoneNumber otherPhoneNumber = (PhoneNumber) obj;
-            return this.getPhoneNumber().equals(otherPhoneNumber.getPhoneNumber());
+            return this.toString().equals(otherPhoneNumber.toString());
         } else {
             return false;
         }

@@ -20,6 +20,11 @@ public class LoginPresenter extends Presenter<LoginView> {
 
     public LoginPresenter(LoginView view, Context context) {
         super(view, context);
+        if (dataManager.getLoggedInAccount() != null) { // if we already have a login token in share prefs proceed logging in
+            this.view.onLoginValidationSuccess();
+        } else {
+            dataManager.clearLoginAccountUserName();
+        }
     }
 
     /**
@@ -30,7 +35,9 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     public void onLoginButtonClicked(String username, String password) {
         try {
-            if (dataManager.validateLogin(new Username(username), new Password(password))) {
+            Username loginUsername = new Username(username);
+            if (dataManager.validateLogin(loginUsername, new Password(password))) {
+                dataManager.setLoginAccountUserName(loginUsername);
                 this.view.onLoginValidationSuccess();
             } else {
                 this.view.onLoginValidationFailure();

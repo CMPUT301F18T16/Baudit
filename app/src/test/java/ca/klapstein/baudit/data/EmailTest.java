@@ -19,7 +19,7 @@ public class EmailTest {
     public void EmailConstructor() {
         Email email = new Email("foo@example.com");
         assertNotNull(email);
-        assertEquals(email.getEmail(), "foo@example.com");
+        assertEquals(email.toString(), "foo@example.com");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -30,8 +30,8 @@ public class EmailTest {
     @Test
     public void getEmail() {
         Email email = new Email("foo@example.com");
-        assertNotNull(email.getEmail());
-        assertEquals(email.getEmail(), "foo@example.com");
+        assertNotNull(email.toString());
+        assertEquals(email.toString(), "foo@example.com");
     }
 
     @Test

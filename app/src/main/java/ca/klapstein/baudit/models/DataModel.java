@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.models;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import ca.klapstein.baudit.data.*;
@@ -21,6 +22,50 @@ public class DataModel {
 
     public DataModel(Context context) {
         this.context = context;
+    }
+
+    public Username getLoginAccountUsername() {
+        return PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
+    }
+
+    public void clearLoginAccountUserName() {
+        Log.i(TAG, "clearing LoginAccountUserName");
+        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, null);
+    }
+
+    public void setLoginAccountUserName(@NonNull Username username) {
+        Log.i(TAG, "setting LoginAccountUserName: " + username.toString());
+        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, username);
+    }
+
+    public Patient getLoggedInPatient() {
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            return getPatient(getLoginAccountUsername());
+        }
+        return null;
+    }
+
+    public CareProvider getLoggedInCareProvider() {
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            return getCareProvider(username);
+        }
+        return null;
+    }
+
+    public Account getLoggedInAccount() {
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            // attempt to get the account as a patient
+            Account account = getLoggedInPatient();
+            // if no patient account was found it must be a care provider
+            if (account == null) {
+                account = getLoggedInCareProvider();
+            }
+            return account;
+        }
+        return null;
     }
 
     /**
@@ -71,13 +116,7 @@ public class DataModel {
         }
 
         // check local
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        for (Patient patient_i : patientTreeSet) {
-            if (patient_i.getUsername().equals(username)) {
-                return patient_i;
-            }
-        }
-        return null;
+        return PreferencesModel.loadSharedPreferencesPatient(context);
     }
 
     /**
@@ -111,15 +150,8 @@ public class DataModel {
                 patient
         );
 
-        // get the patientTreeSet from local and update it
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        if (patientTreeSet.contains(patient)) {
-            patientTreeSet.remove(patient);
-            patientTreeSet.add(patient);
-        }
-
         // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
+        PreferencesModel.saveSharedPreferencesPatient(context, patient);
     }
 
     /**

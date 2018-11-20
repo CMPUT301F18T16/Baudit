@@ -16,12 +16,15 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
 
     public EditAccountPresenter(EditAccountView view, Context context) {
         super(view, context);
+        account = dataManager.getLoggedInAccount();
     }
 
-
     public void viewStarted() {
-        // TODO: Get account details
-        view.updateFields("Test", "help@me.com", "(780) 400-0400");
+        view.updateFields(
+                account.getUsername().toString(),
+                account.getContactInfo().getEmail().toString(),
+                account.getContactInfo().getPhoneNumber().toString()
+        );
     }
 
     public void saveClicked(String name, String email, String phoneNumber) {

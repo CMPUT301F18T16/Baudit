@@ -45,7 +45,8 @@ public class Email {
      * @return {@code String}
      */
     @NonNull
-    public String getEmail() {
+    @Override
+    public String toString() {
         return email;
     }
 
@@ -65,7 +66,7 @@ public class Email {
     @Override
     public int hashCode() {
         int result = 19;
-        result = 31 * result + this.getEmail().hashCode();
+        result = 31 * result + this.toString().hashCode();
         return result;
     }
 
@@ -75,7 +76,7 @@ public class Email {
             return false;
         } else if (obj.getClass().equals(Email.class)) {
             Email otherEmail = (Email) obj;
-            return this.getEmail().equals(otherEmail.getEmail());
+            return this.toString().equals(otherEmail.toString());
         } else {
             return false;
         }

@@ -30,6 +30,7 @@ public class LogoutPresenter extends Presenter<LogoutView> {
      */
     public boolean validateLogout() {
         view.setLogoutSuccess();
+        dataManager.clearLoginAccountUserName();
         return true;
     }
 }

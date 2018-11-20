@@ -24,6 +24,9 @@ public class DataModelTest {
     @After
     public void tearDown() {
         context = null;
+        // clean out the share prefs login data
+        // TODO: empty shared prefs
+        dataModel.clearLoginAccountUserName();
         dataModel = null;
     }
 
@@ -40,7 +43,7 @@ public class DataModelTest {
     @Test
     public void commitPatient() {
         Patient patient3 = new Patient(
-                new Username("TESTPatient3"), new Password("foobar123"),
+                new Username("TESTPatient1"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         dataModel.commitPatient(patient3);
@@ -57,12 +60,12 @@ public class DataModelTest {
     public void commitPatientTreeSet() {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
         Patient patient1 = new Patient(
-                new Username("TESTPatient1"), new Password("foobar123"),
+                new Username("TESTPatient2"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         patientTreeSet.add(patient1);
         Patient patient2 = new Patient(
-                new Username("TESTPatient2"), new Password("foobar123"),
+                new Username("TESTPatient3"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         patientTreeSet.add(patient2);
@@ -80,9 +83,9 @@ public class DataModelTest {
         this.commitPatientTreeSet();
         // wait for remote elastic search cluster to settle
         Thread.sleep(10000);
-        Patient patient1 = dataModel.getPatient(new Username("TESTPatient1"));
+        Patient patient1 = dataModel.getPatient(new Username("TESTPatient2"));
         assertNotNull(patient1);
-        assertEquals(new Username("TESTPatient1"), patient1.getUsername());
+        assertEquals(new Username("TESTPatient2"), patient1.getUsername());
 
         this.commitPatient();
         // wait for remote elastic search cluster to settle
@@ -149,12 +152,42 @@ public class DataModelTest {
         this.commitPatient();
         this.commitCareProvider();
         Thread.sleep(10000);
-        assertTrue(dataModel.validateLogin(new Username("TESTPatient3"), new Password("foobar123")));
+        assertTrue(dataModel.validateLogin(new Username("TESTPatient1"), new Password("foobar123")));
         assertTrue(dataModel.validateLogin(new Username("TESTCareProvider1"), new Password("foobar123")));
     }
 
     @Test
     public void validateLoginFail() {
         assertFalse(dataModel.validateLogin(new Username("NONSUCH_ACCOUNT"), new Password("PASSWORD")));
+    }
+
+    @Test
+    public void setLoginAccountUserName() {
+        dataModel.setLoginAccountUserName(new Username("TESTUsername"));
+        Username username = dataModel.getLoginAccountUsername();
+        assertEquals("TESTUsername", username.toString());
+    }
+
+    @Test
+    public void clearLoginAccountUserName() {
+        dataModel.clearLoginAccountUserName();
+        Username username = dataModel.getLoginAccountUsername();
+        assertNull(username);
+    }
+
+    @Test
+    public void getLoginAccountUserName() {
+        this.commitCareProvider();
+        this.commitPatient();
+
+        dataModel.setLoginAccountUserName(new Username("TESTCareProvider1"));
+        CareProvider careProvider = (CareProvider) dataModel.getLoggedInAccount();
+        assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
+        assertNotNull(careProvider.getAssignedPatientTreeSet());
+
+        dataModel.setLoginAccountUserName(new Username("TESTPatient1"));
+        Patient patient = (Patient) dataModel.getLoggedInAccount();
+        assertEquals("TESTPatient1", patient.getUsername().toString());
+        assertNotNull(patient.getProblemTreeSet());
     }
 }
