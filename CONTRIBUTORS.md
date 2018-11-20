@@ -18,6 +18,7 @@ Baudit contributors (sorted alphabetically)
 
     *   Software Lead
     *   UI/UX Designer
+    
 *   **[Warren Thomas](https://github.com/wlt30)**
     
-    * UI/UX Designer
+    *   UI/UX Designer
