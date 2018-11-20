@@ -61,7 +61,6 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
                     CreatePatientAccountActivity.class
                 );
                 startActivity(intent);
-                finish();
             }
         });
 
