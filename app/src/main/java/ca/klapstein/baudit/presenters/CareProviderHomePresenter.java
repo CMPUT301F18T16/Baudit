@@ -28,7 +28,7 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {
         Patient patient = (Patient) patientTreeSet.toArray()[position];
-        // rowView.setPatientNameText(patient.name);
+        rowView.setPatientNameText(patient.getUsername().toString());
     }
 
     public int getPatientCount() {

@@ -6,7 +6,6 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
-import com.google.common.collect.Iterables;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -31,26 +30,15 @@ public class ProblemPresenter extends Presenter<ProblemView> {
 
     public void viewStarted(int position) {
         if (position == 0) { // If the problem is new
-            Calendar calendar = Calendar.getInstance();
-
-            DateFormat dateFormat = DateFormat.getDateInstance();
-            String dateForButton = dateFormat.format(calendar.getTime());
-            view.updateDateButton(dateForButton);
-
-            DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-            String timeForButton = timeFormat.format(calendar.getTime());
-            view.updateTimeButton(timeForButton);
             problem = new Problem("Set Title", "Set description");
-            view.updateTitleField("");
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
             // TODO: Replace with real data once implemented
-            view.updateTitleField(problem.getTitle());
-            // TODO set data
-            view.updateDateButton("November 12, 2018");
-            view.updateTimeButton("21:42");
-            view.updateDescriptionField(problem.getDescription());
         }
+        view.updateTitleField(problem.getTitle());
+        view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
+        view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
+        view.updateDescriptionField(problem.getDescription());
     }
 
     public void clickedDateButton() {
@@ -64,7 +52,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public Record getRecordAt(int position) {
-        return Iterables.get(problem.getRecordTreeSet(), position);
+        return (Record) problem.getRecordTreeSet().toArray()[position];
     }
 
     public int getRecordCount() {
