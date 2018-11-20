@@ -1,12 +1,17 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.support.v7.widget.Toolbar;
+import android.view.*;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientListPresenter;
@@ -24,14 +29,48 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     private PatientListPresenter presenter;
     private RecyclerView patientRecyclerView;
     private PatientListAdapter adapter;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
+        Toolbar toolbar = findViewById(R.id.patient_list_toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setTitle(R.string.home);
+
         presenter = new PatientListPresenter(this, getApplicationContext());
 
+        drawerLayout = findViewById(R.id.patient_list_drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        drawerLayout.closeDrawers();
+
+                        switch (menuItem.getItemId()) {
+                            case (R.id.nav_edit_account):
+                                startActivity(new Intent(
+                                        PatientListActivity.this,
+                                        EditAccountActivity.class
+                                ));
+                                return true;
+                            case (R.id.nav_logout):
+                                new LogoutDialog().show(getSupportFragmentManager(), LogoutDialog.TAG);
+                                finish();
+                                return true;
+                            default:
+                                return true;
+                        }
+                    }
+                });
         // TODO: get patientTreeSet from local storage/remote
         // TODO: logout methods?
 
@@ -49,6 +88,24 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     public void onStart() {
 
         super.onStart();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.patient_home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {

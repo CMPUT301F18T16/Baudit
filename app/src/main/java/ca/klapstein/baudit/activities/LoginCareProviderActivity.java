@@ -33,7 +33,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_care_provider);
 
-        presenter = new LoginPresenter(this, getApplicationContext());
+        presenter = new LoginPresenter(this, this);
 
         usernameInput = findViewById(R.id.enter_care_provider_username);
         passwordInput = findViewById(R.id.enter_care_provider_password);
@@ -67,12 +67,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         switchLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                    LoginCareProviderActivity.this,
-                    LoginPatientActivity.class
-                );
-                startActivity(intent);
-                finish();
+                switchLoginScreen();
             }
         });
     }
@@ -96,5 +91,15 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
     public void onLoginValidationFailure() {
         passwordInput.setText("");
         errorText.setText(getResources().getString(R.string.login_failed));
+    }
+
+    @Override
+    public void switchLoginScreen() {
+        Intent intent = new Intent(
+                LoginCareProviderActivity.this,
+                LoginPatientActivity.class
+        );
+        startActivity(intent);
+        finish();
     }
 }

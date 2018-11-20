@@ -34,7 +34,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_patient);
 
-        presenter = new LoginPresenter(this, getApplicationContext());
+        presenter = new LoginPresenter(this, this);
 
         usernameInput = findViewById(R.id.enter_patient_username);
         passwordInput = findViewById(R.id.enter_patient_password);
@@ -68,12 +68,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         switchLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                    LoginPatientActivity.this,
-                    LoginCareProviderActivity.class
-                );
-                startActivity(intent);
-                finish();
+                switchLoginScreen();
             }
         });
     }
@@ -97,5 +92,15 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     public void onLoginValidationFailure() {
         passwordInput.setText("");
         errorText.setText(getResources().getString(R.string.login_failed));
+    }
+
+    @Override
+    public void switchLoginScreen() {
+        Intent intent = new Intent(
+                LoginPatientActivity.this,
+                LoginCareProviderActivity.class
+        );
+        startActivity(intent);
+        finish();
     }
 }
