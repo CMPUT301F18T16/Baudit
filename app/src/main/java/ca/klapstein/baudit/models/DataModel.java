@@ -154,13 +154,13 @@ public class DataModel {
      * @param patient {@code Patient}
      */
     public void commitPatient(Patient patient) {
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatient(context, patient);
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patient
         );
 
-        // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatient(context, patient);
     }
 
     /**
@@ -169,13 +169,12 @@ public class DataModel {
      * @param patientTreeSet {@code PatientTreeSet}
      */
     public void commitPatientTreeSet(PatientTreeSet patientTreeSet) {
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patientTreeSet.toArray(new Patient[0])
         );
-
-        // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
     }
 
     /**
@@ -212,8 +211,9 @@ public class DataModel {
      * @param careProvider {@code CareProvider}
      */
     public void commitCareProvider(CareProvider careProvider) {
-        new RemoteModel.AddCareProviderTask().execute(careProvider);
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
+        // save to remote
+        new RemoteModel.AddCareProviderTask().execute(careProvider);
     }
 }
