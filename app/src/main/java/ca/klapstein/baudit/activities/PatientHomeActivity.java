@@ -19,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
+import ca.klapstein.baudit.presenters.DrawerPresenter;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
+import ca.klapstein.baudit.views.DrawerView;
 import ca.klapstein.baudit.views.ProblemListView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
@@ -28,12 +30,16 @@ import ca.klapstein.baudit.views.ProblemRowView;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class PatientHomeActivity extends AppCompatActivity implements ProblemListView {
+public class PatientHomeActivity extends AppCompatActivity implements ProblemListView, DrawerView {
 
     private PatientHomePresenter presenter;
+    private DrawerPresenter drawerPresenter;
+
     private ProblemListAdapter adapter;
     private DrawerLayout drawerLayout;
     private TextView problemCountText;
+    private TextView navHeaderUsername;
+    private TextView navHeaderEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +54,26 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this, getApplicationContext());
+        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
+        // TODO: is this overkill?
+        drawerLayout.addDrawerListener(
+                new DrawerLayout.SimpleDrawerListener() {
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        drawerPresenter.viewStarted();
+                    }
+                }
+        );                                                         
+                                                                   
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
+        navHeaderUsername = navHeaderView.findViewById(R.id.nav_header_username);
+        navHeaderEmail = navHeaderView.findViewById(R.id.nav_header_email);
+
         navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -99,6 +121,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     public void onStart() {
         super.onStart();
         presenter.notifyStarted();
+        drawerPresenter.viewStarted();
     }
 
     @Override
@@ -138,6 +161,17 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
             presenter.getProblemCount()
         ));
     }
+
+    @Override
+    public void setUsername(String name) {
+        navHeaderUsername.setText(name);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        navHeaderEmail.setText(email);
+    }
+
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
 

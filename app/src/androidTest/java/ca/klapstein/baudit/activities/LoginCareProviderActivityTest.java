@@ -32,8 +32,8 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
 
     @After
     public void tearDown() {
-        solo.finishOpenedActivities();
         dataModel.clearLoginAccountUserName();
+        solo.finishOpenedActivities();
     }
 
     /**
@@ -54,7 +54,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.assertCurrentActivity("Wrong Activity", PatientListActivity.class);
+        solo.waitForActivity(PatientListActivity.class, 10);
     }
 
     /**
@@ -77,5 +77,24 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     public void testRegister() {
         solo.clickOnView(solo.getView(R.id.register_care_provider_button));
         solo.assertCurrentActivity("Wrong Activity", CreateCareProviderAccountActivity.class);
+    }
+
+    /**
+     * Test logging with a valid {@code Patient}'s username and password. But, we are on the wrong
+     * login page, thus, we should still fail.
+     */
+    @Test
+    public void testPatientLoginFail() {
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTPatient1");
+        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
+        solo.clickOnView(solo.getView(R.id.login_care_provider_button));
+        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
+        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
+    }
+
+    @Test
+    public void SwitchLoginScreen() {
+        solo.clickOnView(solo.getView(R.id.log_in_as_patient_button));
+        solo.waitForActivity(LoginPatientActivity.class, 5);
     }
 }

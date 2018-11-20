@@ -28,6 +28,7 @@ public class ViewPhotoActivityTest extends ActivityTestRule<ViewPhotoActivity> {
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test

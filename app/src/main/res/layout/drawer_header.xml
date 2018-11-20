@@ -37,12 +37,11 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <TextView
-            android:id="@+id/nav_header_patient_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/test_patient_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
+                android:id="@+id/nav_header_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/test_email"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -35,6 +35,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     @After
     public void tearDown() {
         dataModel.clearLoginAccountUserName();
+        solo.finishOpenedActivities();
     }
 
     @Test
