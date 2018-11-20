@@ -3,9 +3,9 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * Abstract class representing a basic account/account of Baudit.
+ * Data class representing a basic account/account of Baudit.
  */
-public abstract class Account {
+public class Account implements Comparable<Account> {
     private static final String TAG = "Account";
 
     public Account(@NonNull Username username, @NonNull ContactInfo contactInfo, @NonNull Password password) {
@@ -48,5 +48,11 @@ public abstract class Account {
 
     public void setPassword(@NonNull Password password) {
         this.password = password;
+    }
+
+    @Override
+    public int compareTo(@NonNull Account account) {
+        return this.getUsername().toString()
+                .compareTo(account.getUsername().toString());
     }
 }

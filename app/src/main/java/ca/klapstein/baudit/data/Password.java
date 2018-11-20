@@ -36,7 +36,8 @@ public class Password {
     }
 
     @NonNull
-    public String getPassword() {
+    @Override
+    public String toString() {
         return password;
     }
 

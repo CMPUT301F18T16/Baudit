@@ -1,15 +1,13 @@
 package ca.klapstein.baudit.models;
 
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.data.*;
 import org.junit.Test;
 
 import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 // TODO: coverage is provided by DataModelTest but we should still develop unit tests for this
 public class RemoteModelTest {
@@ -50,5 +48,24 @@ public class RemoteModelTest {
         new RemoteModel.AddCareProviderTask().execute(
                 new TreeSet<CareProvider>().toArray(new CareProvider[0])
         );
+    }
+
+    @Test
+    public void ValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
+        assertNull(new RemoteModel.ValidateLogin().execute(
+                new Username("NONSUCH_ACCOUNT").toString(),
+                new Password("BADPASSWORD").toString()).get());
+    }
+
+    @Test
+    public void uniqueIDTrue() throws InterruptedException, ExecutionException {
+        assertTrue(new RemoteModel.UniqueID().execute("NONSUCH_ACCOUNT").get());
+    }
+
+    @Test
+    public void uniqueIDFalse() throws InterruptedException, ExecutionException {
+        // TODO: add hook to ensure the test account is added to the remote or make some mock
+        assertFalse(new RemoteModel.UniqueID().execute("TESTCareProvider1").get());
+        assertFalse(new RemoteModel.UniqueID().execute("TESTPatient1").get());
     }
 }
