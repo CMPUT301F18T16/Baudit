@@ -37,6 +37,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
      */
     @Override
     public void updateUsernameError(String message) {
+        // TODO: Set error message to text view
     }
 
     /**
@@ -46,6 +47,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
      */
     @Override
     public void updateEmailError(String message) {
+        // TODO: Set error message to text view
     }
 
     /**
@@ -55,6 +57,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
      */
     @Override
     public void updatePhoneNumberError(String message) {
+        // TODO: Set error message to text view
     }
 
     /**
@@ -64,6 +67,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
      */
     @Override
     public void updatePasswordError(String message) {
+        // TODO: Set error message to text view
     }
 
     /**
@@ -73,6 +77,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
      */
     @Override
     public void updateCareProviderIdError(String message) {
+        // TODO: Set error message to text view
     }
 
     /**
