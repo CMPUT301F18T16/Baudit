@@ -39,11 +39,21 @@ public class Email {
         return emailValidator.isValid(email);
     }
 
+    /**
+     * Get the {@code String} representation of the {@code Email}.
+     *
+     * @return {@code String}
+     */
     @NonNull
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Set the {@code String} representation of the {@code Email}.
+     *
+     * @param email {@code String}
+     */
     public void setEmail(String email) {
         if (isValid(email)) {
             this.email = email;

@@ -13,7 +13,6 @@ abstract public class CreateAccountPresenter<V extends CreateAccountView> extend
         super(view, context);
     }
 
-
     public boolean validateBaseAccount(String username, String email) {
         return true;
     }
