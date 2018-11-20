@@ -7,10 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
     public class PasswordTest {
@@ -44,14 +41,14 @@ import static org.junit.Assert.assertTrue;
         @Test
         public void testGetPassword() {
             Password password = new Password(input);
-            assertEquals(input, password.getPassword());
+            assertEquals(input, password.toString());
         }
 
         @Test
         public void testSetPassword() {
             Password password = new Password(input);
             password.setPassword("differentPassword");
-            assertEquals("differentPassword", password.getPassword());
+            assertEquals("differentPassword", password.toString());
         }
     }
 

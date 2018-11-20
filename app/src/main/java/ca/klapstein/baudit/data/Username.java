@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-import ca.klapstein.baudit.models.DataModel;
 
 /**
  * Data class representing a Baudit's {@code Account}'s username.
@@ -13,7 +12,7 @@ public class Username {
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException {
-        this.setUsernameString(username);
+        this.setUsername(username);
     }
 
     /**
@@ -27,7 +26,7 @@ public class Username {
      */
     static public boolean isValid(String username) {
         int len = username.length();
-        return len >= 8 && len <= 20 && DataModel.uniqueID(username);
+        return len >= 8 && len <= 20;
     }
 
     /**
@@ -36,16 +35,12 @@ public class Username {
      * @return {@code String}
      */
     @NonNull
-    public String getUsernameString() {
+    @Override
+    public String toString() {
         return this.username;
     }
 
-    /**
-     * Setter for a {@code Username}'s username.
-     *
-     * @param username {@code String}
-     */
-    public void setUsernameString(@NonNull String username) throws IllegalArgumentException {
+    public void setUsername(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {
             throw new IllegalArgumentException("Invalid username");
         } else {
@@ -56,7 +51,7 @@ public class Username {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.getUsernameString().hashCode();
+        result = 31 * result + this.toString().hashCode();
         return result;
     }
 
@@ -66,7 +61,7 @@ public class Username {
             return false;
         } else if (obj.getClass().equals(Username.class)) {
             Username otherUsername = (Username) obj;
-            return this.getUsernameString().equals(otherUsername.getUsernameString());
+            return this.toString().equals(otherUsername.toString());
         } else {
             return false;
         }

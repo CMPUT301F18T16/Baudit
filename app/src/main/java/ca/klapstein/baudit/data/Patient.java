@@ -1,11 +1,9 @@
 package ca.klapstein.baudit.data;
 
-import android.support.annotation.NonNull;
-
 /**
  * Class that represents a Patient.
  */
-public class Patient extends Account implements Comparable<Patient> {
+public class Patient extends Account {
 
     private ProblemTreeSet problemTreeSet;
   
@@ -19,12 +17,6 @@ public class Patient extends Account implements Comparable<Patient> {
         this.problemTreeSet = new ProblemTreeSet();
     }
 
-    @Override
-    public int compareTo(@NonNull Patient patient) {
-        return this.getUsername().getUsernameString()
-            .compareTo(patient.getUsername().getUsernameString());
-    }
-    
     /**
      * Get the list of {@code Problem}s owned by the {@code Patient}.
      *

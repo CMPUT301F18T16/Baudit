@@ -127,4 +127,34 @@ public class DataModelTest {
         assertNotNull(careProvider);
         assertEquals(new Username("TESTCareProvider1"), careProvider.getUsername());
     }
+
+    @Test
+    public void uniqueIDTrue() throws InterruptedException {
+        this.commitCareProvider();
+        // wait for remote elastic search cluster to settle
+        Thread.sleep(10000);
+        assertTrue(dataModel.uniqueID(new Username("UNIQUE_USERNAME")));
+    }
+
+    @Test
+    public void uniqueIDFalse() throws InterruptedException {
+        this.commitCareProvider();
+        // wait for remote elastic search cluster to settle
+        Thread.sleep(10000);
+        assertFalse(dataModel.uniqueID(new Username("TESTCareProvider2")));
+    }
+
+    @Test
+    public void validateLoginSuccess() throws InterruptedException {
+        this.commitPatient();
+        this.commitCareProvider();
+        Thread.sleep(10000);
+        assertTrue(dataModel.validateLogin(new Username("TESTPatient3"), new Password("foobar123")));
+        assertTrue(dataModel.validateLogin(new Username("TESTCareProvider1"), new Password("foobar123")));
+    }
+
+    @Test
+    public void validateLoginFail() {
+        assertFalse(dataModel.validateLogin(new Username("NONSUCH_ACCOUNT"), new Password("PASSWORD")));
+    }
 }
