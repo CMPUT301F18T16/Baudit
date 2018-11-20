@@ -30,7 +30,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
     private EditText phonenumber;
     private EditText password;
     private EditText confirmpassword;
-    private TextView errorText;
+
 
     private TextView create_careprovider_id_error;
     private TextView create_carepovider_username_error;
