@@ -59,7 +59,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         presenter = new PatientHomePresenter(this, getApplicationContext());
 
         drawerLayout = findViewById(R.id.drawer_layout);
-                                                                   
+
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
@@ -125,6 +125,13 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 ));
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.notifyStarted();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -197,7 +204,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             viewHolder.setProblemTitleText(problem.getTitle());
             viewHolder.setProblemDateText(problem.getTimeStamp());
             viewHolder.setProblemDescriptionText(problem.getDescription());
-
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -205,7 +211,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                         PatientHomeActivity.this,
                         ProblemActivity.class
                     );
-                    intent.putExtra("problemId", 1); // Test ID
+                    intent.putExtra("problemId", viewHolder.getAdapterPosition()); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent
                     startActivity(intent);
                 }

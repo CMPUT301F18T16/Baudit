@@ -15,14 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.TimePicker;
-
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
@@ -61,6 +54,7 @@ public class ProblemActivity extends AppCompatActivity
     private ImageButton descriptionSaveButton;
     private ImageButton descriptionCancelButton;
     private TextView recordsLabel;
+    private Button commitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +82,14 @@ public class ProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 presenter.clickedTimeButton();
+            }
+        });
+
+        commitButton = findViewById(R.id.problem_commit_button);
+        commitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.commitProblem();
             }
         });
 
@@ -157,6 +159,16 @@ public class ProblemActivity extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TimePickerDialogFragment mTimeFragment = TimePickerDialogFragment.newInstance(calendar);
         mTimeFragment.show(ft, "timePicker");
+    }
+
+    @Override
+    public void commitProblemFailure() {
+        // TODO:
+    }
+
+    @Override
+    public void commitProblemSuccess() {
+        finish();
     }
 
     @Override
