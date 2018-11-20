@@ -43,7 +43,7 @@ class PreferencesModel {
      * @param prefName {@code String}
      * @param JSONKey  {@code String}
      */
-    private static void saveSharedPreferencesObject(Context context, Object object, String prefName, String JSONKey) {
+    private static void saveSharedPreferencesObject(Context context, Object object, String JSONKey) {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -54,16 +54,14 @@ class PreferencesModel {
     }
 
     public static void saveSharedPreferencesLoginAccountUsername(Context context, Username username) {
-        saveSharedPreferencesObject(context, username, LOGIN_ACCOUNT_USERNAME_PREF_NAME, LOGIN_ACCOUNT_USERNAME_JSON_KEY);
+        saveSharedPreferencesObject(context, username, LOGIN_ACCOUNT_USERNAME_JSON_KEY);
     }
 
     public static Username loadSharedPreferencesLoginAccountUsername(Context context) {
         Username username;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
-        String json = mPrefs.getString(LOGIN_ACCOUNT_USERNAME_PREF_NAME, "");
-        Log.e(TAG, "loaded json: " + json);
-        json = mPrefs.getAll().get("mLoginAccountUsernameJson").toString();
+        String json = mPrefs.getString(LOGIN_ACCOUNT_USERNAME_JSON_KEY, "");
         Log.e(TAG, "loaded json: " + json);
 
         if (json.isEmpty()) {
@@ -83,7 +81,7 @@ class PreferencesModel {
      * @param patientTreeSet {@code PatientTreeSet}
      */
     public static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
-        saveSharedPreferencesObject(context, patientTreeSet, PATIENT_TREESET_PREF_NAME, PATIENT_TREESET_PREF_JSON_KEY);
+        saveSharedPreferencesObject(context, patientTreeSet, PATIENT_TREESET_PREF_JSON_KEY);
     }
 
     /**
@@ -96,7 +94,8 @@ class PreferencesModel {
         PatientTreeSet patientTreeSet;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = mPrefs.getAll().get("mCareProviderJson").toString();
+
+        String json = mPrefs.getString(PATIENT_TREESET_PREF_JSON_KEY, "");
         Log.d(TAG, "loaded mCareProviderJson: " + json);
 
         if (json.isEmpty()) {
@@ -116,7 +115,7 @@ class PreferencesModel {
      * @param careProvider {@code CareProvider}
      */
     public static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
-        saveSharedPreferencesObject(context, careProvider, CAREPROVIDER_PREF_NAME, CAREPROVIDER_PREF_JSON_KEY);
+        saveSharedPreferencesObject(context, careProvider, CAREPROVIDER_PREF_JSON_KEY);
     }
 
     /**
@@ -130,7 +129,8 @@ class PreferencesModel {
         CareProvider careProvider;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = mPrefs.getString(CAREPROVIDER_PREF_NAME, "");
+
+        String json = mPrefs.getString(CAREPROVIDER_PREF_JSON_KEY, "");
         if (json.isEmpty()) {
             careProvider = null;
         } else {

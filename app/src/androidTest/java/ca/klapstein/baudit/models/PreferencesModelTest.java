@@ -7,7 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class PreferencesModelTest {
 
@@ -46,8 +47,10 @@ public class PreferencesModelTest {
 
     @Test
     public void loadSharedPreferencesCareProvider() {
+        this.saveSharedPreferencesCareProvider();
         CareProvider careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
-        assertNull(careProvider);
+        assertNotNull(careProvider);
+        assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
     }
 
     @Test
@@ -58,7 +61,6 @@ public class PreferencesModelTest {
     @Test
     public void loadSharedPreferencesLoginAccountUsername() {
         this.saveSharedPreferencesCareProvider();
-        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, new Username("TESTUsername"));
         Username username = PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
         assertNotNull(username);
         assertEquals("TESTUsername", username.toString());
