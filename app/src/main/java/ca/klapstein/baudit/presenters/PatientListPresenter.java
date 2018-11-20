@@ -19,6 +19,7 @@ public class PatientListPresenter extends Presenter<PatientListView> {
 
     public PatientListPresenter(PatientListView view, Context context) {
         super(view, context);
+        patientTreeSet = dataManager.getPatients();
     }
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {

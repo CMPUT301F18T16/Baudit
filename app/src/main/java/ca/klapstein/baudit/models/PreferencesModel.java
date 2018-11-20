@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.data.Username;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,6 +30,9 @@ class PreferencesModel {
     private static final String CAREPROVIDER_PREF_NAME = "mCareProvider";
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
+    private static final String LOGIN_ACCOUNT_USERNAME_PREF_NAME = "mLoginAccountUsername";
+    private static final String LOGIN_ACCOUNT_USERNAME_JSON_KEY = "mLoginAccountUsernameJson";
+
     /**
      * Save a {@code Gson} compatible object into Android's Shared Preferences.
      *
@@ -43,7 +47,26 @@ class PreferencesModel {
         Gson gson = new Gson();
         String json = gson.toJson(object);
         prefsEditor.putString(JSONKey, json);
-        prefsEditor.apply();
+        prefsEditor.commit();
+    }
+
+    public static void saveSharedPreferencesLoginAccountUsername(Context context, Username username) {
+        saveSharedPreferencesObject(context, username, LOGIN_ACCOUNT_USERNAME_PREF_NAME, LOGIN_ACCOUNT_USERNAME_JSON_KEY);
+    }
+
+    public static Username loadSharedPreferencesLoginAccountUsername(Context context) {
+        Username username;
+        SharedPreferences mPrefs = context.getSharedPreferences(LOGIN_ACCOUNT_USERNAME_PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(LOGIN_ACCOUNT_USERNAME_PREF_NAME, "");
+        if (json.isEmpty()) {
+            username = null;
+        } else {
+            Type type = new TypeToken<Username>() {
+            }.getType();
+            username = gson.fromJson(json, type);
+        }
+        return username;
     }
 
     /**

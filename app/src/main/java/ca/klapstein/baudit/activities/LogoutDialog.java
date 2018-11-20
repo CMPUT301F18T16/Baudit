@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.LogoutPresenter;
 import ca.klapstein.baudit.views.LogoutView;
 
 /**
@@ -16,6 +17,8 @@ import ca.klapstein.baudit.views.LogoutView;
  */
 public class LogoutDialog extends DialogFragment implements LogoutView {
     private static final String TAG = "LogoutDialog";
+
+    LogoutPresenter presenter;
 
     @NonNull
     @Override
@@ -25,7 +28,7 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         // TODO: more implementation
-
+        presenter = new LogoutPresenter(this, getContext());
         // Create the AlertDialog object and return it
         return builder.create();
     }
