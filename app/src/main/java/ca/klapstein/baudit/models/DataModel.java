@@ -88,13 +88,12 @@ public class DataModel {
      * @param password {@code Password}
      * @return {@code boolean}
      */
-    public boolean validateLogin(Username username, Password password) {
+    public Account validateLogin(Username username, Password password) {
         try {
-            Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
-            return account != null;
+            return new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
-            Log.e(TAG, "failure getting Patient from remote", e);
-            return false;
+            Log.e(TAG, "failure getting Account from remote", e);
+            return null;
         }
     }
 

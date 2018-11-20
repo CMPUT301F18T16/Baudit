@@ -28,6 +28,7 @@ public class CreateCareProviderActivityTest extends ActivityTestRule<CreateCareP
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test
