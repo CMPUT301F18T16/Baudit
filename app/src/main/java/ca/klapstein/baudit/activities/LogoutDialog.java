@@ -35,6 +35,9 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
         return builder.create();
     }
 
+    /**
+     * On a logout error show an message that should notify the user.
+     */
     @Override
     public void setLogoutError() {
 
