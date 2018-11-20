@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
@@ -35,6 +35,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private ImageButton commentCancelButton;
     private TextView commentView;
     private EditText commentInput;
+    private Button commitButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         recordId = getIntent().getIntExtra("recordId", 0);
 
         presenter = new RecordPresenter(this, getApplicationContext());
+
+        commitButton = findViewById(R.id.record_commit_button);
+        commitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.commitRecord();
+            }
+        });
 
         initTitleViews();
         initCommentViews();
@@ -71,6 +81,21 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void updateCommentField(String comment) {
         commentView.setText(comment);
+    }
+
+    @Override
+    public void commitRecord() {
+        presenter.commitRecord();
+    }
+
+    @Override
+    public void commitRecordFailure() {
+        // TODO: fail message
+    }
+
+    @Override
+    public void commitRecordSuccess() {
+        finish();
     }
 
     private void initTitleViews() {

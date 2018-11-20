@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
@@ -34,6 +33,7 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
     }
 
     public void viewStarted() {
+        problemTreeSet = dataManager.getLoggedInPatient().getProblemTreeSet();
         view.updateUsernameDisplay(account.getUsername().toString());
         view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
         view.updateList();

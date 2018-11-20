@@ -49,6 +49,7 @@ public class Problem implements Comparable<Problem> {
         this.setTitle(title);
         this.setDescription(description);
         this.date = new Date();
+        this.recordTreeSet = new RecordTreeSet();
     }
 
     /**

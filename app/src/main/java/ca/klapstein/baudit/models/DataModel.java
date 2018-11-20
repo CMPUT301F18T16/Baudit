@@ -108,14 +108,27 @@ public class DataModel {
     @Nullable
     public Patient getPatient(Username username) {
         // check remote
+        Patient remotePatient = null;
         try {
-            return new RemoteModel.GetPatient().execute(username.toString()).get();
+            remotePatient = new RemoteModel.GetPatient().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
         }
 
         // check local
-        return PreferencesModel.loadSharedPreferencesPatient(context);
+        Patient localPatient = PreferencesModel.loadSharedPreferencesPatient(context);
+        if (localPatient != null && !localPatient.getUsername().equals(username)) {
+            localPatient = null;
+            //TODO: deconflicting
+        }
+        // merge both remote and local
+        if (localPatient != null && remotePatient != null) {
+            localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
+        }
+        if (localPatient == null) {
+            return remotePatient;
+        }
+        return localPatient;
     }
 
     /**
@@ -144,13 +157,13 @@ public class DataModel {
      * @param patient {@code Patient}
      */
     public void commitPatient(Patient patient) {
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatient(context, patient);
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patient
         );
 
-        // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatient(context, patient);
     }
 
     /**
@@ -159,13 +172,12 @@ public class DataModel {
      * @param patientTreeSet {@code PatientTreeSet}
      */
     public void commitPatientTreeSet(PatientTreeSet patientTreeSet) {
+        // add the patients to the local
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
         // add patients to the remote
         new RemoteModel.AddPatientTask().execute(
                 patientTreeSet.toArray(new Patient[0])
         );
-
-        // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
     }
 
     /**
@@ -179,14 +191,27 @@ public class DataModel {
     @Nullable
     public CareProvider getCareProvider(Username username) {
         // check remote
+        CareProvider remoteCareProvider = null;
         try {
-            return new RemoteModel.GetCareProvider().execute(username.toString()).get();
+            remoteCareProvider = new RemoteModel.GetCareProvider().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting CareProvider from remote", e);
         }
 
         // check local
-        return PreferencesModel.loadSharedPreferencesCareProvider(context);
+        CareProvider localCareProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
+        if (localCareProvider != null && !localCareProvider.getUsername().equals(username)) {
+            localCareProvider = null;
+            //TODO: deconflicting
+        }
+        // merge remote and local
+        if (localCareProvider != null && remoteCareProvider != null) {
+            localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
+        }
+        if (localCareProvider == null) {
+            return remoteCareProvider;
+        }
+        return localCareProvider;
     }
 
     /**
@@ -195,8 +220,9 @@ public class DataModel {
      * @param careProvider {@code CareProvider}
      */
     public void commitCareProvider(CareProvider careProvider) {
-        new RemoteModel.AddCareProviderTask().execute(careProvider);
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
+        // save to remote
+        new RemoteModel.AddCareProviderTask().execute(careProvider);
     }
 }

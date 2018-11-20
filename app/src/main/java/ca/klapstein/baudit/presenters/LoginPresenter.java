@@ -2,15 +2,10 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Password;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.activities.LoginCareProviderActivity;
 import ca.klapstein.baudit.activities.LoginPatientActivity;
+import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;
 
@@ -32,10 +27,6 @@ public class LoginPresenter extends Presenter<LoginView> {
         super(view, context);
         this.context = context;
 
-        // If the user is already logged in, go to patient home without validation
-        if (dataManager.getLoggedInAccount() != null) {
-            this.view.onLoginValidationSuccess();
-        }
         // attempt to login from local saved state
         processOfflineLoginAccount();
     }
@@ -44,11 +35,10 @@ public class LoginPresenter extends Presenter<LoginView> {
      * Control logging in as a {@code CareProvider} from an offline state.
      */
     private void offlineLoginCareProvider(CareProvider careProvider) {
-        if (view.getClass() == LoginPatientActivity.class) {
-            view.switchLoginScreen();
-        } else {
-            dataManager.setLoginAccountUserName(careProvider.getUsername());
+        if (view.getClass() == LoginCareProviderActivity.class) {
             view.onLoginValidationSuccess();
+        } else {
+            view.switchLoginScreen();
         }
     }
 
@@ -56,11 +46,10 @@ public class LoginPresenter extends Presenter<LoginView> {
      * Control logging in as a {@code Patient} from an offline line state.
      */
     private void offlineLoginPatient(Patient patient) {
-        if (view.getClass() == LoginCareProviderActivity.class) {
-            view.switchLoginScreen();
-        } else {
-            dataManager.setLoginAccountUserName(patient.getUsername());
+        if (view.getClass() == LoginPatientActivity.class) {
             view.onLoginValidationSuccess();
+        } else {
+            view.switchLoginScreen();
         }
     }
 

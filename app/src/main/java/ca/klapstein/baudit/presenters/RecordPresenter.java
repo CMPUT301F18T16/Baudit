@@ -1,7 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-
+import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.RecordView;
 
 /**
@@ -12,6 +12,7 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordPresenter extends Presenter<RecordView> {
 
+    private Record record;
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
     }
@@ -19,20 +20,41 @@ public class RecordPresenter extends Presenter<RecordView> {
     public void viewStarted(int recordId) {
         if (recordId == 0) { // If the record is new
             view.updateTitleField("");
+            record = new Record("Set title", "Set comment");
         } else { // If the record exists and is being edited
             // TODO: Replace with real data once implemented
-            view.updateTitleField("Test");
-            view.updateCommentField("Test");
+            record = new Record("Set title", "Set comment");
         }
+        view.updateTitleField(record.getTitle());
+        view.updateCommentField(record.getComment());
     }
 
     public void saveTitleClicked(String newTitle) {
-        // TODO: Commit change to database
-        view.updateTitleField(newTitle);
+        try {
+            record.setTitle(newTitle);
+            view.updateTitleField(newTitle);
+        } catch (IllegalArgumentException e) {
+            // TODO: error
+        }
     }
 
     public void saveCommentClicked(String newComment) {
-        // TODO: Commit change to database
-        view.updateCommentField(newComment);
+        try {
+            record.setComment(newComment);
+            view.updateCommentField(newComment);
+        } catch (IllegalArgumentException e) {
+            // TODO: error
+        }
+    }
+
+    public void commitRecord() {
+        try {
+            // TODO: commit to remote/local
+//            patient.getProblemTreeSet().add(problem);
+//            dataManager.commitPatient(patient);
+            view.commitRecordSuccess();
+        } catch (IllegalArgumentException e) {
+            view.commitRecordFailure();
+        }
     }
 }
