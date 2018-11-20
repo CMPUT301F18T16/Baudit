@@ -125,6 +125,9 @@ public class DataModel {
         if (localPatient != null && remotePatient != null) {
             localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
         }
+        if (localPatient == null) {
+            return remotePatient;
+        }
         return localPatient;
     }
 
@@ -197,10 +200,16 @@ public class DataModel {
 
         // check local
         CareProvider localCareProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
-
+        if (localCareProvider != null && !localCareProvider.getUsername().equals(username)) {
+            localCareProvider = null;
+            //TODO: deconflicting
+        }
         // merge remote and local
         if (localCareProvider != null && remoteCareProvider != null) {
             localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
+        }
+        if (localCareProvider == null) {
+            return remoteCareProvider;
         }
         return localCareProvider;
     }
