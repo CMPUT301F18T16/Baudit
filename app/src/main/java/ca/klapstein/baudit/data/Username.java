@@ -44,7 +44,7 @@ public class Username {
      * Set the {@code String} representation of the {@code Username}.
      *
      * @param username {@code String}
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if the given username string is invalid
      */
     public void setUsername(@NonNull String username) throws IllegalArgumentException {
         if (!isValid(username)) {

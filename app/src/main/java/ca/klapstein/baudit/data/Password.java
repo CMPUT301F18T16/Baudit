@@ -50,7 +50,7 @@ public class Password {
      * Set the {@code String} representation of the {@code Password}.
      *
      * @param password {@code String}
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if the given password string is invalid
      */
     public void setPassword(@NonNull String password) throws IllegalArgumentException {
         if (isValid(password)) {
