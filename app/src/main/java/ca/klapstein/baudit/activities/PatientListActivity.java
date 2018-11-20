@@ -33,6 +33,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         presenter = new PatientListPresenter(this, getApplicationContext());
 
         // TODO: get patientTreeSet from local storage/remote
+        // TODO: logout methods?
 
         patientRecyclerView = findViewById(R.id.patient_list);
         adapter = new PatientListAdapter();
