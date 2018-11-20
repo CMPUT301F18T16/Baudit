@@ -104,6 +104,7 @@ public class Record implements Comparable<Record> {
      * Setter for a {@code Records}'s title.
      *
      * @param title {@code String}
+     * @throws IllegalArgumentException if the {@code Records}'s title is invalid
      */
     public void setTitle(String title) throws IllegalArgumentException {
         if (!isValidRecordTitle(title)) {
@@ -125,6 +126,7 @@ public class Record implements Comparable<Record> {
      * Setter for a {@code Records}'s comment.
      *
      * @param comment {@code String}
+     * @throws IllegalArgumentException if the {@code Records}'s comment is invalid
      */
     public void setComment(String comment) throws IllegalArgumentException {
         if (!isValidRecordComment(comment)) {
