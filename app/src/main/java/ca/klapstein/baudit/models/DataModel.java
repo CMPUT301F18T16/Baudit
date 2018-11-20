@@ -39,21 +39,33 @@ public class DataModel {
     }
 
     public Patient getLoggedInPatient() {
-        return getPatient(getLoginAccountUsername());
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            return getPatient(getLoginAccountUsername());
+        }
+        return null;
     }
 
     public CareProvider getLoggedInCareProvider() {
-        return getCareProvider(getLoginAccountUsername());
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            return getCareProvider(username);
+        }
+        return null;
     }
 
     public Account getLoggedInAccount() {
-        // attempt to get the account as a patient
-        Account account = getLoggedInPatient();
-        // if no patient account was found it must be a care provider
-        if (account == null) {
-            account = getLoggedInCareProvider();
+        Username username = getLoginAccountUsername();
+        if (username != null) {
+            // attempt to get the account as a patient
+            Account account = getLoggedInPatient();
+            // if no patient account was found it must be a care provider
+            if (account == null) {
+                account = getLoggedInCareProvider();
+            }
+            return account;
         }
-        return account;
+        return null;
     }
 
     /**
@@ -104,13 +116,7 @@ public class DataModel {
         }
 
         // check local
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        for (Patient patient_i : patientTreeSet) {
-            if (patient_i.getUsername().equals(username)) {
-                return patient_i;
-            }
-        }
-        return null;
+        return PreferencesModel.loadSharedPreferencesPatient(context);
     }
 
     /**
@@ -144,15 +150,8 @@ public class DataModel {
                 patient
         );
 
-        // get the patientTreeSet from local and update it
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        if (patientTreeSet.contains(patient)) {
-            patientTreeSet.remove(patient);
-            patientTreeSet.add(patient);
-        }
-
         // add the patients to the local
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
+        PreferencesModel.saveSharedPreferencesPatient(context, patient);
     }
 
     /**

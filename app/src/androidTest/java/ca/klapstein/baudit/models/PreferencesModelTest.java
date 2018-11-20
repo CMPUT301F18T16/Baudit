@@ -21,6 +21,7 @@ public class PreferencesModelTest {
 
     @After
     public void tearDown() {
+        // TODO: empty shared prefs
         context = null;
     }
 

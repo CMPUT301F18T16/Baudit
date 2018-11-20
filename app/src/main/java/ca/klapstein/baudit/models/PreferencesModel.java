@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.data.Username;
 import com.google.gson.Gson;
@@ -29,6 +30,8 @@ class PreferencesModel {
     private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
 
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
+
+    private static final String PATIENT_PREF_JSON_KEY = "mPatientJson";
 
     private static final String LOGIN_ACCOUNT_USERNAME_JSON_KEY = "mLoginAccountUsernameJson";
 
@@ -57,6 +60,7 @@ class PreferencesModel {
         Username username;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
+
         String json = mPrefs.getString(LOGIN_ACCOUNT_USERNAME_JSON_KEY, "");
         Log.e(TAG, "loaded json: " + json);
 
@@ -102,6 +106,41 @@ class PreferencesModel {
             patientTreeSet = gson.fromJson(json, type);
         }
         return patientTreeSet;
+    }
+
+    /**
+     * Save a {@code Patient} using Android's SharedPreferences.
+     *
+     * @param context {@code Context}
+     * @param patient {@code Patient}
+     */
+    public static void saveSharedPreferencesPatient(Context context, Patient patient) {
+        saveSharedPreferencesObject(context, patient, PATIENT_PREF_JSON_KEY);
+    }
+
+    /**
+     * Load the {@code CareProvider} using Android's SharedPreferences.
+     *
+     * @param context {@code Context}
+     * @return {@code CareProvider}
+     */
+    @Nullable
+    public static Patient loadSharedPreferencesPatient(Context context) {
+        Patient patient;
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+
+        String json = mPrefs.getString(PATIENT_PREF_JSON_KEY, "");
+        Log.d(TAG, "loaded json: " + json);
+
+        if (json.isEmpty()) {
+            patient = null;
+        } else {
+            Type type = new TypeToken<Patient>() {
+            }.getType();
+            patient = gson.fromJson(json, type);
+        }
+        return patient;
     }
 
     /**
