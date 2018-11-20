@@ -24,7 +24,6 @@ public class ProblemPresenter extends Presenter<ProblemView> {
 
     public ProblemPresenter(ProblemView view, Context context) {
         super(view, context);
-
         patient = dataManager.getLoggedInPatient();
     }
 
@@ -33,7 +32,6 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             problem = new Problem("Set Title", "Set description");
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
-            // TODO: Replace with real data once implemented
         }
         view.updateTitleField(problem.getTitle());
         view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
