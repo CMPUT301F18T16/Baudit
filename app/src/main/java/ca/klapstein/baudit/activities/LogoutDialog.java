@@ -16,7 +16,7 @@ import ca.klapstein.baudit.views.LogoutView;
  * Dialog providing a logout prompt.
  */
 public class LogoutDialog extends DialogFragment implements LogoutView {
-    private static final String TAG = "LogoutDialog";
+    public static final String TAG = "LogoutDialog";
 
     LogoutPresenter presenter;
 
@@ -30,6 +30,8 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
         // TODO: more implementation
         presenter = new LogoutPresenter(this, getContext());
         // Create the AlertDialog object and return it
+        presenter.validateLogout();
+        // todo make a cool logout animation
         return builder.create();
     }
 
