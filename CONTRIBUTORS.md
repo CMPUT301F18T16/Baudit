@@ -1,6 +1,9 @@
 Baudit contributors (sorted alphabetically)
 ============================================
+*   **[Jeffrey Baglinit](https://github.com/DeveloperJeffb)**
 
+    * UI/UX Designer
+   
 *   **[Daniel Cones](https://github.com/dcones)**
     
     *   Database Administrator
