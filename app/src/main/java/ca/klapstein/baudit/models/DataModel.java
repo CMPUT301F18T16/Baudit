@@ -108,14 +108,21 @@ public class DataModel {
     @Nullable
     public Patient getPatient(Username username) {
         // check remote
+        Patient remotePatient = null;
         try {
-            return new RemoteModel.GetPatient().execute(username.toString()).get();
+            remotePatient = new RemoteModel.GetPatient().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Patient from remote", e);
         }
 
         // check local
-        return PreferencesModel.loadSharedPreferencesPatient(context);
+        Patient localPatient = PreferencesModel.loadSharedPreferencesPatient(context);
+
+        // merge both remote and local
+        if (localPatient != null && remotePatient != null) {
+            localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
+        }
+        return localPatient;
     }
 
     /**
@@ -179,14 +186,21 @@ public class DataModel {
     @Nullable
     public CareProvider getCareProvider(Username username) {
         // check remote
+        CareProvider remoteCareProvider = null;
         try {
-            return new RemoteModel.GetCareProvider().execute(username.toString()).get();
+            remoteCareProvider = new RemoteModel.GetCareProvider().execute(username.toString()).get();
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting CareProvider from remote", e);
         }
 
         // check local
-        return PreferencesModel.loadSharedPreferencesCareProvider(context);
+        CareProvider localCareProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
+
+        // merge remote and local
+        if (localCareProvider != null && remoteCareProvider != null) {
+            localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
+        }
+        return localCareProvider;
     }
 
     /**
