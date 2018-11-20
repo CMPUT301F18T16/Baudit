@@ -22,32 +22,46 @@ public class LoginPresenter extends Presenter<LoginView> {
     public LoginPresenter(LoginView view, Context context) {
         super(view, context);
         // attempt to login from local saved state
-        processLoginAccount(dataManager.getLoggedInAccount());
+        processOfflineLoginAccount();
     }
 
-    private void loginCareProvider() {
+    /**
+     * Control logging in as a {@code CareProvider} from an offline state.
+     */
+    private void offlineLoginCareProvider(CareProvider careProvider) {
         if (view.getClass() == LoginPatientActivity.class) {
             this.view.switchLoginScreen();
         } else {
+            dataManager.setLoginAccountUserName(careProvider.getUsername());
             this.view.onLoginValidationSuccess();
         }
     }
 
-    private void loginPatient() {
+    /**
+     * Control logging in as a {@code Patient} from an offline line state.
+     */
+    private void offlineLoginPatient(Patient patient) {
         if (view.getClass() == LoginCareProviderActivity.class) {
             this.view.switchLoginScreen();
         } else {
+            dataManager.setLoginAccountUserName(patient.getUsername());
             this.view.onLoginValidationSuccess();
         }
     }
 
-    private void processLoginAccount(Account account) {
+    /**
+     * Control logging into a an arbitrary {@code Account} that was obtained from the saved login account within
+     * Android's shared preferences. This allows for login from a offline state.
+     */
+    private void processOfflineLoginAccount() {
+        // obtain the offline logged in account
+        Account account = dataManager.getLoggedInAccount();
         if (account instanceof CareProvider) {
-            loginCareProvider();
+            offlineLoginCareProvider((CareProvider) account);
         } else if (account instanceof Patient) {
-            loginPatient();
+            offlineLoginPatient((Patient) account);
         } else {
-            Log.e(TAG, "invalid account type for login");
+            Log.e(TAG, "no offline login account or invalid account type for offline login");
             dataManager.clearLoginAccountUserName();
         }
     }
@@ -60,14 +74,25 @@ public class LoginPresenter extends Presenter<LoginView> {
      */
     public void onLoginButtonClicked(String username, String password) {
         try {
-            Username loginUsername = new Username(username);
-            if (dataManager.validateLogin(loginUsername, new Password(password))) {
-                dataManager.setLoginAccountUserName(loginUsername);
+            // get the account associated with the user and password
+            Account account = dataManager.validateLogin(new Username(username), new Password(password));
+            // if it is null we failed the login
+            if (account == null) {
+                this.view.onLoginValidationFailure();
+                // if we are logging in a CareProvider ensure the account is actually a CareProvider
+            } else if (view.getClass() == LoginCareProviderActivity.class &&
+                    dataManager.getCareProvider(account.getUsername()) != null) {
+                dataManager.setLoginAccountUserName(account.getUsername());
                 this.view.onLoginValidationSuccess();
-            } else {
+                // if we are logging in a Patient ensure the account is actually a Patient
+            } else if (view.getClass() == LoginPatientActivity.class &&
+                    dataManager.getPatient(account.getUsername()) != null) {
+                dataManager.setLoginAccountUserName(account.getUsername());
+                this.view.onLoginValidationSuccess();
+            } else {  // else we have failed the login
                 this.view.onLoginValidationFailure();
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {  // likely invalid username or password string: fail the login
             this.view.onLoginValidationFailure();
         }
     }
