@@ -16,12 +16,12 @@ import ca.klapstein.baudit.views.LogoutView;
  * Dialog providing a logout prompt.
  */
 public class LogoutDialog extends DialogFragment implements LogoutView {
+
     public static final String TAG = "LogoutDialog";
 
-    LogoutPresenter presenter;
+    private LogoutPresenter presenter;
 
-    @NonNull
-    @Override
+    @Override @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.logout_dialog, null);
 
@@ -40,7 +40,7 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
      */
     @Override
     public void setLogoutError() {
-
+        // TODO: Just put a toast here
     }
 
     /**
@@ -48,8 +48,7 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
      */
     @Override
     public void setLogoutSuccess() {
-        Intent intent = new Intent(getContext(), SplashActivity.class);
-        startActivity(intent);
-        getActivity().finish();
+        startActivity(new Intent(getContext(), SplashActivity.class));
+        // TODO: Finish this fragment
     }
 }

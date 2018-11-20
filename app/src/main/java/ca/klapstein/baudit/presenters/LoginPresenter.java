@@ -1,6 +1,8 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Password;
 import ca.klapstein.baudit.data.Username;
@@ -16,11 +18,15 @@ import ca.klapstein.baudit.views.LogoutView;
  * @see LogoutView
  */
 public class LoginPresenter extends Presenter<LoginView> {
-    private static final String TAG = "LoginPresenter";
+
+    private Context context;
 
     public LoginPresenter(LoginView view, Context context) {
         super(view, context);
-        if (dataManager.getLoggedInAccount() != null) { // if we already have a login token in share prefs proceed logging in
+        this.context = context;
+
+        // If the user is already logged in, go to patient home without validation
+        if (dataManager.getLoggedInAccount() != null) {
             this.view.onLoginValidationSuccess();
         } else {
             dataManager.clearLoginAccountUserName();
@@ -38,12 +44,16 @@ public class LoginPresenter extends Presenter<LoginView> {
             Username loginUsername = new Username(username);
             if (dataManager.validateLogin(loginUsername, new Password(password))) {
                 dataManager.setLoginAccountUserName(loginUsername);
-                this.view.onLoginValidationSuccess();
+                view.onLoginValidationSuccess();
             } else {
-                this.view.onLoginValidationFailure();
+                view.onLoginValidationFailure(
+                    context.getResources().getString(R.string.login_failed)
+                );
             }
         } catch (IllegalArgumentException e) {
-            this.view.onLoginValidationFailure();
+            view.onLoginValidationFailure(
+                context.getResources().getString(R.string.login_failed)
+            );
         }
     }
 }
