@@ -19,8 +19,6 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
 
     public static final String TAG = "LogoutDialog";
 
-    private LogoutPresenter presenter;
-
     @Override @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.logout_dialog, null);
@@ -28,7 +26,7 @@ public class LogoutDialog extends DialogFragment implements LogoutView {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         // TODO: more implementation
-        presenter = new LogoutPresenter(this, getContext());
+        LogoutPresenter presenter = new LogoutPresenter(this, getContext());
         // Create the AlertDialog object and return it
         presenter.validateLogout();
         // todo make a cool logout animation
