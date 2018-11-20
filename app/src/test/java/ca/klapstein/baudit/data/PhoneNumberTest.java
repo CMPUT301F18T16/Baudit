@@ -10,26 +10,26 @@ public class PhoneNumberTest {
     public void testPhoneNumberConstructor() {
         PhoneNumber phoneNumber = new PhoneNumber("(780)4444444");
         assertNotNull(phoneNumber);
-        assertEquals("7804444444", phoneNumber.getPhoneNumber());
+        assertEquals("7804444444", phoneNumber.toString());
     }
 
     @Test
     public void testGetPhoneNumber() {
         PhoneNumber phoneNumber = new PhoneNumber("012-345-6789");
         assertNotNull(phoneNumber);
-        assertEquals("0123456789", phoneNumber.getPhoneNumber());
+        assertEquals("0123456789", phoneNumber.toString());
     }
 
     @Test
     public void testSetPhoneNumberValid() {
         PhoneNumber phoneNumber = new PhoneNumber("(780) 555 5555");
-        assertEquals("7805555555", phoneNumber.getPhoneNumber());
+        assertEquals("7805555555", phoneNumber.toString());
         phoneNumber.setPhoneNumber("780-555-5556");
-        assertEquals("7805555556", phoneNumber.getPhoneNumber());
+        assertEquals("7805555556", phoneNumber.toString());
         phoneNumber.setPhoneNumber("780 555-5557");
-        assertEquals("7805555557", phoneNumber.getPhoneNumber());
+        assertEquals("7805555557", phoneNumber.toString());
         phoneNumber.setPhoneNumber("(780)-555-5558");
-        assertEquals("7805555558", phoneNumber.getPhoneNumber());
+        assertEquals("7805555558", phoneNumber.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
