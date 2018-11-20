@@ -87,5 +87,4 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
     public void onAccountConfirmed() {
         finish();
     }
-
 }

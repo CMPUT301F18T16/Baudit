@@ -62,6 +62,8 @@ dependencies {
 
     // Google Maps Services
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+
+    // JetBrains annotations
     implementation 'org.jetbrains:annotations-java5:15.0'
 }
 
