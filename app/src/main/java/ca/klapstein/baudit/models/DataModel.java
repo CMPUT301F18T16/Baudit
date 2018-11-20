@@ -24,7 +24,7 @@ public class DataModel {
     }
 
     /**
-     * Validate whether a given {@code Username} is not already taken within both the local and remote.
+     * Validate whether a given {@code Username} is not already taken within the remote.
      *
      * @param username {@code Username}
      * @return {@code true} if the {@code Username} is not already taken, otherwise {@code false}
