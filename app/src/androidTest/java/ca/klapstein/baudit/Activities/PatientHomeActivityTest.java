@@ -35,8 +35,8 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
 
     @After
     public void tearDown() {
-        solo.finishOpenedActivities();
         dataModel.clearLoginAccountUserName();
+        solo.finishOpenedActivities();
     }
 
     @Test
