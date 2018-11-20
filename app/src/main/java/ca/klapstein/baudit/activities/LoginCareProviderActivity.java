@@ -93,6 +93,11 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
         errorText.setText(getResources().getString(R.string.login_failed));
     }
 
+    /**
+     * Switch to the {@code Patient} login screen {@code LoginPatientActivity}.
+     *
+     * @see LoginPatientActivity
+     */
     @Override
     public void switchLoginScreen() {
         Intent intent = new Intent(

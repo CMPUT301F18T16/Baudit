@@ -22,7 +22,6 @@ import ca.klapstein.baudit.views.LoginView;
  */
 public class LoginPatientActivity extends AppCompatActivity implements LoginView {
 
-    private static final String TAG = "LoginPatientActivity";
     private LoginPresenter presenter;
 
     private EditText usernameInput;
@@ -94,6 +93,11 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
         errorText.setText(getResources().getString(R.string.login_failed));
     }
 
+    /**
+     * Switch to the {@code CareProvider} login screen {@code LoginCareProviderActivity}.
+     *
+     * @see LoginCareProviderActivity
+     */
     @Override
     public void switchLoginScreen() {
         Intent intent = new Intent(
