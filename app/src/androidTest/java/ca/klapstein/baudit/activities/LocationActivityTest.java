@@ -28,6 +28,7 @@ public class LocationActivityTest extends ActivityTestRule<LocationActivity> {
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test

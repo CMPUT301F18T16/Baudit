@@ -25,6 +25,7 @@ public class AddPhotoActivityTest extends ActivityTestRule<AddPhotoActivity> {
 
     @After
     public void tearDown() {
+        solo.finishOpenedActivities();
     }
 
     @Test
