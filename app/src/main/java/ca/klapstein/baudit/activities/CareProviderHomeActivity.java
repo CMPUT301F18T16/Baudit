@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,13 +14,16 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.DrawerPresenter;
-import ca.klapstein.baudit.presenters.PatientListPresenter;
-import ca.klapstein.baudit.views.DrawerView;
-import ca.klapstein.baudit.views.PatientListView;
+import ca.klapstein.baudit.presenters.CareProviderHomePresenter;
+import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.PatientRowView;
 
 /**
@@ -26,11 +31,9 @@ import ca.klapstein.baudit.views.PatientRowView;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class PatientListActivity extends AppCompatActivity implements PatientListView, DrawerView {
-    private static final String TAG = "PatientListActivity";
+public class CareProviderHomeActivity extends AppCompatActivity implements HomeView {
 
-    private PatientListPresenter presenter;
-    private DrawerPresenter drawerPresenter;
+    private CareProviderHomePresenter presenter;
     private RecyclerView patientRecyclerView;
     private PatientListAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -50,19 +53,9 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setTitle(R.string.home);
 
-        presenter = new PatientListPresenter(this, getApplicationContext());
-        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
-        drawerLayout = findViewById(R.id.patient_list_drawer_layout);
+        presenter = new CareProviderHomePresenter(this, getApplicationContext());
 
-        // TODO: is this overkill?
-        drawerLayout.addDrawerListener(
-                new DrawerLayout.SimpleDrawerListener() {
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        drawerPresenter.viewStarted();
-                    }
-                }
-        );
+        drawerLayout = findViewById(R.id.patient_list_drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -79,13 +72,31 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
                         switch (menuItem.getItemId()) {
                             case (R.id.nav_edit_account):
                                 startActivity(new Intent(
-                                        PatientListActivity.this,
+                                        CareProviderHomeActivity.this,
                                         EditAccountActivity.class
                                 ));
                                 return true;
                             case (R.id.nav_logout):
-                                new LogoutDialog().show(getSupportFragmentManager(), LogoutDialog.TAG);
-                                finish();
+                                new AlertDialog.Builder(
+                                        CareProviderHomeActivity.this,
+                                        R.style.BauditDialogTheme)
+                                    .setTitle(R.string.log_out_question)
+                                    .setCancelable(true)
+                                    .setNegativeButton(R.string.cancel, null)
+                                    .setPositiveButton(R.string.log_out,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface mDialogInterface,
+                                                                int i) {
+                                                presenter.logoutClicked();
+                                                startActivity(new Intent(
+                                                    CareProviderHomeActivity.this,
+                                                    SplashActivity.class
+                                                ));
+                                                finish();
+                                            }
+                                        })
+                                    .show();
                                 return true;
                             default:
                                 return true;
@@ -102,14 +113,14 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     }
 
     @Override
-    public void update() {
-        this.adapter.notifyDataSetChanged();
+    public void onStart() {
+        super.onStart();
+        presenter.viewStarted();
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        drawerPresenter.viewStarted();
+    public void updateList() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -131,20 +142,18 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     }
 
     @Override
-    public void setUsername(String name) {
+    public void updateUsernameDisplay(String name) {
         navHeaderUsername.setText(name);
     }
 
     @Override
-    public void setEmail(String email) {
+    public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
     }
 
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
-        private static final String TAG = "PatientListAdapter";
 
-        @NonNull
-        @Override
+        @Override @NonNull
         public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.card_patient, viewGroup, false);
@@ -163,7 +172,6 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     }
 
     private class PatientViewHolder extends RecyclerView.ViewHolder implements PatientRowView {
-        private static final String TAG = "PatientViewHolder";
 
         CardView mCardView;
         TextView mNameView;

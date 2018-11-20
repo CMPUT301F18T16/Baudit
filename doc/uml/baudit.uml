@@ -18,7 +18,7 @@
     <node x="2729.0" y="1258.0">ca.klapstein.baudit.BuildConfig</node>
     <node x="7712.75" y="896.0">ca.klapstein.baudit.activities.ProblemActivity</node>
     <node x="7725.75" y="651.0">ca.klapstein.baudit.views.ProblemView</node>
-    <node x="10611.75" y="595.5">ca.klapstein.baudit.activities.PatientListActivity</node>
+    <node x="10611.75" y="595.5">ca.klapstein.baudit.activities.CareProviderHomeActivity</node>
     <node x="5172.0" y="1258.0">ca.klapstein.baudit.data.RecordTreeSet</node>
     <node x="3185.0" y="617.0">ca.klapstein.baudit.presenters.LocationPresenter</node>
     <node x="1047.0" y="984.5">ca.klapstein.baudit.presenters.CreatePatientAccountPresenter</node>
@@ -83,7 +83,7 @@
     <node x="7029.0" y="290.5">ca.klapstein.baudit.views.PatientRowView</node>
     <node x="6831.0" y="290.5">ca.klapstein.baudit.views.ProblemRowView</node>
     <node x="3041.0" y="1258.0">ca.klapstein.baudit.data.Photo</node>
-    <node x="3470.0" y="605.5">ca.klapstein.baudit.presenters.PatientListPresenter</node>
+    <node x="3470.0" y="605.5">ca.klapstein.baudit.presenters.CareProviderHomePresenter</node>
     <node x="3117.0" y="1359.0">ca.klapstein.baudit.data.RecordPhoto</node>
     <node x="8751.75" y="290.5">ca.klapstein.baudit.views.SlideShowView</node>
     <node x="8490.75" y="246.0">ca.klapstein.baudit.views.EditAccountView</node>
@@ -298,7 +298,7 @@
       <point x="3140.0" y="1334.0" />
       <point x="33.0" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.presenters.PatientListPresenter" target="ca.klapstein.baudit.presenters.Presenter">
+    <edge source="ca.klapstein.baudit.presenters.CareProviderHomePresenter" target="ca.klapstein.baudit.presenters.Presenter">
       <point x="0.0" y="-71.0" />
       <point x="3662.5" y="543.0" />
       <point x="4248.666666666667" y="543.0" />
@@ -460,7 +460,7 @@
       <point x="4348.666666666667" y="523.0" />
       <point x="66.66666666666697" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.activities.PatientListActivity" target="ca.klapstein.baudit.views.PatientListView">
+    <edge source="ca.klapstein.baudit.activities.CareProviderHomeActivity" target="ca.klapstein.baudit.views.PatientListView">
       <point x="0.0" y="-81.0" />
       <point x="0.0" y="25.5" />
     </edge>

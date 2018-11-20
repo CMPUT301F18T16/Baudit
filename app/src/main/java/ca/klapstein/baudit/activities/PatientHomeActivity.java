@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,15 +16,18 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.presenters.DrawerPresenter;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
-import ca.klapstein.baudit.views.DrawerView;
-import ca.klapstein.baudit.views.ProblemListView;
+import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
@@ -30,11 +35,9 @@ import ca.klapstein.baudit.views.ProblemRowView;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class PatientHomeActivity extends AppCompatActivity implements ProblemListView, DrawerView {
+public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
     private PatientHomePresenter presenter;
-    private DrawerPresenter drawerPresenter;
-
     private ProblemListAdapter adapter;
     private DrawerLayout drawerLayout;
     private TextView problemCountText;
@@ -54,19 +57,8 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this, getApplicationContext());
-        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
 
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        // TODO: is this overkill?
-        drawerLayout.addDrawerListener(
-                new DrawerLayout.SimpleDrawerListener() {
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        drawerPresenter.viewStarted();
-                    }
-                }
-        );                                                         
                                                                    
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -88,8 +80,26 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                             ));
                             return true;
                         case (R.id.nav_logout):
-                            new LogoutDialog().show(getSupportFragmentManager(), LogoutDialog.TAG);
-                            finish();
+                            new AlertDialog.Builder(
+                                    PatientHomeActivity.this,
+                                    R.style.BauditDialogTheme)
+                                .setTitle(R.string.log_out_question)
+                                .setCancelable(true)
+                                .setNegativeButton(R.string.cancel, null)
+                                .setPositiveButton(R.string.log_out,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface mDialogInterface,
+                                                            int i) {
+                                            presenter.logoutClicked();
+                                            startActivity(new Intent(
+                                                PatientHomeActivity.this,
+                                                SplashActivity.class
+                                            ));
+                                            finish();
+                                        }
+                                    })
+                                .show();
                             return true;
                         default:
                             return true;
@@ -120,12 +130,11 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     @Override
     public void onStart() {
         super.onStart();
-        presenter.notifyStarted();
-        drawerPresenter.viewStarted();
+        presenter.viewStarted();
     }
 
     @Override
-    public void update() {
+    public void updateList() {
         adapter.notifyDataSetChanged();
         updateProblemCountText();
     }
@@ -163,12 +172,12 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     }
 
     @Override
-    public void setUsername(String name) {
+    public void updateUsernameDisplay(String name) {
         navHeaderUsername.setText(name);
     }
 
     @Override
-    public void setEmail(String email) {
+    public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
     }
 

@@ -15,13 +15,13 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class PatientListActivityTest extends ActivityTestRule<PatientListActivity> {
+public class CareProviderHomeActivityTest extends ActivityTestRule<CareProviderHomeActivity> {
 
     private Solo solo;
     private DataModel dataModel;
 
-    public PatientListActivityTest() {
-        super(ca.klapstein.baudit.activities.PatientListActivity.class);
+    public CareProviderHomeActivityTest() {
+        super(CareProviderHomeActivity.class);
     }
 
     @Before
@@ -40,6 +40,6 @@ public class PatientListActivityTest extends ActivityTestRule<PatientListActivit
 
     @Test
     public void onCreate() {
-        solo.assertCurrentActivity("Wrong Activity", PatientListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", CareProviderHomeActivity.class);
     }
 }
