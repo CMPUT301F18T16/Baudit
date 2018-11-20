@@ -152,13 +152,13 @@ public class DataModelTest {
         this.commitPatient();
         this.commitCareProvider();
         Thread.sleep(10000);
-        assertTrue(dataModel.validateLogin(new Username("TESTPatient1"), new Password("foobar123")));
-        assertTrue(dataModel.validateLogin(new Username("TESTCareProvider1"), new Password("foobar123")));
+        assertNotNull(dataModel.validateLogin(new Username("TESTPatient1"), new Password("foobar123")));
+        assertNotNull(dataModel.validateLogin(new Username("TESTCareProvider1"), new Password("foobar123")));
     }
 
     @Test
     public void validateLoginFail() {
-        assertFalse(dataModel.validateLogin(new Username("NONSUCH_ACCOUNT"), new Password("PASSWORD")));
+        assertNull(dataModel.validateLogin(new Username("NONSUCH_ACCOUNT"), new Password("PASSWORD")));
     }
 
     @Test
