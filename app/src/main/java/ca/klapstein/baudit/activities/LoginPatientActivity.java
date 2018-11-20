@@ -78,11 +78,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void onLoginValidationSuccess() {
-        Intent intent = new Intent(
-            LoginPatientActivity.this,
-            PatientHomeActivity.class
-        );
-        startActivity(intent);
+        startActivity(new Intent(LoginPatientActivity.this, PatientHomeActivity.class));
         finish();
     }
 
@@ -99,11 +95,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
      */
     @Override
     public void switchLoginScreen() {
-        Intent intent = new Intent(
-                LoginPatientActivity.this,
-                LoginCareProviderActivity.class
-        );
-        startActivity(intent);
+        startActivity(new Intent(LoginPatientActivity.this, LoginCareProviderActivity.class));
         finish();
     }
 }

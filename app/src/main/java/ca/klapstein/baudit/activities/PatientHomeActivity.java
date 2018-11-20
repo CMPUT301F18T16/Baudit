@@ -19,10 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.presenters.DrawerPresenter;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
-import ca.klapstein.baudit.views.DrawerView;
-import ca.klapstein.baudit.views.ProblemListView;
+import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
@@ -30,11 +28,9 @@ import ca.klapstein.baudit.views.ProblemRowView;
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class PatientHomeActivity extends AppCompatActivity implements ProblemListView, DrawerView {
+public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
     private PatientHomePresenter presenter;
-    private DrawerPresenter drawerPresenter;
-
     private ProblemListAdapter adapter;
     private DrawerLayout drawerLayout;
     private TextView problemCountText;
@@ -54,19 +50,8 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
         actionBar.setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this, getApplicationContext());
-        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
 
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        // TODO: is this overkill?
-        drawerLayout.addDrawerListener(
-                new DrawerLayout.SimpleDrawerListener() {
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        drawerPresenter.viewStarted();
-                    }
-                }
-        );                                                         
                                                                    
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -120,12 +105,11 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     @Override
     public void onStart() {
         super.onStart();
-        presenter.notifyStarted();
-        drawerPresenter.viewStarted();
+        presenter.viewStarted();
     }
 
     @Override
-    public void update() {
+    public void updateList() {
         adapter.notifyDataSetChanged();
         updateProblemCountText();
     }
@@ -163,12 +147,12 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
     }
 
     @Override
-    public void setUsername(String name) {
+    public void updateUsernameDisplay(String name) {
         navHeaderUsername.setText(name);
     }
 
     @Override
-    public void setEmail(String email) {
+    public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
     }
 

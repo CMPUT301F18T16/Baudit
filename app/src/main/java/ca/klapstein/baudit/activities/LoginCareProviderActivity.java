@@ -78,11 +78,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
 
     @Override
     public void onLoginValidationSuccess() {
-        Intent intent = new Intent(
-            LoginCareProviderActivity.this,
-            PatientListActivity.class
-        );
-        startActivity(intent);
+        startActivity(new Intent(LoginCareProviderActivity.this, CareProviderHomeActivity.class));
         finish();
     }
 
@@ -99,11 +95,7 @@ public class LoginCareProviderActivity extends AppCompatActivity implements Logi
      */
     @Override
     public void switchLoginScreen() {
-        Intent intent = new Intent(
-                LoginCareProviderActivity.this,
-                LoginPatientActivity.class
-        );
-        startActivity(intent);
+        startActivity(new Intent(LoginCareProviderActivity.this, LoginPatientActivity.class));
         finish();
     }
 }

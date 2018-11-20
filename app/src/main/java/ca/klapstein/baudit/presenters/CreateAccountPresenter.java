@@ -5,7 +5,6 @@ import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 abstract public class CreateAccountPresenter<V extends CreateAccountView> extends Presenter<V> {
-    private static final String TAG = "CreateAccountPresenter";
 
     protected Account account;
 

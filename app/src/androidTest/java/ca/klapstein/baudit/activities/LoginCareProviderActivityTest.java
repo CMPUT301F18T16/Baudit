@@ -45,7 +45,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     }
 
     /**
-     * Tests a valid login. Should open the PatientListActivity.
+     * Tests a valid login. Should open the CareProviderHomeActivity.
      * Will be updated when the remote login validation is completed.
      */
     @Test
@@ -54,7 +54,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
         solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForActivity(PatientListActivity.class, 10);
+        solo.waitForActivity(CareProviderHomeActivity.class, 10);
     }
 
     /**

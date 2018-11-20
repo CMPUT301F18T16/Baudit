@@ -15,10 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.DrawerPresenter;
-import ca.klapstein.baudit.presenters.PatientListPresenter;
-import ca.klapstein.baudit.views.DrawerView;
-import ca.klapstein.baudit.views.PatientListView;
+import ca.klapstein.baudit.presenters.CareProviderHomePresenter;
+import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.PatientRowView;
 
 /**
@@ -26,11 +24,9 @@ import ca.klapstein.baudit.views.PatientRowView;
  *
  * @see ca.klapstein.baudit.data.Patient
  */
-public class PatientListActivity extends AppCompatActivity implements PatientListView, DrawerView {
-    private static final String TAG = "PatientListActivity";
+public class CareProviderHomeActivity extends AppCompatActivity implements HomeView {
 
-    private PatientListPresenter presenter;
-    private DrawerPresenter drawerPresenter;
+    private CareProviderHomePresenter presenter;
     private RecyclerView patientRecyclerView;
     private PatientListAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -50,19 +46,9 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setTitle(R.string.home);
 
-        presenter = new PatientListPresenter(this, getApplicationContext());
-        drawerPresenter = new DrawerPresenter(this, getApplicationContext());
-        drawerLayout = findViewById(R.id.patient_list_drawer_layout);
+        presenter = new CareProviderHomePresenter(this, getApplicationContext());
 
-        // TODO: is this overkill?
-        drawerLayout.addDrawerListener(
-                new DrawerLayout.SimpleDrawerListener() {
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        drawerPresenter.viewStarted();
-                    }
-                }
-        );
+        drawerLayout = findViewById(R.id.patient_list_drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -79,7 +65,7 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
                         switch (menuItem.getItemId()) {
                             case (R.id.nav_edit_account):
                                 startActivity(new Intent(
-                                        PatientListActivity.this,
+                                        CareProviderHomeActivity.this,
                                         EditAccountActivity.class
                                 ));
                                 return true;
@@ -102,14 +88,14 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     }
 
     @Override
-    public void update() {
-        this.adapter.notifyDataSetChanged();
+    public void onStart() {
+        super.onStart();
+        presenter.viewStarted();
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        drawerPresenter.viewStarted();
+    public void updateList() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -131,12 +117,12 @@ public class PatientListActivity extends AppCompatActivity implements PatientLis
     }
 
     @Override
-    public void setUsername(String name) {
+    public void updateUsernameDisplay(String name) {
         navHeaderUsername.setText(name);
     }
 
     @Override
-    public void setEmail(String email) {
+    public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
     }
 
