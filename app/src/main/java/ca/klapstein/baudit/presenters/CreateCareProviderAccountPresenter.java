@@ -31,6 +31,7 @@ public class CreateCareProviderAccountPresenter extends CreateAccountPresenter<C
         view.updatePhoneNumberError("");
         view.updatePasswordError("");
 
+        // TODO: Check if CareProviderID Exists
 
         if (username.length() > 8 && username.length() <20) {
             validAccount = false;
@@ -68,6 +69,8 @@ public class CreateCareProviderAccountPresenter extends CreateAccountPresenter<C
                     context.getResources().getString(R.string.password_match_error)
             );
         }
+
+
 
         if (validAccount) {
             view.onAccountConfirmed();
