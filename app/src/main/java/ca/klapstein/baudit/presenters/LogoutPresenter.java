@@ -13,9 +13,6 @@ import ca.klapstein.baudit.views.LogoutView;
  * @see LogoutView
  */
 public class LogoutPresenter extends Presenter<LogoutView> {
-    private static final String TAG = "LogoutPresenter";
-
-    private Account account;
 
     public LogoutPresenter(LogoutView view, Context context) {
         super(view, context);

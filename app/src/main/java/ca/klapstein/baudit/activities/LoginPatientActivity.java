@@ -23,7 +23,6 @@ import ca.klapstein.baudit.views.LoginView;
 public class LoginPatientActivity extends AppCompatActivity implements LoginView {
 
     private LoginPresenter presenter;
-
     private EditText usernameInput;
     private EditText passwordInput;
     private TextView errorText;
@@ -80,7 +79,7 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     @Override
     public void onLoginValidationSuccess() {
         Intent intent = new Intent(
-            this,
+            LoginPatientActivity.this,
             PatientHomeActivity.class
         );
         startActivity(intent);
@@ -88,9 +87,9 @@ public class LoginPatientActivity extends AppCompatActivity implements LoginView
     }
 
     @Override
-    public void onLoginValidationFailure() {
+    public void onLoginValidationFailure(String message) {
         passwordInput.setText("");
-        errorText.setText(getResources().getString(R.string.login_failed));
+        errorText.setText(message);
     }
 
     /**
