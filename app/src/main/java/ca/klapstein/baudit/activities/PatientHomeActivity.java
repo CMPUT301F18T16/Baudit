@@ -66,10 +66,7 @@ public class PatientHomeActivity extends AppCompatActivity implements ProblemLis
                             ));
                             return true;
                         case (R.id.nav_logout):
-                            startActivity(new Intent(
-                                PatientHomeActivity.this,
-                                LoginPatientActivity.class
-                            ));
+                            new LogoutDialog().show(getSupportFragmentManager(), LogoutDialog.TAG);
                             finish();
                             return true;
                         default:

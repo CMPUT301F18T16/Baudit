@@ -1,9 +1,11 @@
 package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.widget.EditText;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +16,7 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActivity> {
 
     private Solo solo;
+    private DataModel dataModel;
 
     public LoginPatientActivityTest() {
         super(LoginPatientActivity.class);
@@ -21,6 +24,8 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
 
     @Before
     public void setUp() {
+        dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
+        dataModel.clearLoginAccountUserName();
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
@@ -28,6 +33,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @After
     public void tearDown() {
         solo.finishOpenedActivities();
+        dataModel.clearLoginAccountUserName();
     }
 
     /**
