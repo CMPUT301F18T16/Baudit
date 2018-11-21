@@ -14,26 +14,25 @@ public class PreferencesModelTest {
 
     private Context context;
 
-    @Before
-    public void setUp() {
-        context = InstrumentationRegistry.getTargetContext();
-
-        // clear all prefs
+    /**
+     * Clear Android's shared preferences for Baudit.
+     */
+    private void clearPrefs() {
         PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
         PreferencesModel.saveSharedPreferencesPatient(context, null);
         PreferencesModel.saveSharedPreferencesCareProvider(context, null);
         PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
     }
 
+    @Before
+    public void setUp() {
+        context = InstrumentationRegistry.getTargetContext();
+        clearPrefs();
+    }
+
     @After
     public void tearDown() {
-        // TODO: empty shared prefs
-
-        // clear all prefs
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
-        PreferencesModel.saveSharedPreferencesPatient(context, null);
-        PreferencesModel.saveSharedPreferencesCareProvider(context, null);
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
+        clearPrefs();
         context = null;
     }
 
