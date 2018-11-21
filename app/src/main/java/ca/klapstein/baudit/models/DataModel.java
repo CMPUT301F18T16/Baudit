@@ -31,6 +31,15 @@ public class DataModel {
 
     public void setOfflineLoginAccount(@NonNull Account account) {
         Log.i(TAG, "setting LoginAccount: " + account.getUsername().toString());
+
+        // Save the specific account type to shared prefs if applicable
+        if (account instanceof Patient){
+            PreferencesModel.saveSharedPreferencesPatient(context, (Patient) account);
+        } else if (account instanceof CareProvider){
+            PreferencesModel.saveSharedPreferencesCareProvider(context, (CareProvider) account);
+        } else {
+            Log.w(TAG, "abstract account type: "+account.getClass().getSimpleName()+" being saved as an offline login account");
+        }
         PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
     }
 
