@@ -56,14 +56,17 @@ public class PreferencesModelTest {
 
     @Test
     public void saveSharedPreferencesLoginAccountUsername() {
-        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, new Username("TESTUsername"));
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, new Patient(
+                new Username("TESTPatient1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
     }
 
     @Test
     public void loadSharedPreferencesLoginAccountUsername() {
         this.saveSharedPreferencesCareProvider();
-        Username username = PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
-        assertNotNull(username);
-        assertEquals("TESTUsername", username.toString());
+        Account account = PreferencesModel.loadSharedPreferencesLoginAccount(context);
+        assertNotNull(account);
+        assertEquals("TESTUsername", account.getUsername().toString());
     }
 }

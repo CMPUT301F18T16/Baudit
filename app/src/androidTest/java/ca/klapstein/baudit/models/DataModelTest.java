@@ -26,7 +26,7 @@ public class DataModelTest {
         context = null;
         // clean out the share prefs login data
         // TODO: empty shared prefs
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         dataModel = null;
     }
 
@@ -42,11 +42,11 @@ public class DataModelTest {
 
     @Test
     public void commitPatient() {
-        Patient patient3 = new Patient(
+        Patient patient1 = new Patient(
                 new Username("TESTPatient1"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
-        dataModel.commitPatient(patient3);
+        dataModel.commitPatient(patient1);
     }
 
     @Test
@@ -59,16 +59,16 @@ public class DataModelTest {
     @Test
     public void commitPatientTreeSet() {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
-        Patient patient1 = new Patient(
+        Patient patient2 = new Patient(
                 new Username("TESTPatient2"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
-        patientTreeSet.add(patient1);
-        Patient patient2 = new Patient(
+        patientTreeSet.add(patient2);
+        Patient patient3 = new Patient(
                 new Username("TESTPatient3"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
-        patientTreeSet.add(patient2);
+        patientTreeSet.add(patient3);
         dataModel.commitPatientTreeSet(patientTreeSet);
     }
 
@@ -163,16 +163,19 @@ public class DataModelTest {
 
     @Test
     public void setLoginAccountUserName() {
-        dataModel.setLoginAccountUserName(new Username("TESTUsername"));
-        Username username = dataModel.getLoginAccountUsername();
-        assertEquals("TESTUsername", username.toString());
+        dataModel.setOfflineLoginAccount(new Patient(
+                new Username("TESTPatient1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
+        Account account = dataModel.getLoggedInAccount();
+        assertEquals("TESTUsername", account.getUsername().toString());
     }
 
     @Test
     public void clearLoginAccountUserName() {
-        dataModel.clearLoginAccountUserName();
-        Username username = dataModel.getLoginAccountUsername();
-        assertNull(username);
+        dataModel.clearOfflineLoginAccount();
+        Account account = dataModel.getLoggedInAccount();
+        assertNull(account);
     }
 
     @Test
@@ -180,12 +183,18 @@ public class DataModelTest {
         this.commitCareProvider();
         this.commitPatient();
 
-        dataModel.setLoginAccountUserName(new Username("TESTCareProvider1"));
+        dataModel.setOfflineLoginAccount(new CareProvider(
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
         CareProvider careProvider = (CareProvider) dataModel.getLoggedInAccount();
         assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
         assertNotNull(careProvider.getAssignedPatientTreeSet());
 
-        dataModel.setLoginAccountUserName(new Username("TESTPatient1"));
+        dataModel.setOfflineLoginAccount(new Patient(
+                new Username("TESTPatient1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
         Patient patient = (Patient) dataModel.getLoggedInAccount();
         assertEquals("TESTPatient1", patient.getUsername().toString());
         assertNotNull(patient.getProblemTreeSet());

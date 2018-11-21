@@ -8,7 +8,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
 import org.junit.After;
@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertEquals;
+
 
 @RunWith(AndroidJUnit4.class)
 public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
@@ -32,14 +33,17 @@ public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
     @Before
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
-        dataModel.setLoginAccountUserName(new Username("TESTPatient1"));
+        dataModel.setOfflineLoginAccount(new Patient(
+                new Username("TESTPatient1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @After
     public void tearDown() {
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         solo.finishOpenedActivities();
     }
 
