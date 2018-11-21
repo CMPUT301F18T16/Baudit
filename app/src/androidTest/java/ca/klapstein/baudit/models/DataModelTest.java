@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-// TODO: improve these tests they don't actually cover failure or edge cases well
 public class DataModelTest {
 
     private Context context;
@@ -149,6 +148,7 @@ public class DataModelTest {
                 new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         Account account = dataModel.getLoggedInAccount();
+        assertNotNull(account);
         assertEquals("TESTPatient1", account.getUsername().toString());
     }
 
@@ -159,6 +159,7 @@ public class DataModelTest {
                 new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
         Account account = dataModel.getLoggedInAccount();
+        assertNotNull(account);
         assertEquals("TESTCareProvider1", account.getUsername().toString());
     }
 
@@ -167,6 +168,12 @@ public class DataModelTest {
         dataModel.clearOfflineLoginAccount();
         Account account = dataModel.getLoggedInAccount();
         assertNull(account);
+
+        CareProvider careProvider = dataModel.getLoggedInCareProvider();
+        assertNull(careProvider);
+
+        Patient patient = dataModel.getLoggedInPatient();
+        assertNull(patient);
     }
 
     @Test
@@ -174,6 +181,7 @@ public class DataModelTest {
         this.commitCareProvider();
         this.setLoginAccountCareProvider();
         CareProvider careProvider = (CareProvider) dataModel.getLoggedInAccount();
+        assertNotNull(careProvider);
         assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
         assertNotNull(careProvider.getAssignedPatientTreeSet());
     }
@@ -183,6 +191,7 @@ public class DataModelTest {
         this.commitPatient();
         this.setLoginAccountPatient();
         Patient patient = (Patient) dataModel.getLoggedInAccount();
+        assertNotNull(patient);
         assertEquals("TESTPatient1", patient.getUsername().toString());
         assertNotNull(patient.getProblemTreeSet());
     }
