@@ -1,6 +1,9 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.util.Log;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
 
@@ -14,32 +17,26 @@ import java.util.Calendar;
  * @see ProblemView
  */
 public class ProblemPresenter extends Presenter<ProblemView> {
+    private static final String TAG = "ProblemPresenter";
+    private final Patient patient;
+
+    private Problem problem;
 
     public ProblemPresenter(ProblemView view, Context context) {
         super(view, context);
+        patient = dataManager.getLoggedInPatient();
     }
 
-    public void viewStarted(int problemId) {
-        if (problemId == 0) { // If the problem is new
-            Calendar calendar = Calendar.getInstance();
-
-            DateFormat dateFormat = DateFormat.getDateInstance();
-            String dateForButton = dateFormat.format(calendar.getTime());
-            view.updateDateButton(dateForButton);
-
-            DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-            String timeForButton = timeFormat.format(calendar.getTime());
-            view.updateTimeButton(timeForButton);
-
-            view.updateTitleField("");
+    public void viewStarted(int position) {
+        if (position == 0) { // If the problem is new
+            problem = new Problem("Set Title", "Set description");
         } else { // If the problem exists and is being edited
-            // TODO: Replace with real data once implemented
-            view.updateTitleField("Test");
-            view.updateDateButton("November 12, 2018");
-            view.updateTimeButton("21:42");
-            view.updateDescriptionField("Test");
-//            recordTreeSet = dataManager.getRecords();
+            problem = (Problem) patient.getProblemTreeSet().toArray()[position];
         }
+        view.updateTitleField(problem.getTitle());
+        view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
+        view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
+        view.updateDescriptionField(problem.getDescription());
     }
 
     public void clickedDateButton() {
@@ -53,20 +50,39 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public Record getRecordAt(int position) {
-        return new Record("TODO", "Implement actual records.");
+        return (Record) problem.getRecordTreeSet().toArray()[position];
     }
 
     public int getRecordCount() {
-        return 1;
+        return problem.getRecordTreeSet().size();
     }
 
     public void saveTitleClicked(String newTitle) {
-        // TODO: Save the new title
-        view.updateTitleField(newTitle);
+        try {
+            problem.setTitle(newTitle);
+            view.updateTitleField(newTitle);
+        } catch (IllegalArgumentException e) {
+            // TODO: error
+        }
     }
 
     public void saveDescriptionClicked(String newDescription) {
-        // TODO: Save the new description
-        view.updateDescriptionField(newDescription);
+        try {
+            problem.setDescription(newDescription);
+            view.updateDescriptionField(newDescription);
+        } catch (IllegalArgumentException e) {
+            // TODO: error
+        }
+    }
+
+    public void commitProblem() {
+        try {
+            patient.getProblemTreeSet().add(problem);
+            dataManager.commitPatient(patient);
+            view.commitProblemSuccess();
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "failed saving problem", e);
+            view.commitProblemFailure();
+        }
     }
 }

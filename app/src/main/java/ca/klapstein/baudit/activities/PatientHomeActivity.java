@@ -16,12 +16,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
@@ -59,7 +54,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         presenter = new PatientHomePresenter(this, getApplicationContext());
 
         drawerLayout = findViewById(R.id.drawer_layout);
-                                                                   
+
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
@@ -131,6 +126,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     public void onStart() {
         super.onStart();
         presenter.viewStarted();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -197,7 +193,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             viewHolder.setProblemTitleText(problem.getTitle());
             viewHolder.setProblemDateText(problem.getTimeStamp());
             viewHolder.setProblemDescriptionText(problem.getDescription());
-
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -205,7 +200,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                         PatientHomeActivity.this,
                         ProblemActivity.class
                     );
-                    intent.putExtra("problemId", 1); // Test ID
+                    intent.putExtra("problemId", viewHolder.getAdapterPosition()); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent
                     startActivity(intent);
                 }

@@ -9,4 +9,8 @@ public interface ProblemView extends View {
     void updateDescriptionField(String description);
     void showDatePicker(Calendar calendar);
     void showTimePicker(Calendar calendar);
+
+    void commitProblemSuccess();
+
+    void commitProblemFailure();
 }

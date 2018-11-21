@@ -213,6 +213,12 @@
                 android:textSize="18sp"
                 android:text="@string/keywords_label" />
 
+            <Button
+                    android:id="@+id/record_commit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/commit"
+                    android:textColor="@color/dark_grey"/>
         </LinearLayout>
 
     </ScrollView>
