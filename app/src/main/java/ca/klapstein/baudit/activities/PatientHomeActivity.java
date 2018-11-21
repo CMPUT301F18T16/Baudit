@@ -123,6 +123,13 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.viewStarted();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         presenter.viewStarted();
