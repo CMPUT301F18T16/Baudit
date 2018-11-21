@@ -17,11 +17,23 @@ public class PreferencesModelTest {
     @Before
     public void setUp() {
         context = InstrumentationRegistry.getTargetContext();
+
+        // clear all prefs
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
+        PreferencesModel.saveSharedPreferencesPatient(context, null);
+        PreferencesModel.saveSharedPreferencesCareProvider(context, null);
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
     }
 
     @After
     public void tearDown() {
         // TODO: empty shared prefs
+
+        // clear all prefs
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
+        PreferencesModel.saveSharedPreferencesPatient(context, null);
+        PreferencesModel.saveSharedPreferencesCareProvider(context, null);
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
         context = null;
     }
 
@@ -32,7 +44,14 @@ public class PreferencesModelTest {
 
     @Test
     public void loadSharedPreferencesPatientTreeSet() {
-        // this will return an empty patientTreeSet
+        this.saveSharedPreferencesPatientTreeSet();
+        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
+        assertNotNull(patientTreeSet);
+    }
+
+    @Test
+    public void loadSharedPreferencesEmptyPatientTreeSet() {
+        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
         PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
         assertNotNull(patientTreeSet);
     }
@@ -55,18 +74,33 @@ public class PreferencesModelTest {
     }
 
     @Test
-    public void saveSharedPreferencesLoginAccountUsername() {
+    public void saveSharedPreferencesLoginAccountPatient() {
         PreferencesModel.saveSharedPreferencesLoginAccount(context, new Patient(
                 new Username("TESTPatient1"), new Password("foobar123"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
     }
 
     @Test
-    public void loadSharedPreferencesLoginAccountUsername() {
-        this.saveSharedPreferencesCareProvider();
+    public void saveSharedPreferencesLoginAccountCareProvider() {
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, new CareProvider(
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
+    }
+    @Test
+    public void loadSharedPreferencesLoginAccountPatient() {
+        this.saveSharedPreferencesLoginAccountPatient();
         Account account = PreferencesModel.loadSharedPreferencesLoginAccount(context);
         assertNotNull(account);
-        assertEquals("TESTUsername", account.getUsername().toString());
+        assertEquals("TESTPatient1", account.getUsername().toString());
+    }
+
+    @Test
+    public void loadSharedPreferencesLoginAccountCareProvider() {
+        this.saveSharedPreferencesLoginAccountCareProvider();
+        Account account = PreferencesModel.loadSharedPreferencesLoginAccount(context);
+        assertNotNull(account);
+        assertEquals("TESTCareProvider1", account.getUsername().toString());
     }
 }

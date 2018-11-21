@@ -23,21 +23,9 @@ public class DataModelTest {
 
     @After
     public void tearDown() {
-        context = null;
-        // clean out the share prefs login data
-        // TODO: empty shared prefs
         dataModel.clearOfflineLoginAccount();
+        context = null;
         dataModel = null;
-    }
-
-    @Test
-    public void validateLogin() {
-        // TODO: implement
-    }
-
-    @Test
-    public void uniqueID() {
-        // TODO: implement
     }
 
     @Test
@@ -80,19 +68,12 @@ public class DataModelTest {
 
     @Test
     public void getPatient() throws InterruptedException {
-        this.commitPatientTreeSet();
-        // wait for remote elastic search cluster to settle
-        Thread.sleep(10000);
-        Patient patient1 = dataModel.getPatient(new Username("TESTPatient2"));
-        assertNotNull(patient1);
-        assertEquals(new Username("TESTPatient2"), patient1.getUsername());
-
         this.commitPatient();
         // wait for remote elastic search cluster to settle
         Thread.sleep(10000);
-        Patient patient3 = dataModel.getPatient(new Username("TESTPatient3"));
-        assertNotNull(patient3);
-        assertEquals(new Username("TESTPatient3"), patient3.getUsername());
+        Patient patient1 = dataModel.getPatient(new Username("TESTPatient1"));
+        assertNotNull(patient1);
+        assertEquals(new Username("TESTPatient1"), patient1.getUsername());
     }
 
     @Test
@@ -109,16 +90,11 @@ public class DataModelTest {
 
     @Test
     public void commitCareProvider() {
-        CareProvider careProvider1 = new CareProvider(
+        CareProvider careProvider = new CareProvider(
                 new Username("TESTCareProvider1"), new Password("foobar123"),
                 new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
-        dataModel.commitCareProvider(careProvider1);
-        CareProvider careProvider2 = new CareProvider(
-                new Username("TESTCareProvider2"), new Password("foobar123"),
-                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
-        );
-        dataModel.commitCareProvider(careProvider2);
+        dataModel.commitCareProvider(careProvider);
     }
 
     @Test
@@ -144,15 +120,20 @@ public class DataModelTest {
         this.commitCareProvider();
         // wait for remote elastic search cluster to settle
         Thread.sleep(10000);
-        assertFalse(dataModel.uniqueID(new Username("TESTCareProvider2")));
+        assertFalse(dataModel.uniqueID(new Username("TESTCareProvider1")));
     }
 
     @Test
-    public void validateLoginSuccess() throws InterruptedException {
+    public void validateLoginPatientSuccess() throws InterruptedException {
         this.commitPatient();
-        this.commitCareProvider();
         Thread.sleep(10000);
         assertNotNull(dataModel.validateLogin(new Username("TESTPatient1"), new Password("foobar123")));
+    }
+
+    @Test
+    public void validateLoginCareProviderSuccess() throws InterruptedException {
+        this.commitCareProvider();
+        Thread.sleep(10000);
         assertNotNull(dataModel.validateLogin(new Username("TESTCareProvider1"), new Password("foobar123")));
     }
 
@@ -162,39 +143,45 @@ public class DataModelTest {
     }
 
     @Test
-    public void setLoginAccountUserName() {
+    public void setLoginAccountPatient() {
         dataModel.setOfflineLoginAccount(new Patient(
                 new Username("TESTPatient1"), new Password("foobar123"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         Account account = dataModel.getLoggedInAccount();
-        assertEquals("TESTUsername", account.getUsername().toString());
+        assertEquals("TESTPatient1", account.getUsername().toString());
     }
 
     @Test
-    public void clearLoginAccountUserName() {
+    public void setLoginAccountCareProvider() {
+        dataModel.setOfflineLoginAccount(new CareProvider(
+                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+        ));
+        Account account = dataModel.getLoggedInAccount();
+        assertEquals("TESTCareProvider1", account.getUsername().toString());
+    }
+
+    @Test
+    public void clearLoginAccount() {
         dataModel.clearOfflineLoginAccount();
         Account account = dataModel.getLoggedInAccount();
         assertNull(account);
     }
 
     @Test
-    public void getLoginAccountUserName() {
+    public void getLoggedInAccountCareProvider() {
         this.commitCareProvider();
-        this.commitPatient();
-
-        dataModel.setOfflineLoginAccount(new CareProvider(
-                new Username("TESTCareProvider1"), new Password("foobar123"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
-        ));
+        this.setLoginAccountCareProvider();
         CareProvider careProvider = (CareProvider) dataModel.getLoggedInAccount();
         assertEquals("TESTCareProvider1", careProvider.getUsername().toString());
         assertNotNull(careProvider.getAssignedPatientTreeSet());
+    }
 
-        dataModel.setOfflineLoginAccount(new Patient(
-                new Username("TESTPatient1"), new Password("foobar123"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
-        ));
+    @Test
+    public void getLoggedInAccountPatient() {
+        this.commitPatient();
+        this.setLoginAccountPatient();
         Patient patient = (Patient) dataModel.getLoggedInAccount();
         assertEquals("TESTPatient1", patient.getUsername().toString());
         assertNotNull(patient.getProblemTreeSet());
