@@ -10,8 +10,8 @@ public class CreateCareProviderAccountPresenter extends CreateAccountPresenter<C
         super(view, context);
     }
 
-
     public boolean validateCareProviderAccount(String username, String email, String careProviderID) {
+        // TODO:
         return true;
     }
 }

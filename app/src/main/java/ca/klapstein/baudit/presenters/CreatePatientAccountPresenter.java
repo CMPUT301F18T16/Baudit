@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Email;
 import ca.klapstein.baudit.data.PhoneNumber;
@@ -31,7 +30,6 @@ public class CreatePatientAccountPresenter extends CreateAccountPresenter<Create
         }
 
         // TODO: Check for username uniqueness
-
         if (!Email.isValid(email)) {
             validAccount = false;
             view.updateEmailError(context.getResources().getString(R.string.email_error));
@@ -45,7 +43,6 @@ public class CreatePatientAccountPresenter extends CreateAccountPresenter<Create
         }
 
         // TODO: Check validity of password (length, content, etc.)
-
         if (!password.equals(confirmPassord)) {
             validAccount = false;
             view.updatePasswordError(
