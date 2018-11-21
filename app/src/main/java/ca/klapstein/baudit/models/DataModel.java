@@ -24,6 +24,7 @@ public class DataModel {
         this.context = context;
     }
 
+    @Nullable
     private Account getOfflineLoginAccount() {
         return PreferencesModel.loadSharedPreferencesLoginAccount(context);
     }
@@ -38,6 +39,7 @@ public class DataModel {
         PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
     }
 
+    @Nullable
     public Patient getLoggedInPatient() {
         Account account = getOfflineLoginAccount();
         if (account != null) {
@@ -46,6 +48,7 @@ public class DataModel {
         return null;
     }
 
+    @Nullable
     public CareProvider getLoggedInCareProvider() {
         Account account = getOfflineLoginAccount();
         if (account != null) {
@@ -54,6 +57,7 @@ public class DataModel {
         return null;
     }
 
+    @Nullable
     public Account getLoggedInAccount() {
         // attempt to get the account as a patient
         Patient patient = getLoggedInPatient();
@@ -61,7 +65,7 @@ public class DataModel {
         return validateAccountRetrieval(patient, careProvider);
     }
 
-
+    @Nullable
     private Account validateAccountRetrieval(@Nullable Patient patient, @Nullable CareProvider careProvider) {
         if ((patient != null) && (careProvider != null)) {
             // this is awkward we should not be able to get a Patient **AND** CareProvider from the same login
@@ -95,6 +99,7 @@ public class DataModel {
      * @param password {@code Password}
      * @return {@code Account} that can be potentially cast into either a {@code Patient} or {@code CareProvider}
      */
+    @Nullable
     public Account validateLogin(Username username, Password password) {
         try {
             Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
@@ -153,6 +158,7 @@ public class DataModel {
      *
      * @return {@code PatientTreeSet}
      */
+    @NonNull
     public PatientTreeSet getPatients() {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
         // check remote
