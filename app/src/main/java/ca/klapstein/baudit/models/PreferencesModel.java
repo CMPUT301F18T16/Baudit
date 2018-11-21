@@ -3,6 +3,7 @@ package ca.klapstein.baudit.models;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import ca.klapstein.baudit.data.Account;
@@ -90,6 +91,7 @@ class PreferencesModel {
      * @param context {@code Context}
      * @return {@code PatientTreeSet}
      */
+    @NonNull
     public static PatientTreeSet loadSharedPreferencesPatientTreeSet(Context context) {
         PatientTreeSet patientTreeSet;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -104,6 +106,12 @@ class PreferencesModel {
             Type type = new TypeToken<PatientTreeSet>() {
             }.getType();
             patientTreeSet = gson.fromJson(json, type);
+        }
+
+        // ensure we are never returning null
+        // this mocks similar behaviour to the RemoteModel
+        if (patientTreeSet == null){
+            patientTreeSet = new PatientTreeSet();
         }
         return patientTreeSet;
     }
