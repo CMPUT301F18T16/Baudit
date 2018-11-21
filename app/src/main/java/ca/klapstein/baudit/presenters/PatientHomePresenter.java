@@ -7,7 +7,7 @@ import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
 
 /**
- * MVP presenter for presenting a {@code ProblemTreeSet} on a {@code ProblemListView}.
+ * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
  *
  * @see HomeView
  * @see Account
@@ -32,6 +32,12 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
         return problemTreeSet.size();
     }
 
+    /**
+     * Get the latest {@code ProblemTreeSet} of the logged in {@code Patient} and call updates to the respective
+     * components of the {@code HomeView}.
+     * <p>
+     * Note: this method should be called when the {@code HomeView} is started.
+     */
     public void viewStarted() {
         problemTreeSet = dataManager.getLoggedInPatient().getProblemTreeSet();
         view.updateUsernameDisplay(account.getUsername().toString());
