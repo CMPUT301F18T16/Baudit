@@ -74,7 +74,7 @@ public class LoginPresenter extends Presenter<LoginView> {
             offlineLoginPatient();
         } else {
             Log.e(TAG, "no offline login account or invalid account type for offline login");
-            dataManager.clearLoginAccountUserName();
+            dataManager.clearOfflineLoginAccount();
         }
     }
 
@@ -88,17 +88,12 @@ public class LoginPresenter extends Presenter<LoginView> {
         // get the account associated with the user and password
         Account account = dataManager.validateLogin(new Username(username), new Password(password));
         // if it is null we failed the login
-        if (account == null) {
-            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
-            // if we are logging in a CareProvider ensure the account is actually a CareProvider
-        } else if (view.getClass() == LoginCareProviderActivity.class &&
-                dataManager.getCareProvider(account.getUsername()) != null) {
-            dataManager.setLoginAccountUserName(account.getUsername());
+        if (view.getClass() == LoginCareProviderActivity.class && account instanceof CareProvider) {
+            dataManager.setOfflineLoginAccount(account);
             view.onLoginValidationSuccess();
             // if we are logging in a Patient ensure the account is actually a Patient
-        } else if (view.getClass() == LoginPatientActivity.class &&
-                dataManager.getPatient(account.getUsername()) != null) {
-            dataManager.setLoginAccountUserName(account.getUsername());
+        } else if (view.getClass() == LoginPatientActivity.class && account instanceof Patient) {
+            dataManager.setOfflineLoginAccount(account);
             view.onLoginValidationSuccess();
         } else {  // else we have failed the login
             view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));

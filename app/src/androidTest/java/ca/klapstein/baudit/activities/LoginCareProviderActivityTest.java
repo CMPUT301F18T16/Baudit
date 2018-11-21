@@ -25,14 +25,14 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     @Before
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @After
     public void tearDown() {
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         solo.finishOpenedActivities();
     }
 

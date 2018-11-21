@@ -24,48 +24,57 @@ public class DataModel {
         this.context = context;
     }
 
-    public Username getLoginAccountUsername() {
-        return PreferencesModel.loadSharedPreferencesLoginAccountUsername(context);
+    private Account getOfflineLoginAccount() {
+        return PreferencesModel.loadSharedPreferencesLoginAccount(context);
     }
 
-    public void clearLoginAccountUserName() {
-        Log.i(TAG, "clearing LoginAccountUserName");
-        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, null);
+    public void setOfflineLoginAccount(@NonNull Account account) {
+        Log.i(TAG, "setting LoginAccount: " + account.getUsername().toString());
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
     }
 
-    public void setLoginAccountUserName(@NonNull Username username) {
-        Log.i(TAG, "setting LoginAccountUserName: " + username.toString());
-        PreferencesModel.saveSharedPreferencesLoginAccountUsername(context, username);
+    public void clearOfflineLoginAccount() {
+        Log.i(TAG, "clearing LoginAccount");
+        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
     }
 
     public Patient getLoggedInPatient() {
-        Username username = getLoginAccountUsername();
-        if (username != null) {
-            return getPatient(getLoginAccountUsername());
+        Account account = getOfflineLoginAccount();
+        if (account != null) {
+            return getPatient(account.getUsername());
         }
         return null;
     }
 
     public CareProvider getLoggedInCareProvider() {
-        Username username = getLoginAccountUsername();
-        if (username != null) {
-            return getCareProvider(username);
+        Account account = getOfflineLoginAccount();
+        if (account != null) {
+            return getCareProvider(account.getUsername());
         }
         return null;
     }
 
     public Account getLoggedInAccount() {
-        Username username = getLoginAccountUsername();
-        if (username != null) {
-            // attempt to get the account as a patient
-            Account account = getLoggedInPatient();
-            // if no patient account was found it must be a care provider
-            if (account == null) {
-                account = getLoggedInCareProvider();
-            }
-            return account;
+        // attempt to get the account as a patient
+        Patient patient = getLoggedInPatient();
+        CareProvider careProvider = getLoggedInCareProvider();
+        return validateAccountRetrieval(patient, careProvider);
+    }
+
+
+    private Account validateAccountRetrieval(@Nullable Patient patient, @Nullable CareProvider careProvider) {
+        if ((patient != null) && (careProvider != null)) {
+            // this is awkward we should not be able to get a Patient **AND** CareProvider from the same login
+            // credentials (username/password)
+            Log.e(TAG, "retrieved both Patient and CareProvider");
+            return null;
+        } else if (patient != null) {
+            return patient;
+        } else if (careProvider != null) { // careprovider **MUST** not be false
+            return careProvider;
+        } else {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -81,16 +90,21 @@ public class DataModel {
     /**
      * Validate that a given username and password pair match to a valid user within the remote ElasticSearch.
      * Or validate that a local authentication token exists within the local.
-     * <p>
-     * TODO: implement offline login method? Cookie/token based
      *
      * @param username {@code Username}
      * @param password {@code Password}
-     * @return {@code boolean}
+     * @return {@code Account} that can be potentially cast into either a {@code Patient} or {@code CareProvider}
      */
     public Account validateLogin(Username username, Password password) {
         try {
-            return new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
+            Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
+            if (account == null) {
+                return null;
+            }
+            // attempt to get either a valid Patient or CareProvider from the obtained Account's username
+            Patient patient = getPatient(account.getUsername());
+            CareProvider careProvider = getCareProvider(account.getUsername());
+            return validateAccountRetrieval(patient, careProvider);
         } catch (ExecutionException | InterruptedException e) {
             Log.e(TAG, "failure getting Account from remote", e);
             return null;
@@ -117,17 +131,20 @@ public class DataModel {
 
         // check local
         Patient localPatient = PreferencesModel.loadSharedPreferencesPatient(context);
-        if (localPatient != null && !localPatient.getUsername().equals(username)) {
-            localPatient = null;
-            //TODO: deconflicting
-        }
-        // merge both remote and local
-        if (localPatient != null && remotePatient != null) {
-            localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
-        }
         if (localPatient == null) {
             return remotePatient;
         }
+
+        // merge both remote and local
+        if (remotePatient != null) {
+            localPatient.getProblemTreeSet().addAll(remotePatient.getProblemTreeSet());
+        }
+
+        // ensure we are getting the right Patient from local storage
+        if (!localPatient.getUsername().equals(username)) {
+            localPatient = null;
+        }
+
         return localPatient;
     }
 
@@ -138,15 +155,14 @@ public class DataModel {
      */
     public PatientTreeSet getPatients() {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
-        // get from the remote
+        // check remote
         try {
             patientTreeSet.addAll(new RemoteModel.GetPatients().execute("").get());
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
             Log.e(TAG, "failure getting patientTreeSet from remote", e);
         }
         // TODO: dedupe figure out newest
-        // TODO: get from local
+        // check local
         patientTreeSet.addAll(PreferencesModel.loadSharedPreferencesPatientTreeSet(context));
         return patientTreeSet;
     }
@@ -157,13 +173,11 @@ public class DataModel {
      * @param patient {@code Patient}
      */
     public void commitPatient(Patient patient) {
-        // add the patients to the local
+        // add to local
         PreferencesModel.saveSharedPreferencesPatient(context, patient);
-        // add patients to the remote
-        new RemoteModel.AddPatientTask().execute(
-                patient
-        );
 
+        // add to remote
+        new RemoteModel.AddPatientTask().execute(patient);
     }
 
     /**
@@ -172,12 +186,11 @@ public class DataModel {
      * @param patientTreeSet {@code PatientTreeSet}
      */
     public void commitPatientTreeSet(PatientTreeSet patientTreeSet) {
-        // add the patients to the local
+        // add to local
         PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
-        // add patients to the remote
-        new RemoteModel.AddPatientTask().execute(
-                patientTreeSet.toArray(new Patient[0])
-        );
+
+        // add to remote
+        new RemoteModel.AddPatientTask().execute(patientTreeSet.toArray(new Patient[0]));
     }
 
     /**
@@ -200,17 +213,18 @@ public class DataModel {
 
         // check local
         CareProvider localCareProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
-        if (localCareProvider != null && !localCareProvider.getUsername().equals(username)) {
-            localCareProvider = null;
-            //TODO: deconflicting
-        }
-        // merge remote and local
-        if (localCareProvider != null && remoteCareProvider != null) {
-            localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
-        }
         if (localCareProvider == null) {
             return remoteCareProvider;
         }
+
+        // ensure we are getting the right CareProvider from local storage
+        if (!localCareProvider.getUsername().equals(username)) {
+            localCareProvider = null;
+        } else if (remoteCareProvider != null) {
+            // merge remote and local
+            localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
+        }
+
         return localCareProvider;
     }
 
@@ -222,6 +236,7 @@ public class DataModel {
     public void commitCareProvider(CareProvider careProvider) {
         // save to local
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
+
         // save to remote
         new RemoteModel.AddCareProviderTask().execute(careProvider);
     }
