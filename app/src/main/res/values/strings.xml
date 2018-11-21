@@ -64,4 +64,6 @@
     <string name="password_match_error">⚠ Passwords do not match.</string>
     <string name="password_error">⚠Password must be 8&#8211;25 characters.</string>
     <string name="log_out_question">Log out?</string>
+    <string name="identification_mnc">Identification (MNC)</string>
+    <string name="account">Account</string>
 </resources>

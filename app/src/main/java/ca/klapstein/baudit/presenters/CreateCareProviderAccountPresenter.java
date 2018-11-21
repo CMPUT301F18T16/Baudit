@@ -52,8 +52,6 @@ public class CreateCareProviderAccountPresenter extends CreateAccountPresenter<C
             );
         }
 
-
-
         // TODO: Check validity of password (length, content, etc.)
 
         if(password.length() <25){

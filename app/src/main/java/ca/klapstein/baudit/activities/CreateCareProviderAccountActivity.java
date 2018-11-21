@@ -46,24 +46,24 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
 
         presenter = new CreateCareProviderAccountPresenter(this, getApplicationContext());
 
-        id = findViewById(R.id.create_careprovider_id);
-        firstname = findViewById(R.id.create_careprovider_firstname);
-        lastname = findViewById(R.id.create_careprovider_lastName);
-        username= findViewById(R.id.create_careprovider_username);
-        email = findViewById(R.id.create_careprovider_email);
-        phonenumber = findViewById(R.id.create_careprovider_phone);
-        password = findViewById(R.id.create_careprovider_password);
-        confirmpassword =findViewById(R.id.create_careprovider_confirmpassword);
+        id = findViewById(R.id.create_careprovider_id_input);
+        firstname = findViewById(R.id.create_careprovider_first_name_input);
+        lastname = findViewById(R.id.create_careprovider_last_name_input);
+        username= findViewById(R.id.create_careprovider_username_input);
+        email = findViewById(R.id.create_careprovider_email_input);
+        phonenumber = findViewById(R.id.create_careprovider_phone_number_input);
+        password = findViewById(R.id.create_careprovider_password_input);
+        confirmpassword =findViewById(R.id.create_careprovider_confirm_password_input);
 
 
-        create_careprovider_id_error =findViewById(R.id.create_careprovider_id_error);
-        create_carepovider_username_error = findViewById(R.id.create_careprovider_username_error);
-        create_careprovider_email_error = findViewById(R.id.create_careprovider_email_error);
-        create_carepovider_phonenumber_error = findViewById(R.id.create_careprovider_phonenumber_error);
-        create_careprovider_password_error = findViewById(R.id.create_careprovider_password_error);
+        create_careprovider_id_error =findViewById(R.id.create_careprovider_id_error_display);
+        create_carepovider_username_error = findViewById(R.id.create_careprovider_username_error_display);
+        create_careprovider_email_error = findViewById(R.id.create_careprovider_email_error_display);
+        create_carepovider_phonenumber_error = findViewById(R.id.create_careprovider_phone_number_error_display);
+        create_careprovider_password_error = findViewById(R.id.create_careprovider_password_error_display);
 
 
-        Button verifyButton = findViewById(R.id.create_careprovider_verify_button);
+        Button verifyButton = findViewById(R.id.create_careprovider_confirm_buttons);
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class CreateCareProviderAccountActivity extends AppCompatActivity
             }
         });
 
-        Button cancelButton = findViewById(R.id.create_careprovider_cancel_button);
+        Button cancelButton = findViewById(R.id.create_careprovider_cancel_buttons);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
