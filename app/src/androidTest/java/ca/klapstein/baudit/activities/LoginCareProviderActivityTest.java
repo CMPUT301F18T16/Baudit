@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static junit.framework.TestCase.assertTrue;
 
 public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCareProviderActivity> {
 
@@ -97,7 +98,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     @Test
     public void SwitchLoginScreen() {
         solo.clickOnView(solo.getView(R.id.log_in_as_patient_button));
-        solo.waitForActivity(LoginPatientActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        assertTrue(solo.waitForActivity(LoginPatientActivity.class));
+//        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
 }
