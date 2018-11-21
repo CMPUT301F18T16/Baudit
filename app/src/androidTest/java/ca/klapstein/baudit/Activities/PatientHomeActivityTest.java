@@ -30,7 +30,7 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.setOfflineLoginAccount(new Patient(
                 new Username("TESTPatient1"), new Password("foobar123"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
@@ -47,12 +47,6 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 
-    @Test
-    public void testOpenMapView() {
-        solo.clickOnView(solo.getView(R.id.patient_home_view_map));
-        solo.waitForActivity(MapAllProblemsActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", MapAllProblemsActivity.class);
-    }
 
     @Test
     public void testEditAccount() {
