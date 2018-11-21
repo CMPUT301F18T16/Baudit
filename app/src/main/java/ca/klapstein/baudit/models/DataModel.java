@@ -46,6 +46,8 @@ public class DataModel {
     public void clearOfflineLoginAccount() {
         Log.i(TAG, "clearing LoginAccount");
         PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
+        PreferencesModel.saveSharedPreferencesPatient(context, null);
+        PreferencesModel.saveSharedPreferencesCareProvider(context, null);
     }
 
     @Nullable
