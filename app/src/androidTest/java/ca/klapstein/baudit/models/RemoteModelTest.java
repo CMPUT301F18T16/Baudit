@@ -39,21 +39,21 @@ public class RemoteModelTest {
     }
 
     @Test
-    public void ValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
+    public void getValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
         assertNull(new RemoteModel.ValidateLogin().execute(
                 new Username("NONSUCH_ACCOUNT").toString(),
                 new Password("BADPASSWORD").toString()).get());
     }
 
     @Test
-    public void ValidateLoginPatient() throws ExecutionException, InterruptedException {
+    public void getValidateLoginPatient() throws ExecutionException, InterruptedException {
         Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTPatient1").toString(), new Password("foobar123").toString()).get();
         assertNotNull(account);
         assertEquals("TESTPatient1", account.getUsername().toString());
     }
 
     @Test
-    public void ValidateLoginCareProvider() throws ExecutionException, InterruptedException {
+    public void getValidateLoginCareProvider() throws ExecutionException, InterruptedException {
         Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTCareProvider1").toString(), new Password("foobar123").toString()).get();
         assertNotNull(account);
         assertEquals("TESTCareProvider1", account.getUsername().toString());
