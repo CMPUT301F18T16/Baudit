@@ -19,8 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
--dontwarn io.card.**
--dontwarn org.apache.commons.**
--dontwarn com.google.common.**
--dontwarn org.slf4j.**
