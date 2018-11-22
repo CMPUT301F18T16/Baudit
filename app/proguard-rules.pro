@@ -19,3 +19,17 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn com.google.common.util.concurrent.**
+-dontwarn com.google.common.eventbus.**
+-dontwarn com.google.common.collect.**
+-dontwarn com.google.common.util.concurrent.**
+-dontwarn com.google.android.gms.common.util.WorkSourceUtil
+-dontwarn com.google.common.cache.**
+-dontwarn javax.management.**
+-dontwarn java.lang.management.**
+-dontwarn org.apache.commons.**
+-dontwarn org.slf4j.**
+
+-keep class org.** { *; }
+-keep class java.lang.** { *; }
