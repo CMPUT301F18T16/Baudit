@@ -1,13 +1,11 @@
 package ca.klapstein.baudit.models;
 
 import ca.klapstein.baudit.data.*;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class RemoteModelTest {
