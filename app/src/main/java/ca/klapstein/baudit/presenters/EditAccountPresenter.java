@@ -12,19 +12,27 @@ import ca.klapstein.baudit.views.EditAccountView;
  */
 public class EditAccountPresenter extends Presenter<EditAccountView> {
 
-    protected Account account; // TODO: Perhaps this information should be pulled from remote
+    private Account account;
 
     public EditAccountPresenter(EditAccountView view, Context context) {
         super(view, context);
         account = dataManager.getLoggedInAccount();
     }
 
+    /**
+     * On startup of the {@code EditAccountView} populate fields noting the account.
+     */
     public void viewStarted() {
-        view.updateFields(
-                account.getUsername().toString(),
-                account.getContactInfo().getEmail().toString(),
-                account.getContactInfo().getPhoneNumber().toString()
-        );
+        account = dataManager.getLoggedInAccount();
+        if (account != null) {
+            view.updateFields(
+                    account.getUsername().toString(),
+                    account.getContactInfo().getEmail().toString(),
+                    account.getContactInfo().getPhoneNumber().toString()
+            );
+        } else {
+            // TODO: error
+        }
     }
 
     public void saveClicked(String name, String email, String phoneNumber) {

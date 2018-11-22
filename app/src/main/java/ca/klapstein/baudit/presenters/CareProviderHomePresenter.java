@@ -1,8 +1,8 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-
 import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
 import ca.klapstein.baudit.views.HomeView;
@@ -17,12 +17,11 @@ import ca.klapstein.baudit.views.PatientRowView;
  */
 public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
-    private final Account account;
     private PatientTreeSet patientTreeSet;
-
+    private CareProvider careProvider;
     public CareProviderHomePresenter(HomeView view, Context context) {
         super(view, context);
-        account = dataManager.getLoggedInAccount();
+        careProvider = dataManager.getLoggedInCareProvider();
         patientTreeSet = dataManager.getPatients();
     }
 
@@ -36,8 +35,13 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
     }
 
     public void viewStarted() {
-        view.updateUsernameDisplay(account.getUsername().toString());
-        view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
-        view.updateList();
+        CareProvider account = dataManager.getLoggedInCareProvider();
+        if (account != null) {
+            view.updateUsernameDisplay(account.getUsername().toString());
+            view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
+            view.updateList();
+        } else {
+            // TODO: error
+        }
     }
 }

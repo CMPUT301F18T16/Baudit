@@ -3,12 +3,13 @@ package ca.klapstein.baudit.models;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PatientTreeSet;
-import ca.klapstein.baudit.data.Username;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,10 +34,10 @@ class PreferencesModel {
 
     private static final String PATIENT_PREF_JSON_KEY = "mPatientJson";
 
-    private static final String LOGIN_ACCOUNT_USERNAME_JSON_KEY = "mLoginAccountUsernameJson";
+    private static final String LOGIN_ACCOUNT_JSON_KEY = "mLoginAccountJson";
 
     /**
-     * Save a {@code Gson} compatible object into Android's Shared Preferences.
+     * Save a {@code Gson} compatible {@code Object} into Android's Shared Preferences.
      *
      * @param context  {@code Context}
      * @param object   {@code Object}
@@ -52,26 +53,26 @@ class PreferencesModel {
         prefsEditor.commit();
     }
 
-    public static void saveSharedPreferencesLoginAccountUsername(Context context, Username username) {
-        saveSharedPreferencesObject(context, username, LOGIN_ACCOUNT_USERNAME_JSON_KEY);
+    public static void saveSharedPreferencesLoginAccount(Context context, Account account) {
+        saveSharedPreferencesObject(context, account, LOGIN_ACCOUNT_JSON_KEY);
     }
 
-    public static Username loadSharedPreferencesLoginAccountUsername(Context context) {
-        Username username;
+    public static Account loadSharedPreferencesLoginAccount(Context context) {
+        Account account;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
 
-        String json = mPrefs.getString(LOGIN_ACCOUNT_USERNAME_JSON_KEY, "");
+        String json = mPrefs.getString(LOGIN_ACCOUNT_JSON_KEY, "");
         Log.e(TAG, "loaded json: " + json);
 
         if (json.isEmpty()) {
-            username = null;
+            account = null;
         } else {
-            Type type = new TypeToken<Username>() {
+            Type type = new TypeToken<Account>() {
             }.getType();
-            username = gson.fromJson(json, type);
+            account = gson.fromJson(json, type);
         }
-        return username;
+        return account;
     }
 
     /**
@@ -90,6 +91,7 @@ class PreferencesModel {
      * @param context {@code Context}
      * @return {@code PatientTreeSet}
      */
+    @NonNull
     public static PatientTreeSet loadSharedPreferencesPatientTreeSet(Context context) {
         PatientTreeSet patientTreeSet;
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -104,6 +106,12 @@ class PreferencesModel {
             Type type = new TypeToken<PatientTreeSet>() {
             }.getType();
             patientTreeSet = gson.fromJson(json, type);
+        }
+
+        // ensure we are never returning null
+        // this mocks similar behaviour to the RemoteModel
+        if (patientTreeSet == null){
+            patientTreeSet = new PatientTreeSet();
         }
         return patientTreeSet;
     }

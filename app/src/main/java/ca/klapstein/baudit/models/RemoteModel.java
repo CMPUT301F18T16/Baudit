@@ -38,56 +38,11 @@ class RemoteModel {
     private static final String PATIENT_INDEX = "patient";
     private static final String CARE_PROVIDER_INDEX = "careprovider";
 
-    private static JestDroidClient createBaseClient() {
+    private static JestDroidClient createClient() {
         DroidClientConfig config = new DroidClientConfig.Builder(REMOTE_TEST_URL).build();
         JestClientFactory factory = new JestClientFactory();
         factory.setDroidClientConfig(config);
         return (JestDroidClient) factory.getObject();
-    }
-
-    /**
-     * Validate whether a given username {@code String} representation is not already
-     * taken within both remote.
-     *
-     * return {@code true} if the username {@code String} representation is not already taken, otherwise {@code false}
-     */
-    public static class UniqueID extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... search_parameters) {
-            JestDroidClient client = createBaseClient();
-            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
-            String query = "{\n" +
-                    "   \"query\": {\n" +
-                    "       \"bool\": {\n" +
-                    "           \"must\": [\n" +
-                    "                {\"match\": \n" +
-                    "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
-                    "                } \n" +
-                    "           ] \n" +
-                    "       } \n" +
-                    "   } \n" +
-                            "}";
-
-            Log.d(TAG, "search query:\n" + query);
-            Search search = new Search.Builder(query)
-                    .addIndex(CARE_PROVIDER_INDEX)
-                    .addIndex(PATIENT_INDEX)
-                    .build();
-            Log.d(TAG, "search json: " + search.toString());
-
-            try {
-                JestResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Account> accountList;
-                    accountList = result.getSourceAsObjectList(Account.class);
-                    return (accountList.size() == 0);
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "failed to validate account username from remote", e);
-                return false; // assume false on failure to avoid an unexpected state
-            }
-            return false;
-        }
     }
 
     /**
@@ -99,7 +54,7 @@ class RemoteModel {
     public static class ValidateLogin extends AsyncTask<String, Void, Account> {
         @Override
         protected Account doInBackground(String... search_parameters) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Account> accountArrayList = new ArrayList<>();
             String query = "{\n" +
@@ -157,7 +112,7 @@ class RemoteModel {
     public static class GetPatient extends AsyncTask<String, Void, Patient> {
         @Override
         protected Patient doInBackground(String... search_parameters) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Patient> patientArrayList = new ArrayList<>();
             String query = "{\n" +
@@ -205,7 +160,7 @@ class RemoteModel {
     public static class GetPatients extends AsyncTask<String, Void, PatientTreeSet> {
         @Override
         protected PatientTreeSet doInBackground(String... search_parameters) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             PatientTreeSet patientTreeSet = new PatientTreeSet();
             Search search = new Search.Builder(search_parameters[0])
@@ -233,7 +188,7 @@ class RemoteModel {
     public static class AddPatientTask extends AsyncTask<Patient, Void, Void> {
         @Override
         protected Void doInBackground(Patient... patients) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             for (Patient patient : patients) {
                 Index index = new Index.Builder(patient)
                         .index(PATIENT_INDEX)
@@ -262,7 +217,7 @@ class RemoteModel {
     public static class GetCareProvider extends AsyncTask<String, Void, CareProvider> {
         @Override
         protected CareProvider doInBackground(String... search_parameters) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<CareProvider> careProviderArrayList = new ArrayList<>();
             String query = "{\n" +
@@ -307,7 +262,7 @@ class RemoteModel {
     public static class AddCareProviderTask extends AsyncTask<CareProvider, Void, Void> {
         @Override
         protected Void doInBackground(CareProvider... careProviders) {
-            JestDroidClient client = createBaseClient();
+            JestDroidClient client = createClient();
             for (CareProvider careProvider : careProviders) {
                 Index index = new Index.Builder(careProvider)
                         .index(CARE_PROVIDER_INDEX)

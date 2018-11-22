@@ -40,13 +40,15 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void clickedDateButton() {
-        // TODO: Get date from db and convert to calendar
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(problem.getDate());
         view.showDatePicker(Calendar.getInstance());
     }
 
     public void clickedTimeButton() {
-        // TODO: Get time from db and convert to calendar
-        view.showTimePicker(Calendar.getInstance());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(problem.getDate());
+        view.showTimePicker(calendar);
     }
 
     public Record getRecordAt(int position) {
@@ -57,6 +59,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return problem.getRecordTreeSet().size();
     }
 
+    /**
+     * Validate and save the given title to a {@code Problem} to be added/edited.
+     *
+     * @param newTitle {@code String}
+     */
     public void saveTitleClicked(String newTitle) {
         try {
             problem.setTitle(newTitle);
@@ -66,6 +73,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         }
     }
 
+    /**
+     * Validate and save the given description to a {@code Problem} to be added/edited.
+     *
+     * @param newDescription {@code String}
+     */
     public void saveDescriptionClicked(String newDescription) {
         try {
             problem.setDescription(newDescription);
@@ -81,7 +93,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "failed saving problem", e);
+            Log.e(TAG, "failed saving Problem", e);
             view.commitProblemFailure();
         }
     }

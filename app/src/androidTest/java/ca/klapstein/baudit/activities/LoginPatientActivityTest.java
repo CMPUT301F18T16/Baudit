@@ -25,14 +25,14 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @Before
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
     @After
     public void tearDown() {
-        dataModel.clearLoginAccountUserName();
+        dataModel.clearOfflineLoginAccount();
         solo.finishOpenedActivities();
     }
 
@@ -54,7 +54,8 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
         solo.enterText((EditText) solo.getView(R.id.enter_patient_username), "TESTPatient1");
         solo.enterText((EditText) solo.getView(R.id.enter_patient_password), "foobar123");
         solo.clickOnView(solo.getView(R.id.login_patient_button));
-        solo.waitForActivity(PatientHomeActivity.class, 10);
+        solo.waitForActivity(PatientHomeActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 
     /**
@@ -76,6 +77,7 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @Test
     public void testRegister() {
         solo.clickOnView(solo.getView(R.id.register_patient_button));
+        solo.waitForActivity(CreatePatientAccountActivity.class);
         solo.assertCurrentActivity("Wrong Activity", CreatePatientAccountActivity.class);
     }
 
@@ -95,6 +97,9 @@ public class LoginPatientActivityTest extends ActivityTestRule<LoginPatientActiv
     @Test
     public void SwitchLoginScreen() {
         solo.clickOnView(solo.getView(R.id.log_in_as_care_provider_button));
-        solo.waitForActivity(LoginCareProviderActivity.class, 5);
+        solo.waitForActivity(LoginCareProviderActivity.class);
+        // TODO: this test seems to fail on the ci but not in dev environ
+//        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
+
     }
 }

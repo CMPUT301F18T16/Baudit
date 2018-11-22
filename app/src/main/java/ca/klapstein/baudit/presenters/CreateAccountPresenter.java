@@ -13,6 +13,7 @@ abstract public class CreateAccountPresenter<V extends CreateAccountView> extend
     }
 
     public boolean validateBaseAccount(String username, String email) {
+        // TODO:
         return true;
     }
 }

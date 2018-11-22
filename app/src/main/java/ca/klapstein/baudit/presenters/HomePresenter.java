@@ -20,6 +20,6 @@ public abstract class HomePresenter<V extends HomeView> extends Presenter<V> {
      * Invalidate any authentication with the remote servers, and revoke any local access tokens.
      */
     public void logoutClicked() {
-        dataManager.clearLoginAccountUserName();
+        dataManager.clearOfflineLoginAccount();
     }
 }
