@@ -14,6 +14,7 @@
     <string name="login_failed">⚠ Login error: Invalid credentials</string>
     <string name="problem_count">Problems (%1$d):</string>
     <string name="home">Home</string>
+    <string name="get_account_qr_code">Display Account QR Code</string>
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
     <string name="problem_locations">Problem locations</string>
@@ -56,7 +57,9 @@
     <string name="confirm_password">Confirm password</string>
     <string name="body_location_template">Body location template</string>
     <string name="upload">Upload</string>
-    <string name="body_location_disclaimer">Body location images are full-body images used to indicate the location of problems on the body. Please note that these images will be viewable by you primary care provider.</string>
+    <string name="body_location_disclaimer">Body location images are full-body images used to indicate the location of
+        problems on the body. Please note that these images will be viewable by you primary care provider.
+    </string>
     <string name="confirm">Confirm</string>
     <string name="create_account">Create account</string>
     <string name="username_error">⚠ Username must be 8&#8211;20 characters.</string>
@@ -64,4 +67,6 @@
     <string name="phone_number_error">⚠ Invalid phone number.</string>
     <string name="password_match_error">⚠ Passwords do not match.</string>
     <string name="log_out_question">Log out?</string>
+    <string name="scan_qr_code">Scan Account QR Code</string>
+    <string name="qr_code_usage_tip">Scan this QR code to transfer your Baudit account to another device.</string>
 </resources>

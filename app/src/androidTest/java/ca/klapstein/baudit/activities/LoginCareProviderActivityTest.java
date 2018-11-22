@@ -101,4 +101,5 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
         assertTrue(solo.waitForActivity(LoginPatientActivity.class));
 //        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
+
 }
