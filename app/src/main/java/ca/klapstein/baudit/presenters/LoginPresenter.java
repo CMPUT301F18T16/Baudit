@@ -85,17 +85,21 @@ public class LoginPresenter extends Presenter<LoginView> {
      * @param password {@code String}
      */
     public void onLoginButtonClicked(String username, String password) {
-        // get the account associated with the user and password
-        Account account = dataManager.validateLogin(new Username(username), new Password(password));
-        // if it is null we failed the login
-        if (view.getClass() == LoginCareProviderActivity.class && account instanceof CareProvider) {
-            dataManager.setOfflineLoginAccount(account);
-            view.onLoginValidationSuccess();
-            // if we are logging in a Patient ensure the account is actually a Patient
-        } else if (view.getClass() == LoginPatientActivity.class && account instanceof Patient) {
-            dataManager.setOfflineLoginAccount(account);
-            view.onLoginValidationSuccess();
-        } else {  // else we have failed the login
+        try {
+            // get the account associated with the user and password
+            Account account = dataManager.validateLogin(new Username(username), new Password(password));
+            // if it is null we failed the login
+            if (view.getClass() == LoginCareProviderActivity.class && account instanceof CareProvider) {
+                dataManager.setOfflineLoginAccount(account);
+                view.onLoginValidationSuccess();
+                // if we are logging in a Patient ensure the account is actually a Patient
+            } else if (view.getClass() == LoginPatientActivity.class && account instanceof Patient) {
+                dataManager.setOfflineLoginAccount(account);
+                view.onLoginValidationSuccess();
+            } else {  // else we have failed the login
+                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
+            }
+        } catch (IllegalArgumentException e) {
             view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
         }
     }
