@@ -1,15 +1,17 @@
 package ca.klapstein.baudit.data;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class PatientTest {
@@ -18,6 +20,13 @@ public class PatientTest {
     private Patient patient;
     private ContactInfo contactInfo;
 
+    @Mock
+    private BodyPhoto bodyPhoto;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     public PatientTest(String usernameInput, String emailInput,
                        String phoneInput) {
@@ -62,5 +71,25 @@ public class PatientTest {
         ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         patient.setContactInfo(newContactInfo);
         assertEquals(patient.getContactInfo(), newContactInfo);
+    }
+
+    @Test
+    public void getBodyPhoto() {
+        assertNull(patient.getBodyPhoto());
+        patient.setBodyPhoto(bodyPhoto);
+        assertNotNull(patient.getBodyPhoto());
+    }
+
+    @Test
+    public void setBodyPhoto() {
+        patient.setBodyPhoto(bodyPhoto);
+        assertNotNull(patient.getBodyPhoto());
+    }
+
+    @Test
+    public void getProblemTreeSet() {
+        assertNotNull(patient.getProblemTreeSet());
+        // make sure on init the patients ProblemTreeSet is empty
+        assertEquals(0, patient.getProblemTreeSet().size());
     }
 }
