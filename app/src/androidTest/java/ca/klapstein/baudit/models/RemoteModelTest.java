@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.models;
 
 import ca.klapstein.baudit.data.*;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.TreeSet;
@@ -41,21 +40,19 @@ public class RemoteModelTest {
 
     @Test
     public void getValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
-        assertNull(new RemoteModel.ValidateLogin().execute(
-                new Username("NONSUCH_ACCOUNT").toString(),
-                new Password("BADPASSWORD").toString()).get());
+        assertNull(new RemoteModel.ValidateLogin().execute(new Username("NONSUCH_ACCOUNT").toString()).get());
     }
 
     @Test
     public void getValidateLoginPatient() throws ExecutionException, InterruptedException {
-        Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTPatient1").toString(), new Password("foobar123").toString()).get();
+        Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTPatient1").toString()).get();
         assertNotNull(account);
         assertEquals("TESTPatient1", account.getUsername().toString());
     }
 
     @Test
     public void getValidateLoginCareProvider() throws ExecutionException, InterruptedException {
-        Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTCareProvider1").toString(), new Password("foobar123").toString()).get();
+        Account account = new RemoteModel.ValidateLogin().execute(new Username("TESTCareProvider1").toString()).get();
         assertNotNull(account);
         assertEquals("TESTCareProvider1", account.getUsername().toString());
     }

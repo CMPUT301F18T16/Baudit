@@ -5,7 +5,10 @@ import android.util.Log;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.activities.LoginCareProviderActivity;
 import ca.klapstein.baudit.activities.LoginPatientActivity;
-import ca.klapstein.baudit.data.*;
+import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.views.LoginView;
 import ca.klapstein.baudit.views.LogoutView;
 
@@ -87,7 +90,7 @@ public class LoginPresenter extends Presenter<LoginView> {
     public void onLoginButtonClicked(String username, String password) {
         try {
             // get the account associated with the user and password
-            Account account = dataManager.validateLogin(new Username(username), new Password(password));
+            Account account = dataManager.validateLogin(new Username(username));
             // if it is null we failed the login
             if (view.getClass() == LoginCareProviderActivity.class && account instanceof CareProvider) {
                 dataManager.setOfflineLoginAccount(account);

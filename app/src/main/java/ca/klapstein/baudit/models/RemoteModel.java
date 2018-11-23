@@ -63,9 +63,6 @@ class RemoteModel {
                     "           \"must\": [\n" +
                     "                {\"match\": \n" +
                     "                    {\"_id\" : \"" + search_parameters[0] + "\"} \n" +
-                    "                }, \n" +
-                    "                {\"match\": \n" +
-                    "                    {\"password\" : \"" + search_parameters[1] + "\"} \n" +
                     "                } \n" +
                     "           ] \n" +
                     "       } \n" +

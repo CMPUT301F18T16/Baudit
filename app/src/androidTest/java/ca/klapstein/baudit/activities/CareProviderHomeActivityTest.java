@@ -28,7 +28,7 @@ public class CareProviderHomeActivityTest extends ActivityTestRule<CareProviderH
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.setOfflineLoginAccount(new CareProvider(
-                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new Username("TESTCareProvider1"),
                 new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());

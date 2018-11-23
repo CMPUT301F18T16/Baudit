@@ -64,10 +64,7 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
      */
     @Test
     public void testLoginFail() {
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "BADPASSWORD");
-        solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
+        dataModel.clearOfflineLoginAccount();
         solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
     }
 

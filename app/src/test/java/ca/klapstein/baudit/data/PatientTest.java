@@ -15,25 +15,23 @@ import static org.junit.Assert.assertNotNull;
 public class PatientTest {
 
     private Username username;
-    private Password password;
     private Patient patient;
     private ContactInfo contactInfo;
 
 
-    public PatientTest(String usernameInput, String passwordInput, String emailInput,
+    public PatientTest(String usernameInput, String emailInput,
                        String phoneInput) {
         Email email = new Email(emailInput);
         PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
         this.contactInfo = new ContactInfo(email, phoneNumber);
         this.username = new Username(usernameInput);
-        this.password = new Password(passwordInput);
-        this.patient = new Patient(this.username, this.password, contactInfo);
+        this.patient = new Patient(this.username, contactInfo);
     }
 
     @Parameters
     public static Collection patientData() {
         return Arrays.asList(new Object[][] {
-                { "username", "password", "email@example.com", "780-123-1234" }
+                {"username", "email@example.com", "780-123-1234"}
         });
     }
 
@@ -64,17 +62,5 @@ public class PatientTest {
         ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         patient.setContactInfo(newContactInfo);
         assertEquals(patient.getContactInfo(), newContactInfo);
-    }
-
-    @Test
-    public void testGetPatientPassword() {
-        assertEquals(patient.getPassword(), password);
-    }
-
-    @Test
-    public void testSetPatientPassword() {
-        Password newPassword = new Password("newpassword");
-        patient.setPassword(newPassword);
-        assertEquals(patient.getPassword(), newPassword);
     }
 }

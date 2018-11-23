@@ -17,12 +17,10 @@ import ca.klapstein.baudit.views.LoginView;
 import com.blikoon.qrcodescanner.QrCodeActivity;
 
 /**
- * Activity presenting a login page for a Patient Baudit. Providing a page for the {@code Patient}
- * to login with their {@code Username} or {@code Email} and {@code Password} combination.
+ * Activity presenting a login page for a Patient Baudit.
  *
  * @see ca.klapstein.baudit.data.Username
  * @see ca.klapstein.baudit.data.Email
- * @see ca.klapstein.baudit.data.Password
  * @see ca.klapstein.baudit.data.Patient
  */
 public class LoginPatientActivity extends AppCompatActivity implements LoginView {

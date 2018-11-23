@@ -31,13 +31,13 @@ public class PatientTreeSetTest {
         // Assert PatientTreeSet is sorted by username alphabetically
 
         Patient patient0 = new Patient(
-                new Username("AName123"), new Password("password"),
+                new Username("AName123"),
                 new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
         Patient patient1 = new Patient(
-                new Username("BName123"), new Password("password"),
+                new Username("BName123"),
                 new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
         Patient patient2 = new Patient(
-                new Username("CName123"), new Password("password"),
+                new Username("CName123"),
                 new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
 
         patientTreeSet.add(patient2);
