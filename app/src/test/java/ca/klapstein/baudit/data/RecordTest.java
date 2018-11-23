@@ -2,7 +2,10 @@ package ca.klapstein.baudit.data;
 
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 
 public class RecordTest {
@@ -70,5 +73,73 @@ public class RecordTest {
         Record record = new Record();
         record.addKeyword("Test");
         assertEquals("Test", record.getKeywords().get(0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setTitleInvalid() {
+        Record record = new Record();
+        record.setTitle(new String(new char[31]).replace('\0', ' '));
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setCommentInvalid() {
+        Record record = new Record();
+        record.setComment(new String(new char[301]).replace('\0', ' '));
+    }
+
+    @Test
+    public void getGeoLocation() {
+        Record record = new Record();
+        assertNull(record.getGeoLocation());
+    }
+
+    @Test
+    public void setGeoLocation() {
+        Record record = new Record();
+        assertNull(record.getGeoLocation());
+        record.setGeoLocation(mock(GeoLocation.class));
+        assertNotNull(record.getGeoLocation());
+    }
+
+    @Test
+    public void setDate() {
+        Record record = new Record();
+        Date date1 = new Date(0);
+        Date date2 = new Date(1000);
+        assertNotEquals(date1, date2);
+        record.setDate(date1);
+        assertEquals(date1, record.getDate());
+        record.setDate(date2);
+        assertEquals(date2, record.getDate());
+
+        // assert no reference issues
+        assertNotEquals(date1, date2);
+    }
+
+    @Test
+    public void compareTo() {
+        Record record1 = new Record();
+        record1.setDate(new Date(0));
+        Record record2 = new Record();
+        record1.setDate(new Date(1000));
+        assertEquals(-1, record1.compareTo(record2));
+        assertEquals(1, record2.compareTo(record1));
+        assertEquals(0, record2.compareTo(record2));
+    }
+
+    @Test
+    public void removeKeyWord() {
+        Record record = new Record();
+
+        // remove a keyword that does not exist in the list of keywords
+        record.removeKeyword("NONSUCHKEYWORD");
+        assertFalse(record.getKeywords().contains("NONSUCHKEYWORD"));
+
+        // remove a keyword that does exist in the list of keywords
+        record.addKeyword("KEYWORD");
+        assertTrue(record.getKeywords().contains("KEYWORD"));
+        record.removeKeyword("KEYWORD");
+        assertFalse(record.getKeywords().contains("KEYWORD"));
     }
 }
