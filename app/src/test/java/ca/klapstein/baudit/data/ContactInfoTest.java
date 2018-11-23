@@ -92,11 +92,11 @@ public class ContactInfoTest {
 
     @Test
     public void neverEqualsNull() {
-        assertNotEquals(new ContactInfo(mockEmail, mockPhoneNumber), null);
+        assertFalse(new ContactInfo(mockEmail, mockPhoneNumber).equals(null));
     }
 
     @Test
     public void equalsOtherObject() {
-        assertNotEquals(new ContactInfo(mockEmail, mockPhoneNumber), new Object());
+        assertFalse(new ContactInfo(mockEmail, mockPhoneNumber).equals(new Object()));
     }
 }
