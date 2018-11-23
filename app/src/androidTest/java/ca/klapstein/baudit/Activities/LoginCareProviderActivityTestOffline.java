@@ -33,6 +33,18 @@ public class LoginCareProviderActivityTestOffline extends ActivityTestRule<Login
         solo.finishOpenedActivities();
     }
 
+    /**
+     * Tests an invalid login attempt. Should not open a new activity.
+     * Will be updated when the remote login validation is completed.
+     */
+    @Test
+    public void testLoginFail() {
+        dataModel.clearOfflineLoginAccount();
+        super.launchActivity(new Intent());
+        solo = new Solo(getInstrumentation(), getActivity());
+        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
+    }
+
     @Test
     public void testLoginCareProvider() {
         dataModel.setOfflineLoginAccount(new CareProvider(

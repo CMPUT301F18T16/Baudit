@@ -85,9 +85,8 @@ public class LoginPresenter extends Presenter<LoginView> {
      * Attempt a login with a given user/pass combination with the remote authentication server.
      *
      * @param username {@code String}
-     * @param password {@code String}
      */
-    public void onLoginButtonClicked(String username, String password) {
+    public void onLoginButtonClicked(String username) {
         try {
             // get the account associated with the user and password
             Account account = dataManager.validateLogin(new Username(username));
