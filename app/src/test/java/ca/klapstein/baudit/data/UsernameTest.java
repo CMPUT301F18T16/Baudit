@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class UsernameTest {
-// TODO: enable when a RemoteModel is implemented or mocked
     @RunWith(Parameterized.class)
     public static class ValidUserNameTest {
 
