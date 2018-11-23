@@ -21,8 +21,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-//            minifyEnabled true
-//            testProguardFile 'proguard-test-rules.pro'
             multiDexKeepProguard file('proguard-multidex-rules.pro')
             testCoverageEnabled true
         }
