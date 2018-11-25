@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,56 +26,34 @@
         android:textColor="@color/dark_grey"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/enter_patient_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_username"
-        android:inputType="text"
-        android:textColor="@color/dark_grey"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
-
-    <EditText
-        android:id="@+id/enter_patient_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:textColor="@color/dark_grey"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
-
     <TextView
-        android:id="@+id/patient_login_error_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/red"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp" />
+            android:id="@+id/login_error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
 
     <Button
-        android:id="@+id/login_patient_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_in"
-        android:textAllCaps="true"
-        android:textColor="@color/dark_grey"/>
+            android:id="@+id/register_account_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textAllCaps="true"
+            android:textColor="@color/dark_grey"/>
 
     <Button
-        android:id="@+id/register_patient_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:textAllCaps="true"
-        android:textColor="@color/dark_grey"/>
+            android:id="@+id/scan_qr_code_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_qr_code"
+            android:textColor="@color/dark_grey"/>
 
     <Button
-        android:id="@+id/log_in_as_care_provider_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_in_as_care_provider"
-        android:textColor="@color/dark_grey"/>
+            android:id="@+id/log_in_other_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in_as_care_provider"
+            android:textColor="@color/dark_grey"/>
 
 </LinearLayout>

@@ -7,11 +7,9 @@ import android.support.annotation.NonNull;
  */
 public class Account implements Comparable<Account> {
 
-    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo,
-                   @NonNull Password password) {
+    public Account(@NonNull Username username, @NonNull ContactInfo contactInfo) {
         setUsername(username);
         setContactInfo(contactInfo);
-        setPassword(password);
     }
 
     @NonNull
@@ -19,9 +17,6 @@ public class Account implements Comparable<Account> {
 
     @NonNull
     private Username username;
-
-    @NonNull
-    private Password password;
 
     /**
      * Get the {@code Username} of the {@code Account}.
@@ -59,25 +54,6 @@ public class Account implements Comparable<Account> {
      */
     public void setContactInfo(@NonNull ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
-    }
-
-    /**
-     * Get the {@code Password} of the {@code Account}.
-     *
-     * @return {@code Password}
-     */
-    @NonNull
-    public Password getPassword() {
-        return password;
-    }
-
-    /**
-     * Setter for a {@code Accounts}'s {@code Password}.
-     *
-     * @param password {@code Password}
-     */
-    public void setPassword(@NonNull Password password) {
-        this.password = password;
     }
 
     @Override

@@ -15,24 +15,22 @@ public class CareProviderTest {
 
     private ContactInfo contactInfo;
     private Username username;
-    private Password password;
     private CareProvider careProvider;
 
     private Patient patient0;
     private Patient patient1;
 
-    public CareProviderTest(String usernameInput, String passwordInput, String emailInput, String phoneInput) {
+    public CareProviderTest(String usernameInput, String emailInput, String phoneInput) {
 
         this.contactInfo = new ContactInfo(new Email(emailInput), new PhoneNumber(phoneInput));
         this.username = new Username(usernameInput);
-        this.password = new Password(passwordInput);
-        this.careProvider = new CareProvider(this.username, this.password, this.contactInfo);
+        this.careProvider = new CareProvider(this.username, this.contactInfo);
 
         ContactInfo patient0ContactInfo = new ContactInfo(new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"));
-        this.patient0 = new Patient(new Username("patient0"), new Password("password0"), patient0ContactInfo);
+        this.patient0 = new Patient(new Username("patient0"), patient0ContactInfo);
 
         ContactInfo patient1ContactInfo = new ContactInfo(new Email("patient1@hotmail.com"), new PhoneNumber("012-345-5678"));
-        this.patient1 = new Patient(new Username("patient0"), new Password("password0"), patient1ContactInfo);
+        this.patient1 = new Patient(new Username("patient0"), patient1ContactInfo);
 
         careProvider.getAssignedPatientTreeSet().add(patient0);
         careProvider.getAssignedPatientTreeSet().add(patient1);
@@ -41,7 +39,7 @@ public class CareProviderTest {
     @Parameterized.Parameters
     public static Collection careProviderData() {
         return Arrays.asList(new Object[][]{
-                {"nameuser", "password", "email@example.com", "780-123-1234"}
+                {"nameuser", "email@example.com", "780-123-1234"}
         });
     }
 
@@ -81,15 +79,4 @@ public class CareProviderTest {
         assertEquals(careProvider.getContactInfo(), newContactInfo);
     }
 
-    @Test
-    public void testGetCareProviderPassword() {
-        assertEquals(careProvider.getPassword(), password);
-    }
-
-    @Test
-    public void testSetCareProviderPassword() {
-        Password newPassword = new Password("newpassword");
-        careProvider.setPassword(newPassword);
-        assertEquals(careProvider.getPassword(), newPassword);
-    }
 }

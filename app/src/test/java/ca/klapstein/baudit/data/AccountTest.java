@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AccountTest {
+
     @Before
     public void setUp() {
     }

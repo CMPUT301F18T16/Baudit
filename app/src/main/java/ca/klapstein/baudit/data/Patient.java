@@ -12,8 +12,8 @@ public class Patient extends Account {
      */
     private BodyPhoto bodyPhoto;
 
-    public Patient(Username username, Password password, ContactInfo contactInfo){
-        super(username, contactInfo, password);
+    public Patient(Username username, ContactInfo contactInfo) {
+        super(username, contactInfo);
         this.problemTreeSet = new ProblemTreeSet();
     }
 

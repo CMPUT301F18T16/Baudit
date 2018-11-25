@@ -21,8 +21,10 @@ public class Problem implements Comparable<Problem> {
     private Date date;
     private RecordTreeSet recordTreeSet;
 
-    public Problem() {
+    public Problem(@NonNull String title) throws IllegalArgumentException {
+        this.setTitle(title);
         this.date = new Date();
+        this.recordTreeSet = new RecordTreeSet();
     }
 
     /**

@@ -21,12 +21,12 @@ public class AddPhotoActivity extends AppCompatActivity implements AddPhotoView 
 
     @Override
     public void setPhoto(Bitmap bitmap) {
-
+        // TODO: implement
     }
 
     @Override
     public void setPhotoError() {
-
+        // TODO: implement
     }
 
     @Override

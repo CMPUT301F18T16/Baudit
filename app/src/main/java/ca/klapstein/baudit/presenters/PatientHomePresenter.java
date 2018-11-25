@@ -31,7 +31,12 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
     }
 
     public int getProblemCount() {
-        return patient.getProblemTreeSet().size();
+        if (patient == null || patient.getProblemTreeSet() == null) {
+            // TODO: error
+            return 0;
+        } else {
+            return patient.getProblemTreeSet().size();
+        }
     }
 
     /**
@@ -42,12 +47,12 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
      */
     public void viewStarted() {
         patient = dataManager.getLoggedInPatient();
-        if (patient != null) {
+        if (patient == null) {
+            // TODO: error
+        } else {
             view.updateUsernameDisplay(patient.getUsername().toString());
             view.updateEmailDisplay(patient.getContactInfo().getEmail().toString());
             view.updateList();
-        } else {
-            // TODO: error
         }
     }
 }

@@ -6,12 +6,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class UsernameTest {
-// TODO: enable when a RemoteModel is implemented or mocked
     @RunWith(Parameterized.class)
     public static class ValidUserNameTest {
 
@@ -46,6 +44,35 @@ public class UsernameTest {
             username.setUsername(input);
             assertEquals(input, username.toString());
         }
+
+    @Test
+    public void equals() {
+        assertTrue(new Username(input).equals(new Username(input)));
+    }
+
+    @Test
+    public void neverEqualsNull() {
+        assertFalse(new Username(input).equals(null));
+    }
+
+    @Test
+    public void equalsOtherObject() {
+        assertFalse(new Username(input).equals(new Object()));
+    }
+
+    @Test
+    public void testHashCodeSame() {
+        Username username1 = new Username(input);
+        Username username2 = new Username(input);
+        assertEquals(username1.hashCode(), username2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeDifferent() {
+        Username username1 = new Username("foo@example.com");
+        Username username2 = new Username("bar@example.com");
+        assertNotEquals(username1.hashCode(), username2.hashCode());
+    }
     }
 
     @RunWith(Parameterized.class)

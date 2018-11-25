@@ -7,9 +7,7 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class ProblemTreeSetTest {
 
@@ -52,12 +50,9 @@ public class ProblemTreeSetTest {
     @Test
     public void testProblemTreeSetComparable() {
 
-        Problem problem0 = new Problem();
-        Problem problem1 = new Problem();
-        Problem problem2 = new Problem();
-        problem0.setTitle("Aproblem");
-        problem1.setTitle("Bproblem");
-        problem2.setTitle("CProblem");
+        Problem problem0 = new Problem("Aproblem");
+        Problem problem1 = new Problem("Bproblem");
+        Problem problem2 = new Problem("Cproblem");
 
         problemTreeSet.add(problem2);
         problemTreeSet.add(problem1);
@@ -68,7 +63,7 @@ public class ProblemTreeSetTest {
         assertTrue(problemTreeSet.last().equals(problem2));
         assertTrue(problemTreeSet.size() == 3);
 
-        Problem problem3 = new Problem();
+        Problem problem3 = new Problem("Dproblem");
 
         Calendar calendar = Calendar.getInstance();
         long timeMilli = calendar.getTimeInMillis();

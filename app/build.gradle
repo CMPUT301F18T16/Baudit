@@ -12,6 +12,8 @@ android {
         // Testing config
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -19,11 +21,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            multiDexKeepProguard file('proguard-multidex-rules.pro')
             testCoverageEnabled true
         }
     }
 }
-
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // misc android view/layout libraries
@@ -39,6 +46,12 @@ dependencies {
 
     // Android instrument tests
     implementation 'com.android.support:design:28.0.0'
+
+    // QR code scanning
+    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+
+    // QR code generation
+    implementation 'com.github.kenglxn.QRGen:android:2.5.0'
 
     // apache commons!
     implementation 'commons-validator:commons-validator:1.6'
@@ -58,11 +71,16 @@ dependencies {
     // jvm unit tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.23.0'
+
+    //
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
     }
     dependencies {
         // easy javadoc generation for android projects
@@ -83,8 +101,6 @@ androidJavadoc {
 
 apply plugin: 'jacoco-android'
 jacocoAndroidUnitTestReport {
-    csv.enabled false
-    html.enabled true
     xml.enabled true
 }
 

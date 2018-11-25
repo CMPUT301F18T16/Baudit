@@ -3,7 +3,6 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.widget.EditText;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
@@ -45,61 +44,20 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
     }
 
     /**
-     * Tests a valid login. Should open the CareProviderHomeActivity.
-     * Will be updated when the remote login validation is completed.
-     */
-    @Test
-    public void testLoginSuccess() {
-        // TODO: add hook to ensure test care provider is added to the remote or make some mock
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
-        solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForActivity(CareProviderHomeActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", CareProviderHomeActivity.class);
-    }
-
-    /**
-     * Tests an invalid login attempt. Should not open a new activity.
-     * Will be updated when the remote login validation is completed.
-     */
-    @Test
-    public void testLoginFail() {
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTCareProvider1");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "BADPASSWORD");
-        solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
-        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
-    }
-
-    /**
      * Tests clicking the sign up button. Should open the CreateCareProviderAccountActivity.
      */
     @Test
     public void testRegister() {
-        solo.clickOnView(solo.getView(R.id.register_care_provider_button));
+        solo.clickOnView(solo.getView(R.id.register_account_button));
         solo.waitForActivity(CreateCareProviderAccountActivity.class);
         solo.assertCurrentActivity("Wrong Activity", CreateCareProviderAccountActivity.class);
     }
 
-    /**
-     * Test logging with a valid {@code Patient}'s username and password. But, we are on the wrong
-     * login page, thus, we should still fail.
-     */
-    @Test
-    public void testPatientLoginFail() {
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_username), "TESTPatient1");
-        solo.enterText((EditText) solo.getView(R.id.enter_care_provider_password), "foobar123");
-        solo.clickOnView(solo.getView(R.id.login_care_provider_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.login_failed));
-        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
-    }
-
     @Test
     public void SwitchLoginScreen() {
-        solo.clickOnView(solo.getView(R.id.log_in_as_patient_button));
+        solo.clickOnView(solo.getView(R.id.log_in_other_button));
         solo.waitForActivity(LoginPatientActivity.class);
         // TODO: this test seems to fail on the ci but not in dev environ
-
-//        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
     }
 }

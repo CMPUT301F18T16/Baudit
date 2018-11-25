@@ -33,10 +33,22 @@ public class LoginPatientActivityTestOffline extends ActivityTestRule<LoginPatie
         solo.finishOpenedActivities();
     }
 
+    /**
+     * Tests an invalid login attempt. Should not open a new activity.
+     * Will be updated when the remote login validation is completed.
+     */
+    @Test
+    public void testLoginFail() {
+        dataModel.clearOfflineLoginAccount();
+        super.launchActivity(new Intent());
+        solo = new Solo(getInstrumentation(), getActivity());
+        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+    }
+
     @Test
     public void testLoginCareProvider() {
         dataModel.setOfflineLoginAccount(new CareProvider(
-                new Username("TESTCareProvider1"), new Password("foobar123"),
+                new Username("TESTCareProvider1"),
                 new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());
@@ -47,7 +59,7 @@ public class LoginPatientActivityTestOffline extends ActivityTestRule<LoginPatie
     @Test
     public void testLoginPatient() {
         dataModel.setOfflineLoginAccount(new Patient(
-                new Username("TESTPatient1"), new Password("foobar123"),
+                new Username("TESTPatient1"),
                 new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());

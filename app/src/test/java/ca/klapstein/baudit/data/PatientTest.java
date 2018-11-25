@@ -1,39 +1,46 @@
 package ca.klapstein.baudit.data;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class PatientTest {
 
     private Username username;
-    private Password password;
     private Patient patient;
     private ContactInfo contactInfo;
 
+    @Mock
+    private BodyPhoto bodyPhoto;
 
-    public PatientTest(String usernameInput, String passwordInput, String emailInput,
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    public PatientTest(String usernameInput, String emailInput,
                        String phoneInput) {
         Email email = new Email(emailInput);
         PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
         this.contactInfo = new ContactInfo(email, phoneNumber);
         this.username = new Username(usernameInput);
-        this.password = new Password(passwordInput);
-        this.patient = new Patient(this.username, this.password, contactInfo);
+        this.patient = new Patient(this.username, contactInfo);
     }
 
     @Parameters
     public static Collection patientData() {
         return Arrays.asList(new Object[][] {
-                { "username", "password", "email@example.com", "780-123-1234" }
+                {"username", "email@example.com", "780-123-1234"}
         });
     }
 
@@ -67,14 +74,22 @@ public class PatientTest {
     }
 
     @Test
-    public void testGetPatientPassword() {
-        assertEquals(patient.getPassword(), password);
+    public void getBodyPhoto() {
+        assertNull(patient.getBodyPhoto());
+        patient.setBodyPhoto(bodyPhoto);
+        assertNotNull(patient.getBodyPhoto());
     }
 
     @Test
-    public void testSetPatientPassword() {
-        Password newPassword = new Password("newpassword");
-        patient.setPassword(newPassword);
-        assertEquals(patient.getPassword(), newPassword);
+    public void setBodyPhoto() {
+        patient.setBodyPhoto(bodyPhoto);
+        assertNotNull(patient.getBodyPhoto());
+    }
+
+    @Test
+    public void getProblemTreeSet() {
+        assertNotNull(patient.getProblemTreeSet());
+        // make sure on init the patients ProblemTreeSet is empty
+        assertEquals(0, patient.getProblemTreeSet().size());
     }
 }

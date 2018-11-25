@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.klapstein.baudit">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="ca.klapstein.baudit">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-feature
             android:name="android.hardware.camera2"
@@ -27,48 +28,39 @@
                 android:required="false"/>
 
         <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc" />
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc"/>
 
         <activity android:name=".activities.CreateCareProviderAccountActivity"/>
-
         <activity
-            android:name=".activities.EditAccountActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar" />
-
+                android:name=".activities.EditAccountActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity
-            android:name=".activities.CreatePatientAccountActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar"/>
-
+                android:name=".activities.CreatePatientAccountActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity android:name=".activities.LocationActivity"/>
-
         <activity
-            android:name=".activities.LoginCareProviderActivity"
-            android:theme="@style/BauditCareProviderTheme.NoActionBar"/>
+                android:name=".activities.LoginCareProviderActivity"
+                android:theme="@style/BauditCareProviderTheme.NoActionBar"/>
         <activity
-            android:name=".activities.LoginPatientActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar"/>
-
+                android:name=".activities.LoginPatientActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity
-            android:name=".activities.ProblemActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar" />
-
+                android:name=".activities.ProblemActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity
-            android:name=".activities.RecordActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar" />
-
-        <activity android:name=".activities.CareProviderHomeActivity"
-                  android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:name=".activities.RecordActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+        <activity
+                android:name=".activities.CareProviderHomeActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity android:name=".activities.ViewPhotoActivity"/>
-
         <activity
-            android:name=".activities.PatientHomeActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar" />
-
+                android:name=".activities.PatientHomeActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
         <activity
                 android:name=".activities.SplashActivity"
                 android:theme="@style/SplashTheme">
@@ -83,10 +75,11 @@
         </activity>
         <activity android:name=".activities.AddPhotoActivity">
         </activity>
-
         <activity
-            android:name=".activities.MapAllProblemsActivity"
-            android:theme="@style/BauditPatientTheme.NoActionBar" />
+                android:name=".activities.MapAllProblemsActivity"
+                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+        <activity android:name=".activities.DisplayQRCodeActivity">
+        </activity>
     </application>
 
 </manifest>

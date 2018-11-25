@@ -103,17 +103,16 @@ public class DataModel {
     }
 
     /**
-     * Validate that a given username and password pair match to a valid user within the remote ElasticSearch.
+     * Validate that a given username matches to a valid user within the remote ElasticSearch.
      * Or validate that a local authentication token exists within the local.
      *
      * @param username {@code Username}
-     * @param password {@code Password}
      * @return {@code Account} that can be potentially cast into either a {@code Patient} or {@code CareProvider}
      */
     @Nullable
-    public Account validateLogin(Username username, Password password) {
+    public Account validateLogin(Username username) {
         try {
-            Account account = new RemoteModel.ValidateLogin().execute(username.toString(), password.toString()).get();
+            Account account = new RemoteModel.ValidateLogin().execute(username.toString()).get();
             if (account == null) {
                 return null;
             }

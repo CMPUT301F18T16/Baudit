@@ -2,8 +2,7 @@ package ca.klapstein.baudit.data;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class PhoneNumberTest {
     @Test
@@ -36,4 +35,40 @@ public class PhoneNumberTest {
     public void testSetPhoneNumberInvalid() {
         new PhoneNumber("[780]-555-5555");
     }
+
+
+    @Test
+    public void equals() {
+        assertTrue(new PhoneNumber("111-111-1111").equals(new PhoneNumber("111-111-1111")));
+    }
+
+    @Test
+    public void notEquals() {
+        assertFalse(new PhoneNumber("111-111-1111").equals(new PhoneNumber("222-222-2222")));
+    }
+
+    @Test
+    public void neverEqualsNull() {
+        assertFalse(new PhoneNumber("111-111-1111").equals(null));
+    }
+
+    @Test
+    public void equalsOtherObject() {
+        assertFalse(new PhoneNumber("111-111-1111").equals(new Object()));
+    }
+
+    @Test
+    public void testHashCodeSame() {
+        PhoneNumber phoneNumber1 = new PhoneNumber("111-111-1111");
+        PhoneNumber phoneNumber2 = new PhoneNumber("111-111-1111");
+        assertEquals(phoneNumber1.hashCode(), phoneNumber2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeDifferent() {
+        PhoneNumber phoneNumber1 = new PhoneNumber("111-111-1111");
+        PhoneNumber phoneNumber2 = new PhoneNumber("222-222-2222");
+        assertNotEquals(phoneNumber1.hashCode(), phoneNumber2.hashCode());
+    }
+
 }

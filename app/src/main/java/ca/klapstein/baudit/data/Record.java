@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,25 +22,22 @@ public class Record implements Comparable<Record> {
     private String title;
     private String comment;
     private GeoLocation geoLocation;
-    private ArrayList<BodyPhotoCoords> bodyPhotoCoords;
-    private ArrayList<String> keywords;
+    private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
+    private ArrayList<String> keywords = new ArrayList<>();
 
     public Record() {
         date = new Date();
-        // TODO: populate these properly
-        this.keywords = new ArrayList<>();
-        this.bodyPhotoCoords = new ArrayList<>();
     }
 
-    public Record(String title) {
+    public Record(String title) throws IllegalArgumentException {
         date = new Date();
-        this.title = title;
+        this.setTitle(title);
     }
 
-    public Record(String title, String comment) {
+    public Record(String title, String comment) throws IllegalArgumentException {
         date = new Date();
-        this.title = title;
-        this.comment = comment;
+        this.setTitle(title);
+        this.setComment(comment);
     }
 
     // TODO: This check might not be needed because the UI limits the title length
@@ -78,7 +76,7 @@ public class Record implements Comparable<Record> {
      *
      * @param date {@code Date}
      */
-    public void setDate(Date date) {
+    public void setDate(@NonNull Date date) {
         this.date = date;
     }
 
@@ -137,15 +135,17 @@ public class Record implements Comparable<Record> {
 
     /**
      * Add keywords from {@code keywords}.
+     *
+     * TODO: add validation method for keywords?
      */
-    public void addKeyword(String keyword) {
+    public void addKeyword(@NonNull String keyword) {
         this.keywords.add(keyword);
     }
 
     /**
      * Remove keywords from {@code keywords}.
      */
-    public void removeKeyword(String keyword) {
+    public void removeKeyword(@NonNull String keyword) {
         this.keywords.remove(keyword);
     }
 
@@ -163,6 +163,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code GeoLocation}
      */
+    @Nullable
     public GeoLocation getGeoLocation() {
         return geoLocation;
     }
@@ -188,6 +189,6 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        return (int) (date.getTime() - record.getDate().getTime());
+        return date.compareTo(record.getDate());
     }
 }

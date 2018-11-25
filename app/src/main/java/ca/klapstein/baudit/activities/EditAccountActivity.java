@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -58,6 +59,15 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
                     phoneNumberInput.getText().toString()
                 );
                 finish();
+            }
+        });
+
+        // TODO: possibly move this into a better menu
+        Button getAccountQRCodeButton = findViewById(R.id.account_qr_code_button);
+        getAccountQRCodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditAccountActivity.this, DisplayQRCodeActivity.class));
             }
         });
     }
