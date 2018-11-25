@@ -15,7 +15,7 @@ abstract public class Presenter<V extends View> {
 
     protected V view;
     protected DataModel dataManager;
-    private Context context;
+    protected Context context;
 
     public Presenter(V view, Context context) {
         this.view = view;

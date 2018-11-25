@@ -24,8 +24,6 @@ public class StartPresenter extends Presenter<StartView> {
 
     private static String TAG = "StartPresenter";
 
-    private Context context;
-
     /**
      * Construction a {@code StartPresenter}.
      * <p>
@@ -36,15 +34,12 @@ public class StartPresenter extends Presenter<StartView> {
      */
     public StartPresenter(StartView view, Context context) {
         super(view, context);
-        this.context = context;
-
-        // attempt to login from local saved state
-        processOfflineLoginAccount();
+        processOfflineLoginAccount(); // attempt to login from local saved state
     }
 
     /**
-     * Control logging into a an arbitrary {@code Account} that was obtained from the saved login account within
-     * Android's shared preferences. This allows for login from a offline state.
+     * Control logging into a an arbitrary {@code Account} that was obtained from the saved login
+     * account within Android's shared preferences. This allows for login from a offline state.
      */
     private void processOfflineLoginAccount() {
         // obtain the offline logged in account

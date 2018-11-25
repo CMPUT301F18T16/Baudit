@@ -13,14 +13,13 @@ import ca.klapstein.baudit.views.CreateAccountView;
 public class CreateAccountPresenter extends Presenter<CreateAccountView> {
 
     protected Account account;
-    private Context context;
 
     public CreateAccountPresenter(CreateAccountView view, Context context) {
         super(view, context);
     }
 
-    public void confirmButtonClicked(int checkedId, String firstName, String lastName, String username,
-                                     String email, String phoneNumber) {
+    public void confirmButtonClicked(int checkedId, String firstName, String lastName,
+                                     String username, String email, String phoneNumber) {
         boolean validAccount = true;
         view.updateUsernameError("");
         view.updateEmailError("");
