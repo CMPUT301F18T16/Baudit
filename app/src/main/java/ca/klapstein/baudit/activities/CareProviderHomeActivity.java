@@ -43,7 +43,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_list);
+        setContentView(R.layout.activity_care_provider_home);
 
         Toolbar toolbar = findViewById(R.id.patient_list_toolbar);
         setSupportActionBar(toolbar);
@@ -78,8 +78,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
                                 return true;
                             case (R.id.nav_logout):
                                 new AlertDialog.Builder(
-                                        CareProviderHomeActivity.this,
-                                        R.style.BauditDialogTheme)
+                                        CareProviderHomeActivity.this)
                                     .setTitle(R.string.log_out_question)
                                     .setCancelable(true)
                                     .setNegativeButton(R.string.cancel, null)

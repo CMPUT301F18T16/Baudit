@@ -9,28 +9,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.LoginPresenter;
-import ca.klapstein.baudit.views.LoginView;
+import ca.klapstein.baudit.presenters.StartPresenter;
+import ca.klapstein.baudit.views.StartView;
+
 import com.blikoon.qrcodescanner.QrCodeActivity;
 
 /**
  * Template activity for a "login" screen for Baudit.
  * <p>
- * This activity should not be run. It simply provides code duplication mitigation for scanning QR functionality.
+ * This activity should not be run. It simply provides code duplication mitigation for scanning QR
+ * functionality.
  */
-abstract public class LoginActivity extends AppCompatActivity implements LoginView {
-    private static final int REQUEST_CODE_QR_SCAN = 101;
-    private static final String TAG = "LoginActivity";
+public class StartActivity extends AppCompatActivity implements StartView {
 
-    protected LoginPresenter presenter;
-    private TextView errorText;
+    private static final int REQUEST_CODE_QR_SCAN = 101;
+    private static final String TAG = "StartActivity";
+
+    protected StartPresenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        errorText = findViewById(R.id.login_error_text);
+        setContentView(R.layout.activity_start);
 
         Button registerButton = findViewById(R.id.register_account_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -47,14 +48,6 @@ abstract public class LoginActivity extends AppCompatActivity implements LoginVi
                 startScanQRCode();
             }
         });
-
-        Button switchLoginButton = findViewById(R.id.log_in_other_button);
-        switchLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchLoginScreen();
-            }
-        });
     }
 
     @Override
@@ -64,12 +57,12 @@ abstract public class LoginActivity extends AppCompatActivity implements LoginVi
 
     @Override
     public void onLoginValidationFailure(String message) {
-        errorText.setText(message);
+        // TODO: Discuss what should happen here
     }
 
     @Override
-    public void onLoginValidationSuccess() {
-        startActivity(new Intent(getApplicationContext(), CareProviderHomeActivity.class));
+    public void onLoginValidationSuccess(Class homeClass) {
+        startActivity(new Intent(getApplicationContext(), homeClass));
         finish();
     }
 
@@ -87,9 +80,9 @@ abstract public class LoginActivity extends AppCompatActivity implements LoginVi
      * <p>
      * TODO: implement
      *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode {@code int}
+     * @param resultCode {@code int}
+     * @param data {@code Intent}
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -134,5 +127,11 @@ abstract public class LoginActivity extends AppCompatActivity implements LoginVi
             alertDialog.show();
             // TODO: do additional login/authentication work.
         }
+    }
+
+    @Override
+    public void startRegistration() {
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        startActivity(intent);
     }
 }

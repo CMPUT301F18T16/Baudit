@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/default_margin"
+    android:paddingStart="@dimen/default_margin"
+    android:paddingRight="@dimen/default_margin"
+    android:paddingEnd="@dimen/default_margin"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/app_name"
+        android:textColor="@color/vaporwave_pink"
+        android:textAllCaps="true"
+        android:textSize="64sp"/>
+
+    <Button
+        android:id="@+id/register_account_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/dark_grey"/>
+
+    <Button
+        android:id="@+id/scan_qr_code_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scan_qr_code"
+        android:textColor="@color/dark_grey"/>
+
+</LinearLayout>

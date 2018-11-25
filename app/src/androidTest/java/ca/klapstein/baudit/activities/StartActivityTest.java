@@ -12,13 +12,13 @@ import org.junit.Test;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
-public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCareProviderActivity> {
+public class StartActivityTest extends ActivityTestRule<StartActivity> {
 
     private Solo solo;
     private DataModel dataModel;
 
-    public LoginCareProviderActivityTest() {
-        super(ca.klapstein.baudit.activities.LoginCareProviderActivity.class);
+    public StartActivityTest() {
+        super(StartActivity.class);
     }
 
     @Before
@@ -40,24 +40,16 @@ public class LoginCareProviderActivityTest extends ActivityTestRule<LoginCarePro
      */
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", LoginCareProviderActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", StartActivity.class);
     }
 
     /**
-     * Tests clicking the sign up button. Should open the CreateCareProviderAccountActivity.
+     * Tests clicking the sign up button. Should open the CreateAccountActivity.
      */
     @Test
     public void testRegister() {
         solo.clickOnView(solo.getView(R.id.register_account_button));
-        solo.waitForActivity(CreateCareProviderAccountActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", CreateCareProviderAccountActivity.class);
-    }
-
-    @Test
-    public void SwitchLoginScreen() {
-        solo.clickOnView(solo.getView(R.id.log_in_other_button));
-        solo.waitForActivity(LoginPatientActivity.class);
-        // TODO: this test seems to fail on the ci but not in dev environ
-        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        solo.waitForActivity(CreateAccountActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", CreateAccountActivity.class);
     }
 }

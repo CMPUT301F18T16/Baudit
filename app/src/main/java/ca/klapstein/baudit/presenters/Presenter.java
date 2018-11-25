@@ -15,10 +15,11 @@ abstract public class Presenter<V extends View> {
 
     protected V view;
     protected DataModel dataManager;
+    protected Context context;
 
     public Presenter(V view, Context context) {
         this.view = view;
-        // TODO: pass context
         this.dataManager = new DataModel(context);
+        this.context = context;
     }
 }

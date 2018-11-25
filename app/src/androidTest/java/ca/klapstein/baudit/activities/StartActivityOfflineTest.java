@@ -3,7 +3,13 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import ca.klapstein.baudit.data.*;
+
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.ContactInfo;
+import ca.klapstein.baudit.data.Email;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PhoneNumber;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
 import org.junit.After;
@@ -12,13 +18,13 @@ import org.junit.Test;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
-public class LoginPatientActivityTestOffline extends ActivityTestRule<LoginPatientActivity> {
+public class StartActivityOfflineTest extends ActivityTestRule<StartActivity> {
 
     private Solo solo;
     private DataModel dataModel;
 
-    public LoginPatientActivityTestOffline() {
-        super(LoginPatientActivity.class);
+    public StartActivityOfflineTest() {
+        super(StartActivity.class);
     }
 
     @Before
@@ -42,7 +48,7 @@ public class LoginPatientActivityTestOffline extends ActivityTestRule<LoginPatie
         dataModel.clearOfflineLoginAccount();
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
-        solo.assertCurrentActivity("Wrong Activity", LoginPatientActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", StartActivity.class);
     }
 
     @Test
