@@ -31,8 +31,7 @@ public class StartPresenter extends Presenter<StartView> {
      * <p>
      * On construction attempt to do an offline login through {@code processOfflineLoginAccount}.
      *
-     * @param view    {@code StartView} should be either a instance of {@code LoginPatientActivity} or
-     *                {@code LoginCareProviderActivity}.
+     * @param view    {@code StartView}
      * @param context {@code Context}
      */
     public StartPresenter(StartView view, Context context) {
