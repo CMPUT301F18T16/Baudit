@@ -3,7 +3,13 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import ca.klapstein.baudit.data.*;
+
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.ContactInfo;
+import ca.klapstein.baudit.data.Email;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PhoneNumber;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
 import org.junit.After;

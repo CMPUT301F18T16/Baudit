@@ -8,13 +8,16 @@ public class StartPresenterTest {
 
     @Before
     public void setUp() {
+        // Set up before testing
     }
 
     @After
     public void tearDown() {
+        // Tear down after testing
     }
 
     @Test
     public void validateLogin() {
+        // Test login validation
     }
 }

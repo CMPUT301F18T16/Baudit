@@ -57,6 +57,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
 
     @Override
     public void onLoginValidationFailure(String message) {
+        // TODO: Discuss what should happen here
     }
 
     @Override
