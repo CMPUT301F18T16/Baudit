@@ -34,36 +34,40 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc"/>
 
-        <activity android:name=".activities.CreateCareProviderAccountActivity"/>
+        <activity
+            android:name=".activities.StartActivity"
+            android:theme="@style/BauditLoginTheme"/>
+
         <activity
                 android:name=".activities.EditAccountActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
         <activity
-                android:name=".activities.CreatePatientAccountActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:name=".activities.CreateAccountActivity"
+                android:theme="@style/BauditTheme"/>
+
         <activity android:name=".activities.LocationActivity"/>
-        <activity
-                android:name=".activities.LoginCareProviderActivity"
-                android:theme="@style/BauditCareProviderTheme.NoActionBar"/>
-        <activity
-                android:name=".activities.LoginPatientActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+
         <activity
                 android:name=".activities.ProblemActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
+
         <activity
                 android:name=".activities.RecordActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
+
         <activity
                 android:name=".activities.CareProviderHomeActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
+
         <activity android:name=".activities.ViewPhotoActivity"/>
+
         <activity
                 android:name=".activities.PatientHomeActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
+
         <activity
                 android:name=".activities.SplashActivity"
-                android:theme="@style/SplashTheme">
+                android:theme="@style/BauditSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -77,7 +81,7 @@
         </activity>
         <activity
                 android:name=".activities.MapAllProblemsActivity"
-                android:theme="@style/BauditPatientTheme.NoActionBar"/>
+                android:theme="@style/BauditTheme"/>
         <activity android:name=".activities.DisplayQRCodeActivity">
         </activity>
     </application>

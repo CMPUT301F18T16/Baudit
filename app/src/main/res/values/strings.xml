@@ -2,14 +2,10 @@
     <string name="app_name">Baudit</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="splash_image_content_description">Logo Splash Image</string>
-    <string name="patient_login">Patient Login</string>
-    <string name="care_provider_login">Care Provider Login</string>
     <string name="enter_username">Enter username</string>
     <string name="enter_password">Enter password</string>
-    <string name="log_in">Log in</string>
     <string name="log_out">Log out</string>
     <string name="sign_up">Sign up</string>
-    <string name="log_in_as_care_provider">Log in as Care Provider</string>
     <string name="log_in_as_patient">Log in as Patient</string>
     <string name="login_failed">⚠ Login error: Invalid credentials</string>
     <string name="problem_count">Problems (%1$d):</string>
@@ -53,8 +49,6 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="username_with_constraint">Username (8&#8211;20 characters)</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm password</string>
     <string name="body_location_template">Body location template</string>
     <string name="upload">Upload</string>
     <string name="body_location_disclaimer">Body location images are full-body images used to indicate the location of
@@ -65,8 +59,11 @@
     <string name="username_error">⚠ Username must be 8&#8211;20 characters.</string>
     <string name="email_error">⚠ Invalid email.</string>
     <string name="phone_number_error">⚠ Invalid phone number.</string>
-    <string name="password_match_error">⚠ Passwords do not match.</string>
     <string name="log_out_question">Log out?</string>
     <string name="scan_qr_code">Scan Account QR Code</string>
     <string name="qr_code_usage_tip">Scan this QR code to transfer your Baudit account to another device.</string>
+    <string name="patient">Patient</string>
+    <string name="care_provider">Care provider</string>
+    <string name="account_type">Account type</string>
+    <string name="identification_minc">Identification (MINC)</string>
 </resources>

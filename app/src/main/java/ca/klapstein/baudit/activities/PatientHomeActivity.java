@@ -76,8 +76,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             return true;
                         case (R.id.nav_logout):
                             new AlertDialog.Builder(
-                                    PatientHomeActivity.this,
-                                    R.style.BauditDialogTheme)
+                                    PatientHomeActivity.this)
                                 .setTitle(R.string.log_out_question)
                                 .setCancelable(true)
                                 .setNegativeButton(R.string.cancel, null)

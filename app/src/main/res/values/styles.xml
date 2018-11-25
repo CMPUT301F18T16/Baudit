@@ -1,39 +1,15 @@
 <resources>
-    <style name="BauditTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorAccent">@color/vaporwave_pink</item>
-        <item name="colorButtonNormal">@color/vaporwave_yellow</item>
-        <item name="android:textColorPrimary">@color/white</item>
-    </style>
-
-    <style name="BauditPatientTheme" parent="BauditTheme">
+    <style name="BauditTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/vaporwave_blue</item>
         <item name="colorPrimaryDark">@color/vaporwave_purple</item>
+        <item name="colorAccent">@color/vaporwave_pink</item>
+    </style>
+
+    <style name="BauditLoginTheme" parent="BauditTheme">
         <item name="android:windowBackground">@color/vaporwave_blue</item>
     </style>
-
-    <style name="BauditPatientTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="BauditCareProviderTheme" parent="BauditTheme">
-        <item name="colorPrimary">@color/vaporwave_purple</item>
-        <item name="colorPrimaryDark">@color/vaporwave_blue</item>
-        <item name="android:windowBackground">@color/vaporwave_purple</item>
-    </style>
-
-    <style name="BauditCareProviderTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
   
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BauditSplashTheme" parent="BauditTheme">
         <item name="android:windowBackground">@drawable/baudit_logo</item>
-    </style>
-
-    <style name="BauditDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
-        <item name="android:textColor">@color/dark_grey</item>
-        <item name="textColorAlertDialogListItem">@color/vaporwave_pink</item>
-        <item name="android:dialogTitle">@string/log_out_question</item>
     </style>
 </resources>
