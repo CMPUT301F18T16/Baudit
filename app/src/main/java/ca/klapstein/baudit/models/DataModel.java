@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import ca.klapstein.baudit.data.*;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 /**
