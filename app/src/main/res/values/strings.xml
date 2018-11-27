@@ -57,6 +57,7 @@
     <string name="confirm">Confirm</string>
     <string name="create_account">Create account</string>
     <string name="username_error">⚠ Username must be 8&#8211;20 characters.</string>
+    <string name="username_taken_error">⚠ This username is taken.</string>
     <string name="email_error">⚠ Invalid email.</string>
     <string name="phone_number_error">⚠ Invalid phone number.</string>
     <string name="log_out_question">Log out?</string>
