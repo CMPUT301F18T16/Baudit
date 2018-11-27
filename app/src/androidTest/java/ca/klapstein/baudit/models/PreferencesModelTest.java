@@ -59,7 +59,7 @@ public class PreferencesModelTest {
     public void saveSharedPreferencesCareProvider() {
         CareProvider careProvider = new CareProvider(
                 new Username("TESTCareProvider1"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Doctor", "Strange", new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         );
         PreferencesModel.saveSharedPreferencesCareProvider(context, careProvider);
     }
@@ -76,7 +76,7 @@ public class PreferencesModelTest {
     public void saveSharedPreferencesLoginAccountPatient() {
         PreferencesModel.saveSharedPreferencesLoginAccount(context, new Patient(
                 new Username("TESTPatient1"),
-                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Patient", "Zero", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
     }
 
@@ -84,7 +84,7 @@ public class PreferencesModelTest {
     public void saveSharedPreferencesLoginAccountCareProvider() {
         PreferencesModel.saveSharedPreferencesLoginAccount(context, new CareProvider(
                 new Username("TESTCareProvider1"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Doctor", "Strange", new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
     }
     @Test

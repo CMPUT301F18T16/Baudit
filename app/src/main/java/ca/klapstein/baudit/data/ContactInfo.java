@@ -32,7 +32,9 @@ public class ContactInfo {
      *
      * @return {@code String}
      */
-    public @NonNull String getFirstName() { return this.firstName; }
+    public @NonNull String getFirstName() {
+        return this.firstName;
+    }
 
     /**
      * Setter for a {@code ContactInfo}'s first name.
@@ -111,13 +113,6 @@ public class ContactInfo {
             return false;
         } else if (obj.getClass().equals(ContactInfo.class)) {
             ContactInfo otherContactInfo = (ContactInfo) obj;
-            String firstname = this.getFirstName();
-            firstname.length();
-            if (this.getFirstName().equals(otherContactInfo.getFirstName()))
-                if (this.getLastName().equals(otherContactInfo.getLastName()))
-                    if (this.getEmail().equals(otherContactInfo.getEmail()))
-                        if (this.getPhoneNumber().equals(otherContactInfo.getPhoneNumber()))
-                            return true;
             return this.getFirstName().equals(otherContactInfo.getFirstName()) &&
                 this.getLastName().equals(otherContactInfo.getLastName()) &&
                 this.getEmail().equals(otherContactInfo.getEmail()) &&

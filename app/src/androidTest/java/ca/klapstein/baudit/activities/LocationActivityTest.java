@@ -29,7 +29,7 @@ public class LocationActivityTest extends ActivityTestRule<LocationActivity> {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.setOfflineLoginAccount(new Patient(
                 new Username("TESTPatient1"),
-                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());

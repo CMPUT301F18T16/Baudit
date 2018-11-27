@@ -1,8 +1,5 @@
 package ca.klapstein.baudit.data;
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +11,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(Parameterized.class)
 public class PatientTest {

@@ -10,27 +10,28 @@ import static org.junit.Assert.*;
 
 public class ContactInfoTest {
 
-    @Mock
-    private Email mockEmail;
-    @Mock
-    private PhoneNumber mockPhoneNumber;
-
-
-    private ContactInfo contactInfo;
+    private ContactInfo contactInfo1;
+    private ContactInfo contactInfo2;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        contactInfo = new ContactInfo(
+        contactInfo1 = new ContactInfo(
                 getExampleFirstName1(),
                 getExampleLastName1(),
                 getExampleEmail1(),
                 getExamplePhoneNumber1());
+        contactInfo2 = new ContactInfo(
+                getExampleFirstName2(),
+                getExampleLastName2(),
+                getExampleEmail2(),
+                getExamplePhoneNumber2());
     }
 
     @After
     public void tearDown() {
-        contactInfo = null;
+        contactInfo1 = null;
+        contactInfo2 = null;
     }
 
     private String getExampleFirstName1() { return "John";}
@@ -41,118 +42,71 @@ public class ContactInfoTest {
 
     private String getExampleLastName2() { return "Doe";}
 
-    private Email getExampleEmail1() {
-        return new Email("foo@example.com");
-    }
+    private Email getExampleEmail1() { return new Email("foo@example.com"); }
 
-    private Email getExampleEmail2() {
-        return new Email("bar@example.com");
-    }
+    private Email getExampleEmail2() { return new Email("bar@example.com"); }
 
-    private PhoneNumber getExamplePhoneNumber1() {
-        return new PhoneNumber("111-111-1111");
-    }
+    private PhoneNumber getExamplePhoneNumber1() { return new PhoneNumber("111-111-1111"); }
 
-    private PhoneNumber getExamplePhoneNumber2() {
-        return new PhoneNumber("222-222-2222");
-    }
+    private PhoneNumber getExamplePhoneNumber2() { return new PhoneNumber("222-222-2222"); }
 
     @Test
     public void getPhone() {
-        assertNotNull(contactInfo.getPhoneNumber());
-        assertEquals(getExamplePhoneNumber1(), contactInfo.getPhoneNumber());
+        assertNotNull(contactInfo1.getPhoneNumber());
+        assertEquals(getExamplePhoneNumber1(), contactInfo1.getPhoneNumber());
     }
 
     @Test
     public void setPhone() {
-        assertEquals(getExamplePhoneNumber1(), contactInfo.getPhoneNumber());
-        contactInfo.setPhoneNumber(getExamplePhoneNumber2());
-        assertEquals(getExamplePhoneNumber2(), contactInfo.getPhoneNumber());
+        assertEquals(getExamplePhoneNumber1(), contactInfo1.getPhoneNumber());
+        contactInfo1.setPhoneNumber(getExamplePhoneNumber2());
+        assertEquals(getExamplePhoneNumber2(), contactInfo1.getPhoneNumber());
         assertNotEquals(getExamplePhoneNumber1(), getExamplePhoneNumber2());
     }
 
     @Test
     public void getEmail() {
-        assertNotNull(contactInfo.getEmail());
-        assertEquals(getExampleEmail1(), contactInfo.getEmail());
+        assertNotNull(contactInfo1.getEmail());
+        assertEquals(getExampleEmail1(), contactInfo1.getEmail());
     }
 
     @Test
     public void setEmail() {
-        assertEquals(getExampleEmail1(), contactInfo.getEmail());
-        contactInfo.setEmail(getExampleEmail2());
-        assertEquals(getExampleEmail2(), contactInfo.getEmail());
+        assertEquals(getExampleEmail1(), contactInfo1.getEmail());
+        contactInfo1.setEmail(getExampleEmail2());
+        assertEquals(getExampleEmail2(), contactInfo1.getEmail());
         assertNotEquals(getExampleEmail1(), getExampleEmail2());
     }
 
     @Test
     public void testHashCodeSame() {
-        ContactInfo contactInfo1 = new ContactInfo(
+        ContactInfo contactInfo1Same = new ContactInfo(
                 getExampleFirstName1(),
                 getExampleLastName1(),
                 getExampleEmail1(),
                 getExamplePhoneNumber1()
         );
-        ContactInfo contactInfo2 = new ContactInfo(
-                getExampleFirstName1(),
-                getExampleLastName1(),
-                getExampleEmail1(),
-                getExamplePhoneNumber1()
-        );
-        assertEquals(contactInfo1.hashCode(), contactInfo2.hashCode());
+        assertEquals(contactInfo1.hashCode(), contactInfo1Same.hashCode());
     }
 
     @Test
     public void testHashCodeDifferent() {
-        ContactInfo contactInfo1 = new ContactInfo(
-                getExampleFirstName1(),
-                getExampleLastName1(),
-                getExampleEmail1(),
-                getExamplePhoneNumber1()
-        );
-        ContactInfo contactInfo2 = new ContactInfo(
-                getExampleFirstName2(),
-                getExampleLastName2(),
-                getExampleEmail2(),
-                getExamplePhoneNumber2()
-        );
         assertNotEquals(contactInfo1.hashCode(), contactInfo2.hashCode());
     }
 
     @Test
     public void equals() {
-        ContactInfo contactInfo1 = new ContactInfo(
-                this.getExampleFirstName1(),
-                this.getExampleLastName1(),
-                mockEmail,
-                mockPhoneNumber
+        ContactInfo contactInfo1Same = new ContactInfo(
+                getExampleFirstName1(),
+                getExampleLastName1(),
+                getExampleEmail1(),
+                getExamplePhoneNumber1()
         );
-        ContactInfo contactInfo2 = new ContactInfo(
-                this.getExampleFirstName1(),
-                this.getExampleLastName1(),
-                mockEmail,
-                mockPhoneNumber
-        );
-        assertTrue(contactInfo1.equals(contactInfo2));
-    }
-
-    @Test
-    public void neverEqualsNull() {
-        assertFalse(new ContactInfo(
-                this.getExampleFirstName1(),
-                this.getExampleLastName1(),
-                mockEmail,
-                mockPhoneNumber
-        ).equals(null));
+        assertTrue(contactInfo1.equals(contactInfo1Same));
     }
 
     @Test
     public void equalsOtherObject() {
-        assertFalse(new ContactInfo(
-                this.getExampleFirstName1(),
-                this.getExampleLastName1(),
-                mockEmail,
-                mockPhoneNumber
-        ).equals(new Object()));
+        assertFalse(contactInfo1.equals(new Object()));
     }
 }
