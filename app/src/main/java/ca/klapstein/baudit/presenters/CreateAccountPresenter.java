@@ -8,6 +8,8 @@ import ca.klapstein.baudit.activities.PatientHomeActivity;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Email;
 import ca.klapstein.baudit.data.PhoneNumber;
+import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 public class CreateAccountPresenter extends Presenter<CreateAccountView> {
@@ -25,12 +27,16 @@ public class CreateAccountPresenter extends Presenter<CreateAccountView> {
         view.updateEmailError("");
         view.updatePhoneNumberError("");
 
-        if (username.length() < 8) {
+        if (!Username.isValid(username)) {
             validAccount = false;
             view.updateUsernameError(context.getResources().getString(R.string.username_error));
         }
 
-        // TODO: Check for username uniqueness
+        if (!new DataModel(this.context).uniqueID( new Username(username))) {
+            validAccount = false;
+            view.updateUsernameError(context.getResources().getString(R.string.username_taken_error));
+        }
+
         if (!Email.isValid(email)) {
             validAccount = false;
             view.updateEmailError(context.getResources().getString(R.string.email_error));
