@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText commentInput;
     private Button commitButton;
 
+    private ImageButton photoEditButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         initTitleViews();
         initCommentViews();
+
+        initPictureViews();
     }
 
     @Override
@@ -195,4 +200,18 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentCancelButton.setVisibility(View.GONE);
         }
     }
+
+    private void initPictureViews(){
+
+        photoEditButton = findViewById(R.id.record_picture_edit_button);
+        photoEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecordActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
 }
