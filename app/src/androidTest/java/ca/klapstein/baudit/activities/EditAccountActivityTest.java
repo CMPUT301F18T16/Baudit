@@ -27,12 +27,13 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     @Before
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
+        dataModel.clearOfflineLoginAccount();
         dataModel.setOfflineLoginAccount(new Patient(
             new Username("TESTPatient1"),
             new ContactInfo(
                 "Test",
                 "Patient",
-                new Email("cp@example.com"),
+                    new Email("patient@example.com"),
                 new PhoneNumber("111-111-1111")
             )
         ));
