@@ -67,10 +67,12 @@ public class CreateAccountPresenter extends Presenter<CreateAccountView> {
             if (checkedId == R.id.patient_radio_button) {
                 Patient patient = new Patient(newUsername, contactInfo);
                 dataManager.setOfflineLoginAccount(patient);
+                dataManager.commitPatient(patient);
                 view.onAccountConfirmed(PatientHomeActivity.class);
             } else if (checkedId == R.id.care_provider_radio_button) {
                 CareProvider careProvider = new CareProvider(new Username(username), contactInfo);
                 dataManager.setOfflineLoginAccount(careProvider);
+                dataManager.commitCareProvider(careProvider);
                 view.onAccountConfirmed(CareProviderHomeActivity.class);
             }
         }
