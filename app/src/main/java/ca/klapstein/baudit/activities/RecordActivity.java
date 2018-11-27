@@ -60,7 +60,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         initTitleViews();
         initCommentViews();
-
         initPictureViews();
     }
 
@@ -200,16 +199,15 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     }
 
     private void initPictureViews(){
-
         ImageButton photoEditButton = findViewById(R.id.record_picture_edit_button);
         photoEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecordActivity.this, CameraActivity.class);
+                intent.putExtra("RecordPhoto", true);
                 startActivity(intent);
             }
         });
     }
-
 
 }

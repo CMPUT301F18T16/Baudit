@@ -8,30 +8,38 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 import ca.klapstein.baudit.R;
 
 public class CameraActivity extends AppCompatActivity {
 
     private ImageView imageView;
+    private FloatingActionButton saveButton;
     private static final int REQUEST_CAPTURE_IMAGE = 100;
 
     private File photoFile;
     private Bitmap imageBitmap;
+    private Boolean recordPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        recordPhoto = getIntent().getBooleanExtra("recordPhoto", true);
+
         imageView = (ImageView) findViewById(R.id.takenPhoto);
+        saveButton = (FloatingActionButton) findViewById(R.id.savePhotoButton);
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -53,7 +61,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private File createFile() throws IOException {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = getBauditDateFormat().format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -72,6 +80,15 @@ public class CameraActivity extends AppCompatActivity {
             String filePath = photoFile.getPath();
             imageBitmap = BitmapFactory.decodeFile(filePath);
             imageView.setImageBitmap(imageBitmap);
-        }
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recordPhoto){
+                        //add photo
+                    }
+                }
+            });
+        } else
+            finish();
     }
 }
