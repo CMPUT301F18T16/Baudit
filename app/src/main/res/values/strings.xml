@@ -61,7 +61,9 @@
     <string name="phone_number_error">⚠ Invalid phone number.</string>
     <string name="log_out_question">Log out?</string>
     <string name="scan_qr_code">Scan Account QR Code</string>
-    <string name="qr_code_usage_tip">Scan this QR code to transfer your Baudit account to another device.</string>
+    <string name="qr_code_usage_tip">Scan this QR code to transfer your Baudit account to another device or Register
+        this Baudit account to a Care Provider.
+    </string>
     <string name="patient">Patient</string>
     <string name="care_provider">Care provider</string>
     <string name="account_type">Account type</string>

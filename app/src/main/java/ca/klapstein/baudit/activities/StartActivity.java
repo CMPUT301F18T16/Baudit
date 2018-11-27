@@ -9,11 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.StartPresenter;
 import ca.klapstein.baudit.views.StartView;
-
 import com.blikoon.qrcodescanner.QrCodeActivity;
 
 /**
@@ -32,6 +30,8 @@ public class StartActivity extends AppCompatActivity implements StartView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        presenter = new StartPresenter(this, getApplicationContext());
 
         Button registerButton = findViewById(R.id.register_account_button);
         registerButton.setOnClickListener(new View.OnClickListener() {

@@ -32,13 +32,13 @@ public class PatientTreeSetTest {
 
         Patient patient0 = new Patient(
                 new Username("AName123"),
-                new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
+                new ContactInfo("FirstNameA", "LastNameA", new Email("fooA@example.com"), new PhoneNumber("111-111-1111")));
         Patient patient1 = new Patient(
                 new Username("BName123"),
-                new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
+                new ContactInfo("FirstNameB", "LastNameC", new Email("fooB@example.com"), new PhoneNumber("222-222-2222")));
         Patient patient2 = new Patient(
                 new Username("CName123"),
-                new ContactInfo(new Email("foo@example.com"), new PhoneNumber("111-111-1111")));
+                new ContactInfo("FirstNameC", "LastNameC", new Email("fooC@example.com"), new PhoneNumber("333-333-3333")));
 
         patientTreeSet.add(patient2);
         patientTreeSet.add(patient1);

@@ -3,28 +3,24 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 /**
- * Data class representing a basic account/account of Baudit.
+ * Data class representing a basic account of Baudit.
  */
 public class Account implements Comparable<Account> {
 
+    @NonNull private Username username;
+    @NonNull private ContactInfo contactInfo;
+
     public Account(@NonNull Username username, @NonNull ContactInfo contactInfo) {
-        setUsername(username);
-        setContactInfo(contactInfo);
+        this.username = username;
+        this.contactInfo = contactInfo;
     }
-
-    @NonNull
-    private ContactInfo contactInfo;
-
-    @NonNull
-    private Username username;
 
     /**
      * Get the {@code Username} of the {@code Account}.
      *
      * @return {@code Username}
      */
-    @NonNull
-    public Username getUsername() {
+    @NonNull public Username getUsername() {
         return username;
     }
 
@@ -42,8 +38,7 @@ public class Account implements Comparable<Account> {
      *
      * @return {@code ContactInfo}
      */
-    @NonNull
-    public ContactInfo getContactInfo() {
+    @NonNull public ContactInfo getContactInfo() {
         return contactInfo;
     }
 
