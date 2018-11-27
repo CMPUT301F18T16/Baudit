@@ -31,7 +31,7 @@ public class DataModelTest {
     public void commitPatient() {
         Patient patient1 = new Patient(
                 new Username("TESTPatient1"),
-                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("John", "Smith", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         dataModel.commitPatient(patient1);
     }
@@ -48,12 +48,12 @@ public class DataModelTest {
         PatientTreeSet patientTreeSet = new PatientTreeSet();
         Patient patient2 = new Patient(
                 new Username("TESTPatient2"),
-                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Patient", "Two", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         patientTreeSet.add(patient2);
         Patient patient3 = new Patient(
                 new Username("TESTPatient3"),
-                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Patient", "Three", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         patientTreeSet.add(patient3);
         dataModel.commitPatientTreeSet(patientTreeSet);
@@ -91,7 +91,7 @@ public class DataModelTest {
     public void commitCareProvider() {
         CareProvider careProvider = new CareProvider(
                 new Username("TESTCareProvider1"),
-                new ContactInfo(new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Doctor","Strange", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
         );
         dataModel.commitCareProvider(careProvider);
     }
@@ -145,7 +145,7 @@ public class DataModelTest {
     public void setLoginAccountPatient() {
         dataModel.setOfflineLoginAccount(new Patient(
                 new Username("TESTPatient1"),
-                new ContactInfo(new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -156,7 +156,7 @@ public class DataModelTest {
     public void setLoginAccountCareProvider() {
         dataModel.setOfflineLoginAccount(new CareProvider(
                 new Username("TESTCareProvider1"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Doctor", "Strange", new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);

@@ -3,6 +3,7 @@ package ca.klapstein.baudit.data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,26 +21,31 @@ public class CareProviderTest {
     private Patient patient0;
     private Patient patient1;
 
-    public CareProviderTest(String usernameInput, String emailInput, String phoneInput) {
+    public CareProviderTest(String firstName, String lastName, String usernameInput, String emailInput, String phoneInput) {
 
-        this.contactInfo = new ContactInfo(new Email(emailInput), new PhoneNumber(phoneInput));
+        this.contactInfo = new ContactInfo(
+            firstName,
+            lastName,
+            new Email(emailInput),
+            new PhoneNumber(phoneInput)
+        );
         this.username = new Username(usernameInput);
         this.careProvider = new CareProvider(this.username, this.contactInfo);
 
-        ContactInfo patient0ContactInfo = new ContactInfo(new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"));
+        ContactInfo patient0ContactInfo = new ContactInfo("John", "Doe", new Email("patient0@hotmail.com"), new PhoneNumber("123-456-7890"));
         this.patient0 = new Patient(new Username("patient0"), patient0ContactInfo);
 
-        ContactInfo patient1ContactInfo = new ContactInfo(new Email("patient1@hotmail.com"), new PhoneNumber("012-345-5678"));
+        ContactInfo patient1ContactInfo = new ContactInfo("Jane", "Doe", new Email("patient1@hotmail.com"), new PhoneNumber("012-345-5678"));
         this.patient1 = new Patient(new Username("patient0"), patient1ContactInfo);
 
         careProvider.getAssignedPatientTreeSet().add(patient0);
         careProvider.getAssignedPatientTreeSet().add(patient1);
     }
 
-    @Parameterized.Parameters
+    @Parameters
     public static Collection careProviderData() {
         return Arrays.asList(new Object[][]{
-                {"nameuser", "email@example.com", "780-123-1234"}
+                {"firstName", "lastName", "username", "email@example.com", "780-123-1234"}
         });
     }
 
@@ -68,13 +74,13 @@ public class CareProviderTest {
     }
 
     @Test
-    public void testCareProvidertContactInfo() {
+    public void testCareProviderContactInfo() {
         assertEquals(careProvider.getContactInfo(), contactInfo);
     }
 
     @Test
     public void testSetCareProviderContactInfo() {
-        ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
+        ContactInfo newContactInfo = new ContactInfo("newFirstName", "newLastName", new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         careProvider.setContactInfo(newContactInfo);
         assertEquals(careProvider.getContactInfo(), newContactInfo);
     }

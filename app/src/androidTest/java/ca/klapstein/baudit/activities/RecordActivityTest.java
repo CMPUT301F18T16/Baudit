@@ -29,7 +29,7 @@ public class RecordActivityTest extends ActivityTestRule<RecordActivity> {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.setOfflineLoginAccount(new Patient(
                 new Username("TESTPatient1"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
