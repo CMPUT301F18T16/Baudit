@@ -38,8 +38,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText commentInput;
     private Button commitButton;
 
-    private ImageButton photoEditButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,7 +201,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     private void initPictureViews(){
 
-        photoEditButton = findViewById(R.id.record_picture_edit_button);
+        ImageButton photoEditButton = findViewById(R.id.record_picture_edit_button);
         photoEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
