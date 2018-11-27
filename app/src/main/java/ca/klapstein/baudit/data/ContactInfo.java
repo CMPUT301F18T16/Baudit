@@ -1,8 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import org.jetbrains.annotations.Contract;
 
 /**
