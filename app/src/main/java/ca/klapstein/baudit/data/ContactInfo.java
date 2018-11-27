@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.jetbrains.annotations.Contract;
 
@@ -31,7 +32,7 @@ public class ContactInfo {
      *
      * @return {@code String}
      */
-    public @NonNull String getFirstName() { return firstName; }
+    public @NonNull String getFirstName() { return this.firstName; }
 
     /**
      * Setter for a {@code ContactInfo}'s first name.
@@ -48,7 +49,7 @@ public class ContactInfo {
      * @return {@code String}
      */
     public @NonNull String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     /**
@@ -66,7 +67,7 @@ public class ContactInfo {
      * @return {@code Email}
      */
     public @NonNull Email getEmail() {
-        return email;
+        return this.email;
     }
 
     /**
@@ -84,7 +85,7 @@ public class ContactInfo {
      * @return {@code PhoneNumber}
      */
     public @NonNull PhoneNumber getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
     }
 
     /**
@@ -110,6 +111,13 @@ public class ContactInfo {
             return false;
         } else if (obj.getClass().equals(ContactInfo.class)) {
             ContactInfo otherContactInfo = (ContactInfo) obj;
+            String firstname = this.getFirstName();
+            firstname.length();
+            if (this.getFirstName().equals(otherContactInfo.getFirstName()))
+                if (this.getLastName().equals(otherContactInfo.getLastName()))
+                    if (this.getEmail().equals(otherContactInfo.getEmail()))
+                        if (this.getPhoneNumber().equals(otherContactInfo.getPhoneNumber()))
+                            return true;
             return this.getFirstName().equals(otherContactInfo.getFirstName()) &&
                 this.getLastName().equals(otherContactInfo.getLastName()) &&
                 this.getEmail().equals(otherContactInfo.getEmail()) &&
