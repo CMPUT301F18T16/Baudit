@@ -1,22 +1,15 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-
-import java.util.UUID;
-
+import android.util.Log;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.activities.CareProviderHomeActivity;
 import ca.klapstein.baudit.activities.PatientHomeActivity;
-import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.ContactInfo;
-import ca.klapstein.baudit.data.Email;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PhoneNumber;
-import ca.klapstein.baudit.data.Username;
+import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 public class CreateAccountPresenter extends Presenter<CreateAccountView> {
+    private static final String TAG = "CreateAccountPresenter";
 
     protected Account account;
 
@@ -34,11 +27,13 @@ public class CreateAccountPresenter extends Presenter<CreateAccountView> {
         Username newUsername = null;
         try {
             newUsername = new Username(username);
-            if (dataManager.uniqueID(newUsername)) {
+            if (!dataManager.uniqueID(newUsername)) {
+                Log.e(TAG, "given non unique userID");
                 validAccount = false;
                 view.updateUsernameError(context.getResources().getString(R.string.username_error));
             }
         } catch (IllegalArgumentException e) {
+            Log.e(TAG, "given invalid userID: " + username, e);
             validAccount = false;
             view.updateUsernameError(context.getResources().getString(R.string.username_error));
         }
