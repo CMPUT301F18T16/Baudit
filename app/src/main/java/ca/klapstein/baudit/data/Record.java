@@ -206,11 +206,11 @@ public class Record implements Comparable<Record> {
         return date.compareTo(record.getDate());
     }
 
-    public UUID getRecordId() {
+    private UUID getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(UUID recordId) {
+    private void setRecordId(UUID recordId) {
         this.recordId = recordId;
     }
 }

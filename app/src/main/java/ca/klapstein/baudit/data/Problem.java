@@ -40,13 +40,6 @@ public class Problem implements Comparable<Problem> {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
 
-    public UUID getProblemId() {
-        return problemId;
-    }
-
-    public void setProblemId(UUID problemId) {
-        this.problemId = problemId;
-    }
 
     /**
      * Check if a given string is a valid Problem title.
@@ -181,5 +174,13 @@ public class Problem implements Comparable<Problem> {
         } else {
             return getDate().compareTo(problem.getDate()); // Order by date
         }
+    }
+
+    private UUID getProblemId() {
+        return problemId;
+    }
+
+    private void setProblemId(UUID problemId) {
+        this.problemId = problemId;
     }
 }
