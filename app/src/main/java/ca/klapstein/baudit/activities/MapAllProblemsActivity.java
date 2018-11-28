@@ -58,7 +58,6 @@ public class MapAllProblemsActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.viewStarted();
         mapView.onResume();
     }
 

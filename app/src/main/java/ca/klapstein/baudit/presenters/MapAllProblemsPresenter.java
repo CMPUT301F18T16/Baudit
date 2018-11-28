@@ -20,7 +20,4 @@ public class MapAllProblemsPresenter <V extends MapAllProblemsView> extends Pres
             //TODO: error
         }
     }
-    public void viewStarted(){
-        view.populateMap(patient);
-    }
 }
