@@ -1,7 +1,5 @@
 package ca.klapstein.baudit.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -73,27 +71,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                                 PatientHomeActivity.this,
                                 EditAccountActivity.class
                             ));
-                            return true;
-                        case (R.id.nav_logout):
-                            new AlertDialog.Builder(
-                                    PatientHomeActivity.this)
-                                .setTitle(R.string.log_out_question)
-                                .setCancelable(true)
-                                .setNegativeButton(R.string.cancel, null)
-                                .setPositiveButton(R.string.log_out,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface mDialogInterface,
-                                                            int i) {
-                                            presenter.logoutClicked();
-                                            startActivity(new Intent(
-                                                PatientHomeActivity.this,
-                                                SplashActivity.class
-                                            ));
-                                            finish();
-                                        }
-                                    })
-                                .show();
                             return true;
                         default:
                             return true;
