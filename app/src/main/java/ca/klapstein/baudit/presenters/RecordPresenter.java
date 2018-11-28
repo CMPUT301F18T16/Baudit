@@ -64,6 +64,8 @@ public class RecordPresenter extends Presenter<RecordView> {
     public void commitRecord() {
         try {
             // TODO: commit to remote/local
+            // TODO: issue if this is adding a record on a brand new non commited problem.
+            // TODO: will create two problems instead of 1 when fulled exited both edit/add prompts
             problem.getRecordTreeSet().add(record);
             patient.getProblemTreeSet().add(problem);
             dataManager.commitPatient(patient);
