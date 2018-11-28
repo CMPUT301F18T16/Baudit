@@ -1,10 +1,8 @@
 package ca.klapstein.baudit.activities;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.widget.Button;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.StartPresenter;
 import ca.klapstein.baudit.views.StartView;
-import com.blikoon.qrcodescanner.QrCodeActivity;
 
 /**
  * Template activity for a "login" screen for Baudit.
@@ -71,62 +68,35 @@ public class StartActivity extends AppCompatActivity implements StartView {
      */
     @Override
     public void startScanQRCode() {
-        Intent i = new Intent(this, QrCodeActivity.class);
-        startActivityForResult(i, REQUEST_CODE_QR_SCAN);
-    }
+        try {
 
-    /**
-     * On return the QR activities result.
-     * <p>
-     * TODO: implement
-     *
-     * @param requestCode {@code int}
-     * @param resultCode {@code int}
-     * @param data {@code Intent}
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
 
-        if (resultCode != Activity.RESULT_OK) {
-            Log.d(TAG, "COULD NOT GET A GOOD RESULT.");
-            if (data == null)
-                return;
-            //Getting the passed result
-            String result = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
-            if (result != null) {
-                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("Scan Error");
-                alertDialog.setMessage("QR Code could not be scanned");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
-            }
-            return;
+            startActivityForResult(intent, 0);
+
+        } catch (Exception e) {
+
+            Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+            startActivity(marketIntent);
 
         }
+    }
 
-        if (requestCode == REQUEST_CODE_QR_SCAN) {
-            if (data == null)
-                return;
-            //Getting the passed result
-            String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
-            presenter.onQRCodeScanned(result);
-            Log.d(TAG, "Have scan result in your app activity :" + result);
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Scan result");
-            alertDialog.setMessage(result);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
-            // TODO: do additional login/authentication work.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+
+            if (resultCode == RESULT_OK) {
+                String contents = data.getStringExtra("SCAN_RESULT");
+                Log.e(TAG, "obtained: " + contents);
+                presenter.onQRCodeScanned(contents);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //handle cancel
+            }
         }
     }
 
