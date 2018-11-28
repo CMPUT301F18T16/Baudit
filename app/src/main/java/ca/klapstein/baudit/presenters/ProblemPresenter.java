@@ -18,7 +18,7 @@ import java.util.Calendar;
  */
 public class ProblemPresenter extends Presenter<ProblemView> {
     private static final String TAG = "ProblemPresenter";
-    private final Patient patient;
+    private Patient patient;
 
     private Problem problem;
 
@@ -28,6 +28,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void viewStarted(int position) {
+        patient = dataManager.getLoggedInPatient();
         if (position == -1) { // If the problem is new
             problem = new Problem("Set Title", "Set description");
         } else { // If the problem exists and is being edited
