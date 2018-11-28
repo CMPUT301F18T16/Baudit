@@ -24,6 +24,7 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
+    private ArrayList<RecordPhoto> photos = new ArrayList<>();
 
     public Record() {
         date = new Date();
