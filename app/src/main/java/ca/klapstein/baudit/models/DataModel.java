@@ -4,12 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import ca.klapstein.baudit.data.*;
+import com.google.gson.Gson;
+
 import java.util.concurrent.ExecutionException;
-import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.data.CareProvider;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
-import ca.klapstein.baudit.data.Username;
 
 /**
  * Helper class that interacts with the {@code PreferencesModel} (local) and {@code RemoteModel} (remote)
@@ -163,6 +161,7 @@ public class DataModel {
             localPatient = null;
         }
 
+        Log.d(TAG, "loaded patient json: " + new Gson().toJson(localPatient));
         return localPatient;
     }
 
@@ -244,6 +243,7 @@ public class DataModel {
             localCareProvider.getAssignedPatientTreeSet().addAll(remoteCareProvider.getAssignedPatientTreeSet());
         }
 
+        Log.d(TAG, "loaded care provider json: " + new Gson().toJson(localCareProvider));
         return localCareProvider;
     }
 
