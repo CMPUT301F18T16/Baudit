@@ -63,7 +63,7 @@ public class ProblemActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
 
-        problemId = getIntent().getIntExtra("problemId", 0);
+        problemId = getIntent().getIntExtra("problemId", -1);
 
         presenter = new ProblemPresenter(this, getApplicationContext());
 
@@ -102,7 +102,8 @@ public class ProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProblemActivity.this, RecordActivity.class);
-                intent.putExtra("recordId", 0);
+                intent.putExtra("recordId", -1);
+                intent.putExtra("problemId", problemId);
                 startActivity(intent);
             }
         });
@@ -322,7 +323,8 @@ public class ProblemActivity extends AppCompatActivity
                         ProblemActivity.this,
                         RecordActivity.class
                     );
-                    intent.putExtra("recordId", 1); // Test ID
+                    intent.putExtra("problemId", problemId); // Test ID
+                    intent.putExtra("recordId", viewHolder.getAdapterPosition()); // Test ID
                     // TODO: Need a way to get the problem's ID to add to the intent
                     startActivity(intent);
                 }
