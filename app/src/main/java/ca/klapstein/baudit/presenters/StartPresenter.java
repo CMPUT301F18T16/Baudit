@@ -71,11 +71,11 @@ public class StartPresenter extends Presenter<StartView> {
                 view.onLoginValidationSuccess(CareProviderHomeActivity.class);
             } else {  // else we have failed the login
                 // TODO: update text
-                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
+                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
             }
         } catch (IllegalArgumentException e) {
             // TODO: update text
-            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
+            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
         }
     }
 }

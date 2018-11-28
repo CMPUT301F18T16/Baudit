@@ -7,7 +7,7 @@
     <string name="log_out">Log out</string>
     <string name="sign_up">Sign up</string>
     <string name="log_in_as_patient">Log in as Patient</string>
-    <string name="login_failed">⚠ Login error: Invalid credentials</string>
+    <string name="login_failed">⚠ Authentication error: failed to authenticate into account</string>
     <string name="problem_count">Problems (%1$d):</string>
     <string name="home">Home</string>
     <string name="get_account_qr_code">Display Account QR Code</string>
