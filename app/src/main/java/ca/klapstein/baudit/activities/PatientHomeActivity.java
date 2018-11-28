@@ -113,10 +113,12 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(
-                    PatientHomeActivity.this,
-                    ProblemActivity.class
-                ));
+                Intent intent = new Intent(
+                        PatientHomeActivity.this,
+                        ProblemActivity.class
+                );
+                intent.putExtra("problemId", -1);
+                startActivity(intent);
             }
         });
     }

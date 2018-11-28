@@ -28,7 +28,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void viewStarted(int position) {
-        if (position == 0) { // If the problem is new
+        if (position == -1) { // If the problem is new
             problem = new Problem("Set Title", "Set description");
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
