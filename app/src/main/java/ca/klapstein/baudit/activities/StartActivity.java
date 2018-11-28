@@ -114,6 +114,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
                 return;
             //Getting the passed result
             String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
+            presenter.onQRCodeScanned(result);
             Log.d(TAG, "Have scan result in your app activity :" + result);
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             alertDialog.setTitle("Scan result");
