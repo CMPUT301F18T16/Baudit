@@ -35,7 +35,7 @@ public class CreateAccountPresenter extends Presenter<CreateAccountView> {
             view.updateUsernameError(context.getResources().getString(R.string.username_error));
         }
 
-        else if (dataManager.uniqueID( new Username(usernameString))) {
+        else if (!dataManager.uniqueID( new Username(usernameString))) {
             validAccount = false;
             view.updateUsernameError(context.getResources().getString(R.string.username_taken_error));
         }
