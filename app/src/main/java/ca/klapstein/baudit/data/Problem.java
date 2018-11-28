@@ -17,7 +17,7 @@ public class Problem implements Comparable<Problem> {
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-    private String problemId;
+    private UUID problemId;
     private String title;
     private String description;
     private Date date;
@@ -27,7 +27,7 @@ public class Problem implements Comparable<Problem> {
         this.setTitle(title);
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
-        this.problemId = UUID.randomUUID().toString();
+        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -40,12 +40,12 @@ public class Problem implements Comparable<Problem> {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
 
-    public String getProblemId() {
+    public UUID getProblemId() {
         return problemId;
     }
 
-    public void setProblemId(UUID uuid) {
-        this.problemId = uuid.toString();
+    public void setProblemId(UUID problemId) {
+        this.problemId = problemId;
     }
 
     /**
