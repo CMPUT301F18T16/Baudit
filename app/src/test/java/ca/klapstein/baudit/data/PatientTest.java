@@ -11,7 +11,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(Parameterized.class)
 public class PatientTest {
@@ -19,7 +21,6 @@ public class PatientTest {
     private Username username;
     private Patient patient;
     private ContactInfo contactInfo;
-
     @Mock
     private BodyPhoto bodyPhoto;
 
@@ -28,11 +29,14 @@ public class PatientTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    public PatientTest(String usernameInput, String emailInput,
+    public PatientTest(String firstName, String lastName, String usernameInput, String emailInput,
                        String phoneInput) {
-        Email email = new Email(emailInput);
-        PhoneNumber phoneNumber = new PhoneNumber(phoneInput);
-        this.contactInfo = new ContactInfo(email, phoneNumber);
+        this.contactInfo = new ContactInfo(
+            firstName,
+            lastName,
+            new Email(emailInput),
+            new PhoneNumber(phoneInput)
+        );
         this.username = new Username(usernameInput);
         this.patient = new Patient(this.username, contactInfo);
     }
@@ -40,7 +44,7 @@ public class PatientTest {
     @Parameters
     public static Collection patientData() {
         return Arrays.asList(new Object[][] {
-                {"username", "email@example.com", "780-123-1234"}
+                {"firstName", "lastName", "username", "email@example.com", "780-123-1234"}
         });
     }
 
@@ -56,9 +60,9 @@ public class PatientTest {
 
     @Test
     public void testSetPatientUsername() {
-        Username newusername = new Username("newusername");
-        patient.setUsername(newusername);
-        assertEquals(patient.getUsername(), newusername);
+        Username newUsername = new Username("newUsername");
+        patient.setUsername(newUsername);
+        assertEquals(patient.getUsername(), newUsername);
     }
 
     @Test
@@ -68,7 +72,7 @@ public class PatientTest {
 
     @Test
     public void testSetPatientContactInfo() {
-        ContactInfo newContactInfo = new ContactInfo(new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
+        ContactInfo newContactInfo = new ContactInfo("John","Smith", new Email("newemail@example.com"), new PhoneNumber("123-456-7890"));
         patient.setContactInfo(newContactInfo);
         assertEquals(patient.getContactInfo(), newContactInfo);
     }

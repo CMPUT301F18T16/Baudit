@@ -43,8 +43,10 @@ class PreferencesModel {
      * @param object   {@code Object}
      * @param JSONKey  {@code String}
      */
-    private static void saveSharedPreferencesObject(Context context, Object object, String JSONKey) {
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+    private static void saveSharedPreferencesObject(Context context, Object object,
+                                                    String JSONKey) {
+        SharedPreferences mPrefs =
+            PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(object);
@@ -59,7 +61,8 @@ class PreferencesModel {
 
     public static Account loadSharedPreferencesLoginAccount(Context context) {
         Account account;
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        SharedPreferences mPrefs =
+            PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
 
         String json = mPrefs.getString(LOGIN_ACCOUNT_JSON_KEY, "");
@@ -81,7 +84,8 @@ class PreferencesModel {
      * @param context        {@code Context}
      * @param patientTreeSet {@code PatientTreeSet}
      */
-    public static void saveSharedPreferencesPatientTreeSet(Context context, PatientTreeSet patientTreeSet) {
+    public static void saveSharedPreferencesPatientTreeSet(Context context,
+                                                           PatientTreeSet patientTreeSet) {
         saveSharedPreferencesObject(context, patientTreeSet, PATIENT_TREESET_PREF_JSON_KEY);
     }
 
@@ -157,7 +161,8 @@ class PreferencesModel {
      * @param context      {@code Context}
      * @param careProvider {@code CareProvider}
      */
-    public static void saveSharedPreferencesCareProvider(Context context, CareProvider careProvider) {
+    public static void saveSharedPreferencesCareProvider(Context context,
+                                                         CareProvider careProvider) {
         saveSharedPreferencesObject(context, careProvider, CAREPROVIDER_PREF_JSON_KEY);
     }
 

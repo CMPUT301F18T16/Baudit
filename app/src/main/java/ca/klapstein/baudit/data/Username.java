@@ -23,7 +23,7 @@ public class Username {
      */
     static public boolean isValid(String username) {
         int len = username.length();
-        return len >= 8 && len <= 20;
+        return 8 <= len && len <= 20;
     }
 
     /**

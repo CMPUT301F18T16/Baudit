@@ -29,7 +29,7 @@ public class CareProviderHomeActivityTest extends ActivityTestRule<CareProviderH
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.setOfflineLoginAccount(new CareProvider(
                 new Username("TESTCareProvider1"),
-                new ContactInfo(new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
+                new ContactInfo("Doctor", "Strange", new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
