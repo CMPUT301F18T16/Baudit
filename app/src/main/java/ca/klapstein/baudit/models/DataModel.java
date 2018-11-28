@@ -4,9 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import ca.klapstein.baudit.data.*;
-
 import java.util.concurrent.ExecutionException;
+import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PatientTreeSet;
+import ca.klapstein.baudit.data.Username;
 
 /**
  * Helper class that interacts with the {@code PreferencesModel} (local) and {@code RemoteModel} (remote)

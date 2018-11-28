@@ -23,7 +23,7 @@ public class Patient extends Account {
      * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
      */
     public ProblemTreeSet getProblemTreeSet() {
-        return problemTreeSet;
+        return this.problemTreeSet;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Patient extends Account {
      * @return {@code BodyPhoto} belonging to the patient.
      */
     public BodyPhoto getBodyPhoto() {
-        return bodyPhoto;
+        return this.bodyPhoto;
     }
 
     /**
