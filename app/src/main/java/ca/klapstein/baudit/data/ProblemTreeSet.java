@@ -14,3 +14,4 @@ import java.util.TreeSet;
 public class ProblemTreeSet extends TreeSet<Problem> {
     private static final String TAG = "ProblemTreeSet";
 }
+
