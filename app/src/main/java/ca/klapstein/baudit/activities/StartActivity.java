@@ -73,7 +73,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
 
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
 
         } catch (Exception e) {
 
@@ -87,14 +87,13 @@ public class StartActivity extends AppCompatActivity implements StartView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
+        if (requestCode == REQUEST_CODE_QR_SCAN) {
 
             if (resultCode == RESULT_OK) {
                 String contents = data.getStringExtra("SCAN_RESULT");
-                Log.e(TAG, "obtained: " + contents);
+                Log.e(TAG, "obtained qr code decoded string: " + contents);
                 presenter.onQRCodeScanned(contents);
-            }
-            if (resultCode == RESULT_CANCELED) {
+            } else if (resultCode == RESULT_CANCELED) {
                 //handle cancel
             }
         }
