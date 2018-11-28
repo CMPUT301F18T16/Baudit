@@ -50,7 +50,7 @@ class PreferencesModel {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(object);
-        Log.e(TAG, "saved json: " + json);
+        Log.d(TAG, "saved json: " + json);
         prefsEditor.putString(JSONKey, json);
         prefsEditor.commit();
     }
@@ -66,7 +66,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(LOGIN_ACCOUNT_JSON_KEY, "");
-        Log.e(TAG, "loaded json: " + json);
+        Log.d(TAG, "loaded json: " + json);
 
         if (json.isEmpty()) {
             account = null;
