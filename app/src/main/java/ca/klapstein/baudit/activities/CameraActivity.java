@@ -13,7 +13,6 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,22 +20,26 @@ import java.util.Date;
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.AddPhotoPresenter;
+import ca.klapstein.baudit.views.AddPhotoView;
 
-public class CameraActivity extends AppCompatActivity {
+
+public class CameraActivity extends AppCompatActivity implements AddPhotoView {
 
     private ImageView imageView;
     private FloatingActionButton saveButton;
     private static final int REQUEST_CAPTURE_IMAGE = 100;
-
     private File photoFile;
     private Bitmap imageBitmap;
     private Boolean recordPhoto;
+    private AddPhotoPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        recordPhoto = getIntent().getBooleanExtra("recordPhoto", true);
+        recordPhoto = getIntent().getBooleanExtra("recordPhoto", false);
+        presenter = new AddPhotoPresenter(this, getApplicationContext());
 
         imageView = (ImageView) findViewById(R.id.takenPhoto);
         saveButton = (FloatingActionButton) findViewById(R.id.savePhotoButton);
@@ -59,6 +62,11 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private File createFile() throws IOException {
 
         String timeStamp = getBauditDateFormat().format(new Date());
@@ -79,16 +87,31 @@ public class CameraActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
             String filePath = photoFile.getPath();
             imageBitmap = BitmapFactory.decodeFile(filePath);
-            imageView.setImageBitmap(imageBitmap);
+            if(presenter.ValidatePhoto(imageBitmap))
+                setPhoto(imageBitmap);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (recordPhoto){
-                        //add photo
-                    }
+                    commitAddPhoto();
                 }
             });
         } else
-            finish();
+            setPhotoError();
+    }
+
+    @Override
+    public void setPhoto(Bitmap bitmap){ imageView.setImageBitmap(imageBitmap); }
+
+    @Override
+    public void setPhotoError(){ finish(); }
+
+    @Override
+    public void commitAddPhoto(){
+        //TODO: add to remote and local
+        if(recordPhoto){
+        }
+        else{
+            // a body photo
+        }
     }
 }

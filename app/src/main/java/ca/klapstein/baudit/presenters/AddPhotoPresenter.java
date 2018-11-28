@@ -12,6 +12,11 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
 
     public boolean ValidatePhoto(Bitmap bitmap) {
         // TODO:
-        return true;
+        if (bitmap != null) {
+            Bitmap emptyBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+            if (bitmap != emptyBitmap)
+                return true;
+        }
+        return false;
     }
 }

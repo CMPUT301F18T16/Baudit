@@ -204,7 +204,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecordActivity.this, CameraActivity.class);
-                intent.putExtra("RecordPhoto", true);
+                intent.putExtra("recordPhoto", true);
                 startActivity(intent);
             }
         });
