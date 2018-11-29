@@ -23,7 +23,7 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
     }
 
     @Override
-    public void setLocation() {
+    public void updateLocation() {
 
     }
 

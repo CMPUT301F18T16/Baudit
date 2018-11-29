@@ -154,7 +154,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         }
 
         @Override
-        public void setPatientNameText(String patientName) {
+        public void updatePatientNameText(String patientName) {
             mNameView.setText(patientName);
         }
 
