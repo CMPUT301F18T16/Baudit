@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -93,7 +94,9 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Work with this
+                Intent intent = new Intent(CreateAccountActivity.this, CameraActivity.class);
+                intent.putExtra("recordPhoto", false);
+                startActivity(intent);
             }
         });
 
