@@ -146,7 +146,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         @Override
         public void onBindViewHolder(@NonNull PatientViewHolder viewHolder, int i) {
             presenter.onBindPatientRowViewAtPosition(viewHolder, i);
-            viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // TODO: (EXTRA) launch a choice to either drop supporter the patient (EXTRA)
@@ -154,7 +154,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
                 }
             });
 
-            registerForContextMenu(viewHolder.mCardView);
+            registerForContextMenu(viewHolder.cardView);
         }
         @Override
         public int getItemCount() {
@@ -164,25 +164,25 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
 
     private class PatientViewHolder extends RecyclerView.ViewHolder implements PatientRowView {
 
-        CardView mCardView;
-        TextView mNameView;
-        TextView problemCount;
+        CardView cardView;
+        TextView patientName;
+        TextView patientProblemCount;
 
         PatientViewHolder(CardView card) {
             super(card);
-            mCardView = card;
-            mNameView = card.findViewById(R.id.patient_name);
-            problemCount = card.findViewById(R.id.patient_problem_count_num);
+            cardView = card;
+            patientName = card.findViewById(R.id.patient_name);
+            patientProblemCount = card.findViewById(R.id.patient_problem_count_num);
         }
 
         @Override
         public void setPatientNameText(String patientName) {
-            mNameView.setText(patientName);
+            this.patientName.setText(patientName);
         }
 
         @Override
         public void setPatientProblemNum(int problemNum) {
-            problemCount.setText(String.format(
+            patientProblemCount.setText(String.format(
                     getResources().getString(R.string.problem_count),
                     problemNum
             ));
