@@ -131,6 +131,12 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         navHeaderEmail.setText(email);
     }
 
+    @Override
+    public void updateAccountLoadError() {
+        Toast.makeText(this, getResources().getString(R.string.care_provider_account_load_failure), Toast.LENGTH_LONG).show();
+
+    }
+
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
 
         @Override @NonNull

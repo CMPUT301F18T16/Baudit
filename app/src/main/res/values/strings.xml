@@ -7,6 +7,8 @@
     <string name="account_edit_commit_success">Successfully Committed Account Edits</string>
     <string name="account_edit_commit_failure">Failed to Commit Account Edits</string>
     <string name="assign_patient_scan_failure">Failed to Scan Valid Patient Account</string>
+    <string name="patient_account_load_failure">Failed to Load Patient Account</string>
+    <string name="care_provider_account_load_failure">Failed to Load Care Provider Account</string>
     <string name="problem_commit_success">Successfully Committed Problem</string>
     <string name="problem_commit_failure">Failed to Commit Problem</string>
     <string name="problem_map_error">Failed to Load Problem Map</string>

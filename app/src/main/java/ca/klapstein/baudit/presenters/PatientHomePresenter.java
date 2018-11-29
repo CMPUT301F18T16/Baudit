@@ -22,7 +22,7 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
         super(view, context);
         patient = dataManager.getLoggedInPatient();
         if (patient == null) {
-            // TODO: error
+            view.updateAccountLoadError();
         }
     }
 
@@ -32,7 +32,7 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
 
     public int getProblemCount() {
         if (patient == null || patient.getProblemTreeSet() == null) {
-            // TODO: error
+            view.updateAccountLoadError();
             return 0;
         } else {
             return patient.getProblemTreeSet().size();
@@ -48,7 +48,7 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
     public void viewStarted() {
         patient = dataManager.getLoggedInPatient();
         if (patient == null) {
-            // TODO: error
+            view.updateAccountLoadError();
         } else {
             view.updateUsernameDisplay(patient.getUsername().toString());
             view.updateEmailDisplay(patient.getContactInfo().getEmail().toString());

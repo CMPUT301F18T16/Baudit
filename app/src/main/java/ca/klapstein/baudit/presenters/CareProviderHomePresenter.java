@@ -26,7 +26,7 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {
         if (careProvider == null || careProvider.getAssignedPatientTreeSet() == null) {
-            // TODO: error
+            view.updateAccountLoadError();
         } else {
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
             rowView.updatePatientNameText(patient.getUsername().toString());
@@ -37,7 +37,7 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
     public int getPatientCount() {
         if (careProvider == null || careProvider.getAssignedPatientTreeSet() == null) {
-            // TODO: error
+            view.updateAccountLoadError();
             return 0;
         } else {
             return careProvider.getAssignedPatientTreeSet().size();
@@ -47,7 +47,7 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
     public void viewStarted() {
         careProvider = dataManager.getLoggedInCareProvider();
         if (careProvider == null) {
-            // TODO: error
+            view.updateAccountLoadError();
         } else {
             view.updateUsernameDisplay(careProvider.getUsername().toString());
             view.updateEmailDisplay(careProvider.getContactInfo().getEmail().toString());
