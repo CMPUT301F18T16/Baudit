@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.util.Log;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -13,6 +14,8 @@ import ca.klapstein.baudit.views.RecordView;
  * @see RecordView
  */
 public class RecordPresenter extends Presenter<RecordView> {
+
+    private static final String TAG = "RecordPresenter";
 
     private final Patient patient;
     private Record record;
@@ -72,6 +75,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {
+            Log.e(TAG, "failed saving Record", e);
             view.commitRecordFailure();
         }
     }
