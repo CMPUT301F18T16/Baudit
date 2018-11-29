@@ -23,10 +23,11 @@ import ca.klapstein.baudit.views.EditAccountView;
 public class EditAccountActivity extends AppCompatActivity implements EditAccountView {
 
     private EditAccountPresenter presenter;
-    private EditText emailInput;
-    private EditText phoneNumberInput;
+
     private EditText firstNameInput;
     private EditText lastNameInput;
+    private EditText emailInput;
+    private EditText phoneNumberInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,9 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
         Toolbar toolbar = findViewById(R.id.edit_account_toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(R.string.edit_account);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.edit_account);
+        }
 
         presenter = new EditAccountPresenter(this, getApplicationContext());
 
