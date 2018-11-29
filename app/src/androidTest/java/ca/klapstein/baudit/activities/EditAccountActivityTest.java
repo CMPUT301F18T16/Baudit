@@ -88,7 +88,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.enterText((EditText) solo.getView(R.id.edit_account_first_name_input), "Bobby");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -103,7 +103,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.enterText((EditText) solo.getView(R.id.edit_account_last_name_input), "Smith");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -118,7 +118,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.enterText((EditText) solo.getView(R.id.edit_account_email_input), "foobar@example.com");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -131,12 +131,12 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_email_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_email_input), "not a email");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+
+        Thread.sleep(5000);
         assertEquals(
                 getActivity().getResources().getString(R.string.email_error),
                 ((TextView) solo.getView(R.id.edit_account_email_error)).getText().toString()
         );
-
-        Thread.sleep(1000);
         // ensure we have not committed invalid changes
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -150,7 +150,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.enterText((EditText) solo.getView(R.id.edit_account_phone_number_input), "222-222-2222");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -168,7 +168,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
                 ((TextView) solo.getView(R.id.edit_account_phone_number_error)).getText().toString()
         );
 
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         // ensure we have not committed invalid changes
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
