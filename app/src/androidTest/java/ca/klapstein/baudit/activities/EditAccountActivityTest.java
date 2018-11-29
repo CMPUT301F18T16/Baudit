@@ -148,7 +148,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_phone_number_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_phone_number_input), "222-222-2222");
-        solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+        solo.clickOnView(solo.getButton("Save"));
 
         Thread.sleep(5000);
 
