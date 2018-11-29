@@ -189,6 +189,6 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        return date.compareTo(record.getDate());
+        return title.compareTo(record.getTitle());
     }
 }

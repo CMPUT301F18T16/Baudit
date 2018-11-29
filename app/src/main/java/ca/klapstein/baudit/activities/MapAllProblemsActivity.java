@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.ContactInfo;
 import ca.klapstein.baudit.data.Email;
@@ -130,32 +132,50 @@ public class MapAllProblemsActivity extends AppCompatActivity
             Username testUsername = new Username("ThisIsATest");
             ContactInfo testContactInfo = new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234"));
             Patient patient = new Patient(testUsername, testContactInfo);
-            // add problems to the new patient's problem tree set
+
             ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
+
             Problem problem1 = new Problem("First problem","I can't feel my face");
-            RecordTreeSet recordTreeSet = problem1.getRecordTreeSet();
-            // add records to the problems recordtreeset
-            Record record1 = new Record("First occurrence","This first happened on a Friday");
-            record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
-            Record record2 = new Record("Second occurrence", "This happened on a Saturday");
-            recordTreeSet.add(record1);
-            recordTreeSet.add(record2);
-            problemTreeSet.add(problem1);
-            // add problems to the new patient's problem tree set
             Problem problem2 = new Problem("Second problem","I still can't feel my face");
+
+            RecordTreeSet recordTreeSet1 = problem1.getRecordTreeSet();
             RecordTreeSet recordTreeSet2 = problem2.getRecordTreeSet();
-            // add records to the problems recordtreeset
-            Record record3 = new Record("First occurrence","This again on Saturday");
-            record1.setGeoLocation(new GeoLocation(53.527288, -113.529346));
-            Record record4 = new Record("Second occurrence", "This happened on a Sunday");
+
+            Record record1 = new Record("First occurrence","This first happened on a Friday");
+            Record record2 = new Record("Second occurrence", "This happened on a Saturday");
+            Record record3 = new Record("Third occurrence","This again on Saturday");
+            Record record4 = new Record("Fourth occurrence", "This happened on a Sunday");
+
+            record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
+            record2.setGeoLocation(new GeoLocation(53.522849, -113.622665));
+            record3.setGeoLocation(new GeoLocation(53.527288, -113.529346));
+            record4.setGeoLocation(new GeoLocation(53.515232, -113.481288));
+
+            recordTreeSet1.add(record1);
+            recordTreeSet1 = problem1.getRecordTreeSet();
+            Log.d("TEST: recordTreeSet1", Integer.toString(recordTreeSet1.size()));
+            recordTreeSet1.add(record2);
+            problem1.setRecordTreeSet(recordTreeSet1);
+
+
+            recordTreeSet2.add(record3);
             recordTreeSet2.add(record4);
+            problem2.setRecordTreeSet(recordTreeSet2);
+            Log.d("TEST: recordTreeSet1", Integer.toString(recordTreeSet1.size()));
+            Log.d("TEST: recordTreeSet2", Integer.toString(recordTreeSet2.size()));
+
+            problem2.setRecordTreeSet(recordTreeSet2);
+            problemTreeSet.add(problem1);
             problemTreeSet.add(problem2);
+            Log.d("TEST: problemTreeSet", Integer.toString(problemTreeSet.size()));
+
             //iterate over the ProblemTreeSet's RecordTreeSet and post markers
+            LatLng edmonton = new LatLng(53.5408, -113.4926);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(edmonton));
             for (Problem problem:problemTreeSet) {
-                RecordTreeSet thisRecordTreeSet = problem.getRecordTreeSet();
-                for (Record record : thisRecordTreeSet) {
+                for (Record record : problem.getRecordTreeSet()) {
                     LatLng marker = new LatLng(record.getGeoLocation().getLat(), record.getGeoLocation().getLon());
-                    googleMap.addMarker(new MarkerOptions().position(marker).title("test"));
+                    googleMap.addMarker(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()));
                 }
             }
     }
