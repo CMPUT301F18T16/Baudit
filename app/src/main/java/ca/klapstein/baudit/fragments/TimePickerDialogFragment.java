@@ -5,12 +5,12 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import ca.klapstein.baudit.activities.ProblemActivity;
 
 import java.util.Calendar;
 
-import ca.klapstein.baudit.activities.ProblemActivity;
-
 public class TimePickerDialogFragment extends DialogFragment {
+    public static final String TAG = "timePicker";
 
     private static final String HOUR = "hour";
     private static final String MINUTES = "minutes";

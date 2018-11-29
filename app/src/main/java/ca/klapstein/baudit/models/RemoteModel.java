@@ -5,7 +5,6 @@ import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PatientTreeSet;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -30,8 +29,8 @@ import java.util.List;
  */
 class RemoteModel {
     private static final String TAG = "RemoteModel";
-    private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
 
+    private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
     // TODO: switch to PROD URL on release
     private static final String REMOTE_PROD_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16/";
 
@@ -147,35 +146,6 @@ class RemoteModel {
                 return null;
             }
             return patientArrayList.get(0);
-        }
-    }
-
-    /**
-     * Get all {@code Patient}s contained within the remote ElasticSearch.
-     * Return them as a {@code PatientTreeSet}.
-     */
-    public static class GetPatients extends AsyncTask<String, Void, PatientTreeSet> {
-        @Override
-        protected PatientTreeSet doInBackground(String... search_parameters) {
-            JestDroidClient client = createClient();
-            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
-            PatientTreeSet patientTreeSet = new PatientTreeSet();
-            Search search = new Search.Builder(search_parameters[0])
-                    .addIndex(PATIENT_INDEX)
-                    .build();
-            Log.d(TAG, "search json: " + search.toString());
-            try {
-                JestResult result = client.execute(search);
-
-                if (result.isSucceeded()) {
-                    List<Patient> patientList;
-                    patientList = result.getSourceAsObjectList(Patient.class);
-                    patientTreeSet.addAll(patientList);
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "failed to get patients from remote", e);
-            }
-            return patientTreeSet;
         }
     }
 

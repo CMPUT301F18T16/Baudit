@@ -18,10 +18,8 @@ public class PreferencesModelTest {
      * Clear Android's shared preferences for Baudit.
      */
     private void clearPrefs() {
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
         PreferencesModel.saveSharedPreferencesPatient(context, null);
         PreferencesModel.saveSharedPreferencesCareProvider(context, null);
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
     }
 
     @Before
@@ -34,25 +32,6 @@ public class PreferencesModelTest {
     public void tearDown() {
         clearPrefs();
         context = null;
-    }
-
-    @Test
-    public void saveSharedPreferencesPatientTreeSet() {
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, new PatientTreeSet());
-    }
-
-    @Test
-    public void loadSharedPreferencesPatientTreeSet() {
-        this.saveSharedPreferencesPatientTreeSet();
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        assertNotNull(patientTreeSet);
-    }
-
-    @Test
-    public void loadSharedPreferencesEmptyPatientTreeSet() {
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, null);
-        PatientTreeSet patientTreeSet = PreferencesModel.loadSharedPreferencesPatientTreeSet(context);
-        assertNotNull(patientTreeSet);
     }
 
     @Test
@@ -74,7 +53,7 @@ public class PreferencesModelTest {
 
     @Test
     public void saveSharedPreferencesLoginAccountPatient() {
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, new Patient(
+        PreferencesModel.saveSharedPreferencesPatient(context, new Patient(
                 new Username("TESTPatient1"),
                 new ContactInfo("Patient", "Zero", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         ));
@@ -82,7 +61,7 @@ public class PreferencesModelTest {
 
     @Test
     public void saveSharedPreferencesLoginAccountCareProvider() {
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, new CareProvider(
+        PreferencesModel.saveSharedPreferencesCareProvider(context, new CareProvider(
                 new Username("TESTCareProvider1"),
                 new ContactInfo("Doctor", "Strange", new Email("cp@example.com"), new PhoneNumber("111-111-1111"))
         ));
@@ -90,7 +69,7 @@ public class PreferencesModelTest {
     @Test
     public void loadSharedPreferencesLoginAccountPatient() {
         this.saveSharedPreferencesLoginAccountPatient();
-        Account account = PreferencesModel.loadSharedPreferencesLoginAccount(context);
+        Account account = PreferencesModel.loadSharedPreferencesPatient(context);
         assertNotNull(account);
         assertEquals("TESTPatient1", account.getUsername().toString());
     }
@@ -98,7 +77,7 @@ public class PreferencesModelTest {
     @Test
     public void loadSharedPreferencesLoginAccountCareProvider() {
         this.saveSharedPreferencesLoginAccountCareProvider();
-        Account account = PreferencesModel.loadSharedPreferencesLoginAccount(context);
+        Account account = PreferencesModel.loadSharedPreferencesCareProvider(context);
         assertNotNull(account);
         assertEquals("TESTCareProvider1", account.getUsername().toString());
     }
