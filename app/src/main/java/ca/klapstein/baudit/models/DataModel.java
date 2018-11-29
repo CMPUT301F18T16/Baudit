@@ -17,8 +17,8 @@ import java.util.concurrent.ExecutionException;
  * @see PreferencesModel
  */
 public class DataModel {
-
     private static final String TAG = "DataModel";
+
     private final Context context;
 
     public DataModel(Context context) {

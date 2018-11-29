@@ -30,8 +30,8 @@ import java.util.List;
  */
 class RemoteModel {
     private static final String TAG = "RemoteModel";
-    private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
 
+    private static final String REMOTE_TEST_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16test/";
     // TODO: switch to PROD URL on release
     private static final String REMOTE_PROD_URL = "http://cmput301.softwareprocess.es:8080/cmput301f18t16/";
 
