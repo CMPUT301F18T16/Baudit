@@ -24,7 +24,6 @@ public class RecordPresenter extends Presenter<RecordView> {
         super(view, context);
         // TODO: load patient via other method so that care provider can obtain record aswell
         patient = dataManager.getLoggedInPatient();
-
     }
 
     public void viewStarted(int problemId, int recordId) {
@@ -39,7 +38,6 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateTitleField("");
             record = new Record("Set title", "Set comment");
         } else { // If the record exists and is being edited
-            // TODO: Replace with real data once implemented
             record = (Record) problem.getRecordTreeSet().toArray()[recordId];
         }
         view.updateTitleField(record.getTitle());
