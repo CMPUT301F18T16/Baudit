@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
@@ -24,21 +25,27 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
+    private UUID recordID;
 
     public Record() {
         date = new Date();
+        recordID = UUID.randomUUID();
     }
 
     public Record(String title) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
+        recordID = UUID.randomUUID();
     }
 
     public Record(String title, String comment) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
         this.setComment(comment);
+        recordID = UUID.randomUUID();
     }
+
+    public UUID getRecordID(){return this.recordID;}
 
     // TODO: This check might not be needed because the UI limits the title length
     /**
@@ -189,6 +196,6 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        return title.compareTo(record.getTitle());
+        return recordID.compareTo(record.getRecordID());
     }
 }
