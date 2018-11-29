@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.views.EditAccountView;
 
@@ -12,6 +13,7 @@ import ca.klapstein.baudit.views.EditAccountView;
  */
 public class EditAccountPresenter extends Presenter<EditAccountView> {
 
+    private static final String TAG = "EditAccountPresenter";
     private Account account;
 
     public EditAccountPresenter(EditAccountView view, Context context) {
@@ -39,6 +41,7 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
             // TODO: Commit the new information
             view.commitAccountEditSuccess();
         } catch (IllegalArgumentException e) {
+            Log.e(TAG, "failed saving Account edits", e);
             view.commitAccountEditFailure();
         }
     }
