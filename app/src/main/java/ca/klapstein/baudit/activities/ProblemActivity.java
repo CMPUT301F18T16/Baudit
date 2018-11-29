@@ -152,14 +152,14 @@ public class ProblemActivity extends AppCompatActivity
     public void showDatePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DatePickerDialogFragment mDateFragment = DatePickerDialogFragment.newInstance(calendar);
-        mDateFragment.show(ft, "datePicker");
+        mDateFragment.show(ft, DatePickerDialogFragment.TAG);
     }
 
     @Override
     public void showTimePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TimePickerDialogFragment mTimeFragment = TimePickerDialogFragment.newInstance(calendar);
-        mTimeFragment.show(ft, "timePicker");
+        mTimeFragment.show(ft, TimePickerDialogFragment.TAG);
     }
 
     @Override
