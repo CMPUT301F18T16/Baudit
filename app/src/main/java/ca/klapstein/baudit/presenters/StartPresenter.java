@@ -2,11 +2,13 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.activities.CareProviderHomeActivity;
 import ca.klapstein.baudit.activities.PatientHomeActivity;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.views.LogoutView;
 import ca.klapstein.baudit.views.StartView;
 
@@ -49,6 +51,31 @@ public class StartPresenter extends Presenter<StartView> {
         } else {
             Log.e(TAG, "no offline login account or invalid account type for offline login");
             dataManager.clearOfflineLoginAccount();
+        }
+    }
+
+    /**
+     * Attempt a login with a given user/pass combination with the remote authentication server.
+     *
+     * @param username {@code String}
+     */
+    public void onQRCodeScanned(String username) {
+        try {
+            // get the account associated with the user and password
+            Account account = dataManager.validateLogin(new Username(username));
+            if (account instanceof Patient) {
+                dataManager.setOfflineLoginAccount(account);
+                view.onLoginValidationSuccess(PatientHomeActivity.class);
+            } else if (account instanceof CareProvider) {
+                dataManager.setOfflineLoginAccount(account);
+                view.onLoginValidationSuccess(CareProviderHomeActivity.class);
+            } else {  // else we have failed the login
+                // TODO: update text
+                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
+            }
+        } catch (IllegalArgumentException e) {
+            // TODO: update text
+            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
         }
     }
 }
