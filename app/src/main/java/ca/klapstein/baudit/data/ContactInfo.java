@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Contract;
  * @see Account
  */
 public class ContactInfo {
-
     private static final String TAG = "ContactInfo";
+
     @NonNull private String firstName;
     @NonNull private String lastName;
     @NonNull private Email email;
