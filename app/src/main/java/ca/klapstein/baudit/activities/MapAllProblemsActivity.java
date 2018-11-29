@@ -157,7 +157,6 @@ public class MapAllProblemsActivity extends AppCompatActivity
             recordTreeSet1.add(record2);
             problem1.setRecordTreeSet(recordTreeSet1);
 
-
             recordTreeSet2.add(record3);
             recordTreeSet2.add(record4);
             problem2.setRecordTreeSet(recordTreeSet2);

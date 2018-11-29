@@ -16,5 +16,5 @@ import java.util.UUID;
  */
 public class RecordTreeSet extends TreeSet<Record> {
     private static final String TAG = "RecordTreeSet";
-    private ArrayList<UUID> recordIDArrayList;
+    //private ArrayList<UUID> recordIDArrayList; TODO: optional creation of array list to track unique recordID's in a record tree
 }
