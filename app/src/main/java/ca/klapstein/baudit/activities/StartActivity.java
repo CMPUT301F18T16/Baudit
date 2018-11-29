@@ -19,9 +19,9 @@ import ca.klapstein.baudit.views.StartView;
  * functionality.
  */
 public class StartActivity extends AppCompatActivity implements StartView {
+    private static final String TAG = "StartActivity";
 
     private static final int REQUEST_CODE_QR_SCAN = 101;
-    private static final String TAG = "StartActivity";
 
     protected StartPresenter presenter;
 
