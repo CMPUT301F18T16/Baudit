@@ -164,11 +164,12 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void commitProblemFailure() {
-        // TODO:
+        Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void commitProblemSuccess() {
+        Toast.makeText(this, getResources().getString(R.string.problem_commit_success), Toast.LENGTH_LONG).show();
         finish();
     }
 
