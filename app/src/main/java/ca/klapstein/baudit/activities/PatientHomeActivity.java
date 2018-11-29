@@ -146,8 +146,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     }
 
     @Override
-    public void updateUsernameDisplay(String name) {
-        navHeaderUsername.setText(name);
+    public void updateUsernameDisplay(String username) {
+        navHeaderUsername.setText(username);
     }
 
     @Override

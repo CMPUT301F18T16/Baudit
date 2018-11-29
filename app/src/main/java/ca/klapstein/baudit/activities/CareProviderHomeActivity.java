@@ -113,8 +113,8 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
     }
 
     @Override
-    public void updateUsernameDisplay(String name) {
-        navHeaderUsername.setText(name);
+    public void updateUsernameDisplay(String username) {
+        navHeaderUsername.setText(username);
     }
 
     @Override
