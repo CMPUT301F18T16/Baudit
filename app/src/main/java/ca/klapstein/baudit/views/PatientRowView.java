@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.views;
 
 public interface PatientRowView extends View {
-    void setPatientNameText(String patientName);
-
-    void setPatientProblemNum(int problemNum);
+    void updatePatientProblemNum(int problemNum);
+    void updatePatientNameText(String patientName);
 }

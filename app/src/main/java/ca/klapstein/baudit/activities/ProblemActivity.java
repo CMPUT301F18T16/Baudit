@@ -152,23 +152,24 @@ public class ProblemActivity extends AppCompatActivity
     public void showDatePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DatePickerDialogFragment mDateFragment = DatePickerDialogFragment.newInstance(calendar);
-        mDateFragment.show(ft, "datePicker");
+        mDateFragment.show(ft, DatePickerDialogFragment.TAG);
     }
 
     @Override
     public void showTimePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TimePickerDialogFragment mTimeFragment = TimePickerDialogFragment.newInstance(calendar);
-        mTimeFragment.show(ft, "timePicker");
+        mTimeFragment.show(ft, TimePickerDialogFragment.TAG);
     }
 
     @Override
     public void commitProblemFailure() {
-        // TODO:
+        Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void commitProblemSuccess() {
+        Toast.makeText(this, getResources().getString(R.string.problem_commit_success), Toast.LENGTH_LONG).show();
         finish();
     }
 
