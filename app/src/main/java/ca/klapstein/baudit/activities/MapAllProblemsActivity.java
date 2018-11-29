@@ -171,7 +171,7 @@ public class MapAllProblemsActivity extends AppCompatActivity
 
             //iterate over the ProblemTreeSet's RecordTreeSet and post markers
             LatLng edmonton = new LatLng(53.5408, -113.4926);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(edmonton));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton,10.0f));
             for (Problem problem:problemTreeSet) {
                 for (Record record : problem.getRecordTreeSet()) {
                     LatLng marker = new LatLng(record.getGeoLocation().getLat(), record.getGeoLocation().getLon());
