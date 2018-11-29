@@ -37,6 +37,16 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            presenter.viewStarted(getArguments().getString("username", ""));
+        } else {
+            setViewAccountError();
+        }
+    }
+
+    @Override
     public void updateUsernameDisplay() {
 
     }
