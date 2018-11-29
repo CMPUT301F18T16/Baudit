@@ -1,15 +1,15 @@
 package ca.klapstein.baudit.views;
 
 public interface ViewAccountView extends View {
-    void updateUsernameDisplay();
+    void updateUsernameDisplay(String username);
 
-    void updateFirstNameDisplay();
+    void updateFirstNameDisplay(String firstName);
 
-    void updateLastNameDisplay();
+    void updateLastNameDisplay(String lastName);
 
-    void updateEmailDisplay();
+    void updateEmailDisplay(String email);
 
-    void updatePhoneNumberDisplay();
+    void updatePhoneNumberDisplay(String phoneNumber);
 
     void updateViewAccountError();
 }

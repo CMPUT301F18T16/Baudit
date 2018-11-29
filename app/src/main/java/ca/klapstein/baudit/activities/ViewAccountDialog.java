@@ -42,32 +42,32 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
         if (getArguments() != null) {
             presenter.viewStarted(getArguments().getString("username", ""));
         } else {
-            setViewAccountError();
+            updateViewAccountError();
         }
     }
 
     @Override
-    public void updateUsernameDisplay() {
+    public void updateUsernameDisplay(String username) {
 
     }
 
     @Override
-    public void updateFirstNameDisplay() {
+    public void updateFirstNameDisplay(String firstName) {
 
     }
 
     @Override
-    public void updateLastNameDisplay() {
+    public void updateLastNameDisplay(String lastName) {
 
     }
 
     @Override
-    public void updateEmailDisplay() {
+    public void updateEmailDisplay(String email) {
 
     }
 
     @Override
-    public void updatePhoneNumberDisplay() {
+    public void updatePhoneNumberDisplay(String phoneNumber) {
 
     }
 

@@ -17,11 +17,13 @@ public class ViewAccountPresenter extends Presenter<ViewAccountView> {
             account = dataManager.getCareProvider(new Username(username));
         }
         if (account != null) {
-            view.setUsername(account.getUsername().toString());
-            view.setEmail(account.getContactInfo().getEmail().toString());
-            view.setPhoneNumber(account.getContactInfo().getPhoneNumber().toString());
+            view.updateUsernameDisplay(account.getUsername().toString());
+            view.updateFirstNameDisplay(account.getContactInfo().getFirstName());
+            view.updateLastNameDisplay(account.getContactInfo().getLastName());
+            view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
+            view.updatePhoneNumberDisplay(account.getContactInfo().getPhoneNumber().toString());
         } else {
-            view.setViewAccountError();
+            view.updateViewAccountError();
         }
     }
 }
