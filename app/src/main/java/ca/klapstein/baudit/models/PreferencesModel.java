@@ -69,7 +69,7 @@ class PreferencesModel {
     @Nullable
     public static Patient loadSharedPreferencesPatient(Context context) {
         Patient patient;
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
 
         String json = mPrefs.getString(PATIENT_PREF_JSON_KEY, "");
@@ -105,7 +105,7 @@ class PreferencesModel {
     @Nullable
     public static CareProvider loadSharedPreferencesCareProvider(Context context) {
         CareProvider careProvider;
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Gson gson = new Gson();
 
         String json = mPrefs.getString(CAREPROVIDER_PREF_JSON_KEY, "");

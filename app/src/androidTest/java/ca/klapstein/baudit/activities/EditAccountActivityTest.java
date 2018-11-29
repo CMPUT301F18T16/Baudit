@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
-import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
@@ -78,17 +77,15 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         assertEquals(account.getContactInfo().getLastName(), lastNameInput.getText().toString());
         assertEquals(account.getContactInfo().getEmail().toString(), emailInput.getText().toString());
         assertEquals(account.getContactInfo().getPhoneNumber().toString(), phoneNumberInput.getText().toString());
-
     }
 
     @Test
-    public void testEditAccountFirstName() throws InterruptedException {
+    public void testEditAccountFirstName() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_first_name_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_first_name_input), "Bobby");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
-
-        Thread.sleep(5000);
+        solo.waitForActivity(solo.getCurrentActivity().toString());
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -97,13 +94,12 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
-    public void testEditAccountLastName() throws InterruptedException {
+    public void testEditAccountLastName() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_last_name_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_last_name_input), "Smith");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
-
-        Thread.sleep(5000);
+        solo.waitForActivity(solo.getCurrentActivity().toString());
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -112,13 +108,12 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
-    public void testEditAccountEmail() throws InterruptedException {
+    public void testEditAccountEmail() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_email_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_email_input), "foobar@example.com");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
-
-        Thread.sleep(5000);
+        solo.waitForActivity(solo.getCurrentActivity().toString());
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -126,17 +121,13 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
-    public void testEditAccountEmailInvalid() throws InterruptedException {
+    public void testEditAccountEmailInvalid() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_email_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_email_input), "not a email");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+        solo.waitForText(getActivity().getResources().getString(R.string.email_error));
 
-        Thread.sleep(5000);
-        assertEquals(
-                getActivity().getResources().getString(R.string.email_error),
-                ((TextView) solo.getView(R.id.edit_account_email_error)).getText().toString()
-        );
         // ensure we have not committed invalid changes
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -144,13 +135,12 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
-    public void testEditAccountPhoneNumber() throws InterruptedException {
+    public void testEditAccountPhoneNumber() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_phone_number_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_phone_number_input), "222-222-2222");
-        solo.clickOnView(solo.getButton("Save"));
-
-        Thread.sleep(5000);
+        solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+        solo.waitForActivity(solo.getCurrentActivity().toString());
 
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
@@ -158,17 +148,13 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
-    public void testEditAccountPhoneNumberInvalid() throws InterruptedException {
+    public void testEditAccountPhoneNumberInvalid() {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_phone_number_input));
         solo.enterText((EditText) solo.getView(R.id.edit_account_phone_number_input), "not a phone number");
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
-        assertEquals(
-                getActivity().getResources().getString(R.string.phone_number_error),
-                ((TextView) solo.getView(R.id.edit_account_phone_number_error)).getText().toString()
-        );
+        solo.waitForText(getActivity().getResources().getString(R.string.phone_number_error));
 
-        Thread.sleep(5000);
         // ensure we have not committed invalid changes
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
