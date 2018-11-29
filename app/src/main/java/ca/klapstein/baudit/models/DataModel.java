@@ -31,6 +31,9 @@ public class DataModel {
     public <T extends Account> void setOfflineLoginAccount(@NonNull T account) {
         Log.i(TAG, "setting LoginAccount: " + account.getUsername().toString());
 
+        // clear the login account saved state first
+        clearOfflineLoginAccount();
+
         // Save the specific account type to shared prefs if applicable
         if (account instanceof Patient){
             PreferencesModel.saveSharedPreferencesPatient(context, (Patient) account);
@@ -49,19 +52,18 @@ public class DataModel {
 
     @Nullable
     public Patient getLoggedInPatient() {
-        Account account = PreferencesModel.loadSharedPreferencesPatient(context);
-
-        if (account != null) {
-            return getPatient(account.getUsername());
+        Patient patient = PreferencesModel.loadSharedPreferencesPatient(context);
+        if (patient != null) {
+            return getPatient(patient.getUsername());
         }
         return null;
     }
 
     @Nullable
     public CareProvider getLoggedInCareProvider() {
-        Account account = PreferencesModel.loadSharedPreferencesCareProvider(context);
-        if (account != null) {
-            return getCareProvider(account.getUsername());
+        CareProvider careProvider = PreferencesModel.loadSharedPreferencesCareProvider(context);
+        if (careProvider != null) {
+            return getCareProvider(careProvider.getUsername());
         }
         return null;
     }
