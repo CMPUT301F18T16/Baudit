@@ -133,8 +133,8 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
 
         Thread.sleep(1000);
 
-        Account accountNew = dataModel.getLoggedInAccount();
-        assertNotNull(accountNew);
-        assertEquals(new PhoneNumber("222-222-2222"), accountNew.getContactInfo().getPhoneNumber());
+        Account account = dataModel.getLoggedInAccount();
+        assertNotNull(account);
+        assertEquals(new PhoneNumber("222-222-2222"), account.getContactInfo().getPhoneNumber());
     }
 }
