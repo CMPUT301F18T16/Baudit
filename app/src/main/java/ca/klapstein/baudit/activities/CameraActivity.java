@@ -108,10 +108,12 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
     @Override
     public void commitAddPhoto(){
         //TODO: add to remote and local
+        /*
         if(recordPhoto){
         }
         else{
             // a body photo
         }
+        */
     }
 }

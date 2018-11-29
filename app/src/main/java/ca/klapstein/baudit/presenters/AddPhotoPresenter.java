@@ -14,7 +14,7 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
         // TODO:
         if (bitmap != null) {
             Bitmap emptyBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
-            if (bitmap != emptyBitmap)
+            if (!bitmap.equals(emptyBitmap))
                 return true;
         }
         return false;

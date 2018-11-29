@@ -22,9 +22,9 @@ public class Record implements Comparable<Record> {
     private String title;
     private String comment;
     private GeoLocation geoLocation;
-    private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
-    private ArrayList<String> keywords = new ArrayList<>();
-    private ArrayList<RecordPhoto> photos = new ArrayList<>();
+    private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<BodyPhotoCoords>();
+    private ArrayList<String> keywords = new ArrayList<String>();
+    private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
 
     public Record() {
         date = new Date();
