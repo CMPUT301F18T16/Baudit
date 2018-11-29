@@ -37,7 +37,7 @@ public class SlideShowDialog extends DialogFragment implements SlideShowView {
     }
 
     @Override
-    public void setImages(ArrayList<Bitmap> images) {
+    public void updateImageList(ArrayList<Bitmap> images) {
 
     }
 }

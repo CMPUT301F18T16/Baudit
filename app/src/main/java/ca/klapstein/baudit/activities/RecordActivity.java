@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
@@ -88,17 +85,13 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     }
 
     @Override
-    public void commitRecord() {
-        presenter.commitRecord();
-    }
-
-    @Override
     public void commitRecordFailure() {
-        // TODO: fail message
+        Toast.makeText(this, getResources().getString(R.string.record_commit_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void commitRecordSuccess() {
+        Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
     }
 
