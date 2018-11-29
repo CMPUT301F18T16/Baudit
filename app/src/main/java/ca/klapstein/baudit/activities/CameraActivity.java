@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,6 +21,14 @@ import java.util.Date;
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.BodyPhoto;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Problem;
+import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordPhoto;
+import ca.klapstein.baudit.data.RecordTreeSet;
+import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.presenters.AddPhotoPresenter;
 import ca.klapstein.baudit.views.AddPhotoView;
 
@@ -51,6 +60,7 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
             try {
                 photoFile = createFile();
             } catch (IOException ex) {
+                Log.e("CameraActivity", "Couldn't Create File");
             }
 
             // Continue only if the File was successfully created
@@ -87,11 +97,13 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
         if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
             String filePath = photoFile.getPath();
             imageBitmap = BitmapFactory.decodeFile(filePath);
-            if(presenter.ValidatePhoto(imageBitmap))
-                setPhoto(imageBitmap);
+            if (!presenter.ValidatePhoto(imageBitmap))
+                setPhotoError();
+            imageView.setImageBitmap(imageBitmap);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    setPhoto(imageBitmap);
                     commitAddPhoto();
                 }
             });
@@ -100,7 +112,23 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
     }
 
     @Override
-    public void setPhoto(Bitmap bitmap){ imageView.setImageBitmap(imageBitmap); }
+    public void setPhoto(Bitmap bitmap){
+
+        DataModel dataManager = new DataModel(this);
+        Patient patient = dataManager.getLoggedInPatient();
+        if(recordPhoto){
+            RecordPhoto recordPhoto = new RecordPhoto(bitmap);
+            int problemId = getIntent().getIntExtra("probemId", 0);
+            int recordId = getIntent().getIntExtra("recordId", 0);
+            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            //Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
+            //record.addPhoto(recordPhoto);
+
+        } else {
+            BodyPhoto bodyPhoto = new BodyPhoto(bitmap);
+            patient.setBodyPhoto(bodyPhoto);
+        }
+    }
 
     @Override
     public void setPhotoError(){ finish(); }
@@ -108,12 +136,5 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
     @Override
     public void commitAddPhoto(){
         //TODO: add to remote and local
-        /*
-        if(recordPhoto){
-        }
-        else{
-            // a body photo
-        }
-        */
     }
 }
