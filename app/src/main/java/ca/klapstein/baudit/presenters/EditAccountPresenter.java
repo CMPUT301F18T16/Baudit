@@ -27,10 +27,10 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
     public void viewStarted() {
         account = dataManager.getLoggedInAccount();
         if (account != null) {
-            view.setFirstName(account.getContactInfo().getFirstName());
-            view.setLastName(account.getContactInfo().getLastName());
-            view.setEmail(account.getContactInfo().getEmail().toString());
-            view.setPhoneNumber(account.getContactInfo().getPhoneNumber().toString());
+            view.updateFirstNameField(account.getContactInfo().getFirstName());
+            view.updateLastNameField(account.getContactInfo().getLastName());
+            view.updateEmailField(account.getContactInfo().getEmail().toString());
+            view.updatePhoneNumberField(account.getContactInfo().getPhoneNumber().toString());
         } else {
             // TODO: error
         }

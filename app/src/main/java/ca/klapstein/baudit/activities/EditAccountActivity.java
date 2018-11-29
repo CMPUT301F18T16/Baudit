@@ -82,24 +82,24 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     }
 
     @Override
-    public void setFirstName(String firstName) {
+    public void updateFirstNameField(String firstName) {
         firstNameInput.setText(firstName);
 
     }
 
     @Override
-    public void setLastName(String lastName) {
+    public void updateLastNameField(String lastName) {
         lastNameInput.setText(lastName);
     }
 
     @Override
-    public void setEmail(String email) {
+    public void updateEmailField(String email) {
         emailInput.setText(email);
 
     }
 
     @Override
-    public void setPhoneNumber(String phoneNumber) {
+    public void updatePhoneNumberField(String phoneNumber) {
         phoneNumberInput.setText(phoneNumber);
     }
 

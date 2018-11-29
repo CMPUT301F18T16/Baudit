@@ -9,7 +9,6 @@ import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Username;
-import ca.klapstein.baudit.views.LogoutView;
 import ca.klapstein.baudit.views.StartView;
 
 /**
@@ -18,7 +17,6 @@ import ca.klapstein.baudit.views.StartView;
  * Provides the controlling logic for logging in a {@code Account} into the application and remote.
  *
  * @see Account
- * @see LogoutView
  */
 public class StartPresenter extends Presenter<StartView> {
     private static String TAG = "StartPresenter";
