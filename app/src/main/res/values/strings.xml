@@ -4,6 +4,8 @@
     <string name="splash_image_content_description">Logo Splash Image</string>
     <string name="enter_username">Enter username</string>
     <string name="enter_password">Enter password</string>
+    <string name="account_edit_commit_success">Successfully Committed Account Edits</string>
+    <string name="account_edit_commit_failure">Failed to Commit Account Edits</string>
     <string name="log_out">Log out</string>
     <string name="sign_up">Sign up</string>
     <string name="log_in_as_patient">Log in as Patient</string>

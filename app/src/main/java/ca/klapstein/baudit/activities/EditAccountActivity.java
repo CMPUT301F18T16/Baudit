@@ -105,12 +105,12 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
     @Override
     public void commitAccountEditFailure() {
-        Toast.makeText(this, "Failed to Commit Account Edits", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.account_edit_commit_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void commitAccountEditSuccess() {
-        Toast.makeText(this, "Successfully Committed Account Edits", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.account_edit_commit_success), Toast.LENGTH_LONG).show();
         finish();
     }
 }
