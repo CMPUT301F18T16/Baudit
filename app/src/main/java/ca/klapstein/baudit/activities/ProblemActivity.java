@@ -49,7 +49,7 @@ public class ProblemActivity extends AppCompatActivity
     private TextView descriptionView;
     private EditText descriptionInput;
     private TextView recordsLabel;
-    private Button commitButton;
+    private Calendar problemTime = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +57,51 @@ public class ProblemActivity extends AppCompatActivity
         setContentView(R.layout.activity_problem);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         problemPosition = getIntent().getIntExtra("problemPosition", -1);
         String mode = getIntent().getStringExtra("mode");
 
         presenter = new ProblemPresenter(this, getApplicationContext());
 
+        titleView = findViewById(R.id.problem_title_view);
+        titleInput = findViewById(R.id.problem_title_edit_text);
+
+        descriptionView = findViewById(R.id.problem_description_view);
+        descriptionInput = findViewById(R.id.problem_description_edit_text);
+
+        Button cancelButton = findViewById(R.id.problem_cancel_button);
+        Button saveButton = findViewById(R.id.problem_save_button);
+
+        // Set view visibility based on what mode we are in
         if (mode.equals("view")) {
+            getSupportActionBar().setTitle(R.string.view_problem);
 
+            titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
+
+            descriptionView.setVisibility(View.VISIBLE);
+            descriptionInput.setVisibility(View.GONE);
+
+            cancelButton.setVisibility(View.GONE);
+            saveButton.setVisibility(View.GONE);
         } else if (mode.equals("edit")) {
+            if (problemPosition == -1) {
+                getSupportActionBar().setTitle(R.string.new_problem);
+            } else {
+                getSupportActionBar().setTitle(R.string.edit_problem);
+            }
 
+
+            titleView.setVisibility(View.GONE);
+            titleInput.setVisibility(View.VISIBLE);
+
+            descriptionView.setVisibility(View.GONE);
+            descriptionInput.setVisibility(View.VISIBLE);
+
+            cancelButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
         }
-        initTitleViews();
 
         dateButton = findViewById(R.id.problem_date_button);
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -86,15 +119,23 @@ public class ProblemActivity extends AppCompatActivity
             }
         });
 
-        commitButton = findViewById(R.id.problem_commit_button);
-        commitButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.commitProblem();
+                onBackPressed();
             }
         });
 
-        initDescriptionViews();
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.commitProblem(
+                    titleInput.getText().toString(),
+                    descriptionInput.getText().toString(),
+                    problemTime.getTime()
+                );
+            }
+        });
 
         recordsLabel = findViewById(R.id.problem_records_label);
 
@@ -125,13 +166,8 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void updateTitleField(String title) {
-        if (title.isEmpty()) {
-            getSupportActionBar().setTitle(R.string.new_problem);
-        } else {
-            getSupportActionBar().setTitle(title);
-        }
-
         titleView.setText(title);
+        titleInput.setText(title);
     }
 
     @Override
@@ -147,6 +183,7 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void updateDescriptionField(String description) {
         descriptionView.setText(description);
+        descriptionInput.setText(description);
     }
 
     @Override
@@ -176,21 +213,19 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         DateFormat mDateFormat = DateFormat.getDateInstance();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        String dateForButton = mDateFormat.format(calendar.getTime());
+        problemTime.set(Calendar.YEAR, year);
+        problemTime.set(Calendar.MONTH, month);
+        problemTime.set(Calendar.DAY_OF_MONTH, day);
+        String dateForButton = mDateFormat.format(problemTime.getTime());
         updateDateButton(dateForButton);
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        String timeForButton = mTimeFormat.format(calendar.getTime());
+        problemTime.set(Calendar.HOUR_OF_DAY, hour);
+        problemTime.set(Calendar.MINUTE, minute);
+        String timeForButton = mTimeFormat.format(problemTime.getTime());
         updateTimeButton(timeForButton);
     }
 
@@ -199,42 +234,6 @@ public class ProblemActivity extends AppCompatActivity
             getResources().getString(R.string.records_label),
             presenter.getRecordCount()
         ));
-    }
-
-    private void initTitleViews() {
-        titleView = findViewById(R.id.problem_title_view);
-        titleInput = findViewById(R.id.problem_title_edit_text);
-    }
-
-    private void initDescriptionViews() {
-        descriptionView = findViewById(R.id.problem_description_view);
-        descriptionInput = findViewById(R.id.problem_description_edit_text);
-    }
-
-    private void setTitleEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_problem));
-            titleInput.setText(titleView.getText().toString());
-            titleInput.setVisibility(View.VISIBLE);
-            titleView.setVisibility(View.GONE);
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            titleInput.setVisibility(View.GONE);
-            titleView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void setDescriptionEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_problem));
-            descriptionInput.setText(descriptionView.getText().toString());
-            descriptionInput.setVisibility(View.VISIBLE);
-            descriptionView.setVisibility(View.GONE);
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            descriptionInput.setVisibility(View.GONE);
-            descriptionView.setVisibility(View.VISIBLE);
-        }
     }
 
     private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {

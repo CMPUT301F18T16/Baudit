@@ -9,6 +9,7 @@ import ca.klapstein.baudit.views.ProblemView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -17,9 +18,10 @@ import java.util.Calendar;
  * @see ProblemView
  */
 public class ProblemPresenter extends Presenter<ProblemView> {
-    private static final String TAG = "ProblemPresenter";
-    private Patient patient;
 
+    private static final String TAG = "ProblemPresenter";
+
+    private Patient patient;
     private Problem problem;
 
     public ProblemPresenter(ProblemView view, Context context) {
@@ -60,35 +62,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return problem.getRecordTreeSet().size();
     }
 
-    /**
-     * Validate and save the given title to a {@code Problem} to be added/edited.
-     *
-     * @param newTitle {@code String}
-     */
-    public void saveTitleClicked(String newTitle) {
-        try {
-            problem.setTitle(newTitle);
-            view.updateTitleField(newTitle);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
+    public void commitProblem(String title, String description, Date date) {
+        problem.setTitle(title);
+        problem.setDescription(description);
+        problem.setDate(date);
 
-    /**
-     * Validate and save the given description to a {@code Problem} to be added/edited.
-     *
-     * @param newDescription {@code String}
-     */
-    public void saveDescriptionClicked(String newDescription) {
-        try {
-            problem.setDescription(newDescription);
-            view.updateDescriptionField(newDescription);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
-
-    public void commitProblem() {
         try {
             patient.getProblemTreeSet().add(problem);
             dataManager.commitPatient(patient);

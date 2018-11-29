@@ -44,6 +44,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
