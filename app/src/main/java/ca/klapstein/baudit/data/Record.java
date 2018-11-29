@@ -25,25 +25,27 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
-    private UUID recordId;
+    private UUID recordID;
 
     public Record() {
         date = new Date();
-        recordId = UUID.randomUUID();
+        recordID = UUID.randomUUID();
     }
 
     public Record(String title) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
-        recordId = UUID.randomUUID();
+        recordID = UUID.randomUUID();
     }
 
     public Record(String title, String comment) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
         this.setComment(comment);
-        recordId = UUID.randomUUID();
+        recordID = UUID.randomUUID();
     }
+
+    public UUID getRecordID(){return this.recordID;}
 
     // TODO: This check might not be needed because the UI limits the title length
     /**
