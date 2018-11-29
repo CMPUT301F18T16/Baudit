@@ -134,8 +134,13 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         @Override
         public void onBindViewHolder(@NonNull PatientViewHolder viewHolder, int i) {
             presenter.onBindPatientRowViewAtPosition(viewHolder, i);
+            viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO:
+                }
+            });
         }
-
         @Override
         public int getItemCount() {
             return presenter.getPatientCount();
