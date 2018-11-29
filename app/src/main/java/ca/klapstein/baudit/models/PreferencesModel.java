@@ -52,7 +52,7 @@ class PreferencesModel {
         String json = gson.toJson(object);
         Log.d(TAG, "saved " + JSONKey + " json: " + json);
         prefsEditor.putString(JSONKey, json);
-        prefsEditor.commit();
+        prefsEditor.apply();
     }
 
     public static void saveSharedPreferencesLoginAccount(Context context, Account account) {
