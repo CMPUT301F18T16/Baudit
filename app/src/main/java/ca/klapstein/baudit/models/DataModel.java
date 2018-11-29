@@ -4,7 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import ca.klapstein.baudit.data.*;
+import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Username;
 import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutionException;
@@ -25,21 +28,14 @@ public class DataModel {
         this.context = context;
     }
 
-    @Nullable
-    private Account getOfflineLoginAccount() {
-        return PreferencesModel.loadSharedPreferencesLoginAccount(context);
-    }
-
     public <T extends Account> void setOfflineLoginAccount(@NonNull T account) {
         Log.i(TAG, "setting LoginAccount: " + account.getUsername().toString());
 
         // Save the specific account type to shared prefs if applicable
         if (account instanceof Patient){
             PreferencesModel.saveSharedPreferencesPatient(context, (Patient) account);
-            PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
         } else if (account instanceof CareProvider){
             PreferencesModel.saveSharedPreferencesCareProvider(context, (CareProvider) account);
-            PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
         } else {
             Log.e(TAG, "abstract account type: " + account.getClass().getSimpleName() + " not saving as offline login account");
         }
@@ -47,14 +43,14 @@ public class DataModel {
 
     public void clearOfflineLoginAccount() {
         Log.i(TAG, "clearing LoginAccount");
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, null);
         PreferencesModel.saveSharedPreferencesPatient(context, null);
         PreferencesModel.saveSharedPreferencesCareProvider(context, null);
     }
 
     @Nullable
     public Patient getLoggedInPatient() {
-        Account account = getOfflineLoginAccount();
+        Account account = PreferencesModel.loadSharedPreferencesPatient(context);
+
         if (account != null) {
             return getPatient(account.getUsername());
         }
@@ -63,7 +59,7 @@ public class DataModel {
 
     @Nullable
     public CareProvider getLoggedInCareProvider() {
-        Account account = getOfflineLoginAccount();
+        Account account = PreferencesModel.loadSharedPreferencesCareProvider(context);
         if (account != null) {
             return getCareProvider(account.getUsername());
         }
@@ -167,26 +163,6 @@ public class DataModel {
     }
 
     /**
-     * Get all the {@code Patient}s currently registered to Baudit.
-     *
-     * @return {@code PatientTreeSet}
-     */
-    @NonNull
-    public PatientTreeSet getPatients() {
-        PatientTreeSet patientTreeSet = new PatientTreeSet();
-        // check remote
-        try {
-            patientTreeSet.addAll(new RemoteModel.GetPatients().execute("").get());
-        } catch (ExecutionException | InterruptedException e) {
-            Log.e(TAG, "failure getting patientTreeSet from remote", e);
-        }
-        // TODO: dedupe figure out newest
-        // check local
-        patientTreeSet.addAll(PreferencesModel.loadSharedPreferencesPatientTreeSet(context));
-        return patientTreeSet;
-    }
-
-    /**
      * Commit the given {@code Patient} into both local and remote storage.
      *
      * @param patient {@code Patient}
@@ -197,19 +173,6 @@ public class DataModel {
 
         // add to remote
         new RemoteModel.AddPatientTask().execute(patient);
-    }
-
-    /**
-     * Commit the given {@code PatientTreeSet} into both local and remote storage.
-     *
-     * @param patientTreeSet {@code PatientTreeSet}
-     */
-    public void commitPatientTreeSet(PatientTreeSet patientTreeSet) {
-        // add to local
-        PreferencesModel.saveSharedPreferencesPatientTreeSet(context, patientTreeSet);
-
-        // add to remote
-        new RemoteModel.AddPatientTask().execute(patientTreeSet.toArray(new Patient[0]));
     }
 
     /**
