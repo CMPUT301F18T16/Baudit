@@ -47,6 +47,8 @@ public class Record implements Comparable<Record> {
 
     public UUID getRecordID(){return this.recordID;}
 
+    public void setRecordID(){this.recordID = UUID.randomUUID();}
+
     // TODO: This check might not be needed because the UI limits the title length
     /**
      * Check if a given string is a valid Record title.
