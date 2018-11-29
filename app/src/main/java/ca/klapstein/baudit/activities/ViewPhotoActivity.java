@@ -34,7 +34,6 @@ public class ViewPhotoActivity extends AppCompatActivity implements PhotoView {
 
     @Override
     public void onStart() {
-
         super.onStart();
     }
 }
