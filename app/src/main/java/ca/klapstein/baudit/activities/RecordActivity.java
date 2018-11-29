@@ -85,7 +85,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void commitRecordFailure() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_failure), Toast.LENGTH_LONG).show();
-        // TODO: fail message
     }
 
     @Override
