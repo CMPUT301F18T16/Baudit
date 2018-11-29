@@ -41,7 +41,7 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
             // TODO: Commit the new information
             view.commitAccountEditSuccess();
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "failed saving Account edits", e);
+            Log.e(TAG, "failed committing Account edits", e);
             view.commitAccountEditFailure();
         }
     }

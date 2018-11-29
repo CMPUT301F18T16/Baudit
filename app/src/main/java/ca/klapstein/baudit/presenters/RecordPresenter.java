@@ -75,7 +75,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "failed saving Record", e);
+            Log.e(TAG, "failed committing Record", e);
             view.commitRecordFailure();
         }
     }
