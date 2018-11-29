@@ -32,7 +32,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
     private DrawerLayout drawerLayout;
     private TextView navHeaderUsername;
     private TextView navHeaderEmail;
-
+    private TextView patientCountText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
 
         drawerLayout = findViewById(R.id.patient_list_drawer_layout);
 
+        patientCountText = findViewById(R.id.patient_count);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
@@ -81,8 +82,17 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         adapter = new PatientListAdapter();
         patientRecyclerView.setAdapter(adapter);
         patientRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        updatePatientCountText();
     }
 
+
+    private void updatePatientCountText() {
+        patientCountText.setText(String.format(
+                getResources().getString(R.string.problem_count),
+                presenter.getPatientCount()
+        ));
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -92,7 +102,9 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+        updatePatientCountText();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,9 +149,12 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
             viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO:
+                    // TODO: (EXTRA) launch a choice to either drop supporter the patient (EXTRA)
+                    // TODO: launch ability to view patients problems and add records
                 }
             });
+
+            registerForContextMenu(viewHolder.mCardView);
         }
         @Override
         public int getItemCount() {
