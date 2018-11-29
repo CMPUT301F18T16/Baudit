@@ -47,7 +47,7 @@ class PreferencesModel {
         String json = gson.toJson(object);
         Log.d(TAG, "saved " + JSONKey + " json: " + json);
         prefsEditor.putString(JSONKey, json);
-        prefsEditor.apply();
+        prefsEditor.commit();
     }
 
     /**
