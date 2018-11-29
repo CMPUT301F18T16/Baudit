@@ -166,17 +166,28 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
 
         CardView mCardView;
         TextView mNameView;
+        TextView problemCount;
 
         PatientViewHolder(CardView card) {
             super(card);
             mCardView = card;
             mNameView = card.findViewById(R.id.patient_name);
+            problemCount = card.findViewById(R.id.patient_problem_count_num);
         }
 
         @Override
         public void setPatientNameText(String patientName) {
             mNameView.setText(patientName);
         }
+
+        @Override
+        public void setPatientProblemNum(int problemNum) {
+            problemCount.setText(String.format(
+                    getResources().getString(R.string.problem_count),
+                    problemNum
+            ));
+        }
+
 
         @Override
         public void onStart() {

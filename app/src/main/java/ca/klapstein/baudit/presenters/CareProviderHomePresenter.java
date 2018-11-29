@@ -29,6 +29,7 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
         } else {
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
             rowView.setPatientNameText(patient.getUsername().toString());
+            rowView.setPatientProblemNum(patient.getProblemTreeSet().size());
         }
 
     }
