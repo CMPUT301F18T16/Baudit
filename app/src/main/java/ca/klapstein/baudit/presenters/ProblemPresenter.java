@@ -40,6 +40,8 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
         view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
         view.updateDescriptionField(problem.getDescription());
+
+        view.updateRecordList(problem.getRecordTreeSet());
     }
 
     public void clickedDateButton() {

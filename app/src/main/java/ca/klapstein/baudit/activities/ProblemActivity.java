@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
 import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
@@ -41,7 +42,8 @@ public class ProblemActivity extends AppCompatActivity
 
     private int problemPosition;
     private ProblemPresenter presenter;
-    private RecordListAdapter adapter;
+    private Calendar problemTime = Calendar.getInstance();
+
     private TextView titleView;
     private EditText titleInput;
     private Button dateButton;
@@ -49,7 +51,7 @@ public class ProblemActivity extends AppCompatActivity
     private TextView descriptionView;
     private EditText descriptionInput;
     private TextView recordsLabel;
-    private Calendar problemTime = Calendar.getInstance();
+    private LinearLayout recordList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,10 +153,7 @@ public class ProblemActivity extends AppCompatActivity
             }
         });
 
-        RecyclerView recordRecyclerView = findViewById(R.id.problem_records_list);
-        adapter = new RecordListAdapter();
-        recordRecyclerView.setAdapter(adapter);
-        recordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recordList = findViewById(R.id.problem_records_list);
     }
 
     @Override
@@ -162,7 +161,38 @@ public class ProblemActivity extends AppCompatActivity
         super.onStart();
         presenter.viewStarted(problemPosition);
         updateRecordCountText();
-        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateRecordList(RecordTreeSet records) {
+        recordList.removeAllViews();
+        int index = 0;
+        for (Record record : records) {
+            final int recordPosition = index;
+            CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
+                .inflate(R.layout.card_record, recordList, false);
+            TextView recordTitle = recordView.findViewById(R.id.record_card_title);
+            TextView recordComment = recordView.findViewById(R.id.record_card_comment);
+            recordTitle.setText(record.getTitle());
+            recordComment.setText(record.getComment());
+
+            recordView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(
+                        ProblemActivity.this,
+                        RecordActivity.class
+                    );
+                    intent.putExtra("problemPosition", problemPosition);
+                    intent.putExtra("recordPosition", recordPosition);
+                    startActivity(intent);
+                }
+            });
+
+            recordList.addView(recordView);
+
+            index++;
+        }
     }
 
     @Override
@@ -235,86 +265,5 @@ public class ProblemActivity extends AppCompatActivity
             getResources().getString(R.string.records_label),
             presenter.getRecordCount()
         ));
-    }
-
-    private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
-
-        @Override @NonNull
-        public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_record, viewGroup, false);
-            return new RecordViewHolder(v); //Wrap it in a ViewHolder.
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final RecordViewHolder viewHolder, int i) {
-            Record record = presenter.getRecordAt(i);
-
-            // TODO: Need a way to get image from records
-            viewHolder.setTimestampText(record.getTimeStamp());
-            viewHolder.setTitleText(record.getTitle());
-            viewHolder.setCommentText(record.getComment());
-
-            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(
-                        ProblemActivity.this,
-                        RecordActivity.class
-                    );
-                    intent.putExtra("problemPosition", problemPosition);
-                    intent.putExtra("recordId", viewHolder.getAdapterPosition()); // Test ID
-                    startActivity(intent);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return presenter.getRecordCount();
-        }
-    }
-
-    private class RecordViewHolder extends RecyclerView.ViewHolder implements RecordRowView {
-
-        private CardView cardView;
-        private ImageView imageView;
-        private TextView timestampView;
-        private TextView titleView;
-        private TextView commentView;
-
-        private RecordViewHolder(CardView card) {
-            super(card);
-            cardView = card;
-            imageView = card.findViewById(R.id.record_card_image);
-            timestampView = card.findViewById(R.id.record_card_timestamp);
-            titleView = card.findViewById(R.id.record_card_title);
-            commentView = card.findViewById(R.id.record_card_description);
-        }
-
-        @Override
-        public void onStart() {
-            // Do nothing.
-        }
-
-        @Override
-        public void setPreviewImage(Bitmap bmp) {
-            imageView.setImageBitmap(bmp);
-        }
-
-        @Override
-        public void setTimestampText(String timestamp) {
-            timestampView.setText(timestamp);
-        }
-
-        @Override
-        public void setTitleText(String title) {
-            titleView.setText(title);
-        }
-
-        @Override
-        public void setCommentText(String comment) {
-            commentView.setText(comment);
-        }
     }
 }
