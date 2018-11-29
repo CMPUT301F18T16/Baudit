@@ -130,6 +130,7 @@ public class ProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 presenter.commitProblem(
+                    problemPosition,
                     titleInput.getText().toString(),
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
@@ -139,8 +140,8 @@ public class ProblemActivity extends AppCompatActivity
 
         recordsLabel = findViewById(R.id.problem_records_label);
 
-        Button addRecord = findViewById(R.id.problem_add_record_button);
-        addRecord.setOnClickListener(new View.OnClickListener() {
+        Button addRecordButton = findViewById(R.id.problem_add_record_button);
+        addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);

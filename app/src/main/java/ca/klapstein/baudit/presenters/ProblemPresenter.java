@@ -62,13 +62,15 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return problem.getRecordTreeSet().size();
     }
 
-    public void commitProblem(String title, String description, Date date) {
+    public void commitProblem(int position, String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
 
         try {
-            patient.getProblemTreeSet().add(problem);
+            if (position == -1) {
+                patient.getProblemTreeSet().add(problem);
+            }
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {

@@ -59,7 +59,7 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
     public void deleteProblemClicked(int position) {
         Problem deletedProblem = (Problem) patient.getProblemTreeSet().toArray()[position];
         patient.getProblemTreeSet().remove(deletedProblem);
-        // TODO: Update the patient with dataManager
+        dataManager.commitPatient(patient);
         view.updateList();
     }
 }
