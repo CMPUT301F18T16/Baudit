@@ -18,6 +18,7 @@ import ca.klapstein.baudit.views.PatientRowView;
 public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
     private CareProvider careProvider;
+
     public CareProviderHomePresenter(HomeView view, Context context) {
         super(view, context);
         careProvider = dataManager.getLoggedInCareProvider();

@@ -14,12 +14,12 @@ import ca.klapstein.baudit.views.RecordView;
  * @see RecordView
  */
 public class RecordPresenter extends Presenter<RecordView> {
-
     private static final String TAG = "RecordPresenter";
 
     private final Patient patient;
     private Record record;
     private Problem problem;
+
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
         // TODO: load patient via other method so that care provider can obtain record aswell

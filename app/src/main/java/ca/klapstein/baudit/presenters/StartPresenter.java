@@ -21,7 +21,6 @@ import ca.klapstein.baudit.views.StartView;
  * @see LogoutView
  */
 public class StartPresenter extends Presenter<StartView> {
-
     private static String TAG = "StartPresenter";
 
     /**

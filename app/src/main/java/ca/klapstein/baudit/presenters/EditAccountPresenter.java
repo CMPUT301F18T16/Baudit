@@ -12,8 +12,8 @@ import ca.klapstein.baudit.views.EditAccountView;
  * @see EditAccountView
  */
 public class EditAccountPresenter extends Presenter<EditAccountView> {
-
     private static final String TAG = "EditAccountPresenter";
+
     private Account account;
 
     public EditAccountPresenter(EditAccountView view, Context context) {
