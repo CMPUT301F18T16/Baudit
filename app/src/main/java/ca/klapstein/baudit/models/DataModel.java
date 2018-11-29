@@ -30,18 +30,19 @@ public class DataModel {
         return PreferencesModel.loadSharedPreferencesLoginAccount(context);
     }
 
-    public void setOfflineLoginAccount(@NonNull Account account) {
+    public <T extends Account> void setOfflineLoginAccount(@NonNull T account) {
         Log.i(TAG, "setting LoginAccount: " + account.getUsername().toString());
 
         // Save the specific account type to shared prefs if applicable
         if (account instanceof Patient){
             PreferencesModel.saveSharedPreferencesPatient(context, (Patient) account);
+            PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
         } else if (account instanceof CareProvider){
             PreferencesModel.saveSharedPreferencesCareProvider(context, (CareProvider) account);
+            PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
         } else {
-            Log.w(TAG, "abstract account type: "+account.getClass().getSimpleName()+" being saved as an offline login account");
+            Log.e(TAG, "abstract account type: " + account.getClass().getSimpleName() + " not saving as offline login account");
         }
-        PreferencesModel.saveSharedPreferencesLoginAccount(context, account);
     }
 
     public void clearOfflineLoginAccount() {
@@ -258,5 +259,21 @@ public class DataModel {
 
         // save to remote
         new RemoteModel.AddCareProviderTask().execute(careProvider);
+    }
+
+    /**
+     * Commit an subclass of {@code Account} to both local and remote storage.
+     *
+     * @param account the account to commit
+     * @param <T>
+     */
+    public <T extends Account> void commitAccount(T account) {
+        if (account instanceof Patient) {
+            commitPatient((Patient) account);
+        } else if (account instanceof CareProvider) {
+            commitCareProvider((CareProvider) account);
+        } else {
+            Log.e(TAG, "abstract account type: " + account.getClass().getSimpleName() + " not committing account");
+        }
     }
 }

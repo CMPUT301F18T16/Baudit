@@ -3,6 +3,8 @@ package ca.klapstein.baudit.presenters;
 import android.content.Context;
 import android.util.Log;
 import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.Email;
+import ca.klapstein.baudit.data.PhoneNumber;
 import ca.klapstein.baudit.views.EditAccountView;
 
 /**
@@ -37,8 +39,14 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
     }
 
     public void saveClicked(String firstName, String lastName, String email, String phoneNumber) {
+        account = dataManager.getLoggedInAccount();
         try {
             // TODO: Commit the new information
+            account.getContactInfo().setFirstName(firstName);
+            account.getContactInfo().setLastName(lastName);
+            account.getContactInfo().setEmail(new Email(email));
+            account.getContactInfo().setPhoneNumber(new PhoneNumber(phoneNumber));
+            dataManager.commitAccount(account);
             view.commitAccountEditSuccess();
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "failed committing Account edits", e);
