@@ -9,6 +9,10 @@ public interface EditAccountView extends View {
 
     void updatePhoneNumberField(String phoneNumber);
 
+    void updateEmailError(String message);
+
+    void updatePhoneNumberError(String message);
+
     void commitAccountEditFailure();
 
     void commitAccountEditSuccess();

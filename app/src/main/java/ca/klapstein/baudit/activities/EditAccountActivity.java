@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditAccountPresenter;
@@ -27,7 +28,9 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     private EditText firstNameInput;
     private EditText lastNameInput;
     private EditText emailInput;
+    private TextView emailErrorText;
     private EditText phoneNumberInput;
+    private TextView phoneNumberErrorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
         firstNameInput = findViewById(R.id.edit_account_first_name_input);
         lastNameInput = findViewById(R.id.edit_account_last_name_input);
         emailInput = findViewById(R.id.edit_account_email_input);
+        emailErrorText = findViewById(R.id.edit_account_email_error);
+
         phoneNumberInput = findViewById(R.id.edit_account_phone_number_input);
+        phoneNumberErrorText = findViewById(R.id.edit_account_phone_number_error);
 
         Button cancelButton = findViewById(R.id.edit_account_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +108,16 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     @Override
     public void updatePhoneNumberField(String phoneNumber) {
         phoneNumberInput.setText(phoneNumber);
+    }
+
+    @Override
+    public void updateEmailError(String message) {
+        emailErrorText.setText(message);
+    }
+
+    @Override
+    public void updatePhoneNumberError(String message) {
+        phoneNumberErrorText.setText(message);
     }
 
     @Override

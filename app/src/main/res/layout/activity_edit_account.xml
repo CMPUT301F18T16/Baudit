@@ -62,6 +62,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_grey" />
+        <TextView
+                android:id="@+id/edit_account_email_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -75,6 +81,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_grey" />
+
+        <TextView
+                android:id="@+id/edit_account_phone_number_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/red"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

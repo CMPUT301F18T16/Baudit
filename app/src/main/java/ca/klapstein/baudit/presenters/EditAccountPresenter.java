@@ -2,6 +2,7 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Email;
 import ca.klapstein.baudit.data.PhoneNumber;
@@ -39,9 +40,26 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
     }
 
     public void saveClicked(String firstName, String lastName, String email, String phoneNumber) {
-        account = dataManager.getLoggedInAccount();
+        boolean validAccount = true;
+        if (!Email.isValid(email)) {
+            validAccount = false;
+            view.updateEmailError(context.getResources().getString(R.string.email_error));
+        }
+
+        if (!PhoneNumber.isValid(phoneNumber)) {
+            validAccount = false;
+            view.updatePhoneNumberError(
+                    context.getResources().getString(R.string.phone_number_error)
+            );
+        }
+
+        if (!validAccount) {
+            view.commitAccountEditFailure();
+            return;
+        }
+
         try {
-            // TODO: Commit the new information
+            account = dataManager.getLoggedInAccount();
             account.getContactInfo().setFirstName(firstName);
             account.getContactInfo().setLastName(lastName);
             account.getContactInfo().setEmail(new Email(email));
@@ -50,6 +68,9 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
             view.commitAccountEditSuccess();
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "failed committing Account edits", e);
+            view.commitAccountEditFailure();
+        } catch (NullPointerException e) {
+            Log.e(TAG, "failed to obtain account to commit Account edits too", e);
             view.commitAccountEditFailure();
         }
     }

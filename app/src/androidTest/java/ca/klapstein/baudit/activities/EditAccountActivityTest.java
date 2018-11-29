@@ -5,6 +5,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
+import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
@@ -125,6 +126,24 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
     }
 
     @Test
+    public void testEditAccountEmailInvalid() throws InterruptedException {
+        solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
+        solo.clearEditText((EditText) solo.getView(R.id.edit_account_email_input));
+        solo.enterText((EditText) solo.getView(R.id.edit_account_email_input), "not a email");
+        solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+        assertEquals(
+                getActivity().getResources().getString(R.string.email_error),
+                ((TextView) solo.getView(R.id.edit_account_email_error)).getText().toString()
+        );
+
+        Thread.sleep(1000);
+        // ensure we have not committed invalid changes
+        Account account = dataModel.getLoggedInAccount();
+        assertNotNull(account);
+        assertEquals(new Email("patient@example.com"), account.getContactInfo().getEmail());
+    }
+
+    @Test
     public void testEditAccountPhoneNumber() throws InterruptedException {
         solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
         solo.clearEditText((EditText) solo.getView(R.id.edit_account_phone_number_input));
@@ -136,5 +155,23 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         Account account = dataModel.getLoggedInAccount();
         assertNotNull(account);
         assertEquals(new PhoneNumber("222-222-2222"), account.getContactInfo().getPhoneNumber());
+    }
+
+    @Test
+    public void testEditAccountPhoneNumberInvalid() throws InterruptedException {
+        solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
+        solo.clearEditText((EditText) solo.getView(R.id.edit_account_phone_number_input));
+        solo.enterText((EditText) solo.getView(R.id.edit_account_phone_number_input), "not a phone number");
+        solo.clickOnView(solo.getView(R.id.edit_account_save_button));
+        assertEquals(
+                getActivity().getResources().getString(R.string.phone_number_error),
+                ((TextView) solo.getView(R.id.edit_account_phone_number_error)).getText().toString()
+        );
+
+        Thread.sleep(1000);
+        // ensure we have not committed invalid changes
+        Account account = dataModel.getLoggedInAccount();
+        assertNotNull(account);
+        assertEquals(new PhoneNumber("111-111-1111"), account.getContactInfo().getPhoneNumber());
     }
 }
