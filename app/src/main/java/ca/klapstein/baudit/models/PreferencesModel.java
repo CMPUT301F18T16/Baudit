@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
  * @see android.content.SharedPreferences
  * @see android.preference.PreferenceManager
  */
-class PreferencesModel {
+public class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
 
     private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
+import ca.klapstein.baudit.models.PreferencesModel;
 import com.robotium.solo.Solo;
 import org.junit.After;
 import org.junit.Before;
@@ -115,7 +116,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
         solo.waitForActivity(solo.getCurrentActivity().toString());
 
-        Account account = dataModel.getLoggedInAccount();
+        Account account = PreferencesModel.loadSharedPreferencesPatient(solo.getCurrentActivity().getApplicationContext());
         assertNotNull(account);
         assertEquals(new Email("foobar@example.com"), account.getContactInfo().getEmail());
     }
