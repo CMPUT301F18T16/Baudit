@@ -28,12 +28,12 @@ public class DisplayQRCodeActivity extends AppCompatActivity implements DisplayQ
     }
 
     @Override
-    public void setQRCodeImage(Bitmap bitmap) {
+    public void updateQRCodeImage(Bitmap bitmap) {
         accountQRCodeImage.setImageBitmap(bitmap);
     }
 
     @Override
-    public void setQRCodeError() {
+    public void updateQRCodeError() {
         // TODO: error
     }
 }

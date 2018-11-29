@@ -3,7 +3,6 @@ package ca.klapstein.baudit.data;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
@@ -79,6 +78,34 @@ public class ContactInfoTest {
     }
 
     @Test
+    public void getFirstName() {
+        assertNotNull(contactInfo1.getFirstName());
+        assertEquals(getExampleFirstName1(), contactInfo1.getFirstName());
+    }
+
+    @Test
+    public void setFirstName() {
+        assertEquals(getExampleFirstName1(), contactInfo1.getFirstName());
+        contactInfo1.setFirstName(getExampleFirstName2());
+        assertEquals(getExampleFirstName2(), contactInfo1.getFirstName());
+        assertNotEquals(getExampleFirstName1(), getExampleFirstName2());
+    }
+
+    @Test
+    public void getLastName() {
+        assertNotNull(contactInfo1.getLastName());
+        assertEquals(getExampleLastName1(), contactInfo1.getLastName());
+    }
+
+    @Test
+    public void setLastName() {
+        assertEquals(getExampleLastName1(), contactInfo1.getLastName());
+        contactInfo1.setLastName(getExampleLastName2());
+        assertEquals(getExampleLastName2(), contactInfo1.getLastName());
+        assertNotEquals(getExampleLastName1(), getExampleLastName2());
+    }
+
+    @Test
     public void testHashCodeSame() {
         ContactInfo contactInfo1Same = new ContactInfo(
                 getExampleFirstName1(),
@@ -103,6 +130,11 @@ public class ContactInfoTest {
                 getExamplePhoneNumber1()
         );
         assertTrue(contactInfo1.equals(contactInfo1Same));
+    }
+
+    @Test
+    public void equalsNull() {
+        assertFalse(contactInfo1.equals(null));
     }
 
     @Test
