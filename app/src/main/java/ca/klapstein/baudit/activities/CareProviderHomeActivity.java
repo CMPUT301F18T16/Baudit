@@ -1,7 +1,5 @@
 package ca.klapstein.baudit.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,12 +12,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.CareProviderHomePresenter;
@@ -75,27 +68,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
                                         CareProviderHomeActivity.this,
                                         EditAccountActivity.class
                                 ));
-                                return true;
-                            case (R.id.nav_logout):
-                                new AlertDialog.Builder(
-                                        CareProviderHomeActivity.this)
-                                    .setTitle(R.string.log_out_question)
-                                    .setCancelable(true)
-                                    .setNegativeButton(R.string.cancel, null)
-                                    .setPositiveButton(R.string.log_out,
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface mDialogInterface,
-                                                                int i) {
-                                                presenter.logoutClicked();
-                                                startActivity(new Intent(
-                                                    CareProviderHomeActivity.this,
-                                                    SplashActivity.class
-                                                ));
-                                                finish();
-                                            }
-                                        })
-                                    .show();
                                 return true;
                             default:
                                 return true;

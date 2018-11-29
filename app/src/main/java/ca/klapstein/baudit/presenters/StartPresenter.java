@@ -9,8 +9,8 @@ import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Username;
-import ca.klapstein.baudit.views.StartView;
 import ca.klapstein.baudit.views.LogoutView;
+import ca.klapstein.baudit.views.StartView;
 
 /**
  * MVP presenter for presenting a {@code StartView}.
@@ -59,7 +59,7 @@ public class StartPresenter extends Presenter<StartView> {
      *
      * @param username {@code String}
      */
-    public void onLoginButtonClicked(String username) {
+    public void onQRCodeScanned(String username) {
         try {
             // get the account associated with the user and password
             Account account = dataManager.validateLogin(new Username(username));
@@ -70,10 +70,12 @@ public class StartPresenter extends Presenter<StartView> {
                 dataManager.setOfflineLoginAccount(account);
                 view.onLoginValidationSuccess(CareProviderHomeActivity.class);
             } else {  // else we have failed the login
-                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
+                // TODO: update text
+                view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
             }
         } catch (IllegalArgumentException e) {
-            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed));
+            // TODO: update text
+            view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
         }
     }
 }
