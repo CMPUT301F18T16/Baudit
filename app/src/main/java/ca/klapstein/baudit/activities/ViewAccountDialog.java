@@ -37,32 +37,32 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
     }
 
     @Override
-    public void setUsername() {
-        // TODO: implement
+    public void updateUsernameDisplay() {
+
     }
 
     @Override
-    public void setFirstName() {
-        // TODO: implement
+    public void updateFirstNameDisplay() {
+
     }
 
     @Override
-    public void setLastName() {
-        // TODO: implement
+    public void updateLastNameDisplay() {
+
     }
 
     @Override
-    public void setEmail() {
-        // TODO: implement
+    public void updateEmailDisplay() {
+
     }
 
     @Override
-    public void setPhoneNumber() {
-        // TODO: implement
+    public void updatePhoneNumberDisplay() {
+
     }
 
     @Override
-    public void setViewAccountError() {
-        // TODO: implement
+    public void updateViewAccountError() {
+
     }
 }
