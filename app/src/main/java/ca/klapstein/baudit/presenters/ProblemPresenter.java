@@ -94,7 +94,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "failed saving Problem", e);
+            Log.e(TAG, "failed committing Problem", e);
             view.commitProblemFailure();
         }
     }
