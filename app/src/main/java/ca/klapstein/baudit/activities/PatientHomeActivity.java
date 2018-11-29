@@ -152,8 +152,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     }
 
     @Override
-    public void updateUsernameDisplay(String name) {
-        navHeaderUsername.setText(name);
+    public void updateUsernameDisplay(String username) {
+        navHeaderUsername.setText(username);
     }
 
     @Override
@@ -174,9 +174,9 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
             Problem problem = presenter.getProblemAt(i);
-            viewHolder.setProblemTitleText(problem.getTitle());
-            viewHolder.setProblemDateText(problem.getTimeStamp());
-            viewHolder.setProblemDescriptionText(problem.getDescription());
+            viewHolder.updateProblemTitleText(problem.getTitle());
+            viewHolder.updateProblemDateText(problem.getTimeStamp());
+            viewHolder.updateProblemDescriptionText(problem.getDescription());
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -221,22 +221,22 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         }
 
         @Override
-        public void setProblemImage(Bitmap bmp) {
+        public void updateProblemImage(Bitmap bmp) {
             imageView.setImageBitmap(bmp);
         }
 
         @Override
-        public void setProblemTitleText(String title) {
+        public void updateProblemTitleText(String title) {
             titleView.setText(title);
         }
 
         @Override
-        public void setProblemDateText(String date) {
+        public void updateProblemDateText(String date) {
             dateView.setText(date);
         }
 
         @Override
-        public void setProblemDescriptionText(String description) {
+        public void updateProblemDescriptionText(String description) {
             descriptionView.setText(description);
         }
 
