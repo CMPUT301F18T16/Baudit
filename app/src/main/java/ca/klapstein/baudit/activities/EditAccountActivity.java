@@ -84,7 +84,6 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     @Override
     public void updateFirstNameField(String firstName) {
         firstNameInput.setText(firstName);
-
     }
 
     @Override
@@ -95,7 +94,6 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     @Override
     public void updateEmailField(String email) {
         emailInput.setText(email);
-
     }
 
     @Override
