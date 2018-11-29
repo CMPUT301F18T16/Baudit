@@ -126,43 +126,37 @@ public class MapAllProblemsActivity extends AppCompatActivity
     }
 
     public void testPopulateMap(GoogleMap googleMap){
-        //create a test patient to store records and problems to be iterated
-        Username testUsername = new Username("ThisIsATest");
-        ContactInfo testContactInfo = new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234"));
-        Patient patient = new Patient(testUsername, testContactInfo);
-
-        // add problems to the new patient's problem tree set
-        ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
-        Problem problem1 = new Problem("First problem","I can't feel my face");
-        RecordTreeSet recordTreeSet = problem1.getRecordTreeSet();
-        // add records to the problems recordtreeset
-        Record record1 = new Record("First occurrence","This first happened on a Friday");
-        record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
-        Record record2 = new Record("Second occurrence", "This happened on a Saturday");
-        record2.setGeoLocation(new GeoLocation(53.526835, -113.525717));
-        recordTreeSet.add(record1);
-        recordTreeSet.add(record2);
-        problemTreeSet.add(problem1);
-        // add problems to the new patient's problem tree set
-        Problem problem2 = new Problem("Second problem","I still can't feel my face");
-        RecordTreeSet recordTreeSet2 = problem2.getRecordTreeSet();
-        // add records to the problems recordtreeset
-        Record record3 = new Record("First occurrence","This again on Saturday");
-        record1.setGeoLocation(new GeoLocation(53.527288, -113.529346));
-        Record record4 = new Record("Second occurrence", "This happened on a Sunday");
-        record2.setGeoLocation(new GeoLocation(53.522186, -113.526438));
-        recordTreeSet2.add(record3);
-        recordTreeSet2.add(record4);
-        problemTreeSet.add(problem2);
-
-        //iterate over the ProblemTreeSet's RecordTreeSet and post markers
-        for (Problem problem:problemTreeSet){
-            RecordTreeSet thisRecordTreeSet = problem.getRecordTreeSet();
-            for(Record record: thisRecordTreeSet){
-                LatLng marker = new LatLng(record.getGeoLocation().getLat(),record.getGeoLocation().getLon());
-                googleMap.addMarker(new MarkerOptions().position(marker).title(record.getTitle()));
+            //create a test patient to store records and problems to be iterated
+            Username testUsername = new Username("ThisIsATest");
+            ContactInfo testContactInfo = new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234"));
+            Patient patient = new Patient(testUsername, testContactInfo);
+            // add problems to the new patient's problem tree set
+            ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
+            Problem problem1 = new Problem("First problem","I can't feel my face");
+            RecordTreeSet recordTreeSet = problem1.getRecordTreeSet();
+            // add records to the problems recordtreeset
+            Record record1 = new Record("First occurrence","This first happened on a Friday");
+            record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
+            Record record2 = new Record("Second occurrence", "This happened on a Saturday");
+            recordTreeSet.add(record1);
+            recordTreeSet.add(record2);
+            problemTreeSet.add(problem1);
+            // add problems to the new patient's problem tree set
+            Problem problem2 = new Problem("Second problem","I still can't feel my face");
+            RecordTreeSet recordTreeSet2 = problem2.getRecordTreeSet();
+            // add records to the problems recordtreeset
+            Record record3 = new Record("First occurrence","This again on Saturday");
+            record1.setGeoLocation(new GeoLocation(53.527288, -113.529346));
+            Record record4 = new Record("Second occurrence", "This happened on a Sunday");
+            recordTreeSet2.add(record4);
+            problemTreeSet.add(problem2);
+            //iterate over the ProblemTreeSet's RecordTreeSet and post markers
+            for (Problem problem:problemTreeSet) {
+                RecordTreeSet thisRecordTreeSet = problem.getRecordTreeSet();
+                for (Record record : thisRecordTreeSet) {
+                    LatLng marker = new LatLng(record.getGeoLocation().getLat(), record.getGeoLocation().getLon());
+                    googleMap.addMarker(new MarkerOptions().position(marker).title("test"));
+                }
             }
-        }
-
     }
 }
