@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -199,6 +201,20 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                                     startActivity(intent);
                                     break;
                                 case R.id.delete_problem:
+                                    new AlertDialog.Builder(PatientHomeActivity.this)
+                                        .setTitle(R.string.delete_problem_question)
+                                        .setCancelable(true)
+                                        .setNegativeButton(R.string.cancel, null)
+                                        .setPositiveButton(R.string.delete,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface di, int i) {
+                                                    presenter.deleteProblemClicked(
+                                                        viewHolder.getAdapterPosition()
+                                                    );
+                                                }
+                                            })
+                                        .show();
                                     break;
                                 default:
                                     break;
@@ -207,7 +223,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                         }
                     });
                     menu.show();
-                    return false;
+                    return true;
                 }
             });
         }
