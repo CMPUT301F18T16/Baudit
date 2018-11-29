@@ -116,7 +116,7 @@ public class EditAccountActivityTest extends ActivityTestRule<EditAccountActivit
         solo.clickOnView(solo.getView(R.id.edit_account_save_button));
         solo.waitForActivity(solo.getCurrentActivity().toString());
 
-        Account account = PreferencesModel.loadSharedPreferencesPatient(solo.getCurrentActivity().getApplicationContext());
+        Account account = PreferencesModel.loadSharedPreferencesPatient(InstrumentationRegistry.getTargetContext());
         assertNotNull(account);
         assertEquals(new Email("foobar@example.com"), account.getContactInfo().getEmail());
     }
