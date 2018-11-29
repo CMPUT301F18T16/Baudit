@@ -3,11 +3,11 @@ package ca.klapstein.baudit.views;
 import android.graphics.Bitmap;
 
 public interface ProblemRowView extends View {
-    void setProblemImage(Bitmap bmp);
+    void updateProblemImage(Bitmap bmp);
 
-    void setProblemTitleText(String title);
+    void updateProblemTitleText(String title);
 
-    void setProblemDateText(String date);
+    void updateProblemDateText(String date);
 
-    void setProblemDescriptionText(String description);
+    void updateProblemDescriptionText(String description);
 }

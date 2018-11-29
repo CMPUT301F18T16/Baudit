@@ -11,12 +11,6 @@ import static org.junit.Assert.*;
 public class RemoteModelTest {
 
     @Test
-    public void getPatients() throws ExecutionException, InterruptedException {
-        PatientTreeSet patientTreeSet = new RemoteModel.GetPatients().execute("").get();
-        assertNotNull(patientTreeSet);
-    }
-
-    @Test
     public void addPatientsNull() {
         // adding a null list for an initial test (this does effectively nothing to the remote)
         new RemoteModel.AddPatientTask().execute(

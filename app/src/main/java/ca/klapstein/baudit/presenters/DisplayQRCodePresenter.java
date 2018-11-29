@@ -14,10 +14,10 @@ public class DisplayQRCodePresenter extends Presenter<DisplayQRCodeView> {
     public void viewStarted() {
         Account account = dataManager.getLoggedInAccount();
         if (account == null) {
-            view.setQRCodeError();
+            view.updateQRCodeError();
         } else {
             Bitmap myBitmap = QRCode.from(account.getUsername().toString()).bitmap();
-            view.setQRCodeImage(myBitmap);
+            view.updateQRCodeImage(myBitmap);
         }
     }
 }

@@ -40,12 +40,17 @@ public class BodyLocationDialog extends DialogFragment implements BodyLocationVi
     }
 
     @Override
-    public void setBodyLocationView() {
+    public void updateBodyLocationImage() {
 
     }
 
     @Override
-    public void setBodyLocationError() {
+    public void updateBodyLocationCoordsList() {
+
+    }
+
+    @Override
+    public void updateBodyLocationError() {
 
     }
 }
