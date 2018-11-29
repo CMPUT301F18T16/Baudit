@@ -50,7 +50,7 @@ class PreferencesModel {
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(object);
-        Log.d(TAG, "saved json: " + json);
+        Log.d(TAG, "saved " + JSONKey + " json: " + json);
         prefsEditor.putString(JSONKey, json);
         prefsEditor.commit();
     }
@@ -66,7 +66,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(LOGIN_ACCOUNT_JSON_KEY, "");
-        Log.d(TAG, "loaded json: " + json);
+        Log.d(TAG, "loaded " + LOGIN_ACCOUNT_JSON_KEY + " json: " + json);
 
         if (json.isEmpty()) {
             account = null;
@@ -102,7 +102,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(PATIENT_TREESET_PREF_JSON_KEY, "");
-        Log.d(TAG, "loaded json: " + json);
+        Log.d(TAG, "loaded " + PATIENT_TREESET_PREF_JSON_KEY + " json: " + json);
 
         if (json.isEmpty()) {
             patientTreeSet = new PatientTreeSet();
@@ -143,7 +143,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(PATIENT_PREF_JSON_KEY, "");
-        Log.d(TAG, "loaded json: " + json);
+        Log.d(TAG, "loaded " + PATIENT_PREF_JSON_KEY + " json: " + json);
 
         if (json.isEmpty()) {
             patient = null;
@@ -179,7 +179,7 @@ class PreferencesModel {
         Gson gson = new Gson();
 
         String json = mPrefs.getString(CAREPROVIDER_PREF_JSON_KEY, "");
-        Log.d(TAG, "loaded json: " + json);
+        Log.d(TAG, "loaded " + CAREPROVIDER_PREF_JSON_KEY + " json: " + json);
 
         if (json.isEmpty()) {
             careProvider = null;
