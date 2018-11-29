@@ -81,18 +81,13 @@ public class StartActivity extends AppCompatActivity implements StartView {
     @Override
     public void startScanQRCode() {
         try {
-
             Intent intent = new Intent("com.google.zxing.client.android.SCAN");
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE"); // "PRODUCT_MODE for bar codes
-
             startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
-
         } catch (Exception e) {
-
             Uri marketUri = Uri.parse("market://details?id=com.google.zxing.client.android");
             Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
             startActivity(marketIntent);
-
         }
     }
 
