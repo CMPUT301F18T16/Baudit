@@ -198,6 +198,23 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        return recordID.compareTo(record.getRecordID());
+        if (record.getRecordId() == null) {
+            record.setRecordId(UUID.randomUUID());
+        }
+        if (getRecordId() == null) {
+            setRecordId(UUID.randomUUID());
+        }
+        if (getRecordId().compareTo(record.getRecordId()) == 0) {
+            return 0;
+        }
+        return date.compareTo(record.getDate());
+    }
+
+    private UUID getRecordId() {
+        return recordID;
+    }
+
+    private void setRecordId(UUID recordId) {
+        this.recordID = recordId;
     }
 }

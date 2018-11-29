@@ -48,9 +48,6 @@ dependencies {
     // Android instrument tests
     implementation 'com.android.support:design:28.0.0'
 
-    // QR code scanning
-    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
-
     // QR code generation
     implementation 'com.github.kenglxn.QRGen:android:2.5.0'
 

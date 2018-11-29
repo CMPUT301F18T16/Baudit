@@ -3,6 +3,7 @@ package ca.klapstein.baudit.data;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
@@ -16,6 +17,7 @@ public class Problem implements Comparable<Problem> {
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
+    private UUID problemId;
     private String title;
     private String description;
     private Date date;
@@ -25,6 +27,7 @@ public class Problem implements Comparable<Problem> {
         this.setTitle(title);
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
+        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -36,6 +39,7 @@ public class Problem implements Comparable<Problem> {
     static public boolean isValidProblemDescription(@NonNull String description) {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
     }
+
 
     /**
      * Check if a given string is a valid Problem title.
@@ -155,10 +159,28 @@ public class Problem implements Comparable<Problem> {
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
+        if (problem.getProblemId() == null) {
+            problem.setProblemId(UUID.randomUUID());
+        }
+        if (getProblemId() == null) {
+            setProblemId(UUID.randomUUID());
+        }
+        if (getProblemId().compareTo(problem.getProblemId()) == 0) {
+            return 0;
+        }
+
         if (getDate().compareTo(problem.getDate()) == 0) {
             return getTitle().compareTo(problem.getTitle());
         } else {
             return getDate().compareTo(problem.getDate()); // Order by date
         }
+    }
+
+    private UUID getProblemId() {
+        return problemId;
+    }
+
+    private void setProblemId(UUID problemId) {
+        this.problemId = problemId;
     }
 }

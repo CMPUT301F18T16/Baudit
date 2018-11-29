@@ -36,6 +36,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView commentView;
     private EditText commentInput;
     private Button commitButton;
+    private int problemId;
 
 
     @Override
@@ -45,7 +46,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         Toolbar toolbar = findViewById(R.id.record_toolbar);
         setSupportActionBar(toolbar);
 
-        recordId = getIntent().getIntExtra("recordId", 0);
+        problemId = getIntent().getIntExtra("problemId", -1);
+        recordId = getIntent().getIntExtra("recordId", -1);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
@@ -64,7 +66,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(recordId);
+        presenter.viewStarted(problemId, recordId);
     }
 
     @Override
