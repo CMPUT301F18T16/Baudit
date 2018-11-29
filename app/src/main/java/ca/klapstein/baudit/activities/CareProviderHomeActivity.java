@@ -89,7 +89,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
 
     private void updatePatientCountText() {
         patientCountText.setText(String.format(
-                getResources().getString(R.string.problem_count),
+                getResources().getString(R.string.patient_count),
                 presenter.getPatientCount()
         ));
     }
