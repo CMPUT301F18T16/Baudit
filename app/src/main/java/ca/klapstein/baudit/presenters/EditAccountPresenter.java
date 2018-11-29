@@ -25,17 +25,21 @@ public class EditAccountPresenter extends Presenter<EditAccountView> {
     public void viewStarted() {
         account = dataManager.getLoggedInAccount();
         if (account != null) {
-            view.updateFields(
-                    account.getUsername().toString(),
-                    account.getContactInfo().getEmail().toString(),
-                    account.getContactInfo().getPhoneNumber().toString()
-            );
+            view.setFirstName(account.getContactInfo().getFirstName());
+            view.setLastName(account.getContactInfo().getLastName());
+            view.setEmail(account.getContactInfo().getEmail().toString());
+            view.setPhoneNumber(account.getContactInfo().getPhoneNumber().toString());
         } else {
             // TODO: error
         }
     }
 
-    public void saveClicked(String name, String email, String phoneNumber) {
-        // TODO: Commit the new information
+    public void saveClicked(String firstName, String lastName, String email, String phoneNumber) {
+        try {
+            // TODO: Commit the new information
+            view.commitAccountEditSuccess();
+        } catch (IllegalArgumentException e) {
+            view.commitAccountEditFailure();
+        }
     }
 }

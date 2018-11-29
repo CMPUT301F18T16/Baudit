@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditAccountPresenter;
 import ca.klapstein.baudit.views.EditAccountView;
@@ -22,9 +23,10 @@ import ca.klapstein.baudit.views.EditAccountView;
 public class EditAccountActivity extends AppCompatActivity implements EditAccountView {
 
     private EditAccountPresenter presenter;
-    private EditText nameInput;
     private EditText emailInput;
     private EditText phoneNumberInput;
+    private EditText firstNameInput;
+    private EditText lastNameInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
 
         presenter = new EditAccountPresenter(this, getApplicationContext());
 
-        nameInput = findViewById(R.id.edit_account_name_input);
+        firstNameInput = findViewById(R.id.edit_account_first_name_input);
+        lastNameInput = findViewById(R.id.edit_account_last_name_input);
         emailInput = findViewById(R.id.edit_account_email_input);
         phoneNumberInput = findViewById(R.id.edit_account_phone_number_input);
 
@@ -54,11 +57,11 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
             @Override
             public void onClick(View v) {
                 presenter.saveClicked(
-                    nameInput.getText().toString(),
+                        firstNameInput.getText().toString(),
+                        lastNameInput.getText().toString(),
                     emailInput.getText().toString(),
                     phoneNumberInput.getText().toString()
                 );
-                finish();
             }
         });
 
@@ -79,9 +82,35 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     }
 
     @Override
-    public void updateFields(String name, String email, String phoneNumber) {
-        nameInput.setText(name);
+    public void setFirstName(String firstName) {
+        firstNameInput.setText(firstName);
+
+    }
+
+    @Override
+    public void setLastName(String lastName) {
+        lastNameInput.setText(lastName);
+    }
+
+    @Override
+    public void setEmail(String email) {
         emailInput.setText(email);
+
+    }
+
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
         phoneNumberInput.setText(phoneNumber);
+    }
+
+    @Override
+    public void commitAccountEditFailure() {
+        Toast.makeText(this, "Failed to Commit Account Edits", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void commitAccountEditSuccess() {
+        Toast.makeText(this, "Successfully Committed Account Edits", Toast.LENGTH_LONG).show();
+        finish();
     }
 }
