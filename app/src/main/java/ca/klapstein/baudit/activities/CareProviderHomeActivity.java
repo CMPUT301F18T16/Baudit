@@ -75,8 +75,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
                         }
                     }
                 });
-        // TODO: get patientTreeSet from local storage/remote
-        // TODO: logout methods?
 
         patientRecyclerView = findViewById(R.id.patient_list);
         adapter = new PatientListAdapter();
@@ -86,13 +84,13 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         updatePatientCountText();
     }
 
-
     private void updatePatientCountText() {
         patientCountText.setText(String.format(
                 getResources().getString(R.string.patient_count),
                 presenter.getPatientCount()
         ));
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -104,7 +102,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
         adapter.notifyDataSetChanged();
         updatePatientCountText();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,7 +184,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements HomeV
                     problemNum
             ));
         }
-
 
         @Override
         public void onStart() {
