@@ -34,7 +34,7 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
     }
 
     @Override
-    public void setLocationError() {
+    public void updateLocationError() {
 
     }
 
