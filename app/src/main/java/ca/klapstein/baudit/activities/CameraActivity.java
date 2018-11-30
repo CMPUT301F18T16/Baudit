@@ -21,12 +21,6 @@ import java.util.Date;
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.BodyPhoto;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordPhoto;
-import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.presenters.AddPhotoPresenter;
 import ca.klapstein.baudit.views.AddPhotoView;
 
@@ -103,6 +97,7 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
                 public void onClick(View v) {
                     updatePhotoImage(imageBitmap);
                     commitAddPhotoSuccess();
+                    finish();
                 }
             });
         } else
@@ -112,26 +107,19 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
     @Override
     public void updatePhotoImage(Bitmap bitmap){
 
-        DataModel dataManager = new DataModel(this);
-        Patient patient = dataManager.getLoggedInPatient();
         if(recordPhoto){
-            //TODO: get correct record
-            RecordPhoto recordPhoto = new RecordPhoto(bitmap);
             int problemId = getIntent().getIntExtra("probemId", 0);
             int recordId = getIntent().getIntExtra("recordId", -1);
-            //Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
-            //Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
-            //record.addPhoto(recordPhoto);
-
+            presenter.UploadRecordPhoto(bitmap, recordId, problemId);
         } else {
-            //TODO: how to add body photo if patient isnt logged in?
-            //BodyPhoto bodyPhoto = new BodyPhoto(bitmap);
-            //patient.setBodyPhoto(bodyPhoto);
+            presenter.UploadBodyPhoto(bitmap);
         }
     }
 
     @Override
-    public void updatePhotoError(){ finish(); }
+    public void updatePhotoError(){
+        finish();
+    }
 
     @Override
     public void commitAddPhotoSuccess(){
