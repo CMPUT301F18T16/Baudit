@@ -18,7 +18,8 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
-    private int recordId;
+    private int problemPosition;
+    private int recordPosition;
     private RecordPresenter presenter;
 
     private ImageButton titleEditButton;
@@ -33,7 +34,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView commentView;
     private EditText commentInput;
     private Button commitButton;
-    private int problemId;
+
 
 
     @Override
@@ -43,8 +44,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         Toolbar toolbar = findViewById(R.id.record_toolbar);
         setSupportActionBar(toolbar);
 
-        problemId = getIntent().getIntExtra("problemId", -1);
-        recordId = getIntent().getIntExtra("recordId", -1);
+        problemPosition = getIntent().getIntExtra("problemPosition", -1);
+        recordPosition = getIntent().getIntExtra("recordPosition", -1);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
@@ -63,7 +64,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(problemId, recordId);
+        presenter.viewStarted(problemPosition, recordPosition);
     }
 
     @Override

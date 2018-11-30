@@ -26,19 +26,19 @@ public class RecordPresenter extends Presenter<RecordView> {
         patient = dataManager.getLoggedInPatient();
     }
 
-    public void viewStarted(int problemId, int recordId) {
-        if (problemId == -1) {
-            problem = new Problem("Set Title", "Set description");
+    public void viewStarted(int problemPosition, int recordPosition) {
+        if (problemPosition == -1) {
+            problem = new Problem("Untitled", "");
 
         } else {
-            problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
         }
 
-        if (recordId == -1) { // If the record is new
+        if (recordPosition == -1) { // If the record is new
             view.updateTitleField("");
             record = new Record("Set title", "Set comment");
         } else { // If the record exists and is being edited
-            record = (Record) problem.getRecordTreeSet().toArray()[recordId];
+            record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         }
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());

@@ -32,7 +32,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     public void viewStarted(int position) {
         patient = dataManager.getLoggedInPatient();
         if (position == -1) { // If the problem is new
-            problem = new Problem("", "");
+            problem = new Problem("Untitled", "");
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
         }
