@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
 import ca.klapstein.baudit.views.MapAllProblemsView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapAllProblemsActivity extends AppCompatActivity
     implements MapAllProblemsView, OnMapReadyCallback {
@@ -18,6 +21,8 @@ public class MapAllProblemsActivity extends AppCompatActivity
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     private MapView mapView;
+    private MapAllProblemsPresenter presenter;
+    private GoogleMap googleMap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +33,8 @@ public class MapAllProblemsActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle(R.string.problem_locations);
 
+        presenter = new MapAllProblemsPresenter(this, getApplicationContext());
+
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -36,6 +43,7 @@ public class MapAllProblemsActivity extends AppCompatActivity
         mapView = findViewById(R.id.map_all_problems_map);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
+
     }
 
     @Override
@@ -55,11 +63,13 @@ public class MapAllProblemsActivity extends AppCompatActivity
         super.onStop();
         mapView.onStop();
     }
+
     @Override
     protected void onPause() {
         mapView.onPause();
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         mapView.onDestroy();
@@ -87,12 +97,19 @@ public class MapAllProblemsActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng ny = new LatLng(40.7143528, -74.0059731);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        LatLng edmonton = new LatLng(53.5408, -113.4926);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton, 10.0f));
+        this.googleMap = googleMap;
+        presenter.viewStarted();
     }
 
     @Override
-    public void populateMap() {
-        // Do something
+    public void updateMarkerOptions(MarkerOptions marker) {
+        googleMap.addMarker(marker);
+    }
+
+    @Override
+    public void updateMapError() {
+        Toast.makeText(this, getResources().getString(R.string.problem_map_error), Toast.LENGTH_LONG).show();
     }
 }

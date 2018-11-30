@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.LocationPresenter;
 import ca.klapstein.baudit.views.LocationView;
+import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Activity for displaying and choosing a location on a map.
@@ -23,12 +24,17 @@ public class LocationActivity extends AppCompatActivity implements LocationView 
     }
 
     @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+    @Override
     public void updateLocation() {
 
     }
 
     @Override
-    public void setLocationError() {
+    public void updateLocationError() {
 
     }
 
