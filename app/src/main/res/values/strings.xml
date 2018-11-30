@@ -77,4 +77,8 @@
     <string name="care_provider">Care provider</string>
     <string name="account_type">Account type</string>
     <string name="identification_minc">Identification (MINC)</string>
+    <string name="button_capture_text">Capture</string>
+    <string name="content_desc_overlay">Your last photo</string>
+    <string name="camera_open_fail">Failed to open camera</string>
+    <string name="button_switch_camera">Switch Camera</string>
 </resources>
