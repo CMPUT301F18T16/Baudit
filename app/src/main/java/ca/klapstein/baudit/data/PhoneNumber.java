@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class PhoneNumber {
     private static final String TAG = "PhoneNumber";
+
     private static final Pattern phoneNumberPattern =
             Pattern.compile("\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})");
 
