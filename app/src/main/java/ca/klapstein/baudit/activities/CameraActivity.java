@@ -1,41 +1,96 @@
 package ca.klapstein.baudit.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.AddPhotoPresenter;
+import ca.klapstein.baudit.views.AddPhotoView;
 
-import java.util.Arrays;
 
-
-public class CameraActivity extends AppCompatActivity implements Camera.PictureCallback {
+public class CameraActivity extends AppCompatActivity implements Camera.PictureCallback, AddPhotoView {
     private static final String TAG = "CameraActivity";
+
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 23;
+
+    public static final String RECORD_PHOTO_FIELD = "recordPhoto";
+    public static final String RECORD_PHOTO_RECORD_ID_FIELD = "recordId";
+    public static final String RECORD_PHOTO_PROBLEM_ID_FIELD = "problemId";
+    public static final String BODY_PHOTO_FIELD = "bodyPhoto";
+
+    private AddPhotoPresenter presenter;
+
     private Camera camera;
     private CameraPreview cameraPreview;
     private int cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
     private ImageView cameraOverlay;
+
+    /**
+     * Set the camera's orientation.
+     *
+     * @param activity
+     * @param cameraId
+     * @param camera
+     */
+    public static void setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
+        android.hardware.Camera.CameraInfo info =
+                new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.getCameraInfo(cameraId, info);
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;  // compensate the mirror
+        } else {  // back-facing
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        // request camera permission if not already given
+        // TODO: move this to the start activity?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
             }
         }
+
         cameraOverlay = findViewById(R.id.camera_overlay);
         cameraPreview = findViewById(R.id.camera_preview);
 
@@ -44,6 +99,14 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
             @Override
             public void onClick(View v) {
                 switchCamera();
+            }
+        });
+
+        Button capturePhotoButton = findViewById(R.id.capture_photo_button);
+        capturePhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCaptureClick();
             }
         });
 
@@ -57,34 +120,55 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
             Toast.makeText(this, getResources().getText(R.string.camera_open_fail), Toast.LENGTH_LONG).show();
             finish();
         }
+        presenter = new AddPhotoPresenter(this, this);
+
+        if (getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false)) {
+            presenter.getLastRecordPhoto(getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1));
+            Log.d(TAG, "starting CameraActivity for adding a record photo");
+        } else if (getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false)) {
+            Log.d(TAG, "starting CameraActivity for adding a body photo");
+        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case CAMERA_PERMISSION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Start your camera handling here
                 } else {
+                    // TODO: put stuff here?
                 }
+        }
+    }
+
+    /**
+     * Update the camera orientation on device configuration changes (i.e. rotation).
+     *
+     * @param newConfig {@code Configuration}
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (camera != null) {
+            setCameraDisplayOrientation(this, cameraId, camera);
         }
     }
 
     private void releaseCameraAndPreview() {
         cameraPreview.init(null);
-        if (camera != null) {
-            camera.release();
-            camera = null;
-        }
+        releaseCamera();
     }
 
-    // Show the camera view on the activity
+    /**
+     * Show the camera view on the activity
+     */
     private void initCameraPreview() {
         cameraPreview.init(camera);
     }
 
-    public void onCaptureClick(View button) {
+    public void onCaptureClick() {
         // Take a picture with a callback when the photo has been created
         // Here you can add callbacks if you want to give feedback when the picture is being taken
         camera.takePicture(null, null, this);
@@ -93,18 +177,23 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
         Bitmap picture = BitmapFactory.decodeByteArray(data, 0, data.length);
-        // TODO: do stuff with bitmap
-        Log.d(TAG, "Picture taken raw data:" + Arrays.toString(data));
-        finish();
+        // TODO: additional Bitmap work
+        if (getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false)) {
+            presenter.commitRecordPhoto(picture, getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1), getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1));
+        } else if (getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false)) {
+            presenter.commitBodyPhoto(picture);
+        }
     }
 
-    // ALWAYS remember to release the camera when you are finished
     @Override
     protected void onPause() {
         super.onPause();
-        releaseCamera();
+        releaseCameraAndPreview();
     }
 
+    /**
+     * Release control over a camera.
+     */
     private void releaseCamera() {
         if (camera != null) {
             camera.release();
@@ -112,31 +201,63 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
         }
     }
 
-    private void openFrontCamera() {
-        cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
-        openCamera(cameraId);
-    }
-
-    private void openBackCamera() {
-        cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
-        openCamera(cameraId);
-    }
-
+    /**
+     * Attempt to open a camera with the specified cameraId.
+     *
+     * @param cameraId {@code int}
+     */
     private void openCamera(int cameraId) {
         try {
             releaseCameraAndPreview();
             camera = Camera.open(cameraId);
+            setCameraDisplayOrientation(this, cameraId, camera);
         } catch (Exception e) {
             Log.e(TAG, "failed to open Camera", e);
         }
     }
 
+    /**
+     * Switch between the front and rear facing cameras.
+     */
     private void switchCamera() {
         // Camera may be in use by another activity or the system or not available at all
         if (cameraId == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            openBackCamera();
+            cameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+            openCamera(cameraId);
         } else {
-            openFrontCamera();
+            cameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
+            openCamera(cameraId);
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void updateCameraOverlayImage(Bitmap bitmap) {
+        // make the image more transparent
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+        // setAlpha is in 0-255 range
+        drawable.setAlpha(177);
+        cameraOverlay.setImageBitmap(drawable.getBitmap());
+    }
+
+    @Override
+    public void updateCameraOverlayError() {
+        Toast.makeText(this, getResources().getText(R.string.update_camera_overlay_error), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void commitPhotoSuccess() {
+        Toast.makeText(this, getResources().getText(R.string.camera_image_commit_success), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
+    public void commitPhotoFailure() {
+        Toast.makeText(this, getResources().getText(R.string.camera_image_commit_failure), Toast.LENGTH_LONG).show();
+    }
+
 }
