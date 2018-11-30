@@ -96,29 +96,30 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
             String filePath = photoFile.getPath();
             imageBitmap = BitmapFactory.decodeFile(filePath);
             if (!presenter.ValidatePhoto(imageBitmap))
-                setPhotoError();
+                updatePhotoError();
             imageView.setImageBitmap(imageBitmap);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setPhoto(imageBitmap);
-                    commitAddPhoto();
+                    updatePhotoImage(imageBitmap);
+                    commitAddPhotoSuccess();
                 }
             });
         } else
-            setPhotoError();
+            updatePhotoError();
     }
 
     @Override
-    public void setPhoto(Bitmap bitmap){
+    public void updatePhotoImage(Bitmap bitmap){
 
         DataModel dataManager = new DataModel(this);
         Patient patient = dataManager.getLoggedInPatient();
         if(recordPhoto){
+            //TODO: get correct record
             RecordPhoto recordPhoto = new RecordPhoto(bitmap);
             int problemId = getIntent().getIntExtra("probemId", 0);
             int recordId = getIntent().getIntExtra("recordId", -1);
-            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            //Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
             //Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
             //record.addPhoto(recordPhoto);
 
@@ -130,10 +131,10 @@ public class CameraActivity extends AppCompatActivity implements AddPhotoView {
     }
 
     @Override
-    public void setPhotoError(){ finish(); }
+    public void updatePhotoError(){ finish(); }
 
     @Override
-    public void commitAddPhoto(){
+    public void commitAddPhotoSuccess(){
         //TODO: add to remote and local
     }
 }
