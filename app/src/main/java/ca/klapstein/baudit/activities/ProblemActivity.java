@@ -46,7 +46,7 @@ public class ProblemActivity extends AppCompatActivity
     private Button timeButton;
     private TextView descriptionView;
     private EditText descriptionInput;
-    private TextView recordsLabel;
+    private TextView recordCountText;
     private LinearLayout recordList;
 
     @Override
@@ -136,7 +136,7 @@ public class ProblemActivity extends AppCompatActivity
             }
         });
 
-        recordsLabel = findViewById(R.id.problem_records_label);
+        recordCountText = findViewById(R.id.problem_records_label);
 
         Button addRecordButton = findViewById(R.id.problem_add_record_button);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +144,8 @@ public class ProblemActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
                 intent.putExtra("problemPosition", problemPosition);
-                intent.putExtra("recordId", -1);
+                intent.putExtra("recordPosition", -1);
+                intent.putExtra("mode", "edit");
                 startActivity(intent);
             }
         });
@@ -236,6 +237,8 @@ public class ProblemActivity extends AppCompatActivity
 
             index++;
         }
+
+        updateRecordCountText();
     }
 
     @Override
@@ -305,7 +308,7 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     private void updateRecordCountText() {
-        recordsLabel.setText(String.format(
+        recordCountText.setText(String.format(
             getResources().getString(R.string.records_label),
             presenter.getRecordCount()
         ));
