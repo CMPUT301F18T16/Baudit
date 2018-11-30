@@ -30,7 +30,15 @@ public class RecordPresenter extends Presenter<RecordView> {
     }
 
     public void viewStarted(int problemPosition, int recordPosition) {
-        problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
+        if (problemPosition == -1) { // For testing purposes, this case is handled
+            problem = new Problem(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_description)
+            );
+        } else {
+            problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
+        }
+
 
         if (recordPosition == -1) { // If the record is new
             record = new Record(
