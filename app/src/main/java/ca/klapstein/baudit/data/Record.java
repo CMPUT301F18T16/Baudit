@@ -45,9 +45,6 @@ public class Record implements Comparable<Record> {
         recordID = UUID.randomUUID();
     }
 
-    public UUID getRecordID(){return this.recordID;}
-
-    public void setRecordID(){this.recordID = UUID.randomUUID();}
 
     // TODO: This check might not be needed because the UI limits the title length
     /**
@@ -198,16 +195,18 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        if (record.getRecordId() == null) {
-            record.setRecordId(UUID.randomUUID());
+        if (getDate().compareTo(record.getDate()) != 0) {
+            return getDate().compareTo(record.getDate());
         }
-        if (getRecordId() == null) {
-            setRecordId(UUID.randomUUID());
+
+        if (getTitle().compareTo(record.getTitle()) != 0) {
+            return getTitle().compareTo(record.getTitle());
         }
+
         if (getRecordId().compareTo(record.getRecordId()) == 0) {
             return 0;
         }
-        return date.compareTo(record.getDate());
+        return recordID.compareTo(record.getRecordId());
     }
 
     private UUID getRecordId() {
