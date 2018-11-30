@@ -69,7 +69,7 @@ public class ProblemActivity extends AppCompatActivity
         Button saveButton = findViewById(R.id.problem_save_button);
 
         // Set view visibility based on what mode we are in
-        if (mode.equals("view")) {
+        if ("view".equals(mode)) {
             getSupportActionBar().setTitle(R.string.view_problem);
 
             titleView.setVisibility(View.VISIBLE);
@@ -80,7 +80,7 @@ public class ProblemActivity extends AppCompatActivity
 
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
-        } else if (mode.equals("edit")) {
+        } else if ("edit".equals(mode)) {
             if (problemPosition == -1) {
                 getSupportActionBar().setTitle(R.string.new_problem);
             } else {
