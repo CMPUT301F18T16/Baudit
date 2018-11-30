@@ -1,8 +1,10 @@
 package ca.klapstein.baudit.data;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -16,10 +18,12 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  */
 public class Record implements Comparable<Record> {
 
+    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
+    private Bitmap recordPhoto;
     private String title;
     private String comment;
     private GeoLocation geoLocation;
@@ -45,7 +49,6 @@ public class Record implements Comparable<Record> {
         recordId = UUID.randomUUID();
     }
 
-    // TODO: This check might not be needed because the UI limits the title length
     /**
      * Check if a given string is a valid Record title.
      *
@@ -56,7 +59,6 @@ public class Record implements Comparable<Record> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    // TODO: This check might not be needed because the UI limits comment length
     /**
      * Check if a given string is a valid Record comment.
      *
@@ -92,6 +94,17 @@ public class Record implements Comparable<Record> {
      */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
+    }
+
+    public void setRecordPhoto(Bitmap bitmap) {
+        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
+            bitmap = getResizedBitmap(bitmap, MAX_PHOTO_BYTES);
+        }
+        recordPhoto = bitmap;
+    }
+
+    public Bitmap getRecordPhoto() {
+        return recordPhoto;
     }
 
     /**
@@ -212,5 +225,43 @@ public class Record implements Comparable<Record> {
 
     private void setRecordId(UUID recordId) {
         this.recordId = recordId;
+    }
+
+    private byte[] getCompressedBitmapData(Bitmap bitmap, int maxFileSize, int maxDimensions) {
+        Bitmap resizedBitmap;
+        if (bitmap.getWidth() > maxDimensions || bitmap.getHeight() > maxDimensions) {
+            resizedBitmap = getResizedBitmap(bitmap,
+                maxDimensions);
+        } else {
+            resizedBitmap = bitmap;
+        }
+
+        byte[] bitmapData = getByteArray(resizedBitmap);
+
+        while (bitmapData.length > maxFileSize) {
+            bitmapData = getByteArray(resizedBitmap);
+        }
+        return bitmapData;
+    }
+
+    private Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    private byte[] getByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+        return bos.toByteArray();
     }
 }
