@@ -52,64 +52,6 @@ public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
         solo.assertCurrentActivity("Wrong Activity", ProblemActivity.class);
     }
 
-    @UiThreadTest
-    public void testEditAndSaveTitle() {
-        ((TextView)solo.getView(R.id.problem_title_view)).setText("Before");
-        solo.clickOnView(solo.getView(R.id.problem_title_edit_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.edit_problem));
-        solo.clearEditText((EditText)solo.getView(R.id.problem_title_edit_text));
-        solo.enterText((EditText)solo.getView(R.id.problem_title_edit_text), "After");
-        solo.clickOnView(solo.getView(R.id.problem_title_save_button));
-        solo.waitForText("After");
-        assertEquals(
-            "After",
-            ((TextView)solo.getView(R.id.problem_title_view)).getText().toString()
-        );
-    }
-
-    @UiThreadTest
-    public void testEditAndCancelTitle() {
-        ((TextView)solo.getView(R.id.problem_title_view)).setText("Before");
-        solo.clickOnView(solo.getView(R.id.problem_title_edit_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.edit_problem));
-        solo.clearEditText((EditText)solo.getView(R.id.problem_title_edit_text));
-        solo.enterText((EditText)solo.getView(R.id.problem_title_edit_text), "After");
-        solo.clickOnView(solo.getView(R.id.problem_title_cancel_button));
-        assertEquals(
-            "Before",
-            ((TextView)solo.getView(R.id.problem_title_view)).getText().toString()
-        );
-    }
-
-    @UiThreadTest
-    public void testEditAndSaveDescription() {
-        ((TextView)solo.getView(R.id.problem_description_view)).setText("Before");
-        solo.clickOnView(solo.getView(R.id.problem_description_edit_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.edit_problem));
-        solo.clearEditText((EditText)solo.getView(R.id.problem_description_edit_text));
-        solo.enterText((EditText)solo.getView(R.id.problem_description_edit_text), "After");
-        solo.clickOnView(solo.getView(R.id.problem_description_save_button));
-        solo.waitForText("After");
-        assertEquals(
-            "After",
-            ((TextView)solo.getView(R.id.problem_description_view)).getText().toString()
-        );
-    }
-
-    @UiThreadTest
-    public void testEditAndCancelDescription() {
-        ((TextView)solo.getView(R.id.problem_description_view)).setText("Before");
-        solo.clickOnView(solo.getView(R.id.problem_description_edit_button));
-        solo.waitForText(getActivity().getResources().getString(R.string.edit_problem));
-        solo.clearEditText((EditText)solo.getView(R.id.problem_description_edit_text));
-        solo.enterText((EditText)solo.getView(R.id.problem_description_edit_text), "After");
-        solo.clickOnView(solo.getView(R.id.problem_description_cancel_button));
-        assertEquals(
-            "Before",
-            ((TextView)solo.getView(R.id.problem_description_view)).getText().toString()
-        );
-    }
-
     @Test
     public void testNewRecord() {
         solo.clickOnView(solo.getView(R.id.problem_add_record_button));
