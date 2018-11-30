@@ -18,6 +18,7 @@ import ca.klapstein.baudit.views.PatientRowView;
 public class CareProviderHomePresenter extends HomePresenter<HomeView> {
 
     private CareProvider careProvider;
+
     public CareProviderHomePresenter(HomeView view, Context context) {
         super(view, context);
         careProvider = dataManager.getLoggedInCareProvider();
@@ -28,7 +29,8 @@ public class CareProviderHomePresenter extends HomePresenter<HomeView> {
             // TODO: error
         } else {
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
-            rowView.setPatientNameText(patient.getUsername().toString());
+            rowView.updatePatientNameText(patient.getUsername().toString());
+            rowView.updatePatientProblemNum(patient.getProblemTreeSet().size());
         }
 
     }

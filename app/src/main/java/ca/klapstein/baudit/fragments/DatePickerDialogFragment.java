@@ -5,12 +5,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import ca.klapstein.baudit.activities.ProblemActivity;
 
 import java.util.Calendar;
 
-import ca.klapstein.baudit.activities.ProblemActivity;
-
 public class DatePickerDialogFragment extends DialogFragment {
+    public static final String TAG = "datePicker";
 
     private static final String YEAR = "year";
     private static final String MONTH = "month";

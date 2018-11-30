@@ -37,29 +37,6 @@ public class DataModelTest {
     }
 
     @Test
-    public void commitPatientTreeSetNull() {
-        // commit an patientTreeSet this does nothing to the remote
-        PatientTreeSet patientTreeSet = new PatientTreeSet();
-        dataModel.commitPatientTreeSet(patientTreeSet);
-    }
-
-    @Test
-    public void commitPatientTreeSet() {
-        PatientTreeSet patientTreeSet = new PatientTreeSet();
-        Patient patient2 = new Patient(
-                new Username("TESTPatient2"),
-                new ContactInfo("Patient", "Two", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
-        );
-        patientTreeSet.add(patient2);
-        Patient patient3 = new Patient(
-                new Username("TESTPatient3"),
-                new ContactInfo("Patient", "Three", new Email("foobar@example.com"), new PhoneNumber("111-111-1111"))
-        );
-        patientTreeSet.add(patient3);
-        dataModel.commitPatientTreeSet(patientTreeSet);
-    }
-
-    @Test
     public void getPatientNull() {
         Patient patient = dataModel.getPatient(new Username("NONSUCHPATIENT"));
         assertNull(patient);
@@ -73,12 +50,6 @@ public class DataModelTest {
         Patient patient1 = dataModel.getPatient(new Username("TESTPatient1"));
         assertNotNull(patient1);
         assertEquals(new Username("TESTPatient1"), patient1.getUsername());
-    }
-
-    @Test
-    public void getPatients() {
-        PatientTreeSet patientTreeSet = dataModel.getPatients();
-        assertNotNull(patientTreeSet);
     }
 
     @Test

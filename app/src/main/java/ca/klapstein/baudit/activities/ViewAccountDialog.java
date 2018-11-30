@@ -37,22 +37,42 @@ public class ViewAccountDialog extends DialogFragment implements ViewAccountView
     }
 
     @Override
-    public void setUsername() {
-        // TODO: implement
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            presenter.viewStarted(getArguments().getString("username", ""));
+        } else {
+            updateViewAccountError();
+        }
     }
 
     @Override
-    public void setEmail() {
-        // TODO: implement
+    public void updateUsernameDisplay(String username) {
+
     }
 
     @Override
-    public void setPhoneNumber() {
-        // TODO: implement
+    public void updateFirstNameDisplay(String firstName) {
+
     }
 
     @Override
-    public void setViewAccountError() {
-        // TODO: implement
+    public void updateLastNameDisplay(String lastName) {
+
+    }
+
+    @Override
+    public void updateEmailDisplay(String email) {
+
+    }
+
+    @Override
+    public void updatePhoneNumberDisplay(String phoneNumber) {
+
+    }
+
+    @Override
+    public void updateViewAccountError() {
+
     }
 }
