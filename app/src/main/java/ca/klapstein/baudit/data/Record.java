@@ -25,26 +25,25 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
-    private UUID recordID;
+    private UUID recordId;
 
     public Record() {
         date = new Date();
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
 
     public Record(String title) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
 
     public Record(String title, String comment) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
         this.setComment(comment);
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
-
 
     // TODO: This check might not be needed because the UI limits the title length
     /**
@@ -195,25 +194,23 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
-        if (getDate().compareTo(record.getDate()) != 0) {
-            return getDate().compareTo(record.getDate());
+        if (record.getRecordId() == null) {
+            record.setRecordId(UUID.randomUUID());
         }
-
-        if (getTitle().compareTo(record.getTitle()) != 0) {
-            return getTitle().compareTo(record.getTitle());
+        if (getRecordId() == null) {
+            setRecordId(UUID.randomUUID());
         }
-
         if (getRecordId().compareTo(record.getRecordId()) == 0) {
             return 0;
         }
-        return recordID.compareTo(record.getRecordId());
+        return date.compareTo(record.getDate());
     }
 
     private UUID getRecordId() {
-        return recordID;
+        return recordId;
     }
 
     private void setRecordId(UUID recordId) {
-        this.recordID = recordId;
+        this.recordId = recordId;
     }
 }

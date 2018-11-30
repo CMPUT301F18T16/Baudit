@@ -17,7 +17,7 @@ public class Problem implements Comparable<Problem> {
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-    private UUID problemID;
+    private UUID problemId;
     private String title;
     private String description;
     private Date date;
@@ -27,7 +27,7 @@ public class Problem implements Comparable<Problem> {
         this.setTitle(title);
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
-        this.problemID = UUID.randomUUID();
+        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -64,7 +64,7 @@ public class Problem implements Comparable<Problem> {
      * @return {@code RecordTreeSet}
      */
     public RecordTreeSet getRecordTreeSet() {
-        return this.recordTreeSet;
+        return recordTreeSet;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Problem implements Comparable<Problem> {
      * @return {@code String}
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -104,7 +104,7 @@ public class Problem implements Comparable<Problem> {
      * @return {@code String}
      */
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Problem implements Comparable<Problem> {
      * @return {@code Date}
      */
     public Date getDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -159,13 +159,13 @@ public class Problem implements Comparable<Problem> {
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
-        if (problem.getProblemID() == null) {
-            problem.setProblemID(UUID.randomUUID());
+        if (problem.getProblemId() == null) {
+            problem.setProblemId(UUID.randomUUID());
         }
-        if (getProblemID() == null) {
-            setProblemID(UUID.randomUUID());
+        if (getProblemId() == null) {
+            setProblemId(UUID.randomUUID());
         }
-        if (getProblemID().compareTo(problem.getProblemID()) == 0) {
+        if (getProblemId().compareTo(problem.getProblemId()) == 0) {
             return 0;
         }
 
@@ -176,11 +176,11 @@ public class Problem implements Comparable<Problem> {
         }
     }
 
-    private UUID getProblemID() {
-        return problemID;
+    private UUID getProblemId() {
+        return problemId;
     }
 
-    private void setProblemID(UUID problemID) {
-        this.problemID = problemID;
+    private void setProblemId(UUID problemId) {
+        this.problemId = problemId;
     }
 }
