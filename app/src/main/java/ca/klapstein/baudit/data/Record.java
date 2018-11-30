@@ -211,10 +211,10 @@ public class Record implements Comparable<Record> {
     }
 
     private UUID getRecordId() {
-        return recordId;
+        return recordID;
     }
 
     private void setRecordId(UUID recordId) {
-        this.recordId = recordId;
+        this.recordID = recordId;
     }
 }
