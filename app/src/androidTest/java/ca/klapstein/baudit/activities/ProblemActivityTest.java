@@ -2,12 +2,8 @@ package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.widget.EditText;
-import android.widget.TextView;
-import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
@@ -17,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static org.junit.Assert.assertEquals;
 
 
 @RunWith(AndroidJUnit4.class)
