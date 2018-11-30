@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +35,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView commentView;
     private EditText commentInput;
     private Button commitButton;
+    private ImageButton record_geolocation_edit_button;
     private int problemId;
 
 
@@ -53,6 +56,15 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             @Override
             public void onClick(View v) {
                 presenter.commitRecord();
+            }
+        });
+
+        record_geolocation_edit_button = findViewById(R.id.record_geolocation_edit_button);
+        record_geolocation_edit_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
+                startActivity(intent);
             }
         });
 

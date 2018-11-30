@@ -1,6 +1,8 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.views.LocationView;
 
 /**
@@ -8,14 +10,21 @@ import ca.klapstein.baudit.views.LocationView;
  *
  * @see LocationView
  */
-public class LocationPresenter extends Presenter<LocationView> {
+public class LocationPresenter <V extends LocationView>
+        extends Presenter<V> {
 
-    public LocationPresenter(LocationView view, Context context) {
+    private Patient patient;
+    public Patient getPatient(){return patient;}
+
+    public LocationPresenter(V view, Context context) {
         super(view, context);
+        patient = dataManager.getLoggedInPatient();
     }
 
     public boolean validateLocation(long posx, long posy) {
-        // TODO:
+        if (posx>180 || posx<-180 || posy>90 || posy<-90){
+            return false;
+        }
         return true;
     }
 }

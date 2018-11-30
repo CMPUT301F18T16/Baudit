@@ -8,7 +8,8 @@ import ca.klapstein.baudit.activities.MapAllProblemsActivity;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.views.MapAllProblemsView;
 
-public class MapAllProblemsPresenter <V extends MapAllProblemsView> extends Presenter<V> {
+public class MapAllProblemsPresenter <V extends MapAllProblemsView>
+        extends Presenter<V> {
     private Patient patient;
 
     public Patient getPatient(){return patient;}
