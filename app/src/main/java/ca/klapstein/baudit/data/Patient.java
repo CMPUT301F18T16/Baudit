@@ -43,6 +43,4 @@ public class Patient extends Account {
     public void setBodyPhoto(BodyPhoto bodyPhoto) {
         this.bodyPhoto = bodyPhoto;
     }
-
-    public void setProblemTreeSet(ProblemTreeSet problemTreeSet){this.problemTreeSet = problemTreeSet;}
 }
