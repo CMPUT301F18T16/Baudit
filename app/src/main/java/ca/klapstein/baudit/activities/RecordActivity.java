@@ -48,6 +48,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         commentView = findViewById(R.id.record_comment_view);
         commentInput = findViewById(R.id.record_comment_edit_text);
 
+        Button cancelButton = findViewById(R.id.record_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         Button saveButton = findViewById(R.id.record_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +77,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentView.setVisibility(View.VISIBLE);
             commentInput.setVisibility(View.GONE);
 
+            cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
             if (recordPosition == -1) {
@@ -83,6 +92,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentView.setVisibility(View.GONE);
             commentInput.setVisibility(View.VISIBLE);
 
+            cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
         }
     }
