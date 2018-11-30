@@ -32,6 +32,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private ImageButton commentEditButton;
     private ImageButton commentSaveButton;
     private ImageButton commentCancelButton;
+    private ImageButton geolocationEditButton;
     private TextView commentView;
     private EditText commentInput;
     private Button commitButton;
@@ -50,7 +51,18 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         recordId = getIntent().getIntExtra("recordId", -1);
 
         presenter = new RecordPresenter(this, getApplicationContext());
-
+        geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
+        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(
+                        RecordActivity.this,
+                        LocationActivity.class
+                );
+                intent.putExtra("recordId",recordId);
+                startActivity(intent);
+            }
+        });
         commitButton = findViewById(R.id.record_commit_button);
         commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +76,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
+                intent.putExtra("recordId",recordId);
+                intent.putExtra("problemId",problemId);
                 startActivity(intent);
             }
         });

@@ -43,7 +43,8 @@
         <activity
                 android:name=".activities.CreateAccountActivity"
                 android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.LocationActivity"/>
+        <activity
+            android:name=".activities.LocationActivity"/>
         <activity
                 android:name=".activities.ProblemActivity"
                 android:theme="@style/BauditTheme"/>
@@ -76,6 +77,7 @@
                 android:theme="@style/BauditTheme"/>
         <activity android:name=".activities.DisplayQRCodeActivity">
         </activity>
+
         <activity android:name=".activities.CareProviderProblemListActivity">
         </activity>
     </application>

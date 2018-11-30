@@ -2,7 +2,9 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.LocationView;
 
 /**
@@ -27,4 +29,8 @@ public class LocationPresenter <V extends LocationView>
         }
         return true;
     }
+
+    /*public void setRecordGeoLocation(GeoLocation geoLocation){
+        Record record
+    }*/
 }

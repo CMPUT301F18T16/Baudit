@@ -1,9 +1,11 @@
 package ca.klapstein.baudit.views;
 
+import com.google.android.gms.maps.GoogleMap;
+
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Record;
 
 public interface LocationView extends View {
-    void chooseLocation(Patient patient);
-    // void updateLocation(); // TODO
-    // void setLocationError();
+    //void startSetGeoLocation(GoogleMap googleMap);
 }

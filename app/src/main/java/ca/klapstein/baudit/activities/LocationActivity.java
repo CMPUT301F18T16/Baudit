@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -9,9 +10,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.GeoLocation;
+import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.presenters.LocationPresenter;
 import ca.klapstein.baudit.views.LocationView;
 
@@ -22,22 +25,22 @@ import ca.klapstein.baudit.views.LocationView;
 public class LocationActivity extends AppCompatActivity
         implements LocationView, OnMapReadyCallback {
 
-    private static final String TAG = "LocationActivity";
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
-
-    private LocationPresenter presenter;
     private MapView mapView;
+    private LocationPresenter presenter;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         Toolbar toolbar = findViewById(R.id.location_toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setTitle("Add location");
 
-        presenter = new LocationPresenter(this,getApplicationContext());
+        presenter = new LocationPresenter(this, getApplicationContext());
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -47,6 +50,7 @@ public class LocationActivity extends AppCompatActivity
         mapView = findViewById(R.id.choose_location_map);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
+
     }
 
     @Override
@@ -66,11 +70,13 @@ public class LocationActivity extends AppCompatActivity
         super.onStop();
         mapView.onStop();
     }
+
     @Override
     protected void onPause() {
         mapView.onPause();
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         mapView.onDestroy();
@@ -96,12 +102,6 @@ public class LocationActivity extends AppCompatActivity
         mapView.onLowMemory();
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng ny = new LatLng(40.7143528, -74.0059731);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
-    }
-
     /**
      * Called when pointer capture is enabled or disabled for the current window.
      *
@@ -112,8 +112,22 @@ public class LocationActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void chooseLocation(Patient patient) {
+    public void startSetLocation(GoogleMap googleMap) {
+        LatLng marker = new LatLng(53, -113);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        GeoLocation geolocation = new GeoLocation(marker.latitude, marker.longitude);
+        googleMap.addMarker(new MarkerOptions().position(marker).draggable(true));
+    }
 
+    /*public void setLocation(GeoLocation geoLocation) {
+        presenter.setRecordGeoLocation(geoLocation);
+    }*/
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //LatLng ny = new LatLng(40.7143528, -74.0059731);
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        startSetLocation(googleMap);
     }
 }
