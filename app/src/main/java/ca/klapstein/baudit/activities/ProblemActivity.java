@@ -6,6 +6,10 @@ import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -160,6 +164,15 @@ public class ProblemActivity extends AppCompatActivity
         updateRecordCountText();
     }
 
+    private Bitmap createImage(int width, int height, int color) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setColor(color);
+        canvas.drawRect(0F, 0F, (float) width, (float) height, paint);
+        return bitmap;
+    }
+
     @Override
     public void updateRecordList(RecordTreeSet records) {
         recordList.removeAllViews();
@@ -168,6 +181,8 @@ public class ProblemActivity extends AppCompatActivity
             final int recordPosition = index;
             final CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
                 .inflate(R.layout.card_record, recordList, false);
+            ImageView recordImage = recordView.findViewById(R.id.record_card_image);
+            recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
             recordTitle.setText(record.getTitle());
