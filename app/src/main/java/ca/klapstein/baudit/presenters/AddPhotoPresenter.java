@@ -2,16 +2,58 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
+import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.views.AddPhotoView;
 
 public class AddPhotoPresenter extends Presenter<AddPhotoView> {
 
+    private static final String TAG = "AddPhotoPresenter";
+    private Patient patient;
+
     public AddPhotoPresenter(AddPhotoView view, Context context) {
         super(view, context);
+        patient = dataManager.getLoggedInPatient();
     }
 
-    public boolean ValidatePhoto(Bitmap bitmap) {
-        // TODO:
-        return true;
+    public void getLastRecordPhoto(int problemId) {
+        patient = dataManager.getLoggedInPatient();
+        Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+        Record record = problem.getRecordTreeSet().pollFirst();
+        if (!record.getPhotos().isEmpty()) {
+            view.updateCameraOverlayImage(record.getPhotos().get(record.getPhotos().size() - 1).getBitmap());
+        } else {
+            view.updateCameraOverlayError();
+        }
+    }
+
+    public void commitRecordPhoto(Bitmap bitmap, int recordId, int problemId) {
+        try {
+            patient = dataManager.getLoggedInPatient();
+            RecordPhoto recordPhoto = new RecordPhoto(bitmap);
+            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
+            record.addPhoto(recordPhoto);
+            problem.getRecordTreeSet().add(record);
+            patient.getProblemTreeSet().add(problem);
+            dataManager.commitPatient(patient);
+            view.commitPhotoSuccess();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to commit RecordPhoto", e);
+            view.commitPhotoFailure();
+        }
+    }
+
+    public void commitBodyPhoto(Bitmap bitmap) {
+        try {
+            patient = dataManager.getLoggedInPatient();
+            patient.setBodyPhoto(new BodyPhoto(bitmap));
+            dataManager.commitPatient(patient);
+            view.commitPhotoSuccess();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to commit BodyPhoto", e);
+            view.commitPhotoFailure();
+        }
     }
 }
+
