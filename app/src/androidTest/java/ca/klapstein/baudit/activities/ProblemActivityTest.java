@@ -51,11 +51,4 @@ public class ProblemActivityTest extends ActivityTestRule<ProblemActivity> {
     public void testOnCreate() {
         solo.assertCurrentActivity("Wrong Activity", ProblemActivity.class);
     }
-
-    @Test
-    public void testNewRecord() {
-        solo.clickOnView(solo.getView(R.id.problem_add_record_button));
-        solo.waitForActivity(RecordActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", RecordActivity.class);
-    }
 }
