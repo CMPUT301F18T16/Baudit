@@ -1,7 +1,9 @@
 package ca.klapstein.baudit.views;
 
 public interface BodyLocationView extends View {
-    void setBodyLocationView();
+    void updateBodyLocationImage();
 
-    void setBodyLocationError();
+    void updateBodyLocationCoordsList();
+
+    void updateBodyLocationError();
 }

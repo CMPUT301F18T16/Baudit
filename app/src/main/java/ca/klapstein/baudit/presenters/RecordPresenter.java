@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.util.Log;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -13,15 +14,16 @@ import ca.klapstein.baudit.views.RecordView;
  * @see RecordView
  */
 public class RecordPresenter extends Presenter<RecordView> {
+    private static final String TAG = "RecordPresenter";
 
     private final Patient patient;
     private Record record;
     private Problem problem;
+
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
         // TODO: load patient via other method so that care provider can obtain record aswell
         patient = dataManager.getLoggedInPatient();
-
     }
 
     public void viewStarted(int problemId, int recordId) {
@@ -36,7 +38,6 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateTitleField("");
             record = new Record("Set title", "Set comment");
         } else { // If the record exists and is being edited
-            // TODO: Replace with real data once implemented
             record = (Record) problem.getRecordTreeSet().toArray()[recordId];
         }
         view.updateTitleField(record.getTitle());
@@ -72,6 +73,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {
+            Log.e(TAG, "failed committing Record", e);
             view.commitRecordFailure();
         }
     }
