@@ -19,6 +19,10 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
+    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
+    public static final String RECORD_POSITION_EXTRA = "recordPosition";
+    public static final String MODE_EXTRA = "mode";
+
     private int problemPosition;
     private int recordPosition;
     private RecordPresenter presenter;
@@ -36,9 +40,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
-        problemPosition = getIntent().getIntExtra("problemPosition", -1);
-        recordPosition = getIntent().getIntExtra("recordPosition", -1);
-        String mode = getIntent().getStringExtra("mode");
+        problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
+        recordPosition = getIntent().getIntExtra(RECORD_POSITION_EXTRA, -1);
+        String mode = getIntent().getStringExtra(MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 

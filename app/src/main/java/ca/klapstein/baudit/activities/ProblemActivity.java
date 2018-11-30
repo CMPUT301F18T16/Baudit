@@ -40,6 +40,10 @@ public class ProblemActivity extends AppCompatActivity
     implements ProblemView, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
+    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
+    public static final String RECORD_POSITION_EXTRA = "recordPosition";
+    public static final String MODE_EXTRA = "mode";
+
     private int problemPosition;
     private ProblemPresenter presenter;
     private Calendar problemTime = Calendar.getInstance();
@@ -61,8 +65,8 @@ public class ProblemActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
-        problemPosition = getIntent().getIntExtra("problemPosition", -1);
-        String mode = getIntent().getStringExtra("mode");
+        problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
+        String mode = getIntent().getStringExtra(MODE_EXTRA);
 
         presenter = new ProblemPresenter(this, getApplicationContext());
 
@@ -147,9 +151,9 @@ public class ProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
-                intent.putExtra("problemPosition", problemPosition);
-                intent.putExtra("recordPosition", -1);
-                intent.putExtra("mode", "edit");
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                intent.putExtra(RECORD_POSITION_EXTRA, -1);
+                intent.putExtra(MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
@@ -195,9 +199,9 @@ public class ProblemActivity extends AppCompatActivity
                         ProblemActivity.this,
                         RecordActivity.class
                     );
-                    intent.putExtra("problemPosition", problemPosition);
-                    intent.putExtra("recordPosition", recordPosition);
-                    intent.putExtra("mode", "view");
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                    intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                    intent.putExtra(MODE_EXTRA, "view");
                     startActivity(intent);
                 }
             });
@@ -216,9 +220,9 @@ public class ProblemActivity extends AppCompatActivity
                             );
                             switch (item.getItemId()) {
                                 case R.id.edit_record:
-                                    intent.putExtra("problemPosition", problemPosition);
-                                    intent.putExtra("recordPosition", recordPosition);
-                                    intent.putExtra("mode", "edit");
+                                    intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                                    intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                                    intent.putExtra(MODE_EXTRA, "edit");
                                     startActivity(intent);
                                     break;
                                 case R.id.delete_record:

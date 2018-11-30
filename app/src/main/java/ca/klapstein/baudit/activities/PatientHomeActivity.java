@@ -33,6 +33,9 @@ import ca.klapstein.baudit.views.ProblemRowView;
  */
 public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
+    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
+    public static final String MODE_EXTRA = "mode";
+
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -95,8 +98,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                intent.putExtra("problemPosition", -1);
-                intent.putExtra("mode", "edit");
+                intent.putExtra(PROBLEM_POSITION_EXTRA, -1);
+                intent.putExtra(MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
@@ -174,8 +177,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                    intent.putExtra("problemPosition", viewHolder.getAdapterPosition());
-                    intent.putExtra("mode", "view");
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
+                    intent.putExtra(MODE_EXTRA, "view");
                     startActivity(intent);
                 }
             });
@@ -195,10 +198,10 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             switch (item.getItemId()) {
                                 case R.id.edit_problem:
                                     intent.putExtra(
-                                        "problemPosition",
+                                        PROBLEM_POSITION_EXTRA,
                                         viewHolder.getAdapterPosition()
                                     );
-                                    intent.putExtra("mode", "edit");
+                                    intent.putExtra(MODE_EXTRA, "edit");
                                     startActivity(intent);
                                     break;
                                 case R.id.delete_problem:
