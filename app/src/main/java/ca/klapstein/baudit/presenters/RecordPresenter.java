@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
+
+import java.util.ArrayList;
+
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -41,6 +44,7 @@ public class RecordPresenter extends Presenter<RecordView> {
 
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
+        view.updatePhotosLayout(new ArrayList<Bitmap>());
     }
 
     public void commitRecord(int position, String title, String comment) {

@@ -181,6 +181,7 @@ public class ProblemActivity extends AppCompatActivity
                     );
                     intent.putExtra("problemPosition", problemPosition);
                     intent.putExtra("recordPosition", recordPosition);
+                    intent.putExtra("mode", "view");
                     startActivity(intent);
                 }
             });
