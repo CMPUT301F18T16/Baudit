@@ -44,7 +44,6 @@ public class RecordPresenter extends Presenter<RecordView> {
 
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
-        view.updatePhotosLayout(new ArrayList<Bitmap>());
     }
 
     public void commitRecord(int position, String title, String comment) {

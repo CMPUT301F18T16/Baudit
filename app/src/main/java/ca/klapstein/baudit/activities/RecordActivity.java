@@ -1,15 +1,10 @@
 package ca.klapstein.baudit.activities;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
-
-import java.util.ArrayList;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordPresenter;
@@ -32,7 +27,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText titleInput;
     private TextView commentView;
     private EditText commentInput;
-    private GridLayout photosLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +84,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             saveButton.setVisibility(View.VISIBLE);
         }
-
-        photosLayout = findViewById(R.id.record_photos_layout);
     }
 
     @Override
@@ -110,28 +102,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void updateCommentField(String comment) {
         commentView.setText(comment);
         commentInput.setText(comment);
-    }
-
-    @Override
-    public void updatePhotosLayout(ArrayList<Bitmap> photos) {
-        photosLayout.removeAllViews();
-        for (Bitmap photo: photos) {
-            ImageView photoView = (ImageView) LayoutInflater.from(photosLayout.getContext())
-                .inflate(R.layout.photo_tile, photosLayout, false);
-            photoView.setImageBitmap(photo);
-            photosLayout.addView(photoView);
-        }
-        ImageButton addPhotoButton = (ImageButton) LayoutInflater.from(photosLayout.getContext())
-            .inflate(R.layout.add_photo_button, photosLayout, false);
-
-        addPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Open camera activity
-            }
-        });
-
-        photosLayout.addView(addPhotoButton);
     }
 
     @Override
