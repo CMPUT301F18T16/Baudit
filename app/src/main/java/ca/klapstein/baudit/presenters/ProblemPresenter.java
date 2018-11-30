@@ -2,6 +2,8 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -32,7 +34,10 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     public void viewStarted(int position) {
         patient = dataManager.getLoggedInPatient();
         if (position == -1) { // If the problem is new
-            problem = new Problem("Untitled", "");
+            problem = new Problem(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_description)
+            );
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
         }

@@ -1,11 +1,9 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.util.Log;
 
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -35,7 +33,10 @@ public class RecordPresenter extends Presenter<RecordView> {
         problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
 
         if (recordPosition == -1) { // If the record is new
-            record = new Record("", "");
+            record = new Record(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_comment)
+            );
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         }

@@ -81,4 +81,7 @@
     <string name="delete_problem_question">Delete problem?</string>
     <string name="view_record">View Record</string>
     <string name="delete_record_question">Delete record?</string>
+    <string name="default_title">Untitled</string>
+    <string name="default_description"></string>
+    <string name="default_comment"></string>
 </resources>
