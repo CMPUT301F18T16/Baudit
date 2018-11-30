@@ -166,9 +166,9 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
             final Problem problem = presenter.getProblemAt(i);
-            viewHolder.setProblemTitleText(problem.getTitle());
-            viewHolder.setProblemDateText(problem.getTimeStamp());
-            viewHolder.setProblemDescriptionText(problem.getDescription());
+            viewHolder.updateProblemTitleText(problem.getTitle());
+            viewHolder.updateProblemDateText(problem.getTimeStamp());
+            viewHolder.updateProblemDescriptionText(problem.getDescription());
 
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
