@@ -17,6 +17,7 @@ import ca.klapstein.baudit.views.RecordView;
  * @see RecordView
  */
 public class RecordPresenter extends Presenter<RecordView> {
+
     private static final String TAG = "RecordPresenter";
 
     private final Patient patient;
@@ -25,7 +26,7 @@ public class RecordPresenter extends Presenter<RecordView> {
 
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
-        // TODO: load patient via other method so that care provider can obtain record aswell
+        // TODO: load patient via other method so that care provider can obtain record as well
         patient = dataManager.getLoggedInPatient();
     }
 
@@ -42,32 +43,14 @@ public class RecordPresenter extends Presenter<RecordView> {
         view.updateCommentField(record.getComment());
     }
 
-    public void saveTitleClicked(String newTitle) {
-        try {
-            record.setTitle(newTitle);
-            view.updateTitleField(newTitle);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
+    public void commitRecord(int position, String title, String comment) {
+        record.setTitle(title);
+        record.setComment(comment);
 
-    public void saveCommentClicked(String newComment) {
         try {
-            record.setComment(newComment);
-            view.updateCommentField(newComment);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
-
-    public void commitRecord() {
-        try {
-            // TODO: commit to remote/local
-            // TODO: issue if this is adding a record on a brand new non commited problem.
-            // TODO: will create two problems instead of 1 when fulled exited both edit/add prompts
-            // TODO: possible solution lock only adding records only after creating the problem
-            problem.getRecordTreeSet().add(record);
-            patient.getProblemTreeSet().add(problem);
+            if (position == -1) {
+                problem.getRecordTreeSet().add(record);
+            }
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {

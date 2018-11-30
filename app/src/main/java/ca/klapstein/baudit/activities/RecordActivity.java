@@ -24,12 +24,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     private TextView titleView;
     private EditText titleInput;
-
     private TextView commentView;
     private EditText commentInput;
-    private Button saveButton;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,37 +40,48 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
-        saveButton = findViewById(R.id.record_save_button);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.commitRecord();
-            }
-        });
-
         titleView = findViewById(R.id.record_title_view);
         titleInput = findViewById(R.id.record_title_edit_text);
 
         commentView = findViewById(R.id.record_comment_view);
         commentInput = findViewById(R.id.record_comment_edit_text);
 
+        Button saveButton = findViewById(R.id.record_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.commitRecord(
+                    recordPosition,
+                    titleInput.getText().toString(),
+                    commentInput.getText().toString()
+                );
+            }
+        });
+
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
 
-            titleInput.setVisibility(View.GONE);
             titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
 
-            commentInput.setVisibility(View.GONE);
             commentView.setVisibility(View.VISIBLE);
+            commentInput.setVisibility(View.GONE);
 
+            saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+            if (recordPosition == -1) {
+                getSupportActionBar().setTitle(getResources().getString(R.string.new_record));
+            } else {
+                getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+            }
 
-            titleInput.setVisibility(View.VISIBLE);
             titleView.setVisibility(View.GONE);
+            titleInput.setVisibility(View.VISIBLE);
 
-            commentInput.setVisibility(View.VISIBLE);
             commentView.setVisibility(View.GONE);
+            commentInput.setVisibility(View.VISIBLE);
+
+            saveButton.setVisibility(View.VISIBLE);
         }
     }
 
