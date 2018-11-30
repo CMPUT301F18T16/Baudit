@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static java.lang.Thread.sleep;
 
 @RunWith(AndroidJUnit4.class)
 public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsActivity> {
@@ -32,7 +31,7 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
 
         Patient patient = new Patient(
                 new Username("ThisIsATest"),
-                new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234")));
+                new ContactInfo("Test", "McTest", new Email("test@example.com"), new PhoneNumber("7805551234")));
 
         //  create a first problem with one record with a geo location
         Problem problem1 = new Problem("First problem", "I can't feel my face");
@@ -68,14 +67,13 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
 
     @After
     public void tearDown() {
-        // TODO: disable for debugging
-//        dataModel.clearOfflineLoginAccount();
-//        solo.finishOpenedActivities();
+        dataModel.clearOfflineLoginAccount();
+        solo.finishOpenedActivities();
     }
 
     @Test
-    public void testOnCreate() throws InterruptedException {
+    public void testOnCreate() {
         solo.assertCurrentActivity("Wrong Activity", MapAllProblemsActivity.class);
-        sleep(11200);
+        solo.waitForActivity(solo.getCurrentActivity().toString());
     }
 }
