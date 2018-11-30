@@ -64,6 +64,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return problem.getRecordTreeSet().size();
     }
 
+    public void deleteRecordClicked(int recordPosition) {
+        Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+        problem.getRecordTreeSet().remove(deletedRecord);
+        dataManager.commitPatient(patient);
+        view.updateRecordList(problem.getRecordTreeSet());
+    }
+
     public void commitProblem(int position, String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);

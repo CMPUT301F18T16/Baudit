@@ -1,6 +1,9 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.Log;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
@@ -27,19 +30,14 @@ public class RecordPresenter extends Presenter<RecordView> {
     }
 
     public void viewStarted(int problemPosition, int recordPosition) {
-        if (problemPosition == -1) {
-            problem = new Problem("Untitled", "");
-
-        } else {
-            problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
-        }
+        problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
 
         if (recordPosition == -1) { // If the record is new
-            view.updateTitleField("");
-            record = new Record("Set title", "Set comment");
+            record = new Record("", "");
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         }
+
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
     }
@@ -76,5 +74,14 @@ public class RecordPresenter extends Presenter<RecordView> {
             Log.e(TAG, "failed committing Record", e);
             view.commitRecordFailure();
         }
+    }
+
+    public static Bitmap createImage(int width, int height, int color) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setColor(color);
+        canvas.drawRect(0F, 0F, (float) width, (float) height, paint);
+        return bitmap;
     }
 }

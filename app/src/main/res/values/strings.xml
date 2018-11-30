@@ -79,4 +79,6 @@
     <string name="identification_minc">Identification (MINC)</string>
     <string name="view_problem">View Problem</string>
     <string name="delete_problem_question">Delete problem?</string>
+    <string name="view_record">View Record</string>
+    <string name="delete_record_question">Delete record?</string>
 </resources>

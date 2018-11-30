@@ -22,18 +22,12 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private int recordPosition;
     private RecordPresenter presenter;
 
-    private ImageButton titleEditButton;
-    private ImageButton titleSaveButton;
-    private ImageButton titleCancelButton;
     private TextView titleView;
     private EditText titleInput;
 
-    private ImageButton commentEditButton;
-    private ImageButton commentSaveButton;
-    private ImageButton commentCancelButton;
     private TextView commentView;
     private EditText commentInput;
-    private Button commitButton;
+    private Button saveButton;
 
 
 
@@ -46,19 +40,42 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         problemPosition = getIntent().getIntExtra("problemPosition", -1);
         recordPosition = getIntent().getIntExtra("recordPosition", -1);
+        String mode = getIntent().getStringExtra("mode");
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
-        commitButton = findViewById(R.id.record_commit_button);
-        commitButton.setOnClickListener(new View.OnClickListener() {
+        saveButton = findViewById(R.id.record_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.commitRecord();
             }
         });
 
-        initTitleViews();
-        initCommentViews();
+        titleView = findViewById(R.id.record_title_view);
+        titleInput = findViewById(R.id.record_title_edit_text);
+
+        commentView = findViewById(R.id.record_comment_view);
+        commentInput = findViewById(R.id.record_comment_edit_text);
+
+        if ("view".equals(mode)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
+
+            titleInput.setVisibility(View.GONE);
+            titleView.setVisibility(View.VISIBLE);
+
+            commentInput.setVisibility(View.GONE);
+            commentView.setVisibility(View.VISIBLE);
+
+        } else if ("edit".equals(mode)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+
+            titleInput.setVisibility(View.VISIBLE);
+            titleView.setVisibility(View.GONE);
+
+            commentInput.setVisibility(View.VISIBLE);
+            commentView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -69,18 +86,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     @Override
     public void updateTitleField(String title) {
-        if (title.isEmpty()) {
-            getSupportActionBar().setTitle(R.string.new_record);
-        } else {
-            getSupportActionBar().setTitle(title);
-        }
-
         titleView.setText(title);
+        titleInput.setText(title);
     }
 
     @Override
     public void updateCommentField(String comment) {
         commentView.setText(comment);
+        commentInput.setText(comment);
     }
 
     @Override
@@ -92,103 +105,5 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
-    }
-
-    private void initTitleViews() {
-        titleView = findViewById(R.id.record_title_view);
-        titleInput = findViewById(R.id.record_title_edit_text);
-        titleEditButton = findViewById(R.id.record_title_edit_button);
-        titleEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(true);
-            }
-        });
-        titleSaveButton = findViewById(R.id.record_title_save_button);
-        titleSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveTitleClicked(titleInput.getText().toString());
-                setTitleEditMode(false);
-            }
-        });
-        titleCancelButton = findViewById(R.id.record_title_cancel_button);
-        titleCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(false);
-            }
-        });
-    }
-
-    private void initCommentViews() {
-        commentView = findViewById(R.id.record_comment_view);
-        commentInput = findViewById(R.id.record_comment_edit_text);
-        commentEditButton = findViewById(R.id.record_comment_edit_button);
-        commentEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCommentEditMode(true);
-            }
-        });
-        commentSaveButton = findViewById(R.id.record_comment_save_button);
-        commentSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveCommentClicked(commentInput.getText().toString());
-                setCommentEditMode(false);
-            }
-        });
-        commentCancelButton = findViewById(R.id.record_comment_cancel_button);
-        commentCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCommentEditMode(false);
-            }
-        });
-    }
-
-    private void setTitleEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
-            titleInput.setText(titleView.getText().toString());
-            titleInput.setVisibility(View.VISIBLE);
-            titleView.setVisibility(View.GONE);
-
-            titleEditButton.setVisibility(View.GONE);
-            titleSaveButton.setVisibility(View.VISIBLE);
-            titleCancelButton.setVisibility(View.VISIBLE);
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            titleInput.setVisibility(View.GONE);
-            titleView.setVisibility(View.VISIBLE);
-
-            titleEditButton.setVisibility(View.VISIBLE);
-            titleSaveButton.setVisibility(View.GONE);
-            titleCancelButton.setVisibility(View.GONE);
-        }
-    }
-
-    private void setCommentEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
-            commentInput.setText(commentView.getText().toString());
-            commentInput.setVisibility(View.VISIBLE);
-            commentView.setVisibility(View.GONE);
-
-            commentEditButton.setVisibility(View.GONE);
-            commentSaveButton.setVisibility(View.VISIBLE);
-            commentCancelButton.setVisibility(View.VISIBLE);
-
-
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            commentInput.setVisibility(View.GONE);
-            commentView.setVisibility(View.VISIBLE);
-
-            commentEditButton.setVisibility(View.VISIBLE);
-            commentSaveButton.setVisibility(View.GONE);
-            commentCancelButton.setVisibility(View.GONE);
-        }
     }
 }

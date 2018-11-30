@@ -46,36 +46,6 @@
                     android:textSize="18sp"
                     android:text="@string/title_label" />
 
-                <ImageButton
-                    android:id="@+id/record_title_edit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:src="@drawable/ic_pencil_white_24dp"
-                    android:background="@android:color/transparent"
-                    android:tint="@color/vaporwave_purple"/>
-
-                <ImageButton
-                    android:id="@+id/record_title_save_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:src="@drawable/ic_content_save_white_24dp"
-                    android:tint="@color/vaporwave_blue"
-                    android:background="@android:color/transparent"
-                    android:visibility="gone" />
-
-                <ImageButton
-                    android:id="@+id/record_title_cancel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_close_white_24dp"
-                    android:tint="@color/vaporwave_pink"
-                    android:background="@android:color/transparent"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <TextView
@@ -108,36 +78,6 @@
                     android:textSize="18sp"
                     android:text="@string/comment_label" />
 
-                <ImageButton
-                    android:id="@+id/record_comment_edit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:src="@drawable/ic_pencil_white_24dp"
-                    android:background="@android:color/transparent"
-                    android:tint="@color/vaporwave_purple"/>
-
-                <ImageButton
-                    android:id="@+id/record_comment_save_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:src="@drawable/ic_content_save_white_24dp"
-                    android:tint="@color/vaporwave_blue"
-                    android:background="@android:color/transparent"
-                    android:visibility="gone" />
-
-                <ImageButton
-                    android:id="@+id/record_comment_cancel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_close_white_24dp"
-                    android:tint="@color/vaporwave_pink"
-                    android:background="@android:color/transparent"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <TextView
@@ -169,16 +109,6 @@
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:text="@string/location_label" />
-
-                <ImageButton
-                    android:id="@+id/record_geolocation_edit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:src="@drawable/ic_pencil_white_24dp"
-                    android:background="@android:color/transparent"
-                    android:tint="@color/vaporwave_purple"/>
 
             </LinearLayout>
 
@@ -214,11 +144,12 @@
                 android:text="@string/keywords_label" />
 
             <Button
-                    android:id="@+id/record_commit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/commit"
-                    android:textColor="@color/dark_grey"/>
+                android:id="@+id/record_save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textColor="@color/dark_grey"/>
+
         </LinearLayout>
 
     </ScrollView>

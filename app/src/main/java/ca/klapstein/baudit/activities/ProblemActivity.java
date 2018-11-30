@@ -1,14 +1,17 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import ca.klapstein.baudit.R;
@@ -162,7 +165,7 @@ public class ProblemActivity extends AppCompatActivity
         int index = 0;
         for (Record record : records) {
             final int recordPosition = index;
-            CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
+            final CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
                 .inflate(R.layout.card_record, recordList, false);
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
@@ -179,6 +182,52 @@ public class ProblemActivity extends AppCompatActivity
                     intent.putExtra("problemPosition", problemPosition);
                     intent.putExtra("recordPosition", recordPosition);
                     startActivity(intent);
+                }
+            });
+
+            recordView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    PopupMenu menu = new PopupMenu(getApplicationContext(), recordView);
+                    menu.inflate(R.menu.record_popup_menu);
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            Intent intent = new Intent(
+                                getApplicationContext(),
+                                ProblemActivity.class
+                            );
+                            switch (item.getItemId()) {
+                                case R.id.edit_record:
+                                    intent.putExtra("problemPosition", problemPosition);
+                                    intent.putExtra("recordPosition", recordPosition);
+                                    intent.putExtra("mode", "edit");
+                                    startActivity(intent);
+                                    break;
+                                case R.id.delete_record:
+                                    new AlertDialog.Builder(ProblemActivity.this)
+                                        .setTitle(R.string.delete_record_question)
+                                        .setCancelable(true)
+                                        .setNegativeButton(R.string.cancel, null)
+                                        .setPositiveButton(R.string.delete,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface di, int i) {
+                                                    presenter.deleteRecordClicked(
+                                                        recordPosition
+                                                    );
+                                                }
+                                            })
+                                        .show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    menu.show();
+                    return true;
                 }
             });
 
