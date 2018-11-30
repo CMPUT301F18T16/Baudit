@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +33,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText titleInput;
     private TextView commentView;
     private EditText commentInput;
+    private ImageButton geolocationEditButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,18 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         commentView = findViewById(R.id.record_comment_view);
         commentInput = findViewById(R.id.record_comment_edit_text);
+
+        geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
+        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(
+                    RecordActivity.this,
+                    LocationActivity.class
+                );
+                startActivity(intent);
+            }
+        });
 
         Button cancelButton = findViewById(R.id.record_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
