@@ -8,9 +8,9 @@ import ca.klapstein.baudit.views.LocationView;
  *
  * @see LocationView
  */
-public class LocationPresenter extends Presenter<LocationView> {
+public class LocationPresenter <V extends LocationView> extends Presenter<V> {
 
-    public LocationPresenter(LocationView view, Context context) {
+    public LocationPresenter(V view, Context context) {
         super(view, context);
     }
 
