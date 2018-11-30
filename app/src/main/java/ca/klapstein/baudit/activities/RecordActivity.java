@@ -1,11 +1,18 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordPresenter;
@@ -22,6 +29,8 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
  */
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
+    private static final String TAG = "RecordActivity";
+
     public static final String RECORD_POSITION_EXTRA = "recordPosition";
     public static final String RECORD_MODE_EXTRA = "mode";
 
@@ -33,7 +42,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText titleInput;
     private TextView commentView;
     private EditText commentInput;
-    private ImageButton geolocationEditButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +63,25 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         commentView = findViewById(R.id.record_comment_view);
         commentInput = findViewById(R.id.record_comment_edit_text);
 
-        geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
-        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+            getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        // TODO: This is a heuristic. Set to Canada for now
+        LatLng sw = new LatLng(41.6751050889, -140.99778);
+        LatLng ne = new LatLng(83.23324, -52.6480987209);
+        autocompleteFragment.setBoundsBias(new LatLngBounds(sw, ne));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onClick(View v){
-                Intent intent = new Intent(
-                    RecordActivity.this,
-                    LocationActivity.class
-                );
-                startActivity(intent);
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
             }
         });
 
