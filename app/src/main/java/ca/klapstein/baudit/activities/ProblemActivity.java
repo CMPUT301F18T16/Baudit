@@ -29,6 +29,8 @@ import ca.klapstein.baudit.views.ProblemView;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
+
 /**
  * Activity for editing a {@code Problem}.
  * <p>
@@ -41,8 +43,7 @@ public class ProblemActivity extends AppCompatActivity
     TimePickerDialog.OnTimeSetListener {
 
     public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
-    public static final String RECORD_POSITION_EXTRA = "recordPosition";
-    public static final String MODE_EXTRA = "mode";
+    public static final String PROBLEM_MODE_EXTRA = "mode";
 
     private int problemPosition;
     private ProblemPresenter presenter;
@@ -66,7 +67,7 @@ public class ProblemActivity extends AppCompatActivity
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
-        String mode = getIntent().getStringExtra(MODE_EXTRA);
+        String mode = getIntent().getStringExtra(PROBLEM_MODE_EXTRA);
 
         presenter = new ProblemPresenter(this, getApplicationContext());
 
@@ -153,7 +154,7 @@ public class ProblemActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
                 intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                 intent.putExtra(RECORD_POSITION_EXTRA, -1);
-                intent.putExtra(MODE_EXTRA, "edit");
+                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
@@ -201,7 +202,7 @@ public class ProblemActivity extends AppCompatActivity
                     );
                     intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                     intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
-                    intent.putExtra(MODE_EXTRA, "view");
+                    intent.putExtra(PROBLEM_MODE_EXTRA, "view");
                     startActivity(intent);
                 }
             });
@@ -222,7 +223,7 @@ public class ProblemActivity extends AppCompatActivity
                                 case R.id.edit_record:
                                     intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                                     intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
-                                    intent.putExtra(MODE_EXTRA, "edit");
+                                    intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                                     startActivity(intent);
                                     break;
                                 case R.id.delete_record:

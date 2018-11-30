@@ -10,6 +10,8 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
 
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
+
 /**
  * Activity for editing a {@code Record}.
  * <p>
@@ -19,9 +21,8 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
-    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
     public static final String RECORD_POSITION_EXTRA = "recordPosition";
-    public static final String MODE_EXTRA = "mode";
+    public static final String RECORD_MODE_EXTRA = "mode";
 
     private int problemPosition;
     private int recordPosition;
@@ -42,7 +43,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
         recordPosition = getIntent().getIntExtra(RECORD_POSITION_EXTRA, -1);
-        String mode = getIntent().getStringExtra(MODE_EXTRA);
+        String mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 

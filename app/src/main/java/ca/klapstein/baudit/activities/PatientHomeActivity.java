@@ -26,15 +26,15 @@ import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
+
 /**
  * Activity for listing {@code Problem}s.
  *
  * @see ca.klapstein.baudit.data.Problem
  */
 public class PatientHomeActivity extends AppCompatActivity implements HomeView {
-
-    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
-    public static final String MODE_EXTRA = "mode";
 
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
@@ -99,7 +99,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
                 intent.putExtra(PROBLEM_POSITION_EXTRA, -1);
-                intent.putExtra(MODE_EXTRA, "edit");
+                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
@@ -178,7 +178,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
                     intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
-                    intent.putExtra(MODE_EXTRA, "view");
+                    intent.putExtra(PROBLEM_MODE_EXTRA, "view");
                     startActivity(intent);
                 }
             });
@@ -201,7 +201,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                                         PROBLEM_POSITION_EXTRA,
                                         viewHolder.getAdapterPosition()
                                     );
-                                    intent.putExtra(MODE_EXTRA, "edit");
+                                    intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                                     startActivity(intent);
                                     break;
                                 case R.id.delete_problem:
