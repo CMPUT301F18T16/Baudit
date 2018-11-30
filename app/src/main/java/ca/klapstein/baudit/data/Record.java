@@ -1,10 +1,10 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -98,9 +98,10 @@ public class Record implements Comparable<Record> {
 
     public void setRecordPhoto(Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            bitmap = getResizedBitmap(bitmap, MAX_PHOTO_BYTES);
+            recordPhoto = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+        } else {
+            recordPhoto = bitmap;
         }
-        recordPhoto = bitmap;
     }
 
     public Bitmap getRecordPhoto() {
@@ -225,43 +226,5 @@ public class Record implements Comparable<Record> {
 
     private void setRecordId(UUID recordId) {
         this.recordId = recordId;
-    }
-
-    private byte[] getCompressedBitmapData(Bitmap bitmap, int maxFileSize, int maxDimensions) {
-        Bitmap resizedBitmap;
-        if (bitmap.getWidth() > maxDimensions || bitmap.getHeight() > maxDimensions) {
-            resizedBitmap = getResizedBitmap(bitmap,
-                maxDimensions);
-        } else {
-            resizedBitmap = bitmap;
-        }
-
-        byte[] bitmapData = getByteArray(resizedBitmap);
-
-        while (bitmapData.length > maxFileSize) {
-            bitmapData = getByteArray(resizedBitmap);
-        }
-        return bitmapData;
-    }
-
-    private Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true);
-    }
-
-    private byte[] getByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-        return bos.toByteArray();
     }
 }
