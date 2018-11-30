@@ -34,6 +34,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         setContentView(R.layout.activity_record);
         Toolbar toolbar = findViewById(R.id.record_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         problemPosition = getIntent().getIntExtra("problemPosition", -1);
         recordPosition = getIntent().getIntExtra("recordPosition", -1);
