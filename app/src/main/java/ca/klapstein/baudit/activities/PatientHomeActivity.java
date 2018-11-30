@@ -15,14 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.GoogleMap;
-
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
@@ -63,7 +58,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
         navHeaderUsername = navHeaderView.findViewById(R.id.nav_header_username);
         navHeaderEmail = navHeaderView.findViewById(R.id.nav_header_email);
-
 
         navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {
@@ -197,7 +191,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         }
     }
 
-
     private class ProblemViewHolder extends RecyclerView.ViewHolder implements ProblemRowView {
 
         private CardView cardView;
@@ -239,6 +232,5 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         public void updateProblemDescriptionText(String description) {
             descriptionView.setText(description);
         }
-
     }
 }
