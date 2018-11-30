@@ -15,6 +15,7 @@
     <string name="log_in_as_patient">Log in as Patient</string>
     <string name="login_failed">⚠ Authentication error: failed to authenticate into account</string>
     <string name="problem_count">Problems (%1$d):</string>
+    <string name="patient_count">Patients (%1$d):</string>
     <string name="home">Home</string>
     <string name="get_account_qr_code">Display Account QR Code</string>
     <string name="patient_search_title">Search</string>
