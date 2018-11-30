@@ -35,36 +35,28 @@
                 android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc"/>
 
         <activity
-            android:name=".activities.StartActivity"
-            android:theme="@style/BauditLoginTheme"/>
-
+                android:name=".activities.StartActivity"
+                android:theme="@style/BauditLoginTheme"/>
         <activity
                 android:name=".activities.EditAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
                 android:name=".activities.CreateAccountActivity"
                 android:theme="@style/BauditTheme"/>
-
         <activity android:name=".activities.LocationActivity"/>
-
         <activity
                 android:name=".activities.ProblemActivity"
                 android:theme="@style/BauditTheme"/>
-
         <activity
                 android:name=".activities.RecordActivity"
                 android:theme="@style/BauditTheme"/>
-
         <activity
                 android:name=".activities.CareProviderHomeActivity"
                 android:theme="@style/BauditTheme"/>
-
         <activity android:name=".activities.ViewPhotoActivity"/>
-
         <activity
                 android:name=".activities.PatientHomeActivity"
                 android:theme="@style/BauditTheme"/>
-
         <activity
                 android:name=".activities.SplashActivity"
                 android:theme="@style/BauditSplashTheme">
@@ -84,7 +76,6 @@
                 android:theme="@style/BauditTheme"/>
         <activity android:name=".activities.DisplayQRCodeActivity">
         </activity>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -94,6 +85,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
+
+        <activity android:name=".activities.CareProviderProblemListActivity">
+        </activity>
 
     </application>
 
