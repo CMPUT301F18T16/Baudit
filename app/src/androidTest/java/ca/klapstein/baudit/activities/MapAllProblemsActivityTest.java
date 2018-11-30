@@ -30,41 +30,36 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.clearOfflineLoginAccount();
 
-        //TODO: clean
-        //create a test patient to store records and problems to be iterated
-        Username testUsername = new Username("ThisIsATest");
-        ContactInfo testContactInfo = new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234"));
-        Patient patient = new Patient(testUsername, testContactInfo);
+        Patient patient = new Patient(
+                new Username("ThisIsATest"),
+                new ContactInfo("Test", "McTest", new Email("test@gmail.com"), new PhoneNumber("7805551234")));
 
-        ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
-
+        //  create a first problem with one record with a geo location
         Problem problem1 = new Problem("First problem", "I can't feel my face");
-        Problem problem2 = new Problem("Second problem", "I still can't feel my face");
-
-        RecordTreeSet recordTreeSet1 = problem1.getRecordTreeSet();
-        RecordTreeSet recordTreeSet2 = problem2.getRecordTreeSet();
-
         Record record1 = new Record("First occurrence", "This first happened on a Friday");
-        Record record2 = new Record("Second occurrence", "This happened on a Saturday");
-        Record record3 = new Record("Third occurrence", "This again on Saturday");
-        Record record4 = new Record("Fourth occurrence", "This happened on a Sunday");
-
         record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
-        record2.setGeoLocation(new GeoLocation(53.522849, -113.622665));
-        record3.setGeoLocation(new GeoLocation(53.527288, -113.529346));
-        record4.setGeoLocation(new GeoLocation(53.515232, -113.481288));
+        problem1.getRecordTreeSet().add(record1);
+        patient.getProblemTreeSet().add(problem1);
 
-        recordTreeSet1.add(record1);
-        recordTreeSet1 = problem1.getRecordTreeSet();
-        recordTreeSet1.add(record2);
-        problem1.setRecordTreeSet(recordTreeSet1);
-        recordTreeSet2.add(record3);
-        recordTreeSet2.add(record4);
-        problem2.setRecordTreeSet(recordTreeSet1);
-        problem2.setRecordTreeSet(recordTreeSet2);
-        problemTreeSet.add(problem1);
-        problemTreeSet.add(problem2);
-        patient.setProblemTreeSet(problemTreeSet);
+        // create a second problem with two records with geo locations
+        Problem problem2 = new Problem("Second problem", "I still can't feel my face");
+        Record record2 = new Record("Second occurrence", "This again on Saturday");
+        record2.setGeoLocation(new GeoLocation(53.527288, -113.529346));
+        problem2.getRecordTreeSet().add(record2);
+        Record record3 = new Record("Third occurrence", "This happened on a Sunday");
+        record3.setGeoLocation(new GeoLocation(53.515232, -113.481288));
+        problem2.getRecordTreeSet().add(record3);
+        patient.getProblemTreeSet().add(problem2);
+
+        // create a third problem with one record **without** a geolocation
+        Problem problem3 = new Problem("Third problem", "I still can't feel my face");
+        Record record4 = new Record("Fourth occurrence", "This again on Saturday");
+        problem2.getRecordTreeSet().add(record4);
+        patient.getProblemTreeSet().add(problem3);
+
+        // create a forth problem with no records
+        Problem problem4 = new Problem("Fourth problem", "I still can't feel my face");
+        patient.getProblemTreeSet().add(problem4);
 
         dataModel.setOfflineLoginAccount(patient);
         super.launchActivity(new Intent());
