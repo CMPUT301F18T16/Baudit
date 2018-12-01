@@ -178,7 +178,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     }
 
     @Override
-    public void setNewRecordHints() {
+    public void updateRecordHints() {
         titleView.setHint(R.string.default_title);
         titleInput.setHint(R.string.default_title);
         commentView.setHint(R.string.default_comment);

@@ -46,7 +46,7 @@ public class RecordPresenter extends Presenter<RecordView> {
                 context.getResources().getString(R.string.default_title),
                 context.getResources().getString(R.string.default_comment)
             );
-            view.setNewRecordHints();
+            view.updateRecordHints();
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
             view.updateTitleField(record.getTitle());

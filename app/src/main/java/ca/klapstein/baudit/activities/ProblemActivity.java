@@ -284,7 +284,7 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void setNewProblemHints() {
+    public void updateProblemHints() {
         titleView.setHint(R.string.default_title);
         titleInput.setHint(R.string.default_title);
         descriptionView.setHint(R.string.default_description);
