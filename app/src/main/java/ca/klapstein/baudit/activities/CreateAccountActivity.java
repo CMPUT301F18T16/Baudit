@@ -86,6 +86,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: likely move setting a body photo to account edit activity
                 Intent intent = new Intent(CreateAccountActivity.this, CameraActivity.class);
                 intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
                 startActivity(intent);
