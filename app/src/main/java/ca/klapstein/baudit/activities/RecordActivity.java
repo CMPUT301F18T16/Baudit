@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
 
@@ -42,6 +44,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText titleInput;
     private TextView commentView;
     private EditText commentInput;
+    private TextView locationView;
+    private PlaceAutocompleteFragment autocompleteFragment;
+    private GeoLocation geoLocation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +68,23 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         commentView = findViewById(R.id.record_comment_view);
         commentInput = findViewById(R.id.record_comment_edit_text);
 
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+        locationView = findViewById(R.id.record_location_view);
+
+        autocompleteFragment = (PlaceAutocompleteFragment)
             getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         // TODO: This is a heuristic. Set to Canada for now
         LatLng sw = new LatLng(41.6751050889, -140.99778);
         LatLng ne = new LatLng(83.23324, -52.6480987209);
         autocompleteFragment.setBoundsBias(new LatLngBounds(sw, ne));
-
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName());
+                geoLocation = new GeoLocation(
+                    place.getName().toString(),
+                    place.getLatLng().latitude,
+                    place.getLatLng().longitude
+                );
             }
 
             @Override
@@ -100,7 +109,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 presenter.commitRecord(
                     recordPosition,
                     titleInput.getText().toString(),
-                    commentInput.getText().toString()
+                    commentInput.getText().toString(),
+                    geoLocation
                 );
             }
         });
@@ -113,6 +123,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             commentView.setVisibility(View.VISIBLE);
             commentInput.setVisibility(View.GONE);
+
+            locationView.setVisibility(View.VISIBLE);
+            autocompleteFragment.getView().setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
@@ -128,6 +141,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             commentView.setVisibility(View.GONE);
             commentInput.setVisibility(View.VISIBLE);
+
+            locationView.setVisibility(View.GONE);
+            autocompleteFragment.getView().setVisibility(View.VISIBLE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
@@ -150,6 +166,15 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void updateCommentField(String comment) {
         commentView.setText(comment);
         commentInput.setText(comment);
+    }
+
+    @Override
+    public void updateLocationField(GeoLocation geoLocation) {
+        if (geoLocation != null) {
+            this.geoLocation = geoLocation;
+            locationView.setText(geoLocation.getAddress());
+            autocompleteFragment.setText(geoLocation.getAddress());
+        }
     }
 
     @Override

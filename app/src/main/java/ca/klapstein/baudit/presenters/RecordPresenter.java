@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -51,11 +52,16 @@ public class RecordPresenter extends Presenter<RecordView> {
 
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
+        view.updateLocationField(record.getGeoLocation());
     }
 
-    public void commitRecord(int position, String title, String comment) {
+    public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
         record.setTitle(title);
         record.setComment(comment);
+
+        if (geoLocation != null) {
+            record.setGeoLocation(geoLocation);
+        }
 
         try {
             if (position == -1) {

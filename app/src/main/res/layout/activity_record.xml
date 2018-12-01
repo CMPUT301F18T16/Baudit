@@ -119,6 +119,13 @@
                     android:textSize="18sp"
                     android:text="@string/location_label" />
 
+                <TextView
+                    android:id="@+id/record_location_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp"/>
+
                 <fragment
                     android:id="@+id/place_autocomplete_fragment"
                     android:layout_width="match_parent"

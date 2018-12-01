@@ -217,7 +217,7 @@ public class ProblemActivity extends AppCompatActivity
                         public boolean onMenuItemClick(MenuItem item) {
                             Intent intent = new Intent(
                                 getApplicationContext(),
-                                ProblemActivity.class
+                                RecordActivity.class
                             );
                             switch (item.getItemId()) {
                                 case R.id.edit_record:
