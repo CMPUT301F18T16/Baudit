@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -40,6 +39,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private int recordPosition;
     private RecordPresenter presenter;
 
+    private TextView timestampView;
     private TextView titleView;
     private EditText titleInput;
     private TextView commentView;
@@ -61,6 +61,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         String mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
+
+        timestampView = findViewById(R.id.record_timestamp_text);
 
         titleView = findViewById(R.id.record_title_view);
         titleInput = findViewById(R.id.record_title_edit_text);
@@ -154,6 +156,11 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void onStart() {
         super.onStart();
         presenter.viewStarted(problemPosition, recordPosition);
+    }
+
+    @Override
+    public void updateTimestampField(String timestamp) {
+        timestampView.setText(timestamp);
     }
 
     @Override

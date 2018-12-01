@@ -43,7 +43,7 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
         // create a second problem with two records with geo locations
         Problem problem2 = new Problem("Second problem", "I still can't feel my face");
         Record record2 = new Record("Second occurrence", "This again on Saturday");
-        record2.setGeoLocation(new GeoLocation( "Edmonton",53.527288, -113.529346));
+        record2.setGeoLocation(new GeoLocation("Edmonton",53.527288, -113.529346));
         problem2.getRecordTreeSet().add(record2);
         Record record3 = new Record("Third occurrence", "This happened on a Sunday");
         record3.setGeoLocation(new GeoLocation("Edmonton",53.515232, -113.481288));

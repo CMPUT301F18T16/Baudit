@@ -188,8 +188,11 @@ public class ProblemActivity extends AppCompatActivity
                 .inflate(R.layout.card_record, recordList, false);
             ImageView recordImage = recordView.findViewById(R.id.record_card_image);
             recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            TextView recordTimestamp = recordView.findViewById(R.id.record_card_timestamp);
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
+
+            recordTimestamp.setText(record.getTimeStamp());
             recordTitle.setText(record.getTitle());
             recordComment.setText(record.getComment());
 

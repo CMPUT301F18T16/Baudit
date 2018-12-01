@@ -53,7 +53,10 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateCommentField(record.getComment());
             view.updateLocationField(record.getGeoLocation());
         }
-
+        view.updateTimestampField(record.getTimeStamp());
+        view.updateTitleField(record.getTitle());
+        view.updateCommentField(record.getComment());
+        view.updateLocationField(record.getGeoLocation());
     }
 
     public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
