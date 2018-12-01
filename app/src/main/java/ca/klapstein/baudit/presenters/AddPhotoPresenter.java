@@ -3,6 +3,8 @@ package ca.klapstein.baudit.presenters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import ca.klapstein.baudit.data.*;
+import android.util.Log;
 import ca.klapstein.baudit.data.BodyPhoto;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
