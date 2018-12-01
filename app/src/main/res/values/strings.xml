@@ -82,7 +82,7 @@
     <string name="delete_problem_question">Delete problem?</string>
     <string name="view_record">View Record</string>
     <string name="delete_record_question">Delete record?</string>
-    <string name="default_title">Untitled</string>
-    <string name="default_description"></string>
-    <string name="default_comment"></string>
+    <string name="default_title">Add a title</string>
+    <string name="default_description">Add a description</string>
+    <string name="default_comment">Add a comment</string>
 </resources>

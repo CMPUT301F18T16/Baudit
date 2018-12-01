@@ -178,6 +178,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     }
 
     @Override
+    public void setNewRecordHints() {
+        titleView.setHint(R.string.default_title);
+        titleInput.setHint(R.string.default_title);
+        commentView.setHint(R.string.default_comment);
+        commentInput.setHint(R.string.default_comment);
+    }
+
+    @Override
     public void commitRecordFailure() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_failure), Toast.LENGTH_LONG).show();
     }

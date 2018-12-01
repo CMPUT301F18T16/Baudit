@@ -46,13 +46,14 @@ public class RecordPresenter extends Presenter<RecordView> {
                 context.getResources().getString(R.string.default_title),
                 context.getResources().getString(R.string.default_comment)
             );
+            view.setNewRecordHints();
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            view.updateTitleField(record.getTitle());
+            view.updateCommentField(record.getComment());
+            view.updateLocationField(record.getGeoLocation());
         }
 
-        view.updateTitleField(record.getTitle());
-        view.updateCommentField(record.getComment());
-        view.updateLocationField(record.getGeoLocation());
     }
 
     public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
