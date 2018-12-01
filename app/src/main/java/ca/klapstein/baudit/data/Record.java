@@ -29,7 +29,6 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
-    private ArrayList<RecordPhoto> photos = new ArrayList<RecordPhoto>();
     private UUID recordId;
 
     public Record() {
@@ -227,13 +226,5 @@ public class Record implements Comparable<Record> {
 
     private void setRecordId(UUID recordId) {
         this.recordId = recordId;
-    }
-
-    public ArrayList<RecordPhoto> getPhotos() {
-        return this.photos;
-    }
-
-    public void addPhoto(RecordPhoto photo) {
-        this.photos.add(photo);
     }
 }
