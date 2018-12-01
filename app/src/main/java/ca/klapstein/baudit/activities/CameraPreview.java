@@ -50,6 +50,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    public void switchCamera(Camera camera) {
+        this.camera = camera;
+        initCamera(getHolder());
+    }
+
+
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         // not-used
