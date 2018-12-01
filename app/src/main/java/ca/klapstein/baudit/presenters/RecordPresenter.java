@@ -50,6 +50,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         }
 
+        view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
         view.updateLocationField(record.getGeoLocation());
