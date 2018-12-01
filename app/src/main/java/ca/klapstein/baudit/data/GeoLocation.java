@@ -9,6 +9,10 @@ public class GeoLocation {
     /**
      * Latitude must be between -90 and +90.
      */
+
+    private String address;
+
+
     private double lat;
 
     /**
@@ -22,11 +26,18 @@ public class GeoLocation {
      * @param lat {@code double} a latitude value that must be between -90 and +90.
      * @param lon {@code double} a longitude value that must be between -180 and +180.
      */
-    public GeoLocation(double lat, double lon) throws IllegalArgumentException {
+    public GeoLocation(String address, double lat, double lon) throws IllegalArgumentException {
+        setAddress(address);
         setLon(lon);
         setLat(lat);
     }
+    public String getAddress() {
+        return address;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
     /**
      * Getter for a longitude value.
      *
