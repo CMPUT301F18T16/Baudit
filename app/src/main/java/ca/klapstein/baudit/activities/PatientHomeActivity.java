@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,12 +18,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
+
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
 /**
  * Activity for listing {@code Problem}s.
@@ -43,6 +49,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -68,7 +75,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                     switch (menuItem.getItemId()) {
                         case (R.id.nav_edit_account):
                             startActivity(new Intent(
-                                PatientHomeActivity.this,
+                                getApplicationContext(),
                                 EditAccountActivity.class
                             ));
                             return true;
@@ -90,11 +97,9 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        PatientHomeActivity.this,
-                        ProblemActivity.class
-                );
-                intent.putExtra("problemId", -1);
+                Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, -1);
+                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
@@ -127,11 +132,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.patient_home_view_map:
-                Intent intent = new Intent(
-                    PatientHomeActivity.this,
-                    MapAllProblemsActivity.class
-                );
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), MapAllProblemsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -162,25 +163,71 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.card_problem, viewGroup, false);
-            return new ProblemViewHolder(v); //Wrap it in a ViewHolder.
+            return new ProblemViewHolder(v); // Wrap it in a ViewHolder.
         }
 
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
-            Problem problem = presenter.getProblemAt(i);
+            final Problem problem = presenter.getProblemAt(i);
             viewHolder.updateProblemTitleText(problem.getTitle());
             viewHolder.updateProblemDateText(problem.getTimeStamp());
             viewHolder.updateProblemDescriptionText(problem.getDescription());
+
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(
-                        PatientHomeActivity.this,
-                        ProblemActivity.class
-                    );
-                    intent.putExtra("problemId", viewHolder.getAdapterPosition()); // Test ID
-                    // TODO: Need a way to get the problem's ID to add to the intent
+                    Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
+                    intent.putExtra(PROBLEM_MODE_EXTRA, "view");
                     startActivity(intent);
+                }
+            });
+
+            viewHolder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    PopupMenu menu = new PopupMenu(getApplicationContext(), viewHolder.cardView);
+                    menu.inflate(R.menu.problem_popup_menu);
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            Intent intent = new Intent(
+                                getApplicationContext(),
+                                ProblemActivity.class
+                            );
+                            switch (item.getItemId()) {
+                                case R.id.edit_problem:
+                                    intent.putExtra(
+                                        PROBLEM_POSITION_EXTRA,
+                                        viewHolder.getAdapterPosition()
+                                    );
+                                    intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
+                                    startActivity(intent);
+                                    break;
+                                case R.id.delete_problem:
+                                    new AlertDialog.Builder(PatientHomeActivity.this)
+                                        .setTitle(R.string.delete_problem_question)
+                                        .setCancelable(true)
+                                        .setNegativeButton(R.string.cancel, null)
+                                        .setPositiveButton(R.string.delete,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface di, int i) {
+                                                    presenter.deleteProblemClicked(
+                                                        viewHolder.getAdapterPosition()
+                                                    );
+                                                }
+                                            })
+                                        .show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    menu.show();
+                    return true;
                 }
             });
         }

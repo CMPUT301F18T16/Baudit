@@ -2,6 +2,9 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -14,6 +17,7 @@ import ca.klapstein.baudit.views.RecordView;
  * @see RecordView
  */
 public class RecordPresenter extends Presenter<RecordView> {
+
     private static final String TAG = "RecordPresenter";
 
     private final Patient patient;
@@ -22,54 +26,48 @@ public class RecordPresenter extends Presenter<RecordView> {
 
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
-        // TODO: load patient via other method so that care provider can obtain record aswell
+        // TODO: load patient via other method so that care provider can obtain record as well
         patient = dataManager.getLoggedInPatient();
     }
 
-    public void viewStarted(int problemId, int recordId) {
-        if (problemId == -1) {
-            problem = new Problem("Set Title", "Set description");
-
+    public void viewStarted(int problemPosition, int recordPosition) {
+        if (problemPosition == -1) { // For testing purposes, this case is handled
+            problem = new Problem(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_description)
+            );
         } else {
-            problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
         }
 
-        if (recordId == -1) { // If the record is new
-            view.updateTitleField("");
-            record = new Record("Set title", "Set comment");
+
+        if (recordPosition == -1) { // If the record is new
+            record = new Record(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_comment)
+            );
         } else { // If the record exists and is being edited
-            record = (Record) problem.getRecordTreeSet().toArray()[recordId];
+            record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         }
+
+        view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
+        view.updateLocationField(record.getGeoLocation());
     }
 
-    public void saveTitleClicked(String newTitle) {
-        try {
-            record.setTitle(newTitle);
-            view.updateTitleField(newTitle);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
+    public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
+        record.setTitle(title);
+        record.setComment(comment);
+
+        if (geoLocation != null) {
+            record.setGeoLocation(geoLocation);
         }
-    }
 
-    public void saveCommentClicked(String newComment) {
         try {
-            record.setComment(newComment);
-            view.updateCommentField(newComment);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
-
-    public void commitRecord() {
-        try {
-            // TODO: commit to remote/local
-            // TODO: issue if this is adding a record on a brand new non commited problem.
-            // TODO: will create two problems instead of 1 when fulled exited both edit/add prompts
-            // TODO: possible solution lock only adding records only after creating the problem
-            problem.getRecordTreeSet().add(record);
-            patient.getProblemTreeSet().add(problem);
+            if (position == -1) {
+                problem.getRecordTreeSet().add(record);
+            }
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {

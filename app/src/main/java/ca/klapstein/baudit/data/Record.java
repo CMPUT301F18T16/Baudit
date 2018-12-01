@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.data;
 
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -16,10 +18,12 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  */
 public class Record implements Comparable<Record> {
 
+    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
+    private Bitmap recordPhoto;
     private String title;
     private String comment;
     private GeoLocation geoLocation;
@@ -45,7 +49,6 @@ public class Record implements Comparable<Record> {
         recordId = UUID.randomUUID();
     }
 
-    // TODO: This check might not be needed because the UI limits the title length
     /**
      * Check if a given string is a valid Record title.
      *
@@ -56,7 +59,6 @@ public class Record implements Comparable<Record> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    // TODO: This check might not be needed because the UI limits comment length
     /**
      * Check if a given string is a valid Record comment.
      *
@@ -92,6 +94,18 @@ public class Record implements Comparable<Record> {
      */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
+    }
+
+    public void setRecordPhoto(Bitmap bitmap) {
+        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
+            recordPhoto = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+        } else {
+            recordPhoto = bitmap;
+        }
+    }
+
+    public Bitmap getRecordPhoto() {
+        return recordPhoto;
     }
 
     /**

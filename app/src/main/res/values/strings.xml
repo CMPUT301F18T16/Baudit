@@ -47,6 +47,7 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
     <string name="comment_label">Comment:</string>
     <string name="location_label">Location:</string>
     <string name="photos_label">Photos:</string>
@@ -77,4 +78,11 @@
     <string name="care_provider">Care provider</string>
     <string name="account_type">Account type</string>
     <string name="identification_minc">Identification (MINC)</string>
+    <string name="view_problem">View Problem</string>
+    <string name="delete_problem_question">Delete problem?</string>
+    <string name="view_record">View Record</string>
+    <string name="delete_record_question">Delete record?</string>
+    <string name="default_title">Untitled</string>
+    <string name="default_description"></string>
+    <string name="default_comment"></string>
 </resources>
