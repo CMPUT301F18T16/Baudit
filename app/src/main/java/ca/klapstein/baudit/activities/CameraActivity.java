@@ -20,6 +20,7 @@ import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.AddPhotoPresenter;
 import ca.klapstein.baudit.views.AddPhotoView;
+import ca.klapstein.baudit.widgets.CameraPreview;
 import org.jetbrains.annotations.NotNull;
 
 

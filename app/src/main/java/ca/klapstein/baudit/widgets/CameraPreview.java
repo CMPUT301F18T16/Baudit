@@ -1,4 +1,4 @@
-package ca.klapstein.baudit.activities;
+package ca.klapstein.baudit.widgets;
 
 import android.content.Context;
 import android.hardware.Camera;
