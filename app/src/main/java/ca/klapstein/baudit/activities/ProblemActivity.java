@@ -142,6 +142,7 @@ public class ProblemActivity extends AppCompatActivity
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
                 );
+                finish();
             }
         });
 
@@ -151,6 +152,12 @@ public class ProblemActivity extends AppCompatActivity
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.commitProblem(
+                        problemPosition,
+                        titleInput.getText().toString(),
+                        descriptionInput.getText().toString(),
+                        problemTime.getTime()
+                );
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
                 intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                 intent.putExtra(RECORD_POSITION_EXTRA, -1);
@@ -308,7 +315,6 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void commitProblemSuccess() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_success), Toast.LENGTH_LONG).show();
-        finish();
     }
 
     @Override
