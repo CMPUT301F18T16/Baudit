@@ -3,7 +3,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="fill_parent"
              android:layout_height="fill_parent">
 
-    <ca.klapstein.baudit.activities.CameraPreview
+    <ca.klapstein.baudit.widgets.CameraPreview
             android:id="@+id/camera_preview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
