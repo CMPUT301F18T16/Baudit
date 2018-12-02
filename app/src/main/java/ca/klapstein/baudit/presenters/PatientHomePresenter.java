@@ -14,7 +14,7 @@ import ca.klapstein.baudit.views.HomeView;
  * @see Account
  * @see ProblemTreeSet
  */
-public class PatientHomePresenter extends HomePresenter<HomeView> {
+public class PatientHomePresenter extends Presenter<HomeView> {
 
     private Patient patient;
 

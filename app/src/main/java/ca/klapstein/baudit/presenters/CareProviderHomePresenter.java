@@ -14,7 +14,7 @@ import ca.klapstein.baudit.views.PatientRowView;
  * @see Account
  * @see PatientTreeSet
  */
-public class CareProviderHomePresenter extends HomePresenter<CareProviderHomeView> {
+public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
     private static final String TAG = "CPHomePresenter";
 
     private CareProvider careProvider;
