@@ -1,16 +1,15 @@
 package ca.klapstein.baudit.data;
 
+import android.graphics.Bitmap;
+
 /**
  * Class that represents a Patient.
  */
 public class Patient extends Account {
 
     private ProblemTreeSet problemTreeSet;
-  
-    /**
-     * A {@code Patient} can only have one {@code BodyPhoto}.
-     */
-    private BodyPhoto bodyPhoto;
+
+    private Bitmap bodyPhoto;
 
     public Patient(Username username, ContactInfo contactInfo) {
         super(username, contactInfo);
@@ -31,16 +30,16 @@ public class Patient extends Account {
      *
      * @return {@code BodyPhoto} belonging to the patient.
      */
-    public BodyPhoto getBodyPhoto() {
+    public Bitmap getBodyPhoto() {
         return this.bodyPhoto;
     }
 
     /**
-     * Setter for a {@code Patient}'s {@code BodyPhoto}.
+     * Setter for a {@code Patient}'s body photo.
      *
-     * @param bodyPhoto {@code BodyPhoto}
+     * @param bitmap {@code Bitmap}
      */
-    public void setBodyPhoto(BodyPhoto bodyPhoto) {
-        this.bodyPhoto = bodyPhoto;
+    public void setBodyPhoto(Bitmap bitmap) {
+        this.bodyPhoto = bitmap;
     }
 }
