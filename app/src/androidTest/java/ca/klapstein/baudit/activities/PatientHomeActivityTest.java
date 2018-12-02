@@ -103,7 +103,25 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     }
 
     @Test
-    public void testProblemCardLongClick() {
+    public void testEditProblem() {
         solo.clickLongOnView(solo.getText("problem 1"));
+        solo.clickOnText("Edit");
+        solo.waitForActivity(ProblemActivity.class);
+    }
+
+    @Test
+    public void testDeleteProblemCancel() {
+        solo.clickLongOnView(solo.getText("problem 1"));
+        solo.clickOnText("Delete");
+        solo.clickOnButton("Cancel");
+        assertTrue(solo.searchText("problem 1"));
+    }
+
+    @Test
+    public void testDeleteProblem() {
+        solo.clickLongOnView(solo.getText("problem 1"));
+        solo.clickOnText("Delete");
+        solo.clickOnButton("Delete");
+        assertFalse(solo.searchText("problem 1"));
     }
 }
