@@ -68,8 +68,6 @@
         </activity>
         <activity android:name=".activities.CameraActivity">
         </activity>
-        <activity android:name=".activities.AddPhotoActivity">
-        </activity>
         <activity
                 android:name=".activities.MapAllProblemsActivity"
                 android:theme="@style/BauditTheme"/>
