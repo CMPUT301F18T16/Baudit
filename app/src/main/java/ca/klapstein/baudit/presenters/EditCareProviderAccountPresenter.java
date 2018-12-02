@@ -19,7 +19,7 @@ import ca.klapstein.baudit.views.EditCareProviderAccountView;
  */
 public class EditCareProviderAccountPresenter extends Presenter<EditCareProviderAccountView> {
 
-    private static final String TAG = "EditPatientAccountPresenter";
+    private static final String TAG = "EditCareProvider";
 
     private CareProvider careProvider;
 
