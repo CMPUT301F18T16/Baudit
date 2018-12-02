@@ -56,12 +56,4 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         solo.waitForActivity(EditPatientAccountActivity.class);
         solo.assertCurrentActivity("Wrong Activity", EditPatientAccountActivity.class);
     }
-
-    @Test
-    public void testSetBodyPhoto() {
-        solo.clickOnActionBarHomeButton();
-        solo.clickOnMenuItem(getActivity().getResources().getString(R.string.set_body_photo));
-        solo.waitForActivity(CameraActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", CameraActivity.class);
-    }
 }
