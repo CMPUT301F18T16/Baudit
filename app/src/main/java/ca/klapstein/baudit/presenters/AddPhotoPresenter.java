@@ -19,33 +19,31 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
     }
 
     public void getLastRecordPhoto(int problemId) {
-        patient = dataManager.getLoggedInPatient();
-        Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
-        Record record = problem.getRecordTreeSet().pollFirst();
-        if (record.getRecordPhoto() != null) {
-            view.updateCameraOverlayImage(record.getRecordPhoto());
-        } else {
-            view.updateCameraOverlayError();
+        try {
+            patient = dataManager.getLoggedInPatient();
+            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            Record record = problem.getRecordTreeSet().pollFirst();
+            if (record.getRecordPhoto() != null) {
+                view.updateCameraOverlayImage(record.getRecordPhoto());
+            } else {
+                view.updateCameraOverlayError();
+            }
+        } catch (Exception e){
+            Log.d(TAG, "non-existent record photo");
         }
+
     }
 
     public void commitRecordPhoto(Bitmap bitmap, int recordId, int problemId) {
+
         try {
-            Log.w(TAG, "record id: " + recordId + " " + "problem id: " + problemId);
             patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
             Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
             record.setRecordPhoto(bitmap);
-
-            if (record.getRecordPhoto() != null)
-                Log.w(TAG, "IMAGE NOT NULL");
-
-            //problem.getRecordTreeSet().remove(record);
-            problem.getRecordTreeSet().remove(record);
             problem.getRecordTreeSet().add(record);
             patient.getProblemTreeSet().remove(problem);
             patient.getProblemTreeSet().add(problem);
-            Log.w(TAG, "problem title: " + problem.getTitle() + " record title: " + record.getTitle());
             dataManager.commitPatient(patient);
             view.commitPhotoSuccess();
         } catch (Exception e) {

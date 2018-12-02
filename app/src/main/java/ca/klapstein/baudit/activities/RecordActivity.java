@@ -188,13 +188,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     @Override
     public void updateImageField(Bitmap bitmap){
-        if (bitmap != null) {
+        if (bitmap != null)
             recordImage.setImageBitmap(bitmap);
-            Log.i(TAG, "IMAGE SET");
-        } else {
-            Log.i(TAG, "IMAGE NOT SET");
-            Log.i(TAG, "Record title: " + presenter.getRecord().getTitle());
-        }
     }
 
     @Override
