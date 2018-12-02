@@ -1,10 +1,13 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -23,13 +26,13 @@ public class Record implements Comparable<Record> {
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
-    private Bitmap recordPhoto;
     private String title;
     private String comment;
     private GeoLocation geoLocation;
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     private ArrayList<String> keywords = new ArrayList<>();
     private UUID recordId;
+    private String recordPhotoBitmapString;
 
     public Record() {
         date = new Date();
@@ -96,16 +99,32 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void setRecordPhoto(Bitmap bitmap) {
-        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            recordPhoto = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
-        } else {
-            recordPhoto = bitmap;
-        }
+    public static String encodeTobase64(Bitmap image) {
+        Bitmap immagex = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.PNG, 90, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+        return imageEncoded;
     }
 
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    @Nullable
     public Bitmap getRecordPhoto() {
-        return recordPhoto;
+        if (recordPhotoBitmapString != null)
+            return decodeBase64(recordPhotoBitmapString);
+        return null;
+    }
+
+    public void setRecordPhoto(Bitmap bitmap) {
+        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+        }
+        recordPhotoBitmapString = encodeTobase64(bitmap);
     }
 
     /**

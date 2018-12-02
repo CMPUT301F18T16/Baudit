@@ -19,7 +19,7 @@ public class RecordPresenter extends Presenter<RecordView> {
 
     private static final String TAG = "RecordPresenter";
 
-    private final Patient patient;
+    private Patient patient;
     private Record record;
     private Problem problem;
 
@@ -34,6 +34,7 @@ public class RecordPresenter extends Presenter<RecordView> {
     }
 
     public void viewStarted(int problemPosition, int recordPosition) {
+        patient = dataManager.getLoggedInPatient();
         if (problemPosition == -1) { // For testing purposes, this case is handled
             problem = new Problem(
                 context.getResources().getString(R.string.default_title),

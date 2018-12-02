@@ -41,7 +41,9 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
                 Log.w(TAG, "IMAGE NOT NULL");
 
             //problem.getRecordTreeSet().remove(record);
+            problem.getRecordTreeSet().remove(record);
             problem.getRecordTreeSet().add(record);
+            patient.getProblemTreeSet().remove(problem);
             patient.getProblemTreeSet().add(problem);
             Log.w(TAG, "problem title: " + problem.getTitle() + " record title: " + record.getTitle());
             dataManager.commitPatient(patient);

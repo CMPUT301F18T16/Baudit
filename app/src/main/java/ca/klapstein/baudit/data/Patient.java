@@ -1,19 +1,20 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 
 /**
  * Class that represents a Patient.
  */
 public class Patient extends Account {
 
-    private ProblemTreeSet problemTreeSet;
+    @NonNull
+    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
     private Bitmap bodyPhoto;
 
     public Patient(Username username, ContactInfo contactInfo) {
         super(username, contactInfo);
-        this.problemTreeSet = new ProblemTreeSet();
     }
 
     /**
@@ -21,6 +22,7 @@ public class Patient extends Account {
      *
      * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
      */
+    @NonNull
     public ProblemTreeSet getProblemTreeSet() {
         return this.problemTreeSet;
     }
