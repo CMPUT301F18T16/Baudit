@@ -95,4 +95,5 @@
     <string name="update_camera_overlay_error">Failed to update the camera overlay</string>
     <string name="camera_image_commit_success">Successfuly committed image</string>
     <string name="camera_image_commit_failure">Failed to commit image</string>
+    <string name="set_body_photo">Set Body Photo</string>
 </resources>

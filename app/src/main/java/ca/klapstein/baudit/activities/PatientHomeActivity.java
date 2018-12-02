@@ -80,6 +80,10 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                                 EditAccountActivity.class
                             ));
                             return true;
+                        case (R.id.nav_set_body_photo):
+                            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+                            intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
+                            startActivity(intent);
                         default:
                             return true;
                     }
