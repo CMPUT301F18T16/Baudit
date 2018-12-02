@@ -41,7 +41,6 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         patient.getProblemTreeSet().add(new Problem("problem 2", "description"));
         patient.getProblemTreeSet().add(new Problem("problem 3", "description"));
         dataModel.setOfflineLoginAccount(patient);
-        dataModel.commitPatient(patient);
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
