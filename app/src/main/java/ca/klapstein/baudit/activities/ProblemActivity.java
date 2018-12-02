@@ -176,6 +176,7 @@ public class ProblemActivity extends AppCompatActivity
         updateRecordCountText();
     }
 
+
     private Bitmap createImage(int width, int height, int color) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -278,13 +279,17 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void updateDateButton(String dateString) {
-        dateButton.setText(dateString);
+    public void updateDateButton() {
+        DateFormat mDateFormat = DateFormat.getDateInstance();
+        String dateForButton = mDateFormat.format(problemTime.getTime());
+        dateButton.setText(dateForButton);
     }
 
     @Override
-    public void updateTimeButton(String timeString) {
-        timeButton.setText(timeString);
+    public void updateTimeButton() {
+        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+        String timeForButton = mTimeFormat.format(problemTime.getTime());
+        timeButton.setText(timeForButton);
     }
 
     @Override
@@ -319,21 +324,17 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        DateFormat mDateFormat = DateFormat.getDateInstance();
         problemTime.set(Calendar.YEAR, year);
         problemTime.set(Calendar.MONTH, month);
         problemTime.set(Calendar.DAY_OF_MONTH, day);
-        String dateForButton = mDateFormat.format(problemTime.getTime());
-        updateDateButton(dateForButton);
+        updateDateButton();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
-        String timeForButton = mTimeFormat.format(problemTime.getTime());
-        updateTimeButton(timeForButton);
+        updateTimeButton();
     }
 
     private void updateRecordCountText() {

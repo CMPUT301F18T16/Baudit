@@ -42,10 +42,9 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
         }
         view.updateTitleField(problem.getTitle());
-        view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
-        view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
+        view.updateDateButton();
+        view.updateTimeButton();
         view.updateDescriptionField(problem.getDescription());
-
         view.updateRecordList(problem.getRecordTreeSet());
     }
 
