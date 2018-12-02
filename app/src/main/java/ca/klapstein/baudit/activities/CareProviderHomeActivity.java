@@ -85,23 +85,25 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     drawerLayout.closeDrawers();
 
-                        switch (menuItem.getItemId()) {
-                            case (R.id.nav_edit_account):
-                                startActivity(new Intent(
-                                        CareProviderHomeActivity.this,
-                                        EditCareProviderAccountActivity.class
-                                ));
-                            case (R.id.nav_display_qr_code):
-                                startActivity(new Intent(
-                                    getApplicationContext(),
-                                    DisplayQRCodeActivity.class
-                                ));
-                                return true;
-                            default:
-                                return true;
-                        }
+                    switch (menuItem.getItemId()) {
+                        case (R.id.nav_edit_account):
+                            startActivity(new Intent(
+                                CareProviderHomeActivity.this,
+                                EditCareProviderAccountActivity.class
+                            ));
+                            break;
+                        case (R.id.nav_display_qr_code):
+                            startActivity(new Intent(
+                                getApplicationContext(),
+                                DisplayQRCodeActivity.class
+                            ));
+                            break;
+                        default:
+                            break;
                     }
-                });
+                    return true;
+                }
+            });
 
         patientRecyclerView = findViewById(R.id.patient_list);
         adapter = new PatientListAdapter();
