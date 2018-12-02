@@ -80,23 +80,29 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         });
 
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        drawerLayout.closeDrawers();
+            new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    drawerLayout.closeDrawers();
 
-                        switch (menuItem.getItemId()) {
-                            case (R.id.nav_edit_account):
-                                startActivity(new Intent(
-                                        CareProviderHomeActivity.this,
-                                        EditAccountActivity.class
-                                ));
-                                return true;
-                            default:
-                                return true;
-                        }
+                    switch (menuItem.getItemId()) {
+                        case (R.id.nav_edit_account):
+                            startActivity(new Intent(
+                                CareProviderHomeActivity.this,
+                                EditAccountActivity.class
+                            ));
+                            return true;
+                        case (R.id.nav_display_qr_code):
+                            startActivity(new Intent(
+                                getApplicationContext(),
+                                DisplayQRCodeActivity.class
+                            ));
+                            return true;
+                        default:
+                            return true;
                     }
-                });
+                }
+            });
 
         patientRecyclerView = findViewById(R.id.patient_list);
         adapter = new PatientListAdapter();
@@ -117,8 +123,8 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     @Override
     public void updatePatientCountText() {
         patientCountText.setText(String.format(
-                getResources().getString(R.string.patient_count),
-                presenter.getPatientCount()
+            getResources().getString(R.string.patient_count),
+            presenter.getPatientCount()
         ));
     }
 
@@ -184,8 +190,8 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     }
 
     /**
-     * Catch the result from the QR code scanning activity. And send its obtained data (if the scan was successful)
-     * to the presenter.
+     * Catch the result from the QR code scanning activity. And send its obtained data (if the scan
+     * was successful) to the presenter.
      *
      * @param requestCode {@code int}
      * @param resultCode  {@code int}
@@ -220,7 +226,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         @NonNull
         public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.card_patient, viewGroup, false);
+                .inflate(R.layout.card_patient, viewGroup, false);
             return new PatientViewHolder(v); //Wrap it in a ViewHolder.
         }
 
