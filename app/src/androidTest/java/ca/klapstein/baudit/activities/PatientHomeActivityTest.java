@@ -48,7 +48,6 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         solo.assertCurrentActivity("Wrong Activity", PatientHomeActivity.class);
     }
 
-
     @Test
     public void testEditAccount() {
         solo.clickOnActionBarHomeButton();
