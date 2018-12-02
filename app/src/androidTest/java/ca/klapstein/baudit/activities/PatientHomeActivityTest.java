@@ -101,4 +101,9 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         assertFalse(solo.searchText("problem 2"));
         assertFalse(solo.searchText("problem 3"));
     }
+
+    @Test
+    public void testProblemCardLongClick() {
+        solo.clickLongOnView(solo.getText("problem 1"));
+    }
 }
