@@ -38,6 +38,7 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
         setContentView(R.layout.activity_edit_account);
         Toolbar toolbar = findViewById(R.id.edit_account_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.edit_account);

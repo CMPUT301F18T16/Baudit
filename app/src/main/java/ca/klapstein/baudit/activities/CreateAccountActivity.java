@@ -34,7 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = findViewById(R.id.create_account_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.create_account);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         presenter = new CreateAccountPresenter(this, getApplicationContext());
 

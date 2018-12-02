@@ -19,36 +19,31 @@
         android:padding="@dimen/default_margin"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@mipmap/ic_launcher" />
-
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="@string/first_name"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/first_name"/>
 
         <EditText
-                android:id="@+id/edit_account_first_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"/>
+            android:id="@+id/edit_account_first_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"/>
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:text="@string/last_name"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/last_name"/>
 
         <EditText
-                android:id="@+id/edit_account_last_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"/>
+            android:id="@+id/edit_account_last_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -63,11 +58,11 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dark_grey" />
         <TextView
-                android:id="@+id/edit_account_email_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red"/>
+            android:id="@+id/edit_account_email_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/red"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -83,11 +78,11 @@
             android:textColor="@color/dark_grey" />
 
         <TextView
-                android:id="@+id/edit_account_phone_number_error"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/red"/>
+            android:id="@+id/edit_account_phone_number_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/red"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -115,11 +110,11 @@
         </RelativeLayout>
 
         <Button
-                android:id="@+id/account_qr_code_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"
-                android:text="@string/get_account_qr_code"/>
+            android:id="@+id/account_qr_code_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"
+            android:text="@string/get_account_qr_code"/>
 
     </LinearLayout>
 
