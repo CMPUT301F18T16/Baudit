@@ -37,10 +37,11 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
                 new Username("TESTPatient1"),
                 new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         );
-        patient.getProblemTreeSet().add(new Problem("problem 1", "problem description"));
-        patient.getProblemTreeSet().add(new Problem("problem 2", "problem description"));
-        patient.getProblemTreeSet().add(new Problem("problem 3", "problem description"));
+        patient.getProblemTreeSet().add(new Problem("problem 1", "description"));
+        patient.getProblemTreeSet().add(new Problem("problem 2", "description"));
+        patient.getProblemTreeSet().add(new Problem("problem 3", "description"));
         dataModel.setOfflineLoginAccount(patient);
+        dataModel.commitPatient(patient);
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
@@ -77,27 +78,25 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     }
 
     @Test
-    public void testSearchProblem() {
+    public void testSearchProblemNull() {
         solo.waitForActivity(PatientHomeActivity.class);
         solo.clickOnView(solo.getView(R.id.patient_home_search));
         SearchView searchView = (SearchView) ((ActionMenuItemView) solo.getView(R.id.patient_home_search)).getItemData().getActionView();
-        searchView.setQuery("1", false);
+
+        searchView.setQuery("NULL", true);
+        assertFalse(solo.searchText("problem 1"));
+        assertFalse(solo.searchText("problem 2"));
+        assertFalse(solo.searchText("problem 3"));
+    }
+
+    @Test
+    public void testSearchProblem1() {
+        solo.waitForActivity(PatientHomeActivity.class);
+        solo.clickOnView(solo.getView(R.id.patient_home_search));
+        SearchView searchView = (SearchView) ((ActionMenuItemView) solo.getView(R.id.patient_home_search)).getItemData().getActionView();
+
+        searchView.setQuery("1", true);
         assertTrue(solo.searchText("problem 1"));
-        assertFalse(solo.searchText("problem 2"));
-        assertFalse(solo.searchText("problem 3"));
-
-        searchView.setQuery("2", false);
-        assertTrue(solo.searchText("problem 2"));
-        assertFalse(solo.searchText("problem 1"));
-        assertFalse(solo.searchText("problem 3"));
-
-        searchView.setQuery("3", false);
-        assertTrue(solo.searchText("problem 3"));
-        assertFalse(solo.searchText("problem 1"));
-        assertFalse(solo.searchText("problem 2"));
-
-        searchView.setQuery("NONSUCH", false);
-        assertFalse(solo.searchText("problem 1"));
         assertFalse(solo.searchText("problem 2"));
         assertFalse(solo.searchText("problem 3"));
     }
