@@ -93,8 +93,10 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
                             intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
                             startActivity(intent);
+                            return true;
                         case (R.id.nav_display_qr_code):
                             startActivity(new Intent(getApplicationContext(), DisplayQRCodeActivity.class));
+                            return true;
                         default:
                             return true;
                     }
