@@ -7,6 +7,7 @@ public interface RecordView extends View {
     void updateTitleField(String title);
     void updateCommentField(String comment);
     void updateLocationField(GeoLocation location);
+    void updateRecordHints();
     void commitRecordFailure();
     void commitRecordSuccess();
 }
