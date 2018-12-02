@@ -35,6 +35,7 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
+
         Toolbar toolbar = findViewById(R.id.edit_account_toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);

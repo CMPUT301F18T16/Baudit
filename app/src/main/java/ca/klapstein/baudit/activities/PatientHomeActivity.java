@@ -25,6 +25,8 @@ import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 import static ca.klapstein.baudit.activities.ViewAccountActivity.VIEW_ACCOUNT_USERNAME_EXTRA;
@@ -155,7 +157,10 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.patient_home_view_map:
-                startActivity(new Intent(getApplicationContext(), MapAllProblemsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MapRecordsActivity.class);
+                intent.putExtra(MAP_RECORDS_MODE, "all");
+                intent.putExtra(MAP_RECORDS_USERNAME, presenter.getUsername());
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
