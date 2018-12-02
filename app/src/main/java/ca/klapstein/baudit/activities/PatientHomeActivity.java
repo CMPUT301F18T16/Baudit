@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -90,12 +89,18 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             ));
                             return true;
                         case (R.id.nav_set_body_photo):
-                            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+                            Intent intent = new Intent(
+                                getApplicationContext(),
+                                CameraActivity.class
+                            );
                             intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
                             startActivity(intent);
                             return true;
                         case (R.id.nav_display_qr_code):
-                            startActivity(new Intent(getApplicationContext(), DisplayQRCodeActivity.class));
+                            startActivity(new Intent(
+                                getApplicationContext(), 
+                                DisplayQRCodeActivity.class
+                            ));
                             return true;
                         default:
                             return true;
