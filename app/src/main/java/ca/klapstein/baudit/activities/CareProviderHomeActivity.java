@@ -89,7 +89,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
                             case (R.id.nav_edit_account):
                                 startActivity(new Intent(
                                         CareProviderHomeActivity.this,
-                                        EditAccountActivity.class
+                                        EditCareProviderAccountActivity.class
                                 ));
                                 return true;
                             default:

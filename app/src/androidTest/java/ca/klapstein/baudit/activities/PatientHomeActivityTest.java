@@ -53,8 +53,8 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     public void testEditAccount() {
         solo.clickOnActionBarHomeButton();
         solo.clickOnMenuItem(getActivity().getResources().getString(R.string.edit_account));
-        solo.waitForActivity(EditAccountActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
+        solo.waitForActivity(EditPatientAccountActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", EditPatientAccountActivity.class);
     }
 
     @Test
