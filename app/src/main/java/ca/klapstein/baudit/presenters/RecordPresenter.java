@@ -2,7 +2,6 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;

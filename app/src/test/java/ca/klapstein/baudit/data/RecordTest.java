@@ -134,8 +134,8 @@ public class RecordTest {
         Record record = new Record();
 
         // remove a keyword that does not exist in the list of keywords
-        record.removeKeyword("NONSUCHKEYWORD");
-        assertFalse(record.getKeywords().contains("NONSUCHKEYWORD"));
+        record.removeKeyword("NON_SUCH_KEYWORD");
+        assertFalse(record.getKeywords().contains("NON_SUCH_KEYWORD"));
 
         // remove a keyword that does exist in the list of keywords
         record.addKeyword("KEYWORD");

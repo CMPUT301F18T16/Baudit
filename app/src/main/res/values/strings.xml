@@ -105,4 +105,10 @@
     <string name="remove_patient">Remove patient</string>
     <string name="remove">Remove</string>
     <string name="remove_patient_question">Remove this patient from your list?</string>
+    <string name="account_qr_code">Account QR Code</string>
+    <string name="record_photo">Record Photo</string>
+    <string name="add_record_photo_button">Add Record Photo Button</string>
+    <string name="problem_image">Problem Icon Image</string>
+    <string name="record_icon_image">Record Icon Image</string>
+    <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
 </resources>
