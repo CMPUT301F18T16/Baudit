@@ -10,7 +10,6 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/create_account_toolbar"
         android:layout_width="match_parent"
-        android:text="@string/create_account"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />

@@ -50,13 +50,11 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setTitle(R.string.home);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this, getApplicationContext());
 
@@ -95,6 +93,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
                             intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
                             startActivity(intent);
+                        case (R.id.nav_display_qr_code):
+                            startActivity(new Intent(getApplicationContext(), DisplayQRCodeActivity.class));
                         default:
                             return true;
                     }
