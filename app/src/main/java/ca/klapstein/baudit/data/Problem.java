@@ -25,15 +25,11 @@ public class Problem implements Comparable<Problem> {
     private Date date;
     private RecordTreeSet recordTreeSet;
 
-    @NonNull
-    private HashSet<String> keywords = new HashSet<>();
-
     public Problem(@NonNull String title) throws IllegalArgumentException {
         this.setTitle(title);
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
         this.problemId = UUID.randomUUID();
-        populateKeyWords();
     }
 
     public Problem(@NonNull String title, String description) throws IllegalArgumentException {
@@ -42,7 +38,6 @@ public class Problem implements Comparable<Problem> {
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
         this.problemId = UUID.randomUUID();
-        populateKeyWords();
     }
 
     /**
@@ -67,9 +62,26 @@ public class Problem implements Comparable<Problem> {
     }
 
     public HashSet<String> getKeywords() {
-        if (keywords == null) {
-            keywords = new HashSet<>();
-            populateKeyWords();
+        HashSet<String> keywords = new HashSet<>();
+        keywords.clear();
+        if (getTitle() != null)
+            keywords.addAll(Arrays.asList(getTitle().toLowerCase().split(" ")));
+        if (getDescription() != null)
+            keywords.addAll(Arrays.asList(getDescription().toLowerCase().split(" ")));
+        if (getDate() != null)
+            keywords.add(getTimeStamp());
+        for (Record record : getRecordTreeSet()) {
+            if (record.getGeoLocation() != null) {
+                if (record.getGeoLocation().getAddress() != null) {
+                    keywords.addAll(Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" ")));
+                }
+            }
+            if (record.getComment() != null) {
+                keywords.addAll(Arrays.asList(record.getComment().toLowerCase().split(" ")));
+            }
+            if (record.getTitle() != null) {
+                keywords.addAll(Arrays.asList(record.getTitle().toLowerCase().split(" ")));
+            }
         }
         return keywords;
     }
@@ -112,7 +124,6 @@ public class Problem implements Comparable<Problem> {
             throw new IllegalArgumentException("invalid problem description");
         }
         this.description = description;
-        populateKeyWords();
     }
 
     /**
@@ -135,24 +146,6 @@ public class Problem implements Comparable<Problem> {
             throw new IllegalArgumentException("invalid problem title");
         }
         this.title = title;
-        populateKeyWords();
-    }
-
-    /**
-     * Clear and repopulate the {@code keywords}.
-     * <p>
-     * Keywords are derived from a {@code Problem}'s title, description, and timestamp
-     * <p>
-     * TODO: add body location keywords
-     */
-    public void populateKeyWords() {
-        keywords.clear();
-        if (getTitle() != null)
-            keywords.addAll(Arrays.asList(getTitle().toLowerCase().split(" ")));
-        if (getDescription() != null)
-            keywords.addAll(Arrays.asList(getDescription().toLowerCase().split(" ")));
-        if (getDate() != null)
-            keywords.add(getTimeStamp());
     }
 
     /**
