@@ -19,6 +19,7 @@ import android.view.*;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
@@ -177,6 +178,11 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
+    }
+
+    @Override
+    public void updateAccountLoadError() {
+        Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
     }
 
 

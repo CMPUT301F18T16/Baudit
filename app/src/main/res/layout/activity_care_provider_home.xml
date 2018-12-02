@@ -32,12 +32,28 @@
                 android:paddingLeft="@dimen/default_margin"
                 android:paddingRight="@dimen/default_margin"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/patient_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
-    </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/patient_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/care_provider_home_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="@dimen/default_margin"
+                    android:src="@drawable/ic_plus_white_24dp"/>
+
+        </FrameLayout>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
