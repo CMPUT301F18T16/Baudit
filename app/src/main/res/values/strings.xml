@@ -40,7 +40,7 @@
     <string name="edit_account">Edit account</string>
     <string name="test_username">TESTAccount</string>
     <string name="test_email">test@example.com</string>
-    <string name="test_patient_name">Firstname Lastname</string>
+    <string name="test_patient_name">First Name Last Name</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone number</string>
@@ -95,4 +95,10 @@
     <string name="camera_image_commit_success">Successfuly committed image</string>
     <string name="camera_image_commit_failure">Failed to commit image</string>
     <string name="set_body_photo">Set body photo</string>
+    <string name="account_qr_code">Account QR Code</string>
+    <string name="record_photo">Record Photo</string>
+    <string name="add_record_photo_button">Add Record Photo Button</string>
+    <string name="problem_image">Problem Icon Image</string>
+    <string name="record_icon_image">Record Icon Image</string>
+    <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
 </resources>
