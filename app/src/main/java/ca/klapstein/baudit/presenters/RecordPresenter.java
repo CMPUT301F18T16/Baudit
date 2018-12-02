@@ -23,6 +23,10 @@ public class RecordPresenter extends Presenter<RecordView> {
     private Record record;
     private Problem problem;
 
+    public Record getRecord(){
+        return this.record;
+    }
+
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
         // TODO: load patient via other method so that care provider can obtain record as well
@@ -51,6 +55,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateTitleField(record.getTitle());
             view.updateCommentField(record.getComment());
             view.updateLocationField(record.getGeoLocation());
+            view.updateImageField(record.getRecordPhoto());
         }
         view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
