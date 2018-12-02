@@ -4,4 +4,8 @@
         android:id="@+id/nav_edit_account"
         android:icon="@drawable/ic_settings_white_24dp"
         android:title="@string/edit_account" />
+    <item
+        android:id="@+id/nav_display_qr_code"
+        android:icon="@drawable/ic_qrcode_white_24dp"
+        android:title="@string/display_qr_code"/>
 </menu>
