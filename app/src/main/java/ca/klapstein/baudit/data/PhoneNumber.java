@@ -11,7 +11,6 @@ public class PhoneNumber {
     private static final Pattern phoneNumberPattern =
             Pattern.compile("\\(?(\\d{3})\\)?(?: ?|-?)(\\d{3})(?: ?|-?)(\\d{4})");
 
-    @NonNull
     private String phoneNumber;
 
     public PhoneNumber(@NonNull String phoneNumber) throws IllegalArgumentException {

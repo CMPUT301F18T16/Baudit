@@ -50,9 +50,9 @@ public class ProblemTreeSetTest {
     @Test
     public void testProblemTreeSetComparable() {
 
-        Problem problem0 = new Problem("Aproblem");
-        Problem problem1 = new Problem("Bproblem");
-        Problem problem2 = new Problem("Cproblem");
+        Problem problem0 = new Problem("problem0");
+        Problem problem1 = new Problem("problem1");
+        Problem problem2 = new Problem("problem2");
 
         problemTreeSet.add(problem2);
         problemTreeSet.add(problem1);
@@ -63,7 +63,7 @@ public class ProblemTreeSetTest {
         assertTrue(problemTreeSet.last().equals(problem2));
         assertTrue(problemTreeSet.size() == 3);
 
-        Problem problem3 = new Problem("Dproblem");
+        Problem problem3 = new Problem("problem3");
 
         Calendar calendar = Calendar.getInstance();
         long timeMilli = calendar.getTimeInMillis();

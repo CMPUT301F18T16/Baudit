@@ -8,6 +8,7 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
+import ca.klapstein.baudit.views.ProblemRowView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +46,17 @@ public class PatientHomePresenter extends Presenter<HomeView> {
 
     public int getProblemCount() {
         return problemTreeSet.size();
+    }
+
+    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
+        if (patient == null || patient.getProblemTreeSet() == null) {
+            view.updateAccountLoadError();
+        } else {
+            Problem problem =  (Problem) patient.getProblemTreeSet().toArray()[position];
+            rowView.updateProblemTitleText(problem.getTitle());
+            rowView.updateProblemDateText(problem.getTimeStamp());
+            rowView.updateProblemDescriptionText(problem.getDescription());
+        }
     }
 
     public String getUsername() {
