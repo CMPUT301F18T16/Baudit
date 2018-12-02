@@ -16,15 +16,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
+
+import java.util.HashSet;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
@@ -44,6 +43,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     private TextView problemCountText;
     private TextView navHeaderUsername;
     private TextView navHeaderEmail;
+    private SearchView problemSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +146,22 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.patient_home_menu, menu);
+
+        problemSearchView = (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+        problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
         return true;
     }
 
@@ -186,7 +202,9 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     }
 
 
-    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
+    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
+
+        private HashSet<Integer> filteredIndexes = new HashSet<>();
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -195,8 +213,14 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             return new ProblemViewHolder(v); // Wrap it in a ViewHolder.
         }
 
+        private ProblemFilter problemFilter = new ProblemFilter();
+
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
+            if (!filteredIndexes.contains(i)) {
+                return;
+            }
+
             final Problem problem = presenter.getProblemAt(i);
             viewHolder.updateProblemTitleText(problem.getTitle());
             viewHolder.updateProblemDateText(problem.getTimeStamp());
@@ -263,7 +287,30 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         @Override
         public int getItemCount() {
-            return presenter.getProblemCount();
+            return filteredIndexes.size();
+        }
+
+        @Override
+        public Filter getFilter() {
+            return problemFilter;
+        }
+
+        private class ProblemFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                HashSet<Integer> filteredIndexes = presenter.filterProblemsByTitle(constraint);
+                results.values = filteredIndexes;
+                results.count = filteredIndexes.size();
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredIndexes = (HashSet) results.values;
+                notifyDataSetChanged();
+            }
         }
     }
 

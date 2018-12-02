@@ -1,11 +1,15 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
@@ -16,6 +20,7 @@ import ca.klapstein.baudit.views.HomeView;
  */
 public class PatientHomePresenter extends Presenter<HomeView> {
 
+    private static final String TAG = "PatientHomePresenter";
     private Patient patient;
 
     public PatientHomePresenter(HomeView view, Context context) {
@@ -65,5 +70,20 @@ public class PatientHomePresenter extends Presenter<HomeView> {
         patient.getProblemTreeSet().remove(deletedProblem);
         dataManager.commitPatient(patient);
         view.updateList();
+    }
+
+    public HashSet<Integer> filterProblemsByTitle(CharSequence constraint) {
+        String searchTitle = constraint.toString();
+        patient = dataManager.getLoggedInPatient();
+        HashSet<Integer> filterIndexes = new HashSet<>();
+        Problem[] problemArray = patient.getProblemTreeSet().toArray(new Problem[0]);
+        for (int i = 0; i < problemArray.length; i++) {
+            Problem problem = problemArray[i];
+
+            if (problem.getTitle().toLowerCase().contains(searchTitle.toLowerCase()))
+                filterIndexes.add(i);
+        }
+        Log.d(TAG, "obtained filtered problems by title search: constraint: " + searchTitle + " indexes: " + Arrays.toString(filterIndexes.toArray()));
+        return filterIndexes;
     }
 }
