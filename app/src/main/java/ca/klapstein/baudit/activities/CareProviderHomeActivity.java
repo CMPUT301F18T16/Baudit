@@ -185,7 +185,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
             if (resultCode == RESULT_OK) {
                 String username = data.getStringExtra("SCAN_RESULT");
                 Log.i(TAG, "obtained qr code decoded string: " + username);
-                presenter.onAddPatientAccount(username);
+                presenter.assignPatient(username);
             } else if (resultCode == RESULT_CANCELED) {
                 Log.e(TAG, "obtained invalid qr code activity result: " + resultCode);
             }

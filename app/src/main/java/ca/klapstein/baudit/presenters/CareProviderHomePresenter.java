@@ -24,7 +24,15 @@ public class CareProviderHomePresenter extends HomePresenter<CareProviderHomeVie
         careProvider = dataManager.getLoggedInCareProvider();
     }
 
-    public void onAddPatientAccount(String username) {
+    /**
+     * Attempt to assign a {@code Patient} with the given string specified username.
+     * <p>
+     * Fails if the given string username is invalid or if the username does not relate to any valid {@code Patient}
+     * account.
+     *
+     * @param username {@code String}
+     */
+    public void assignPatient(String username) {
         try {
             careProvider.getAssignedPatientTreeSet().add(dataManager.getPatient(new Username(username)));
             dataManager.commitCareProvider(careProvider);
