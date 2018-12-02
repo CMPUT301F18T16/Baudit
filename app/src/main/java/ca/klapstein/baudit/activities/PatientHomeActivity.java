@@ -23,8 +23,6 @@ import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
-import java.util.HashSet;
-
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
@@ -203,8 +201,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
-
-        private HashSet<Integer> filteredIndexes = new HashSet<>();
+        private static final String TAG = "ProblemListAdapter";
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -217,10 +214,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
-            if (!filteredIndexes.contains(i)) {
-                return;
-            }
-
             final Problem problem = presenter.getProblemAt(i);
             viewHolder.updateProblemTitleText(problem.getTitle());
             viewHolder.updateProblemDateText(problem.getTimeStamp());
@@ -287,7 +280,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         @Override
         public int getItemCount() {
-            return filteredIndexes.size();
+            return presenter.getProblemCount();
         }
 
         @Override
@@ -299,16 +292,14 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                HashSet<Integer> filteredIndexes = presenter.filterProblemsByTitle(constraint);
-                results.values = filteredIndexes;
-                results.count = filteredIndexes.size();
+                presenter.filterProblemsByTitle(constraint);
+                results.count = presenter.getProblemCount();
                 return results;
             }
 
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredIndexes = (HashSet) results.values;
                 notifyDataSetChanged();
             }
         }
