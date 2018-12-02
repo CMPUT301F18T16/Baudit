@@ -37,7 +37,7 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             careProvider.getAssignedPatientTreeSet().add(dataManager.getPatient(new Username(username)));
             dataManager.commitCareProvider(careProvider);
             view.updateList();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "failed to assign patient " + username, e);
             view.updateScanQRCodeError();
         }
