@@ -121,6 +121,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
+
+//        //Implement: If records photolist is empty Display a toast msg "No photos to be displayed"
         record_sideshow_button = findViewById(R.id.record_slideshow_button);
         record_sideshow_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +131,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 startActivity(intent);
             }
         });
+
 
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));

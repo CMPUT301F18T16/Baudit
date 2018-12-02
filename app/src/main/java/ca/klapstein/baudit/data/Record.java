@@ -113,6 +113,8 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code String}
      */
+
+
     public String getTitle() {
         return title;
     }
