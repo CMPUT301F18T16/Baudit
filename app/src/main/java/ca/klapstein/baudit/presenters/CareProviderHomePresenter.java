@@ -37,7 +37,7 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             careProvider.getAssignedPatientTreeSet().add(dataManager.getPatient(new Username(username)));
             dataManager.commitCareProvider(careProvider);
             view.updateList();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "failed to assign patient " + username, e);
             view.updateScanQRCodeError();
         }
@@ -48,10 +48,13 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             view.updateAccountLoadError();
         } else {
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
-            rowView.updatePatientNameText(patient.getUsername().toString());
+            rowView.updatePatientNameText(
+                patient.getContactInfo().getFirstName(),
+                patient.getContactInfo().getLastName()
+            );
+            rowView.updatePatientUsernameText(patient.getUsername().toString());
             rowView.updatePatientProblemNum(patient.getProblemTreeSet().size());
         }
-
     }
 
     public int getPatientCount() {
@@ -72,5 +75,22 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             view.updateEmailDisplay(careProvider.getContactInfo().getEmail().toString());
             view.updateList();
         }
+    }
+
+    public String getUsername() {
+        return careProvider.getUsername().toString();
+    }
+
+    public void removePatientClicked(int position) {
+        Patient deletedPatient =
+            (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
+        careProvider.getAssignedPatientTreeSet().remove(deletedPatient);
+        dataManager.commitCareProvider(careProvider);
+        view.updateList();
+    }
+
+    public String getPatientUsername(int position) {
+        Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
+        return patient.getUsername().toString();
     }
 }

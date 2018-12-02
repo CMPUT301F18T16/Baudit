@@ -98,4 +98,17 @@
     <string name="camera_image_commit_success">Successfuly committed image</string>
     <string name="camera_image_commit_failure">Failed to commit image</string>
     <string name="set_body_photo">Set body photo</string>
+    <string name="name_label">Name:</string>
+    <string name="username_label">Username:</string>
+    <string name="problem_count_label">Number of problems:</string>
+    <string name="view_account">View account</string>
+    <string name="remove_patient">Remove patient</string>
+    <string name="remove">Remove</string>
+    <string name="remove_patient_question">Remove this patient from your list?</string>
+    <string name="account_qr_code">Account QR Code</string>
+    <string name="record_photo">Record Photo</string>
+    <string name="add_record_photo_button">Add Record Photo Button</string>
+    <string name="problem_image">Problem Icon Image</string>
+    <string name="record_icon_image">Record Icon Image</string>
+    <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
 </resources>
