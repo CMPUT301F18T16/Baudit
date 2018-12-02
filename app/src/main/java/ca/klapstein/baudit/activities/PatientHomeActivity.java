@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -35,6 +36,8 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
  * @see ca.klapstein.baudit.data.Problem
  */
 public class PatientHomeActivity extends AppCompatActivity implements HomeView {
+
+    public static final String USERNAME_EXTRA = "username";
 
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
@@ -65,6 +68,16 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
         navHeaderUsername = navHeaderView.findViewById(R.id.nav_header_username);
         navHeaderEmail = navHeaderView.findViewById(R.id.nav_header_email);
+
+        navHeaderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientHomeActivity.this, ViewAccountActivity.class);
+                intent.putExtra(USERNAME_EXTRA, presenter.getUsername());
+                startActivity(intent);
+                drawerLayout.closeDrawers();
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {

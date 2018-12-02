@@ -85,4 +85,6 @@
     <string name="default_title">Untitled</string>
     <string name="default_description"></string>
     <string name="default_comment"></string>
+    <string name="username">Username</string>
+    <string name="ok">OK</string>
 </resources>
