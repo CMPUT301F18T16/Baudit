@@ -178,7 +178,7 @@ public class Problem implements Comparable<Problem> {
         return problemId;
     }
 
-    public void setProblemId(UUID problemId) {
+    public void setProblemId(@NonNull UUID problemId) {
         this.problemId = problemId;
     }
 }
