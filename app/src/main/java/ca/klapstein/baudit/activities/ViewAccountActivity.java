@@ -10,9 +10,9 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.ViewAccountPresenter;
 import ca.klapstein.baudit.views.ViewAccountView;
 
-import static ca.klapstein.baudit.activities.PatientHomeActivity.USERNAME_EXTRA;
-
 public class ViewAccountActivity extends AppCompatActivity implements ViewAccountView {
+
+    public static String VIEW_ACCOUNT_USERNAME_EXTRA = "username";
 
     private String username;
     private ViewAccountPresenter presenter;
@@ -26,7 +26,7 @@ public class ViewAccountActivity extends AppCompatActivity implements ViewAccoun
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_account);
 
-        username = getIntent().getStringExtra(USERNAME_EXTRA);
+        username = getIntent().getStringExtra(VIEW_ACCOUNT_USERNAME_EXTRA);
 
         presenter = new ViewAccountPresenter(this, getApplicationContext());
 
