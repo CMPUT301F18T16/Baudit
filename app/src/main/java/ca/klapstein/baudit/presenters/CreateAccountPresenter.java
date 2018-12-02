@@ -4,10 +4,17 @@ import android.content.Context;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.activities.CareProviderHomeActivity;
 import ca.klapstein.baudit.activities.PatientHomeActivity;
-import ca.klapstein.baudit.data.*;
+import ca.klapstein.baudit.data.Account;
+import ca.klapstein.baudit.data.CareProvider;
+import ca.klapstein.baudit.data.ContactInfo;
+import ca.klapstein.baudit.data.Email;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.PhoneNumber;
+import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 public class CreateAccountPresenter extends Presenter<CreateAccountView> {
+
     private static final String TAG = "CreateAccountPresenter";
 
     protected Account account;
