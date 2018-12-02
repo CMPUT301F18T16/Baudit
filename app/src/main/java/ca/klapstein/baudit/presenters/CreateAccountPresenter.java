@@ -11,10 +11,10 @@ import ca.klapstein.baudit.data.Email;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PhoneNumber;
 import ca.klapstein.baudit.data.Username;
-import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.views.CreateAccountView;
 
 public class CreateAccountPresenter extends Presenter<CreateAccountView> {
+
     private static final String TAG = "CreateAccountPresenter";
 
     protected Account account;

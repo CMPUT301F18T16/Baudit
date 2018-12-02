@@ -1,7 +1,12 @@
 package ca.klapstein.baudit.data;
 
+import android.graphics.Bitmap;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,6 +15,14 @@ import static org.mockito.Mockito.mock;
 
 
 public class RecordTest {
+
+    @Mock
+    private Bitmap mockRecordPhoto;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testConstructor1() {
@@ -134,8 +147,8 @@ public class RecordTest {
         Record record = new Record();
 
         // remove a keyword that does not exist in the list of keywords
-        record.removeKeyword("NONSUCHKEYWORD");
-        assertFalse(record.getKeywords().contains("NONSUCHKEYWORD"));
+        record.removeKeyword("NON_SUCH_KEYWORD");
+        assertFalse(record.getKeywords().contains("NON_SUCH_KEYWORD"));
 
         // remove a keyword that does exist in the list of keywords
         record.addKeyword("KEYWORD");
@@ -156,5 +169,32 @@ public class RecordTest {
     public void getRecordId() {
         Record record = new Record();
         assertNotNull(record.getRecordId());
+    }
+
+    @Test
+    public void getLastRecordPhotoNull() {
+        Record record = new Record();
+        assertNull(record.getLastRecordPhoto());
+    }
+
+    @Test
+    public void addRecordPhoto() {
+        Record record = new Record();
+        record.addRecordPhoto(mockRecordPhoto);
+        assertEquals(1, record.getRecordPhotos().size());
+    }
+
+    @Test
+    public void getLastRecordPhotoNonNull() {
+        Record record = new Record();
+        record.addRecordPhoto(mockRecordPhoto);
+        assertNotNull(record.getLastRecordPhoto());
+    }
+
+    @Test
+    public void getRecordPhotos() {
+        Record record = new Record();
+        ArrayList<Bitmap> recordPhotos = record.getRecordPhotos();
+        assertEquals(0, recordPhotos.size());
     }
 }

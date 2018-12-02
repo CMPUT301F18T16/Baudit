@@ -67,7 +67,7 @@ public class StartActivity extends AppCompatActivity implements StartView {
     /**
      * On a login validation success proceed and start the appropriate home activity.
      *
-     * @param homeClass
+     * @param homeClass {@code Class}
      */
     @Override
     public void onLoginValidationSuccess(Class homeClass) {

@@ -2,7 +2,6 @@ package ca.klapstein.baudit.views;
 
 import java.util.Calendar;
 import java.util.Date;
-
 import ca.klapstein.baudit.data.RecordTreeSet;
 
 public interface ProblemView extends View {

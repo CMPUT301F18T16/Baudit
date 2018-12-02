@@ -6,6 +6,7 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
+import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
  * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
@@ -36,6 +37,17 @@ public class PatientHomePresenter extends Presenter<HomeView> {
             return 0;
         } else {
             return patient.getProblemTreeSet().size();
+        }
+    }
+
+    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
+        if (patient == null || patient.getProblemTreeSet() == null) {
+            view.updateAccountLoadError();
+        } else {
+            Problem problem =  (Problem) patient.getProblemTreeSet().toArray()[position];
+            rowView.updateProblemTitleText(problem.getTitle());
+            rowView.updateProblemDateText(problem.getTimeStamp());
+            rowView.updateProblemDescriptionText(problem.getDescription());
         }
     }
 

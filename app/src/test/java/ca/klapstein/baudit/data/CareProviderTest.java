@@ -68,9 +68,9 @@ public class CareProviderTest {
 
     @Test
     public void testSetCareProviderUsername() {
-        Username newusername = new Username("newusername");
-        careProvider.setUsername(newusername);
-        assertEquals(careProvider.getUsername(), newusername);
+        Username newUsername = new Username("new username");
+        careProvider.setUsername(newUsername);
+        assertEquals(careProvider.getUsername(), newUsername);
     }
 
     @Test

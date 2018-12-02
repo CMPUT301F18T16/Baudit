@@ -230,7 +230,7 @@ public class DataModel {
      * Commit an subclass of {@code Account} to both local and remote storage.
      *
      * @param account the account to commit
-     * @param <T>
+     * @param <T> A subclass of {@code Account}
      */
     public <T extends Account> void commitAccount(T account) {
         if (account instanceof Patient) {
