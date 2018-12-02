@@ -1,28 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/card_half_spacing"
-        android:layout_marginLeft="@dimen/card_spacing"
-        android:layout_marginRight="@dimen/card_spacing"
-        android:layout_marginTop="@dimen/card_half_spacing"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="@dimen/elevation">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_half_spacing"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="@dimen/elevation">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/card_patient_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <TextView
-                android:id="@+id/patient_name"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_half_spacing"
+            android:textSize="22sp"
+            android:textColor="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/card_half_spacing"
+                android:text="@string/username_label" />
+
+            <TextView
+                android:id="@+id/card_patient_username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        <TextView
-                android:id="@+id/patient_problem_count_num"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_half_spacing"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/card_half_spacing"
+                android:text="@string/problem_count_label"/>
+
+            <TextView
+                android:id="@+id/card_patient_problem_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_half_spacing"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>
