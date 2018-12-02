@@ -21,7 +21,7 @@
     <string name="problem_count">Problems (%1$d):</string>
     <string name="patient_count">Patients (%1$d):</string>
     <string name="home">Home</string>
-    <string name="get_account_qr_code">Display Account QR Code</string>
+    <string name="display_qr_code">Display account QR code</string>
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
     <string name="problem_locations">Problem locations</string>
@@ -89,11 +89,13 @@
     <string name="delete_problem_question">Delete problem?</string>
     <string name="view_record">View Record</string>
     <string name="delete_record_question">Delete record?</string>
+    <string name="username">Username</string>
+    <string name="ok">OK</string>
     <string name="default_title">Add a title</string>
     <string name="default_description">Add a description</string>
     <string name="default_comment">Add a comment</string>
     <string name="update_camera_overlay_error">Failed to update the camera overlay</string>
     <string name="camera_image_commit_success">Successfuly committed image</string>
     <string name="camera_image_commit_failure">Failed to commit image</string>
-    <string name="set_body_photo">Set Body Photo</string>
+    <string name="set_body_photo">Set body photo</string>
 </resources>

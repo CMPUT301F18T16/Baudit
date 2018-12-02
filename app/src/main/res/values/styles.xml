@@ -8,6 +8,15 @@
     <style name="BauditLoginTheme" parent="BauditTheme">
         <item name="android:windowBackground">@color/vaporwave_blue</item>
     </style>
+
+    <style name="BauditDialogTheme" parent="BauditTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
   
     <style name="BauditSplashTheme" parent="BauditTheme">
         <item name="android:windowBackground">@drawable/baudit_logo</item>
