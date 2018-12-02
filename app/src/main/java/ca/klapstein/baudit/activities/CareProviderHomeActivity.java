@@ -32,13 +32,14 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
 
     private static final String TAG = "CareProviderHome";
 
+    private final int REQUEST_CODE_QR_SCAN = 101;
+
     private CareProviderHomePresenter presenter;
     private RecyclerView patientRecyclerView;
     private PatientListAdapter adapter;
     private DrawerLayout drawerLayout;
     private TextView navHeaderUsername;
     private TextView navHeaderEmail;
-    private final int REQUEST_CODE_QR_SCAN = 101;
     private TextView patientCountText;
 
     @Override
@@ -151,35 +152,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     @Override
     public void updateAccountLoadError() {
         Toast.makeText(this, getResources().getString(R.string.care_provider_account_load_failure), Toast.LENGTH_LONG).show();
-
-    }
-
-    private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
-
-        @Override @NonNull
-        public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.card_patient, viewGroup, false);
-            return new PatientViewHolder(v); //Wrap it in a ViewHolder.
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull PatientViewHolder viewHolder, int i) {
-            presenter.onBindPatientRowViewAtPosition(viewHolder, i);
-            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: (EXTRA) launch a choice to either drop supporter the patient (EXTRA)
-                    // TODO: launch ability to view patients problems and add records
-                }
-            });
-
-            registerForContextMenu(viewHolder.cardView);
-        }
-        @Override
-        public int getItemCount() {
-            return presenter.getPatientCount();
-        }
     }
 
     /**
@@ -198,6 +170,14 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         }
     }
 
+    /**
+     * Catch the result from the QR code scanning activity. And send its obtained data (if the scan was successful)
+     * to the presenter.
+     *
+     * @param requestCode {@code int}
+     * @param resultCode  {@code int}
+     * @param data        {@code Intent}
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -246,6 +226,36 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         @Override
         public void onStart() {
 
+        }
+    }
+
+    private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
+
+        @Override
+        @NonNull
+        public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.card_patient, viewGroup, false);
+            return new PatientViewHolder(v); //Wrap it in a ViewHolder.
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull PatientViewHolder viewHolder, int i) {
+            presenter.onBindPatientRowViewAtPosition(viewHolder, i);
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: (EXTRA) launch a choice to either drop supporter the patient (EXTRA)
+                    // TODO: launch ability to view patients problems and add records
+                }
+            });
+
+            registerForContextMenu(viewHolder.cardView);
+        }
+
+        @Override
+        public int getItemCount() {
+            return presenter.getPatientCount();
         }
     }
 }
