@@ -25,8 +25,6 @@ import java.lang.reflect.Type;
 public class PreferencesModel {
     private static final String TAG = "BauditPrefManager";
 
-    private static final String PATIENT_TREESET_PREF_JSON_KEY = "mPatientTreeSetJson";
-
     private static final String CAREPROVIDER_PREF_JSON_KEY = "mCareProviderJson";
 
     private static final String PATIENT_PREF_JSON_KEY = "mPatientJson";

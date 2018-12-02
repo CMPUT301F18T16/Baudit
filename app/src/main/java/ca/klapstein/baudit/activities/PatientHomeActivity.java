@@ -18,13 +18,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
+import static ca.klapstein.baudit.activities.ViewAccountActivity.VIEW_ACCOUNT_USERNAME_EXTRA;
 
 /**
  * Activity for listing {@code Problem}s.
@@ -32,8 +32,6 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
  * @see ca.klapstein.baudit.data.Problem
  */
 public class PatientHomeActivity extends AppCompatActivity implements HomeView {
-
-    public static final String USERNAME_EXTRA = "username";
 
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
@@ -47,6 +45,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_home);
+
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
@@ -68,7 +67,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PatientHomeActivity.this, ViewAccountActivity.class);
-                intent.putExtra(USERNAME_EXTRA, presenter.getUsername());
+                intent.putExtra(VIEW_ACCOUNT_USERNAME_EXTRA, presenter.getUsername());
                 startActivity(intent);
                 drawerLayout.closeDrawers();
             }
@@ -208,9 +207,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
     }
 
-
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
-        private static final String TAG = "ProblemListAdapter";
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -223,10 +220,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
-            final Problem problem = presenter.getProblemAt(i);
-            viewHolder.updateProblemTitleText(problem.getTitle());
-            viewHolder.updateProblemDateText(problem.getTimeStamp());
-            viewHolder.updateProblemDescriptionText(problem.getDescription());
+            presenter.onBindProblemRowViewAtPosition(viewHolder, i);
 
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
