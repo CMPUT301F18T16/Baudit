@@ -3,6 +3,7 @@ package ca.klapstein.baudit.data;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -141,5 +142,19 @@ public class RecordTest {
         assertTrue(record.getKeywords().contains("KEYWORD"));
         record.removeKeyword("KEYWORD");
         assertFalse(record.getKeywords().contains("KEYWORD"));
+    }
+
+    @Test
+    public void setRecordId() {
+        Record record = new Record();
+        UUID uuid = UUID.randomUUID();
+        record.setRecordId(uuid);
+        assertEquals(uuid, record.getRecordId());
+    }
+
+    @Test
+    public void getRecordId() {
+        Record record = new Record();
+        assertNotNull(record.getRecordId());
     }
 }
