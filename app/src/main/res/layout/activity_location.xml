@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/location_toolbar"
+    <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
-
-    <com.google.android.gms.maps.MapView
+        android:layout_height="match_parent"
         android:id="@+id/choose_location_map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+    
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height= "50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:elevation="10dp"
+        android:background="@color/white"
+        android:id="@+id/relative_layout">
 
-    <fragment
-        android:id="@+id/place_autocomplete_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:id="@+id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/magnify"
+            android:layout_marginStart="10dp"></ImageView>
 
-    </LinearLayout>
+        <AutoCompleteTextView
+            android:id="@+id/search_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ic_magnify"
+            android:background="@null"
+            android:hint="Enter city, address or postal code"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/gps"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/relative_layout"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gps" />
+
+</RelativeLayout>
 
 

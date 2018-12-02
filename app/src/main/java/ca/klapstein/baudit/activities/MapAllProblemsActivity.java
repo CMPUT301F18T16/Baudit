@@ -146,10 +146,10 @@ public class MapAllProblemsActivity extends AppCompatActivity
             Record record3 = new Record("Third occurrence","This again on Saturday");
             Record record4 = new Record("Fourth occurrence", "This happened on a Sunday");
 
-            record1.setGeoLocation(new GeoLocation(53.524074, -113.526378));
-            record2.setGeoLocation(new GeoLocation(53.522849, -113.622665));
-            record3.setGeoLocation(new GeoLocation(53.527288, -113.529346));
-            record4.setGeoLocation(new GeoLocation(53.515232, -113.481288));
+            record1.setGeoLocation(new GeoLocation("place1",53.524074, -113.526378));
+            record2.setGeoLocation(new GeoLocation("place2",53.522849, -113.622665));
+            record3.setGeoLocation(new GeoLocation("place3",53.527288, -113.529346));
+            record4.setGeoLocation(new GeoLocation("place4",53.515232, -113.481288));
 
             recordTreeSet1.add(record1);
             recordTreeSet1 = problem1.getRecordTreeSet();

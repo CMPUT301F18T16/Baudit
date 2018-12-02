@@ -2,22 +2,38 @@ package ca.klapstein.baudit.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.location.Location;
 
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,8 +44,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
+import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
+import ca.klapstein.baudit.data.PlaceInfo;
 import ca.klapstein.baudit.presenters.LocationPresenter;
 import ca.klapstein.baudit.views.LocationView;
 
@@ -38,63 +60,48 @@ import ca.klapstein.baudit.views.LocationView;
  * Activity for displaying and choosing a location on a map.
  */
 public class LocationActivity extends AppCompatActivity
-        implements LocationView, OnMapReadyCallback {
+        implements LocationView, OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
     private static final String TAG = "LOCATION_ACTIVITY";
-    private static final float defaultZoom = 20.0f;
+    private static final float defaultZoom = 10.0f;
+    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71,136));
 
     private MapView mapView;
     private LocationPresenter presenter;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private PlaceAutocompleteFragment autocompleteFragment;
-    private GoogleMap googleMap;
+    private GoogleMap map;
     private GeoLocation geoLocation;
+    private AutoCompleteTextView searchText;
+    private ImageView gpsButton;
+    private PlaceAutoCompleteAdapter autoCompleteAdapter;
+    private GeoDataClient geoDataClient;
+    private PlaceDetectionClient placeDetectionClient;
+    private GoogleApiClient googleApiClient;
+    private Place place;
+    private PlaceInfo placeInfo;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-        Toolbar toolbar = findViewById(R.id.location_toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setTitle("Add location");
 
         presenter = new LocationPresenter(this, getApplicationContext());
+        searchText = findViewById(R.id.search_field);
+        gpsButton = findViewById(R.id.gps);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
-
         mapView = findViewById(R.id.choose_location_map);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
 
-        autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        LatLng sw = new LatLng(41.6751050889, -140.99778);
-        LatLng ne = new LatLng(83.23324, -52.6480987209);
-        autocompleteFragment.setBoundsBias(new LatLngBounds(sw, ne));
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                geoLocation = new GeoLocation(
-                        place.getName().toString(),
-                        place.getLatLng().latitude,
-                        place.getLatLng().longitude
-                );
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
     }
+
 
     @Override
     protected void onResume(){
@@ -155,9 +162,16 @@ public class LocationActivity extends AppCompatActivity
 
     }
 
-    public void startSetLocation(GoogleMap googleMap) {
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        startSetLocation(map);
+        return;
+    }
+
+    public void startSetLocation(GoogleMap map) {
         Toast.makeText(this, "Set a Location", Toast.LENGTH_SHORT).show();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(56.1304,-106.3468)),0.0f));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(56.1304,-106.3468)),defaultZoom));
         getDeviceLocation();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -169,11 +183,64 @@ public class LocationActivity extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        googleMap.setMyLocationEnabled(true);
-        //LatLng marker = new LatLng(current.getLatitude(), current.getLongitude());
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,20.0f));
-        //googleMap.addMarker(new MarkerOptions().position(marker).draggable(true));
-        //GeoLocation geolocation = new GeoLocation(marker.latitude, marker.longitude);
+        map.setMyLocationEnabled(true);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        init();
+        hideSoftKeyboard();
+    }
+
+    private void init(){
+        googleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
+
+        geoDataClient = Places.getGeoDataClient(this,null);
+        placeDetectionClient = Places.getPlaceDetectionClient(this, null);
+
+
+        autoCompleteAdapter = new PlaceAutoCompleteAdapter(this, geoDataClient, LAT_LNG_BOUNDS,null);
+
+        searchText.setAdapter(autoCompleteAdapter);
+        searchText.setOnItemClickListener(autoCompleteClickListener);
+
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
+                if(actionId== EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
+                    geoLocate();
+                }
+                return false;
+            }
+        });
+        gpsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDeviceLocation();
+            }
+        });
+    }
+
+    private void geoLocate(){
+        String searchString = searchText.getText().toString();
+        Geocoder geocoder = new Geocoder(LocationActivity.this);
+        List<Address> list = new ArrayList<>();
+        try{
+            list = geocoder.getFromLocationName(searchString, 1);
+        }catch (IOException e){
+            Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
+        }
+        if(list.size() > 0){
+            Address address = list.get(0);
+            Log.d(TAG, "geoLocate: found a location: " + address.toString());
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
+        }
+        return;
     }
 
     private void getDeviceLocation(){
@@ -186,6 +253,7 @@ public class LocationActivity extends AppCompatActivity
                     if(task.isSuccessful()){
                         Log.d(TAG, "getDeviceLocation found location");
                         Location currentLocation = (Location) task.getResult();
+                        moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), defaultZoom, "My Location");
                     }else{
                         Log.d(TAG, "getDeviceLocation could not find a location");
                         Toast.makeText(LocationActivity.this, "Current location not found", Toast.LENGTH_SHORT).show();
@@ -200,14 +268,62 @@ public class LocationActivity extends AppCompatActivity
             Log.e(TAG, "getDeviceLocation error" +e.getMessage());
         }
     }
-    public void moveCamera(LatLng latLng, float zoom){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+    public void moveCamera(LatLng latLng, float zoom, String title){
+        MarkerOptions marker = new MarkerOptions().position(latLng).title(title).draggable(false);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+        if(!(title.equals("My Location"))){
+            map.addMarker(marker);
+        }
+        hideSoftKeyboard();
+        return;
+    }
+
+    private void hideSoftKeyboard(){
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        return;
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        //LatLng ny = new LatLng(40.7143528, -74.0059731);
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
-        startSetLocation(googleMap);
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
+
+    private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            hideSoftKeyboard();
+            final AutocompletePrediction item = autoCompleteAdapter.getItem(position);
+            final String placeId = item.getPlaceId();
+
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(googleApiClient, placeId);
+            placeResult.setResultCallback(updatePlaceDetailCallback);
+        }
+    };
+
+    private ResultCallback<PlaceBuffer> updatePlaceDetailCallback = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(@NonNull PlaceBuffer places) {
+            if (places.getStatus().isSuccess()) {
+                places.release();
+                return;
+            }
+            final Place place = places.get(0);
+            try {
+                placeInfo = new PlaceInfo();
+                placeInfo.setAddress(place.getAddress().toString());
+                placeInfo.setName(place.getName().toString());
+                placeInfo.setId(place.getId().toString());
+                placeInfo.setLatLng(place.getLatLng());
+                placeInfo.setPhoneNumber(place.getPhoneNumber().toString());
+            }catch(NullPointerException e){
+                Log.e(TAG, "onResult NullPointerException" + e.getMessage());
+            }
+
+            moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude)
+                    ,defaultZoom, placeInfo.getName());
+            places.release();
+
+        }
+
+    };
 }

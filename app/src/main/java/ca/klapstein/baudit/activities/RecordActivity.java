@@ -1,13 +1,19 @@
 package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
 
@@ -20,7 +26,12 @@ import ca.klapstein.baudit.views.RecordView;
  */
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
+    private static final String TAG = "RecordActivity";
+
+    private static final int REQUEST_GEOLOCATION = 123;
+
     private int recordId;
+    private GeoLocation geoLocation;
     private RecordPresenter presenter;
 
     private ImageButton titleEditButton;
@@ -59,8 +70,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                         RecordActivity.this,
                         LocationActivity.class
                 );
-                intent.putExtra("recordId",recordId);
-                startActivity(intent);
+                intent.putExtra("geolocation", "GEOLOCATION");
+                startActivityForResult(intent,REQUEST_GEOLOCATION);
             }
         });
         commitButton = findViewById(R.id.record_commit_button);
@@ -84,6 +95,20 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         initTitleViews();
         initCommentViews();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_GEOLOCATION) {
+
+            if (resultCode == RESULT_OK) {
+                geoLocation = data.getStringExtra("SCAN_RESULT");
+                Log.e(TAG, "obtained qr code decoded string: " + contents);
+                presenter.onQRCodeScanned(contents);
+            } else if (resultCode == RESULT_CANCELED) {
+                //handle cancel
+            }
+        }
     }
 
     @Override

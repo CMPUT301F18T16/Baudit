@@ -5,4 +5,5 @@ public interface RecordView extends View {
     void updateCommentField(String comment);
     void commitRecordFailure();
     void commitRecordSuccess();
+
 }
