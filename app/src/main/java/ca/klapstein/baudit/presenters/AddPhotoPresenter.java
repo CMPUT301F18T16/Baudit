@@ -22,9 +22,8 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
         patient = dataManager.getLoggedInPatient();
         Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
         Record record = problem.getRecordTreeSet().pollFirst();
-        if (!record.getRecordPhotos().isEmpty() &&
-                record.getRecordPhotos().get(record.getRecordPhotos().size() - 1) != null) {
-            view.updateCameraOverlayImage(record.getRecordPhotos().get(record.getRecordPhotos().size() - 1));
+        if (record.getLastRecordPhoto() != null) {
+            view.updateCameraOverlayImage(record.getLastRecordPhoto());
         } else {
             view.updateCameraOverlayError();
         }

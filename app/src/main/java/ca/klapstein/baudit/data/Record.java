@@ -109,8 +109,17 @@ public class Record implements Comparable<Record> {
         }
     }
 
+    @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
         return recordPhotos;
+    }
+
+    @Nullable
+    public Bitmap getLastRecordPhoto() {
+        if (!getRecordPhotos().isEmpty())
+            return null;
+        else
+            return getRecordPhotos().get(getRecordPhotos().size() - 1);
     }
 
     /**
