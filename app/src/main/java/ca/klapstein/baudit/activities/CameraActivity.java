@@ -166,8 +166,8 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     }
 
     /**
-     * On taking a picture convert it to a {@code Bitmap} and send it to the presenter for either commiting a
-     * {@code RecordPhoto} or {@code BodyPhoto}.
+     * On taking a picture convert it to a {@code Bitmap} and send it to the presenter for either committing a
+     * record or body photo.
      *
      * @param data   {@code byte[]}
      * @param camera {@code Camera}
