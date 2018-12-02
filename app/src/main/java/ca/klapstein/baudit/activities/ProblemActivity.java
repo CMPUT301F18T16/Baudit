@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import ca.klapstein.baudit.views.ProblemView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
@@ -136,13 +138,13 @@ public class ProblemActivity extends AppCompatActivity
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("onResume after update", problemTime.getTime().toString());
                 presenter.commitProblem(
                     problemPosition,
                     titleInput.getText().toString(),
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
                 );
-                finish();
             }
         });
 
@@ -152,12 +154,6 @@ public class ProblemActivity extends AppCompatActivity
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.commitProblem(
-                        problemPosition,
-                        titleInput.getText().toString(),
-                        descriptionInput.getText().toString(),
-                        problemTime.getTime()
-                );
                 Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
                 intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                 intent.putExtra(RECORD_POSITION_EXTRA, -1);
@@ -174,8 +170,24 @@ public class ProblemActivity extends AppCompatActivity
         super.onStart();
         presenter.viewStarted(problemPosition);
         updateRecordCountText();
+        updateTimeButton(problemTime.getTime());
+        updateDateButton(problemTime.getTime());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.viewStarted(problemPosition);
+        updateRecordCountText();
+        updateTimeButton(problemTime.getTime());
+        updateDateButton(problemTime.getTime());
+        Log.d("onResume after update", problemTime.getTime().toString());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 
     private Bitmap createImage(int width, int height, int color) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -279,17 +291,28 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void updateDateButton() {
+    public void updateDateButton(Date date) {
         DateFormat mDateFormat = DateFormat.getDateInstance();
-        String dateForButton = mDateFormat.format(problemTime.getTime());
+        String dateForButton = mDateFormat.format(date);
         dateButton.setText(dateForButton);
     }
 
     @Override
-    public void updateTimeButton() {
+    public void updateTimeButton(Date date) {
         DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-        String timeForButton = mTimeFormat.format(problemTime.getTime());
+        String timeForButton = mTimeFormat.format(date);
         timeButton.setText(timeForButton);
+    }
+
+    @Override
+    public void updateProblemTime(Date date) {
+        problemTime.set(Calendar.YEAR, date.getYear());
+        problemTime.set(Calendar.MONTH, date.getMonth());
+        problemTime.set(Calendar.DAY_OF_MONTH, date.getDay());
+        problemTime.set(Calendar.HOUR_OF_DAY, date.getHours());
+        problemTime.set(Calendar.MINUTE, date.getMinutes());
+        updateDateButton(problemTime.getTime());
+        updateTimeButton(problemTime.getTime());
     }
 
     @Override
@@ -328,6 +351,7 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void commitProblemSuccess() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_success), Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -335,14 +359,14 @@ public class ProblemActivity extends AppCompatActivity
         problemTime.set(Calendar.YEAR, year);
         problemTime.set(Calendar.MONTH, month);
         problemTime.set(Calendar.DAY_OF_MONTH, day);
-        updateDateButton();
+        updateDateButton(problemTime.getTime());
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
-        updateTimeButton();
+        updateTimeButton(problemTime.getTime());
     }
 
     private void updateRecordCountText() {

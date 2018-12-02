@@ -1,13 +1,15 @@
 package ca.klapstein.baudit.views;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import ca.klapstein.baudit.data.RecordTreeSet;
 
 public interface ProblemView extends View {
     void updateTitleField(String title);
-    void updateDateButton();
-    void updateTimeButton();
+    void updateDateButton(Date date);
+    void updateTimeButton(Date date);
+    void updateProblemTime(Date date);
     void updateDescriptionField(String description);
     void updateProblemHints();
     void showDatePicker(Calendar calendar);

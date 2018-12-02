@@ -54,7 +54,6 @@ class RemoteModel {
         @Override
         protected Account doInBackground(String... search_parameters) {
             JestDroidClient client = createClient();
-            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Account> accountArrayList = new ArrayList<>();
             String query = "{\n" +
                     "   \"query\": {\n" +
@@ -67,9 +66,6 @@ class RemoteModel {
                     "       } \n" +
                     "   } \n" +
                     "}";
-
-
-            Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
                     .addIndex(PATIENT_INDEX)
                     .addIndex(CARE_PROVIDER_INDEX)
@@ -109,7 +105,6 @@ class RemoteModel {
         @Override
         protected Patient doInBackground(String... search_parameters) {
             JestDroidClient client = createClient();
-            Log.d(TAG, "elastic search parameters: " + Arrays.toString(search_parameters));
             ArrayList<Patient> patientArrayList = new ArrayList<>();
             String query = "{\n" +
                     "    \"query\": {\n" +
@@ -119,8 +114,6 @@ class RemoteModel {
                     "         }\n" +
                     "     }\n" +
                     "}";
-
-            Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
                     .addIndex(PATIENT_INDEX)
                     .build();
