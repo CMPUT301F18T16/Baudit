@@ -160,6 +160,15 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             }
         });
 
+        problemSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                // reset the presenters list of problems, thus, repopulating the list
+                presenter.viewStarted();
+                return false;
+            }
+        });
+
         return true;
     }
 
