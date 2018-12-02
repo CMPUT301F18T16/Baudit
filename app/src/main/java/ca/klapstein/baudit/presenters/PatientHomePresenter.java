@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Patient;
@@ -8,8 +9,9 @@ import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 
 /**
  * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
@@ -22,6 +24,8 @@ public class PatientHomePresenter extends Presenter<HomeView> {
 
     private static final String TAG = "PatientHomePresenter";
     private Patient patient;
+
+    @NonNull
     private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
     public PatientHomePresenter(HomeView view, Context context) {
@@ -40,12 +44,7 @@ public class PatientHomePresenter extends Presenter<HomeView> {
     }
 
     public int getProblemCount() {
-        if (patient == null || problemTreeSet == null) {
-            view.updateAccountLoadError();
-            return 0;
-        } else {
-            return problemTreeSet.size();
-        }
+        return problemTreeSet.size();
     }
 
     public String getUsername() {
@@ -75,12 +74,13 @@ public class PatientHomePresenter extends Presenter<HomeView> {
 
     public void deleteProblemClicked(int position) {
         Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
+        problemTreeSet.remove(deletedProblem);
         patient.getProblemTreeSet().remove(deletedProblem);
         dataManager.commitPatient(patient);
         view.updateList();
     }
 
-    public void filterProblemsByTitle(CharSequence constraint) {
+    public void filterProblemsByKeyWords(CharSequence constraint) {
         try {
             patient = dataManager.getLoggedInPatient();
             problemTreeSet.clear();
@@ -89,17 +89,13 @@ public class PatientHomePresenter extends Presenter<HomeView> {
             Log.e(TAG, "failed to obtain patient account info", e);
         }
 
-        String searchTitle = constraint.toString();
+        ArrayList<String> searchTokens = new ArrayList<>(Arrays.asList(constraint.toString().toLowerCase().split(" ")));
+        Log.d(TAG, "filtering with tokens: " + searchTokens);
         patient = dataManager.getLoggedInPatient();
-        HashSet<Integer> filterIndexes = new HashSet<>();
         Problem[] problemArray = problemTreeSet.toArray(new Problem[0]);
-        for (int i = 0; i < problemArray.length; i++) {
-            Problem problem = problemArray[i];
-            if (!problem.getTitle().toLowerCase().contains(searchTitle.toLowerCase()))
-                problemTreeSet.remove(problemArray[i]);
+        for (Problem aProblemArray : problemArray) {
+            if (Collections.disjoint(searchTokens, aProblemArray.getKeywords()))
+                problemTreeSet.remove(aProblemArray);
         }
-
-        Log.d(TAG, "obtained filtered problems by title search: constraint: " + searchTitle + " indexes: " + Arrays.toString(filterIndexes.toArray()));
-        return;
     }
 }

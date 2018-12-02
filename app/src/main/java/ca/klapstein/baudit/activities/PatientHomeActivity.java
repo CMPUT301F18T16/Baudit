@@ -292,7 +292,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                presenter.filterProblemsByTitle(constraint);
+                presenter.filterProblemsByKeyWords(constraint);
                 results.count = presenter.getProblemCount();
                 return results;
             }
