@@ -77,24 +77,26 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     }
 
     @Test
-    public void testSearchProblemNull() {
+    public void testSearchProblemNull() throws InterruptedException {
         solo.waitForActivity(PatientHomeActivity.class);
         solo.clickOnView(solo.getView(R.id.patient_home_search));
         SearchView searchView = (SearchView) ((ActionMenuItemView) solo.getView(R.id.patient_home_search)).getItemData().getActionView();
 
         searchView.setQuery("NULL", true);
+        Thread.sleep(5000);
         assertFalse(solo.searchText("problem 1"));
         assertFalse(solo.searchText("problem 2"));
         assertFalse(solo.searchText("problem 3"));
     }
 
     @Test
-    public void testSearchProblem1() {
+    public void testSearchProblem1() throws InterruptedException {
         solo.waitForActivity(PatientHomeActivity.class);
         solo.clickOnView(solo.getView(R.id.patient_home_search));
         SearchView searchView = (SearchView) ((ActionMenuItemView) solo.getView(R.id.patient_home_search)).getItemData().getActionView();
 
         searchView.setQuery("1", true);
+        Thread.sleep(5000);
         assertTrue(solo.searchText("problem 1"));
         assertFalse(solo.searchText("problem 2"));
         assertFalse(solo.searchText("problem 3"));
