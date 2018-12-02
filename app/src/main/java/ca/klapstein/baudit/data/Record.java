@@ -23,11 +23,16 @@ public class Record implements Comparable<Record> {
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
-    private Bitmap recordPhoto;
+
     private String title;
     private String comment;
     private GeoLocation geoLocation;
+
+    @NonNull
+    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
+    @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
     private UUID recordId;
 
@@ -96,16 +101,25 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void setRecordPhoto(Bitmap bitmap) {
+    public void addRecordPhoto(Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            recordPhoto = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+            recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
         } else {
-            recordPhoto = bitmap;
+            recordPhotos.add(bitmap);
         }
     }
 
-    public Bitmap getRecordPhoto() {
-        return recordPhoto;
+    @NonNull
+    public ArrayList<Bitmap> getRecordPhotos() {
+        return recordPhotos;
+    }
+
+    @Nullable
+    public Bitmap getLastRecordPhoto() {
+        if (getRecordPhotos().isEmpty())
+            return null;
+        else
+            return getRecordPhotos().get(getRecordPhotos().size() - 1);
     }
 
     /**
