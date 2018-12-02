@@ -8,8 +8,6 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
-
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
