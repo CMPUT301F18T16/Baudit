@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -178,5 +179,19 @@ public class ProblemTest {
 
         // ensure not reference overriding
         assertNotEquals(recordTreeSet1, recordTreeSet2);
+    }
+
+    @Test
+    public void setProblemId() {
+        Problem problem = new Problem("test title", "");
+        UUID uuid = UUID.randomUUID();
+        problem.setProblemId(uuid);
+        assertEquals(uuid, problem.getProblemId());
+    }
+
+    @Test
+    public void getProblemId() {
+        Problem problem = new Problem("test title", "");
+        assertNotNull(problem.getProblemId());
     }
 }
