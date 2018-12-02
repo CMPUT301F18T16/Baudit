@@ -33,6 +33,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = findViewById(R.id.create_account_toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.create_account);
 
@@ -43,9 +44,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         final TextView identificationMincText = findViewById(R.id.create_account_minc_text);
         identificationMincInput = findViewById(R.id.create_account_minc_input);
 
-        final LinearLayout bodyLocationLayout =
-            findViewById(R.id.create_account_body_location_layout);
-
         RadioButton patientRadioButton = findViewById(R.id.patient_radio_button);
         patientRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -53,7 +51,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
                 if (isChecked) {
                     identificationMincText.setVisibility(View.GONE);
                     identificationMincInput.setVisibility(View.GONE);
-                    bodyLocationLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -65,7 +62,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
                 if (isChecked) {
                     identificationMincText.setVisibility(View.VISIBLE);
                     identificationMincInput.setVisibility(View.VISIBLE);
-                    bodyLocationLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -81,17 +77,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
         phoneNumberInput = findViewById(R.id.create_account_phone_number_input);
         phoneNumberErrorText = findViewById(R.id.create_account_phone_number_error);
-
-        Button uploadButton = findViewById(R.id.create_account_body_location_upload_button);
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: likely move setting a body photo to account edit activity
-                Intent intent = new Intent(CreateAccountActivity.this, CameraActivity.class);
-                intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
-                startActivity(intent);
-            }
-        });
 
         Button cancelButton = findViewById(R.id.create_account_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {

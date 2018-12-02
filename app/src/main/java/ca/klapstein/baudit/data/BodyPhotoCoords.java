@@ -1,9 +1,7 @@
 package ca.klapstein.baudit.data;
 
 /**
- * DataClass representing the coordinates of a location specified within a {@code BodyPhoto}.
- *
- * @see BodyPhoto
+ * DataClass representing the coordinates of a location specified for a body photo.
  */
 public class BodyPhotoCoords {
     private static final String TAG = "BodyPhotoCoords";

@@ -3,6 +3,7 @@ package ca.klapstein.baudit.data;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -133,13 +134,27 @@ public class RecordTest {
         Record record = new Record();
 
         // remove a keyword that does not exist in the list of keywords
-        record.removeKeyword("NONSUCHKEYWORD");
-        assertFalse(record.getKeywords().contains("NONSUCHKEYWORD"));
+        record.removeKeyword("NON_SUCH_KEYWORD");
+        assertFalse(record.getKeywords().contains("NON_SUCH_KEYWORD"));
 
         // remove a keyword that does exist in the list of keywords
         record.addKeyword("KEYWORD");
         assertTrue(record.getKeywords().contains("KEYWORD"));
         record.removeKeyword("KEYWORD");
         assertFalse(record.getKeywords().contains("KEYWORD"));
+    }
+
+    @Test
+    public void setRecordId() {
+        Record record = new Record();
+        UUID uuid = UUID.randomUUID();
+        record.setRecordId(uuid);
+        assertEquals(uuid, record.getRecordId());
+    }
+
+    @Test
+    public void getRecordId() {
+        Record record = new Record();
+        assertNotNull(record.getRecordId());
     }
 }

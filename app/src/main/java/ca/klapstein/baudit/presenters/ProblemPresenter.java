@@ -2,7 +2,6 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
@@ -38,15 +37,15 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 context.getResources().getString(R.string.default_title),
                 context.getResources().getString(R.string.default_description)
             );
+            view.updateProblemHints();
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            view.updateTitleField(problem.getTitle());
+            view.updateDescriptionField(problem.getDescription());
+            view.updateRecordList(problem.getRecordTreeSet());
         }
-        view.updateTitleField(problem.getTitle());
         view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
         view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
-        view.updateDescriptionField(problem.getDescription());
-
-        view.updateRecordList(problem.getRecordTreeSet());
     }
 
     public void clickedDateButton() {

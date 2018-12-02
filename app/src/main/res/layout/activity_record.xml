@@ -51,15 +51,17 @@
                     android:textColor="@color/dark_grey" />
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:visibility="gone"/>
+                        android:contentDescription="@string/record_photo"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:visibility="gone"/>
 
                 <ImageButton
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_add_a_photo_24dp"
-                    android:background="@color/vaporwave_purple"/>
+                        android:contentDescription="@string/add_record_photo_button"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_add_a_photo_24dp"
+                        android:background="@color/vaporwave_purple"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,12 +87,13 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/record_title_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/dark_grey"
-                    android:maxLength="30"
-                    android:maxLines="1" />
+                        android:inputType="textCapWords"
+                        android:id="@+id/record_title_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:maxLength="30"
+                        android:maxLines="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -116,12 +119,13 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/record_comment_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/dark_grey"
-                    android:maxLength="30"
-                    android:maxLines="1" />
+                        android:inputType="textShortMessage"
+                        android:id="@+id/record_comment_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:maxLength="30"
+                        android:maxLines="1" />
 
                 <TextView
                     android:layout_width="wrap_content"

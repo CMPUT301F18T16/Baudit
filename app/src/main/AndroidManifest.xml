@@ -66,6 +66,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".activities.CameraActivity" />
         <activity android:name=".activities.AddPhotoActivity" />
         <activity
@@ -74,6 +75,22 @@
         <activity android:name=".activities.DisplayQRCodeActivity" />
         <activity android:name=".activities.CareProviderProblemListActivity" />
         <activity android:name=".activities.SlideshowActivity" />
+=======
+        <activity android:name=".activities.CameraActivity">
+        </activity>
+        <activity
+                android:name=".activities.MapAllProblemsActivity"
+                android:theme="@style/BauditTheme"/>
+        <activity android:name=".activities.DisplayQRCodeActivity">
+        </activity>
+        <activity android:name=".activities.CareProviderProblemListActivity">
+        </activity>
+
+        <activity
+            android:name=".activities.ViewAccountActivity"
+            android:theme="@style/BauditDialogTheme"/>
+
+>>>>>>> e675e6187a8216f9b7e8bc3417acf5cc6a148be7
     </application>
 
 </manifest>

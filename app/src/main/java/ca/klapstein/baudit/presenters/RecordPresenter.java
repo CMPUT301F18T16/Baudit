@@ -2,7 +2,6 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.Patient;
@@ -46,10 +45,13 @@ public class RecordPresenter extends Presenter<RecordView> {
                 context.getResources().getString(R.string.default_title),
                 context.getResources().getString(R.string.default_comment)
             );
+            view.updateRecordHints();
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            view.updateTitleField(record.getTitle());
+            view.updateCommentField(record.getComment());
+            view.updateLocationField(record.getGeoLocation());
         }
-
         view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());

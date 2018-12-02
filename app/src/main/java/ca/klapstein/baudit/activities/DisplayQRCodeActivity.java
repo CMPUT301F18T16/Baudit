@@ -18,7 +18,7 @@ public class DisplayQRCodeActivity extends AppCompatActivity implements DisplayQ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_qr_code);
         presenter = new DisplayQRCodePresenter(this, this);
-        accountQRCodeImage = findViewById(R.id.AccountQRCodeImageView);
+        accountQRCodeImage = findViewById(R.id.qr_code_image_view);
     }
 
     @Override
