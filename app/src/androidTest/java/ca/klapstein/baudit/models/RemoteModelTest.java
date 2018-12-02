@@ -34,7 +34,7 @@ public class RemoteModelTest {
 
     @Test
     public void getValidateLoginInvalidUser() throws ExecutionException, InterruptedException {
-        assertNull(new RemoteModel.ValidateLogin().execute(new Username("NONSUCH_ACCOUNT").toString()).get());
+        assertNull(new RemoteModel.ValidateLogin().execute(new Username("NON_SUCH_ACCOUNT").toString()).get());
     }
 
     @Test
