@@ -9,6 +9,7 @@ public interface ProblemView extends View {
     void updateDateButton();
     void updateTimeButton();
     void updateDescriptionField(String description);
+    void updateProblemHints();
     void showDatePicker(Calendar calendar);
     void showTimePicker(Calendar calendar);
     void commitProblemSuccess();

@@ -1,5 +1,13 @@
 package ca.klapstein.baudit.views;
 
-public interface AddPhotoView extends PhotoView {
-    void commitAddPhotoSuccess();
+import android.graphics.Bitmap;
+
+public interface AddPhotoView extends View {
+    void commitPhotoSuccess();
+
+    void commitPhotoFailure();
+
+    void updateCameraOverlayImage(Bitmap bitmap);
+
+    void updateCameraOverlayError();
 }

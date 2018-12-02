@@ -6,6 +6,9 @@
     <string name="enter_password">Enter password</string>
     <string name="account_edit_commit_success">Successfully Committed Account Edits</string>
     <string name="account_edit_commit_failure">Failed to Commit Account Edits</string>
+    <string name="assign_patient_scan_failure">Failed to Scan Valid Patient Account</string>
+    <string name="patient_account_load_failure">Failed to Load Patient Account</string>
+    <string name="care_provider_account_load_failure">Failed to Load Care Provider Account</string>
     <string name="problem_commit_success">Successfully Committed Problem</string>
     <string name="problem_commit_failure">Failed to Commit Problem</string>
     <string name="problem_map_error">Failed to Load Problem Map</string>
@@ -18,7 +21,7 @@
     <string name="problem_count">Problems (%1$d):</string>
     <string name="patient_count">Patients (%1$d):</string>
     <string name="home">Home</string>
-    <string name="get_account_qr_code">Display Account QR Code</string>
+    <string name="display_qr_code">Display account QR code</string>
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
     <string name="problem_locations">Problem locations</string>
@@ -78,11 +81,21 @@
     <string name="care_provider">Care provider</string>
     <string name="account_type">Account type</string>
     <string name="identification_minc">Identification (MINC)</string>
+    <string name="button_capture_text">Capture</string>
+    <string name="content_desc_overlay">Your last photo</string>
+    <string name="camera_open_fail">Failed to open camera</string>
+    <string name="button_switch_camera">Switch Camera</string>
     <string name="view_problem">View Problem</string>
     <string name="delete_problem_question">Delete problem?</string>
     <string name="view_record">View Record</string>
     <string name="delete_record_question">Delete record?</string>
-    <string name="default_title">Untitled</string>
-    <string name="default_description"></string>
-    <string name="default_comment"></string>
+    <string name="username">Username</string>
+    <string name="ok">OK</string>
+    <string name="default_title">Add a title</string>
+    <string name="default_description">Add a description</string>
+    <string name="default_comment">Add a comment</string>
+    <string name="update_camera_overlay_error">Failed to update the camera overlay</string>
+    <string name="camera_image_commit_success">Successfuly committed image</string>
+    <string name="camera_image_commit_failure">Failed to commit image</string>
+    <string name="set_body_photo">Set body photo</string>
 </resources>

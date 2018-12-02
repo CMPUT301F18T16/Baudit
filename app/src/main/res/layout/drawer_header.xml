@@ -21,13 +21,15 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginRight="10dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_face_white_48dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp">
 
         <TextView
             android:id="@+id/nav_header_username"
@@ -37,11 +39,12 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <TextView
-                android:id="@+id/nav_header_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/test_email"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            android:id="@+id/nav_header_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/test_email"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
     </LinearLayout>
 
 </LinearLayout>

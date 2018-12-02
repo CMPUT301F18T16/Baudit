@@ -38,13 +38,14 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 context.getResources().getString(R.string.default_title),
                 context.getResources().getString(R.string.default_description)
             );
+            view.updateProblemHints();
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            view.updateTitleField(problem.getTitle());
+            view.updateDescriptionField(problem.getDescription());
         }
-        view.updateTitleField(problem.getTitle());
         view.updateDateButton();
         view.updateTimeButton();
-        view.updateDescriptionField(problem.getDescription());
         view.updateRecordList(problem.getRecordTreeSet());
     }
 

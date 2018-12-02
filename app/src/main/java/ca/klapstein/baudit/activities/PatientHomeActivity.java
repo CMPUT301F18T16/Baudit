@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import android.view.*;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
@@ -36,6 +36,8 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
  */
 public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
+    public static final String USERNAME_EXTRA = "username";
+
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -48,13 +50,11 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_home);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setTitle(R.string.home);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setTitle(R.string.home);
 
         presenter = new PatientHomePresenter(this, getApplicationContext());
 
@@ -65,6 +65,16 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         View navHeaderView = navigationView.inflateHeaderView(R.layout.drawer_header);
         navHeaderUsername = navHeaderView.findViewById(R.id.nav_header_username);
         navHeaderEmail = navHeaderView.findViewById(R.id.nav_header_email);
+
+        navHeaderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientHomeActivity.this, ViewAccountActivity.class);
+                intent.putExtra(USERNAME_EXTRA, presenter.getUsername());
+                startActivity(intent);
+                drawerLayout.closeDrawers();
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {
@@ -77,6 +87,20 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                             startActivity(new Intent(
                                 getApplicationContext(),
                                 EditAccountActivity.class
+                            ));
+                            return true;
+                        case (R.id.nav_set_body_photo):
+                            Intent intent = new Intent(
+                                getApplicationContext(),
+                                CameraActivity.class
+                            );
+                            intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
+                            startActivity(intent);
+                            return true;
+                        case (R.id.nav_display_qr_code):
+                            startActivity(new Intent(
+                                getApplicationContext(), 
+                                DisplayQRCodeActivity.class
                             ));
                             return true;
                         default:
@@ -154,6 +178,11 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void updateEmailDisplay(String email) {
         navHeaderEmail.setText(email);
+    }
+
+    @Override
+    public void updateAccountLoadError() {
+        Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
     }
 
 
