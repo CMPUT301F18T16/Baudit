@@ -1,5 +1,6 @@
 package ca.klapstein.baudit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +48,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView locationView;
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
+    private Button record_sideshow_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         commentInput = findViewById(R.id.record_comment_edit_text);
 
         locationView = findViewById(R.id.record_location_view);
+
 
         autocompleteFragment = (PlaceAutocompleteFragment)
             getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -114,6 +117,15 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                     commentInput.getText().toString(),
                     geoLocation
                 );
+            }
+        });
+
+        record_sideshow_button = findViewById(R.id.record_slideshow_button);
+        record_sideshow_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SlideshowActivity.class);
+                startActivity(intent);
             }
         });
 

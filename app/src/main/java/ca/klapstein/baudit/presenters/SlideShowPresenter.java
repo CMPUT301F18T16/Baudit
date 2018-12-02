@@ -10,7 +10,6 @@ import ca.klapstein.baudit.views.SlideShowView;
  */
 public class SlideShowPresenter extends Presenter<SlideShowView> {
     private static final String TAG = "SlideShowPresenter";
-
     public SlideShowPresenter(SlideShowView view, Context context) {
         super(view, context);
     }
