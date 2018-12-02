@@ -270,7 +270,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     private class ProblemViewHolder extends RecyclerView.ViewHolder implements ProblemRowView {
 
         private CardView cardView;
-        private ImageView imageView;
         private TextView titleView;
         private TextView dateView;
         private TextView descriptionView;
@@ -278,20 +277,14 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         private ProblemViewHolder(CardView card) {
             super(card);
             cardView = card;
-            imageView = card.findViewById(R.id.problem_card_image);
-            titleView = card.findViewById(R.id.problem_card_title);
-            dateView = card.findViewById(R.id.problem_card_date);
-            descriptionView = card.findViewById(R.id.problem_card_description);
+            titleView = card.findViewById(R.id.card_problem_title);
+            dateView = card.findViewById(R.id.card_problem_date);
+            descriptionView = card.findViewById(R.id.card_problem_description);
         }
 
         @Override
         public void onStart() {
             // Do nothing.
-        }
-
-        @Override
-        public void updateProblemImage(Bitmap bmp) {
-            imageView.setImageBitmap(bmp);
         }
 
         @Override

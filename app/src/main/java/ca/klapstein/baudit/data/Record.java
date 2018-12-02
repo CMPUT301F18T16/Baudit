@@ -23,11 +23,16 @@ public class Record implements Comparable<Record> {
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
-    private Bitmap recordPhoto;
+
     private String title;
     private String comment;
     private GeoLocation geoLocation;
+
+    @NonNull
+    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
+    @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
     private UUID recordId;
 
@@ -96,16 +101,25 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void setRecordPhoto(Bitmap bitmap) {
+    public void addRecordPhoto(Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            recordPhoto = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+            recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
         } else {
-            recordPhoto = bitmap;
+            recordPhotos.add(bitmap);
         }
     }
 
-    public Bitmap getRecordPhoto() {
-        return recordPhoto;
+    @NonNull
+    public ArrayList<Bitmap> getRecordPhotos() {
+        return recordPhotos;
+    }
+
+    @Nullable
+    public Bitmap getLastRecordPhoto() {
+        if (getRecordPhotos().isEmpty())
+            return null;
+        else
+            return getRecordPhotos().get(getRecordPhotos().size() - 1);
     }
 
     /**
@@ -202,9 +216,9 @@ public class Record implements Comparable<Record> {
      * This is used for sorting a {@code RecordTreeSet} by a {@code Record}'s creation time.
      *
      * @param record {@code Record} the given {@code Record} to compare.
-     * @return {@code int} {@code 0} if both {@code Record}'s times are the same or
-     *                     {@code -int} if this {@code Record} is created earlier in time than the given {@code Record}
-     *                     {@code +int} if this {@code Record} is created later in time than the given {@code Record}.
+     * @return {@code 0} if both {@code Record}'s times are the same or
+     *         {@code -int} if this {@code Record} is created earlier than the other
+     *         {@code +int} if this {@code Record} is created later than the other
      */
     @Override
     public int compareTo(@NonNull Record record) {
