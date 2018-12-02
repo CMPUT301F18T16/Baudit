@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.models.DataModel;
 import com.robotium.solo.Solo;
@@ -42,11 +41,13 @@ public class CareProviderHomeActivityTest extends ActivityTestRule<CareProviderH
         solo.finishOpenedActivities();
     }
 
-    @Test
-    public void testAssignPatient() {
-        solo.clickOnView(solo.getView(R.id.care_provider_home_fab));
-        // TODO: should go to camera activity but robotium does not like me
-    }
+//    // TODO: for local testing only
+//    @Test
+//    public void testAssignPatient() {
+//        solo.clickOnView(solo.getView(R.id.care_provider_home_fab));
+//        solo.waitForActivity(CreateAccountActivity.class);
+//        solo.assertCurrentActivity("Wrong Activity", CreateAccountActivity.class);
+//    }
 
     @Test
     public void onCreate() {
