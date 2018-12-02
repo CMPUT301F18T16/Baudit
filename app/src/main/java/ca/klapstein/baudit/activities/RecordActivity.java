@@ -70,7 +70,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                         RecordActivity.this,
                         LocationActivity.class
                 );
-                intent.putExtra("geolocation", "GEOLOCATION");
                 startActivityForResult(intent,REQUEST_GEOLOCATION);
             }
         });
@@ -102,11 +101,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         if (requestCode == REQUEST_GEOLOCATION) {
 
             if (resultCode == RESULT_OK) {
-                geoLocation = data.getStringExtra("SCAN_RESULT");
-                Log.e(TAG, "obtained qr code decoded string: " + contents);
-                presenter.onQRCodeScanned(contents);
+                Float latitude = data.getFloatExtra("Latitude", 53);
+                Float longitude = data.getFloatExtra("Longitude", -113);
+                String address = data.getStringExtra("Address");
+                geoLocation = new GeoLocation(address, latitude, longitude);
+                Log.d(TAG, "obtained Geolocation for: " + address);
+
             } else if (resultCode == RESULT_CANCELED) {
-                //handle cancel
+                Log.d(TAG, "cancelled location activity");
             }
         }
     }

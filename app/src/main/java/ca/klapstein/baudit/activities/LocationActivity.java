@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -66,6 +67,8 @@ public class LocationActivity extends AppCompatActivity
     private static final String TAG = "LOCATION_ACTIVITY";
     private static final float defaultZoom = 10.0f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71,136));
+    private static final int REQUEST_GEOLOCATION = 123;
+
 
     private MapView mapView;
     private LocationPresenter presenter;
@@ -79,7 +82,6 @@ public class LocationActivity extends AppCompatActivity
     private GeoDataClient geoDataClient;
     private PlaceDetectionClient placeDetectionClient;
     private GoogleApiClient googleApiClient;
-    private Place place;
     private PlaceInfo placeInfo;
 
 
@@ -229,7 +231,7 @@ public class LocationActivity extends AppCompatActivity
     private void geoLocate(){
         String searchString = searchText.getText().toString();
         Geocoder geocoder = new Geocoder(LocationActivity.this);
-        List<Address> list = new ArrayList<>();
+        List<Address> list = new ArrayList<Address>();
         try{
             list = geocoder.getFromLocationName(searchString, 1);
         }catch (IOException e){
@@ -303,6 +305,7 @@ public class LocationActivity extends AppCompatActivity
     private ResultCallback<PlaceBuffer> updatePlaceDetailCallback = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
+            Log.d(TAG, "Entered onResult method");
             if (places.getStatus().isSuccess()) {
                 places.release();
                 return;
@@ -312,18 +315,27 @@ public class LocationActivity extends AppCompatActivity
                 placeInfo = new PlaceInfo();
                 placeInfo.setAddress(place.getAddress().toString());
                 placeInfo.setName(place.getName().toString());
-                placeInfo.setId(place.getId().toString());
+                placeInfo.setId(place.getId());
                 placeInfo.setLatLng(place.getLatLng());
                 placeInfo.setPhoneNumber(place.getPhoneNumber().toString());
             }catch(NullPointerException e){
                 Log.e(TAG, "onResult NullPointerException" + e.getMessage());
             }
-
-            moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude)
-                    ,defaultZoom, placeInfo.getName());
+            try {
+                moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude)
+                        , defaultZoom, placeInfo.getName());
+            }catch(NullPointerException e){
+                Log.e(TAG, "Null value in ResultCallBack" + e.getMessage());
+            }
             places.release();
+            Intent intent = new Intent();
+            intent.putExtra("Address", placeInfo.getName());
+            intent.putExtra("Latitude", placeInfo.getLatLng().latitude);
+            intent.putExtra("Longitude", placeInfo.getLatLng().longitude);
+            setResult(RESULT_OK,intent);
+            Log.d(TAG, intent.getStringExtra("Address"));
 
         }
-
     };
+
 }
