@@ -116,7 +116,7 @@ public class Record implements Comparable<Record> {
 
     @Nullable
     public Bitmap getLastRecordPhoto() {
-        if (!getRecordPhotos().isEmpty())
+        if (getRecordPhotos().isEmpty())
             return null;
         else
             return getRecordPhotos().get(getRecordPhotos().size() - 1);
