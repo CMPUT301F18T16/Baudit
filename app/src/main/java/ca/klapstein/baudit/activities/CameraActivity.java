@@ -44,7 +44,7 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     /**
      * Set the camera's orientation.
      *
-     * @param activity
+     * @param activity {@code Activity}
      */
     public void setCameraOrientation(Activity activity) {
         android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
