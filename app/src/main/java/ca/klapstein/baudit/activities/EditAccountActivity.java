@@ -1,6 +1,5 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,11 +36,9 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
         Toolbar toolbar = findViewById(R.id.edit_account_toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.edit_account);
-        }
+        getSupportActionBar().setTitle(R.string.edit_account);
 
         presenter = new EditAccountPresenter(this, getApplicationContext());
 
@@ -71,15 +68,6 @@ public class EditAccountActivity extends AppCompatActivity implements EditAccoun
                     emailInput.getText().toString(),
                     phoneNumberInput.getText().toString()
                 );
-            }
-        });
-
-        // TODO: possibly move this into a better menu
-        Button getAccountQRCodeButton = findViewById(R.id.account_qr_code_button);
-        getAccountQRCodeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(EditAccountActivity.this, DisplayQRCodeActivity.class));
             }
         });
     }

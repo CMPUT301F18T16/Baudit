@@ -18,8 +18,10 @@ public class ViewAccountPresenter extends Presenter<ViewAccountView> {
         }
         if (account != null) {
             view.updateUsernameDisplay(account.getUsername().toString());
-            view.updateFirstNameDisplay(account.getContactInfo().getFirstName());
-            view.updateLastNameDisplay(account.getContactInfo().getLastName());
+            view.updateNameDisplay(
+                account.getContactInfo().getFirstName(),
+                account.getContactInfo().getLastName()
+            );
             view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
             view.updatePhoneNumberDisplay(account.getContactInfo().getPhoneNumber().toString());
         } else {

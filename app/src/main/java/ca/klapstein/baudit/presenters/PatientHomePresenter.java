@@ -39,6 +39,10 @@ public class PatientHomePresenter extends HomePresenter<HomeView> {
         }
     }
 
+    public String getUsername() {
+        return patient.getUsername().toString();
+    }
+
     /**
      * Get the latest {@code ProblemTreeSet} of the logged in {@code Patient} and call updates to the respective
      * components of the {@code HomeView}.
