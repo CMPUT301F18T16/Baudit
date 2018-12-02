@@ -287,6 +287,14 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateProblemHints() {
+        titleView.setHint(R.string.default_title);
+        titleInput.setHint(R.string.default_title);
+        descriptionView.setHint(R.string.default_description);
+        descriptionInput.setHint(R.string.default_description);
+    }
+
+    @Override
     public void showDatePicker(Calendar calendar) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DatePickerDialogFragment mDateFragment = DatePickerDialogFragment.newInstance(calendar);

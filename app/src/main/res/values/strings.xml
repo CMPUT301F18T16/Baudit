@@ -78,13 +78,21 @@
     <string name="care_provider">Care provider</string>
     <string name="account_type">Account type</string>
     <string name="identification_minc">Identification (MINC)</string>
+    <string name="button_capture_text">Capture</string>
+    <string name="content_desc_overlay">Your last photo</string>
+    <string name="camera_open_fail">Failed to open camera</string>
+    <string name="button_switch_camera">Switch Camera</string>
     <string name="view_problem">View Problem</string>
     <string name="delete_problem_question">Delete problem?</string>
     <string name="view_record">View Record</string>
     <string name="delete_record_question">Delete record?</string>
-    <string name="default_title">Untitled</string>
-    <string name="default_description"></string>
-    <string name="default_comment"></string>
     <string name="username">Username</string>
     <string name="ok">OK</string>
+    <string name="default_title">Add a title</string>
+    <string name="default_description">Add a description</string>
+    <string name="default_comment">Add a comment</string>
+    <string name="update_camera_overlay_error">Failed to update the camera overlay</string>
+    <string name="camera_image_commit_success">Successfuly committed image</string>
+    <string name="camera_image_commit_failure">Failed to commit image</string>
+    <string name="set_body_photo">Set Body Photo</string>
 </resources>
