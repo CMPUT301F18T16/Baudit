@@ -23,7 +23,7 @@ public class ViewAccountPresenter extends Presenter<ViewAccountView> {
                 account.getContactInfo().getLastName()
             );
             view.updateEmailDisplay(account.getContactInfo().getEmail().toString());
-            view.updatePhoneNumberDisplay("");
+            view.updatePhoneNumberDisplay(account.getContactInfo().getPhoneNumber().toString());
         } else {
             view.updateViewAccountError();
         }
