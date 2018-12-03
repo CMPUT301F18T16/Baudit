@@ -8,19 +8,13 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.BodyLocationPhoto;
 import ca.klapstein.baudit.presenters.EditPatientAccountPresenter;
 import ca.klapstein.baudit.views.EditPatientAccountView;
+
+import java.util.ArrayList;
 
 /**
  * Activity for editing a {@code Account}.
@@ -133,7 +127,7 @@ public class EditPatientAccountActivity extends AppCompatActivity implements Edi
                 .inflate(R.layout.card_body_location, bodyLocationsLayout, false);
             ImageView bodyLocationImage =
                 bodyLocationView.findViewById(R.id.card_body_location_image);
-            bodyLocationImage.setImageBitmap(photo.getPhoto());
+            bodyLocationImage.setImageBitmap(photo.getBitmap());
             TextView bodyLocationLabel =
                 bodyLocationView.findViewById(R.id.card_body_location_label);
             bodyLocationLabel.setText(photo.getLabel());

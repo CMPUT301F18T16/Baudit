@@ -1,10 +1,8 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import ca.klapstein.baudit.util.BitmapEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,8 +16,6 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
-
-    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
@@ -30,7 +26,7 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
 
     @NonNull
-    private ArrayList<String> recordPhotos = new ArrayList<>();
+    private ArrayList<RecordPhoto> recordPhotos = new ArrayList<>();
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
@@ -103,17 +99,14 @@ public class Record implements Comparable<Record> {
     }
 
     public void addRecordPhoto(Bitmap bitmap) {
-        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
-        }
-        recordPhotos.add(BitmapEncoder.encodeTobase64(bitmap));
+        recordPhotos.add(new RecordPhoto(bitmap));
     }
 
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        for (String bitmapString : recordPhotos) {
-            bitmaps.add(BitmapEncoder.decodeBase64(bitmapString));
+        for (RecordPhoto recordPhoto : recordPhotos) {
+            bitmaps.add(recordPhoto.getBitmap());
         }
         return bitmaps;
     }
