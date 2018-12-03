@@ -24,10 +24,16 @@ public class SlideshowActivityTest extends ActivityTestRule<SlideshowActivity> {
     @Before
     public void setUp() {
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
-        dataModel.setOfflineLoginAccount(new Patient(
+        Patient patient = new Patient(
                 new Username("TESTPatient1"),
                 new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
-        ));
+        );
+        Problem problem = new Problem("test problem", "test problem description");
+        Record record = new Record("test record");
+        problem.getRecordTreeSet().add(record);
+        patient.getProblemTreeSet().add(problem);
+        // TODO: add test bitmap
+        dataModel.setOfflineLoginAccount(patient);
         super.launchActivity(new Intent());
         solo = new Solo(getInstrumentation(), getActivity());
     }
