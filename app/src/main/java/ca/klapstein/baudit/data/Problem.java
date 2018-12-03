@@ -122,7 +122,7 @@ public class Problem implements Comparable<Problem> {
      * @param description {@code String}
      * @throws IllegalArgumentException if the {@code Problem}'s description is invalid
      */
-    public void setDescription(String description) throws IllegalArgumentException {
+    public void setDescription(@NonNull String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
             throw new IllegalArgumentException("invalid problem description");
         }
