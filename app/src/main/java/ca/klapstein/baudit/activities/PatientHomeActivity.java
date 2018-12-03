@@ -206,6 +206,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
             Toast.LENGTH_LONG
         ).show();
     }
+
     @Override
     public void updateDeleteProblemError() {
         Toast.makeText(this, getResources().getString(R.string.delete_problem_failure), Toast.LENGTH_LONG).show();
