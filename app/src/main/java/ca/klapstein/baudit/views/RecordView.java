@@ -10,4 +10,6 @@ public interface RecordView extends View {
     void updateRecordHints();
     void commitRecordFailure();
     void commitRecordSuccess();
+
+    void updateViewRecordError();
 }

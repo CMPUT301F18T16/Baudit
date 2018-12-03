@@ -337,6 +337,12 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateViewProblemError() {
+        Toast.makeText(this, getResources().getString(R.string.problem_load_error), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
     public void commitProblemFailure() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }

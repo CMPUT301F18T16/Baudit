@@ -13,6 +13,7 @@ public interface ProblemView extends View {
     void showDatePicker(Calendar calendar);
     void showTimePicker(Calendar calendar);
 
+    void updateViewProblemError();
     void commitProblemSuccess();
 
     void commitProblemFailure();

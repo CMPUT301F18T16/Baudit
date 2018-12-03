@@ -116,6 +116,8 @@
     <string name="delete_body_location_question">Delete this body location?</string>
     <string name="new_body_location">New body location</string>
     <string name="start_date_label">Start date:</string>
-    <string name="care_provider_remove_patient_failure">Failed to remove patient</string>
-    <string name="delete_problem_failure">Failed to delete problem</string>
+    <string name="care_provider_remove_patient_failure">Failed to remove Patient</string>
+    <string name="delete_problem_failure">Failed to delete Problem</string>
+    <string name="problem_load_error">Failed to load Problem</string>
+    <string name="record_load_error">Failed to load Record</string>
 </resources>
