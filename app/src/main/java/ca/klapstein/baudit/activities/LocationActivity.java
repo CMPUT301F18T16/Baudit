@@ -152,7 +152,9 @@ public class LocationActivity extends AppCompatActivity
      * @param hasCapture True if the window has pointer capture.
      */
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {}
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        // Needs to implemented interface method, but is not needed here
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -294,7 +296,9 @@ public class LocationActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // Needs to implemented interface method, but is not needed here
+    }
 
     private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override
