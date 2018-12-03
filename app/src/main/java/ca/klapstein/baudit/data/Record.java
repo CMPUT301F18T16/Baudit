@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -115,7 +114,7 @@ public class Record implements Comparable<Record> {
     }
 
     @Nullable
-    public Bitmap getRecordPhoto() {
+    public Bitmap getLastRecordPhoto() {
         if (photoBitmapStrings.size() >= 1) {
             String recordPhotoBitmapString = photoBitmapStrings.get(photoBitmapStrings.size() - 1);
             if (recordPhotoBitmapString != null)
@@ -129,10 +128,12 @@ public class Record implements Comparable<Record> {
     }
 
     public void addRecordPhoto(Bitmap bitmap) {
+        String recordPhotoBitmapString;
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
-        }
-        String recordPhotoBitmapString = encodeTobase64(bitmap);
+            Bitmap CorrectedBitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+            recordPhotoBitmapString = encodeTobase64(CorrectedBitmap);
+        }else
+            recordPhotoBitmapString = encodeTobase64(bitmap);
         photoBitmapStrings.add(recordPhotoBitmapString);
     }
 

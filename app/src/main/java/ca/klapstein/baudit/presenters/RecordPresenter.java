@@ -56,7 +56,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateTitleField(record.getTitle());
             view.updateCommentField(record.getComment());
             view.updateLocationField(record.getGeoLocation());
-            view.updateImageField(record.getRecordPhoto());
+            view.updateImageField(record.getLastRecordPhoto());
         } catch (Exception e) {
             Log.e(TAG, "failed to present record", e);
             view.updateViewRecordError();
