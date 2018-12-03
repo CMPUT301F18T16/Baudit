@@ -41,6 +41,7 @@ public class EditPatientAccountPresenter extends Presenter<EditPatientAccountVie
             view.updateBodyLocationField(patient.getBodyLocationPhotos());
         } else {
             // TODO: error
+            Log.e(TAG,"Error with ViewStarted");
         }
     }
 

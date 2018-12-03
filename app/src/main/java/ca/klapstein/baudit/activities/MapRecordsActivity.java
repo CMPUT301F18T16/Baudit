@@ -5,13 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
-<<<<<<< HEAD:app/src/main/java/ca/klapstein/baudit/activities/MapAllProblemsActivity.java
 
-=======
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.MapRecordsPresenter;
-import ca.klapstein.baudit.views.MapAllProblemsView;
->>>>>>> 2a4dae6fb6120696d80163edbcf4fd43c12545dd:app/src/main/java/ca/klapstein/baudit/activities/MapRecordsActivity.java
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -19,15 +13,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-<<<<<<< HEAD:app/src/main/java/ca/klapstein/baudit/activities/MapAllProblemsActivity.java
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
+import ca.klapstein.baudit.presenters.MapRecordsPresenter;
 import ca.klapstein.baudit.views.MapAllProblemsView;
 
-public class MapAllProblemsActivity extends AppCompatActivity
-=======
+
 public class MapRecordsActivity extends AppCompatActivity
->>>>>>> 2a4dae6fb6120696d80163edbcf4fd43c12545dd:app/src/main/java/ca/klapstein/baudit/activities/MapRecordsActivity.java
     implements MapAllProblemsView, OnMapReadyCallback {
 
     public static final String MAP_RECORDS_MODE = "mode";

@@ -15,12 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.BodyLocationPhoto;
 import ca.klapstein.baudit.presenters.EditPatientAccountPresenter;
 import ca.klapstein.baudit.views.EditPatientAccountView;
-
-import java.util.ArrayList;
 
 /**
  * Activity for editing a {@code Account}.
@@ -126,40 +126,42 @@ public class EditPatientAccountActivity extends AppCompatActivity implements Edi
         bodyLocationsLayout.removeAllViews();
 
         int index = 0;
-        for (BodyLocationPhoto photo : photos) {
-            final int position = index;
-            CardView bodyLocationView = (CardView) LayoutInflater
-                .from(bodyLocationsLayout.getContext())
-                .inflate(R.layout.card_body_location, bodyLocationsLayout, false);
-            ImageView bodyLocationImage =
-                bodyLocationView.findViewById(R.id.card_body_location_image);
-            bodyLocationImage.setImageBitmap(photo.getBitmap());
-            TextView bodyLocationLabel =
-                bodyLocationView.findViewById(R.id.card_body_location_label);
-            bodyLocationLabel.setText(photo.getLabel());
+        if(photos!=null) {
+            for (BodyLocationPhoto photo : photos) {
+                final int position = index;
+                CardView bodyLocationView = (CardView) LayoutInflater
+                        .from(bodyLocationsLayout.getContext())
+                        .inflate(R.layout.card_body_location, bodyLocationsLayout, false);
+                ImageView bodyLocationImage =
+                        bodyLocationView.findViewById(R.id.card_body_location_image);
+                bodyLocationImage.setImageBitmap(photo.getBitmap());
+                TextView bodyLocationLabel =
+                        bodyLocationView.findViewById(R.id.card_body_location_label);
+                bodyLocationLabel.setText(photo.getLabel());
 
-            bodyLocationView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    new AlertDialog.Builder(EditPatientAccountActivity.this)
-                        .setTitle(R.string.delete_body_location_question)
-                        .setCancelable(true)
-                        .setNegativeButton(R.string.cancel, null)
-                        .setPositiveButton(R.string.delete,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface di, int i) {
-                                    presenter.deleteBodyLocationClicked(position);
-                                }
-                            })
-                        .show();
-                    return false;
-                }
-            });
+                bodyLocationView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        new AlertDialog.Builder(EditPatientAccountActivity.this)
+                                .setTitle(R.string.delete_body_location_question)
+                                .setCancelable(true)
+                                .setNegativeButton(R.string.cancel, null)
+                                .setPositiveButton(R.string.delete,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface di, int i) {
+                                                presenter.deleteBodyLocationClicked(position);
+                                            }
+                                        })
+                                .show();
+                        return false;
+                    }
+                });
 
-            bodyLocationsLayout.addView(bodyLocationView);
+                bodyLocationsLayout.addView(bodyLocationView);
 
-            index++;
+                index++;
+            }
         }
 
         CardView addBodyLocationView = (CardView) LayoutInflater
