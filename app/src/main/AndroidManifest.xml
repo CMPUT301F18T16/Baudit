@@ -1,85 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ca.klapstein.baudit">
+    package="ca.klapstein.baudit">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature
-            android:name="android.hardware.camera2"
-            android:required="true"/>
+        android:name="android.hardware.camera2"
+        android:required="true" />
     <uses-feature
-            android:name="android.hardware.camera2.front"
-            android:required="true"/>
+        android:name="android.hardware.camera2.front"
+        android:required="true" />
 
     <application
-            android:allowBackup="true"
-            android:fullBackupContent="true"
-            android:icon="@mipmap/ic_launcher_round"
-            android:label="@string/app_name"
-            android:supportsRtl="true"
-            android:theme="@style/BauditTheme">
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/BauditTheme">
         <uses-library
-                android:name="org.apache.http.legacy"
-                android:required="false"/>
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"/>
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc"/>
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCWM9XQ4GOnOImKKwDazF3w7BPibuSM8wc" />
 
         <activity
-                android:name=".activities.StartActivity"
-                android:theme="@style/BauditLoginTheme"/>
+            android:name=".activities.StartActivity"
+            android:theme="@style/BauditLoginTheme" />
         <activity
-                android:name=".activities.EditPatientAccountActivity"
-                android:theme="@style/BauditTheme"/>
+            android:name=".activities.EditPatientAccountActivity"
+            android:theme="@style/BauditTheme" />
         <activity
-                android:name=".activities.CreateAccountActivity"
-                android:theme="@style/BauditTheme"/>
+            android:name=".activities.CreateAccountActivity"
+            android:theme="@style/BauditTheme" />
         <activity
-                android:name=".activities.ProblemActivity"
-                android:theme="@style/BauditTheme"/>
+            android:name=".activities.ProblemActivity"
+            android:theme="@style/BauditTheme" />
         <activity
-                android:name=".activities.RecordActivity"
-                android:theme="@style/BauditTheme"/>
+            android:name=".activities.RecordActivity"
+            android:theme="@style/BauditTheme" />
         <activity
-                android:name=".activities.CareProviderHomeActivity"
-                android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.ViewPhotoActivity"/>
+            android:name=".activities.CareProviderHomeActivity"
+            android:theme="@style/BauditTheme" />
+        <activity android:name=".activities.ViewPhotoActivity" />
         <activity
-                android:name=".activities.PatientHomeActivity"
-                android:theme="@style/BauditTheme"/>
+            android:name=".activities.PatientHomeActivity"
+            android:theme="@style/BauditTheme" />
         <activity
-                android:name=".activities.SplashActivity"
-                android:theme="@style/BauditSplashTheme">
+            android:name=".activities.SplashActivity"
+            android:theme="@style/BauditSplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CameraActivity">
-        </activity>
+        <activity android:name=".activities.CameraActivity"></activity>
         <activity
-                android:name=".activities.MapAllProblemsActivity"
-                android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.DisplayQRCodeActivity">
-        </activity>
-        <activity android:name=".activities.CareProviderProblemListActivity">
-        </activity>
-
+            android:name=".activities.MapAllProblemsActivity"
+            android:theme="@style/BauditTheme" />
+        <activity android:name=".activities.DisplayQRCodeActivity"></activity>
+        <activity android:name=".activities.CareProviderProblemListActivity"></activity>
         <activity
             android:name=".activities.ViewAccountActivity"
-            android:theme="@style/BauditDialogTheme"/>
-
+            android:theme="@style/BauditDialogTheme" />
+        <activity android:name=".activities.SlideshowActivity"></activity>
     </application>
 
 </manifest>
