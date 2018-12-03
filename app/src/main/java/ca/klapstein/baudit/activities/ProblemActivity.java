@@ -14,10 +14,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
+
+import android.view.*;
 import android.widget.*;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
@@ -26,8 +31,7 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
 
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
@@ -47,7 +51,7 @@ public class ProblemActivity extends AppCompatActivity
 
     private int problemPosition;
     private ProblemPresenter presenter;
-    private Calendar problemTime = Calendar.getInstance();
+    private Calendar problemTime = new GregorianCalendar();
 
     private TextView titleView;
     private EditText titleInput;
@@ -62,9 +66,10 @@ public class ProblemActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem);
+
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        setSupportActionBar(toolbar);
 
         problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
         String mode = getIntent().getStringExtra(PROBLEM_MODE_EXTRA);
@@ -160,13 +165,37 @@ public class ProblemActivity extends AppCompatActivity
         });
 
         recordList = findViewById(R.id.problem_records_list);
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         presenter.viewStarted(problemPosition);
-        updateRecordCountText();
+        updateTimeButton(problemTime.getTime());
+        updateDateButton(problemTime.getTime());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.problem_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.problem_map_records:
+                Intent intent = new Intent(getApplicationContext(), MapRecordsActivity.class);
+                intent.putExtra(MAP_RECORDS_MODE, "single");
+                intent.putExtra(MAP_RECORDS_USERNAME, presenter.getUsername());
+                intent.putExtra(MAP_RECORDS_PROBLEM_POSITION, problemPosition);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private Bitmap createImage(int width, int height, int color) {
@@ -260,8 +289,6 @@ public class ProblemActivity extends AppCompatActivity
 
             index++;
         }
-
-        updateRecordCountText();
     }
 
     @Override
@@ -271,13 +298,30 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void updateDateButton(String dateString) {
-        dateButton.setText(dateString);
+    public void updateDateButton(Date date) {
+        DateFormat mDateFormat = DateFormat.getDateInstance();
+        String dateForButton = mDateFormat.format(date);
+        dateButton.setText(dateForButton);
     }
 
     @Override
-    public void updateTimeButton(String timeString) {
-        timeButton.setText(timeString);
+    public void updateTimeButton(Date date) {
+        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+        String timeForButton = mTimeFormat.format(date);
+        timeButton.setText(timeForButton);
+    }
+
+    @Override
+    public void updateProblemTime(Date date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        problemTime.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        problemTime.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        problemTime.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+        problemTime.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR));
+        problemTime.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+        updateDateButton(problemTime.getTime());
+        updateTimeButton(problemTime.getTime());
     }
 
     @Override
@@ -309,6 +353,20 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateRecordNumber(int recordNumber) {
+        recordCountText.setText(String.format(
+                getResources().getString(R.string.records_label),
+                recordNumber
+        ));
+    }
+
+    @Override
+    public void updateViewProblemError() {
+        Toast.makeText(this, getResources().getString(R.string.problem_load_error), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
     public void commitProblemFailure() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }
@@ -321,27 +379,16 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        DateFormat mDateFormat = DateFormat.getDateInstance();
         problemTime.set(Calendar.YEAR, year);
         problemTime.set(Calendar.MONTH, month);
         problemTime.set(Calendar.DAY_OF_MONTH, day);
-        String dateForButton = mDateFormat.format(problemTime.getTime());
-        updateDateButton(dateForButton);
+        updateDateButton(problemTime.getTime());
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
-        String timeForButton = mTimeFormat.format(problemTime.getTime());
-        updateTimeButton(timeForButton);
-    }
-
-    private void updateRecordCountText() {
-        recordCountText.setText(String.format(
-            getResources().getString(R.string.records_label),
-            presenter.getRecordCount()
-        ));
+        updateTimeButton(problemTime.getTime());
     }
 }

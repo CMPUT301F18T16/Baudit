@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
  */
 public class Username {
 
+    @NonNull
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException {
@@ -21,7 +22,7 @@ public class Username {
      * @param username {@code String} the username string to test.
      * @return {@code boolean} {@code true} if the username is valid, otherwise {@code false}.
      */
-    static public boolean isValid(String username) {
+    static public boolean isValid(@NonNull String username) {
         int len = username.length();
         return 8 <= len && len <= 20;
     }

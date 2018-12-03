@@ -10,13 +10,13 @@ import java.util.ArrayList;
  */
 public class Patient extends Account {
 
-    private ProblemTreeSet problemTreeSet;
-    private ArrayList<BodyLocationPhoto> bodyLocationPhotos;
+    @NonNull
+    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
+    @NonNull
+    private ArrayList<BodyLocationPhoto> bodyLocationPhotos = new ArrayList<>();
 
-    public Patient(Username username, ContactInfo contactInfo) {
+    public Patient(@NonNull Username username, @NonNull ContactInfo contactInfo) {
         super(username, contactInfo);
-        this.problemTreeSet = new ProblemTreeSet();
-        bodyLocationPhotos = new ArrayList<>();
     }
 
     /**
@@ -34,6 +34,7 @@ public class Patient extends Account {
      *
      * @return {@code BodyPhoto} belonging to the patient.
      */
+    @NonNull
     public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
         return bodyLocationPhotos;
     }

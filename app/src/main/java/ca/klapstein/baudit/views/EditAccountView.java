@@ -9,4 +9,6 @@ public interface EditAccountView extends View {
     void updatePhoneNumberError(String message);
     void commitAccountEditFailure();
     void commitAccountEditSuccess();
+
+    void updateViewAccountError();
 }

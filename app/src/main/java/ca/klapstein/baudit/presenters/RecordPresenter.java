@@ -29,40 +29,38 @@ public class RecordPresenter extends Presenter<RecordView> {
 
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
-        // TODO: load patient via other method so that care provider can obtain record as well
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void viewStarted(int problemPosition, int recordPosition) {
-        patient = dataManager.getLoggedInPatient();
-        if (problemPosition == -1) { // For testing purposes, this case is handled
-            problem = new Problem(
-                context.getResources().getString(R.string.default_title),
-                context.getResources().getString(R.string.default_description)
-            );
-        } else {
-            problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
-        }
+        try {
+            patient = dataManager.getLoggedInPatient();
+            if (problemPosition == -1) { // For testing purposes, this case is handled
+                problem = new Problem(
+                        context.getResources().getString(R.string.default_title),
+                        context.getResources().getString(R.string.default_description)
+                );
+            } else {
+                problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
+            }
 
-
-        if (recordPosition == -1) { // If the record is new
-            record = new Record(
-                context.getResources().getString(R.string.default_title),
-                context.getResources().getString(R.string.default_comment)
-            );
-            view.updateRecordHints();
-        } else { // If the record exists and is being edited
-            record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            if (recordPosition == -1) { // If the record is new
+                record = new Record(
+                        context.getResources().getString(R.string.default_title),
+                        context.getResources().getString(R.string.default_comment)
+                );
+                view.updateRecordHints();
+            } else { // If the record exists and is being edited
+                record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            }
+            view.updateTimestampField(record.getTimeStamp());
             view.updateTitleField(record.getTitle());
             view.updateCommentField(record.getComment());
             view.updateLocationField(record.getGeoLocation());
-            view.updateImageField(record.getRecordPhoto());
+            view.updateImageField(record.getLastRecordPhoto());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present record", e);
+            view.updateViewRecordError();
         }
-
-        view.updateTimestampField(record.getTimeStamp());
-        view.updateTitleField(record.getTitle());
-        view.updateCommentField(record.getComment());
-        view.updateLocationField(record.getGeoLocation());
     }
 
     public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {

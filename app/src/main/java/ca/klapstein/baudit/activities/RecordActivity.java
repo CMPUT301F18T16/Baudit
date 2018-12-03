@@ -56,7 +56,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView locationView;
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
-    private ImageView addPhotoImage;
     private ImageView recordImage;
     private Button slideshow;
 
@@ -136,7 +135,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         } );
 
         recordImage = findViewById(R.id.recordImage);
-        addPhotoImage = findViewById(R.id.addPhotoImageView);
+        ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,6 +265,12 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
+    public void updateViewRecordError() {
+        Toast.makeText(this, getResources().getString(R.string.record_load_error), Toast.LENGTH_LONG).show();
         finish();
     }
 }

@@ -35,7 +35,7 @@ public class Email {
      * @return {@code boolean} {@code true} if the email is valid, otherwise {@code false}
      * @see EmailValidator
      */
-    static public boolean isValid(String email) {
+    static public boolean isValid(@NonNull String email) {
         return emailValidator.isValid(email);
     }
 
@@ -55,7 +55,7 @@ public class Email {
      *
      * @param email {@code String}
      */
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         if (isValid(email)) {
             this.email = email;
         } else {

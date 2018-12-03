@@ -8,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -158,14 +157,6 @@ public class RecordTest {
     }
 
     @Test
-    public void setRecordId() {
-        Record record = new Record();
-        UUID uuid = UUID.randomUUID();
-        record.setRecordId(uuid);
-        assertEquals(uuid, record.getRecordId());
-    }
-
-    @Test
     public void getRecordId() {
         Record record = new Record();
         assertNotNull(record.getRecordId());
@@ -175,20 +166,6 @@ public class RecordTest {
     public void getLastRecordPhotoNull() {
         Record record = new Record();
         assertNull(record.getLastRecordPhoto());
-    }
-
-    @Test
-    public void addRecordPhoto() {
-        Record record = new Record();
-        record.addRecordPhoto(mockRecordPhoto);
-        assertEquals(1, record.getRecordPhotos().size());
-    }
-
-    @Test
-    public void getLastRecordPhotoNonNull() {
-        Record record = new Record();
-        record.addRecordPhoto(mockRecordPhoto);
-        assertNotNull(record.getLastRecordPhoto());
     }
 
     @Test
