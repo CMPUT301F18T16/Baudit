@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.EditCareProviderAccountPresenter;
 import ca.klapstein.baudit.views.EditCareProviderAccountView;
@@ -120,5 +119,10 @@ public class EditCareProviderAccountActivity extends AppCompatActivity
             Toast.LENGTH_LONG
         ).show();
         finish();
+    }
+
+    @Override
+    public void updateViewAccountError() {
+        Toast.makeText(this, getResources().getString(R.string.care_provider_account_load_failure), Toast.LENGTH_LONG).show();
     }
 }

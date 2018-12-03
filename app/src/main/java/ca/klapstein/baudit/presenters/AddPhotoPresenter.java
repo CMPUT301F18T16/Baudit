@@ -15,7 +15,6 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
 
     public AddPhotoPresenter(AddPhotoView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void getLastRecordPhoto(int problemId) {
@@ -29,7 +28,8 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
                 view.updateCameraOverlayError();
             }
         } catch (Exception e){
-            Log.d(TAG, "non-existent record photo");
+            Log.e(TAG, "failed to get record photo", e);
+            view.updateCameraOverlayError();
         }
 
     }
