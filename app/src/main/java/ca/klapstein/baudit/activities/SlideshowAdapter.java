@@ -46,7 +46,7 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
     @Override
     public int getCount() {
         //TODO: Get length of the photos stored in bitmap Array
-        //return bitmapArray.size();  //TEStS
+//        return bitmapArray.size();  //TEStS
         return image_resource.length;
     }
 
@@ -72,11 +72,12 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
 
 
         ImageView imageView = item_view.findViewById(R.id.image_view);
-        imageView.setImageResource(image_resource[position]);  //TEST CASE
+        imageView.setImageResource( image_resource[position] );
+
 
         //TODO:update empty bitmapArray & setImageResource to the images on the list
-       // updateImageList();
-        //imageView.setImageBitmap(bitmapArray.get(position));
+//        updateImageList();
+//        imageView.setImageBitmap(bitmapArray.get(position));
 
 
         container.addView(item_view);
