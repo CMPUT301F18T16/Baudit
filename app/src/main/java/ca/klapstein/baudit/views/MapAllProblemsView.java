@@ -7,7 +7,6 @@ import ca.klapstein.baudit.data.Patient;
 
 public interface MapAllProblemsView extends View {
     void updateMarkerOptions(MarkerOptions marker);
-
     void updateMapError();
     void populateMap(Patient patient, GoogleMap googleMap);
 }
