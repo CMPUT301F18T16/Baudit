@@ -6,6 +6,7 @@ import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -126,6 +127,10 @@ public class Record implements Comparable<Record> {
                 return decodeBase64(recordPhotoBitmapString);
         }
         return null;
+    }
+
+    public ArrayList<String> getPhotoBitmapStrings(){
+        return this.photoBitmapStrings;
     }
 
     public void addRecordPhoto(Bitmap bitmap) {
