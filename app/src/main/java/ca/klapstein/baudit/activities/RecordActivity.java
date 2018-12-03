@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageButton;
@@ -23,6 +25,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
+import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
+import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
+import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
 
 /**
  * Activity for editing a {@code Record}.
@@ -49,6 +54,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private EditText commentInput;
     private TextView locationView;
     private GeoLocation geoLocation = null;
+    private ImageView recordImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,19 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
+        recordImage = findViewById(R.id.recordImage);
+        ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
+        addPhotoImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecordActivity.this, CameraActivity.class);
+                intent.putExtra(RECORD_PHOTO_FIELD, true);
+                intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, problemPosition);
+                intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, recordPosition);
+                startActivity(intent);
+            }
+        });
+
         Button cancelButton = findViewById(R.id.record_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +137,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             locationView.setVisibility(View.VISIBLE);
             geolocationEditButton.setVisibility(View.GONE);
 
+            recordImage.setVisibility(View.VISIBLE);
+            addPhotoImage.setVisibility(View.GONE);
+
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
@@ -135,6 +157,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             locationView.setVisibility(View.VISIBLE);
             geolocationEditButton.setVisibility(View.VISIBLE);
+
+            addPhotoImage.setVisibility(View.VISIBLE);
+            recordImage.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
@@ -169,6 +194,12 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void onStart() {
         super.onStart();
         presenter.viewStarted(problemPosition, recordPosition);
+    }
+
+    @Override
+    public void updateImageField(Bitmap bitmap){
+        if (bitmap != null)
+            recordImage.setImageBitmap(bitmap);
     }
 
     @Override
