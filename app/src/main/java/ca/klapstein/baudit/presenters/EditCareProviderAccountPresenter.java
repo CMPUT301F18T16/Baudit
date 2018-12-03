@@ -25,7 +25,6 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
 
     public EditCareProviderAccountPresenter(EditCareProviderAccountView view, Context context) {
         super(view, context);
-        careProvider = (CareProvider) dataManager.getLoggedInAccount();
     }
 
     /**
