@@ -23,10 +23,6 @@ public class RecordPresenter extends Presenter<RecordView> {
     private Record record;
     private Problem problem;
 
-    public Record getRecord(){
-        return this.record;
-    }
-
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
     }
@@ -63,7 +59,14 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
     }
 
-    public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
+    /**
+     * Commit a {@code Record} to storage.
+     *
+     * @param title       {@code String}
+     * @param comment     {@code String}
+     * @param geoLocation {@code GeoLocation}
+     */
+    public void commitRecord(String title, String comment, GeoLocation geoLocation) {
         record.setTitle(title);
         record.setComment(comment);
 
@@ -72,9 +75,7 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
 
         try {
-            if (position == -1) {
-                problem.getRecordTreeSet().add(record);
-            }
+            problem.getRecordTreeSet().add(record);
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {

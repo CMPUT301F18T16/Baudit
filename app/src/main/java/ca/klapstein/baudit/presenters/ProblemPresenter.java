@@ -43,8 +43,8 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateTitleField(problem.getTitle());
                 view.updateDescriptionField(problem.getDescription());
             }
-            view.updateRecordList(problem.getRecordTreeSet());
             view.updateProblemTime(problem.getDate());
+            view.updateRecordList(problem.getRecordTreeSet());
             view.updateRecordNumber(problem.getRecordTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to present problem", e);
@@ -65,21 +65,31 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void deleteRecordClicked(int recordPosition) {
-        Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
-        problem.getRecordTreeSet().remove(deletedRecord);
-        dataManager.commitPatient(patient);
-        view.updateRecordList(problem.getRecordTreeSet());
-        view.updateRecordNumber(problem.getRecordTreeSet().size());
+        try {
+            Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            problem.getRecordTreeSet().remove(deletedRecord);
+            dataManager.commitPatient(patient);
+            view.updateRecordList(problem.getRecordTreeSet());
+            view.updateRecordNumber(problem.getRecordTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to delete record", e);
+            view.updateDeleteRecordError();
+        }
     }
 
-    public int commitProblem(int position, String title, String description, Date date) {
+    /**
+     * Commit a {@code Problem} to storage.
+     *
+     * @param title       {@code String}
+     * @param description {@code String}
+     * @param date        {@code Date}
+     */
+    public void commitProblem(String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
         try {
-            if (position == -1) {
-                patient.getProblemTreeSet().add(problem);
-            }
+            patient.getProblemTreeSet().add(problem);
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {
@@ -94,6 +104,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return -1;
     }
 
+    /**
+     * Return the {@code String} representation of the logged in {@code Patient}.
+     *
+     * @return {@code String}
+     */
     public String getUsername() {
         try {
             patient = dataManager.getLoggedInPatient();

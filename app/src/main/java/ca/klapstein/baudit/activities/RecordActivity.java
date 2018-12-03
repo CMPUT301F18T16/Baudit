@@ -129,7 +129,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             public void onClick(View v) {
                 addPhotoImage.setVisibility(View.VISIBLE);
                 presenter.commitRecord(
-                    recordPosition,
                     titleInput.getText().toString(),
                     commentInput.getText().toString(),
                     geoLocation

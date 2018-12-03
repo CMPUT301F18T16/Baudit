@@ -85,8 +85,9 @@ public class ProblemActivity extends AppCompatActivity
 
         dateButton = findViewById(R.id.problem_date_button);
         timeButton = findViewById(R.id.problem_time_button);
-
+        
         final Button addRecordButton = findViewById(R.id.problem_add_record_button);
+
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +115,7 @@ public class ProblemActivity extends AppCompatActivity
         } else if ("edit".equals(mode)) {
             if (problemPosition == -1) {
                 getSupportActionBar().setTitle(R.string.new_problem);
+                // if we are creating a new problem disable adding records
                 addRecordButton.setVisibility(View.GONE);
             } else {
                 getSupportActionBar().setTitle(R.string.edit_problem);
@@ -155,7 +157,6 @@ public class ProblemActivity extends AppCompatActivity
             public void onClick(View v) {
                 addRecordButton.setVisibility(View.VISIBLE);
                 problemPosition = presenter.commitProblem(
-                    problemPosition,
                     titleInput.getText().toString(),
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
@@ -165,15 +166,14 @@ public class ProblemActivity extends AppCompatActivity
 
         recordCountText = findViewById(R.id.problem_records_label);
         recordList = findViewById(R.id.problem_records_list);
-        presenter.viewStarted(problemPosition);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(problemPosition);
         updateTimeButton(problemTime.getTime());
         updateDateButton(problemTime.getTime());
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
@@ -355,6 +355,11 @@ public class ProblemActivity extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TimePickerDialogFragment mTimeFragment = TimePickerDialogFragment.newInstance(calendar);
         mTimeFragment.show(ft, TimePickerDialogFragment.TAG);
+    }
+
+    @Override
+    public void updateDeleteRecordError() {
+        Toast.makeText(this, getResources().getString(R.string.delete_record_error), Toast.LENGTH_LONG).show();
     }
 
     @Override
