@@ -27,7 +27,6 @@ public class ProblemPresenter extends Presenter<ProblemView> {
 
     public ProblemPresenter(ProblemView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void viewStarted(int position) {
