@@ -31,11 +31,9 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
             Log.e(TAG, "failed to get record photo", e);
             view.updateCameraOverlayError();
         }
-
     }
 
     public void commitRecordPhoto(Bitmap bitmap, int recordId, int problemId) {
-
         try {
             patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
