@@ -47,10 +47,10 @@ public class RecordPresenter extends Presenter<RecordView> {
                 view.updateRecordHints();
             } else { // If the record exists and is being edited
                 record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+                view.updateTitleField(record.getTitle());
+                view.updateCommentField(record.getComment());
             }
             view.updateTimestampField(record.getTimeStamp());
-            view.updateTitleField(record.getTitle());
-            view.updateCommentField(record.getComment());
             view.updateLocationField(record.getGeoLocation());
         } catch (Exception e) {
             Log.e(TAG, "failed to present record", e);
