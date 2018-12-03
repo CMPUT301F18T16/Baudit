@@ -85,8 +85,9 @@ public class ProblemActivity extends AppCompatActivity
 
         dateButton = findViewById(R.id.problem_date_button);
         timeButton = findViewById(R.id.problem_time_button);
+        
+        final Button addRecordButton = findViewById(R.id.problem_add_record_button);
 
-        Button addRecordButton = findViewById(R.id.problem_add_record_button);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +155,8 @@ public class ProblemActivity extends AppCompatActivity
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.commitProblem(
+                addRecordButton.setVisibility(View.VISIBLE);
+                problemPosition = presenter.commitProblem(
                     titleInput.getText().toString(),
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
@@ -382,7 +384,6 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void commitProblemSuccess() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_success), Toast.LENGTH_LONG).show();
-        finish();
     }
 
     @Override
