@@ -51,8 +51,7 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
     public void commitBodyPhoto(Bitmap bitmap) {
         try {
             patient = dataManager.getLoggedInPatient();
-            // TODO: update
-            patient.addBodyLocationPhoto(new BodyLocationPhoto(bitmap, "No label"));
+            patient.addBodyLocationPhoto(new BodyLocationPhoto(bitmap));
             dataManager.commitPatient(patient);
             view.commitPhotoSuccess();
         } catch (Exception e) {
