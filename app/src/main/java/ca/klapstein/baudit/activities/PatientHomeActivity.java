@@ -278,7 +278,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                                                 @Override
                                                 public void onClick(DialogInterface di, int i) {
                                                     presenter.deleteProblemClicked(
-                                                            presenter.getTrueProblemIndex(viewHolder.getAdapterPosition())
+                                                            viewHolder.getAdapterPosition()
                                                     );
                                                 }
                                             })
