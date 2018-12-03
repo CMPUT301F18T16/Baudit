@@ -149,12 +149,17 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
-                return false;
+                updateList();
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
+                updateList();
+                if (newText.length() == 0) {
+                    presenter.viewStarted();
+                }
                 return true;
             }
         });
