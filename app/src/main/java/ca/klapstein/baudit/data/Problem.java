@@ -197,7 +197,6 @@ public class Problem implements Comparable<Problem> {
         if (getProblemId().compareTo(problem.getProblemId()) == 0) {
             return 0;
         }
-
         if (getDate().compareTo(problem.getDate()) == 0) {
             return getTitle().compareTo(problem.getTitle());
         } else {

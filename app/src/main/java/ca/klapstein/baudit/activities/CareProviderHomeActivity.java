@@ -236,11 +236,16 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         @Override
         public void onBindViewHolder(@NonNull final PatientViewHolder viewHolder, int i) {
             presenter.onBindPatientRowViewAtPosition(viewHolder, i);
-
+            String patientUsername = viewHolder.patientUsername.toString();
+            Bundle bundle = new Bundle();
+            bundle.putString("key", patientUsername);
+            getIntent().putExtras(bundle);
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // TODO: launch ability to view patients problems and add records
+                    Intent intent = new Intent(CareProviderHomeActivity.this, CareProviderProblemListActivity.class);
+                    startActivity(intent);
                 }
             });
 
