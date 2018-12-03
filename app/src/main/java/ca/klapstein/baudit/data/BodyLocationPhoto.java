@@ -1,10 +1,12 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import ca.klapstein.baudit.util.BitmapEncoder;
 
 public class BodyLocationPhoto {
 
-    private Bitmap photo;
+    private String bitmapString;
+
     private String label;
 
     public BodyLocationPhoto(Bitmap photo, String label) {
@@ -13,11 +15,11 @@ public class BodyLocationPhoto {
     }
 
     public Bitmap getPhoto() {
-        return photo;
+        return BitmapEncoder.decodeBase64(bitmapString);
     }
 
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
+    public void setPhoto(Bitmap bitmap) {
+        bitmapString = BitmapEncoder.encodeTobase64(bitmap);
     }
 
     public String getLabel() {
