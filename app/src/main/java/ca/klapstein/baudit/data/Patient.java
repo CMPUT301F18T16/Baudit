@@ -1,6 +1,8 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -9,13 +11,14 @@ import java.util.ArrayList;
  */
 public class Patient extends Account {
 
-    private ProblemTreeSet problemTreeSet;
-    private ArrayList<BodyLocationPhoto> bodyLocationPhotos;
+    @NonNull
+    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
-    public Patient(Username username, ContactInfo contactInfo) {
+    @NonNull
+    private ArrayList<BodyLocationPhoto> bodyLocationPhotos = new ArrayList<>();
+
+    public Patient(@NonNull Username username, @NonNull ContactInfo contactInfo) {
         super(username, contactInfo);
-        this.problemTreeSet = new ProblemTreeSet();
-        bodyLocationPhotos = new ArrayList<>();
     }
 
     /**
@@ -23,6 +26,7 @@ public class Patient extends Account {
      *
      * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
      */
+    @NotNull
     public ProblemTreeSet getProblemTreeSet() {
         return this.problemTreeSet;
     }
@@ -32,6 +36,7 @@ public class Patient extends Account {
      *
      * @return {@code BodyPhoto} belonging to the patient.
      */
+    @NotNull
     public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
         return bodyLocationPhotos;
     }

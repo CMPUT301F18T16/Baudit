@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,36 +23,33 @@ public class Record implements Comparable<Record> {
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-    private Date date;
-
+    @NonNull
+    private final UUID recordId = UUID.randomUUID();
+    @Nullable
     private String title;
+    @Nullable
     private String comment;
+    @Nullable
     private GeoLocation geoLocation;
-
     @NonNull
     private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
-    private UUID recordId;
+    @NonNull
+    private Date date = new Date();
 
     public Record() {
-        date = new Date();
-        recordId = UUID.randomUUID();
     }
 
-    public Record(String title) throws IllegalArgumentException {
-        date = new Date();
+    public Record(@NonNull String title) throws IllegalArgumentException {
         this.setTitle(title);
-        recordId = UUID.randomUUID();
     }
 
-    public Record(String title, String comment) throws IllegalArgumentException {
-        date = new Date();
+    public Record(@NonNull String title, @NonNull String comment) throws IllegalArgumentException {
         this.setTitle(title);
         this.setComment(comment);
-        recordId = UUID.randomUUID();
     }
 
     /**
@@ -79,6 +77,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code Date}
      */
+    @NotNull
     public Date getDate() {
         return date;
     }
@@ -101,7 +100,7 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void addRecordPhoto(Bitmap bitmap) {
+    public void addRecordPhoto(@NonNull Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
             recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
         } else {
@@ -127,6 +126,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code String}
      */
+    @Nullable
     public String getTitle() {
         return title;
     }
@@ -137,7 +137,7 @@ public class Record implements Comparable<Record> {
      * @param title {@code String}
      * @throws IllegalArgumentException if the {@code Record}'s title is invalid
      */
-    public void setTitle(String title) throws IllegalArgumentException {
+    public void setTitle(@NonNull String title) throws IllegalArgumentException {
         if (!isValidRecordTitle(title)) {
             throw new IllegalArgumentException("invalid record title: too long");
         }
@@ -149,6 +149,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code String}
      */
+    @Nullable
     public String getComment() {
         return comment;
     }
@@ -159,7 +160,7 @@ public class Record implements Comparable<Record> {
      * @param comment {@code String}
      * @throws IllegalArgumentException if the {@code Record}'s comment is invalid
      */
-    public void setComment(String comment) throws IllegalArgumentException {
+    public void setComment(@NonNull String comment) throws IllegalArgumentException {
         if (!isValidRecordComment(comment)) {
             throw new IllegalArgumentException("invalid record comment: too long");
         }
@@ -187,6 +188,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code ArrayList<String>}
      */
+    @NotNull
     public ArrayList<String> getKeywords() {
         return keywords;
     }
@@ -206,7 +208,7 @@ public class Record implements Comparable<Record> {
      *
      * @param geoLocation {@code GeoLocation}
      */
-    public void setGeoLocation(GeoLocation geoLocation) {
+    public void setGeoLocation(@NonNull GeoLocation geoLocation) {
         this.geoLocation = geoLocation;
     }
 
@@ -228,14 +230,8 @@ public class Record implements Comparable<Record> {
         return date.compareTo(record.getDate());
     }
 
+    @NotNull
     public UUID getRecordId() {
-        if (recordId == null) { // backwards compatibility fix
-            setRecordId(UUID.randomUUID());
-        }
         return recordId;
-    }
-
-    public void setRecordId(@NonNull UUID recordId) {
-        this.recordId = recordId;
     }
 }
