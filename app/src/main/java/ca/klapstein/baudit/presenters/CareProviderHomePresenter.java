@@ -37,6 +37,7 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             careProvider.getAssignedPatientTreeSet().add(dataManager.getPatient(new Username(username)));
             dataManager.commitCareProvider(careProvider);
             view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to assign patient " + username, e);
             view.updateScanQRCodeError();
@@ -75,6 +76,7 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
             view.updateUsernameDisplay(careProvider.getUsername().toString());
             view.updateEmailDisplay(careProvider.getContactInfo().getEmail().toString());
             view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to present care provider", e);
             view.updateAccountLoadError();
@@ -92,13 +94,14 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
         }
     }
 
-    public void removePatientClicked(int position) {
+    public void removePatient(int position) {
         try {
             careProvider = dataManager.getLoggedInCareProvider();
             Patient deletedPatient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
             careProvider.getAssignedPatientTreeSet().remove(deletedPatient);
             dataManager.commitCareProvider(careProvider);
             view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to remove paitent", e);
             view.updateRemovePatientError();
