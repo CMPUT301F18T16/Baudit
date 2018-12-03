@@ -114,4 +114,5 @@
     <string name="body_location_photos">Body location photos</string>
     <string name="delete_body_location_question">Delete this body location?</string>
     <string name="new_body_location">New body location</string>
+    <string name="start_date_label">Start date:</string>
 </resources>
