@@ -2,10 +2,16 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-import ca.klapstein.baudit.data.*;
-import ca.klapstein.baudit.views.MapAllProblemsView;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Problem;
+import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
+import ca.klapstein.baudit.views.MapAllProblemsView;
 
 public class MapAllProblemsPresenter extends Presenter<MapAllProblemsView> {
     private static final String TAG = "MapProblemsPresenter";
@@ -32,7 +38,7 @@ public class MapAllProblemsPresenter extends Presenter<MapAllProblemsView> {
                     if (record.getGeoLocation() != null) {  // not all records have a geo-location
                         LatLng marker = new LatLng(record.getGeoLocation().getLat(), record.getGeoLocation().getLon());
                         Log.d(TAG, "adding marker: " + marker.toString());
-                        view.updateMarkerOptions(new MarkerOptions().position(marker).title(record.getTitle()));
+                        view.updateMarkerOptions(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()));
                     }
                 }
             }
