@@ -31,11 +31,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -52,7 +49,6 @@ import java.util.List;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
-import ca.klapstein.baudit.data.PlaceInfo;
 import ca.klapstein.baudit.presenters.LocationPresenter;
 import ca.klapstein.baudit.views.LocationView;
 
@@ -67,23 +63,16 @@ public class LocationActivity extends AppCompatActivity
     private static final String TAG = "LOCATION_ACTIVITY";
     private static final float defaultZoom = 10.0f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71,136));
-    private static final int REQUEST_GEOLOCATION = 123;
-
 
     private MapView mapView;
-    private LocationPresenter presenter;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private PlaceAutocompleteFragment autocompleteFragment;
     private GoogleMap map;
     private AutoCompleteTextView searchText;
     private ImageView gpsButton;
     private Button confirmButton;
     private PlaceAutoCompleteAdapter autoCompleteAdapter;
     private GeoDataClient geoDataClient;
-    private PlaceDetectionClient placeDetectionClient;
     private GoogleApiClient googleApiClient;
-    private PlaceInfo placeInfo;
-    private MarkerOptions returnMarker;
     private Address address;
 
 
@@ -92,7 +81,6 @@ public class LocationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        presenter = new LocationPresenter(this, getApplicationContext());
         searchText = findViewById(R.id.search_field);
         gpsButton = findViewById(R.id.gps);
         confirmButton = findViewById(R.id.marker_confirm_button);
@@ -168,7 +156,7 @@ public class LocationActivity extends AppCompatActivity
      */
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-
+        return;
     }
 
     @Override
@@ -206,8 +194,6 @@ public class LocationActivity extends AppCompatActivity
                 .build();
 
         geoDataClient = Places.getGeoDataClient(this,null);
-        placeDetectionClient = Places.getPlaceDetectionClient(this, null);
-
 
         autoCompleteAdapter = new PlaceAutoCompleteAdapter(this, geoDataClient, LAT_LNG_BOUNDS,null);
 
@@ -300,7 +286,7 @@ public class LocationActivity extends AppCompatActivity
     public void moveCamera(LatLng latLng, float zoom, String title){
         MarkerOptions marker = new MarkerOptions().position(latLng).title(title).draggable(false);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
-        if(!(title.equals("My Location"))){
+        if(!("My Location".equals(title))){
             map.clear();
             map.addMarker(marker);
         }
@@ -312,7 +298,7 @@ public class LocationActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {return;}
 
     private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -334,7 +320,6 @@ public class LocationActivity extends AppCompatActivity
                 places.release();
                 return;
             }
-            final Place place = places.get(0);
             places.release();
         }
     };
