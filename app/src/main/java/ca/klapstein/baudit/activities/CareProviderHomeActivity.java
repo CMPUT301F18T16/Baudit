@@ -34,6 +34,8 @@ import static ca.klapstein.baudit.activities.ViewAccountActivity.VIEW_ACCOUNT_US
  */
 public class CareProviderHomeActivity extends AppCompatActivity implements CareProviderHomeView {
 
+    public static final String PATIENT_USERNAME_EXTRA = "patientUsername";
+
     private static final String TAG = "CareProviderHome";
 
     private final int REQUEST_CODE_QR_SCAN = 101;
@@ -240,7 +242,15 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
             viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: launch ability to view patients problems and add records
+                    Intent intent = new Intent(
+                        CareProviderHomeActivity.this,
+                        CareProviderProblemListActivity.class
+                    );
+                    intent.putExtra(
+                        PATIENT_USERNAME_EXTRA,
+                        viewHolder.patientUsername.getText().toString()
+                    );
+                    startActivity(intent);
                 }
             });
 
