@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/edit_account_toolbar"
+        android:id="@+id/edit_care_provider_account_toolbar"
         android:layout_width="match_parent"
         android:text="@string/edit_account"
         android:layout_height="?attr/actionBarSize"
@@ -28,11 +28,11 @@
             android:text="@string/first_name"/>
 
         <EditText
-                android:inputType="textPersonName"
-                android:id="@+id/edit_account_first_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"/>
+            android:inputType="textPersonName"
+            android:id="@+id/edit_care_provider_account_first_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -42,11 +42,11 @@
             android:text="@string/last_name"/>
 
         <EditText
-                android:inputType="textPersonName"
-                android:id="@+id/edit_account_last_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey"/>
+            android:inputType="textPersonName"
+            android:id="@+id/edit_care_provider_account_last_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -56,13 +56,14 @@
             android:text="@string/email" />
 
         <EditText
-                android:inputType="textEmailAddress"
-                android:id="@+id/edit_account_email_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey" />
+            android:id="@+id/edit_care_provider_account_email_input"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey" />
+
         <TextView
-            android:id="@+id/edit_account_email_error"
+            android:id="@+id/edit_care_provider_account_email_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -76,14 +77,14 @@
             android:text="@string/phone_number" />
 
         <EditText
-                android:inputType="phone"
-                android:id="@+id/edit_account_phone_number_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_grey" />
+            android:inputType="phone"
+            android:id="@+id/edit_care_provider_account_phone_number_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey" />
 
         <TextView
-            android:id="@+id/edit_account_phone_number_error"
+            android:id="@+id/edit_care_provider_account_phone_number_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -95,7 +96,7 @@
             android:layout_gravity="bottom">
 
             <Button
-                android:id="@+id/edit_account_cancel_button"
+                android:id="@+id/edit_care_provider_account_cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -104,7 +105,7 @@
                 android:text="@string/cancel" />
 
             <Button
-                android:id="@+id/edit_account_save_button"
+                android:id="@+id/edit_care_provider_account_save_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

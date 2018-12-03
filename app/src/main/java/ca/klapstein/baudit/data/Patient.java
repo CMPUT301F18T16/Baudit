@@ -3,18 +3,20 @@ package ca.klapstein.baudit.data;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+
 /**
  * Class that represents a Patient.
  */
 public class Patient extends Account {
 
-    @NonNull
-    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
-
-    private Bitmap bodyPhoto;
+    private ProblemTreeSet problemTreeSet;
+    private ArrayList<BodyLocationPhoto> bodyLocationPhotos;
 
     public Patient(Username username, ContactInfo contactInfo) {
         super(username, contactInfo);
+        this.problemTreeSet = new ProblemTreeSet();
+        bodyLocationPhotos = new ArrayList<>();
     }
 
     /**
@@ -32,8 +34,8 @@ public class Patient extends Account {
      *
      * @return {@code BodyPhoto} belonging to the patient.
      */
-    public Bitmap getBodyPhoto() {
-        return this.bodyPhoto;
+    public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
+        return bodyLocationPhotos;
     }
 
     /**
@@ -41,7 +43,11 @@ public class Patient extends Account {
      *
      * @param bitmap {@code Bitmap}
      */
-    public void setBodyPhoto(Bitmap bitmap) {
-        this.bodyPhoto = bitmap;
+    public void addBodyLocationPhoto(Bitmap bitmap, String label) {
+        bodyLocationPhotos.add(new BodyLocationPhoto(bitmap, label));
+    }
+
+    public void removeBodyLocationPhoto(int index) {
+        bodyLocationPhotos.remove(index);
     }
 }
