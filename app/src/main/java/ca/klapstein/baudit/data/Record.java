@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import ca.klapstein.baudit.util.BitmapEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
 
     @NonNull
-    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    private ArrayList<String> recordPhotos = new ArrayList<>();
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
@@ -103,15 +104,18 @@ public class Record implements Comparable<Record> {
 
     public void addRecordPhoto(Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
-        } else {
-            recordPhotos.add(bitmap);
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
         }
+        recordPhotos.add(BitmapEncoder.encodeTobase64(bitmap));
     }
 
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
-        return recordPhotos;
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (String bitmapString : recordPhotos) {
+            bitmaps.add(BitmapEncoder.decodeBase64(bitmapString));
+        }
+        return bitmaps;
     }
 
     @Nullable

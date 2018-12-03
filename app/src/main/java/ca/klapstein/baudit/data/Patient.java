@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
+import ca.klapstein.baudit.util.BitmapEncoder;
 
 /**
  * Class that represents a Patient.
@@ -9,7 +10,7 @@ public class Patient extends Account {
 
     private ProblemTreeSet problemTreeSet;
 
-    private Bitmap bodyPhoto;
+    private String bodyPhoto;
 
     public Patient(Username username, ContactInfo contactInfo) {
         super(username, contactInfo);
@@ -31,7 +32,7 @@ public class Patient extends Account {
      * @return {@code BodyPhoto} belonging to the patient.
      */
     public Bitmap getBodyPhoto() {
-        return this.bodyPhoto;
+        return BitmapEncoder.decodeBase64(bodyPhoto);
     }
 
     /**
@@ -40,6 +41,6 @@ public class Patient extends Account {
      * @param bitmap {@code Bitmap}
      */
     public void setBodyPhoto(Bitmap bitmap) {
-        this.bodyPhoto = bitmap;
+        this.bodyPhoto = BitmapEncoder.encodeTobase64(bitmap);
     }
 }
