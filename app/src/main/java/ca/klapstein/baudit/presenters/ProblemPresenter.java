@@ -29,19 +29,24 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void viewStarted(int position) {
-        patient = dataManager.getLoggedInPatient();
-        if (position == -1) { // If the problem is new
-            problem = new Problem(
-                context.getResources().getString(R.string.default_title),
-                context.getResources().getString(R.string.default_description)
-            );
-            view.updateProblemHints();
-        } else { // If the problem exists and is being edited
-            problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+        try {
+            patient = dataManager.getLoggedInPatient();
+            if (position == -1) { // If the problem is new
+                problem = new Problem(
+                        context.getResources().getString(R.string.default_title),
+                        context.getResources().getString(R.string.default_description)
+                );
+                view.updateProblemHints();
+            } else { // If the problem exists and is being edited
+                problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            }
             view.updateTitleField(problem.getTitle());
             view.updateDescriptionField(problem.getDescription());
             view.updateRecordList(problem.getRecordTreeSet());
             view.updateProblemTime(problem.getDate());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present problem", e);
+            // TODO: error
         }
     }
 
