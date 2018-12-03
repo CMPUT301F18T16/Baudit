@@ -117,4 +117,5 @@
     <string name="new_body_location">New body location</string>
     <string name="start_date_label">Start date:</string>
     <string name="care_provider_remove_patient_failure">Failed to remove patient</string>
+    <string name="delete_problem_failure">Failed to delete problem</string>
 </resources>
