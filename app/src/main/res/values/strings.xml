@@ -122,4 +122,5 @@
     <string name="record_load_error">Failed to load Record</string>
     <string name="no_photos_to_show">No photos to present in slideshow</string>
     <string name="slideshow_view_error">Failed to load slideshow photos</string>
+    <string name="record_photos_slideshow">Record Photos Slideshow</string>
 </resources>
