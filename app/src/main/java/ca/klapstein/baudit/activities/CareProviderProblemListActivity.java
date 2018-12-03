@@ -8,13 +8,13 @@ import ca.klapstein.baudit.views.CareProviderProblemListView;
 
 public class CareProviderProblemListActivity extends AppCompatActivity implements CareProviderProblemListView {
 
+    private static final String TAG = "CareProviderProblemList";
     CareProviderProblemListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_care_provider_problem_list);
-
         presenter = new CareProviderProblemListPresenter(this, this);
     }
 

@@ -8,19 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageButton;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
@@ -133,7 +128,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentView.setVisibility(View.GONE);
             commentInput.setVisibility(View.VISIBLE);
 
-            locationView.setVisibility(View.GONE);
+            locationView.setVisibility(View.VISIBLE);
             geolocationEditButton.setVisibility(View.VISIBLE);
 
             cancelButton.setVisibility(View.VISIBLE);
@@ -149,7 +144,13 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 Double latitude = data.getDoubleExtra("Latitude", 53);
                 Double longitude = data.getDoubleExtra("Longitude", -113);
                 String address = data.getStringExtra("Address");
-                geoLocation = new GeoLocation(address, latitude, longitude);
+                if(geoLocation == null) {
+                    geoLocation = new GeoLocation(address, latitude, longitude);
+                }else{
+                    geoLocation.setAddress(address);
+                    geoLocation.setLat(latitude);
+                    geoLocation.setLon(longitude);
+                }
                 Log.d(TAG, "obtained Geolocation for: " + geoLocation.getAddress() +"at coordinates:" +geoLocation.getLat() +geoLocation.getLon());
                 updateLocationField(geoLocation);
 
