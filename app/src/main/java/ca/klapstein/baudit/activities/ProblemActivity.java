@@ -164,14 +164,15 @@ public class ProblemActivity extends AppCompatActivity
 
         recordCountText = findViewById(R.id.problem_records_label);
         recordList = findViewById(R.id.problem_records_list);
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        presenter.viewStarted(problemPosition);
         updateTimeButton(problemTime.getTime());
         updateDateButton(problemTime.getTime());
-        presenter.viewStarted(problemPosition);
     }
 
     @Override

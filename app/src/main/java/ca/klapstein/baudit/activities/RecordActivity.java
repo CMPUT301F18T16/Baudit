@@ -148,7 +148,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
-        addPhotoImage.setVisibility(View.VISIBLE);
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
 
@@ -171,7 +170,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         } else if ("edit".equals(mode)) {
             if (recordPosition == -1) {
                 getSupportActionBar().setTitle(getResources().getString(R.string.new_record));
-                Log.d(TAG, "EDIT MODE and RECORD = -1");
                 addPhotoImage.setVisibility(View.GONE);
             } else {
                 getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
@@ -250,7 +248,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
-//        finish();
     }
 
     @Override
