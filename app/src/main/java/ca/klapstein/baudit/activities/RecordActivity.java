@@ -58,7 +58,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private ImageView recordImage;
     private Button slideshow;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
