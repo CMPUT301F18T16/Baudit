@@ -3,7 +3,6 @@ package ca.klapstein.baudit.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -14,14 +13,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 import static ca.klapstein.baudit.activities.ViewAccountActivity.VIEW_ACCOUNT_USERNAME_EXTRA;
@@ -170,7 +181,10 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.patient_home_view_map:
-                startActivity(new Intent(getApplicationContext(), MapAllProblemsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MapRecordsActivity.class);
+                intent.putExtra(MAP_RECORDS_MODE, "all");
+                intent.putExtra(MAP_RECORDS_USERNAME, presenter.getUsername());
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

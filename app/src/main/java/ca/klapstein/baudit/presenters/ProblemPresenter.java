@@ -96,4 +96,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             view.commitProblemFailure();
         }
     }
+
+    public String getUsername() {
+        patient = dataManager.getLoggedInPatient();
+        if (patient != null) {
+            return patient.getUsername().toString();
+        } else {
+            return "";
+        }
+    }
 }
