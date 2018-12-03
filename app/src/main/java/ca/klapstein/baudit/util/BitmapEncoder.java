@@ -19,12 +19,10 @@ public class BitmapEncoder {
      */
     @NonNull
     public static String encodeTobase64(@NonNull Bitmap image) {
-        Bitmap immagex = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     /**
