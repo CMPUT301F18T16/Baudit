@@ -65,10 +65,6 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         view.showTimePicker(calendar);
     }
 
-    public Record getRecordAt(int position) {
-        return (Record) problem.getRecordTreeSet().toArray()[position];
-    }
-
     public int getRecordCount() {
         return problem.getRecordTreeSet().size();
     }
