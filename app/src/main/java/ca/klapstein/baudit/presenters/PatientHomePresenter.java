@@ -102,8 +102,14 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
     }
 
     public int getTrueProblemIndex(int position) {
-        Problem problem = (Problem) problemTreeSet.toArray()[position];
-        return new ArrayList<Problem>(Arrays.asList(patient.getProblemTreeSet().toArray(new Problem[0]))).indexOf(problem);
+        try {
+            Problem problem = (Problem) problemTreeSet.toArray()[position];
+            return new ArrayList<Problem>(Arrays.asList(patient.getProblemTreeSet().toArray(new Problem[0]))).indexOf(problem);
+        } catch (Exception e) {
+            Log.e(TAG, "failed to obtain true problem index", e);
+            view.updateAccountLoadError();
+            return 0;
+        }
     }
 
     public void filterProblemsByKeyWords(CharSequence constraint) {
