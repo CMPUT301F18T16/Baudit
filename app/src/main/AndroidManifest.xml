@@ -39,6 +39,9 @@
                 android:name=".activities.EditPatientAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
+            android:name=".activities.EditCareProviderAccountActivity"
+            android:theme="@style/BauditTheme"/>
+        <activity
                 android:name=".activities.CreateAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
@@ -60,7 +63,7 @@
         <activity
                 android:name=".activities.CameraActivity"/>
         <activity
-                android:name=".activities.MapAllProblemsActivity"
+                android:name=".activities.MapRecordsActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
                 android:name=".activities.DisplayQRCodeActivity"/>
