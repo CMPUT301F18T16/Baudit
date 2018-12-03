@@ -121,5 +121,7 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
             if (Collections.disjoint(searchTokens, aProblemArray.getKeywords()))
                 problemTreeSet.remove(aProblemArray);
         }
+        view.updateList();
+        view.updateProblemNumber(problemTreeSet.size());
     }
 }
