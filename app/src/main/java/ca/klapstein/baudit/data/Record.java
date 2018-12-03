@@ -31,13 +31,12 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
 
     @NonNull
-    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    private ArrayList<String> photoBitmapStrings = new ArrayList<String>();
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
     private UUID recordId;
-    private String recordPhotoBitmapString;
 
     public Record() {
         date = new Date();
@@ -121,16 +120,20 @@ public class Record implements Comparable<Record> {
 
     @Nullable
     public Bitmap getRecordPhoto() {
-        if (recordPhotoBitmapString != null)
-            return decodeBase64(recordPhotoBitmapString);
+        if (photoBitmapStrings.size() >= 1) {
+            String recordPhotoBitmapString = photoBitmapStrings.get(photoBitmapStrings.size() - 1);
+            if (recordPhotoBitmapString != null)
+                return decodeBase64(recordPhotoBitmapString);
+        }
         return null;
     }
 
-    public void setRecordPhoto(Bitmap bitmap) {
+    public void addRecordPhoto(Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
             bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
         }
-        recordPhotoBitmapString = encodeTobase64(bitmap);
+        String recordPhotoBitmapString = encodeTobase64(bitmap);
+        photoBitmapStrings.add(recordPhotoBitmapString);
     }
 
     /**
@@ -249,4 +252,5 @@ public class Record implements Comparable<Record> {
     public void setRecordId(@NonNull UUID recordId) {
         this.recordId = recordId;
     }
+
 }
