@@ -37,7 +37,7 @@ public class MapRecordsPresenter extends Presenter<MapAllProblemsView> {
                             );
                             Log.d(TAG, "adding marker: " + marker.toString());
                             view.updateMarkerOptions(
-                                    new MarkerOptions().position(marker).title(record.getTitle())
+                                    new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()+" "+record.getDate())
                             );
                         }
                     }
