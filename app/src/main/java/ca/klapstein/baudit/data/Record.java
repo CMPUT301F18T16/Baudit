@@ -5,15 +5,14 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Base64;
 
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
+import static ca.klapstein.baudit.util.BitmapEncoderUtil.decodeBase64;
+import static ca.klapstein.baudit.util.BitmapEncoderUtil.encodeTobase64;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -21,9 +20,13 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
+    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
+
+    @NonNull
+    private ArrayList<String> photoBitmapStrings = new ArrayList<String>();
     @NonNull
     private final UUID recordId = UUID.randomUUID();
     @Nullable
@@ -102,10 +105,6 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void addRecordPhoto(Bitmap bitmap) {
-        recordPhotos.add(new RecordPhoto(bitmap));
-    }
-
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
@@ -123,6 +122,10 @@ public class Record implements Comparable<Record> {
                 return decodeBase64(recordPhotoBitmapString);
         }
         return null;
+    }
+
+    public ArrayList<String> getPhotoBitmapStrings(){
+        return this.photoBitmapStrings;
     }
 
     public void addRecordPhoto(Bitmap bitmap) {
