@@ -2,14 +2,17 @@ package ca.klapstein.baudit.activities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import ca.klapstein.baudit.R;
@@ -22,23 +25,29 @@ import ca.klapstein.baudit.views.SlideShowView;
 public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
 
     //Stored temporary photos in drawable to test slideshow
-    //private int[] image_resource = {R.drawable.sample1,R.drawable.sample2,R.drawable.sample3,R.drawable.sample4, R.drawable.sample5 }; //TEST, Remove images when finished
-    private int[] image_resource={};
-    private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
+    private int[] image_resource = {R.drawable.baudit_logo_240x120};
+    private ArrayList<String> bitmapStringArray = new ArrayList<String>();
     private Context context;
     private LayoutInflater layoutInflater;
+    private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
 
 
 
-    public SlideshowAdapter(Context context){
+    public SlideshowAdapter(Context context, ArrayList<String> bitmapStringArray){
         this.context=context;
+        this.bitmapStringArray = bitmapStringArray;
     }
 
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
 
     @Override
     public int getCount() {
         //TODO: Get length of the photos stored in bitmap Array
-        return image_resource.length;  //TEStS
+        //return bitmapArray.size();  //TEStS
+        return image_resource.length;
     }
 
     /**
@@ -66,8 +75,8 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
         imageView.setImageResource(image_resource[position]);  //TEST CASE
 
         //TODO:update empty bitmapArray & setImageResource to the images on the list
-        //updateImageList(bitmapArray);
-        //imageView.setImageResource(bitmapArray.get(position))
+        updateImageList();
+        //imageView.setImageBitmap(bitmapArray.get(position));
 
 
         container.addView(item_view);
@@ -79,9 +88,10 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
      * Get List of images of the record
      */
     @Override
-    public void updateImageList(ArrayList<Bitmap> images) {
-
-        //TODO: Update ArrayList<Bitmap> with list of photos of the records, this.bitmapArray = record.getPhotoList()
+    public void updateImageList() {
+        for(String encodedString : bitmapStringArray){
+            bitmapArray.add(decodeBase64(encodedString));
+        }
     }
 
     /**
