@@ -129,7 +129,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             @Override
             public void onClick(View v) {
                 presenter.commitRecord(
-                    recordPosition,
                     titleInput.getText().toString(),
                     commentInput.getText().toString(),
                     geoLocation
