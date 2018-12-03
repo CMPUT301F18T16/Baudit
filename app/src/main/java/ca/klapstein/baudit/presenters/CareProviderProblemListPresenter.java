@@ -10,9 +10,9 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
     private Patient patient;
 
 
+
     public CareProviderProblemListPresenter(CareProviderProblemListView view, Context context) {
         super(view, context);
         patient = dataManager.getPatient(patientUsername);
-
     }
 }

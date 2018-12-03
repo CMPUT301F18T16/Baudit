@@ -14,8 +14,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
@@ -24,12 +42,9 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_PROBLEM_POSITION;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
@@ -101,12 +116,23 @@ public class ProblemActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(R.string.edit_problem);
             }
 
-
             titleView.setVisibility(View.GONE);
             titleInput.setVisibility(View.VISIBLE);
 
             descriptionView.setVisibility(View.GONE);
             descriptionInput.setVisibility(View.VISIBLE);
+
+            cancelButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
+        }else if("careprovider".equals(mode)){
+            if (!(problemPosition == -1)) {
+                getSupportActionBar().setTitle("Edit problem");
+            }
+            titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
+
+            descriptionView.setVisibility(View.VISIBLE);
+            descriptionInput.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);

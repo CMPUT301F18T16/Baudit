@@ -158,6 +158,26 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
+        }else if("careprovider".equals(mode)){
+            if (recordPosition == -1) {
+                getSupportActionBar().setTitle(getResources().getString(R.string.new_record));
+            } else {
+                getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+            }
+            titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
+
+            commentView.setVisibility(View.VISIBLE);
+            commentInput.setVisibility(View.VISIBLE);
+
+            locationView.setVisibility(View.VISIBLE);
+            geolocationEditButton.setVisibility(View.GONE);
+
+            recordImage.setVisibility(View.VISIBLE);
+            addPhotoImage.setVisibility(View.GONE);
+
+            cancelButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
         }
     }
 
