@@ -40,9 +40,9 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateProblemHints();
             } else { // If the problem exists and is being edited
                 problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+                view.updateTitleField(problem.getTitle());
+                view.updateDescriptionField(problem.getDescription());
             }
-            view.updateTitleField(problem.getTitle());
-            view.updateDescriptionField(problem.getDescription());
             view.updateProblemTime(problem.getDate());
             view.updateRecordList(problem.getRecordTreeSet());
             view.updateRecordNumber(problem.getRecordTreeSet().size());
