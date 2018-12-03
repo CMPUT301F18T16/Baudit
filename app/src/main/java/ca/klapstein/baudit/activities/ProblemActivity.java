@@ -30,6 +30,7 @@ import ca.klapstein.baudit.views.ProblemView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
 import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_PROBLEM_POSITION;
@@ -173,6 +174,8 @@ public class ProblemActivity extends AppCompatActivity
         super.onStart();
         presenter.viewStarted(problemPosition);
         updateRecordCountText();
+        updateTimeButton(problemTime.getTime());
+        updateDateButton(problemTime.getTime());
     }
 
     @Override
@@ -299,13 +302,26 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void updateDateButton(String dateString) {
-        dateButton.setText(dateString);
+    public void updateDateButton(Date date) {
+        DateFormat mDateFormat = DateFormat.getDateInstance();
+        String dateForButton = mDateFormat.format(date);
+        dateButton.setText(dateForButton);
     }
 
     @Override
-    public void updateTimeButton(String timeString) {
-        timeButton.setText(timeString);
+    public void updateTimeButton(Date date) {
+        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+        String timeForButton = mTimeFormat.format(date);
+        timeButton.setText(timeForButton);
+    }
+
+    @Override
+    public void updateProblemTime(Date date) {
+        problemTime.set(Calendar.YEAR, date.getYear());
+        problemTime.set(Calendar.MONTH, date.getMonth());
+        problemTime.set(Calendar.DAY_OF_MONTH, date.getDay());
+        problemTime.set(Calendar.HOUR_OF_DAY, date.getHours());
+        problemTime.set(Calendar.MINUTE, date.getMinutes());
     }
 
     @Override
@@ -349,21 +365,17 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        DateFormat mDateFormat = DateFormat.getDateInstance();
         problemTime.set(Calendar.YEAR, year);
         problemTime.set(Calendar.MONTH, month);
         problemTime.set(Calendar.DAY_OF_MONTH, day);
-        String dateForButton = mDateFormat.format(problemTime.getTime());
-        updateDateButton(dateForButton);
+        updateDateButton(problemTime.getTime());
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-        DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
-        String timeForButton = mTimeFormat.format(problemTime.getTime());
-        updateTimeButton(timeForButton);
+        updateTimeButton(problemTime.getTime());
     }
 
     private void updateRecordCountText() {
