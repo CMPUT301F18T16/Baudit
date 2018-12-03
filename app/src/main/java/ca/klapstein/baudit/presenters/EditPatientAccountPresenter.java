@@ -25,33 +25,33 @@ public class EditPatientAccountPresenter extends Presenter<EditPatientAccountVie
 
     public EditPatientAccountPresenter(EditPatientAccountView view, Context context) {
         super(view, context);
-        patient = (Patient) dataManager.getLoggedInAccount();
     }
 
     /**
      * On startup of the {@code EditAccountView} populate fields noting the account.
      */
     public void viewStarted() {
-        patient = (Patient) dataManager.getLoggedInAccount();
-        if (patient != null) {
+        try {
+            patient = dataManager.getLoggedInPatient();
             view.updateFirstNameField(patient.getContactInfo().getFirstName());
             view.updateLastNameField(patient.getContactInfo().getLastName());
             view.updateEmailField(patient.getContactInfo().getEmail().toString());
             view.updatePhoneNumberField(patient.getContactInfo().getPhoneNumber().toString());
             view.updateBodyLocationField(patient.getBodyLocationPhotos());
-        } else {
-            // TODO: error
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present patient", e);
+            view.updateViewAccountError();
         }
     }
 
     public void deleteBodyLocationClicked(int position) {
         try {
-            patient = (Patient) dataManager.getLoggedInAccount();
+            patient = dataManager.getLoggedInPatient();
             patient.removeBodyLocationPhoto(position);
             dataManager.commitAccount(patient);
             view.updateBodyLocationField(patient.getBodyLocationPhotos());
-        } catch (NullPointerException e) {
-            Log.e(TAG, "failed to obtain account to commit Account edits too", e);
+        } catch (Exception e) {
+            Log.e(TAG, "failed to delete body location", e);
             view.commitAccountEditFailure();
         }
     }
@@ -76,18 +76,15 @@ public class EditPatientAccountPresenter extends Presenter<EditPatientAccountVie
         }
 
         try {
-            patient = (Patient) dataManager.getLoggedInAccount();
+            patient = dataManager.getLoggedInPatient();
             patient.getContactInfo().setFirstName(firstName);
             patient.getContactInfo().setLastName(lastName);
             patient.getContactInfo().setEmail(new Email(email));
             patient.getContactInfo().setPhoneNumber(new PhoneNumber(phoneNumber));
             dataManager.commitAccount(patient);
             view.commitAccountEditSuccess();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "failed committing Account edits", e);
-            view.commitAccountEditFailure();
-        } catch (NullPointerException e) {
-            Log.e(TAG, "failed to obtain account to commit Account edits too", e);
             view.commitAccountEditFailure();
         }
     }

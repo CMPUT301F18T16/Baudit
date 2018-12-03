@@ -21,7 +21,7 @@ public class RecordPhoto {
     public void setPhoto(@NonNull Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
             bitmapString = BitmapEncoderUtil.encodeTobase64(
-                    ThumbnailUtils.extractThumbnail(bitmap, 255, 255)
+                ThumbnailUtils.extractThumbnail(bitmap, 255, 255)
             );
         } else {
             bitmapString = BitmapEncoderUtil.encodeTobase64(bitmap);

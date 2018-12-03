@@ -1,8 +1,12 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.UUID;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
@@ -16,25 +20,27 @@ public class Problem implements Comparable<Problem> {
 
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
-
-    private UUID problemId;
+    @NonNull
     private String title;
+    @Nullable
     private String description;
-    private Date date;
-    private RecordTreeSet recordTreeSet;
+    @NonNull
+    private final UUID problemId = UUID.randomUUID();
+    @NonNull
+    private Date date = new Date();
+    @NonNull
+    private RecordTreeSet recordTreeSet = new RecordTreeSet();
 
     public Problem(@NonNull String title) throws IllegalArgumentException {
         this.setTitle(title);
-        this.date = new Date();
-        this.recordTreeSet = new RecordTreeSet();
-        this.problemId = UUID.randomUUID();
     }
 
     /**
      * Check if a given string is a valid Problem description.
      *
      * @param description {@code String} the description to validate
-     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise {@code false}
+     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise
+     * {@code false}
      */
     static public boolean isValidProblemDescription(@NonNull String description) {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
@@ -51,12 +57,34 @@ public class Problem implements Comparable<Problem> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    public Problem(@NonNull String title, String description) throws IllegalArgumentException{
+    public HashSet<String> getKeywords() {
+        HashSet<String> keywords = new HashSet<>();
+        keywords.clear();
+        if (getTitle() != null)
+            keywords.addAll(Arrays.asList(getTitle().toLowerCase().split(" ")));
+        if (getDescription() != null)
+            keywords.addAll(Arrays.asList(getDescription().toLowerCase().split(" ")));
+        if (getDate() != null)
+            keywords.add(getTimeStamp());
+        for (Record record : getRecordTreeSet()) {
+            if (record.getGeoLocation() != null && record.getGeoLocation().getAddress() != null) {
+                keywords.addAll(
+                        Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" "))
+                );
+            }
+            if (record.getComment() != null) {
+                keywords.addAll(Arrays.asList(record.getComment().toLowerCase().split(" ")));
+            }
+            if (record.getTitle() != null) {
+                keywords.addAll(Arrays.asList(record.getTitle().toLowerCase().split(" ")));
+            }
+        }
+        return keywords;
+    }
+
+    public Problem(@NonNull String title, @NonNull String description) throws IllegalArgumentException {
         this.setTitle(title);
         this.setDescription(description);
-        this.date = new Date();
-        this.recordTreeSet = new RecordTreeSet();
-        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -64,6 +92,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code RecordTreeSet}
      */
+    @NotNull
     public RecordTreeSet getRecordTreeSet() {
         return this.recordTreeSet;
     }
@@ -73,7 +102,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @param recordTreeSet {@code RecordTreeSet}
      */
-    public void setRecordTreeSet(RecordTreeSet recordTreeSet) {
+    public void setRecordTreeSet(@NonNull RecordTreeSet recordTreeSet) {
         this.recordTreeSet = recordTreeSet;
     }
 
@@ -82,6 +111,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @Nullable
     public String getDescription() {
         return this.description;
     }
@@ -92,7 +122,7 @@ public class Problem implements Comparable<Problem> {
      * @param description {@code String}
      * @throws IllegalArgumentException if the {@code Problem}'s description is invalid
      */
-    public void setDescription(String description) throws IllegalArgumentException {
+    public void setDescription(@NonNull String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
             throw new IllegalArgumentException("invalid problem description");
         }
@@ -104,6 +134,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @NotNull
     public String getTitle() {
         return this.title;
     }
@@ -114,7 +145,7 @@ public class Problem implements Comparable<Problem> {
      * @param title {@code String}
      * @throws IllegalArgumentException if the {@code Problem}'s title is invalid
      */
-    public void setTitle(String title) throws IllegalArgumentException {
+    public void setTitle(@NonNull String title) throws IllegalArgumentException {
         if (!isValidProblemTitle(title)) {
             throw new IllegalArgumentException("invalid problem title");
         }
@@ -126,6 +157,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code Date}
      */
+    @NotNull
     public Date getDate() {
         return this.date;
     }
@@ -135,7 +167,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @param date {@code Date}
      */
-    public void setDate(Date date) {
+    public void setDate(@NonNull Date date) {
         this.date = date;
     }
 
@@ -149,14 +181,16 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Compare two {@code Problem}s by their creation time and if equal creation times by their titles.
+     * Compare two {@code Problem}s by their creation time and if equal creation times by their
+     * titles.
      * <p>
-     * This is used for sorting a {@code ProblemTreeSet} by a {@code Problem}'s creation time and title.
+     * This is used for sorting a {@code ProblemTreeSet} by a {@code Problem}'s creation time and
+     * title.
      *
      * @param problem {@code Problem} the given {@code Problem} to compare.
-     * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are the same or
-     *                     {@code -int} if the this {@code Problem} is less than the given {@code Problem}
-     *                     {@code +int} if the this {@code Problem} is greater than the given {@code Problem}.
+     * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are equal
+     *                     {@code -int} if the this {@code Problem} is less than the other or
+     *                     {@code +int} if the this {@code Problem} is greater than the other.
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
@@ -171,14 +205,8 @@ public class Problem implements Comparable<Problem> {
         }
     }
 
+    @NotNull
     public UUID getProblemId() {
-        if (problemId == null) {
-            setProblemId(UUID.randomUUID());
-        }
         return problemId;
-    }
-
-    public void setProblemId(@NonNull UUID problemId) {
-        this.problemId = problemId;
     }
 }

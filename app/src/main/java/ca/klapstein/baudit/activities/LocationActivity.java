@@ -16,13 +16,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
+import ca.klapstein.baudit.views.LocationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -46,11 +43,6 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
-import ca.klapstein.baudit.views.LocationView;
-
 /**
  * Activity for displaying and choosing a location on a map.
  */

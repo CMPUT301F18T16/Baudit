@@ -1,6 +1,6 @@
 package ca.klapstein.baudit.data;
 
-import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 public class Patient extends Account {
 
-    private ProblemTreeSet problemTreeSet;
-    private ArrayList<BodyLocationPhoto> bodyLocationPhotos;
+    @NonNull
+    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
+    @NonNull
+    private ArrayList<BodyLocationPhoto> bodyLocationPhotos = new ArrayList<>();
 
-    public Patient(Username username, ContactInfo contactInfo) {
+    public Patient(@NonNull Username username, @NonNull ContactInfo contactInfo) {
         super(username, contactInfo);
-        this.problemTreeSet = new ProblemTreeSet();
-        bodyLocationPhotos = new ArrayList<>();
     }
 
     /**
@@ -23,6 +23,7 @@ public class Patient extends Account {
      *
      * @return {@code ProblemTreeSet} the list of {@code Problem}s owned by the {@code Patient}.
      */
+    @NonNull
     public ProblemTreeSet getProblemTreeSet() {
         return this.problemTreeSet;
     }
@@ -32,22 +33,21 @@ public class Patient extends Account {
      *
      * @return {@code BodyPhoto} belonging to the patient.
      */
+    @NonNull
     public ArrayList<BodyLocationPhoto> getBodyLocationPhotos() {
         return bodyLocationPhotos;
     }
 
     /**
-     * Setter for a {@code Patient}'s body photo.
+     * Add a {@code BodyLocationPhoto} to the {@code Patient}.
      *
-     * @param bitmap {@code Bitmap}
+     * @param bodyLocationPhoto {@code BodyLocationPhoto}
      */
-    public void addBodyLocationPhoto(Bitmap bitmap, String label) {
-        bodyLocationPhotos.add(new BodyLocationPhoto(bitmap, label));
+    public void addBodyLocationPhoto(BodyLocationPhoto bodyLocationPhoto) {
+        bodyLocationPhotos.add(bodyLocationPhoto);
     }
 
     public void removeBodyLocationPhoto(int index) {
         bodyLocationPhotos.remove(index);
     }
-
-    public void setProblemTreeSet(ProblemTreeSet problemTreeSet){this.problemTreeSet = problemTreeSet;}
 }
