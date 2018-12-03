@@ -3,6 +3,7 @@ package ca.klapstein.baudit.presenters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,8 @@ import ca.klapstein.baudit.views.SlideshowView;
  * @see SlideshowView
  */
 public class SlideshowPresenter extends Presenter<SlideshowView> {
+
+    private static final String TAG = "SlideshowPresenter";
 
     private Patient patient;
 
@@ -42,6 +45,7 @@ public class SlideshowPresenter extends Presenter<SlideshowView> {
             view.updateImageList(photos);
         } else {
             // TODO: Handle error
+            Log.e(TAG, "error opening slideshow - patient is null");
         }
     }
 }
