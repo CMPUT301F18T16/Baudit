@@ -38,7 +38,7 @@ public class MapAllProblemsPresenter extends Presenter<MapAllProblemsView> {
                     if (record.getGeoLocation() != null) {  // not all records have a geo-location
                         LatLng marker = new LatLng(record.getGeoLocation().getLat(), record.getGeoLocation().getLon());
                         Log.d(TAG, "adding marker: " + marker.toString());
-                        view.updateMarkerOptions(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()));
+                        view.updateMarkerOptions(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()+" " +record.getDate()));
                     }
                 }
             }
