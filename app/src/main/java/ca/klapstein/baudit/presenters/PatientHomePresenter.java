@@ -21,13 +21,6 @@ public class PatientHomePresenter extends ProblemListPresenter<PatientHomeView> 
 
     public PatientHomePresenter(PatientHomeView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
-        if (patient == null) {
-            view.updateAccountLoadError();
-        } else {
-            problemTreeSet.clear();
-            problemTreeSet.addAll(patient.getProblemTreeSet());
-        }
     }
 
     public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position) {
