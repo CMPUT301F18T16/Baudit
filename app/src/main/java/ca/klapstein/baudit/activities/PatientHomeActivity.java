@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.PatientHomeView;
@@ -138,6 +139,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
 
         SearchView problemSearchView =
             (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

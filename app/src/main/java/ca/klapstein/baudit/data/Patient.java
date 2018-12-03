@@ -13,7 +13,6 @@ public class Patient extends Account {
 
     @NonNull
     private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
-
     @NonNull
     private ArrayList<BodyLocationPhoto> bodyLocationPhotos = new ArrayList<>();
 
