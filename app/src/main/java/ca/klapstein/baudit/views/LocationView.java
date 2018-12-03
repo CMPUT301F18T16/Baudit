@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.views;
 
 import android.location.Address;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -13,5 +12,4 @@ public interface LocationView extends View {
     void getDeviceLocation();
     void moveCamera(LatLng latLng, float zoom, String title);
     void hideSoftKeyboard();
-
 }
