@@ -160,7 +160,6 @@ public class ProblemActivity extends AppCompatActivity
                     descriptionInput.getText().toString(),
                     problemTime.getTime()
                 );
-
             }
         });
 
