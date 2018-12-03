@@ -32,14 +32,15 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
      * On startup of the {@code EditAccountView} populate fields noting the account.
      */
     public void viewStarted() {
-        careProvider = (CareProvider) dataManager.getLoggedInAccount();
-        if (careProvider != null) {
+        try {
+            careProvider = (CareProvider) dataManager.getLoggedInAccount();
             view.updateFirstNameField(careProvider.getContactInfo().getFirstName());
             view.updateLastNameField(careProvider.getContactInfo().getLastName());
             view.updateEmailField(careProvider.getContactInfo().getEmail().toString());
             view.updatePhoneNumberField(careProvider.getContactInfo().getPhoneNumber().toString());
-        } else {
-            // TODO: error
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present care provider", e);
+            view.updateViewAccountError();
         }
     }
 
@@ -70,11 +71,8 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
             careProvider.getContactInfo().setPhoneNumber(new PhoneNumber(phoneNumber));
             dataManager.commitAccount(careProvider);
             view.commitAccountEditSuccess();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "failed committing Account edits", e);
-            view.commitAccountEditFailure();
-        } catch (NullPointerException e) {
-            Log.e(TAG, "failed to obtain account to commit Account edits too", e);
             view.commitAccountEditFailure();
         }
     }
