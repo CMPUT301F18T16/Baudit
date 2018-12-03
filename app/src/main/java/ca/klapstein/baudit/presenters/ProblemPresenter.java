@@ -78,7 +78,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     /**
-     * Commit a problem to storage.
+     * Commit a {@code Problem} to storage.
      *
      * @param title       {@code String}
      * @param description {@code String}

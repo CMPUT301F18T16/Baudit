@@ -63,6 +63,13 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
     }
 
+    /**
+     * Commit a {@code Record} to storage.
+     *
+     * @param title       {@code String}
+     * @param comment     {@code String}
+     * @param geoLocation {@code GeoLocation}
+     */
     public void commitRecord(String title, String comment, GeoLocation geoLocation) {
         record.setTitle(title);
         record.setComment(comment);
