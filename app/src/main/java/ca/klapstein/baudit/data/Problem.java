@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -19,9 +20,9 @@ public class Problem implements Comparable<Problem> {
 
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
-
+    @NonNull
     private String title;
-
+    @Nullable
     private String description;
     @NonNull
     private final UUID problemId = UUID.randomUUID();
@@ -110,6 +111,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -132,6 +134,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @NotNull
     public String getTitle() {
         return title;
     }
