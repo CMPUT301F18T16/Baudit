@@ -27,6 +27,7 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 /**
  * Activity for editing a {@code Record}.
@@ -211,7 +212,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void updateImageField(Bitmap bitmap){
         if (bitmap != null)
-            recordImage.setImageBitmap(bitmap);
+            recordImage.setImageBitmap(RotateBitmap90(bitmap));
     }
 
     @Override
