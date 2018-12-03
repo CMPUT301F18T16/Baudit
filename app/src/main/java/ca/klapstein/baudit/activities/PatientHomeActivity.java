@@ -51,7 +51,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     private TextView problemCountText;
     private TextView navHeaderUsername;
     private TextView navHeaderEmail;
-    private SearchView problemSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +147,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.patient_home_menu, menu);
 
-        problemSearchView = (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+        SearchView problemSearchView =
+            (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
 
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
