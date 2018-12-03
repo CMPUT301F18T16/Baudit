@@ -114,22 +114,11 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             public void onClick(View v) {
                 Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
 
-                /*
-                Log.d("RECORDACTIVITYLOG", "stringsSize: " + bitmapStrings.size());
-                ArrayList<String> testarray = new ArrayList<String>();
-                testarray.add("YO");
-                */
-
-
-                ArrayList<String> recordBitmapStrings = presenter.getRecord().getPhotoBitmapStrings();
-
-                ArrayList<String> bitmapStrings = new ArrayList<String>();
-                for(String bitmapString : recordBitmapStrings){
-                    bitmapStrings.add(bitmapString);
-                }
-
-                // ISSUE: the activity doesn't start when bitmapStrings is put in, but works with testarray
-                intent.putExtra("BitmapStringArray", bitmapStrings);
+                //ArrayList<String> bitmapStrings = presenter.getRecord().getPhotoBitmapStrings();
+                // ISSUE: the activity doesn't start when bitmapStrings.size() > 2
+                //intent.putExtra("BitmapStringArray", bitmapStrings);
+                intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, problemPosition);
+                intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, recordPosition);
                 startActivity(intent);
             }
         } );
