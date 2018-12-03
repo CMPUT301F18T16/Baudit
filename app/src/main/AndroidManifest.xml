@@ -65,10 +65,12 @@
         <activity
                 android:name=".activities.MapRecordsActivity"
                 android:theme="@style/BauditTheme"/>
-        <activity
-                android:name=".activities.DisplayQRCodeActivity"/>
-        <activity
-                android:name=".activities.CareProviderProblemListActivity"/>
+        <activity android:name=".activities.DisplayQRCodeActivity">
+        </activity>
+        <activity android:name=".activities.CareProviderProblemListActivity">
+        </activity>
+        <activity android:name=".activities.SlideshowActivity">
+        </activity>
         <activity
             android:name=".activities.ViewAccountActivity"
             android:theme="@style/BauditDialogTheme"/>
