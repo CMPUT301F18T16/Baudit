@@ -29,14 +29,6 @@ public class CareProviderProblemListPresenter extends ProblemListPresenter<CareP
         }
     }
 
-    public int getProblemCount() {
-        if (patient != null) {
-            return problemTreeSet.size();
-        } else {
-            return 0;
-        }
-    }
-
     public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position) {
         try {
             Problem problem = (Problem) problemTreeSet.toArray()[position];

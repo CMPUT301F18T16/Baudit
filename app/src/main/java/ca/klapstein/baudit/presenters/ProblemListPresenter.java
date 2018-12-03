@@ -7,12 +7,13 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.ProblemListView;
+import ca.klapstein.baudit.views.ProblemRowView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class ProblemListPresenter<V extends ProblemListView> extends Presenter<V> {
+public abstract class ProblemListPresenter<V extends ProblemListView> extends Presenter<V> {
     private static final String TAG = "ProblemListPresenter";
 
     @NonNull
@@ -34,6 +35,8 @@ public class ProblemListPresenter<V extends ProblemListView> extends Presenter<V
         }
     }
 
+    abstract public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position);
+
     public void filterProblemsByKeyWords(CharSequence constraint) {
         try {
             problemTreeSet.clear();
@@ -51,5 +54,9 @@ public class ProblemListPresenter<V extends ProblemListView> extends Presenter<V
         }
         view.updateList();
         view.updateProblemNumber(problemTreeSet.size());
+    }
+
+    public int getProblemCount() {
+        return problemTreeSet.size();
     }
 }

@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Problem;
@@ -29,11 +30,7 @@ public class PatientHomePresenter extends ProblemListPresenter<PatientHomeView> 
         }
     }
 
-    public int getProblemCount() {
-        return problemTreeSet.size();
-    }
-
-    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
+    public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position) {
         try {
             Problem problem = problemTreeSet.toArray(new Problem[0])[position];
             rowView.updateProblemTitleText(problem.getTitle());
