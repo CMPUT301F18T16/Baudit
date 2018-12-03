@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapRecordsActivity extends AppCompatActivity
-
     implements MapAllProblemsView, OnMapReadyCallback {
 
     public static final String MAP_RECORDS_MODE = "mode";
@@ -112,7 +111,6 @@ public class MapRecordsActivity extends AppCompatActivity
         LatLng edmonton = new LatLng(53.5408, -113.4926);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton, 10.0f));
         this.googleMap = googleMap;
-
         presenter.viewStarted(mode, username, problemPosition);
     }
 

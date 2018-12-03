@@ -39,7 +39,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private int problemPosition;
     private int recordPosition;
     private RecordPresenter presenter;
-
     private String mode;
 
     private TextView timestampView;
