@@ -14,20 +14,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+
+import android.view.*;
+import android.widget.*;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -42,9 +31,8 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_PROBLEM_POSITION;
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
+
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
@@ -183,7 +171,7 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void onStart() {
         super.onStart();
-        updateRecordCountText();
+        presenter.viewStarted(problemPosition);
         updateTimeButton(problemTime.getTime());
         updateDateButton(problemTime.getTime());
     }
@@ -301,8 +289,6 @@ public class ProblemActivity extends AppCompatActivity
 
             index++;
         }
-
-        updateRecordCountText();
     }
 
     @Override
@@ -367,6 +353,20 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateRecordNumber(int recordNumber) {
+        recordCountText.setText(String.format(
+                getResources().getString(R.string.records_label),
+                recordNumber
+        ));
+    }
+
+    @Override
+    public void updateViewProblemError() {
+        Toast.makeText(this, getResources().getString(R.string.problem_load_error), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
     public void commitProblemFailure() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }
@@ -390,12 +390,5 @@ public class ProblemActivity extends AppCompatActivity
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
         updateTimeButton(problemTime.getTime());
-    }
-
-    private void updateRecordCountText() {
-        recordCountText.setText(String.format(
-            getResources().getString(R.string.records_label),
-            presenter.getRecordCount()
-        ));
     }
 }

@@ -8,6 +8,7 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
 import ca.klapstein.baudit.views.HomeView;
+import ca.klapstein.baudit.views.PatientHomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 import java.util.ArrayList;
@@ -21,15 +22,14 @@ import java.util.Collections;
  * @see Account
  * @see ProblemTreeSet
  */
-public class PatientHomePresenter extends Presenter<HomeView> {
+public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     private static final String TAG = "PatientHomePresenter";
     private Patient patient;
-
     @NonNull
     private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
-    public PatientHomePresenter(HomeView view, Context context) {
+    public PatientHomePresenter(PatientHomeView view, Context context) {
         super(view, context);
         patient = dataManager.getLoggedInPatient();
         if (patient == null) {
@@ -40,27 +40,32 @@ public class PatientHomePresenter extends Presenter<HomeView> {
         }
     }
 
-    public Problem getProblemAt(int position) {
-        return (Problem) problemTreeSet.toArray()[position];
-    }
-
     public int getProblemCount() {
         return problemTreeSet.size();
     }
 
     public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
-        if (patient == null || patient.getProblemTreeSet() == null) {
-            view.updateAccountLoadError();
-        } else {
-            Problem problem =  (Problem) patient.getProblemTreeSet().toArray()[position];
+        try {
+            patient = dataManager.getLoggedInPatient();
+            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[position];
             rowView.updateProblemTitleText(problem.getTitle());
             rowView.updateProblemDateText(problem.getTimeStamp());
             rowView.updateProblemDescriptionText(problem.getDescription());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get problem data", e);
+            view.updateAccountLoadError();
         }
     }
 
     public String getUsername() {
-        return patient.getUsername().toString();
+        try {
+            patient = dataManager.getLoggedInPatient();
+            return patient.getUsername().toString();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get patient username", e);
+            view.updateAccountLoadError();
+            return "Unknown User";
+        }
     }
 
     /**
@@ -77,19 +82,26 @@ public class PatientHomePresenter extends Presenter<HomeView> {
             problemTreeSet.clear();
             problemTreeSet.addAll(patient.getProblemTreeSet());
             view.updateList();
+            view.updateProblemNumber(problemTreeSet.size());
         } catch (Exception e) {
             Log.e(TAG, "failed to obtain patient account info", e);
             view.updateAccountLoadError();
-
         }
     }
 
     public void deleteProblemClicked(int position) {
-        Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
-        problemTreeSet.remove(deletedProblem);
-        patient.getProblemTreeSet().remove(deletedProblem);
-        dataManager.commitPatient(patient);
-        view.updateList();
+        try {
+            patient = dataManager.getLoggedInPatient();
+            Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
+            problemTreeSet.remove(deletedProblem);
+            patient.getProblemTreeSet().remove(deletedProblem);
+            dataManager.commitPatient(patient);
+            view.updateList();
+            view.updateProblemNumber(problemTreeSet.size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to delete problem", e);
+            view.updateDeleteProblemError();
+        }
     }
 
     public void filterProblemsByKeyWords(CharSequence constraint) {
@@ -109,5 +121,7 @@ public class PatientHomePresenter extends Presenter<HomeView> {
             if (Collections.disjoint(searchTokens, aProblemArray.getKeywords()))
                 problemTreeSet.remove(aProblemArray);
         }
+        view.updateList();
+        view.updateProblemNumber(problemTreeSet.size());
     }
 }
