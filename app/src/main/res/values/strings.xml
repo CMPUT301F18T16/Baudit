@@ -112,5 +112,8 @@
     <string name="record_icon_image">Record Icon Image</string>
     <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
     <string name="problem_map_records_title">Map problem records</string>
+    <string name="body_location_photos">Body location photos</string>
+    <string name="delete_body_location_question">Delete this body location?</string>
+    <string name="new_body_location">New body location</string>
     <string name="start_date_label">Start date:</string>
 </resources>
