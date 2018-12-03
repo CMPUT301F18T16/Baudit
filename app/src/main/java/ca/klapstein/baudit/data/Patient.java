@@ -1,6 +1,5 @@
 package ca.klapstein.baudit.data;
 
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -40,12 +39,12 @@ public class Patient extends Account {
     }
 
     /**
-     * Setter for a {@code Patient}'s body photo.
+     * Add a {@code BodyLocationPhoto} to the {@code Patient}.
      *
-     * @param bitmap {@code Bitmap}
+     * @param bodyLocationPhoto {@code BodyLocationPhoto}
      */
-    public void addBodyLocationPhoto(Bitmap bitmap, String label) {
-        bodyLocationPhotos.add(new BodyLocationPhoto(bitmap, label));
+    public void addBodyLocationPhoto(BodyLocationPhoto bodyLocationPhoto) {
+        bodyLocationPhotos.add(bodyLocationPhoto);
     }
 
     public void removeBodyLocationPhoto(int index) {

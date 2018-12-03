@@ -96,8 +96,8 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void addRecordPhoto(Bitmap bitmap) {
-        recordPhotos.add(new RecordPhoto(bitmap));
+    public void addRecordPhoto(RecordPhoto recordPhoto) {
+        recordPhotos.add(recordPhoto);
     }
 
     @NonNull
