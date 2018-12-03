@@ -91,7 +91,8 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
     public void deleteProblemClicked(int position) {
         try {
             patient = dataManager.getLoggedInPatient();
-            Problem deletedProblem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
+            problemTreeSet.remove(deletedProblem);
             patient.getProblemTreeSet().remove(deletedProblem);
             dataManager.commitPatient(patient);
             view.updateList();
