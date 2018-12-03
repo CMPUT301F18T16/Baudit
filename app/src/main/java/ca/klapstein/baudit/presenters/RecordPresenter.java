@@ -82,4 +82,14 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.commitRecordFailure();
         }
     }
+
+    public int getLastRecordId(int problemId) {
+        try {
+            patient = dataManager.getLoggedInPatient();
+            return ((Problem) patient.getProblemTreeSet().toArray()[problemId]).getRecordTreeSet().size()-1;
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get last record", e);
+            return -1;
+        }
+    }
 }

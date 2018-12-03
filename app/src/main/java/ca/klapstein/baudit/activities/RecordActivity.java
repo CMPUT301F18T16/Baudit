@@ -113,7 +113,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         } );
 
         recordImage = findViewById(R.id.recordImage);
-        ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
+        final ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,15 +137,18 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addPhotoImage.setVisibility(View.VISIBLE);
                 presenter.commitRecord(
                     recordPosition,
                     titleInput.getText().toString(),
                     commentInput.getText().toString(),
                     geoLocation
                 );
+                recordPosition = presenter.getLastRecordId(problemPosition);
             }
         });
 
+        addPhotoImage.setVisibility(View.VISIBLE);
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
 
@@ -168,8 +171,11 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         } else if ("edit".equals(mode)) {
             if (recordPosition == -1) {
                 getSupportActionBar().setTitle(getResources().getString(R.string.new_record));
+                Log.d(TAG, "EDIT MODE and RECORD = -1");
+                addPhotoImage.setVisibility(View.GONE);
             } else {
                 getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+                addPhotoImage.setVisibility(View.VISIBLE);
             }
 
             titleView.setVisibility(View.GONE);
@@ -181,7 +187,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             locationView.setVisibility(View.GONE);
             autocompleteFragment.getView().setVisibility(View.VISIBLE);
 
-            addPhotoImage.setVisibility(View.VISIBLE);
             recordImage.setVisibility(View.GONE);
 
             slideshow.setVisibility(View.GONE);
@@ -245,7 +250,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
-        finish();
+//        finish();
     }
 
     @Override
