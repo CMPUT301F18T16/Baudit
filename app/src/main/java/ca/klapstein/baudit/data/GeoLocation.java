@@ -6,13 +6,11 @@ package ca.klapstein.baudit.data;
 public class GeoLocation {
     private static final String TAG = "GeoLocation";
 
+    private String address;
+
     /**
      * Latitude must be between -90 and +90.
      */
-
-    private String address;
-
-
     private double lat;
 
     /**
@@ -31,6 +29,7 @@ public class GeoLocation {
         setLon(lon);
         setLat(lat);
     }
+
     public String getAddress() {
         return address;
     }
@@ -38,6 +37,7 @@ public class GeoLocation {
     public void setAddress(String address) {
         this.address = address;
     }
+
     /**
      * Getter for a longitude value.
      *

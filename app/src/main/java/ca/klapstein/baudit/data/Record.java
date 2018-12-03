@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.data;
 
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -16,37 +18,42 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  */
 public class Record implements Comparable<Record> {
 
+    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
     private Date date;
+
     private String title;
     private String comment;
     private GeoLocation geoLocation;
+
+    @NonNull
+    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
+    @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
-    private UUID recordID;
+    private UUID recordId;
 
     public Record() {
         date = new Date();
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
 
     public Record(String title) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
 
     public Record(String title, String comment) throws IllegalArgumentException {
         date = new Date();
         this.setTitle(title);
         this.setComment(comment);
-        recordID = UUID.randomUUID();
+        recordId = UUID.randomUUID();
     }
 
-
-    // TODO: This check might not be needed because the UI limits the title length
     /**
      * Check if a given string is a valid Record title.
      *
@@ -57,7 +64,6 @@ public class Record implements Comparable<Record> {
         return title.length() <= MAX_TITLE_LENGTH;
     }
 
-    // TODO: This check might not be needed because the UI limits comment length
     /**
      * Check if a given string is a valid Record comment.
      *
@@ -93,6 +99,27 @@ public class Record implements Comparable<Record> {
      */
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
+    }
+
+    public void addRecordPhoto(Bitmap bitmap) {
+        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
+            recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
+        } else {
+            recordPhotos.add(bitmap);
+        }
+    }
+
+    @NonNull
+    public ArrayList<Bitmap> getRecordPhotos() {
+        return recordPhotos;
+    }
+
+    @Nullable
+    public Bitmap getLastRecordPhoto() {
+        if (getRecordPhotos().isEmpty())
+            return null;
+        else
+            return getRecordPhotos().get(getRecordPhotos().size() - 1);
     }
 
     /**
@@ -189,9 +216,9 @@ public class Record implements Comparable<Record> {
      * This is used for sorting a {@code RecordTreeSet} by a {@code Record}'s creation time.
      *
      * @param record {@code Record} the given {@code Record} to compare.
-     * @return {@code int} {@code 0} if both {@code Record}'s times are the same or
-     *                     {@code -int} if this {@code Record} is created earlier in time than the given {@code Record}
-     *                     {@code +int} if this {@code Record} is created later in time than the given {@code Record}.
+     * @return {@code 0} if both {@code Record}'s times are the same or
+     *         {@code -int} if this {@code Record} is created earlier than the other
+     *         {@code +int} if this {@code Record} is created later than the other
      */
     @Override
     public int compareTo(@NonNull Record record) {
@@ -206,14 +233,17 @@ public class Record implements Comparable<Record> {
         if (getRecordId().compareTo(record.getRecordId()) == 0) {
             return 0;
         }
-        return recordID.compareTo(record.getRecordId());
+        return getRecordId().compareTo(record.getRecordId());
     }
 
-    private UUID getRecordId() {
-        return recordID;
+    public UUID getRecordId() {
+        if (recordId == null) { // backwards compatibility fix
+            setRecordId(UUID.randomUUID());
+        }
+        return recordId;
     }
 
-    private void setRecordId(UUID recordId) {
-        this.recordID = recordId;
+    public void setRecordId(@NonNull UUID recordId) {
+        this.recordId = recordId;
     }
 }

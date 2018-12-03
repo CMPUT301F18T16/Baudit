@@ -16,7 +16,6 @@ import ca.klapstein.baudit.views.BodyLocationView;
  * Dialog providing a prompt to pick a location on a {@code BodyPhoto}
  * thus obtaining a set of {@code BodyPhotoCoords}
  *
- * @see ca.klapstein.baudit.data.BodyPhoto
  * @see ca.klapstein.baudit.data.BodyPhotoCoords
  */
 public class BodyLocationDialog extends DialogFragment implements BodyLocationView {

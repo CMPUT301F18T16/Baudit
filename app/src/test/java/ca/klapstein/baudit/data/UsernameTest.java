@@ -97,7 +97,7 @@ public class UsernameTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void testSetUsername() {
-            Username username = new Username("validuser");
+            Username username = new Username("valid user");
             username.setUsername(input);
             assertEquals(input, username.toString());
         }
