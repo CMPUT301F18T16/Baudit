@@ -14,15 +14,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-
 import android.view.*;
 import android.widget.*;
-
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
@@ -31,8 +24,12 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
-import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
@@ -217,6 +214,10 @@ public class ProblemActivity extends AppCompatActivity
                 .inflate(R.layout.card_record, recordList, false);
             ImageView recordImage = recordView.findViewById(R.id.record_card_image);
             recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            if (record.getLastRecordPhoto() != null) {
+                recordImage.setImageBitmap(record.getLastRecordPhoto());
+            }
+
             TextView recordTimestamp = recordView.findViewById(R.id.record_card_timestamp);
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
