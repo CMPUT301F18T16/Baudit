@@ -228,11 +228,9 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
 
     @Override
     public void updateCameraOverlayImage(Bitmap bitmap) {
-        // make the image more transparent
-        BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+        cameraOverlay.setImageBitmap(bitmap);
         // setAlpha is in 0-255 range
-        drawable.setAlpha(177);
-        cameraOverlay.setImageBitmap(drawable.getBitmap());
+        cameraOverlay.setAlpha(60);
     }
 
     @Override
