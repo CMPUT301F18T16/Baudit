@@ -220,9 +220,9 @@ public class Record implements Comparable<Record> {
      * This is used for sorting a {@code RecordTreeSet} by a {@code Record}'s creation time.
      *
      * @param record {@code Record} the given {@code Record} to compare.
-     * @return {@code int} {@code 0} if both {@code Record}'s times are the same or
-     *                     {@code -int} if this {@code Record} is created earlier in time than the given {@code Record}
-     *                     {@code +int} if this {@code Record} is created later in time than the given {@code Record}.
+     * @return {@code 0} if both {@code Record}'s times are the same or
+     *         {@code -int} if this {@code Record} is created earlier than the other
+     *         {@code +int} if this {@code Record} is created later than the other
      */
     @Override
     public int compareTo(@NonNull Record record) {
