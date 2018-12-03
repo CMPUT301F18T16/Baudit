@@ -65,7 +65,7 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         solo.assertCurrentActivity("Wrong Activity", EditPatientAccountActivity.class);
     }
 
-    // TODO: fails on travis
+// TODO: fails on travis
 //    @Test
 //    public void testSearchProblemNull() throws InterruptedException {
 //        solo.waitForActivity(PatientHomeActivity.class);
@@ -78,9 +78,9 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
 //        assertFalse(solo.searchText("problem 2"));
 //        assertFalse(solo.searchText("problem 3"));
 //    }
-//
 
-    // TODO: fails on travis
+
+// TODO: travis does not likey
 //    @Test
 //    public void testSearchProblem1() throws InterruptedException {
 //        solo.waitForActivity(PatientHomeActivity.class);
@@ -94,7 +94,7 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
 //        assertFalse(solo.searchText("problem 3"));
 //    }
 
-    // TODO: fix later
+// TODO: fix later
 //    @Test
 //    public void testEditProblem() {
 //        solo.clickLongOnView(solo.getText("problem 1"));

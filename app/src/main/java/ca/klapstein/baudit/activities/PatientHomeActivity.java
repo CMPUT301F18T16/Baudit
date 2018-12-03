@@ -14,8 +14,10 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+
 import android.view.*;
 import android.widget.*;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
@@ -138,6 +140,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         inflater.inflate(R.menu.patient_home_menu, menu);
 
         problemSearchView = (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -200,10 +203,16 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
     @Override
     public void updateAccountLoadError() {
-        Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
+        Toast.makeText(
+            this,
+            getResources().getString(R.string.patient_account_load_failure),
+            Toast.LENGTH_LONG
+        ).show();
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
+
+        private final ProblemFilter problemFilter = new ProblemFilter();
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

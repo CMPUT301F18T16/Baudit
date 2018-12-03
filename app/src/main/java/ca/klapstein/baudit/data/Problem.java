@@ -44,7 +44,8 @@ public class Problem implements Comparable<Problem> {
      * Check if a given string is a valid Problem description.
      *
      * @param description {@code String} the description to validate
-     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise {@code false}
+     * @return {@code boolean} {@code true} if the Problem's description is valid, otherwise
+     * {@code false}
      */
     static public boolean isValidProblemDescription(@NonNull String description) {
         return description.length() <= MAX_DESCRIPTION_LENGTH;
@@ -176,14 +177,16 @@ public class Problem implements Comparable<Problem> {
     }
 
     /**
-     * Compare two {@code Problem}s by their creation time and if equal creation times by their titles.
+     * Compare two {@code Problem}s by their creation time and if equal creation times by their
+     * titles.
      * <p>
-     * This is used for sorting a {@code ProblemTreeSet} by a {@code Problem}'s creation time and title.
+     * This is used for sorting a {@code ProblemTreeSet} by a {@code Problem}'s creation time and
+     * title.
      *
      * @param problem {@code Problem} the given {@code Problem} to compare.
-     * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are the same or
-     *                     {@code -int} if the this {@code Problem} is less than the given {@code Problem}
-     *                     {@code +int} if the this {@code Problem} is greater than the given {@code Problem}.
+     * @return {@code int} {@code 0} if both {@code Problem}'s creation times and titles are equal
+     *                     {@code -int} if the this {@code Problem} is less than the other or
+     *                     {@code +int} if the this {@code Problem} is greater than the other.
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
