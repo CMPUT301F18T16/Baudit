@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.*;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.PatientHomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
@@ -90,6 +91,13 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                             startActivity(new Intent(
                                 getApplicationContext(), 
                                 DisplayQRCodeActivity.class
+                            ));
+                            return true;
+                        case (R.id.nav_unpair):
+                            new DataModel(getApplicationContext()).clearOfflineLoginAccount();
+                            startActivity(new Intent(
+                                    getApplicationContext(),
+                                    StartActivity.class
                             ));
                             return true;
                         default:

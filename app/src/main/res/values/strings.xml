@@ -124,4 +124,5 @@
     <string name="slideshow_view_error">Failed to load slideshow photos</string>
     <string name="record_photos_slideshow">Record Photos Slideshow</string>
     <string name="delete_record_error">Failed to delete record</string>
+    <string name="unpair">Unpair Device</string>
 </resources>
