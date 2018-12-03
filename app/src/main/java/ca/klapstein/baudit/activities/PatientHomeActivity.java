@@ -14,21 +14,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.PopupMenu;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
-import ca.klapstein.baudit.views.HomeView;
+import ca.klapstein.baudit.views.PatientHomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
@@ -42,7 +32,7 @@ import static ca.klapstein.baudit.activities.ViewAccountActivity.VIEW_ACCOUNT_US
  *
  * @see ca.klapstein.baudit.data.Problem
  */
-public class PatientHomeActivity extends AppCompatActivity implements HomeView {
+public class PatientHomeActivity extends AppCompatActivity implements PatientHomeView {
 
     private PatientHomePresenter presenter;
     private ProblemListAdapter adapter;
@@ -114,7 +104,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         problemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         problemCountText = findViewById(R.id.problem_count);
-        updateProblemCountText();
 
         FloatingActionButton fab = findViewById(R.id.patient_home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +127,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
-        updateProblemCountText();
     }
 
     @Override
@@ -148,6 +136,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         SearchView problemSearchView =
             (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -191,13 +180,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         }
     }
 
-    private void updateProblemCountText() {
-        problemCountText.setText(String.format(
-            getResources().getString(R.string.problem_count),
-            presenter.getProblemCount()
-        ));
-    }
-
     @Override
     public void updateUsernameDisplay(String username) {
         navHeaderUsername.setText(username);
@@ -215,6 +197,19 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
             getResources().getString(R.string.patient_account_load_failure),
             Toast.LENGTH_LONG
         ).show();
+    }
+    @Override
+    public void updateDeleteProblemError() {
+        Toast.makeText(this, getResources().getString(R.string.delete_problem_failure), Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void updateProblemNumber(int problemNumber) {
+        problemCountText.setText(String.format(
+                getResources().getString(R.string.problem_count),
+                problemNumber
+        ));
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder>

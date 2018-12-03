@@ -16,13 +16,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
+import ca.klapstein.baudit.views.LocationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -31,11 +28,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -49,14 +43,6 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
-import ca.klapstein.baudit.data.PlaceInfo;
-import ca.klapstein.baudit.presenters.LocationPresenter;
-import ca.klapstein.baudit.views.LocationView;
-
-
 /**
  * Activity for displaying and choosing a location on a map.
  */
@@ -67,32 +53,21 @@ public class LocationActivity extends AppCompatActivity
     private static final String TAG = "LOCATION_ACTIVITY";
     private static final float defaultZoom = 10.0f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71,136));
-    private static final int REQUEST_GEOLOCATION = 123;
-
 
     private MapView mapView;
-    private LocationPresenter presenter;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private PlaceAutocompleteFragment autocompleteFragment;
     private GoogleMap map;
     private AutoCompleteTextView searchText;
     private ImageView gpsButton;
     private Button confirmButton;
     private PlaceAutoCompleteAdapter autoCompleteAdapter;
-    private GeoDataClient geoDataClient;
-    private PlaceDetectionClient placeDetectionClient;
     private GoogleApiClient googleApiClient;
-    private PlaceInfo placeInfo;
-    private MarkerOptions returnMarker;
     private Address address;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        presenter = new LocationPresenter(this, getApplicationContext());
         searchText = findViewById(R.id.search_field);
         gpsButton = findViewById(R.id.gps);
         confirmButton = findViewById(R.id.marker_confirm_button);
@@ -104,7 +79,6 @@ public class LocationActivity extends AppCompatActivity
         mapView = findViewById(R.id.choose_location_map);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
-
     }
 
     @Override
@@ -164,11 +138,11 @@ public class LocationActivity extends AppCompatActivity
     /**
      * Called when pointer capture is enabled or disabled for the current window.
      *
-     * @param hasCapture True if the window has pointer capture.
+     * @param hasCapture {@code true} if the window has pointer capture.
      */
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-
+        // Needs to implemented interface method, but is not needed here
     }
 
     @Override
@@ -205,9 +179,7 @@ public class LocationActivity extends AppCompatActivity
                 .enableAutoManage(this, this)
                 .build();
 
-        geoDataClient = Places.getGeoDataClient(this,null);
-        placeDetectionClient = Places.getPlaceDetectionClient(this, null);
-
+        GeoDataClient geoDataClient = Places.getGeoDataClient(this,null);
 
         autoCompleteAdapter = new PlaceAutoCompleteAdapter(this, geoDataClient, LAT_LNG_BOUNDS,null);
 
@@ -256,14 +228,14 @@ public class LocationActivity extends AppCompatActivity
     public Address geoLocate(){
         String searchString = searchText.getText().toString();
         Geocoder geocoder = new Geocoder(LocationActivity.this);
-        List<Address> list = new ArrayList<Address>();
+        List<Address> list = new ArrayList<>();
         try{
             list = geocoder.getFromLocationName(searchString, 1);
         }catch (IOException e){
             Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
         }
         address = new Address(null);
-        if(list.size() > 0){
+        if (!list.isEmpty()) {
             address = list.get(0);
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
@@ -273,7 +245,8 @@ public class LocationActivity extends AppCompatActivity
     }
 
     public void getDeviceLocation(){
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this);
         try{
             final Task location = fusedLocationProviderClient.getLastLocation();
             location.addOnCompleteListener(new OnCompleteListener() {
@@ -300,7 +273,7 @@ public class LocationActivity extends AppCompatActivity
     public void moveCamera(LatLng latLng, float zoom, String title){
         MarkerOptions marker = new MarkerOptions().position(latLng).title(title).draggable(false);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
-        if(!(title.equals("My Location"))){
+        if(!("My Location".equals(title))){
             map.clear();
             map.addMarker(marker);
         }
@@ -312,7 +285,9 @@ public class LocationActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // Needs to implemented interface method, but is not needed here
+    }
 
     private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -322,7 +297,6 @@ public class LocationActivity extends AppCompatActivity
             final String placeId = item.getPlaceId();
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(googleApiClient, placeId);
             placeResult.setResultCallback(updatePlaceDetailCallback);
-
         }
     };
 
@@ -334,7 +308,6 @@ public class LocationActivity extends AppCompatActivity
                 places.release();
                 return;
             }
-            final Place place = places.get(0);
             places.release();
         }
     };

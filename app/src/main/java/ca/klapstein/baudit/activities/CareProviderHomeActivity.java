@@ -110,8 +110,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         patientRecyclerView.setAdapter(adapter);
         patientRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        updatePatientCountText();
-
         FloatingActionButton fab = findViewById(R.id.care_provider_home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,11 +120,8 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     }
 
     @Override
-    public void updatePatientCountText() {
-        patientCountText.setText(String.format(
-            getResources().getString(R.string.patient_count),
-            presenter.getPatientCount()
-        ));
+    public void updateRemovePatientError() {
+        Toast.makeText(this, getResources().getString(R.string.care_provider_remove_patient_failure), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -138,7 +133,6 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
-        updatePatientCountText();
     }
 
     @Override
@@ -221,6 +215,14 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
         ).show();
     }
 
+    @Override
+    public void updatePatientCount(int patientNumber) {
+        patientCountText.setText(String.format(
+                getResources().getString(R.string.patient_count),
+                patientNumber
+        ));
+    }
+
     private class PatientListAdapter extends RecyclerView.Adapter<PatientViewHolder> {
 
         @Override
@@ -273,7 +275,7 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
                                             new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface di, int i) {
-                                                    presenter.removePatientClicked(
+                                                    presenter.removePatient(
                                                         viewHolder.getAdapterPosition()
                                                     );
                                                 }

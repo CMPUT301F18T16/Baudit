@@ -1,5 +1,7 @@
 package ca.klapstein.baudit.data;
 
+import android.support.annotation.NonNull;
+
 /**
  * Data class representing a geographic location described within latitude and longitude coordinates.
  */
@@ -34,7 +36,7 @@ public class GeoLocation {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(@NonNull String address) {
         this.address = address;
     }
 
@@ -44,7 +46,7 @@ public class GeoLocation {
      * @return {@code double} a longitude value that is between -90 and +90.
      */
     public double getLon() {
-        return this.lon;
+        return lon;
     }
 
 
@@ -67,7 +69,7 @@ public class GeoLocation {
      * @return {@code double} a latitude value that is between -90 and +90.
      */
     public double getLat() {
-        return this.lat;
+        return lat;
     }
 
     /**

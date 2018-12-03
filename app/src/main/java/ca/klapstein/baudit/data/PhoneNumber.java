@@ -23,7 +23,7 @@ public class PhoneNumber {
      * @param phoneNumber {@code String} the phone number string to test.
      * @return {@code boolean} {@code true} if the phone number is valid, otherwise {@code false}.
      */
-    static public boolean isValid(String phoneNumber) {
+    static public boolean isValid(@NonNull String phoneNumber) {
         Matcher m = phoneNumberPattern.matcher(phoneNumber);
         return m.matches();
     }
@@ -44,7 +44,7 @@ public class PhoneNumber {
      *
      * @param phoneNumber {@code String}
      */
-    public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
+    public void setPhoneNumber(@NonNull String phoneNumber) throws IllegalArgumentException {
         if (!isValid(phoneNumber)) {
             throw new IllegalArgumentException("invalid phone number");
         } else {

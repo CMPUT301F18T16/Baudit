@@ -5,17 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
-
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.MapRecordsPresenter;
+import ca.klapstein.baudit.views.MapAllProblemsView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.presenters.MapRecordsPresenter;
-import ca.klapstein.baudit.views.MapAllProblemsView;
 
 public class MapRecordsActivity extends AppCompatActivity
 
@@ -114,9 +112,9 @@ public class MapRecordsActivity extends AppCompatActivity
         LatLng edmonton = new LatLng(53.5408, -113.4926);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton, 10.0f));
         this.googleMap = googleMap;
+
         presenter.viewStarted(mode, username, problemPosition);
     }
-
 
     @Override
     public void updateMarkerOptions(MarkerOptions marker) {

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import ca.klapstein.baudit.views.AddPhotoView;
 import ca.klapstein.baudit.widgets.CameraPreview;
 import org.jetbrains.annotations.NotNull;
 
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 public class CameraActivity extends AppCompatActivity implements Camera.PictureCallback, AddPhotoView {
     private static final String TAG = "CameraActivity";
@@ -177,7 +177,7 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
         Bitmap picture = BitmapFactory.decodeByteArray(data, 0, data.length);
         // TODO: additional Bitmap work
         if (getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false)) {
-            presenter.commitRecordPhoto(picture, getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1), getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1));
+            presenter.commitRecordPhoto(picture, getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1), getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1));
         } else if (getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false)) {
             presenter.commitBodyPhoto(picture);
         } else {
@@ -228,11 +228,9 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
 
     @Override
     public void updateCameraOverlayImage(Bitmap bitmap) {
-        // make the image more transparent
-        BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+        cameraOverlay.setImageBitmap(RotateBitmap90(bitmap));
         // setAlpha is in 0-255 range
-        drawable.setAlpha(177);
-        cameraOverlay.setImageBitmap(drawable.getBitmap());
+        cameraOverlay.setAlpha(60);
     }
 
     @Override
