@@ -56,6 +56,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private GeoLocation geoLocation = null;
     private ImageView addPhotoImage;
     private ImageView recordImage;
+    private Button slideshow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,15 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
+        slideshow =findViewById( R.id.record_slideshow_button );
+        slideshow.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
+                startActivity( intent );
+            }
+        } );
+
         recordImage = findViewById(R.id.recordImage);
         addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +149,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 );
             }
         });
+
+
 
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
