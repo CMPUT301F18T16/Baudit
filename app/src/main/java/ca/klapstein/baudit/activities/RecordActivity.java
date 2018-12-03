@@ -54,7 +54,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView locationView;
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
-    private ImageView addPhotoImage;
     private ImageView recordImage;
 
     @Override
@@ -106,7 +105,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         });
 
         recordImage = findViewById(R.id.recordImage);
-        addPhotoImage = findViewById(R.id.addPhotoImageView);
+        ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
