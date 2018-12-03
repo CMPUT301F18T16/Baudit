@@ -39,7 +39,6 @@ public class RecordPresenter extends Presenter<RecordView> {
             problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
         }
 
-
         if (recordPosition == -1) { // If the record is new
             record = new Record(
                 context.getResources().getString(R.string.default_title),
@@ -48,9 +47,6 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateRecordHints();
         } else { // If the record exists and is being edited
             record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
-            view.updateTitleField(record.getTitle());
-            view.updateCommentField(record.getComment());
-            view.updateLocationField(record.getGeoLocation());
         }
         view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
