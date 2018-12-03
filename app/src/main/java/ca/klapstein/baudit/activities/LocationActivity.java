@@ -16,13 +16,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
+import ca.klapstein.baudit.views.LocationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -47,11 +44,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
-import ca.klapstein.baudit.views.LocationView;
-
-
 /**
  * Activity for displaying and choosing a location on a map.
  */
@@ -72,7 +64,6 @@ public class LocationActivity extends AppCompatActivity
     private GoogleApiClient googleApiClient;
     private Address address;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +80,6 @@ public class LocationActivity extends AppCompatActivity
         mapView = findViewById(R.id.choose_location_map);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
-
     }
 
     @Override
@@ -149,7 +139,7 @@ public class LocationActivity extends AppCompatActivity
     /**
      * Called when pointer capture is enabled or disabled for the current window.
      *
-     * @param hasCapture True if the window has pointer capture.
+     * @param hasCapture {@code true} if the window has pointer capture.
      */
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -239,14 +229,14 @@ public class LocationActivity extends AppCompatActivity
     public Address geoLocate(){
         String searchString = searchText.getText().toString();
         Geocoder geocoder = new Geocoder(LocationActivity.this);
-        List<Address> list = new ArrayList<Address>();
+        List<Address> list = new ArrayList<>();
         try{
             list = geocoder.getFromLocationName(searchString, 1);
         }catch (IOException e){
             Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
         }
         address = new Address(null);
-        if(list.size() > 0){
+        if (!list.isEmpty()) {
             address = list.get(0);
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
@@ -308,7 +298,6 @@ public class LocationActivity extends AppCompatActivity
             final String placeId = item.getPlaceId();
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(googleApiClient, placeId);
             placeResult.setResultCallback(updatePlaceDetailCallback);
-
         }
     };
 
