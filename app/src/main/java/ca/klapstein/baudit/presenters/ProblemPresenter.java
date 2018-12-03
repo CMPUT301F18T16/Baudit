@@ -93,6 +93,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         }
     }
 
+    /**
+     * Return the {@code String} representation of the logged in {@code Patient}.
+     *
+     * @return {@code String}
+     */
     public String getUsername() {
         try {
             patient = dataManager.getLoggedInPatient();
