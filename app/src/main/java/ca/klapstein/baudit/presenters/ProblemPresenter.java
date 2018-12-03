@@ -7,6 +7,7 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,9 +44,10 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             view.updateDescriptionField(problem.getDescription());
             view.updateRecordList(problem.getRecordTreeSet());
             view.updateProblemTime(problem.getDate());
+            view.updateRecordNumber(problem.getRecordTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to present problem", e);
-            // TODO: error
+            view.updateViewProblemError();
         }
     }
 
@@ -61,15 +63,12 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         view.showTimePicker(calendar);
     }
 
-    public int getRecordCount() {
-        return problem.getRecordTreeSet().size();
-    }
-
     public void deleteRecordClicked(int recordPosition) {
         Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
         problem.getRecordTreeSet().remove(deletedRecord);
         dataManager.commitPatient(patient);
         view.updateRecordList(problem.getRecordTreeSet());
+        view.updateRecordNumber(problem.getRecordTreeSet().size());
     }
 
     public void commitProblem(int position, String title, String description, Date date) {
@@ -89,11 +88,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public String getUsername() {
-        patient = dataManager.getLoggedInPatient();
-        if (patient != null) {
+        try {
+            patient = dataManager.getLoggedInPatient();
             return patient.getUsername().toString();
-        } else {
-            return "";
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get patient username", e);
+            view.updateViewProblemError();
+            return "Unknown User";
         }
     }
 }

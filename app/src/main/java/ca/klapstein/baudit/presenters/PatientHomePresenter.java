@@ -64,7 +64,7 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
         } catch (Exception e) {
             Log.e(TAG, "failed to get patient username", e);
             view.updateAccountLoadError();
-            return "Unknown";
+            return "Unknown User";
         }
     }
 
@@ -82,6 +82,7 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
             problemTreeSet.clear();
             problemTreeSet.addAll(patient.getProblemTreeSet());
             view.updateList();
+            view.updateProblemNumber(problemTreeSet.size());
         } catch (Exception e) {
             Log.e(TAG, "failed to obtain patient account info", e);
             view.updateAccountLoadError();
@@ -96,6 +97,7 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
             patient.getProblemTreeSet().remove(deletedProblem);
             dataManager.commitPatient(patient);
             view.updateList();
+            view.updateProblemNumber(problemTreeSet.size());
         } catch (Exception e) {
             Log.e(TAG, "failed to delete problem", e);
             view.updateDeleteProblemError();
