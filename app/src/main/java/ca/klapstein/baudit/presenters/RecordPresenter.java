@@ -56,6 +56,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             Log.e(TAG, "failed to present record", e);
             view.updateViewRecordError();
         }
+        view.updateTimestampField(record.getTimeStamp());
     }
 
     public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {

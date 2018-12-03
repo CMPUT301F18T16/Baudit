@@ -7,8 +7,6 @@ import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
-
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,12 +38,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateProblemHints();
             } else { // If the problem exists and is being edited
                 problem = (Problem) patient.getProblemTreeSet().toArray()[position];
-                view.updateTitleField(problem.getTitle());
-                view.updateDescriptionField(problem.getDescription());
-                view.updateRecordList(problem.getRecordTreeSet());
             }
-            view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
-            view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
+            view.updateTitleField(problem.getTitle());
+            view.updateDescriptionField(problem.getDescription());
+            view.updateRecordList(problem.getRecordTreeSet());
+            view.updateProblemTime(problem.getDate());
         } catch (Exception e) {
             Log.e(TAG, "failed to present problem", e);
             // TODO: error
@@ -79,7 +76,6 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
-
         try {
             if (position == -1) {
                 patient.getProblemTreeSet().add(problem);
