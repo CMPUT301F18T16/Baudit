@@ -130,6 +130,11 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
     }
 
     @Override
+    public void updateRemovePatientError() {
+        Toast.makeText(this, getResources().getString(R.string.care_provider_remove_patient_failure), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         presenter.viewStarted();
