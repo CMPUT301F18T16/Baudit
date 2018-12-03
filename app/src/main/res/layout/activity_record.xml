@@ -37,23 +37,22 @@
                     android:id="@+id/record_timestamp_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/dark_grey"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_grey"/>
 
                 <ImageView
+                    android:contentDescription="@string/record_photo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:contentDescription="@string/record_photo"
                     android:visibility="gone" />
 
                 <ImageButton
+                    android:contentDescription="@string/add_record_photo_button"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@color/vaporwave_purple"
-                    android:contentDescription="@string/add_record_photo_button"
-                    android:src="@drawable/ic_add_a_photo_24dp" />
+                    android:src="@drawable/ic_add_a_photo_24dp"
+                    android:background="@color/vaporwave_purple"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,11 +62,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/default_margin"
                         android:layout_marginRight="@dimen/default_margin"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:textStyle="bold"
                         android:text="@string/title_label"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -79,13 +78,13 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:inputType="textCapWords"
                     android:id="@+id/record_title_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
+                    android:textColor="@color/dark_grey"
                     android:maxLength="30"
-                    android:maxLines="1"
-                    android:textColor="@color/dark_grey" />
+                    android:maxLines="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
