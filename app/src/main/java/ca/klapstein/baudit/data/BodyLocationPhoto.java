@@ -2,7 +2,6 @@ package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-
 import ca.klapstein.baudit.util.BitmapEncoderUtil;
 
 public class BodyLocationPhoto {
@@ -24,12 +23,12 @@ public class BodyLocationPhoto {
         bitmapString = BitmapEncoderUtil.encodeTobase64(bitmap);
     }
 
-    @NotNull
+    @NonNull
     public String getLabel() {
         return label;
     }
 
-    public void setLabel(@NotNull String label) {
+    public void setLabel(@NonNull String label) {
         this.label = label;
     }
 }
