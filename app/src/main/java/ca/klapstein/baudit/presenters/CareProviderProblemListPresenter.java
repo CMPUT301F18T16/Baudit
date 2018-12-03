@@ -1,6 +1,7 @@
 package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import ca.klapstein.baudit.data.Patient;
@@ -18,11 +19,12 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
 
     private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
-    public CareProviderProblemListPresenter(CareProviderProblemListView view, Context context) {
+    public CareProviderProblemListPresenter(@NonNull CareProviderProblemListView view,
+                                            @NonNull Context context) {
         super(view, context);
     }
 
-    public void viewStarted(String patientUsername) {
+    public void viewStarted(@NonNull String patientUsername) {
         try {
             patient = dataManager.getPatient(new Username(patientUsername));
             problemTreeSet.clear();
@@ -30,9 +32,6 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
             view.updateList();
         } catch (Exception e) {
             Log.e(TAG, "failed to obtain patient account info", e);
-            Log.e(TAG, patientUsername);
-            Log.e(TAG, patientUsername);
-            Log.e(TAG, patientUsername);
             view.updateAccountLoadError();
         }
     }
@@ -45,7 +44,7 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
         }
     }
 
-    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
+    public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position) {
         try {
             Problem problem = (Problem) problemTreeSet.toArray()[position];
             rowView.updateProblemTitleText(problem.getTitle());
