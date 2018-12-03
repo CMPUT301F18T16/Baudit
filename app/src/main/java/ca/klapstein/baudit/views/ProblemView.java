@@ -15,6 +15,7 @@ public interface ProblemView extends View {
     void showDatePicker(Calendar calendar);
     void showTimePicker(Calendar calendar);
 
+    void updateDeleteRecordError();
     void updateRecordNumber(int recordNumber);
     void updateViewProblemError();
     void commitProblemSuccess();
