@@ -21,11 +21,10 @@ import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USER
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
-    private static final String TAG = "CareProviderProblemList";
-    CareProviderProblemListPresenter presenter;
+
 public class CareProviderProblemListActivity extends AppCompatActivity implements
     CareProviderProblemListView {
-
+    private static final String TAG = "CareProviderProblemList";
     private CareProviderProblemListPresenter presenter;
     private ProblemListAdapter adapter;
     private String patientUsername;
