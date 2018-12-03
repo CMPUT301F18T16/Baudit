@@ -24,7 +24,7 @@
     <string name="display_qr_code">Display account QR code</string>
     <string name="patient_search_title">Search</string>
     <string name="patient_view_map_title">View Map</string>
-    <string name="problem_locations">Problem locations</string>
+    <string name="record_locations">Record locations</string>
     <string name="title_label">Title:</string>
     <string name="date_label">Date:</string>
     <string name="records_label">Records (%1$d):</string>
@@ -111,8 +111,16 @@
     <string name="problem_image">Problem Icon Image</string>
     <string name="record_icon_image">Record Icon Image</string>
     <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
+    <string name="problem_map_records_title">Map problem records</string>
     <string name="body_location_photos">Body location photos</string>
     <string name="delete_body_location_question">Delete this body location?</string>
     <string name="new_body_location">New body location</string>
     <string name="start_date_label">Start date:</string>
+    <string name="care_provider_remove_patient_failure">Failed to remove Patient</string>
+    <string name="delete_problem_failure">Failed to delete Problem</string>
+    <string name="problem_load_error">Failed to load Problem</string>
+    <string name="record_load_error">Failed to load Record</string>
+    <string name="no_photos_to_show">No photos to present in slideshow</string>
+    <string name="slideshow_view_error">Failed to load slideshow photos</string>
+    <string name="record_photos_slideshow">Record Photos Slideshow</string>
 </resources>

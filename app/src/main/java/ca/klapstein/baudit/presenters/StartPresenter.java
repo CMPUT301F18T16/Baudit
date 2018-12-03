@@ -67,11 +67,10 @@ public class StartPresenter extends Presenter<StartView> {
                 dataManager.setOfflineLoginAccount(account);
                 view.onLoginValidationSuccess(CareProviderHomeActivity.class);
             } else {  // else we have failed the login
-                // TODO: update text
                 view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
             }
-        } catch (IllegalArgumentException e) {
-            // TODO: update text
+        } catch (Exception e) {
+            Log.e(TAG, "failed to login with QR code scanned username", e);
             view.onLoginValidationFailure(context.getResources().getString(R.string.login_failed) + ": " + username);
         }
     }

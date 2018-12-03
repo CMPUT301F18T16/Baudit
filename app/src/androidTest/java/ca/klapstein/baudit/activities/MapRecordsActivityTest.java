@@ -15,13 +15,13 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsActivity> {
+public class MapRecordsActivityTest extends ActivityTestRule<MapRecordsActivity> {
 
     private Solo solo;
     private DataModel dataModel;
 
-    public MapAllProblemsActivityTest() {
-        super(MapAllProblemsActivity.class);
+    public MapRecordsActivityTest() {
+        super(MapRecordsActivity.class);
     }
 
     @Before
@@ -61,7 +61,10 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
         patient.getProblemTreeSet().add(problem4);
 
         dataModel.setOfflineLoginAccount(patient);
-        super.launchActivity(new Intent());
+        Intent intent = new Intent();
+        intent.putExtra(MapRecordsActivity.MAP_RECORDS_USERNAME, patient.getUsername().toString());
+        intent.putExtra(MapRecordsActivity.MAP_RECORDS_MODE, "all");
+        super.launchActivity(intent);
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -73,7 +76,7 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
 
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", MapAllProblemsActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MapRecordsActivity.class);
         solo.waitForActivity(solo.getCurrentActivity().toString());
     }
 }

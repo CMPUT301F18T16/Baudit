@@ -67,8 +67,6 @@ class RemoteModel {
                     "       } \n" +
                     "   } \n" +
                     "}";
-
-
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
                     .addIndex(PATIENT_INDEX)
@@ -119,7 +117,6 @@ class RemoteModel {
                     "         }\n" +
                     "     }\n" +
                     "}";
-
             Log.d(TAG, "search query:\n" + query);
             Search search = new Search.Builder(query)
                     .addIndex(PATIENT_INDEX)

@@ -3,9 +3,7 @@ package ca.klapstein.baudit.presenters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.views.AddPhotoView;
 
 public class AddPhotoPresenter extends Presenter<AddPhotoView> {
@@ -15,7 +13,6 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
 
     public AddPhotoPresenter(AddPhotoView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void getLastRecordPhoto(int problemId) {
@@ -23,24 +20,23 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
             patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
             Record record = problem.getRecordTreeSet().pollFirst();
-            if (record.getRecordPhoto() != null) {
-                view.updateCameraOverlayImage(record.getRecordPhoto());
+            if (record.getLastRecordPhoto() != null) {
+                view.updateCameraOverlayImage(record.getLastRecordPhoto());
             } else {
                 view.updateCameraOverlayError();
             }
         } catch (Exception e){
-            Log.d(TAG, "non-existent record photo");
+            Log.e(TAG, "failed to get record photo", e);
+            view.updateCameraOverlayError();
         }
-
     }
 
     public void commitRecordPhoto(Bitmap bitmap, int recordId, int problemId) {
-
         try {
             patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
             Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
-            record.addRecordPhoto(bitmap);
+            record.addRecordPhoto(new RecordPhoto(bitmap));
             problem.getRecordTreeSet().add(record);
             patient.getProblemTreeSet().remove(problem);
             patient.getProblemTreeSet().add(problem);
@@ -55,6 +51,8 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
     public void commitBodyPhoto(Bitmap bitmap) {
         try {
             patient = dataManager.getLoggedInPatient();
+            // TODO: update
+            patient.addBodyLocationPhoto(new BodyLocationPhoto(bitmap, "No label"));
             dataManager.commitPatient(patient);
             view.commitPhotoSuccess();
         } catch (Exception e) {

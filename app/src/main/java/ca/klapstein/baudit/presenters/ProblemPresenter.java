@@ -8,9 +8,9 @@ import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -27,45 +27,41 @@ public class ProblemPresenter extends Presenter<ProblemView> {
 
     public ProblemPresenter(ProblemView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void viewStarted(int position) {
-        patient = dataManager.getLoggedInPatient();
-        if (position == -1) { // If the problem is new
-            problem = new Problem(
-                context.getResources().getString(R.string.default_title),
-                context.getResources().getString(R.string.default_description)
-            );
-            view.updateProblemHints();
-        } else { // If the problem exists and is being edited
-            problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+        try {
+            patient = dataManager.getLoggedInPatient();
+            if (position == -1) { // If the problem is new
+                problem = new Problem(
+                        context.getResources().getString(R.string.default_title),
+                        context.getResources().getString(R.string.default_description)
+                );
+                view.updateProblemHints();
+            } else { // If the problem exists and is being edited
+                problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            }
             view.updateTitleField(problem.getTitle());
             view.updateDescriptionField(problem.getDescription());
             view.updateRecordList(problem.getRecordTreeSet());
+            view.updateProblemTime(problem.getDate());
+            view.updateRecordNumber(problem.getRecordTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present problem", e);
+            view.updateViewProblemError();
         }
-        view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
-        view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
     }
 
     public void clickedDateButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
-        view.showDatePicker(Calendar.getInstance());
+        view.showDatePicker(calendar);
     }
 
     public void clickedTimeButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
         view.showTimePicker(calendar);
-    }
-
-    public Record getRecordAt(int position) {
-        return (Record) problem.getRecordTreeSet().toArray()[position];
-    }
-
-    public int getRecordCount() {
-        return problem.getRecordTreeSet().size();
     }
 
     public void deleteRecordClicked(int recordPosition) {
@@ -73,13 +69,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         problem.getRecordTreeSet().remove(deletedRecord);
         dataManager.commitPatient(patient);
         view.updateRecordList(problem.getRecordTreeSet());
+        view.updateRecordNumber(problem.getRecordTreeSet().size());
     }
 
     public void commitProblem(int position, String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
-
         try {
             if (position == -1) {
                 patient.getProblemTreeSet().add(problem);
@@ -89,6 +85,17 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "failed committing Problem", e);
             view.commitProblemFailure();
+        }
+    }
+
+    public String getUsername() {
+        try {
+            patient = dataManager.getLoggedInPatient();
+            return patient.getUsername().toString();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get patient username", e);
+            view.updateViewProblemError();
+            return "Unknown User";
         }
     }
 }

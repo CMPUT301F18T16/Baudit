@@ -10,11 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
@@ -26,10 +22,9 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import static ca.klapstein.baudit.activities.CameraActivity.*;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 /**
  * Activity for editing a {@code Record}.
@@ -58,7 +53,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
     private ImageView recordImage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +136,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
-
-
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
 
@@ -194,7 +186,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void updateImageField(Bitmap bitmap){
         if (bitmap != null)
-            recordImage.setImageBitmap(bitmap);
+            recordImage.setImageBitmap(RotateBitmap90(bitmap));
     }
 
     @Override
@@ -258,5 +250,11 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void updateViewRecordError() {
+        Toast.makeText(this, getResources().getString(R.string.record_load_error), Toast.LENGTH_LONG).show();
+        finish();
     }
 }
