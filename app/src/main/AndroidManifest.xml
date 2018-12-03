@@ -38,7 +38,7 @@
                 android:name=".activities.StartActivity"
                 android:theme="@style/BauditLoginTheme"/>
         <activity
-                android:name=".activities.EditAccountActivity"
+                android:name=".activities.EditPatientAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
                 android:name=".activities.CreateAccountActivity"
