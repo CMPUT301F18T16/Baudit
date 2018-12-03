@@ -64,6 +64,11 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
     }
 
     @Override
+    public void updateProblemNumber(int problemNumber) {
+        // not implemented
+    }
+
+    @Override
     public void updateAccountLoadError() {
         Toast.makeText(
             this,
