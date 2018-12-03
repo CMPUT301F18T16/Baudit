@@ -10,6 +10,11 @@ import ca.klapstein.baudit.views.SlideShowView;
 
 import java.util.ArrayList;
 
+/**
+ * MVP presenter for presenting a series of images on a {@code SlideShowView}.
+ *
+ * @see SlideShowView
+ */
 public class SlideShowPresenter extends Presenter<SlideShowView> {
 
     private static final String TAG = "SlideShowPresenter";
