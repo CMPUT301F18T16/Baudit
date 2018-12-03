@@ -96,10 +96,20 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
+    /**
+     * Add a {@code RecordPhoto} to the {@code Record}'s {@code recordPhotos} .
+     *
+     * @param recordPhoto {@code RecordPhoto}
+     */
     public void addRecordPhoto(RecordPhoto recordPhoto) {
         recordPhotos.add(recordPhoto);
     }
 
+    /**
+     * Get the recordPhotos of the {@code Record}.
+     *
+     * @return {@code ArrayList<Bitmap>}
+     */
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
@@ -109,6 +119,11 @@ public class Record implements Comparable<Record> {
         return bitmaps;
     }
 
+    /**
+     * Get the last Bitmap in recordPhotos of the {@code Record}.
+     *
+     * @return {@code Bitmap}
+     */
     @Nullable
     public Bitmap getLastRecordPhoto() {
         if (getRecordPhotos().isEmpty())
@@ -226,6 +241,11 @@ public class Record implements Comparable<Record> {
         return date.compareTo(record.getDate());
     }
 
+    /**
+     * Get the recordId of the {@code Record}.
+     *
+     * @return {@code UUID}
+     */
     @NonNull
     public UUID getRecordId() {
         return recordId;
