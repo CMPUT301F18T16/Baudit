@@ -58,6 +58,7 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.updateLocationField(record.getGeoLocation());
             view.updateImageField(record.getRecordPhoto());
         }
+
         view.updateTimestampField(record.getTimeStamp());
         view.updateTitleField(record.getTitle());
         view.updateCommentField(record.getComment());
