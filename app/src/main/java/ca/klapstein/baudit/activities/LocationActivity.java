@@ -301,6 +301,7 @@ public class LocationActivity extends AppCompatActivity
         MarkerOptions marker = new MarkerOptions().position(latLng).title(title).draggable(false);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
         if(!(title.equals("My Location"))){
+            map.clear();
             map.addMarker(marker);
         }
         hideSoftKeyboard();

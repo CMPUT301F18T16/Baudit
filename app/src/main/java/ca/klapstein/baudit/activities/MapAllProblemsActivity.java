@@ -1,35 +1,26 @@
 package ca.klapstein.baudit.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.ContactInfo;
-import ca.klapstein.baudit.data.Email;
-import ca.klapstein.baudit.data.GeoLocation;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.PhoneNumber;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordTreeSet;
-import ca.klapstein.baudit.data.Username;
-import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
-import ca.klapstein.baudit.views.MapAllProblemsView;
-
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Problem;
+import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
+import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
+import ca.klapstein.baudit.views.MapAllProblemsView;
 
 public class MapAllProblemsActivity extends AppCompatActivity
     implements MapAllProblemsView, OnMapReadyCallback {
@@ -127,7 +118,7 @@ public class MapAllProblemsActivity extends AppCompatActivity
             RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
             for(Record record: recordTreeSet){
                 LatLng marker = new LatLng(record.getGeoLocation().getLat(),record.getGeoLocation().getLon());
-                googleMap.addMarker(new MarkerOptions().position(marker).title(record.getTitle()));
+                googleMap.addMarker(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()));
             }
         }
     }
