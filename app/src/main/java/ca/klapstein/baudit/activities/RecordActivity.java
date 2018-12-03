@@ -43,6 +43,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private int problemPosition;
     private int recordPosition;
     private RecordPresenter presenter;
+    private String mode;
 
     private TextView timestampView;
     private TextView titleView;
@@ -64,7 +65,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
         recordPosition = getIntent().getIntExtra(RECORD_POSITION_EXTRA, -1);
-        String mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
+        mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
@@ -236,6 +237,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if ("edit".equals(mode) && recordPosition == -1) {
+            return true;
+        }
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.record_menu, menu);
         return true;
