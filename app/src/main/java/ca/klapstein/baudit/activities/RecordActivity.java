@@ -7,11 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
@@ -23,10 +19,9 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import static ca.klapstein.baudit.activities.CameraActivity.*;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 /**
  * Activity for editing a {@code Record}.
@@ -55,6 +50,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
     private ImageView recordImage;
+    private Button slideshow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +99,18 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
+
+        slideshow = findViewById( R.id.record_slideshow_button );
+        slideshow.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
+                // TODO: ISSUE: the activity doesn't start when bitmapStrings.size() > 2
+                intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, problemPosition);
+                intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, recordPosition);
+                startActivity(intent);
+            }
+        } );
 
         recordImage = findViewById(R.id.recordImage);
         ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
@@ -153,6 +161,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             recordImage.setVisibility(View.VISIBLE);
             addPhotoImage.setVisibility(View.GONE);
 
+            slideshow.setVisibility(View.VISIBLE);
+
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
@@ -174,6 +184,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             addPhotoImage.setVisibility(View.VISIBLE);
             recordImage.setVisibility(View.GONE);
 
+            slideshow.setVisibility(View.GONE);
+
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
         }
@@ -188,7 +200,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void updateImageField(Bitmap bitmap){
         if (bitmap != null)
-            recordImage.setImageBitmap(bitmap);
+            recordImage.setImageBitmap(RotateBitmap90(bitmap));
     }
 
     @Override
