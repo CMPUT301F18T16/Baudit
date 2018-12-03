@@ -140,13 +140,12 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_GEOLOCATION) {
-            Log.d(TAG,"GOT RESULTS");
             if (resultCode == RESULT_OK) {
-                Float latitude = data.getFloatExtra("Latitude", 53);
-                Float longitude = data.getFloatExtra("Longitude", -113);
+                Double latitude = data.getDoubleExtra("Latitude", 53);
+                Double longitude = data.getDoubleExtra("Longitude", -113);
                 String address = data.getStringExtra("Address");
                 geoLocation = new GeoLocation(address, latitude, longitude);
-                Log.d(TAG, "obtained Geolocation for: " + address);
+                Log.d(TAG, "obtained Geolocation for: " + geoLocation.getAddress() +"at coordinates:" +geoLocation.getLat() +geoLocation.getLon());
                 updateLocationField(geoLocation);
 
             } else if (resultCode == RESULT_CANCELED) {

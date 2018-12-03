@@ -220,8 +220,10 @@ public class LocationActivity extends AppCompatActivity
                 if(actionId== EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-                    address = geoLocate();
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_SEARCH){
+                    geoLocate();
+                    hideSoftKeyboard();
                 }
                 return false;
             }
@@ -244,7 +246,7 @@ public class LocationActivity extends AppCompatActivity
     public void confirmLocation(Address address){
         Intent resultIntent = new Intent();
         resultIntent.putExtra("Address", address.getAddressLine(0));
-        resultIntent.putExtra("Latitude", address.getLatitude());
+        resultIntent.putExtra("Latitude",  address.getLatitude());
         resultIntent.putExtra("Longitude", address.getLongitude());
         setResult(RESULT_OK,resultIntent);
         Log.d(TAG, "Doing the thing"+address.getAddressLine(0));
@@ -266,6 +268,7 @@ public class LocationActivity extends AppCompatActivity
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
         }
+        hideSoftKeyboard();
         return address;
     }
 
@@ -318,7 +321,6 @@ public class LocationActivity extends AppCompatActivity
             hideSoftKeyboard();
             final AutocompletePrediction item = autoCompleteAdapter.getItem(position);
             final String placeId = item.getPlaceId();
-
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(googleApiClient, placeId);
             placeResult.setResultCallback(updatePlaceDetailCallback);
 
@@ -334,12 +336,6 @@ public class LocationActivity extends AppCompatActivity
                 return;
             }
             final Place place = places.get(0);
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("Address", places.get(0).getName());
-            resultIntent.putExtra("Latitude", places.get(0).getLatLng().latitude);
-            resultIntent.putExtra("Longitude", places.get(0).getLatLng().longitude);
-            setResult(RESULT_OK,resultIntent);
-            Log.d(TAG, "Doing the thing");
             places.release();
         }
     };
