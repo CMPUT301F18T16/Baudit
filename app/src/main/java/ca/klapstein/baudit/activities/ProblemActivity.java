@@ -31,6 +31,7 @@ import java.util.GregorianCalendar;
 
 import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 /**
  * Activity for editing a {@code Problem}.
@@ -214,7 +215,12 @@ public class ProblemActivity extends AppCompatActivity
             final CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
                 .inflate(R.layout.card_record, recordList, false);
             ImageView recordImage = recordView.findViewById(R.id.record_card_image);
-            recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            if (record.getLastRecordPhoto() != null) {
+                recordImage.setImageBitmap(RotateBitmap90(record.getLastRecordPhoto()));
+            } else {
+                recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY));
+            }
+
             TextView recordTimestamp = recordView.findViewById(R.id.record_card_timestamp);
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
