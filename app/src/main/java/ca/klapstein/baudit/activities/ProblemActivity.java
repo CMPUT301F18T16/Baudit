@@ -351,6 +351,11 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateDeleteRecordError() {
+        Toast.makeText(this, getResources().getString(R.string.delete_record_error), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void updateRecordNumber(int recordNumber) {
         recordCountText.setText(String.format(
                 getResources().getString(R.string.records_label),

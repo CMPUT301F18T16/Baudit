@@ -2,16 +2,15 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -41,10 +40,10 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateProblemHints();
             } else { // If the problem exists and is being edited
                 problem = (Problem) patient.getProblemTreeSet().toArray()[position];
-                view.updateTitleField(problem.getTitle());
-                view.updateDescriptionField(problem.getDescription());
-                view.updateProblemTime(problem.getDate());
             }
+            view.updateTitleField(problem.getTitle());
+            view.updateDescriptionField(problem.getDescription());
+            view.updateProblemTime(problem.getDate());
             view.updateRecordList(problem.getRecordTreeSet());
             view.updateRecordNumber(problem.getRecordTreeSet().size());
         } catch (Exception e) {
@@ -66,11 +65,16 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void deleteRecordClicked(int recordPosition) {
-        Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
-        problem.getRecordTreeSet().remove(deletedRecord);
-        dataManager.commitPatient(patient);
-        view.updateRecordList(problem.getRecordTreeSet());
-        view.updateRecordNumber(problem.getRecordTreeSet().size());
+        try {
+            Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+            problem.getRecordTreeSet().remove(deletedRecord);
+            dataManager.commitPatient(patient);
+            view.updateRecordList(problem.getRecordTreeSet());
+            view.updateRecordNumber(problem.getRecordTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to delete record", e);
+            view.updateDeleteRecordError();
+        }
     }
 
     public void commitProblem(int position, String title, String description, Date date) {

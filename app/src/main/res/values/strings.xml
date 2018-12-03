@@ -120,4 +120,5 @@
     <string name="delete_problem_failure">Failed to delete Problem</string>
     <string name="problem_load_error">Failed to load Problem</string>
     <string name="record_load_error">Failed to load Record</string>
+    <string name="delete_record_error">Failed to delete record</string>
 </resources>
