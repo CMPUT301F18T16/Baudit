@@ -56,7 +56,7 @@
     <node x="1756.99375" y="2737.5">ca.klapstein.baudit.data.CareProvider</node>
     <node x="5641.018978215421" y="2237.0">ca.klapstein.baudit.presenters.CreateAccountPresenter</node>
     <node x="4748.966014680907" y="5058.0">ca.klapstein.baudit.activities.LoginPatientActivity</node>
-    <node x="6693.964811548754" y="3418.0">ca.klapstein.baudit.activities.MapAllProblemsActivity</node>
+    <node x="6693.964811548754" y="3418.0">ca.klapstein.baudit.activities.MapRecordsActivity</node>
     <node x="2713.4023956496176" y="2716.0">ca.klapstein.baudit.models.RemoteModel</node>
     <node x="1877.6814782154215" y="1155.0">ca.klapstein.baudit.data.Username</node>
     <node x="7277.685714285713" y="1078.0">ca.klapstein.baudit.data.Problem</node>
@@ -711,7 +711,7 @@
       <point x="2235.50908534195" y="2153.0" />
       <point x="-101.84999999999991" y="48.0" />
     </edge>
-    <edge source="ca.klapstein.baudit.activities.PatientHomeActivity" target="ca.klapstein.baudit.activities.MapAllProblemsActivity">
+    <edge source="ca.klapstein.baudit.activities.PatientHomeActivity" target="ca.klapstein.baudit.activities.MapRecordsActivity">
       <point x="75.5" y="-180.0" />
       <point x="6708.761848014241" y="4044.0" />
       <point x="6817.964811548754" y="4044.0" />
@@ -1047,7 +1047,7 @@
       <point x="458.85022821542134" y="1448.0" />
       <point x="16.5" y="25.5" />
     </edge>
-    <edge source="ca.klapstein.baudit.activities.MapAllProblemsActivity" target="ca.klapstein.baudit.views.MapAllProblemsView">
+    <edge source="ca.klapstein.baudit.activities.MapRecordsActivity" target="ca.klapstein.baudit.views.MapAllProblemsView">
       <point x="0.0" y="-147.0" />
       <point x="0.0" y="25.5" />
     </edge>
