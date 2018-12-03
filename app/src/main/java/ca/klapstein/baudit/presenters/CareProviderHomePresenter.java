@@ -107,6 +107,7 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
 
     public String getPatientUsername(int position) {
         try {
+            careProvider = dataManager.getLoggedInCareProvider();
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
             return patient.getUsername().toString();
         } catch (Exception e) {
