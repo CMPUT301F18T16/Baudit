@@ -41,6 +41,9 @@
                 android:name=".activities.EditPatientAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
+            android:name=".activities.EditCareProviderAccountActivity"
+            android:theme="@style/BauditTheme"/>
+        <activity
                 android:name=".activities.CreateAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
