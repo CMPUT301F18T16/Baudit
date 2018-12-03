@@ -4,50 +4,28 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import ca.klapstein.baudit.data.Account;
-import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.PatientHomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
  *
- * @see HomeView
  * @see Account
  * @see ProblemTreeSet
  */
-public class PatientHomePresenter extends Presenter<PatientHomeView> {
+public class PatientHomePresenter extends ProblemListPresenter<PatientHomeView> {
 
     private static final String TAG = "PatientHomePresenter";
-    private Patient patient;
-    @NonNull
-    private ProblemTreeSet problemTreeSet = new ProblemTreeSet();
 
     public PatientHomePresenter(PatientHomeView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
-        if (patient == null) {
-            view.updateAccountLoadError();
-        } else {
-            problemTreeSet.clear();
-            problemTreeSet.addAll(patient.getProblemTreeSet());
-        }
     }
 
-    public int getProblemCount() {
-        return problemTreeSet.size();
-    }
-
-    public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
+    public void onBindProblemRowViewAtPosition(@NonNull ProblemRowView rowView, int position) {
         try {
-            patient = dataManager.getLoggedInPatient();
-            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            Problem problem = problemTreeSet.toArray(new Problem[0])[position];
             rowView.updateProblemTitleText(problem.getTitle());
             rowView.updateProblemDateText(problem.getTimeStamp());
             rowView.updateProblemDescriptionText(problem.getDescription());
@@ -59,7 +37,6 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public String getUsername() {
         try {
-            patient = dataManager.getLoggedInPatient();
             return patient.getUsername().toString();
         } catch (Exception e) {
             Log.e(TAG, "failed to get patient username", e);
@@ -91,7 +68,6 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public void deleteProblemClicked(int position) {
         try {
-            patient = dataManager.getLoggedInPatient();
             Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
             problemTreeSet.remove(deletedProblem);
             patient.getProblemTreeSet().remove(deletedProblem);
@@ -102,26 +78,5 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
             Log.e(TAG, "failed to delete problem", e);
             view.updateDeleteProblemError();
         }
-    }
-
-    public void filterProblemsByKeyWords(CharSequence constraint) {
-        try {
-            patient = dataManager.getLoggedInPatient();
-            problemTreeSet.clear();
-            problemTreeSet.addAll(patient.getProblemTreeSet());
-        } catch (Exception e) {
-            Log.e(TAG, "failed to obtain patient account info", e);
-        }
-
-        ArrayList<String> searchTokens = new ArrayList<>(Arrays.asList(constraint.toString().toLowerCase().split(" ")));
-        Log.d(TAG, "filtering with tokens: " + searchTokens);
-        patient = dataManager.getLoggedInPatient();
-        Problem[] problemArray = problemTreeSet.toArray(new Problem[0]);
-        for (Problem aProblemArray : problemArray) {
-            if (Collections.disjoint(searchTokens, aProblemArray.getKeywords()))
-                problemTreeSet.remove(aProblemArray);
-        }
-        view.updateList();
-        view.updateProblemNumber(problemTreeSet.size());
     }
 }

@@ -206,6 +206,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
             Toast.LENGTH_LONG
         ).show();
     }
+
     @Override
     public void updateDeleteProblemError() {
         Toast.makeText(this, getResources().getString(R.string.delete_problem_failure), Toast.LENGTH_LONG).show();
@@ -240,7 +241,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                    intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, presenter.getTrueProblemIndex(viewHolder.getAdapterPosition()));
                     intent.putExtra(PROBLEM_MODE_EXTRA, "view");
                     startActivity(intent);
                 }
@@ -262,7 +263,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                                 case R.id.edit_problem:
                                     intent.putExtra(
                                         PROBLEM_POSITION_EXTRA,
-                                        viewHolder.getAdapterPosition()
+                                            presenter.getTrueProblemIndex(viewHolder.getAdapterPosition())
                                     );
                                     intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                                     startActivity(intent);
@@ -277,7 +278,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                                                 @Override
                                                 public void onClick(DialogInterface di, int i) {
                                                     presenter.deleteProblemClicked(
-                                                        viewHolder.getAdapterPosition()
+                                                            viewHolder.getAdapterPosition()
                                                     );
                                                 }
                                             })
