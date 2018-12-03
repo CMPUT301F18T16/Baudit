@@ -3,22 +3,13 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.CareProviderProblemListPresenter;
 import ca.klapstein.baudit.views.CareProviderProblemListView;
@@ -85,6 +76,32 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.care_provider_problem_list_menu, menu);
+
+        SearchView problemSearchView =
+                (SearchView) menu.findItem(R.id.care_provider_problem_list_search).getActionView();
+        problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        problemSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                // reset the presenters list of problems, thus, repopulating the list
+                presenter.viewStarted(patientUsername);
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -102,7 +119,9 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
         }
     }
 
-    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
+    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
+
+        private final ProblemFilter problemFilter = new ProblemFilter();
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -129,6 +148,27 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
         @Override
         public int getItemCount() {
             return presenter.getProblemCount();
+        }
+
+        @Override
+        public Filter getFilter() {
+            return problemFilter;
+        }
+
+        private class ProblemFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                presenter.filterProblemsByKeyWords(constraint);
+                results.count = presenter.getProblemCount();
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                notifyDataSetChanged();
+            }
         }
     }
 
