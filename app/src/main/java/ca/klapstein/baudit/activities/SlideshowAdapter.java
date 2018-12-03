@@ -36,6 +36,7 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
     public SlideshowAdapter(Context context, ArrayList<String> bitmapStringArray){
         this.context=context;
         this.bitmapStringArray = bitmapStringArray;
+        updateImageList();
     }
 
     public static Bitmap decodeBase64(String input) {
@@ -75,7 +76,6 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
         // imageView.setImageResource(image_resource[position]);  //TEST CASE
 
         //TODO:update empty bitmapArray & setImageResource to the images on the list
-        updateImageList();
         imageView.setImageBitmap(bitmapArray.get(position));
 
 

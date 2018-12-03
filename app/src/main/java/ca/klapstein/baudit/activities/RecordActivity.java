@@ -23,6 +23,8 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.util.ArrayList;
+
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
@@ -107,12 +109,29 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             }
         });
 
-        slideshow =findViewById( R.id.record_slideshow_button );
+        slideshow = findViewById( R.id.record_slideshow_button );
         slideshow.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
-                startActivity( intent );
+
+                /*
+                Log.d("RECORDACTIVITYLOG", "stringsSize: " + bitmapStrings.size());
+                ArrayList<String> testarray = new ArrayList<String>();
+                testarray.add("YO");
+                */
+
+
+                ArrayList<String> recordBitmapStrings = presenter.getRecord().getPhotoBitmapStrings();
+
+                ArrayList<String> bitmapStrings = new ArrayList<String>();
+                for(String bitmapString : recordBitmapStrings){
+                    bitmapStrings.add(bitmapString);
+                }
+
+                // ISSUE: the activity doesn't start when bitmapStrings is put in, but works with testarray
+                intent.putExtra("BitmapStringArray", bitmapStrings);
+                startActivity(intent);
             }
         } );
 
