@@ -214,7 +214,7 @@ public class ProblemActivity extends AppCompatActivity
             final CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
                 .inflate(R.layout.card_record, recordList, false);
             ImageView recordImage = recordView.findViewById(R.id.record_card_image);
-            recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY));
             if (record.getLastRecordPhoto() != null) {
                 recordImage.setImageBitmap(RotateBitmap90(record.getLastRecordPhoto()));
             }
