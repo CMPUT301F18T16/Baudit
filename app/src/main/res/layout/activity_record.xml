@@ -25,11 +25,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginBottom="80dp"
                 android:orientation="vertical">
 
@@ -37,22 +37,23 @@
                     android:id="@+id/record_timestamp_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/dark_grey"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_grey" />
+                    android:textStyle="bold" />
+
 
                 <ImageView
-                        android:contentDescription="@string/record_photo"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:visibility="gone"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/record_photo"
+                    android:visibility="gone" />
 
                 <ImageButton
-                        android:contentDescription="@string/add_record_photo_button"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_add_a_photo_24dp"
-                        android:background="@color/vaporwave_purple"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@color/vaporwave_purple"
+                    android:contentDescription="@string/add_record_photo_button"
+                    android:src="@drawable/ic_add_a_photo_24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,11 +63,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/default_margin"
                         android:layout_marginEnd="@dimen/default_margin"
-                        android:textStyle="bold"
+                        android:layout_marginRight="@dimen/default_margin"
+                        android:text="@string/title_label"
                         android:textSize="18sp"
-                        android:text="@string/title_label" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -78,13 +79,13 @@
                     android:textSize="16sp" />
 
                 <EditText
-                        android:inputType="textCapWords"
-                        android:id="@+id/record_title_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
-                        android:maxLength="30"
-                        android:maxLines="1" />
+                    android:id="@+id/record_title_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:textColor="@color/dark_grey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,11 +95,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/default_margin"
                         android:layout_marginEnd="@dimen/default_margin"
-                        android:textStyle="bold"
+                        android:layout_marginRight="@dimen/default_margin"
+                        android:text="@string/comment_label"
                         android:textSize="18sp"
-                        android:text="@string/comment_label" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -110,29 +111,29 @@
                     android:textSize="16sp" />
 
                 <EditText
-                        android:inputType="textShortMessage"
-                        android:id="@+id/record_comment_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
-                        android:maxLength="30"
-                        android:maxLines="1" />
+                    android:id="@+id/record_comment_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textShortMessage"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:textColor="@color/dark_grey" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
                     android:layout_marginEnd="@dimen/default_margin"
-                    android:textStyle="bold"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:text="@string/location_label"
                     android:textSize="18sp"
-                    android:text="@string/location_label" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/record_location_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_grey"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/record_geolocation_edit_button"
@@ -141,12 +142,13 @@
                     android:src="@drawable/ic_plus_white_24dp"
                     android:tint="@color/vaporwave_purple" />
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:text="@string/body_location_label"
                     android:textSize="18sp"
-                    android:text="@string/body_location_label" />
+                    android:textStyle="bold" />
 
                 <GridLayout
                     android:id="@+id/record_body_location_photos_layout"
@@ -161,33 +163,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:gravity="center_vertical"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/record_cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="start"
                 android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:text="@string/cancel"
-                android:textColor="@color/dark_grey"/>
+                android:textColor="@color/dark_grey" />
 
             <Button
                 android:id="@+id/record_save_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/default_margin"
+                android:layout_alignParentRight="true"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:text="@string/save"
-                android:textColor="@color/dark_grey"/>
+                android:textColor="@color/dark_grey" />
 
         </RelativeLayout>
 

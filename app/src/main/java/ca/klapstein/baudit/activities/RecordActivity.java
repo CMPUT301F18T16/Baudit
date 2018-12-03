@@ -128,7 +128,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentView.setVisibility(View.GONE);
             commentInput.setVisibility(View.VISIBLE);
 
-            locationView.setVisibility(View.GONE);
+            locationView.setVisibility(View.VISIBLE);
             geolocationEditButton.setVisibility(View.VISIBLE);
 
             cancelButton.setVisibility(View.VISIBLE);
@@ -144,7 +144,13 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 Double latitude = data.getDoubleExtra("Latitude", 53);
                 Double longitude = data.getDoubleExtra("Longitude", -113);
                 String address = data.getStringExtra("Address");
-                geoLocation = new GeoLocation(address, latitude, longitude);
+                if(geoLocation == null) {
+                    geoLocation = new GeoLocation(address, latitude, longitude);
+                }else{
+                    geoLocation.setAddress(address);
+                    geoLocation.setLat(latitude);
+                    geoLocation.setLon(longitude);
+                }
                 Log.d(TAG, "obtained Geolocation for: " + geoLocation.getAddress() +"at coordinates:" +geoLocation.getLat() +geoLocation.getLon());
                 updateLocationField(geoLocation);
 
