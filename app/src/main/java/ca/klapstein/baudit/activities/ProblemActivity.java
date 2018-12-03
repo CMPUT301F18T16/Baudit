@@ -14,11 +14,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
@@ -31,10 +27,9 @@ import ca.klapstein.baudit.views.ProblemView;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_PROBLEM_POSITION;
-import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
@@ -53,7 +48,7 @@ public class ProblemActivity extends AppCompatActivity
 
     private int problemPosition;
     private ProblemPresenter presenter;
-    private Calendar problemTime = Calendar.getInstance();
+    private Calendar problemTime = new GregorianCalendar();
 
     private TextView titleView;
     private EditText titleInput;
@@ -167,13 +162,13 @@ public class ProblemActivity extends AppCompatActivity
         });
 
         recordList = findViewById(R.id.problem_records_list);
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         presenter.viewStarted(problemPosition);
-        updateRecordCountText();
         updateTimeButton(problemTime.getTime());
         updateDateButton(problemTime.getTime());
     }
@@ -219,6 +214,10 @@ public class ProblemActivity extends AppCompatActivity
                 .inflate(R.layout.card_record, recordList, false);
             ImageView recordImage = recordView.findViewById(R.id.record_card_image);
             recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            if (record.getLastRecordPhoto() != null) {
+                recordImage.setImageBitmap(record.getLastRecordPhoto());
+            }
+
             TextView recordTimestamp = recordView.findViewById(R.id.record_card_timestamp);
             TextView recordTitle = recordView.findViewById(R.id.record_card_title);
             TextView recordComment = recordView.findViewById(R.id.record_card_comment);
@@ -291,8 +290,6 @@ public class ProblemActivity extends AppCompatActivity
 
             index++;
         }
-
-        updateRecordCountText();
     }
 
     @Override
@@ -317,11 +314,15 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void updateProblemTime(Date date) {
-        problemTime.set(Calendar.YEAR, date.getYear());
-        problemTime.set(Calendar.MONTH, date.getMonth());
-        problemTime.set(Calendar.DAY_OF_MONTH, date.getDay());
-        problemTime.set(Calendar.HOUR_OF_DAY, date.getHours());
-        problemTime.set(Calendar.MINUTE, date.getMinutes());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        problemTime.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        problemTime.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        problemTime.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+        problemTime.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR));
+        problemTime.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+        updateDateButton(problemTime.getTime());
+        updateTimeButton(problemTime.getTime());
     }
 
     @Override
@@ -353,6 +354,20 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
+    public void updateRecordNumber(int recordNumber) {
+        recordCountText.setText(String.format(
+                getResources().getString(R.string.records_label),
+                recordNumber
+        ));
+    }
+
+    @Override
+    public void updateViewProblemError() {
+        Toast.makeText(this, getResources().getString(R.string.problem_load_error), Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
     public void commitProblemFailure() {
         Toast.makeText(this, getResources().getString(R.string.problem_commit_failure), Toast.LENGTH_LONG).show();
     }
@@ -376,12 +391,5 @@ public class ProblemActivity extends AppCompatActivity
         problemTime.set(Calendar.HOUR_OF_DAY, hour);
         problemTime.set(Calendar.MINUTE, minute);
         updateTimeButton(problemTime.getTime());
-    }
-
-    private void updateRecordCountText() {
-        recordCountText.setText(String.format(
-            getResources().getString(R.string.records_label),
-            presenter.getRecordCount()
-        ));
     }
 }

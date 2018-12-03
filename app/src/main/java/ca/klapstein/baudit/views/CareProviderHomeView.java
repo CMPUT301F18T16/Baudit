@@ -5,5 +5,7 @@ public interface CareProviderHomeView extends HomeView {
 
     void updateScanQRCodeError();
 
-    void updatePatientCountText();
+    void updatePatientCount(int patientNumber);
+
+    void updateRemovePatientError();
 }
