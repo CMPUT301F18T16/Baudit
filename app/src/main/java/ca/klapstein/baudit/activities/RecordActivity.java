@@ -11,16 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 import static ca.klapstein.baudit.activities.CameraActivity.*;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
@@ -39,6 +34,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
     public static final String RECORD_POSITION_EXTRA = "recordPosition";
     public static final String RECORD_MODE_EXTRA = "mode";
+    private static final int REQUEST_GEOLOCATION = 123;
 
     private int problemPosition;
     private int recordPosition;
@@ -51,7 +47,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView commentView;
     private EditText commentInput;
     private TextView locationView;
-    private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
     private ImageView recordImage;
 
@@ -79,27 +74,14 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         locationView = findViewById(R.id.record_location_view);
 
-        autocompleteFragment = (PlaceAutocompleteFragment)
-            getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        // TODO: This is a heuristic. Set to Canada for now
-        LatLng sw = new LatLng(41.6751050889, -140.99778);
-        LatLng ne = new LatLng(83.23324, -52.6480987209);
-        autocompleteFragment.setBoundsBias(new LatLngBounds(sw, ne));
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        ImageButton geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
+        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onPlaceSelected(Place place) {
-                geoLocation = new GeoLocation(
-                    place.getName().toString(),
-                    place.getLatLng().latitude,
-                    place.getLatLng().longitude
-                );
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
+            public void onClick(View v){
+                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
+                intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                startActivityForResult(intent,REQUEST_GEOLOCATION);
             }
         });
         recordImage = findViewById(R.id.recordImage);
@@ -146,7 +128,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentInput.setVisibility(View.GONE);
 
             locationView.setVisibility(View.VISIBLE);
-            autocompleteFragment.getView().setVisibility(View.GONE);
+            geolocationEditButton.setVisibility(View.GONE);
 
             recordImage.setVisibility(View.VISIBLE);
             addPhotoImage.setVisibility(View.GONE);
@@ -166,14 +148,38 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentView.setVisibility(View.GONE);
             commentInput.setVisibility(View.VISIBLE);
 
-            locationView.setVisibility(View.GONE);
-            autocompleteFragment.getView().setVisibility(View.VISIBLE);
+            locationView.setVisibility(View.VISIBLE);
+            geolocationEditButton.setVisibility(View.VISIBLE);
 
             addPhotoImage.setVisibility(View.VISIBLE);
             recordImage.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_GEOLOCATION) {
+            if (resultCode == RESULT_OK) {
+                Double latitude = data.getDoubleExtra("Latitude", 53);
+                Double longitude = data.getDoubleExtra("Longitude", -113);
+                String address = data.getStringExtra("Address");
+                if(geoLocation == null) {
+                    geoLocation = new GeoLocation(address, latitude, longitude);
+                }else{
+                    geoLocation.setAddress(address);
+                    geoLocation.setLat(latitude);
+                    geoLocation.setLon(longitude);
+                }
+                Log.d(TAG, "obtained Geolocation for: " + geoLocation.getAddress() +"at coordinates:" +geoLocation.getLat() +geoLocation.getLon());
+                updateLocationField(geoLocation);
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Log.d(TAG, "cancelled location activity");
+            }
         }
     }
 
@@ -211,7 +217,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         if (geoLocation != null) {
             this.geoLocation = geoLocation;
             locationView.setText(geoLocation.getAddress());
-            autocompleteFragment.setText(geoLocation.getAddress());
         }
     }
 

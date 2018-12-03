@@ -88,7 +88,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                             return true;
                         case (R.id.nav_display_qr_code):
                             startActivity(new Intent(
-                                getApplicationContext(), 
+                                getApplicationContext(),
                                 DisplayQRCodeActivity.class
                             ));
                             return true;

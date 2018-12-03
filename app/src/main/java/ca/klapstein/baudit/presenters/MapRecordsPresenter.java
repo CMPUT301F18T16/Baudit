@@ -22,16 +22,10 @@ public class MapRecordsPresenter extends Presenter<MapAllProblemsView> {
     }
 
     public void viewStarted(String mode, String username, int problemPosition) {
-        Patient patient = dataManager.getPatient(new Username(username));
-
-        if (patient == null) {
-            view.updateMapError();
-            return;
-        }
-
-        if ("all".equals(mode)) {
-            try {
-                ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
+        try {
+            Patient patient = dataManager.getPatient(new Username(username));
+            ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
+            if ("all".equals(mode)) {
                 for (Problem problem : problemTreeSet) {
                     RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
                     for (Record record : recordTreeSet) {
@@ -42,31 +36,31 @@ public class MapRecordsPresenter extends Presenter<MapAllProblemsView> {
                             );
                             Log.d(TAG, "adding marker: " + marker.toString());
                             view.updateMarkerOptions(
-                                new MarkerOptions().position(marker).title(record.getTitle())
+                                new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()+" "+record.getDate())
                             );
                         }
                     }
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "error populating problem map", e);
-                view.updateMapError();
-            }
-        } else if ("single".equals(mode)) {
-            ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
-            Problem problem = (Problem) problemTreeSet.toArray()[problemPosition];
-            RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
-            for (Record record : recordTreeSet) {
-                if (record.getGeoLocation() != null) {
-                    LatLng marker = new LatLng(
-                        record.getGeoLocation().getLat(),
-                        record.getGeoLocation().getLon()
-                    );
-                    Log.d(TAG, "adding marker: " + marker.toString());
-                    view.updateMarkerOptions(
-                        new MarkerOptions().position(marker).title(record.getTitle())
-                    );
+
+            } else if ("single".equals(mode)) {
+                Problem problem = (Problem) problemTreeSet.toArray()[problemPosition];
+                RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
+                for (Record record : recordTreeSet) {
+                    if (record.getGeoLocation() != null) {
+                        LatLng marker = new LatLng(
+                                record.getGeoLocation().getLat(),
+                                record.getGeoLocation().getLon()
+                        );
+                        Log.d(TAG, "adding marker: " + marker.toString());
+                        view.updateMarkerOptions(
+                                new MarkerOptions().position(marker).title(record.getTitle())
+                        );
+                    }
                 }
             }
+        } catch (Exception e) {
+            Log.e(TAG, "error populating problem map", e);
+            view.updateMapError();
         }
     }
 }

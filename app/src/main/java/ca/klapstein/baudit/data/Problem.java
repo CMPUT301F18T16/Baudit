@@ -94,7 +94,7 @@ public class Problem implements Comparable<Problem> {
      */
     @NotNull
     public RecordTreeSet getRecordTreeSet() {
-        return recordTreeSet;
+        return this.recordTreeSet;
     }
 
     /**
@@ -113,7 +113,7 @@ public class Problem implements Comparable<Problem> {
      */
     @Nullable
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -136,7 +136,7 @@ public class Problem implements Comparable<Problem> {
      */
     @NotNull
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -159,7 +159,7 @@ public class Problem implements Comparable<Problem> {
      */
     @NotNull
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     /**
