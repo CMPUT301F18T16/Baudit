@@ -31,21 +31,26 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void viewStarted(int position) {
-        patient = dataManager.getLoggedInPatient();
-        if (position == -1) { // If the problem is new
-            problem = new Problem(
-                context.getResources().getString(R.string.default_title),
-                context.getResources().getString(R.string.default_description)
-            );
-            view.updateProblemHints();
-        } else { // If the problem exists and is being edited
-            problem = (Problem) patient.getProblemTreeSet().toArray()[position];
-            view.updateTitleField(problem.getTitle());
-            view.updateDescriptionField(problem.getDescription());
-            view.updateRecordList(problem.getRecordTreeSet());
+        try {
+            patient = dataManager.getLoggedInPatient();
+            if (position == -1) { // If the problem is new
+                problem = new Problem(
+                        context.getResources().getString(R.string.default_title),
+                        context.getResources().getString(R.string.default_description)
+                );
+                view.updateProblemHints();
+            } else { // If the problem exists and is being edited
+                problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+                view.updateTitleField(problem.getTitle());
+                view.updateDescriptionField(problem.getDescription());
+                view.updateRecordList(problem.getRecordTreeSet());
+            }
+            view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
+            view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present problem", e);
+            // TODO: error
         }
-        view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
-        view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
     }
 
     public void clickedDateButton() {
@@ -89,6 +94,15 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "failed committing Problem", e);
             view.commitProblemFailure();
+        }
+    }
+
+    public String getUsername() {
+        patient = dataManager.getLoggedInPatient();
+        if (patient != null) {
+            return patient.getUsername().toString();
+        } else {
+            return "";
         }
     }
 }

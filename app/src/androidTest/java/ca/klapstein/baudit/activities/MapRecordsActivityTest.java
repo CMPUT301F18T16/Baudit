@@ -15,13 +15,13 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
-public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsActivity> {
+public class MapRecordsActivityTest extends ActivityTestRule<MapRecordsActivity> {
 
     private Solo solo;
     private DataModel dataModel;
 
-    public MapAllProblemsActivityTest() {
-        super(MapAllProblemsActivity.class);
+    public MapRecordsActivityTest() {
+        super(MapRecordsActivity.class);
     }
 
     @Before
@@ -73,7 +73,7 @@ public class MapAllProblemsActivityTest extends ActivityTestRule<MapAllProblemsA
 
     @Test
     public void testOnCreate() {
-        solo.assertCurrentActivity("Wrong Activity", MapAllProblemsActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MapRecordsActivity.class);
         solo.waitForActivity(solo.getCurrentActivity().toString());
     }
 }
