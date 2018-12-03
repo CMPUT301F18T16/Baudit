@@ -9,6 +9,7 @@ import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -39,11 +40,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateProblemHints();
             } else { // If the problem exists and is being edited
                 problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+                view.updateTitleField(problem.getTitle());
+                view.updateDescriptionField(problem.getDescription());
+                view.updateRecordList(problem.getRecordTreeSet());
+                view.updateProblemTime(problem.getDate());
             }
-            view.updateTitleField(problem.getTitle());
-            view.updateDescriptionField(problem.getDescription());
-            view.updateRecordList(problem.getRecordTreeSet());
-            view.updateProblemTime(problem.getDate());
         } catch (Exception e) {
             Log.e(TAG, "failed to present problem", e);
             // TODO: error
@@ -51,13 +52,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void clickedDateButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
-        view.showDatePicker(Calendar.getInstance());
+        view.showDatePicker(calendar);
     }
 
     public void clickedTimeButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
         view.showTimePicker(calendar);
     }
