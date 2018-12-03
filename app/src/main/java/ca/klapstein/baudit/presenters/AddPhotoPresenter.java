@@ -15,16 +15,18 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
 
     public AddPhotoPresenter(AddPhotoView view, Context context) {
         super(view, context);
-        patient = dataManager.getLoggedInPatient();
     }
 
     public void getLastRecordPhoto(int problemId) {
-        patient = dataManager.getLoggedInPatient();
-        Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
-        Record record = problem.getRecordTreeSet().pollFirst();
-        if (record.getLastRecordPhoto() != null) {
-            view.updateCameraOverlayImage(record.getLastRecordPhoto());
-        } else {
+        try {
+            patient = dataManager.getLoggedInPatient();
+            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
+            Record record = problem.getRecordTreeSet().pollFirst();
+            if (record.getLastRecordPhoto() != null) {
+                view.updateCameraOverlayImage(record.getLastRecordPhoto());
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get record photo", e);
             view.updateCameraOverlayError();
         }
     }

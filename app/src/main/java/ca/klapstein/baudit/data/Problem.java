@@ -1,6 +1,8 @@
 package ca.klapstein.baudit.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -18,26 +20,19 @@ public class Problem implements Comparable<Problem> {
 
     private static final int MAX_DESCRIPTION_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
-
-    private UUID problemId;
+    @NonNull
     private String title;
+    @Nullable
     private String description;
-    private Date date;
-    private RecordTreeSet recordTreeSet;
+    @NonNull
+    private final UUID problemId = UUID.randomUUID();
+    @NonNull
+    private Date date = new Date();
+    @NonNull
+    private RecordTreeSet recordTreeSet = new RecordTreeSet();
 
     public Problem(@NonNull String title) throws IllegalArgumentException {
         this.setTitle(title);
-        this.date = new Date();
-        this.recordTreeSet = new RecordTreeSet();
-        this.problemId = UUID.randomUUID();
-    }
-
-    public Problem(@NonNull String title, String description) throws IllegalArgumentException {
-        this.setTitle(title);
-        this.setDescription(description);
-        this.date = new Date();
-        this.recordTreeSet = new RecordTreeSet();
-        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -74,7 +69,7 @@ public class Problem implements Comparable<Problem> {
         for (Record record : getRecordTreeSet()) {
             if (record.getGeoLocation() != null && record.getGeoLocation().getAddress() != null) {
                 keywords.addAll(
-                    Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" "))
+                        Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" "))
                 );
             }
             if (record.getComment() != null) {
@@ -87,11 +82,17 @@ public class Problem implements Comparable<Problem> {
         return keywords;
     }
 
+    public Problem(@NonNull String title, @NonNull String description) throws IllegalArgumentException {
+        this.setTitle(title);
+        this.setDescription(description);
+    }
+
     /**
      * Get the {@code RecordTreeSet} of the {@code Problem}.
      *
      * @return {@code RecordTreeSet}
      */
+    @NotNull
     public RecordTreeSet getRecordTreeSet() {
         return recordTreeSet;
     }
@@ -101,7 +102,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @param recordTreeSet {@code RecordTreeSet}
      */
-    public void setRecordTreeSet(RecordTreeSet recordTreeSet) {
+    public void setRecordTreeSet(@NonNull RecordTreeSet recordTreeSet) {
         this.recordTreeSet = recordTreeSet;
     }
 
@@ -110,6 +111,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -120,7 +122,7 @@ public class Problem implements Comparable<Problem> {
      * @param description {@code String}
      * @throws IllegalArgumentException if the {@code Problem}'s description is invalid
      */
-    public void setDescription(String description) throws IllegalArgumentException {
+    public void setDescription(@NonNull String description) throws IllegalArgumentException {
         if (!isValidProblemDescription(description)) {
             throw new IllegalArgumentException("invalid problem description");
         }
@@ -132,6 +134,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code String}
      */
+    @NotNull
     public String getTitle() {
         return title;
     }
@@ -142,7 +145,7 @@ public class Problem implements Comparable<Problem> {
      * @param title {@code String}
      * @throws IllegalArgumentException if the {@code Problem}'s title is invalid
      */
-    public void setTitle(String title) throws IllegalArgumentException {
+    public void setTitle(@NonNull String title) throws IllegalArgumentException {
         if (!isValidProblemTitle(title)) {
             throw new IllegalArgumentException("invalid problem title");
         }
@@ -154,6 +157,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @return {@code Date}
      */
+    @NotNull
     public Date getDate() {
         return date;
     }
@@ -163,7 +167,7 @@ public class Problem implements Comparable<Problem> {
      *
      * @param date {@code Date}
      */
-    public void setDate(Date date) {
+    public void setDate(@NonNull Date date) {
         this.date = date;
     }
 
@@ -201,14 +205,8 @@ public class Problem implements Comparable<Problem> {
         }
     }
 
+    @NotNull
     public UUID getProblemId() {
-        if (problemId == null) {
-            setProblemId(UUID.randomUUID());
-        }
         return problemId;
-    }
-
-    public void setProblemId(@NonNull UUID problemId) {
-        this.problemId = problemId;
     }
 }

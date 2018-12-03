@@ -21,7 +21,6 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
 
     public CareProviderHomePresenter(CareProviderHomeView view, Context context) {
         super(view, context);
-        careProvider = dataManager.getLoggedInCareProvider();
     }
 
     /**
@@ -34,9 +33,11 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
      */
     public void assignPatient(String username) {
         try {
+            careProvider = dataManager.getLoggedInCareProvider();
             careProvider.getAssignedPatientTreeSet().add(dataManager.getPatient(new Username(username)));
             dataManager.commitCareProvider(careProvider);
             view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to assign patient " + username, e);
             view.updateScanQRCodeError();
@@ -44,53 +45,78 @@ public class CareProviderHomePresenter extends Presenter<CareProviderHomeView> {
     }
 
     public void onBindPatientRowViewAtPosition(PatientRowView rowView, int position) {
-        if (careProvider == null || careProvider.getAssignedPatientTreeSet() == null) {
-            view.updateAccountLoadError();
-        } else {
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
             Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
             rowView.updatePatientNameText(
-                patient.getContactInfo().getFirstName(),
-                patient.getContactInfo().getLastName()
+                    patient.getContactInfo().getFirstName(),
+                    patient.getContactInfo().getLastName()
             );
             rowView.updatePatientUsernameText(patient.getUsername().toString());
             rowView.updatePatientProblemNum(patient.getProblemTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get assigned patient", e);
+            view.updateAccountLoadError();
         }
     }
 
     public int getPatientCount() {
-        if (careProvider == null || careProvider.getAssignedPatientTreeSet() == null) {
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
+            return careProvider.getAssignedPatientTreeSet().size();
+        } catch (Exception e) {
             view.updateAccountLoadError();
             return 0;
-        } else {
-            return careProvider.getAssignedPatientTreeSet().size();
         }
     }
 
     public void viewStarted() {
-        careProvider = dataManager.getLoggedInCareProvider();
-        if (careProvider == null) {
-            view.updateAccountLoadError();
-        } else {
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
             view.updateUsernameDisplay(careProvider.getUsername().toString());
             view.updateEmailDisplay(careProvider.getContactInfo().getEmail().toString());
             view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present care provider", e);
+            view.updateAccountLoadError();
         }
     }
 
     public String getUsername() {
-        return careProvider.getUsername().toString();
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
+            return careProvider.getUsername().toString();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get care provider username", e);
+            view.updateAccountLoadError();
+            return "Unknown";
+        }
     }
 
-    public void removePatientClicked(int position) {
-        Patient deletedPatient =
-            (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
-        careProvider.getAssignedPatientTreeSet().remove(deletedPatient);
-        dataManager.commitCareProvider(careProvider);
-        view.updateList();
+    public void removePatient(int position) {
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
+            Patient deletedPatient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
+            careProvider.getAssignedPatientTreeSet().remove(deletedPatient);
+            dataManager.commitCareProvider(careProvider);
+            view.updateList();
+            view.updatePatientCount(careProvider.getAssignedPatientTreeSet().size());
+        } catch (Exception e) {
+            Log.e(TAG, "failed to remove paitent", e);
+            view.updateRemovePatientError();
+        }
     }
 
     public String getPatientUsername(int position) {
-        Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
-        return patient.getUsername().toString();
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
+            Patient patient = (Patient) careProvider.getAssignedPatientTreeSet().toArray()[position];
+            return patient.getUsername().toString();
+        } catch (Exception e) {
+            Log.e(TAG, "failed to get assigned patient username", e);
+            view.updateAccountLoadError();
+            return "Unknown";
+        }
     }
 }
