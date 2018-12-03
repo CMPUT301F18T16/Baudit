@@ -61,7 +61,10 @@ public class MapRecordsActivityTest extends ActivityTestRule<MapRecordsActivity>
         patient.getProblemTreeSet().add(problem4);
 
         dataModel.setOfflineLoginAccount(patient);
-        super.launchActivity(new Intent());
+        Intent intent = new Intent();
+        intent.putExtra(MapRecordsActivity.MAP_RECORDS_USERNAME, patient.getUsername().toString());
+        intent.putExtra(MapRecordsActivity.MAP_RECORDS_MODE, "all");
+        super.launchActivity(intent);
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
