@@ -3,7 +3,6 @@ package ca.klapstein.baudit.data;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,7 +73,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code Date}
      */
-    @NotNull
+    @NonNull
     public Date getDate() {
         return date;
     }
@@ -97,8 +96,8 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
-    public void addRecordPhoto(Bitmap bitmap) {
-        recordPhotos.add(new RecordPhoto(bitmap));
+    public void addRecordPhoto(RecordPhoto recordPhoto) {
+        recordPhotos.add(recordPhoto);
     }
 
     @NonNull
@@ -185,7 +184,7 @@ public class Record implements Comparable<Record> {
      *
      * @return {@code ArrayList<String>}
      */
-    @NotNull
+    @NonNull
     public ArrayList<String> getKeywords() {
         return keywords;
     }
@@ -227,7 +226,7 @@ public class Record implements Comparable<Record> {
         return date.compareTo(record.getDate());
     }
 
-    @NotNull
+    @NonNull
     public UUID getRecordId() {
         return recordId;
     }
