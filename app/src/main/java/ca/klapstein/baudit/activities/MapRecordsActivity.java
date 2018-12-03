@@ -8,11 +8,6 @@ import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.MapRecordsPresenter;
 import ca.klapstein.baudit.views.MapAllProblemsView;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordTreeSet;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -117,19 +112,6 @@ public class MapRecordsActivity extends AppCompatActivity
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(edmonton, 10.0f));
         this.googleMap = googleMap;
         presenter.viewStarted(mode, username, problemPosition);
-    }
-
-    @Override
-    public void populateMap(Patient patient, GoogleMap googleMap) {
-        //https://developers.google.com/maps/documentation/android-sdk/map-with-marker
-        ProblemTreeSet problemTreeSet = patient.getProblemTreeSet();
-        for (Problem problem:problemTreeSet){
-            RecordTreeSet recordTreeSet = problem.getRecordTreeSet();
-            for(Record record: recordTreeSet){
-                LatLng marker = new LatLng(record.getGeoLocation().getLat(),record.getGeoLocation().getLon());
-                googleMap.addMarker(new MarkerOptions().position(marker).title(record.getTitle()).snippet(record.getComment()));
-            }
-        }
     }
 
     @Override
