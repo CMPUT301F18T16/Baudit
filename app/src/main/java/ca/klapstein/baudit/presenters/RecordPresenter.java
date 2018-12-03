@@ -84,7 +84,7 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
     }
 
-    public int getLastRecordId(int problemId) {
+    public int getLatestRecordId(int problemId) {
         try {
             patient = dataManager.getLoggedInPatient();
             return ((Problem) patient.getProblemTreeSet().toArray()[problemId]).getRecordTreeSet().size()-1;

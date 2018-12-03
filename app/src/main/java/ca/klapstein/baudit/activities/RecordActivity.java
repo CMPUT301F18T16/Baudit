@@ -133,7 +133,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                     commentInput.getText().toString(),
                     geoLocation
                 );
-                recordPosition = presenter.getLastRecordId(problemPosition);
+                recordPosition = presenter.getLatestRecordId(problemPosition);
             }
         });
 

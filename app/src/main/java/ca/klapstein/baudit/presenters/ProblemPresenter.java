@@ -84,7 +84,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
      * @param description {@code String}
      * @param date        {@code Date}
      */
-    public void commitProblem(String title, String description, Date date) {
+    public int commitProblem(String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
