@@ -23,8 +23,6 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-import java.util.ArrayList;
-
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
 import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_RECORD_ID_FIELD;
@@ -174,6 +172,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             recordImage.setVisibility(View.VISIBLE);
             addPhotoImage.setVisibility(View.GONE);
 
+            slideshow.setVisibility(View.VISIBLE);
+
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
@@ -194,6 +194,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             addPhotoImage.setVisibility(View.VISIBLE);
             recordImage.setVisibility(View.GONE);
+
+            slideshow.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);

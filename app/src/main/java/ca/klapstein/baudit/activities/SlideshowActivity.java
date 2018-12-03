@@ -1,56 +1,52 @@
 package ca.klapstein.baudit.activities;
 
-import android.graphics.Bitmap;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.models.DataModel;
-import ca.klapstein.baudit.presenters.RecordPresenter;
-import ca.klapstein.baudit.views.RecordView;
+import ca.klapstein.baudit.presenters.SlideshowPresenter2;
+import ca.klapstein.baudit.views.SlideshowView2;
 
-import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
-import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
-import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
-public class SlideshowActivity extends AppCompatActivity {
+public class SlideshowActivity extends AppCompatActivity implements SlideshowView2 {
 
-    ViewPager viewPager;
-    SlideshowAdapter adapter;
-    private ArrayList<String> bitmapStringArray;
+    public static final String RECORD_PHOTO_RECORD_ID_FIELD = "recordId";
+    public static final String RECORD_PHOTO_PROBLEM_ID_FIELD = "problemId";
+
+    private ViewPager viewPager;
+    private SlideshowAdapter adapter;
+    private SlideshowPresenter2 presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slideshow);
 
-
-
-        DataModel dataManager = new DataModel(this);
-        Patient patient =  (Patient) dataManager.getLoggedInAccount();
-        int problemPosition = getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1);
-        int recordPosition = getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1);
-        Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemPosition];
-        Record record = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
-
-        bitmapStringArray = record.getPhotoBitmapStrings();
+        presenter = new SlideshowPresenter2(this, getApplicationContext());
+        ArrayList<String> bitmapStringArray = presenter.getRecordBitmapStrings(getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1),
+                getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1));
 
         //bitmapStringArray = getIntent().getStringArrayListExtra("BitmapStringArray");
 
         viewPager = findViewById(R.id.view_pager);
-        adapter = new SlideshowAdapter(this, bitmapStringArray);
-        viewPager.setAdapter(adapter);
+
+        if (bitmapStringArray.size() != 0) {
+            adapter = new SlideshowAdapter(this, bitmapStringArray);
+            viewPager.setAdapter(adapter);
+        } else{
+            finish();
+            Toast.makeText(SlideshowActivity.this, "No Photos to Show", Toast.LENGTH_LONG ).show();
+        }
+
+
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
     }
 }

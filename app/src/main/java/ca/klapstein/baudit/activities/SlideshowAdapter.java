@@ -2,21 +2,21 @@ package ca.klapstein.baudit.activities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.views.SlideShowView;
+
+import static ca.klapstein.baudit.util.BitmapEncoderUtil.decodeBase64;
+import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
 
 /**
  * Adapter providing a "slideshow" of photos to be easily viewed.
@@ -37,11 +37,6 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
         this.context=context;
         this.bitmapStringArray = bitmapStringArray;
         updateImageList();
-    }
-
-    public static Bitmap decodeBase64(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     @Override
@@ -76,7 +71,7 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
         // imageView.setImageResource(image_resource[position]);  //TEST CASE
 
         //TODO:update empty bitmapArray & setImageResource to the images on the list
-        imageView.setImageBitmap(bitmapArray.get(position));
+        imageView.setImageBitmap(RotateBitmap90(bitmapArray.get(position)));
 
 
         container.addView(item_view);
