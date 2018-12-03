@@ -10,22 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
@@ -39,37 +29,21 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
     private static final String TAG = "RecordActivity";
-
     public static final String RECORD_POSITION_EXTRA = "recordPosition";
     public static final String RECORD_MODE_EXTRA = "mode";
 
-    private int problemPosition;
-    private int recordPosition;
-    private static final String TAG = "RecordActivity";
-
     private static final int REQUEST_GEOLOCATION = 123;
 
-    private int recordId;
+    private int problemPosition;
+    private int recordPosition;
     private GeoLocation geoLocation;
     private RecordPresenter presenter;
-
     private TextView timestampView;
     private TextView titleView;
     private EditText titleInput;
-
-    private ImageButton commentEditButton;
-    private ImageButton commentSaveButton;
-    private ImageButton commentCancelButton;
-    private ImageButton geolocationEditButton;
     private TextView commentView;
     private EditText commentInput;
     private TextView locationView;
-    private PlaceAutocompleteFragment autocompleteFragment;
-    private GeoLocation geoLocation = null;
-    private Button commitButton;
-    private ImageButton record_geolocation_edit_button;
-    private int problemId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,45 +69,19 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         locationView = findViewById(R.id.record_location_view);
 
-        autocompleteFragment = (PlaceAutocompleteFragment)
-            getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        // TODO: This is a heuristic. Set to Canada for now
-        LatLng sw = new LatLng(41.6751050889, -140.99778);
-        LatLng ne = new LatLng(83.23324, -52.6480987209);
-        autocompleteFragment.setBoundsBias(new LatLngBounds(sw, ne));
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        ImageButton geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
+        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onPlaceSelected(Place place) {
-                geoLocation = new GeoLocation(
-                    place.getName().toString(),
-                    place.getLatLng().latitude,
-                    place.getLatLng().longitude
-                );
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
+            public void onClick(View v){
+                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
+                intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                startActivityForResult(intent,REQUEST_GEOLOCATION);
             }
         });
 
         Button cancelButton = findViewById(R.id.record_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
-        geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
-        geolocationEditButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(
-                        RecordActivity.this,
-                        LocationActivity.class
-                );
-                startActivityForResult(intent,REQUEST_GEOLOCATION);
-            }
-        });
-        commitButton = findViewById(R.id.record_commit_button);
-        commitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -163,7 +111,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentInput.setVisibility(View.GONE);
 
             locationView.setVisibility(View.VISIBLE);
-            autocompleteFragment.getView().setVisibility(View.GONE);
+            geolocationEditButton.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
@@ -181,25 +129,13 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             commentInput.setVisibility(View.VISIBLE);
 
             locationView.setVisibility(View.GONE);
-            autocompleteFragment.getView().setVisibility(View.VISIBLE);
+            geolocationEditButton.setVisibility(View.VISIBLE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
         }
-        record_geolocation_edit_button = findViewById(R.id.record_geolocation_edit_button);
-        record_geolocation_edit_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
-                intent.putExtra("recordId",recordId);
-                intent.putExtra("problemId",problemId);
-                startActivity(intent);
-            }
-        });
-
-        initTitleViews();
-        initCommentViews();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -246,7 +182,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         if (geoLocation != null) {
             this.geoLocation = geoLocation;
             locationView.setText(geoLocation.getAddress());
-            autocompleteFragment.setText(geoLocation.getAddress());
         }
     }
 
