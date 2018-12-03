@@ -16,6 +16,11 @@ public class CareProvider extends Account {
         super(username, contactInfo);
     }
 
+    /**
+     * Decode the {@code bitmapString} and return its representing {@code Bitmap} for usage.
+     *
+     * @return {@code PatientTreeSet}
+     */
     @NotNull
     public PatientTreeSet getAssignedPatientTreeSet(){
         return this.assignedPatientTreeSet;
