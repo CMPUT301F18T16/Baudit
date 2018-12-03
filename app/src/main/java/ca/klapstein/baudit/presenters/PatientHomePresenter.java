@@ -46,7 +46,7 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
         try {
-            Problem problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            Problem problem = problemTreeSet.toArray(new Problem[0])[position];
             rowView.updateProblemTitleText(problem.getTitle());
             rowView.updateProblemDateText(problem.getTimeStamp());
             rowView.updateProblemDescriptionText(problem.getDescription());
