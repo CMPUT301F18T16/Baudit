@@ -5,14 +5,12 @@ import android.util.Log;
 import ca.klapstein.baudit.data.Account;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.PatientHomeView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 /**
  * MVP presenter for presenting a {@code Patient}'s home screen on a {@code HomeView}.
  *
- * @see HomeView
  * @see Account
  * @see ProblemTreeSet
  */

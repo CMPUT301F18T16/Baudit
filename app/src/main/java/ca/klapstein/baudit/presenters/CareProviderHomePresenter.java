@@ -4,13 +4,11 @@ import android.content.Context;
 import android.util.Log;
 import ca.klapstein.baudit.data.*;
 import ca.klapstein.baudit.views.CareProviderHomeView;
-import ca.klapstein.baudit.views.HomeView;
 import ca.klapstein.baudit.views.PatientRowView;
 
 /**
  * MVP presenter for presenting a {@code PatientTreeSet} on a {@code PatientListView}.
  *
- * @see HomeView
  * @see Account
  * @see PatientTreeSet
  */
