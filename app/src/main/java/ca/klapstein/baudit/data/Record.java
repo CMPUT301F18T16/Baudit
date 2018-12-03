@@ -20,8 +20,6 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
-
-    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
@@ -31,7 +29,8 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
 
     @NonNull
-    private ArrayList<String> photoBitmapStrings = new ArrayList<String>();
+    private ArrayList<RecordPhoto> recordPhotos = new ArrayList<>();
+
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
@@ -102,20 +101,18 @@ public class Record implements Comparable<Record> {
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
-    
-    // TODO: move this into util class
-    public static String encodeTobase64(Bitmap image) {
-        Bitmap immagex = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.PNG, 90, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
+
+    public void addRecordPhoto(Bitmap bitmap) {
+        recordPhotos.add(new RecordPhoto(bitmap));
     }
 
-    public static Bitmap decodeBase64(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    @NonNull
+    public ArrayList<Bitmap> getRecordPhotos() {
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (RecordPhoto recordPhoto : recordPhotos) {
+            bitmaps.add(recordPhoto.getBitmap());
+        }
+        return bitmaps;
     }
 
     @Nullable
@@ -252,5 +249,4 @@ public class Record implements Comparable<Record> {
     public void setRecordId(@NonNull UUID recordId) {
         this.recordId = recordId;
     }
-
 }

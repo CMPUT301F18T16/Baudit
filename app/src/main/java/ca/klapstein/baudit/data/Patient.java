@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Patient extends Account {
 
     private ProblemTreeSet problemTreeSet;
+
     private ArrayList<BodyLocationPhoto> bodyLocationPhotos;
 
     public Patient(Username username, ContactInfo contactInfo) {
