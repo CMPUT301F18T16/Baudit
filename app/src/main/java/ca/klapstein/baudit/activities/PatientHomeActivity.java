@@ -50,7 +50,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     private TextView problemCountText;
     private TextView navHeaderUsername;
     private TextView navHeaderEmail;
-    private SearchView problemSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +146,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.patient_home_menu, menu);
 
-        problemSearchView = (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+        SearchView problemSearchView =
+            (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -210,10 +210,17 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
     @Override
     public void updateAccountLoadError() {
-        Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
+        Toast.makeText(
+            this,
+            getResources().getString(R.string.patient_account_load_failure),
+            Toast.LENGTH_LONG
+        ).show();
     }
 
-    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
+    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder>
+        implements Filterable {
+
+        private final ProblemFilter problemFilter = new ProblemFilter();
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -221,8 +228,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                     .inflate(R.layout.card_problem, viewGroup, false);
             return new ProblemViewHolder(v); // Wrap it in a ViewHolder.
         }
-
-        private ProblemFilter problemFilter = new ProblemFilter();
 
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {
