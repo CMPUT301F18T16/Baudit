@@ -222,10 +222,18 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(@NonNull Record record) {
+        if (getDate().compareTo(record.getDate()) != 0) {
+            return getDate().compareTo(record.getDate());
+        }
+
+        if (getTitle().compareTo(record.getTitle()) != 0) {
+            return getTitle().compareTo(record.getTitle());
+        }
+
         if (getRecordId().compareTo(record.getRecordId()) == 0) {
             return 0;
         }
-        return date.compareTo(record.getDate());
+        return getRecordId().compareTo(record.getRecordId());
     }
 
     public UUID getRecordId() {

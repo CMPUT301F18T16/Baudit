@@ -44,7 +44,7 @@ public class GeoLocation {
      * @return {@code double} a longitude value that is between -90 and +90.
      */
     public double getLon() {
-        return lon;
+        return this.lon;
     }
 
 
@@ -67,7 +67,7 @@ public class GeoLocation {
      * @return {@code double} a latitude value that is between -90 and +90.
      */
     public double getLat() {
-        return lat;
+        return this.lat;
     }
 
     /**
