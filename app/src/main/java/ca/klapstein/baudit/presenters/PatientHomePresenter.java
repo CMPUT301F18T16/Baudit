@@ -104,6 +104,12 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
         }
     }
 
+    public int getTrueProblemIndex(int position) {
+        patient = dataManager.getLoggedInPatient();
+        Problem problem = (Problem) problemTreeSet.toArray()[position];
+        return new ArrayList<Problem>(Arrays.asList(patient.getProblemTreeSet().toArray(new Problem[0]))).indexOf(problem);
+    }
+
     public void filterProblemsByKeyWords(CharSequence constraint) {
         try {
             patient = dataManager.getLoggedInPatient();

@@ -39,6 +39,12 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
         }
     }
 
+    public int getTrueProblemIndex(int position) {
+        patient = dataManager.getPatient(patient.getUsername());
+        Problem problem = (Problem) problemTreeSet.toArray()[position];
+        return new ArrayList<Problem>(Arrays.asList(patient.getProblemTreeSet().toArray(new Problem[0]))).indexOf(problem);
+    }
+
     public int getProblemCount() {
         if (patient != null) {
             return problemTreeSet.size();
