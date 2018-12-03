@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,9 +57,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView locationView;
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
-    private ImageView addPhotoImage;
     private ImageView recordImage;
-    private Button slideshow;
 
 
     @Override
@@ -106,18 +107,9 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
-
-        slideshow =findViewById( R.id.record_slideshow_button );
-        slideshow.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
-                startActivity( intent );
-            }
-        } );
-
         recordImage = findViewById(R.id.recordImage);
-        addPhotoImage = findViewById(R.id.addPhotoImageView);
+
+        ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,5 +240,23 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.record_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.record_play_slideshow:
+                startActivity(new Intent(RecordActivity.this,SlideshowActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
