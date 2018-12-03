@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
@@ -40,6 +41,10 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     private CameraPreview cameraPreview;
     private int cameraId;
     private ImageView cameraOverlay;
+    private boolean recordPhoto = false;
+    private boolean bodyLocationPhoto = false;
+    private int recordId;
+    private int problemId;
 
     /**
      * Set the camera's orientation.
@@ -90,6 +95,11 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
             }
         }
 
+        recordPhoto = getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false);
+        bodyLocationPhoto = getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false);
+        problemId = getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1);
+        recordId = getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1);
+
         cameraOverlay = findViewById(R.id.camera_overlay);
         cameraPreview = findViewById(R.id.camera_preview);
 
@@ -113,12 +123,12 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
         openCamera();
         initCamera();
 
-        presenter = new AddPhotoPresenter(this, this);
+        presenter = new AddPhotoPresenter(this, getApplicationContext());
 
-        if (getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false)) {
-            presenter.getLastRecordPhoto(getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1));
+        if (recordPhoto) {
+            presenter.getLastRecordPhoto(problemId);
             Log.d(TAG, "starting CameraActivity for adding a record photo");
-        } else if (getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false)) {
+        } else if (bodyLocationPhoto) {
             Log.d(TAG, "starting CameraActivity for adding a body photo");
         } else {
             Log.w(TAG, "unknown reason for starting CameraActivity: are you testing?");
@@ -126,12 +136,14 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
+    public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions,
+                                           @NotNull int[] grantResults) {
+        // If request is cancelled, the result arrays are empty.
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //Start your camera handling here
             } else {
-                // TODO: put stuff here?
+                finish();
             }
         }
     }
@@ -166,19 +178,19 @@ public class CameraActivity extends AppCompatActivity implements Camera.PictureC
     }
 
     /**
-     * On taking a picture convert it to a {@code Bitmap} and send it to the presenter for either committing a
-     * record or body photo.
+     * On taking a picture convert it to a {@code Bitmap} and send it to the presenter for either
+     * committing a record or body photo.
      *
      * @param data   {@code byte[]}
      * @param camera {@code Camera}
      */
     @Override
-    public void onPictureTaken(byte[] data, Camera camera) {
+    public void onPictureTaken(@NonNull byte[] data, @NonNull Camera camera) {
         Bitmap picture = BitmapFactory.decodeByteArray(data, 0, data.length);
         // TODO: additional Bitmap work
-        if (getIntent().getBooleanExtra(RECORD_PHOTO_FIELD, false)) {
-            presenter.commitRecordPhoto(picture, getIntent().getIntExtra(RECORD_PHOTO_RECORD_ID_FIELD, -1), getIntent().getIntExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, -1));
-        } else if (getIntent().getBooleanExtra(BODY_PHOTO_FIELD, false)) {
+        if (recordPhoto) {
+            presenter.commitRecordPhoto(picture, recordId, problemId);
+        } else if (bodyLocationPhoto) {
             presenter.commitBodyPhoto(picture);
         } else {
             Log.w(TAG, "unknown reason CameraActivity photo taken");

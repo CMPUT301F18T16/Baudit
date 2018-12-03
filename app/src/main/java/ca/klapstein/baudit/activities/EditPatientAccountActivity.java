@@ -2,6 +2,7 @@ package ca.klapstein.baudit.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -13,9 +14,13 @@ import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.BodyLocationPhoto;
 import ca.klapstein.baudit.presenters.EditPatientAccountPresenter;
+import ca.klapstein.baudit.util.BitmapRotater;
 import ca.klapstein.baudit.views.EditPatientAccountView;
 
 import java.util.ArrayList;
+
+import static ca.klapstein.baudit.activities.CameraActivity.BODY_PHOTO_FIELD;
+import static ca.klapstein.baudit.activities.CameraActivity.RECORD_PHOTO_FIELD;
 
 /**
  * Activity for editing a {@code Account}.
@@ -128,10 +133,7 @@ public class EditPatientAccountActivity extends AppCompatActivity implements Edi
                 .inflate(R.layout.card_body_location, bodyLocationsLayout, false);
             ImageView bodyLocationImage =
                 bodyLocationView.findViewById(R.id.card_body_location_image);
-            bodyLocationImage.setImageBitmap(photo.getBitmap());
-            TextView bodyLocationLabel =
-                bodyLocationView.findViewById(R.id.card_body_location_label);
-            bodyLocationLabel.setText(photo.getLabel());
+            bodyLocationImage.setImageBitmap(BitmapRotater.RotateBitmap90(photo.getBitmap()));
 
             bodyLocationView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -164,7 +166,10 @@ public class EditPatientAccountActivity extends AppCompatActivity implements Edi
         addBodyLocationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Do something
+                Intent intent = new Intent(EditPatientAccountActivity.this, CameraActivity.class);
+                intent.putExtra(RECORD_PHOTO_FIELD, false);
+                intent.putExtra(BODY_PHOTO_FIELD, true);
+                startActivity(intent);
             }
         });
 

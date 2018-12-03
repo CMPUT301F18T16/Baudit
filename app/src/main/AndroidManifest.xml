@@ -10,11 +10,14 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-feature
-            android:name="android.hardware.camera2"
-            android:required="true"/>
+            android:name="android.hardware.camera"
+            android:required="false"/>
     <uses-feature
-            android:name="android.hardware.camera2.front"
-            android:required="true"/>
+            android:name="android.hardware.camera.front"
+            android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false"/>
 
     <application
             android:allowBackup="true"
@@ -55,10 +58,11 @@
         <activity
                 android:name=".activities.CareProviderHomeActivity"
                 android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.ViewPhotoActivity"/>
+
         <activity
                 android:name=".activities.PatientHomeActivity"
                 android:theme="@style/BauditTheme"/>
+
         <activity
                 android:name=".activities.SplashActivity"
                 android:theme="@style/BauditSplashTheme">
@@ -69,17 +73,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.CameraActivity">
         </activity>
+
         <activity
                 android:name=".activities.MapRecordsActivity"
                 android:theme="@style/BauditTheme"/>
+
         <activity android:name=".activities.DisplayQRCodeActivity">
         </activity>
-        <activity android:name=".activities.CareProviderProblemListActivity">
-        </activity>
-        <activity android:name=".activities.SlideshowActivity">
-        </activity>
+
+        <activity
+            android:name=".activities.CareProviderProblemListActivity"
+            android:theme="@style/BauditTheme" />
+
+        <activity
+            android:name=".activities.SlideshowActivity"
+            android:theme="@style/BauditTheme" />
 
         <activity
             android:name=".activities.ViewAccountActivity"
