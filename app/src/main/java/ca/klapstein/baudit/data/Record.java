@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -17,8 +16,6 @@ import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
-
-    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
@@ -29,7 +26,7 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
 
     @NonNull
-    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    private ArrayList<RecordPhoto> recordPhotos = new ArrayList<>();
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
@@ -102,16 +99,16 @@ public class Record implements Comparable<Record> {
     }
 
     public void addRecordPhoto(Bitmap bitmap) {
-        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            recordPhotos.add(ThumbnailUtils.extractThumbnail(bitmap, 255, 255));
-        } else {
-            recordPhotos.add(bitmap);
-        }
+        recordPhotos.add(new RecordPhoto(bitmap));
     }
 
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
-        return recordPhotos;
+        ArrayList<Bitmap> bitmaps = new ArrayList<>();
+        for (RecordPhoto recordPhoto : recordPhotos) {
+            bitmaps.add(recordPhoto.getBitmap());
+        }
+        return bitmaps;
     }
 
     @Nullable
