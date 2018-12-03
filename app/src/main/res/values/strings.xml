@@ -111,4 +111,5 @@
     <string name="problem_image">Problem Icon Image</string>
     <string name="record_icon_image">Record Icon Image</string>
     <string name="navigation_header_icon_image">Navigation Header Icon Image</string>
+    <string name="start_date_label">Start date:</string>
 </resources>
