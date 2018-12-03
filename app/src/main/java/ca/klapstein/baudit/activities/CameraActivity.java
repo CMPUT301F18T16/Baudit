@@ -18,13 +18,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.AddPhotoPresenter;
-import ca.klapstein.baudit.util.BitmapEncoderUtil;
 import ca.klapstein.baudit.views.AddPhotoView;
 import ca.klapstein.baudit.widgets.CameraPreview;
 import org.jetbrains.annotations.NotNull;
 
 import static ca.klapstein.baudit.util.BitmapRotater.RotateBitmap90;
-
 
 public class CameraActivity extends AppCompatActivity implements Camera.PictureCallback, AddPhotoView {
     private static final String TAG = "CameraActivity";
