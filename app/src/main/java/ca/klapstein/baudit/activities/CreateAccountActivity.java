@@ -56,15 +56,17 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         });
 
         RadioButton careProviderRadioButton = findViewById(R.id.care_provider_radio_button);
-        careProviderRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    identificationMincText.setVisibility(View.VISIBLE);
-                    identificationMincInput.setVisibility(View.VISIBLE);
+        careProviderRadioButton.setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        identificationMincText.setVisibility(View.VISIBLE);
+                        identificationMincInput.setVisibility(View.VISIBLE);
+                    }
                 }
             }
-        });
+        );
 
         firstNameInput = findViewById(R.id.create_account_first_name_input);
         lastNameInput = findViewById(R.id.create_account_last_name_input);

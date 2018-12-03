@@ -85,16 +85,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                         case (R.id.nav_edit_account):
                             startActivity(new Intent(
                                 getApplicationContext(),
-                                EditAccountActivity.class
+                                EditPatientAccountActivity.class
                             ));
-                            return true;
-                        case (R.id.nav_set_body_photo):
-                            Intent intent = new Intent(
-                                getApplicationContext(),
-                                CameraActivity.class
-                            );
-                            intent.putExtra(CameraActivity.BODY_PHOTO_FIELD, true);
-                            startActivity(intent);
                             return true;
                         case (R.id.nav_display_qr_code):
                             startActivity(new Intent(
