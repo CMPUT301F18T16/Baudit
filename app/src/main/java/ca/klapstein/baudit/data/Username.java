@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
  */
 public class Username {
 
+    @NonNull
     private String username;
 
     public Username(@NonNull String username) throws IllegalArgumentException {
