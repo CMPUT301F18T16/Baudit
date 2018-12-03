@@ -70,7 +70,6 @@ public class CareProviderProblemListPresenter extends Presenter<CareProviderProb
 
         ArrayList<String> searchTokens = new ArrayList<>(Arrays.asList(constraint.toString().toLowerCase().split(" ")));
         Log.d(TAG, "filtering with tokens: " + searchTokens);
-        patient = dataManager.getLoggedInPatient();
         Problem[] problemArray = problemTreeSet.toArray(new Problem[0]);
         for (Problem aProblemArray : problemArray) {
             if (Collections.disjoint(searchTokens, aProblemArray.getKeywords()))
