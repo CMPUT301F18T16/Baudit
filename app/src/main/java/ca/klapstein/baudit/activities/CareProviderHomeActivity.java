@@ -21,6 +21,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.models.DataModel;
 import ca.klapstein.baudit.presenters.CareProviderHomePresenter;
 import ca.klapstein.baudit.views.CareProviderHomeView;
 import ca.klapstein.baudit.views.PatientRowView;
@@ -96,6 +97,13 @@ public class CareProviderHomeActivity extends AppCompatActivity implements CareP
                             startActivity(new Intent(
                                 getApplicationContext(),
                                 DisplayQRCodeActivity.class
+                            ));
+                            break;
+                        case (R.id.nav_unpair):
+                            new DataModel(getApplicationContext()).clearOfflineLoginAccount();
+                            startActivity(new Intent(
+                                    getApplicationContext(),
+                                    StartActivity.class
                             ));
                             break;
                         default:
