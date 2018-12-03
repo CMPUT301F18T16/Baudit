@@ -10,6 +10,7 @@ import ca.klapstein.baudit.views.ProblemView;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -52,13 +53,13 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     }
 
     public void clickedDateButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
-        view.showDatePicker(Calendar.getInstance());
+        view.showDatePicker(calendar);
     }
 
     public void clickedTimeButton() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(problem.getDate());
         view.showTimePicker(calendar);
     }

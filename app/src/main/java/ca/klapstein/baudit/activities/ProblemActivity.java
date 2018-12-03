@@ -14,8 +14,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+
 import android.view.*;
 import android.widget.*;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.data.RecordTreeSet;
@@ -24,11 +31,8 @@ import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import static ca.klapstein.baudit.activities.MapRecordsActivity.*;
+
 import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
@@ -47,7 +51,7 @@ public class ProblemActivity extends AppCompatActivity
 
     private int problemPosition;
     private ProblemPresenter presenter;
-    private Calendar problemTime = Calendar.getInstance();
+    private Calendar problemTime = new GregorianCalendar();
 
     private TextView titleView;
     private EditText titleInput;
@@ -161,6 +165,7 @@ public class ProblemActivity extends AppCompatActivity
         });
 
         recordList = findViewById(R.id.problem_records_list);
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
@@ -308,11 +313,15 @@ public class ProblemActivity extends AppCompatActivity
 
     @Override
     public void updateProblemTime(Date date) {
-        problemTime.set(Calendar.YEAR, date.getYear());
-        problemTime.set(Calendar.MONTH, date.getMonth());
-        problemTime.set(Calendar.DAY_OF_MONTH, date.getDay());
-        problemTime.set(Calendar.HOUR_OF_DAY, date.getHours());
-        problemTime.set(Calendar.MINUTE, date.getMinutes());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        problemTime.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        problemTime.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        problemTime.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+        problemTime.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR));
+        problemTime.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+        updateDateButton(problemTime.getTime());
+        updateTimeButton(problemTime.getTime());
     }
 
     @Override
