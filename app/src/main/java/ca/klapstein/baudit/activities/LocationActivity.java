@@ -49,7 +49,6 @@ import java.util.List;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
-import ca.klapstein.baudit.presenters.LocationPresenter;
 import ca.klapstein.baudit.views.LocationView;
 
 
@@ -65,13 +64,11 @@ public class LocationActivity extends AppCompatActivity
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71,136));
 
     private MapView mapView;
-    private FusedLocationProviderClient fusedLocationProviderClient;
     private GoogleMap map;
     private AutoCompleteTextView searchText;
     private ImageView gpsButton;
     private Button confirmButton;
     private PlaceAutoCompleteAdapter autoCompleteAdapter;
-    private GeoDataClient geoDataClient;
     private GoogleApiClient googleApiClient;
     private Address address;
 
@@ -155,9 +152,7 @@ public class LocationActivity extends AppCompatActivity
      * @param hasCapture True if the window has pointer capture.
      */
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        return;
-    }
+    public void onPointerCaptureChanged(boolean hasCapture) {}
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -193,7 +188,7 @@ public class LocationActivity extends AppCompatActivity
                 .enableAutoManage(this, this)
                 .build();
 
-        geoDataClient = Places.getGeoDataClient(this,null);
+        GeoDataClient geoDataClient = Places.getGeoDataClient(this,null);
 
         autoCompleteAdapter = new PlaceAutoCompleteAdapter(this, geoDataClient, LAT_LNG_BOUNDS,null);
 
@@ -259,7 +254,8 @@ public class LocationActivity extends AppCompatActivity
     }
 
     public void getDeviceLocation(){
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        FusedLocationProviderClient fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this);
         try{
             final Task location = fusedLocationProviderClient.getLastLocation();
             location.addOnCompleteListener(new OnCompleteListener() {
@@ -298,7 +294,7 @@ public class LocationActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {return;}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override

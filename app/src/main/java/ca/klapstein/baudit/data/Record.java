@@ -223,15 +223,15 @@ public class Record implements Comparable<Record> {
             return getDate().compareTo(record.getDate());
         }
 
-        if (getTitle() != null && record.getTitle() != null) {
-            if (getTitle().compareTo(record.getTitle()) != 0) {
+        if (getTitle() != null && record.getTitle() != null
+            && getTitle().compareTo(record.getTitle()) != 0) {
                 return getTitle().compareTo(record.getTitle());
-            }
         }
 
         if (getRecordId().compareTo(record.getRecordId()) == 0) {
             return 0;
         }
+
         return getRecordId().compareTo(record.getRecordId());
     }
 
