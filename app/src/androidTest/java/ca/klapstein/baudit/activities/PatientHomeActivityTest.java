@@ -79,7 +79,8 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
 //        assertFalse(solo.searchText("problem 3"));
 //    }
 
-    // TODO: travis does not likey
+
+// TODO: travis does not likey
 //    @Test
 //    public void testSearchProblem1() throws InterruptedException {
 //        solo.waitForActivity(PatientHomeActivity.class);

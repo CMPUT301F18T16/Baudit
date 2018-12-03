@@ -26,6 +26,7 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
 import ca.klapstein.baudit.views.HomeView;
@@ -148,6 +149,7 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
         SearchView problemSearchView =
             (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+
         problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

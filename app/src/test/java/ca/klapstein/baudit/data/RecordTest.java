@@ -178,20 +178,6 @@ public class RecordTest {
     }
 
     @Test
-    public void addRecordPhoto() {
-        Record record = new Record();
-        record.addRecordPhoto(mockRecordPhoto);
-        assertEquals(1, record.getRecordPhotos().size());
-    }
-
-    @Test
-    public void getLastRecordPhotoNonNull() {
-        Record record = new Record();
-        record.addRecordPhoto(mockRecordPhoto);
-        assertNotNull(record.getLastRecordPhoto());
-    }
-
-    @Test
     public void getRecordPhotos() {
         Record record = new Record();
         ArrayList<Bitmap> recordPhotos = record.getRecordPhotos();
