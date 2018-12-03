@@ -138,7 +138,7 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                    intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, presenter.getTrueProblemIndex(viewHolder.getAdapterPosition()));
                     intent.putExtra(PROBLEM_MODE_EXTRA, "careprovider");
                     startActivity(intent);
                 }

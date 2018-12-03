@@ -241,7 +241,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ProblemActivity.class);
-                    intent.putExtra(PROBLEM_POSITION_EXTRA, viewHolder.getAdapterPosition());
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, presenter.getTrueProblemIndex(viewHolder.getAdapterPosition()));
                     intent.putExtra(PROBLEM_MODE_EXTRA, "view");
                     startActivity(intent);
                 }
@@ -263,7 +263,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                                 case R.id.edit_problem:
                                     intent.putExtra(
                                         PROBLEM_POSITION_EXTRA,
-                                        viewHolder.getAdapterPosition()
+                                            presenter.getTrueProblemIndex(viewHolder.getAdapterPosition())
                                     );
                                     intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                                     startActivity(intent);
@@ -278,7 +278,7 @@ public class PatientHomeActivity extends AppCompatActivity implements PatientHom
                                                 @Override
                                                 public void onClick(DialogInterface di, int i) {
                                                     presenter.deleteProblemClicked(
-                                                        viewHolder.getAdapterPosition()
+                                                            presenter.getTrueProblemIndex(viewHolder.getAdapterPosition())
                                                     );
                                                 }
                                             })
