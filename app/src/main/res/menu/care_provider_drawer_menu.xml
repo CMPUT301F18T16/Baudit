@@ -8,4 +8,8 @@
         android:id="@+id/nav_display_qr_code"
         android:icon="@drawable/ic_qrcode_white_24dp"
         android:title="@string/display_qr_code"/>
+    <item
+        android:id="@+id/nav_unpair"
+        android:icon="@drawable/logout"
+        android:title="@string/unpair"/>
 </menu>
