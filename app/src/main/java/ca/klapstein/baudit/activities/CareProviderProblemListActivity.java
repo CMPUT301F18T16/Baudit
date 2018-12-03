@@ -3,14 +3,19 @@ package ca.klapstein.baudit.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +25,8 @@ import ca.klapstein.baudit.views.CareProviderProblemListView;
 import ca.klapstein.baudit.views.ProblemRowView;
 
 import static ca.klapstein.baudit.activities.CareProviderHomeActivity.PATIENT_USERNAME_EXTRA;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_MODE;
+import static ca.klapstein.baudit.activities.MapRecordsActivity.MAP_RECORDS_USERNAME;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_MODE_EXTRA;
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
@@ -69,6 +76,27 @@ public class CareProviderProblemListActivity extends AppCompatActivity implement
             getResources().getString(R.string.patient_account_load_failure),
             Toast.LENGTH_LONG
         ).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.care_provider_problem_list_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.care_provider_problem_list_view_map:
+                Intent intent = new Intent(getApplicationContext(), MapRecordsActivity.class);
+                intent.putExtra(MAP_RECORDS_MODE, "all");
+                intent.putExtra(MAP_RECORDS_USERNAME, patientUsername);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
