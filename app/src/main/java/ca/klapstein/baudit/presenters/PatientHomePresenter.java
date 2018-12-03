@@ -46,7 +46,6 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public void onBindProblemRowViewAtPosition(ProblemRowView rowView, int position) {
         try {
-            patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[position];
             rowView.updateProblemTitleText(problem.getTitle());
             rowView.updateProblemDateText(problem.getTimeStamp());
@@ -59,7 +58,6 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public String getUsername() {
         try {
-            patient = dataManager.getLoggedInPatient();
             return patient.getUsername().toString();
         } catch (Exception e) {
             Log.e(TAG, "failed to get patient username", e);
@@ -91,7 +89,6 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
 
     public void deleteProblemClicked(int position) {
         try {
-            patient = dataManager.getLoggedInPatient();
             Problem deletedProblem = (Problem) problemTreeSet.toArray()[position];
             problemTreeSet.remove(deletedProblem);
             patient.getProblemTreeSet().remove(deletedProblem);
@@ -105,14 +102,12 @@ public class PatientHomePresenter extends Presenter<PatientHomeView> {
     }
 
     public int getTrueProblemIndex(int position) {
-        patient = dataManager.getLoggedInPatient();
         Problem problem = (Problem) problemTreeSet.toArray()[position];
         return new ArrayList<Problem>(Arrays.asList(patient.getProblemTreeSet().toArray(new Problem[0]))).indexOf(problem);
     }
 
     public void filterProblemsByKeyWords(CharSequence constraint) {
         try {
-            patient = dataManager.getLoggedInPatient();
             problemTreeSet.clear();
             problemTreeSet.addAll(patient.getProblemTreeSet());
         } catch (Exception e) {
