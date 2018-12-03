@@ -72,7 +72,7 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         view.updateRecordNumber(problem.getRecordTreeSet().size());
     }
 
-    public void commitProblem(int position, String title, String description, Date date) {
+    public int commitProblem(int position, String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
@@ -86,6 +86,12 @@ public class ProblemPresenter extends Presenter<ProblemView> {
             Log.e(TAG, "failed committing Problem", e);
             view.commitProblemFailure();
         }
+        for (int i = 0; i < patient.getProblemTreeSet().size(); i++) {
+            if (problem.equals( patient.getProblemTreeSet().toArray()[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public String getUsername() {
