@@ -20,7 +20,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.klapstein.baudit.R;
@@ -142,6 +145,32 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.patient_home_menu, menu);
+
+        SearchView problemSearchView =
+            (SearchView) menu.findItem(R.id.patient_home_search).getActionView();
+        problemSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        problemSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                // reset the presenters list of problems, thus, repopulating the list
+                presenter.viewStarted();
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -181,10 +210,17 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
 
     @Override
     public void updateAccountLoadError() {
-        Toast.makeText(this, getResources().getString(R.string.patient_account_load_failure), Toast.LENGTH_LONG).show();
+        Toast.makeText(
+            this,
+            getResources().getString(R.string.patient_account_load_failure),
+            Toast.LENGTH_LONG
+        ).show();
     }
 
-    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> {
+    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder>
+        implements Filterable {
+
+        private final ProblemFilter problemFilter = new ProblemFilter();
 
         @Override @NonNull
         public ProblemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -259,6 +295,27 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         @Override
         public int getItemCount() {
             return presenter.getProblemCount();
+        }
+
+        @Override
+        public Filter getFilter() {
+            return problemFilter;
+        }
+
+        private class ProblemFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                presenter.filterProblemsByKeyWords(constraint);
+                results.count = presenter.getProblemCount();
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                notifyDataSetChanged();
+            }
         }
     }
 
