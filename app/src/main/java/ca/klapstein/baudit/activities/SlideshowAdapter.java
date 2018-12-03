@@ -25,12 +25,12 @@ import ca.klapstein.baudit.views.SlideShowView;
 public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
 
     //Stored temporary photos in drawable to test slideshow
-    private int[] image_resource = {R.drawable.baudit_logo_240x120, R.drawable.baudit_logo_240x120, R.drawable.baudit_logo_240x120};
+    //TEST: image_resource
+    //private int[] image_resource = {R.drawable.baudit_logo_240x120, R.drawable.baudit_logo_240x120, R.drawable.baudit_logo_240x120};
     private ArrayList<String> bitmapStringArray = new ArrayList<String>();
     private Context context;
     private LayoutInflater layoutInflater;
     private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-
 
 
     public SlideshowAdapter(Context context, ArrayList<String> bitmapStringArray){
@@ -46,8 +46,8 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
     @Override
     public int getCount() {
         //TODO: Get length of the photos stored in bitmap Array
-        //return bitmapArray.size();  //TEStS
-        return image_resource.length;
+        // return image_resource.length; TEST
+        return bitmapArray.size();
     }
 
     /**
@@ -72,11 +72,11 @@ public class SlideshowAdapter extends PagerAdapter implements SlideShowView {
 
 
         ImageView imageView = item_view.findViewById(R.id.image_view);
-        imageView.setImageResource(image_resource[position]);  //TEST CASE
+        // imageView.setImageResource(image_resource[position]);  //TEST CASE
 
         //TODO:update empty bitmapArray & setImageResource to the images on the list
-       // updateImageList();
-        //imageView.setImageBitmap(bitmapArray.get(position));
+        updateImageList();
+        imageView.setImageBitmap(bitmapArray.get(position));
 
 
         container.addView(item_view);
