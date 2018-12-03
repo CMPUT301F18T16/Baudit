@@ -5,14 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
+import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.CreateAccountPresenter;
 import ca.klapstein.baudit.views.CreateAccountView;
@@ -40,6 +33,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         Toolbar toolbar = findViewById(R.id.create_account_toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.create_account);
 
@@ -50,9 +44,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         final TextView identificationMincText = findViewById(R.id.create_account_minc_text);
         identificationMincInput = findViewById(R.id.create_account_minc_input);
 
-        final LinearLayout bodyLocationLayout =
-            findViewById(R.id.create_account_body_location_layout);
-
         RadioButton patientRadioButton = findViewById(R.id.patient_radio_button);
         patientRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -60,22 +51,22 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
                 if (isChecked) {
                     identificationMincText.setVisibility(View.GONE);
                     identificationMincInput.setVisibility(View.GONE);
-                    bodyLocationLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
 
         RadioButton careProviderRadioButton = findViewById(R.id.care_provider_radio_button);
-        careProviderRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    identificationMincText.setVisibility(View.VISIBLE);
-                    identificationMincInput.setVisibility(View.VISIBLE);
-                    bodyLocationLayout.setVisibility(View.GONE);
+        careProviderRadioButton.setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        identificationMincText.setVisibility(View.VISIBLE);
+                        identificationMincInput.setVisibility(View.VISIBLE);
+                    }
                 }
             }
-        });
+        );
 
         firstNameInput = findViewById(R.id.create_account_first_name_input);
         lastNameInput = findViewById(R.id.create_account_last_name_input);
@@ -88,14 +79,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
 
         phoneNumberInput = findViewById(R.id.create_account_phone_number_input);
         phoneNumberErrorText = findViewById(R.id.create_account_phone_number_error);
-
-        Button uploadButton = findViewById(R.id.create_account_body_location_upload_button);
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Work with this
-            }
-        });
 
         Button cancelButton = findViewById(R.id.create_account_cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {

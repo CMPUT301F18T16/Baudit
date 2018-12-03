@@ -41,6 +41,14 @@ public class CareProviderHomeActivityTest extends ActivityTestRule<CareProviderH
         solo.finishOpenedActivities();
     }
 
+//    // TODO: for local testing only
+//    @Test
+//    public void testAssignPatient() {
+//        solo.clickOnView(solo.getView(R.id.care_provider_home_fab));
+//        solo.waitForActivity(CreateAccountActivity.class);
+//        solo.assertCurrentActivity("Wrong Activity", CreateAccountActivity.class);
+//    }
+
     @Test
     public void onCreate() {
         solo.assertCurrentActivity("Wrong Activity", CareProviderHomeActivity.class);

@@ -1,31 +1,35 @@
 package ca.klapstein.baudit.activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
 import ca.klapstein.baudit.fragments.DatePickerDialogFragment;
 import ca.klapstein.baudit.fragments.TimePickerDialogFragment;
 import ca.klapstein.baudit.presenters.ProblemPresenter;
 import ca.klapstein.baudit.views.ProblemView;
-import ca.klapstein.baudit.views.RecordRowView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+
+import static ca.klapstein.baudit.activities.RecordActivity.RECORD_POSITION_EXTRA;
 
 /**
  * Activity for editing a {@code Problem}.
@@ -38,23 +42,21 @@ public class ProblemActivity extends AppCompatActivity
     implements ProblemView, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
-    private int problemId;
+    public static final String PROBLEM_POSITION_EXTRA = "problemPosition";
+    public static final String PROBLEM_MODE_EXTRA = "mode";
+
+    private int problemPosition;
     private ProblemPresenter presenter;
-    private RecordListAdapter adapter;
+    private Calendar problemTime = Calendar.getInstance();
+
     private TextView titleView;
     private EditText titleInput;
-    private ImageButton titleEditButton;
-    private ImageButton titleSaveButton;
-    private ImageButton titleCancelButton;
     private Button dateButton;
     private Button timeButton;
     private TextView descriptionView;
     private EditText descriptionInput;
-    private ImageButton descriptionEditButton;
-    private ImageButton descriptionSaveButton;
-    private ImageButton descriptionCancelButton;
-    private TextView recordsLabel;
-    private Button commitButton;
+    private TextView recordCountText;
+    private LinearLayout recordList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +64,51 @@ public class ProblemActivity extends AppCompatActivity
         setContentView(R.layout.activity_problem);
         Toolbar toolbar = findViewById(R.id.patient_home_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
-        problemId = getIntent().getIntExtra("problemId", -1);
+        problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
+        String mode = getIntent().getStringExtra(PROBLEM_MODE_EXTRA);
 
         presenter = new ProblemPresenter(this, getApplicationContext());
 
-        initTitleViews();
+        titleView = findViewById(R.id.problem_title_view);
+        titleInput = findViewById(R.id.problem_title_edit_text);
+
+        descriptionView = findViewById(R.id.problem_description_view);
+        descriptionInput = findViewById(R.id.problem_description_edit_text);
+
+        Button cancelButton = findViewById(R.id.problem_cancel_button);
+        Button saveButton = findViewById(R.id.problem_save_button);
+
+        // Set view visibility based on what mode we are in
+        if ("view".equals(mode)) {
+            getSupportActionBar().setTitle(R.string.view_problem);
+
+            titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
+
+            descriptionView.setVisibility(View.VISIBLE);
+            descriptionInput.setVisibility(View.GONE);
+
+            cancelButton.setVisibility(View.GONE);
+            saveButton.setVisibility(View.GONE);
+        } else if ("edit".equals(mode)) {
+            if (problemPosition == -1) {
+                getSupportActionBar().setTitle(R.string.new_problem);
+            } else {
+                getSupportActionBar().setTitle(R.string.edit_problem);
+            }
+
+
+            titleView.setVisibility(View.GONE);
+            titleInput.setVisibility(View.VISIBLE);
+
+            descriptionView.setVisibility(View.GONE);
+            descriptionInput.setVisibility(View.VISIBLE);
+
+            cancelButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
+        }
 
         dateButton = findViewById(R.id.problem_date_button);
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -85,52 +126,148 @@ public class ProblemActivity extends AppCompatActivity
             }
         });
 
-        commitButton = findViewById(R.id.problem_commit_button);
-        commitButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.commitProblem();
+                onBackPressed();
             }
         });
 
-        initDescriptionViews();
-
-        recordsLabel = findViewById(R.id.problem_records_label);
-
-        Button addRecord = findViewById(R.id.problem_add_record_button);
-        addRecord.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProblemActivity.this, RecordActivity.class);
-                intent.putExtra("recordId", -1);
-                intent.putExtra("problemId", problemId);
+                presenter.commitProblem(
+                    problemPosition,
+                    titleInput.getText().toString(),
+                    descriptionInput.getText().toString(),
+                    problemTime.getTime()
+                );
+            }
+        });
+
+        recordCountText = findViewById(R.id.problem_records_label);
+
+        Button addRecordButton = findViewById(R.id.problem_add_record_button);
+        addRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                intent.putExtra(RECORD_POSITION_EXTRA, -1);
+                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
                 startActivity(intent);
             }
         });
 
-        RecyclerView recordRecyclerView = findViewById(R.id.problem_records_list);
-        adapter = new RecordListAdapter();
-        recordRecyclerView.setAdapter(adapter);
-        recordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recordList = findViewById(R.id.problem_records_list);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(problemId);
+        presenter.viewStarted(problemPosition);
         updateRecordCountText();
-        adapter.notifyDataSetChanged();
+    }
+
+    private Bitmap createImage(int width, int height, int color) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setColor(color);
+        canvas.drawRect(0F, 0F, (float) width, (float) height, paint);
+        return bitmap;
+    }
+
+    @Override
+    public void updateRecordList(RecordTreeSet records) {
+        recordList.removeAllViews();
+        int index = 0;
+        for (Record record : records) {
+            final int recordPosition = index;
+            final CardView recordView = (CardView) LayoutInflater.from(recordList.getContext())
+                .inflate(R.layout.card_record, recordList, false);
+            ImageView recordImage = recordView.findViewById(R.id.record_card_image);
+            recordImage.setImageBitmap(createImage(64, 64, Color.LTGRAY)); // TODO: Replace with actual image if available
+            TextView recordTimestamp = recordView.findViewById(R.id.record_card_timestamp);
+            TextView recordTitle = recordView.findViewById(R.id.record_card_title);
+            TextView recordComment = recordView.findViewById(R.id.record_card_comment);
+
+            recordTimestamp.setText(record.getTimeStamp());
+            recordTitle.setText(record.getTitle());
+            recordComment.setText(record.getComment());
+
+            recordView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(
+                        ProblemActivity.this,
+                        RecordActivity.class
+                    );
+                    intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                    intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                    intent.putExtra(PROBLEM_MODE_EXTRA, "view");
+                    startActivity(intent);
+                }
+            });
+
+            recordView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    PopupMenu menu = new PopupMenu(getApplicationContext(), recordView);
+                    menu.inflate(R.menu.record_popup_menu);
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            Intent intent = new Intent(
+                                getApplicationContext(),
+                                RecordActivity.class
+                            );
+                            switch (item.getItemId()) {
+                                case R.id.edit_record:
+                                    intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                                    intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                                    intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
+                                    startActivity(intent);
+                                    break;
+                                case R.id.delete_record:
+                                    new AlertDialog.Builder(ProblemActivity.this)
+                                        .setTitle(R.string.delete_record_question)
+                                        .setCancelable(true)
+                                        .setNegativeButton(R.string.cancel, null)
+                                        .setPositiveButton(R.string.delete,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface di, int i) {
+                                                    presenter.deleteRecordClicked(
+                                                        recordPosition
+                                                    );
+                                                }
+                                            })
+                                        .show();
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    menu.show();
+                    return true;
+                }
+            });
+
+            recordList.addView(recordView);
+
+            index++;
+        }
+
+        updateRecordCountText();
     }
 
     @Override
     public void updateTitleField(String title) {
-        if (title.isEmpty()) {
-            getSupportActionBar().setTitle(R.string.new_problem);
-        } else {
-            getSupportActionBar().setTitle(title);
-        }
-
         titleView.setText(title);
+        titleInput.setText(title);
     }
 
     @Override
@@ -146,6 +283,15 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void updateDescriptionField(String description) {
         descriptionView.setText(description);
+        descriptionInput.setText(description);
+    }
+
+    @Override
+    public void updateProblemHints() {
+        titleView.setHint(R.string.default_title);
+        titleInput.setHint(R.string.default_title);
+        descriptionView.setHint(R.string.default_description);
+        descriptionInput.setHint(R.string.default_description);
     }
 
     @Override
@@ -176,208 +322,26 @@ public class ProblemActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         DateFormat mDateFormat = DateFormat.getDateInstance();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        String dateForButton = mDateFormat.format(calendar.getTime());
+        problemTime.set(Calendar.YEAR, year);
+        problemTime.set(Calendar.MONTH, month);
+        problemTime.set(Calendar.DAY_OF_MONTH, day);
+        String dateForButton = mDateFormat.format(problemTime.getTime());
         updateDateButton(dateForButton);
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
         DateFormat mTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        String timeForButton = mTimeFormat.format(calendar.getTime());
+        problemTime.set(Calendar.HOUR_OF_DAY, hour);
+        problemTime.set(Calendar.MINUTE, minute);
+        String timeForButton = mTimeFormat.format(problemTime.getTime());
         updateTimeButton(timeForButton);
     }
 
     private void updateRecordCountText() {
-        recordsLabel.setText(String.format(
+        recordCountText.setText(String.format(
             getResources().getString(R.string.records_label),
             presenter.getRecordCount()
         ));
-    }
-
-    private void initTitleViews() {
-        titleView = findViewById(R.id.problem_title_view);
-        titleInput = findViewById(R.id.problem_title_edit_text);
-        titleEditButton = findViewById(R.id.problem_title_edit_button);
-        titleEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(true);
-            }
-        });
-        titleSaveButton = findViewById(R.id.problem_title_save_button);
-        titleSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveTitleClicked(titleInput.getText().toString());
-                setTitleEditMode(false);
-            }
-        });
-        titleCancelButton = findViewById(R.id.problem_title_cancel_button);
-        titleCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(false);
-            }
-        });
-    }
-
-    private void initDescriptionViews() {
-        descriptionView = findViewById(R.id.problem_description_view);
-        descriptionInput = findViewById(R.id.problem_description_edit_text);
-        descriptionEditButton = findViewById(R.id.problem_description_edit_button);
-        descriptionEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDescriptionEditMode(true);
-            }
-        });
-        descriptionSaveButton = findViewById(R.id.problem_description_save_button);
-        descriptionSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveDescriptionClicked(descriptionInput.getText().toString());
-                setDescriptionEditMode(false);
-            }
-        });
-        descriptionCancelButton = findViewById(R.id.problem_description_cancel_button);
-        descriptionCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDescriptionEditMode(false);
-            }
-        });
-    }
-
-    private void setTitleEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_problem));
-            titleInput.setText(titleView.getText().toString());
-            titleInput.setVisibility(View.VISIBLE);
-            titleView.setVisibility(View.GONE);
-
-            titleEditButton.setVisibility(View.GONE);
-            titleSaveButton.setVisibility(View.VISIBLE);
-            titleCancelButton.setVisibility(View.VISIBLE);
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            titleInput.setVisibility(View.GONE);
-            titleView.setVisibility(View.VISIBLE);
-
-            titleEditButton.setVisibility(View.VISIBLE);
-            titleSaveButton.setVisibility(View.GONE);
-            titleCancelButton.setVisibility(View.GONE);
-        }
-    }
-
-    private void setDescriptionEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_problem));
-            descriptionInput.setText(descriptionView.getText().toString());
-            descriptionInput.setVisibility(View.VISIBLE);
-            descriptionView.setVisibility(View.GONE);
-
-            descriptionEditButton.setVisibility(View.GONE);
-            descriptionSaveButton.setVisibility(View.VISIBLE);
-            descriptionCancelButton.setVisibility(View.VISIBLE);
-
-
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            descriptionInput.setVisibility(View.GONE);
-            descriptionView.setVisibility(View.VISIBLE);
-
-            descriptionEditButton.setVisibility(View.VISIBLE);
-            descriptionSaveButton.setVisibility(View.GONE);
-            descriptionCancelButton.setVisibility(View.GONE);
-        }
-    }
-
-    private class RecordListAdapter extends RecyclerView.Adapter<RecordViewHolder> {
-
-        @Override @NonNull
-        public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            CardView v = (CardView) LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_record, viewGroup, false);
-            return new RecordViewHolder(v); //Wrap it in a ViewHolder.
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final RecordViewHolder viewHolder, int i) {
-            Record record = presenter.getRecordAt(i);
-
-            // TODO: Need a way to get image from records
-            viewHolder.setTimestampText(record.getTimeStamp());
-            viewHolder.setTitleText(record.getTitle());
-            viewHolder.setCommentText(record.getComment());
-
-            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(
-                        ProblemActivity.this,
-                        RecordActivity.class
-                    );
-                    intent.putExtra("problemId", problemId); // Test ID
-                    intent.putExtra("recordId", viewHolder.getAdapterPosition()); // Test ID
-                    // TODO: Need a way to get the problem's ID to add to the intent
-                    startActivity(intent);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return presenter.getRecordCount();
-        }
-    }
-
-    private class RecordViewHolder extends RecyclerView.ViewHolder implements RecordRowView {
-
-        private CardView cardView;
-        private ImageView imageView;
-        private TextView timestampView;
-        private TextView titleView;
-        private TextView commentView;
-
-        private RecordViewHolder(CardView card) {
-            super(card);
-            cardView = card;
-            imageView = card.findViewById(R.id.record_card_image);
-            timestampView = card.findViewById(R.id.record_card_timestamp);
-            titleView = card.findViewById(R.id.record_card_title);
-            commentView = card.findViewById(R.id.record_card_description);
-        }
-
-        @Override
-        public void onStart() {
-            // Do nothing.
-        }
-
-        @Override
-        public void setPreviewImage(Bitmap bmp) {
-            imageView.setImageBitmap(bmp);
-        }
-
-        @Override
-        public void setTimestampText(String timestamp) {
-            timestampView.setText(timestamp);
-        }
-
-        @Override
-        public void setTitleText(String title) {
-            titleView.setText(title);
-        }
-
-        @Override
-        public void setCommentText(String comment) {
-            commentView.setText(comment);
-        }
     }
 }

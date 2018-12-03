@@ -2,6 +2,7 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
@@ -9,6 +10,7 @@ import ca.klapstein.baudit.views.ProblemView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -17,9 +19,10 @@ import java.util.Calendar;
  * @see ProblemView
  */
 public class ProblemPresenter extends Presenter<ProblemView> {
-    private static final String TAG = "ProblemPresenter";
-    private Patient patient;
 
+    private static final String TAG = "ProblemPresenter";
+
+    private Patient patient;
     private Problem problem;
 
     public ProblemPresenter(ProblemView view, Context context) {
@@ -30,14 +33,19 @@ public class ProblemPresenter extends Presenter<ProblemView> {
     public void viewStarted(int position) {
         patient = dataManager.getLoggedInPatient();
         if (position == -1) { // If the problem is new
-            problem = new Problem("Set Title", "Set description");
+            problem = new Problem(
+                context.getResources().getString(R.string.default_title),
+                context.getResources().getString(R.string.default_description)
+            );
+            view.updateProblemHints();
         } else { // If the problem exists and is being edited
             problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+            view.updateTitleField(problem.getTitle());
+            view.updateDescriptionField(problem.getDescription());
+            view.updateRecordList(problem.getRecordTreeSet());
         }
-        view.updateTitleField(problem.getTitle());
         view.updateDateButton(DateFormat.getDateInstance().format(problem.getDate()));
         view.updateTimeButton(DateFormat.getTimeInstance(DateFormat.SHORT).format(problem.getDate()));
-        view.updateDescriptionField(problem.getDescription());
     }
 
     public void clickedDateButton() {
@@ -60,37 +68,22 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         return problem.getRecordTreeSet().size();
     }
 
-    /**
-     * Validate and save the given title to a {@code Problem} to be added/edited.
-     *
-     * @param newTitle {@code String}
-     */
-    public void saveTitleClicked(String newTitle) {
-        try {
-            problem.setTitle(newTitle);
-            view.updateTitleField(newTitle);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
+    public void deleteRecordClicked(int recordPosition) {
+        Record deletedRecord = (Record) problem.getRecordTreeSet().toArray()[recordPosition];
+        problem.getRecordTreeSet().remove(deletedRecord);
+        dataManager.commitPatient(patient);
+        view.updateRecordList(problem.getRecordTreeSet());
     }
 
-    /**
-     * Validate and save the given description to a {@code Problem} to be added/edited.
-     *
-     * @param newDescription {@code String}
-     */
-    public void saveDescriptionClicked(String newDescription) {
-        try {
-            problem.setDescription(newDescription);
-            view.updateDescriptionField(newDescription);
-        } catch (IllegalArgumentException e) {
-            // TODO: error
-        }
-    }
+    public void commitProblem(int position, String title, String description, Date date) {
+        problem.setTitle(title);
+        problem.setDescription(description);
+        problem.setDate(date);
 
-    public void commitProblem() {
         try {
-            patient.getProblemTreeSet().add(problem);
+            if (position == -1) {
+                patient.getProblemTreeSet().add(problem);
+            }
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {

@@ -56,6 +56,7 @@ public class Problem implements Comparable<Problem> {
         this.setDescription(description);
         this.date = new Date();
         this.recordTreeSet = new RecordTreeSet();
+        this.problemId = UUID.randomUUID();
     }
 
     /**
@@ -159,12 +160,6 @@ public class Problem implements Comparable<Problem> {
      */
     @Override
     public int compareTo(@NonNull Problem problem) {
-        if (problem.getProblemId() == null) {
-            problem.setProblemId(UUID.randomUUID());
-        }
-        if (getProblemId() == null) {
-            setProblemId(UUID.randomUUID());
-        }
         if (getProblemId().compareTo(problem.getProblemId()) == 0) {
             return 0;
         }
@@ -176,11 +171,14 @@ public class Problem implements Comparable<Problem> {
         }
     }
 
-    private UUID getProblemId() {
+    public UUID getProblemId() {
+        if (problemId == null) {
+            setProblemId(UUID.randomUUID());
+        }
         return problemId;
     }
 
-    private void setProblemId(UUID problemId) {
+    public void setProblemId(@NonNull UUID problemId) {
         this.problemId = problemId;
     }
 }

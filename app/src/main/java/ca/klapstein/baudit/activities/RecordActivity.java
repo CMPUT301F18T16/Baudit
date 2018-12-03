@@ -8,14 +8,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageButton;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
+
+import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
 /**
  * Activity for editing a {@code Record}.
@@ -27,29 +29,21 @@ import ca.klapstein.baudit.views.RecordView;
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
     private static final String TAG = "RecordActivity";
+    public static final String RECORD_POSITION_EXTRA = "recordPosition";
+    public static final String RECORD_MODE_EXTRA = "mode";
 
     private static final int REQUEST_GEOLOCATION = 123;
 
-    private int recordId;
+    private int problemPosition;
+    private int recordPosition;
     private GeoLocation geoLocation;
     private RecordPresenter presenter;
-
-    private ImageButton titleEditButton;
-    private ImageButton titleSaveButton;
-    private ImageButton titleCancelButton;
+    private TextView timestampView;
     private TextView titleView;
     private EditText titleInput;
-
-    private ImageButton commentEditButton;
-    private ImageButton commentSaveButton;
-    private ImageButton commentCancelButton;
-    private ImageButton geolocationEditButton;
     private TextView commentView;
     private EditText commentInput;
-    private Button commitButton;
-    private ImageButton record_geolocation_edit_button;
-    private int problemId;
-
+    private TextView locationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,44 +51,91 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         setContentView(R.layout.activity_record);
         Toolbar toolbar = findViewById(R.id.record_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
-        problemId = getIntent().getIntExtra("problemId", -1);
-        recordId = getIntent().getIntExtra("recordId", -1);
+        problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
+        recordPosition = getIntent().getIntExtra(RECORD_POSITION_EXTRA, -1);
+        String mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
-        geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
+
+        timestampView = findViewById(R.id.record_timestamp_text);
+
+        titleView = findViewById(R.id.record_title_view);
+        titleInput = findViewById(R.id.record_title_edit_text);
+
+        commentView = findViewById(R.id.record_comment_view);
+        commentInput = findViewById(R.id.record_comment_edit_text);
+
+        locationView = findViewById(R.id.record_location_view);
+
+        ImageButton geolocationEditButton = findViewById(R.id.record_geolocation_edit_button);
         geolocationEditButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(
-                        RecordActivity.this,
-                        LocationActivity.class
-                );
+                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
+                intent.putExtra(RECORD_POSITION_EXTRA, recordPosition);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
                 startActivityForResult(intent,REQUEST_GEOLOCATION);
             }
         });
-        commitButton = findViewById(R.id.record_commit_button);
-        commitButton.setOnClickListener(new View.OnClickListener() {
+
+        Button cancelButton = findViewById(R.id.record_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.commitRecord();
+                onBackPressed();
             }
         });
 
-        record_geolocation_edit_button = findViewById(R.id.record_geolocation_edit_button);
-        record_geolocation_edit_button.setOnClickListener(new View.OnClickListener(){
+        Button saveButton = findViewById(R.id.record_save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent intent = new Intent(RecordActivity.this, LocationActivity.class);
-                intent.putExtra("recordId",recordId);
-                intent.putExtra("problemId",problemId);
-                startActivity(intent);
+            public void onClick(View v) {
+                presenter.commitRecord(
+                    recordPosition,
+                    titleInput.getText().toString(),
+                    commentInput.getText().toString(),
+                    geoLocation
+                );
             }
         });
 
-        initTitleViews();
-        initCommentViews();
+        if ("view".equals(mode)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.view_record));
+
+            titleView.setVisibility(View.VISIBLE);
+            titleInput.setVisibility(View.GONE);
+
+            commentView.setVisibility(View.VISIBLE);
+            commentInput.setVisibility(View.GONE);
+
+            locationView.setVisibility(View.VISIBLE);
+            geolocationEditButton.setVisibility(View.GONE);
+
+            cancelButton.setVisibility(View.GONE);
+            saveButton.setVisibility(View.GONE);
+        } else if ("edit".equals(mode)) {
+            if (recordPosition == -1) {
+                getSupportActionBar().setTitle(getResources().getString(R.string.new_record));
+            } else {
+                getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
+            }
+
+            titleView.setVisibility(View.GONE);
+            titleInput.setVisibility(View.VISIBLE);
+
+            commentView.setVisibility(View.GONE);
+            commentInput.setVisibility(View.VISIBLE);
+
+            locationView.setVisibility(View.GONE);
+            geolocationEditButton.setVisibility(View.VISIBLE);
+
+            cancelButton.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
+        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -116,23 +157,40 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(problemId, recordId);
+        presenter.viewStarted(problemPosition, recordPosition);
+    }
+
+    @Override
+    public void updateTimestampField(String timestamp) {
+        timestampView.setText(timestamp);
     }
 
     @Override
     public void updateTitleField(String title) {
-        if (title.isEmpty()) {
-            getSupportActionBar().setTitle(R.string.new_record);
-        } else {
-            getSupportActionBar().setTitle(title);
-        }
-
         titleView.setText(title);
+        titleInput.setText(title);
     }
 
     @Override
     public void updateCommentField(String comment) {
         commentView.setText(comment);
+        commentInput.setText(comment);
+    }
+
+    @Override
+    public void updateLocationField(GeoLocation geoLocation) {
+        if (geoLocation != null) {
+            this.geoLocation = geoLocation;
+            locationView.setText(geoLocation.getAddress());
+        }
+    }
+
+    @Override
+    public void updateRecordHints() {
+        titleView.setHint(R.string.default_title);
+        titleInput.setHint(R.string.default_title);
+        commentView.setHint(R.string.default_comment);
+        commentInput.setHint(R.string.default_comment);
     }
 
     @Override
@@ -144,103 +202,5 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
-    }
-
-    private void initTitleViews() {
-        titleView = findViewById(R.id.record_title_view);
-        titleInput = findViewById(R.id.record_title_edit_text);
-        titleEditButton = findViewById(R.id.record_title_edit_button);
-        titleEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(true);
-            }
-        });
-        titleSaveButton = findViewById(R.id.record_title_save_button);
-        titleSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveTitleClicked(titleInput.getText().toString());
-                setTitleEditMode(false);
-            }
-        });
-        titleCancelButton = findViewById(R.id.record_title_cancel_button);
-        titleCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTitleEditMode(false);
-            }
-        });
-    }
-
-    private void initCommentViews() {
-        commentView = findViewById(R.id.record_comment_view);
-        commentInput = findViewById(R.id.record_comment_edit_text);
-        commentEditButton = findViewById(R.id.record_comment_edit_button);
-        commentEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCommentEditMode(true);
-            }
-        });
-        commentSaveButton = findViewById(R.id.record_comment_save_button);
-        commentSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.saveCommentClicked(commentInput.getText().toString());
-                setCommentEditMode(false);
-            }
-        });
-        commentCancelButton = findViewById(R.id.record_comment_cancel_button);
-        commentCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCommentEditMode(false);
-            }
-        });
-    }
-
-    private void setTitleEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
-            titleInput.setText(titleView.getText().toString());
-            titleInput.setVisibility(View.VISIBLE);
-            titleView.setVisibility(View.GONE);
-
-            titleEditButton.setVisibility(View.GONE);
-            titleSaveButton.setVisibility(View.VISIBLE);
-            titleCancelButton.setVisibility(View.VISIBLE);
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            titleInput.setVisibility(View.GONE);
-            titleView.setVisibility(View.VISIBLE);
-
-            titleEditButton.setVisibility(View.VISIBLE);
-            titleSaveButton.setVisibility(View.GONE);
-            titleCancelButton.setVisibility(View.GONE);
-        }
-    }
-
-    private void setCommentEditMode(boolean editMode) {
-        if (editMode) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_record));
-            commentInput.setText(commentView.getText().toString());
-            commentInput.setVisibility(View.VISIBLE);
-            commentView.setVisibility(View.GONE);
-
-            commentEditButton.setVisibility(View.GONE);
-            commentSaveButton.setVisibility(View.VISIBLE);
-            commentCancelButton.setVisibility(View.VISIBLE);
-
-
-        } else {
-            getSupportActionBar().setTitle(titleView.getText().toString());
-            commentInput.setVisibility(View.GONE);
-            commentView.setVisibility(View.VISIBLE);
-
-            commentEditButton.setVisibility(View.VISIBLE);
-            commentSaveButton.setVisibility(View.GONE);
-            commentCancelButton.setVisibility(View.GONE);
-        }
     }
 }
