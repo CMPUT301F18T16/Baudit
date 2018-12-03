@@ -214,4 +214,10 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
     }
+
+    @Override
+    public void updateViewRecordError() {
+        Toast.makeText(this, getResources().getString(R.string.record_load_error), Toast.LENGTH_LONG).show();
+        finish();
+    }
 }

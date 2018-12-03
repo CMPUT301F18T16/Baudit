@@ -25,21 +25,21 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
 
     public EditCareProviderAccountPresenter(EditCareProviderAccountView view, Context context) {
         super(view, context);
-        careProvider = (CareProvider) dataManager.getLoggedInAccount();
     }
 
     /**
      * On startup of the {@code EditAccountView} populate fields noting the account.
      */
     public void viewStarted() {
-        careProvider = (CareProvider) dataManager.getLoggedInAccount();
-        if (careProvider != null) {
+        try {
+            careProvider = dataManager.getLoggedInCareProvider();
             view.updateFirstNameField(careProvider.getContactInfo().getFirstName());
             view.updateLastNameField(careProvider.getContactInfo().getLastName());
             view.updateEmailField(careProvider.getContactInfo().getEmail().toString());
             view.updatePhoneNumberField(careProvider.getContactInfo().getPhoneNumber().toString());
-        } else {
-            // TODO: error
+        } catch (Exception e) {
+            Log.e(TAG, "failed to present care provider", e);
+            view.updateViewAccountError();
         }
     }
 
@@ -63,18 +63,15 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
         }
 
         try {
-            careProvider = (CareProvider) dataManager.getLoggedInAccount();
+            careProvider = dataManager.getLoggedInCareProvider();
             careProvider.getContactInfo().setFirstName(firstName);
             careProvider.getContactInfo().setLastName(lastName);
             careProvider.getContactInfo().setEmail(new Email(email));
             careProvider.getContactInfo().setPhoneNumber(new PhoneNumber(phoneNumber));
             dataManager.commitAccount(careProvider);
             view.commitAccountEditSuccess();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.e(TAG, "failed committing Account edits", e);
-            view.commitAccountEditFailure();
-        } catch (NullPointerException e) {
-            Log.e(TAG, "failed to obtain account to commit Account edits too", e);
             view.commitAccountEditFailure();
         }
     }
