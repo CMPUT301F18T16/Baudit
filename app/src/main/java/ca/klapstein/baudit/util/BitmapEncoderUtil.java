@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * A base64 encoder/decoder of {@code Bitmap}.
  */
-public class BitmapEncoder {
+public class BitmapEncoderUtil {
     /**
      * Encode a {@code Bitmap} into a base64 string.
      *

@@ -14,9 +14,18 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.PopupMenu;
+import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.presenters.PatientHomePresenter;
@@ -210,7 +219,8 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
         ).show();
     }
 
-    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder> implements Filterable {
+    private class ProblemListAdapter extends RecyclerView.Adapter<ProblemViewHolder>
+        implements Filterable {
 
         private final ProblemFilter problemFilter = new ProblemFilter();
 
@@ -220,8 +230,6 @@ public class PatientHomeActivity extends AppCompatActivity implements HomeView {
                     .inflate(R.layout.card_problem, viewGroup, false);
             return new ProblemViewHolder(v); // Wrap it in a ViewHolder.
         }
-
-        private ProblemFilter problemFilter = new ProblemFilter();
 
         @Override
         public void onBindViewHolder(@NonNull final ProblemViewHolder viewHolder, int i) {

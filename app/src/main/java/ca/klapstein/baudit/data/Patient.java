@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
-import ca.klapstein.baudit.util.BitmapEncoder;
 
 import java.util.ArrayList;
 

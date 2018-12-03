@@ -3,7 +3,7 @@ package ca.klapstein.baudit.data;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
-import ca.klapstein.baudit.util.BitmapEncoder;
+import ca.klapstein.baudit.util.BitmapEncoderUtil;
 
 public class RecordPhoto {
     private static final int MAX_PHOTO_BYTES = 65535;
@@ -15,13 +15,16 @@ public class RecordPhoto {
     }
 
     public Bitmap getBitmap() {
-        return BitmapEncoder.decodeBase64(bitmapString);
+        return BitmapEncoderUtil.decodeBase64(bitmapString);
     }
 
     public void setPhoto(@NonNull Bitmap bitmap) {
         if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
+            bitmapString = BitmapEncoderUtil.encodeTobase64(
+                ThumbnailUtils.extractThumbnail(bitmap, 255, 255)
+            );
+        } else {
+            bitmapString = BitmapEncoderUtil.encodeTobase64(bitmap);
         }
-        bitmapString = BitmapEncoder.encodeTobase64(bitmap);
     }
 }

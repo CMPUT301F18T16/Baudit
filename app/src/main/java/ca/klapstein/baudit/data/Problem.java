@@ -72,10 +72,10 @@ public class Problem implements Comparable<Problem> {
         if (getDate() != null)
             keywords.add(getTimeStamp());
         for (Record record : getRecordTreeSet()) {
-            if (record.getGeoLocation() != null) {
-                if (record.getGeoLocation().getAddress() != null) {
-                    keywords.addAll(Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" ")));
-                }
+            if (record.getGeoLocation() != null && record.getGeoLocation().getAddress() != null) {
+                keywords.addAll(
+                    Arrays.asList(record.getGeoLocation().getAddress().toLowerCase().split(" "))
+                );
             }
             if (record.getComment() != null) {
                 keywords.addAll(Arrays.asList(record.getComment().toLowerCase().split(" ")));
