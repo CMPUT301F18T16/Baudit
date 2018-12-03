@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -77,6 +78,8 @@ public class ProblemActivity extends AppCompatActivity
         descriptionView = findViewById(R.id.problem_description_view);
         descriptionInput = findViewById(R.id.problem_description_edit_text);
 
+        Button addRecordButton = findViewById(R.id.problem_add_record_button);
+
         Button cancelButton = findViewById(R.id.problem_cancel_button);
         Button saveButton = findViewById(R.id.problem_save_button);
 
@@ -90,15 +93,18 @@ public class ProblemActivity extends AppCompatActivity
             descriptionView.setVisibility(View.VISIBLE);
             descriptionInput.setVisibility(View.GONE);
 
+            addRecordButton.setVisibility(View.VISIBLE);
+
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
             if (problemPosition == -1) {
                 getSupportActionBar().setTitle(R.string.new_problem);
+                addRecordButton.setVisibility(View.GONE);
             } else {
                 getSupportActionBar().setTitle(R.string.edit_problem);
+                addRecordButton.setVisibility(View.VISIBLE);
             }
-
 
             titleView.setVisibility(View.GONE);
             titleInput.setVisibility(View.VISIBLE);
@@ -147,7 +153,6 @@ public class ProblemActivity extends AppCompatActivity
 
         recordCountText = findViewById(R.id.problem_records_label);
 
-        Button addRecordButton = findViewById(R.id.problem_add_record_button);
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +184,7 @@ public class ProblemActivity extends AppCompatActivity
     }
 
     @Override
-    public void updateRecordList(RecordTreeSet records) {
+    public void updateRecordList(@NonNull RecordTreeSet records) {
         recordList.removeAllViews();
         int index = 0;
         for (Record record : records) {
