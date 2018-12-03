@@ -140,6 +140,16 @@
                         android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/problem_slideshow_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/slideshow"
+                        android:textColor="@color/dark_grey" />
+
+                    <Button
                         android:id="@+id/problem_add_record_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

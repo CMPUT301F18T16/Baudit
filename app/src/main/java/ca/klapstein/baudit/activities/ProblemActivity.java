@@ -95,6 +95,7 @@ public class ProblemActivity extends AppCompatActivity
         descriptionView = findViewById(R.id.problem_description_view);
         descriptionInput = findViewById(R.id.problem_description_edit_text);
 
+        Button slideshowButton = findViewById(R.id.problem_slideshow_button);
         Button addRecordButton = findViewById(R.id.problem_add_record_button);
 
         Button cancelButton = findViewById(R.id.problem_cancel_button);
@@ -110,7 +111,8 @@ public class ProblemActivity extends AppCompatActivity
             descriptionView.setVisibility(View.VISIBLE);
             descriptionInput.setVisibility(View.GONE);
 
-            addRecordButton.setVisibility(View.VISIBLE);
+            slideshowButton.setVisibility(View.VISIBLE);
+            addRecordButton.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
@@ -128,6 +130,8 @@ public class ProblemActivity extends AppCompatActivity
 
             descriptionView.setVisibility(View.GONE);
             descriptionInput.setVisibility(View.VISIBLE);
+
+            slideshowButton.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
@@ -169,6 +173,13 @@ public class ProblemActivity extends AppCompatActivity
         });
 
         recordCountText = findViewById(R.id.problem_records_label);
+
+        slideshowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SlideshowActivity.class));
+            }
+        });
 
         addRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
