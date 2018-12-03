@@ -40,7 +40,7 @@ public class AddPhotoPresenter extends Presenter<AddPhotoView> {
             patient = dataManager.getLoggedInPatient();
             Problem problem = (Problem) patient.getProblemTreeSet().toArray()[problemId];
             Record record = (Record) problem.getRecordTreeSet().toArray()[recordId];
-            record.setRecordPhoto(bitmap);
+            record.addRecordPhoto(bitmap);
             problem.getRecordTreeSet().add(record);
             patient.getProblemTreeSet().remove(problem);
             patient.getProblemTreeSet().add(problem);

@@ -29,7 +29,12 @@ public class Record implements Comparable<Record> {
     private String title;
     private String comment;
     private GeoLocation geoLocation;
+
+    @NonNull
+    private ArrayList<Bitmap> recordPhotos = new ArrayList<>();
+    @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
+    @NonNull
     private ArrayList<String> keywords = new ArrayList<>();
     private UUID recordId;
     private String recordPhotoBitmapString;
@@ -98,7 +103,8 @@ public class Record implements Comparable<Record> {
     public String getTimeStamp() {
         return getBauditDateFormat().format(date);
     }
-
+    
+    // TODO: move this into util class
     public static String encodeTobase64(Bitmap image) {
         Bitmap immagex = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -221,9 +227,9 @@ public class Record implements Comparable<Record> {
      * This is used for sorting a {@code RecordTreeSet} by a {@code Record}'s creation time.
      *
      * @param record {@code Record} the given {@code Record} to compare.
-     * @return {@code int} {@code 0} if both {@code Record}'s times are the same or
-     *                     {@code -int} if this {@code Record} is created earlier in time than the given {@code Record}
-     *                     {@code +int} if this {@code Record} is created later in time than the given {@code Record}.
+     * @return {@code 0} if both {@code Record}'s times are the same or
+     *         {@code -int} if this {@code Record} is created earlier than the other
+     *         {@code +int} if this {@code Record} is created later than the other
      */
     @Override
     public int compareTo(@NonNull Record record) {
