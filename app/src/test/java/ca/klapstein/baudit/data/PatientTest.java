@@ -1,12 +1,10 @@
 package ca.klapstein.baudit.data;
 
-import android.graphics.Bitmap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -21,8 +19,6 @@ public class PatientTest {
     private Username username;
     private Patient patient;
     private ContactInfo contactInfo;
-    @Mock
-    private Bitmap bodyPhoto;
 
     @Before
     public void setUp() {

@@ -59,21 +59,12 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         assertTrue(solo.searchText("problem 3"));
     }
 
-
     @Test
     public void testEditAccount() {
         solo.clickOnActionBarHomeButton();
         solo.clickOnMenuItem(getActivity().getResources().getString(R.string.edit_account));
-        solo.waitForActivity(EditAccountActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", EditAccountActivity.class);
-    }
-
-    @Test
-    public void testSetBodyPhoto() {
-        solo.clickOnActionBarHomeButton();
-        solo.clickOnMenuItem(getActivity().getResources().getString(R.string.set_body_photo));
-        solo.waitForActivity(CameraActivity.class);
-        solo.assertCurrentActivity("Wrong Activity", CameraActivity.class);
+        solo.waitForActivity(EditPatientAccountActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", EditPatientAccountActivity.class);
     }
 
     @Test
