@@ -52,6 +52,4 @@ public class Patient extends Account {
     public void removeBodyLocationPhoto(int index) {
         bodyLocationPhotos.remove(index);
     }
-
-    public void setProblemTreeSet(ProblemTreeSet problemTreeSet){this.problemTreeSet = problemTreeSet;}
 }
