@@ -248,7 +248,10 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.record_play_slideshow:
-                startActivity(new Intent(RecordActivity.this,SlideshowActivity.class));
+                Intent intent = new Intent(RecordActivity.this, SlideshowActivity.class);
+                intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, problemPosition);
+                intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, recordPosition);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
