@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static ca.klapstein.baudit.activities.SlideshowActivity.RECORD_PHOTO_PROBLEM_ID_FIELD;
+import static ca.klapstein.baudit.activities.SlideshowActivity.RECORD_PHOTO_RECORD_ID_FIELD;
 
 public class SlideshowActivityTest extends ActivityTestRule<SlideshowActivity> {
 
@@ -34,7 +36,12 @@ public class SlideshowActivityTest extends ActivityTestRule<SlideshowActivity> {
         patient.getProblemTreeSet().add(problem);
         // TODO: add test bitmap
         dataModel.setOfflineLoginAccount(patient);
-        super.launchActivity(new Intent());
+
+        // setup an intent to present the first problem's first record's photos
+        Intent intent = new Intent();
+        intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, 0);
+        intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, 0);
+        super.launchActivity(intent);
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
