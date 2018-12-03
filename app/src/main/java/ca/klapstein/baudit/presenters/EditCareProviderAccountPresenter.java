@@ -32,7 +32,7 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
      */
     public void viewStarted() {
         try {
-            careProvider = (CareProvider) dataManager.getLoggedInAccount();
+            careProvider = dataManager.getLoggedInCareProvider();
             view.updateFirstNameField(careProvider.getContactInfo().getFirstName());
             view.updateLastNameField(careProvider.getContactInfo().getLastName());
             view.updateEmailField(careProvider.getContactInfo().getEmail().toString());
@@ -63,7 +63,7 @@ public class EditCareProviderAccountPresenter extends Presenter<EditCareProvider
         }
 
         try {
-            careProvider = (CareProvider) dataManager.getLoggedInAccount();
+            careProvider = dataManager.getLoggedInCareProvider();
             careProvider.getContactInfo().setFirstName(firstName);
             careProvider.getContactInfo().setLastName(lastName);
             careProvider.getContactInfo().setEmail(new Email(email));
