@@ -2,15 +2,16 @@ package ca.klapstein.baudit.presenters;
 
 import android.content.Context;
 import android.util.Log;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Record;
 import ca.klapstein.baudit.views.ProblemView;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * MVP presenter for presenting and controlling the editing of a {@code Problem} via a {@code ProblemView}.
@@ -40,11 +41,11 @@ public class ProblemPresenter extends Presenter<ProblemView> {
                 view.updateProblemHints();
             } else { // If the problem exists and is being edited
                 problem = (Problem) patient.getProblemTreeSet().toArray()[position];
+                view.updateTitleField(problem.getTitle());
+                view.updateDescriptionField(problem.getDescription());
+                view.updateProblemTime(problem.getDate());
             }
-            view.updateTitleField(problem.getTitle());
-            view.updateDescriptionField(problem.getDescription());
             view.updateRecordList(problem.getRecordTreeSet());
-            view.updateProblemTime(problem.getDate());
             view.updateRecordNumber(problem.getRecordTreeSet().size());
         } catch (Exception e) {
             Log.e(TAG, "failed to present problem", e);

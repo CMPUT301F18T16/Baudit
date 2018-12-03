@@ -85,6 +85,22 @@ public class ProblemActivity extends AppCompatActivity
         Button cancelButton = findViewById(R.id.problem_cancel_button);
         Button saveButton = findViewById(R.id.problem_save_button);
 
+        dateButton = findViewById(R.id.problem_date_button);
+        timeButton = findViewById(R.id.problem_time_button);
+
+        Button addRecordButton = findViewById(R.id.problem_add_record_button);
+        addRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
+                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
+                intent.putExtra(RECORD_POSITION_EXTRA, -1);
+                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
+                startActivity(intent);
+            }
+        });
+        addRecordButton.setVisibility(View.VISIBLE);
+
         // Set view visibility based on what mode we are in
         if ("view".equals(mode)) {
             getSupportActionBar().setTitle(R.string.view_problem);
@@ -100,10 +116,10 @@ public class ProblemActivity extends AppCompatActivity
         } else if ("edit".equals(mode)) {
             if (problemPosition == -1) {
                 getSupportActionBar().setTitle(R.string.new_problem);
+                addRecordButton.setVisibility(View.GONE);
             } else {
                 getSupportActionBar().setTitle(R.string.edit_problem);
             }
-
 
             titleView.setVisibility(View.GONE);
             titleInput.setVisibility(View.VISIBLE);
@@ -113,23 +129,21 @@ public class ProblemActivity extends AppCompatActivity
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
+
+            dateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    presenter.clickedDateButton();
+                }
+            });
+
+            timeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    presenter.clickedTimeButton();
+                }
+            });
         }
-
-        dateButton = findViewById(R.id.problem_date_button);
-        dateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.clickedDateButton();
-            }
-        });
-
-        timeButton = findViewById(R.id.problem_time_button);
-        timeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.clickedTimeButton();
-            }
-        });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,29 +165,15 @@ public class ProblemActivity extends AppCompatActivity
         });
 
         recordCountText = findViewById(R.id.problem_records_label);
-
-        Button addRecordButton = findViewById(R.id.problem_add_record_button);
-        addRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RecordActivity.class);
-                intent.putExtra(PROBLEM_POSITION_EXTRA, problemPosition);
-                intent.putExtra(RECORD_POSITION_EXTRA, -1);
-                intent.putExtra(PROBLEM_MODE_EXTRA, "edit");
-                startActivity(intent);
-            }
-        });
-
         recordList = findViewById(R.id.problem_records_list);
-        presenter.viewStarted(problemPosition);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.viewStarted(problemPosition);
         updateTimeButton(problemTime.getTime());
         updateDateButton(problemTime.getTime());
+        presenter.viewStarted(problemPosition);
     }
 
     @Override
