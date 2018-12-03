@@ -4,13 +4,7 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-<<<<<<< HEAD
 
-=======
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.*;
-import ca.klapstein.baudit.models.DataModel;
->>>>>>> 976b37f47057c1c0f7f2ed61d5bdd58e665cf43d
 import com.robotium.solo.Solo;
 
 import org.junit.After;
@@ -18,10 +12,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.CareProvider;
 import ca.klapstein.baudit.data.ContactInfo;
 import ca.klapstein.baudit.data.Email;
+import ca.klapstein.baudit.data.Patient;
 import ca.klapstein.baudit.data.PhoneNumber;
+import ca.klapstein.baudit.data.Problem;
 import ca.klapstein.baudit.data.Username;
 import ca.klapstein.baudit.models.DataModel;
 
