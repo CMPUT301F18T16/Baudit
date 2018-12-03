@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.data.PlaceAutoCompleteAdapter;
 import ca.klapstein.baudit.data.PlaceInfo;
 import ca.klapstein.baudit.presenters.LocationPresenter;
@@ -75,7 +74,6 @@ public class LocationActivity extends AppCompatActivity
     private FusedLocationProviderClient fusedLocationProviderClient;
     private PlaceAutocompleteFragment autocompleteFragment;
     private GoogleMap map;
-    private GeoLocation geoLocation;
     private AutoCompleteTextView searchText;
     private ImageView gpsButton;
     private PlaceAutoCompleteAdapter autoCompleteAdapter;
@@ -104,6 +102,10 @@ public class LocationActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+    }
 
     @Override
     protected void onResume(){
@@ -168,12 +170,10 @@ public class LocationActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         startSetLocation(map);
-        return;
     }
 
     public void startSetLocation(GoogleMap map) {
         Toast.makeText(this, "Set a Location", Toast.LENGTH_SHORT).show();
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom((new LatLng(56.1304,-106.3468)),defaultZoom));
         getDeviceLocation();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -189,6 +189,7 @@ public class LocationActivity extends AppCompatActivity
         map.getUiSettings().setMyLocationButtonEnabled(false);
         init();
         hideSoftKeyboard();
+        Log.d(TAG,"Completed setLocation");
     }
 
     private void init(){
@@ -242,7 +243,6 @@ public class LocationActivity extends AppCompatActivity
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
         }
-        return;
     }
 
     private void getDeviceLocation(){
@@ -277,12 +277,10 @@ public class LocationActivity extends AppCompatActivity
             map.addMarker(marker);
         }
         hideSoftKeyboard();
-        return;
     }
 
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        return;
     }
 
     @Override
@@ -299,6 +297,7 @@ public class LocationActivity extends AppCompatActivity
 
             PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(googleApiClient, placeId);
             placeResult.setResultCallback(updatePlaceDetailCallback);
+
         }
     };
 
@@ -306,35 +305,19 @@ public class LocationActivity extends AppCompatActivity
         @Override
         public void onResult(@NonNull PlaceBuffer places) {
             Log.d(TAG, "Entered onResult method");
-            if (places.getStatus().isSuccess()) {
+            if (!places.getStatus().isSuccess()) {
                 places.release();
                 return;
             }
             final Place place = places.get(0);
-            try {
-                placeInfo = new PlaceInfo();
-                placeInfo.setAddress(place.getAddress().toString());
-                placeInfo.setName(place.getName().toString());
-                placeInfo.setId(place.getId());
-                placeInfo.setLatLng(place.getLatLng());
-                placeInfo.setPhoneNumber(place.getPhoneNumber().toString());
-            }catch(NullPointerException e){
-                Log.e(TAG, "onResult NullPointerException" + e.getMessage());
-            }
-            try {
-                moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude)
-                        , defaultZoom, placeInfo.getName());
-            }catch(NullPointerException e){
-                Log.e(TAG, "Null value in ResultCallBack" + e.getMessage());
-            }
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("Address", places.get(0).getName());
+            resultIntent.putExtra("Latitude", places.get(0).getLatLng().latitude);
+            resultIntent.putExtra("Longitude", places.get(0).getLatLng().longitude);
+            setResult(RESULT_OK,resultIntent);
+            Log.d(TAG, "Doing the thing");
+            moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude), defaultZoom, placeInfo.getName());
             places.release();
-            Intent intent = new Intent();
-            intent.putExtra("Address", placeInfo.getName());
-            intent.putExtra("Latitude", placeInfo.getLatLng().latitude);
-            intent.putExtra("Longitude", placeInfo.getLatLng().longitude);
-            setResult(RESULT_OK,intent);
-            Log.d(TAG, intent.getStringExtra("Address"));
-
         }
     };
 
