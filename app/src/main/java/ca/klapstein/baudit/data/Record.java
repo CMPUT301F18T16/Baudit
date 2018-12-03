@@ -1,7 +1,6 @@
 package ca.klapstein.baudit.data;
 
 import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -10,8 +9,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import static ca.klapstein.baudit.BauditDateFormat.getBauditDateFormat;
-import static ca.klapstein.baudit.util.BitmapEncoderUtil.decodeBase64;
-import static ca.klapstein.baudit.util.BitmapEncoderUtil.encodeTobase64;
 
 /**
  * Data class representing a Record for a Medical Problem {@code Problem}.
@@ -19,13 +16,9 @@ import static ca.klapstein.baudit.util.BitmapEncoderUtil.encodeTobase64;
  * @see Problem
  */
 public class Record implements Comparable<Record> {
-    private static final int MAX_PHOTO_BYTES = 65535;
     private static final int MAX_COMMENT_LENGTH = 300;
     private static final int MAX_TITLE_LENGTH = 30;
 
-
-    @NonNull
-    private ArrayList<String> photoBitmapStrings = new ArrayList<String>();
     @NonNull
     private final UUID recordId = UUID.randomUUID();
     @Nullable
@@ -36,7 +29,6 @@ public class Record implements Comparable<Record> {
     private GeoLocation geoLocation;
     @NonNull
     private ArrayList<RecordPhoto> recordPhotos = new ArrayList<>();
-
     @NonNull
     private ArrayList<BodyPhotoCoords> bodyPhotoCoords = new ArrayList<>();
     @NonNull
@@ -104,6 +96,10 @@ public class Record implements Comparable<Record> {
         return getBauditDateFormat().format(date);
     }
 
+    public void addRecordPhoto(Bitmap bitmap) {
+        recordPhotos.add(new RecordPhoto(bitmap));
+    }
+
     @NonNull
     public ArrayList<Bitmap> getRecordPhotos() {
         ArrayList<Bitmap> bitmaps = new ArrayList<>();
@@ -115,26 +111,10 @@ public class Record implements Comparable<Record> {
 
     @Nullable
     public Bitmap getLastRecordPhoto() {
-        if (photoBitmapStrings.size() >= 1) {
-            String recordPhotoBitmapString = photoBitmapStrings.get(photoBitmapStrings.size() - 1);
-            if (recordPhotoBitmapString != null)
-                return decodeBase64(recordPhotoBitmapString);
-        }
-        return null;
-    }
-
-    public ArrayList<String> getPhotoBitmapStrings(){
-        return this.photoBitmapStrings;
-    }
-
-    public void addRecordPhoto(Bitmap bitmap) {
-        String recordPhotoBitmapString;
-        if (bitmap.getByteCount() > MAX_PHOTO_BYTES) {
-            Bitmap CorrectedBitmap = ThumbnailUtils.extractThumbnail(bitmap, 255, 255);
-            recordPhotoBitmapString = encodeTobase64(CorrectedBitmap);
-        }else
-            recordPhotoBitmapString = encodeTobase64(bitmap);
-        photoBitmapStrings.add(recordPhotoBitmapString);
+        if (getRecordPhotos().isEmpty())
+            return null;
+        else
+            return getRecordPhotos().get(getRecordPhotos().size() - 1);
     }
 
     /**
