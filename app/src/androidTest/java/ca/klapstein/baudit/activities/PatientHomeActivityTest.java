@@ -34,7 +34,7 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
         dataModel = new DataModel(InstrumentationRegistry.getTargetContext());
         dataModel.clearOfflineLoginAccount();
         Patient patient = new Patient(
-                new Username("TESTPatient1"),
+                new Username("TESTPatient13"),
                 new ContactInfo("John", "Smith", new Email("patient@example.com"), new PhoneNumber("111-111-1111"))
         );
         patient.getProblemTreeSet().add(new Problem("problem 1", "description"));
