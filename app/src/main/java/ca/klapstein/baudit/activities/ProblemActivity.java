@@ -155,7 +155,6 @@ public class ProblemActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 presenter.commitProblem(
-                    problemPosition,
                     titleInput.getText().toString(),
                     descriptionInput.getText().toString(),
                     problemTime.getTime()

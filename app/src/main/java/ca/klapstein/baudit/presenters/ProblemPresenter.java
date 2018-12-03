@@ -77,14 +77,19 @@ public class ProblemPresenter extends Presenter<ProblemView> {
         }
     }
 
-    public void commitProblem(int position, String title, String description, Date date) {
+    /**
+     * Commit a problem to storage.
+     *
+     * @param title       {@code String}
+     * @param description {@code String}
+     * @param date        {@code Date}
+     */
+    public void commitProblem(String title, String description, Date date) {
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setDate(date);
         try {
-            if (position == -1) {
-                patient.getProblemTreeSet().add(problem);
-            }
+            patient.getProblemTreeSet().add(problem);
             dataManager.commitPatient(patient);
             view.commitProblemSuccess();
         } catch (IllegalArgumentException e) {

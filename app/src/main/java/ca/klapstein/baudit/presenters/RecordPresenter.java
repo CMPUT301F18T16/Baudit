@@ -63,7 +63,7 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
     }
 
-    public void commitRecord(int position, String title, String comment, GeoLocation geoLocation) {
+    public void commitRecord(String title, String comment, GeoLocation geoLocation) {
         record.setTitle(title);
         record.setComment(comment);
 
@@ -72,9 +72,7 @@ public class RecordPresenter extends Presenter<RecordView> {
         }
 
         try {
-            if (position == -1) {
-                problem.getRecordTreeSet().add(record);
-            }
+            problem.getRecordTreeSet().add(record);
             dataManager.commitPatient(patient);
             view.commitRecordSuccess();
         } catch (IllegalArgumentException e) {
