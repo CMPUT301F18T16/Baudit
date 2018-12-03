@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,11 +77,14 @@ public class LocationActivity extends AppCompatActivity
     private GoogleMap map;
     private AutoCompleteTextView searchText;
     private ImageView gpsButton;
+    private Button confirmButton;
     private PlaceAutoCompleteAdapter autoCompleteAdapter;
     private GeoDataClient geoDataClient;
     private PlaceDetectionClient placeDetectionClient;
     private GoogleApiClient googleApiClient;
     private PlaceInfo placeInfo;
+    private MarkerOptions returnMarker;
+    private Address address;
 
 
     @Override
@@ -91,6 +95,7 @@ public class LocationActivity extends AppCompatActivity
         presenter = new LocationPresenter(this, getApplicationContext());
         searchText = findViewById(R.id.search_field);
         gpsButton = findViewById(R.id.gps);
+        confirmButton = findViewById(R.id.marker_confirm_button);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -216,7 +221,7 @@ public class LocationActivity extends AppCompatActivity
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-                    geoLocate();
+                    address = geoLocate();
                 }
                 return false;
             }
@@ -227,9 +232,26 @@ public class LocationActivity extends AppCompatActivity
                 getDeviceLocation();
             }
         });
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmLocation(address);
+            }
+        });
     }
 
-    private void geoLocate(){
+    public void confirmLocation(Address address){
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("Address", address.getAddressLine(0));
+        resultIntent.putExtra("Latitude", address.getLatitude());
+        resultIntent.putExtra("Longitude", address.getLongitude());
+        setResult(RESULT_OK,resultIntent);
+        Log.d(TAG, "Doing the thing"+address.getAddressLine(0));
+        super.onBackPressed();
+    }
+
+    private Address geoLocate(){
         String searchString = searchText.getText().toString();
         Geocoder geocoder = new Geocoder(LocationActivity.this);
         List<Address> list = new ArrayList<Address>();
@@ -238,11 +260,13 @@ public class LocationActivity extends AppCompatActivity
         }catch (IOException e){
             Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
         }
+        address = new Address(null);
         if(list.size() > 0){
-            Address address = list.get(0);
+            address = list.get(0);
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()),10f, address.getAddressLine(0));
         }
+        return address;
     }
 
     private void getDeviceLocation(){
@@ -316,7 +340,6 @@ public class LocationActivity extends AppCompatActivity
             resultIntent.putExtra("Longitude", places.get(0).getLatLng().longitude);
             setResult(RESULT_OK,resultIntent);
             Log.d(TAG, "Doing the thing");
-            moveCamera(new LatLng(place.getViewport().getCenter().latitude, place.getViewport().getCenter().longitude), defaultZoom, placeInfo.getName());
             places.release();
         }
     };
