@@ -98,15 +98,15 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     @Test
     public void testEditProblem() {
         solo.clickLongOnView(solo.getText("problem 1"));
-        solo.clickOnText("Edit");
+        solo.clickOnText(getActivity().getResources().getString(R.string.edit));
         solo.waitForActivity(ProblemActivity.class);
     }
 
     @Test
     public void testDeleteProblemCancel() {
         solo.clickLongOnView(solo.getText("problem 1"));
-        solo.clickOnText("Delete");
-        solo.clickOnButton("Cancel");
+        solo.clickOnText(getActivity().getResources().getString(R.string.delete));
+        solo.clickOnButton(getActivity().getResources().getString(R.string.cancel));
         // TODO: travis no likey
 //        assertTrue(solo.searchText("problem 1"));
     }
@@ -114,9 +114,17 @@ public class PatientHomeActivityTest extends ActivityTestRule<PatientHomeActivit
     @Test
     public void testDeleteProblem() {
         solo.clickLongOnView(solo.getText("problem 1"));
-        solo.clickOnText("Delete");
-        solo.clickOnButton("Delete");
+        solo.clickOnText(getActivity().getResources().getString(R.string.delete));
+        solo.clickOnButton(getActivity().getResources().getString(R.string.delete));
         // TODO: travis no likey
 //        assertFalse(solo.searchText("problem 1"));
+    }
+
+    @Test
+    public void testQRCodeDisplay() {
+        solo.clickOnActionBarHomeButton();
+        solo.clickOnMenuItem(getActivity().getResources().getString(R.string.display_qr_code));
+        solo.waitForActivity(DisplayQRCodeActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", DisplayQRCodeActivity.class);
     }
 }
