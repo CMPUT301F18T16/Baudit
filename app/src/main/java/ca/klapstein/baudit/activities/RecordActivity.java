@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import ca.klapstein.baudit.R;
@@ -40,6 +43,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private int problemPosition;
     private int recordPosition;
     private RecordPresenter presenter;
+    private String mode;
 
     private TextView timestampView;
     private TextView titleView;
@@ -50,7 +54,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private PlaceAutocompleteFragment autocompleteFragment;
     private GeoLocation geoLocation = null;
     private ImageView recordImage;
-    private Button slideshow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
         problemPosition = getIntent().getIntExtra(PROBLEM_POSITION_EXTRA, -1);
         recordPosition = getIntent().getIntExtra(RECORD_POSITION_EXTRA, -1);
-        String mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
+        mode = getIntent().getStringExtra(RECORD_MODE_EXTRA);
 
         presenter = new RecordPresenter(this, getApplicationContext());
 
@@ -99,20 +102,8 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
-
-        slideshow = findViewById( R.id.record_slideshow_button );
-        slideshow.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecordActivity.this,SlideshowActivity.class );
-                // TODO: ISSUE: the activity doesn't start when bitmapStrings.size() > 2
-                intent.putExtra(RECORD_PHOTO_PROBLEM_ID_FIELD, problemPosition);
-                intent.putExtra(RECORD_PHOTO_RECORD_ID_FIELD, recordPosition);
-                startActivity(intent);
-            }
-        } );
-
         recordImage = findViewById(R.id.recordImage);
+
         ImageView addPhotoImage = findViewById(R.id.addPhotoImageView);
         addPhotoImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,8 +151,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
             recordImage.setVisibility(View.VISIBLE);
             addPhotoImage.setVisibility(View.GONE);
 
-            slideshow.setVisibility(View.VISIBLE);
-
             cancelButton.setVisibility(View.GONE);
             saveButton.setVisibility(View.GONE);
         } else if ("edit".equals(mode)) {
@@ -182,8 +171,6 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
 
             addPhotoImage.setVisibility(View.VISIBLE);
             recordImage.setVisibility(View.GONE);
-
-            slideshow.setVisibility(View.GONE);
 
             cancelButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
@@ -245,6 +232,27 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     public void commitRecordSuccess() {
         Toast.makeText(this, getResources().getString(R.string.record_commit_success), Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if ("edit".equals(mode) && recordPosition == -1) {
+            return true;
+        }
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.record_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.record_play_slideshow:
+                startActivity(new Intent(RecordActivity.this,SlideshowActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
