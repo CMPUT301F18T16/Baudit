@@ -77,8 +77,4 @@ public class RecordPresenter extends Presenter<RecordView> {
             view.commitRecordFailure();
         }
     }
-
-    public void chooseLocation(){
-
-    }
 }

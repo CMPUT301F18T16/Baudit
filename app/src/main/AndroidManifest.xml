@@ -26,14 +26,12 @@
         <uses-library
                 android:name="org.apache.http.legacy"
                 android:required="false"/>
-
         <meta-data
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version"/>
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCeYNwFxFqRwuDOywhP5w4aaiO-9yGKt9g"/>
-
         <activity
                 android:name=".activities.StartActivity"
                 android:theme="@style/BauditLoginTheme"/>
@@ -44,7 +42,7 @@
                 android:name=".activities.CreateAccountActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
-            android:name=".activities.LocationActivity"/>
+                android:name=".activities.LocationActivity"/>
         <activity
                 android:name=".activities.ProblemActivity"
                 android:theme="@style/BauditTheme"/>
@@ -54,35 +52,32 @@
         <activity
                 android:name=".activities.CareProviderHomeActivity"
                 android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.ViewPhotoActivity"/>
+        <activity
+                android:name=".activities.ViewPhotoActivity"/>
         <activity
                 android:name=".activities.PatientHomeActivity"
                 android:theme="@style/BauditTheme"/>
         <activity
-                android:name=".activities.SplashActivity"
-                android:theme="@style/BauditSplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.CameraActivity">
-        </activity>
+                android:name=".activities.CameraActivity"/>
         <activity
                 android:name=".activities.MapAllProblemsActivity"
                 android:theme="@style/BauditTheme"/>
-        <activity android:name=".activities.DisplayQRCodeActivity">
-        </activity>
-
-        <activity android:name=".activities.CareProviderProblemListActivity">
-        </activity>
-
+        <activity
+                android:name=".activities.DisplayQRCodeActivity"/>
+        <activity
+                android:name=".activities.CareProviderProblemListActivity"/>
         <activity
             android:name=".activities.ViewAccountActivity"
             android:theme="@style/BauditDialogTheme"/>
-
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/BauditSplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

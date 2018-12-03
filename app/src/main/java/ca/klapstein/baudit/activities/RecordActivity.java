@@ -16,6 +16,12 @@ import ca.klapstein.baudit.R;
 import ca.klapstein.baudit.data.GeoLocation;
 import ca.klapstein.baudit.presenters.RecordPresenter;
 import ca.klapstein.baudit.views.RecordView;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EXTRA;
 
@@ -29,14 +35,13 @@ import static ca.klapstein.baudit.activities.ProblemActivity.PROBLEM_POSITION_EX
 public class RecordActivity extends AppCompatActivity implements RecordView {
 
     private static final String TAG = "RecordActivity";
+
     public static final String RECORD_POSITION_EXTRA = "recordPosition";
     public static final String RECORD_MODE_EXTRA = "mode";
-
     private static final int REQUEST_GEOLOCATION = 123;
 
     private int problemPosition;
     private int recordPosition;
-    private GeoLocation geoLocation;
     private RecordPresenter presenter;
     private TextView timestampView;
     private TextView titleView;
@@ -44,6 +49,7 @@ public class RecordActivity extends AppCompatActivity implements RecordView {
     private TextView commentView;
     private EditText commentInput;
     private TextView locationView;
+    private GeoLocation geoLocation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

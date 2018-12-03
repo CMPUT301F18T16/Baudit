@@ -1,8 +1,6 @@
 package ca.klapstein.baudit.data;
 
-import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.UUID;
 
 /**
  * {@code TreeSet} subclass that models a list of {@code Record}s of a Medical Problem {@code Problem}.
@@ -16,5 +14,4 @@ import java.util.UUID;
  */
 public class RecordTreeSet extends TreeSet<Record> {
     private static final String TAG = "RecordTreeSet";
-
 }

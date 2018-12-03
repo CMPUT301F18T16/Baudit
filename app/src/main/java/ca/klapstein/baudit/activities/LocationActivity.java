@@ -197,7 +197,7 @@ public class LocationActivity extends AppCompatActivity
         Log.d(TAG,"Completed setLocation");
     }
 
-    private void init(){
+    public void init(){
         googleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -253,7 +253,7 @@ public class LocationActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
-    private Address geoLocate(){
+    public Address geoLocate(){
         String searchString = searchText.getText().toString();
         Geocoder geocoder = new Geocoder(LocationActivity.this);
         List<Address> list = new ArrayList<Address>();
@@ -272,7 +272,7 @@ public class LocationActivity extends AppCompatActivity
         return address;
     }
 
-    private void getDeviceLocation(){
+    public void getDeviceLocation(){
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
             final Task location = fusedLocationProviderClient.getLastLocation();
@@ -307,14 +307,12 @@ public class LocationActivity extends AppCompatActivity
         hideSoftKeyboard();
     }
 
-    private void hideSoftKeyboard(){
+    public void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -340,5 +338,4 @@ public class LocationActivity extends AppCompatActivity
             places.release();
         }
     };
-
 }

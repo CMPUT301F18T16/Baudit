@@ -5,6 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
+import ca.klapstein.baudit.R;
+import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
+import ca.klapstein.baudit.views.MapAllProblemsView;
+import ca.klapstein.baudit.data.Patient;
+import ca.klapstein.baudit.data.Problem;
+import ca.klapstein.baudit.data.ProblemTreeSet;
+import ca.klapstein.baudit.data.Record;
+import ca.klapstein.baudit.data.RecordTreeSet;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,14 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import ca.klapstein.baudit.R;
-import ca.klapstein.baudit.data.Patient;
-import ca.klapstein.baudit.data.Problem;
-import ca.klapstein.baudit.data.ProblemTreeSet;
-import ca.klapstein.baudit.data.Record;
-import ca.klapstein.baudit.data.RecordTreeSet;
-import ca.klapstein.baudit.presenters.MapAllProblemsPresenter;
-import ca.klapstein.baudit.views.MapAllProblemsView;
 
 public class MapAllProblemsActivity extends AppCompatActivity
     implements MapAllProblemsView, OnMapReadyCallback {
