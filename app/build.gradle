@@ -17,10 +17,14 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField 'String', "ApiKey", GOOGLE_MAPS_API_KEY
+            resValue 'string', "api_key", GOOGLE_MAPS_API_KEY
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
+            buildConfigField 'String', "ApiKey", GOOGLE_MAPS_API_KEY
+            resValue 'string', "api_key", GOOGLE_MAPS_API_KEY
             multiDexKeepProguard file('proguard-multidex-rules.pro')
             testCoverageEnabled true
         }
