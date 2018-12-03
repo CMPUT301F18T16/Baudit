@@ -23,10 +23,6 @@ public class RecordPresenter extends Presenter<RecordView> {
     private Record record;
     private Problem problem;
 
-    public Record getRecord(){
-        return this.record;
-    }
-
     public RecordPresenter(RecordView view, Context context) {
         super(view, context);
     }
